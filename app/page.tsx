@@ -1,12 +1,12 @@
-import HomeComponent from "@/src/components/pages/home";
+import DashboardComponent from "@/src/components/pages/dahboard";
 import Layout from "./layout";
 
-const HomePage: NextPageWithLayout = () => {
-  return <HomeComponent />;
+const DashboardPage: NextPageWithLayout = () => {
+  return <DashboardComponent />;
 };
 
-HomePage.getLayout = function Home(page) {
+DashboardPage.getLayout = function Home(page) {
   return <Layout>{page}</Layout>;
 };
 
-export default HomePage;
+export default DashboardPage;
