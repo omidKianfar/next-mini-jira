@@ -15,6 +15,7 @@ const DashboardComponent = () => {
   const handleCloseModal = () => {
     setOpen(false);
   };
+  
   return (
     <div className="p-4">
       <div>
