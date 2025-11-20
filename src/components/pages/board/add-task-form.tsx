@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const AddTaskFormComponent = () => {
   return (
     <div>
-      AddTaskFormComponent
+      <p>AddTaskFormComponent</p>
     </div>
-  )
-}
+  );
+};
 
-export default AddTaskFormComponent
+export default AddTaskFormComponent;
