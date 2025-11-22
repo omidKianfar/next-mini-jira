@@ -1,4 +1,9 @@
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { SignupProps } from "./types";
@@ -11,4 +16,13 @@ export const storage = getStorage(app);
 export const signupWithEmail = async ({ email, password }: SignupProps) => {
   const newUser = await createUserWithEmailAndPassword(auth, email, password);
   return newUser.user;
+};
+
+export const signinWithEmail = async ({ email, password }: SignupProps) => {
+  const newUser = await signInWithEmailAndPassword(auth, email, password);
+  return newUser.user;
+};
+
+export const logout = () => {
+  signOut(auth);
 };

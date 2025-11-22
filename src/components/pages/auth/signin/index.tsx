@@ -6,10 +6,10 @@ import { AuthProps, FormValues } from "../types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authSchema } from "../schema";
 import InputField from "@/src/components/atom/controllers/input-field";
-import { signupWithEmail } from "@/firebase/mothods";
+import { signinWithEmail } from "@/firebase/mothods";
 import { useRouter } from "next/navigation";
 
-const SignupComponent = ({ setPage }:AuthProps) => {
+const SigninComponent = ({ setPage }: AuthProps) => {
   const router = useRouter();
 
   const defaultValues: FormValues = useMemo(
@@ -29,7 +29,7 @@ const SignupComponent = ({ setPage }:AuthProps) => {
     const email = values.email;
     const password = values.password;
 
-    await signupWithEmail({ email, password });
+    await signinWithEmail({ email, password });
 
     router.push("/");
   };
@@ -55,15 +55,15 @@ const SignupComponent = ({ setPage }:AuthProps) => {
               type="submit"
               className="cursor-pointer rounded-sm px-8 py-2 border mt-4"
             >
-              Sign up
+              Sign in
             </button>
           </div>
         </form>
       </FormProvider>
 
-      <button onClick={() => setPage("signin")}>{"Signin ->"}</button>
+      <button onClick={() => setPage("signup")}>{"Signup ->"}</button>
     </div>
   );
 };
 
-export default SignupComponent;
+export default SigninComponent;
