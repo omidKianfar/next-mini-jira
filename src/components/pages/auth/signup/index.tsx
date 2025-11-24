@@ -1,69 +1,36 @@
 "use client";
 
-import { useMemo } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { AuthProps, FormValues } from "../types";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { authSchema } from "../schema";
-import InputField from "@/src/components/atom/controllers/input-field";
-import { signupWithEmail } from "@/firebase/mothods";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { AuthProps } from "../types";
 
-const SignupComponent = ({ setPage }:AuthProps) => {
-  const router = useRouter();
+import Step1Component from "./steps/step1";
+import Step2Component from "./steps/step2";
+import Step3Component from "./steps/step3";
 
-  const defaultValues: FormValues = useMemo(
-    () => ({
-      email: "",
-      password: "",
-    }),
-    []
-  );
-
-  const methods = useForm<FormValues>({
-    defaultValues,
-    resolver: yupResolver(authSchema),
+const SignupComponent = ({ setPage }: AuthProps) => {
+  const [stepNumber, setStepNumber] = useState<string>(() => {
+    return localStorage.getItem("step") || "0";
   });
 
-  const signupUser = async (values: FormValues) => {
-    const email = values.email;
-    const password = values.password;
+  console.log(localStorage.getItem("step"));
 
-    await signupWithEmail({ email, password });
-
-    router.push("/");
+  const changeStep = (newStep: string) => {
+    setStepNumber(newStep);
+    localStorage.setItem("step", newStep);
   };
 
-  return (
-    <div className="lg:w-[500px] border p-4 rounded-sm">
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(signupUser)}>
-          <InputField
-            name="email"
-            label="Email"
-            placeholder="Enter your email"
-          />
+  const renderStep = () => {
+    switch (stepNumber) {
+      case "0":
+        return <Step1Component setPage={setPage} changeStep={changeStep} />;
+      case "1":
+        return <Step2Component changeStep={changeStep}/>;
+      case "2":
+        return <Step3Component changeStep={changeStep}/>;
+    }
+  };
 
-          <InputField
-            name="password"
-            label="Password"
-            placeholder="Enter your password"
-          />
-
-          <div className="flex justify-end items-center">
-            <button
-              type="submit"
-              className="cursor-pointer rounded-sm px-8 py-2 border mt-4"
-            >
-              Sign up
-            </button>
-          </div>
-        </form>
-      </FormProvider>
-
-      <button onClick={() => setPage("signin")}>{"Signin ->"}</button>
-    </div>
-  );
+  return <>{renderStep()}</>;
 };
 
 export default SignupComponent;

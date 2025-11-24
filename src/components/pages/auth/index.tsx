@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SignupComponent from "./signup";
 import SigninComponent from "./signin";
 import { AuthType } from "./types";
