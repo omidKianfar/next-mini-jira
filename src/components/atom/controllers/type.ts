@@ -1,3 +1,4 @@
+import { RefObject } from "react";
 import { FieldValues, Path } from "react-hook-form";
 
 export interface BaseControllerProps<T extends FieldValues> {
@@ -10,6 +11,8 @@ export interface BaseControllerProps<T extends FieldValues> {
 export interface InputControllerProps<T extends FieldValues>
   extends BaseControllerProps<T> {
   type?: string;
+  ref?: RefObject<HTMLInputElement | null>;
+  onChange?: (event: any) => void;
 }
 
 export type TextareaControllerProps<T extends FieldValues> =
@@ -26,3 +29,5 @@ export interface SelectControllerProps<T extends FieldValues>
   extends BaseControllerProps<T> {
   options: SelectOption[];
 }
+
+export type DateInputFieldProps<T extends FieldValues> = BaseControllerProps<T>;

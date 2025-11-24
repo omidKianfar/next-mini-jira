@@ -1,22 +1,17 @@
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
-import { InputControllerProps } from "./type";
+import { DateInputFieldProps } from "./type";
 
-const InputField = <T extends FieldValues>({
+const DateInputField = <T extends FieldValues>({
   name,
   label,
-  placeholder,
-  type = "text",
-  className,
-  ref,
-  onChange,
-}: InputControllerProps<T>) => {
+}: DateInputFieldProps<T>) => {
   const {
     control,
     formState: { errors },
   } = useFormContext();
 
   return (
-    <div className={className}>
+    <div className="space-y-1">
       {label && (
         <label htmlFor={name} className="text-sm  text-blue-400">
           {label}
@@ -30,15 +25,8 @@ const InputField = <T extends FieldValues>({
           <input
             {...field}
             id={name}
-            type={type}
-            placeholder={placeholder}
-            ref={ref}
-            value={type == "file" ? undefined : field.value || ""}
-            onChange={(event) => {
-              field.onChange(event);
-              onChange?.(event);
-            }}
-            className="w-full border p-2 my-1 rounded-lg text-sm focus:outline-blue-400 placeholder:text-sm px-2"
+            type="date"
+            className="w-full my-1 border p-2 rounded-lg focus:outline-blue-400 px-2 text-sm"
           />
         )}
       />
@@ -50,4 +38,4 @@ const InputField = <T extends FieldValues>({
   );
 };
 
-export default InputField;
+export default DateInputField;
