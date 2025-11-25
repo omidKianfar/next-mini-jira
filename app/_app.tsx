@@ -1,4 +1,5 @@
-import React, { ReactElement } from "react";
+"use client";
+import { ReactElement } from "react";
 
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page: ReactElement) => page);
