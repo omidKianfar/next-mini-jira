@@ -6,11 +6,10 @@ import { AuthProps, FormValues } from "../types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authSchema } from "../schema";
 import InputField from "@/src/components/atom/controllers/input-field";
-import { signinWithEmail } from "@/firebase/mothods";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/src/providers/auth/auth-provider";
 
 const SigninComponent = ({ setPage }: AuthProps) => {
-  const router = useRouter();
+  const { signinWithEmail } = useAuth();
 
   const defaultValues: FormValues = useMemo(
     () => ({
@@ -25,13 +24,11 @@ const SigninComponent = ({ setPage }: AuthProps) => {
     resolver: yupResolver(authSchema),
   });
 
-  const signupUser = async (values: FormValues) => {
+  const signupUser = (values: FormValues) => {
     const email = values.email;
     const password = values.password;
 
-    await signinWithEmail({ email, password });
-
-    router.push("/");
+    signinWithEmail({ email, password });
   };
 
   return (
