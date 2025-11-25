@@ -12,8 +12,6 @@ const SignupComponent = ({ setPage }: AuthProps) => {
     return localStorage.getItem("step") || "0";
   });
 
-  console.log(localStorage.getItem("step"));
-
   const changeStep = (newStep: string) => {
     setStepNumber(newStep);
     localStorage.setItem("step", newStep);
@@ -24,9 +22,9 @@ const SignupComponent = ({ setPage }: AuthProps) => {
       case "0":
         return <Step1Component setPage={setPage} changeStep={changeStep} />;
       case "1":
-        return <Step2Component changeStep={changeStep}/>;
+        return <Step2Component changeStep={changeStep} />;
       case "2":
-        return <Step3Component changeStep={changeStep}/>;
+        return <Step3Component changeStep={changeStep} />;
     }
   };
 

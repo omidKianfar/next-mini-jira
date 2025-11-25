@@ -6,15 +6,18 @@ import { ProfileProps, SignupProps } from "../../types";
 import { ProfileSchema } from "../../schema";
 import DateInputField from "@/src/components/atom/controllers/date-input-field";
 import Image from "next/image";
+import { useAuth } from "@/src/providers/auth/auth-provider";
 
 const Step2Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
+  const { saveUserProfile, user } = useAuth();
+
   const photoRef = useRef<HTMLInputElement | null>(null);
 
   const defaultValues: ProfileProps = useMemo(
     () => ({
-      photo: "",
-      userName: "",
-      birthday: "",
+      photo: user?.photo ?? "",
+      userName: user?.userName ?? "",
+      birthday: user?.birthday ?? "",
     }),
     []
   );
@@ -40,6 +43,15 @@ const Step2Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
   };
 
   const setProfileHandler = async (values: ProfileProps) => {
+    const userId = user?.userId as string;
+
+    const data = {
+      photo: values?.photo,
+      userName: values?.userName,
+      birthday: values?.birthday,
+    };
+
+    await saveUserProfile({ userId, data });
 
     changeStep("2");
   };

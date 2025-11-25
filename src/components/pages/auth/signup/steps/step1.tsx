@@ -6,9 +6,11 @@ import { FormValues, SignupProps } from "../../types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authSchema } from "../../schema";
 import InputField from "@/src/components/atom/controllers/input-field";
-import { signupWithEmail } from "@/firebase/mothods";
+import { useAuth } from "@/src/providers/auth/auth-provider";
 
 const Step1Component = ({ setPage, changeStep }: SignupProps) => {
+  const { signupWithEmail } = useAuth();
+
   const defaultValues: FormValues = useMemo(
     () => ({
       email: "",
@@ -22,11 +24,11 @@ const Step1Component = ({ setPage, changeStep }: SignupProps) => {
     resolver: yupResolver(authSchema),
   });
 
-  const signupUser = async (values: FormValues) => {
+  const signupUser = (values: FormValues) => {
     const email = values.email;
     const password = values.password;
 
-    await signupWithEmail({ email, password });
+    signupWithEmail({ email, password });
 
     changeStep("1");
   };
