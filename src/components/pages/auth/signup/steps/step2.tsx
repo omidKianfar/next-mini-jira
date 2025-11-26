@@ -2,13 +2,17 @@ import InputField from "@/src/components/atom/controllers/input-field";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMemo, useRef } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { ProfileProps, SignupProps } from "../../types";
 import { ProfileSchema } from "../../schema";
 import DateInputField from "@/src/components/atom/controllers/date-input-field";
 import Image from "next/image";
-import { useAuth } from "@/src/providers/auth/auth-provider";
+import { useAuth } from "@/src/hooks/useAuth";
+import { useQueryClient } from "@tanstack/react-query";
+import { SignupProps } from "../../type";
+import { ProfileProps } from "@/src/types/global";
 
 const Step2Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
+  const queryClient = useQueryClient();
+
   const { saveUserProfile, user } = useAuth();
 
   const photoRef = useRef<HTMLInputElement | null>(null);
@@ -51,9 +55,17 @@ const Step2Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
       birthday: values?.birthday,
     };
 
-    await saveUserProfile({ userId, data });
+    try {
+      const result = await saveUserProfile({ userId, data }).unwrap();
 
-    changeStep("2");
+      await queryClient.invalidateQueries({
+        queryKey: ["userProfile", result.userId],
+      });
+
+      changeStep("2");
+    } catch (error) {
+      console.log("Error: ", error);
+    }
   };
 
   return (

@@ -1,16 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { AuthProps } from "../types";
 
 import Step1Component from "./steps/step1";
 import Step2Component from "./steps/step2";
 import Step3Component from "./steps/step3";
+import { AuthProps } from "../type";
 
 const SignupComponent = ({ setPage }: AuthProps) => {
-  const [stepNumber, setStepNumber] = useState<string>(() => {
-    return localStorage.getItem("step") || "0";
-  });
+  const [stepNumber, setStepNumber] = useState<string>("0");
 
   const changeStep = (newStep: string) => {
     setStepNumber(newStep);

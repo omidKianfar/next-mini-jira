@@ -3,7 +3,7 @@
 import { useState } from "react";
 import SignupComponent from "./signup";
 import SigninComponent from "./signin";
-import { AuthType } from "./types";
+import { AuthType } from "./type";
 
 const AuthPageComponent = () => {
   const [page, setPage] = useState<AuthType>("signin");

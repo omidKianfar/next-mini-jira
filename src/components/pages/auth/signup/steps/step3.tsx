@@ -1,5 +1,5 @@
 import React from "react";
-import { SignupProps } from "../../types";
+import { SignupProps } from "../../type";
 
 const Step3Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
   const BackProfile = () => {

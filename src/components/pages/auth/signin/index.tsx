@@ -2,11 +2,11 @@
 
 import { useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { AuthProps, FormValues } from "../types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authSchema } from "../schema";
 import InputField from "@/src/components/atom/controllers/input-field";
-import { useAuth } from "@/src/providers/auth/auth-provider";
+import { useAuth } from "@/src/hooks/useAuth";
+import { AuthProps, FormValues } from "../type";
 
 const SigninComponent = ({ setPage }: AuthProps) => {
   const { signinWithEmail } = useAuth();

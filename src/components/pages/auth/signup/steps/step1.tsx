@@ -2,11 +2,11 @@
 
 import { useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { FormValues, SignupProps } from "../../types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authSchema } from "../../schema";
 import InputField from "@/src/components/atom/controllers/input-field";
-import { useAuth } from "@/src/providers/auth/auth-provider";
+import { useAuth } from "@/src/hooks/useAuth";
+import { FormValues, SignupProps } from "../../type";
 
 const Step1Component = ({ setPage, changeStep }: SignupProps) => {
   const { signupWithEmail } = useAuth();
@@ -24,13 +24,16 @@ const Step1Component = ({ setPage, changeStep }: SignupProps) => {
     resolver: yupResolver(authSchema),
   });
 
-  const signupUser = (values: FormValues) => {
+  const signupUser = async (values: FormValues) => {
     const email = values.email;
     const password = values.password;
 
-    signupWithEmail({ email, password });
+    const result = await signupWithEmail({ email, password });
+    console.log("signupWithEmail", result);
 
-    changeStep("1");
+    if (result) {
+      changeStep("1");
+    }
   };
 
   return (
