@@ -9,11 +9,16 @@ import {
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import config from "@/config";
-import { MyUserType, SignPropsType, UserProfileType, UserType } from "@/src/types/global";
+import {
+  MyUserType,
+  SignPropsType,
+  UserProfileType,
+  UserType,
+} from "@/src/types/global";
 
-const app = initializeApp(config.firebase);
-const auth = getAuth(app);
-const db = getFirestore(app);
+export const app = initializeApp(config.firebase);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
 
 const mapFirebaseUserToUser = async (
   currentUser: User
@@ -63,7 +68,15 @@ export const signupWithEmail = createAsyncThunk(
       birthday: null,
     });
 
-    return mapFirebaseUserToUser(newUser.user);
+    return {
+      userId: newUser.user.uid,
+      email: newUser.user.email,
+      userName: null,
+      userType: UserType.Client,
+      isActive: true,
+      photo: null,
+      birthday: null,
+    };
   }
 );
 
