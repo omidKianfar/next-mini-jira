@@ -11,6 +11,15 @@ export type MyUserType = {
   photo: string | null;
   userName: string | null;
   birthday: string | null;
+  createdAt: string | null;
+  payment: {
+    isPaid: boolean | null;
+    freeTrialEnabled: boolean | null;
+    planType: string | null;
+    subscriptionId: string | null;
+    trialEnd: string | null;
+    createdAt: string | null;
+  };
 };
 
 export type SignPropsType = {
@@ -47,3 +56,5 @@ export type Task = {
   status: string;
   assignedTo?: number;
 };
+
+export type PlanType = "monthly" | "yearly";
