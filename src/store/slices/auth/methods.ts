@@ -15,12 +15,13 @@ import {
   UserProfileType,
   UserType,
 } from "@/src/types/global";
+import dayjs from "dayjs";
 
 export const app = initializeApp(config.firebase);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
-const mapFirebaseUserToUser = async (
+export const mapFirebaseUserToUser = async (
   currentUser: User
 ): Promise<MyUserType> => {
   const docRef = doc(db, "users", currentUser.uid);
@@ -31,12 +32,21 @@ const mapFirebaseUserToUser = async (
 
   return {
     userId: currentUser.uid,
-    email: currentUser.email,
+    email: currentUser.email ?? null,
     photo: currentUser.photoURL ?? null,
     userName: profile.userName ?? null,
     birthday: profile.birthday ?? null,
     userType: profile.userType ?? UserType.Client,
     isActive: profile.isActive ?? true,
+    createdAt: profile.createdAt ?? null,
+    payment: {
+      isPaid: profile.isPaid ?? false,
+      freeTrialEnabled: profile.freeTrialEnabled ?? false,
+      planType: profile.planType ?? null,
+      subscriptionId: profile.subscriptionId ?? null,
+      trialEnd: profile.trialEnd ?? null,
+      createdAt: profile.paymentCreatedAt ?? null,
+    },
   };
 };
 
@@ -58,25 +68,28 @@ export const signupWithEmail = createAsyncThunk(
   async ({ email, password }: SignPropsType) => {
     const newUser = await createUserWithEmailAndPassword(auth, email, password);
 
-    await setDoc(doc(db, "users", newUser.user.uid), {
+    const userItems = {
       userId: newUser.user.uid,
       email: newUser.user.email,
+      photo: null,
       userName: null,
+      birthday: null,
       userType: UserType.Client,
       isActive: true,
-      photo: null,
-      birthday: null,
-    });
-
-    return {
-      userId: newUser.user.uid,
-      email: newUser.user.email,
-      userName: null,
-      userType: UserType.Client,
-      isActive: true,
-      photo: null,
-      birthday: null,
+      createdAt: dayjs(new Date()).format("YYYY-MM-DD"),
+      payment: {
+        isPaid: false,
+        freeTrialEnabled: false,
+        planType: null,
+        subscriptionId: null,
+        trialEnd: null,
+        createdAt: null,
+      },
     };
+
+    await setDoc(doc(db, "users", newUser.user.uid), userItems);
+
+    return userItems;
   }
 );
 
