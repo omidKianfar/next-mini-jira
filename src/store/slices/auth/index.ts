@@ -1,8 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { logout, saveUserProfile, signinWithEmail, signupWithEmail } from "./methods";
+import {
+  logout,
+  saveUserProfile,
+  signinWithEmail,
+  signupWithEmail,
+} from "./methods";
 import { AuthStateType, MyUserType } from "@/src/types/global";
-
-
 
 const initialState: AuthStateType = {
   user: null,
@@ -13,7 +16,16 @@ const initialState: AuthStateType = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (state, action) => {
+      state.user = action.payload;
+      state.isAuthenticated = true;
+    },
+    clearUser: (state) => {
+      state.user = null;
+      state.isAuthenticated = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       // Signin
@@ -63,3 +75,4 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
+export const { setUser, clearUser } = authSlice.actions;
