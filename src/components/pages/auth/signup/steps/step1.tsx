@@ -28,11 +28,14 @@ const Step1Component = ({ setPage, changeStep }: SignupProps) => {
     const email = values.email;
     const password = values.password;
 
-    const result = await signupWithEmail({ email, password });
-    console.log("signupWithEmail", result);
+    try {
+      const result = await signupWithEmail({ email, password }).unwrap();
 
-    if (result) {
-      changeStep("1");
+      if (result) {
+        changeStep("1");
+      }
+    } catch (error) {
+      console.log("Error: ", error);
     }
   };
 

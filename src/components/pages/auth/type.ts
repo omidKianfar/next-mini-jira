@@ -14,3 +14,9 @@ export interface FormValues {
   email: string;
   password: string;
 }
+
+export type CartType = {
+  title: string;
+  description: string;
+  onClick: () => void;
+};

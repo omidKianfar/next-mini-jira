@@ -6,6 +6,7 @@ import Step1Component from "./steps/step1";
 import Step2Component from "./steps/step2";
 import Step3Component from "./steps/step3";
 import { AuthProps } from "../type";
+import Step4Component from "./steps/step4";
 
 const SignupComponent = ({ setPage }: AuthProps) => {
   const [stepNumber, setStepNumber] = useState<string>("0");
@@ -23,6 +24,8 @@ const SignupComponent = ({ setPage }: AuthProps) => {
         return <Step2Component changeStep={changeStep} />;
       case "2":
         return <Step3Component changeStep={changeStep} />;
+      case "3":
+        return <Step4Component changeStep={changeStep} />;
     }
   };
 
