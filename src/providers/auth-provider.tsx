@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import { setUser, clearUser } from "@/src/store/slices/auth";
-import { auth, db } from "@/config"; // چون گفتی از اول همینجاست
+import { auth, db } from "@/config";
 import { UserType } from "@/src/types/global";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -24,7 +24,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       const ref = doc(db, "users", firebaseUser.uid);
 
-      // Attach Firestore listener
       unsubDoc = onSnapshot(ref, (snap) => {
         const data = snap.exists() ? snap.data() : {};
 
