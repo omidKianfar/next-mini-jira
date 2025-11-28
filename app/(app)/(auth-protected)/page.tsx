@@ -1,5 +1,5 @@
 import DashboardComponent from "@/src/components/pages/dahboard";
-import Layout from "@/app/(app)/layout";
+import Layout from "./layout";
 
 const DashboardPage = () => {
   return (

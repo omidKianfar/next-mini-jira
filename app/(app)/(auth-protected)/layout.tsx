@@ -1,10 +1,10 @@
 "use client";
 
 import { PropsWithChildren } from "react";
-import ProvidersWrapper from "@/src/providers";
+import AuthGuard from "@/src/guards/auth-guard";
 
 const Layout = ({ children }: PropsWithChildren) => {
-  return <ProvidersWrapper>{children}</ProvidersWrapper>;
+  return <AuthGuard>{children}</AuthGuard>;
 };
 
 export default Layout;
