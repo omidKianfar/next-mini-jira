@@ -1,14 +1,11 @@
-import { initializeApp } from "firebase/app";
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   signInWithEmailAndPassword,
   signOut,
   User,
 } from "firebase/auth";
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import { doc, getDoc,  setDoc } from "firebase/firestore";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import config from "@/config";
 import {
   MyUserType,
   SignPropsType,
@@ -16,10 +13,9 @@ import {
   UserType,
 } from "@/src/types/global";
 import dayjs from "dayjs";
+import { auth, db } from "@/config";
 
-export const app = initializeApp(config.firebase);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+
 
 export const mapFirebaseUserToUser = async (
   currentUser: User
