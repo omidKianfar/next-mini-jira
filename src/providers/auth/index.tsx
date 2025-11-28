@@ -45,6 +45,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
               subscriptionId: data.payment?.subscriptionId ?? null,
               trialEnd: data.payment?.trialEnd ?? null,
               createdAt: data.payment?.createdAt ?? null,
+              endAt: data.payment?.endAt ?? null,
             },
           })
         );

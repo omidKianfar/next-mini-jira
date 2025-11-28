@@ -4,7 +4,7 @@ import {
   signOut,
   User,
 } from "firebase/auth";
-import { doc, getDoc,  setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   MyUserType,
@@ -14,8 +14,6 @@ import {
 } from "@/src/types/global";
 import dayjs from "dayjs";
 import { auth, db } from "@/config";
-
-
 
 export const mapFirebaseUserToUser = async (
   currentUser: User
@@ -41,7 +39,8 @@ export const mapFirebaseUserToUser = async (
       planType: profile.planType ?? null,
       subscriptionId: profile.subscriptionId ?? null,
       trialEnd: profile.trialEnd ?? null,
-      createdAt: profile.paymentCreatedAt ?? null,
+      createdAt: profile.createdAt ?? null,
+      endAt: profile.endAt ?? null,
     },
   };
 };
@@ -72,7 +71,7 @@ export const signupWithEmail = createAsyncThunk(
       birthday: null,
       userType: UserType.Client,
       isActive: true,
-      createdAt: dayjs(new Date()).format("YYYY-MM-DD"),
+      createdAt: dayjs().format("YYYY-MM-DD"),
       payment: {
         isPaid: false,
         freeTrialEnabled: false,
@@ -80,6 +79,7 @@ export const signupWithEmail = createAsyncThunk(
         subscriptionId: null,
         trialEnd: null,
         createdAt: null,
+        endAt: null,
       },
     };
 

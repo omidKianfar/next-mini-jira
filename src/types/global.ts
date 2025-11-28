@@ -19,6 +19,7 @@ export type MyUserType = {
     subscriptionId: string | null;
     trialEnd: string | null;
     createdAt: string | null;
+    endAt: string | null;
   };
 };
 

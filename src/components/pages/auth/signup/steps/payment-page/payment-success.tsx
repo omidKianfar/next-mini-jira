@@ -15,6 +15,9 @@ const PaymentSuccessComponent = () => {
   const planType = params.get("planType");
   const sessionId = params.get("session_id");
 
+  const now = dayjs().format("YYYY-MM-DD");
+  const oneMonth = dayjs().add(1, "month").format("YYYY-MM-DD");
+  const oneYear = dayjs().add(1, "year").format("YYYY-MM-DD");
 
   const [subscriptionId, setSubscriptionId] = useState<string | null>(null);
 
@@ -62,11 +65,12 @@ const PaymentSuccessComponent = () => {
     await updateDoc(doc(db, "users", user.userId), {
       payment: {
         freeTrialEnabled: false,
-        trialEndsAt: dayjs(new Date()).format("YYYY-MM-DD"),
+        trialEnd: now,
         isPaid: true,
         planType: planType,
         subscriptionId: subscriptionId,
-        createdAt: dayjs(new Date()).format("YYYY-MM-DD"),
+        createdAt: now,
+        endAt: planType === "monthly" ? oneMonth : oneYear,
       },
     });
 
