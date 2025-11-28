@@ -19,7 +19,9 @@ const Step3Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
     await updateDoc(doc(db, "users", user?.userId as string), {
       payment: {
         freeTrialEnabled: true,
-        trialEnd: dayjs(new Date()).format("YYYY-MM-DD"),
+        trialEnd: dayjs(new Date(Date.now() + 10 * 24 * 60 * 60 * 1000)).format(
+          "YYYY-MM-DD"
+        ),
       },
     });
 
