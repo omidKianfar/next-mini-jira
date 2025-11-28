@@ -1,27 +1,55 @@
 "use client";
 
-import { clearUser, setUser } from "@/src/store/slices/auth";
-import { auth, mapFirebaseUserToUser } from "@/src/store/slices/auth/methods";
-import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, onSnapshot } from "firebase/firestore";
+import { setUser, clearUser } from "@/src/store/slices/auth";
+import { auth, db } from "@/config";   // چون گفتی از اول همینجاست
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
-      if (firebaseUser) {
-        const mappedCurrentUser = await mapFirebaseUserToUser(firebaseUser);
+    let unsubDoc: null | (() => void) = null;
 
-        dispatch(setUser(mappedCurrentUser));
-      } else {
+    const unsubAuth = onAuthStateChanged(auth, (firebaseUser) => {
+      if (!firebaseUser) {
         dispatch(clearUser());
+        if (unsubDoc) unsubDoc();
+        unsubDoc = null;
+        return;
       }
+
+      const ref = doc(db, "users", firebaseUser.uid);
+
+      // Attach Firestore listener
+      unsubDoc = onSnapshot(ref, (snap) => {
+        const data = snap.exists() ? snap.data() : {};
+
+        dispatch(
+          setUser({
+            userId: firebaseUser.uid,
+            email: firebaseUser.email ?? null,
+            userName: data.userName ?? null,
+            photo: data.photo ?? null,
+            payment: {
+              isPaid: data.payment?.isPaid ?? false,
+              freeTrialEnabled: data.payment?.freeTrialEnabled ?? false,
+              planType: data.payment?.planType ?? null,
+              subscriptionId: data.payment?.subscriptionId ?? null,
+              trialEndsAt: data.payment?.trialEnd ?? null,
+            },
+          })
+        );
+      });
     });
 
-    return () => unsub();
-  }, []);
+    return () => {
+      unsubAuth();
+      if (unsubDoc) unsubDoc();
+    };
+  }, [dispatch]);
 
   return <>{children}</>;
 };
