@@ -7,8 +7,11 @@ import { authSchema } from "../schema";
 import InputField from "@/src/components/atom/controllers/input-field";
 import { useAuth } from "@/src/hooks/useAuth";
 import { AuthProps, FormValues } from "../type";
+import { useRouter } from "next/navigation";
 
 const SigninComponent = ({ setPage }: AuthProps) => {
+  const router = useRouter();
+
   const { signinWithEmail } = useAuth();
 
   const defaultValues: FormValues = useMemo(
@@ -24,11 +27,13 @@ const SigninComponent = ({ setPage }: AuthProps) => {
     resolver: yupResolver(authSchema),
   });
 
-  const signupUser = (values: FormValues) => {
+  const signupUser = async (values: FormValues) => {
     const email = values.email;
     const password = values.password;
 
-    signinWithEmail({ email, password });
+    await signinWithEmail({ email, password }).unwrap();
+
+    router.push("/");
   };
 
   return (
