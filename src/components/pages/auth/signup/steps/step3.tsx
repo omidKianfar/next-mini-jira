@@ -2,9 +2,9 @@ import { SignupProps } from "../../type";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/src/hooks/useAuth";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "@/src/store/slices/auth/methods";
 import CartComponent from "./cart";
 import dayjs from "dayjs";
+import { db } from "@/config";
 
 const Step3Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
   const router = useRouter();
