@@ -9,7 +9,6 @@ import { db } from "@/config";
 const Step3Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
   const router = useRouter();
   const { user } = useAuth();
-  console.log("user", user);
 
   const BackProfile = () => {
     changeStep("1");
