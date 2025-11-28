@@ -5,7 +5,8 @@ import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import { setUser, clearUser } from "@/src/store/slices/auth";
-import { auth, db } from "@/config";   // چون گفتی از اول همینجاست
+import { auth, db } from "@/config"; // چون گفتی از اول همینجاست
+import { UserType } from "@/src/types/global";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
@@ -33,12 +34,17 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             email: firebaseUser.email ?? null,
             userName: data.userName ?? null,
             photo: data.photo ?? null,
+            birthday: data.birthday ?? null,
+            userType: data.userType ?? UserType.Client,
+            isActive: data.isActive ?? true,
+            createdAt: data.createdAt ?? null,
             payment: {
               isPaid: data.payment?.isPaid ?? false,
               freeTrialEnabled: data.payment?.freeTrialEnabled ?? false,
               planType: data.payment?.planType ?? null,
               subscriptionId: data.payment?.subscriptionId ?? null,
-              trialEndsAt: data.payment?.trialEnd ?? null,
+              trialEnd: data.payment?.trialEnd ?? null,
+              createdAt: data.payment?.createdAt ?? null,
             },
           })
         );
