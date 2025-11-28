@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useAuth } from "@/src/hooks/useAuth";
-import { db } from "@/src/store/slices/auth/methods";
 import { doc, updateDoc } from "firebase/firestore";
 import { useRouter, useSearchParams } from "next/navigation";
 import dayjs from "dayjs";
+import { db } from "@/config";
 
 const PaymentSuccessComponent = () => {
   const router = useRouter();
