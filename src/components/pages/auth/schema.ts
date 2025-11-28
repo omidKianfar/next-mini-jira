@@ -1,5 +1,5 @@
+import { ProfileProps } from "@/src/types/global";
 import * as Yup from "yup";
-import { ProfileProps } from "./types";
 
 export const authSchema = Yup.object({
   email: Yup.string().required("Enter your email"),
