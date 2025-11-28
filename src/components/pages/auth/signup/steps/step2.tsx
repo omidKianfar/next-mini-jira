@@ -1,6 +1,6 @@
 import InputField from "@/src/components/atom/controllers/input-field";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { ProfileSchema } from "../../schema";
 import DateInputField from "@/src/components/atom/controllers/date-input-field";
@@ -9,9 +9,13 @@ import { useAuth } from "@/src/hooks/useAuth";
 import { useQueryClient } from "@tanstack/react-query";
 import { SignupProps } from "../../type";
 import { ProfileProps } from "@/src/types/global";
+import ModalContainer from "@/src/components/atom/modal";
+import BackToSignup from "./modal/back-to-signup";
 
 const Step2Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
   const queryClient = useQueryClient();
+
+  const [open, setOpen] = useState(false);
 
   const { saveUserProfile, user } = useAuth();
 
@@ -68,8 +72,28 @@ const Step2Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
     }
   };
 
+  const handleOpenModal = () => {
+    setOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpen(false);
+  };
+
   return (
     <div className="lg:w-[500px] border p-4 rounded-sm">
+      <button
+        type="button"
+        className="border-2 rounded-sm px-8 py-2 cursor-pointer"
+        onClick={handleOpenModal}
+      >
+        Back
+      </button>
+
+      <ModalContainer open={open} handleClose={handleCloseModal}>
+        <BackToSignup changeStep={changeStep} handleClose={handleCloseModal} />
+      </ModalContainer>
+
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(setProfileHandler)}>
           <div className="mb-8">

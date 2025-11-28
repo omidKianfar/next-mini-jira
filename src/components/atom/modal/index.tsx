@@ -24,7 +24,7 @@ export default function ModalContainer({
           role="button"
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 cursor-pointer"
         >
-          <Icon icon="zondicons:close-outline" className="hover:text-red-500" />
+          <Icon icon="zondicons:close-outline" width={20} className="hover:text-red-500" />
         </button>
       </div>
     </div>
