@@ -3,8 +3,8 @@
 import { PropsWithChildren } from "react";
 import ProvidersWrapper from "@/src/providers";
 
-const Layout = ({ children }: PropsWithChildren) => {
+const ProviderLayout = ({ children }: PropsWithChildren) => {
   return <ProvidersWrapper>{children}</ProvidersWrapper>;
 };
 
-export default Layout;
+export default ProviderLayout;
