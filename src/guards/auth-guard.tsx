@@ -11,7 +11,7 @@ const AuthGuard = ({ children }:PropsWithChildren) => {
 
   useEffect(() => {
     if (!isLoading && !user) {
-      router.replace("/auth");
+      router.replace("/auth/signin");
     }
   }, [user, isLoading, router]);
 
