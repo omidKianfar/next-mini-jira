@@ -9,3 +9,7 @@ export interface ButtonProps {
   disable?: boolean;
   icon?: React.ReactNode;
 }
+
+export interface BackButtonProps {
+  onClick: () => void;
+}
