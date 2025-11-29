@@ -3,15 +3,11 @@
 import { motion as m, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 
-export default function AuthLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
 
   return (
-    <div className="w-screen h-screen overflow-hidden">
+    <div className="w-screen h-screen overflow-hidden bg-gray-200">
       <AnimatePresence mode="wait" initial={false}>
         <m.div
           key={pathname}
@@ -26,4 +22,5 @@ export default function AuthLayout({
       </AnimatePresence>
     </div>
   );
-}
+};
+export default AuthLayout;
