@@ -1,20 +1,18 @@
 "use client";
 
 import { PropsWithChildren } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import { store } from "../store";
 import AuthProvider from "./auth-provider";
+import NotistackProvider from "../components/atom/error-handler/notistack";
 
 const ProvidersWrapper = ({ children }: PropsWithChildren) => {
-  const queryClient = new QueryClient();
-
   return (
-    <QueryClientProvider client={queryClient}>
+    <NotistackProvider>
       <Provider store={store}>
         <AuthProvider>{children}</AuthProvider>
       </Provider>
-    </QueryClientProvider>
+    </NotistackProvider>
   );
 };
 
