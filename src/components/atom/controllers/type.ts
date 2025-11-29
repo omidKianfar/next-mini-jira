@@ -13,6 +13,8 @@ export interface InputControllerProps<T extends FieldValues>
   type?: string;
   ref?: RefObject<HTMLInputElement | null>;
   onChange?: (event: any) => void;
+  autoFocus?: boolean;
+  autoComplete?: string;
 }
 
 export type TextareaControllerProps<T extends FieldValues> =
@@ -31,3 +33,7 @@ export interface SelectControllerProps<T extends FieldValues>
 }
 
 export type DateInputFieldProps<T extends FieldValues> = BaseControllerProps<T>;
+
+export interface ErrorProps {
+  errors: any;
+}

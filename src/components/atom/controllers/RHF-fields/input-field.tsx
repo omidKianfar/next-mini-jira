@@ -1,5 +1,13 @@
-import { Controller, FieldValues, useFormContext } from "react-hook-form";
-import { InputControllerProps } from "./type";
+"use client";
+
+import {
+  Controller,
+  ErrorComponent,
+  FieldValues,
+  InputControllerProps,
+  LabelComponent,
+  useFormContext,
+} from "../imports";
 
 const InputField = <T extends FieldValues>({
   name,
@@ -8,6 +16,8 @@ const InputField = <T extends FieldValues>({
   type = "text",
   className,
   ref,
+  autoFocus,
+  autoComplete,
   onChange,
 }: InputControllerProps<T>) => {
   const {
@@ -17,11 +27,7 @@ const InputField = <T extends FieldValues>({
 
   return (
     <div className={className}>
-      {label && (
-        <label htmlFor={name} className="text-sm  text-blue-400">
-          {label}
-        </label>
-      )}
+      <LabelComponent label={label} name={name} />
 
       <Controller
         name={name}
@@ -32,6 +38,8 @@ const InputField = <T extends FieldValues>({
             id={name}
             type={type}
             placeholder={placeholder}
+            autoFocus={autoFocus}
+            autoComplete={autoComplete}
             ref={ref}
             value={type == "file" ? undefined : field.value || ""}
             onChange={(event) => {
@@ -43,9 +51,7 @@ const InputField = <T extends FieldValues>({
         )}
       />
 
-      {errors?.[name] && (
-        <p className="text-red-500 text-sm">{errors[name]?.message as any}</p>
-      )}
+      <ErrorComponent errors={errors} name={name} />
     </div>
   );
 };

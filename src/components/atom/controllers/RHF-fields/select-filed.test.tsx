@@ -1,7 +1,12 @@
-import { FormProvider, useForm } from "react-hook-form";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { useEffect } from "react";
-import SelectField from "./select-filed";
+import {
+  fireEvent,
+  FormProvider,
+  render,
+  useEffect,
+  useForm,
+  screen,
+  SelectField,
+} from "../imports";
 
 const options = [
   { label: "Option A", value: "A" },

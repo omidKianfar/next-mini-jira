@@ -1,5 +1,13 @@
-import { Controller, FieldValues, useFormContext } from "react-hook-form";
-import { TextareaControllerProps } from "./type";
+"use client";
+
+import {
+  Controller,
+  ErrorComponent,
+  FieldValues,
+  LabelComponent,
+  TextareaControllerProps,
+  useFormContext,
+} from "../imports";
 
 const TextareaFiled = <T extends FieldValues>({
   name,
@@ -15,11 +23,7 @@ const TextareaFiled = <T extends FieldValues>({
 
   return (
     <div className={className}>
-      {label && (
-        <label htmlFor={name} className="text-sm  text-blue-400">
-          {label}
-        </label>
-      )}
+      <LabelComponent label={label} name={name} />
 
       <Controller
         name={name}
@@ -35,9 +39,7 @@ const TextareaFiled = <T extends FieldValues>({
         )}
       />
 
-      {errors?.[name] && (
-        <p className="text-red-500 text-sm">{errors[name]?.message as any}</p>
-      )}
+      <ErrorComponent errors={errors} name={name} />
     </div>
   );
 };

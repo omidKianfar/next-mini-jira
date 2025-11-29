@@ -1,7 +1,12 @@
-import { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { fireEvent, render, screen } from "@testing-library/react";
-import DateInputField from "./date-input-field";
+import {
+  DateInputField,
+  fireEvent,
+  FormProvider,
+  render,
+  useEffect,
+  useForm,
+  screen,
+} from "../imports";
 
 const Wrapper = ({ withError = false }) => {
   const methods = useForm({

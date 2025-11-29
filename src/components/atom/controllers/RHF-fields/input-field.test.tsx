@@ -1,7 +1,12 @@
-import { FormProvider, useForm } from "react-hook-form";
-import InputField from "./input-field";
-import { render, screen, fireEvent } from "@testing-library/react";
-import { useEffect } from "react";
+import {
+  fireEvent,
+  FormProvider,
+  render,
+  useEffect,
+  useForm,
+  screen,
+  InputField,
+} from "../imports";
 
 const Wrapper = ({ withError = false }) => {
   const defaultValues = { name: "Initial text" };

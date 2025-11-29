@@ -1,5 +1,13 @@
-import { Controller, FieldValues, useFormContext } from "react-hook-form";
-import { SelectControllerProps } from "./type";
+"use client";
+
+import {
+  Controller,
+  ErrorComponent,
+  FieldValues,
+  LabelComponent,
+  SelectControllerProps,
+  useFormContext,
+} from "../imports";
 
 const SelectField = <T extends FieldValues>({
   name,
@@ -14,11 +22,7 @@ const SelectField = <T extends FieldValues>({
 
   return (
     <div className={className}>
-      {label && (
-        <label htmlFor={name} className="text-sm text-blue-400">
-          {label}
-        </label>
-      )}
+      <LabelComponent label={label} name={name} />
 
       <Controller
         name={name}
@@ -28,7 +32,7 @@ const SelectField = <T extends FieldValues>({
             id={name}
             {...field}
             onChange={(e) => field.onChange(e.target.value)}
-            className="w-full border p-2 my-1 rounded-lg text-sm focus:outline-blue-400 px-2"
+            className="w-full border p-2 my-1 rounded-lg text-sm focus:outline-blue-400 cursor-pointer"
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
@@ -39,9 +43,7 @@ const SelectField = <T extends FieldValues>({
         )}
       />
 
-      {errors?.[name] && (
-        <p className="text-red-500 text-sm">{errors[name]?.message as any}</p>
-      )}
+      <ErrorComponent errors={errors} name={name} />
     </div>
   );
 };

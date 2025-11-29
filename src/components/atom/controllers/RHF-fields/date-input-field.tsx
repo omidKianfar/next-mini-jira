@@ -1,5 +1,13 @@
-import { Controller, FieldValues, useFormContext } from "react-hook-form";
-import { DateInputFieldProps } from "./type";
+"use client";
+
+import {
+  Controller,
+  DateInputFieldProps,
+  ErrorComponent,
+  FieldValues,
+  LabelComponent,
+  useFormContext,
+} from "../imports";
 
 const DateInputField = <T extends FieldValues>({
   name,
@@ -12,11 +20,7 @@ const DateInputField = <T extends FieldValues>({
 
   return (
     <div className="space-y-1">
-      {label && (
-        <label htmlFor={name} className="text-sm  text-blue-400">
-          {label}
-        </label>
-      )}
+      <LabelComponent label={label} name={name} />
 
       <Controller
         name={name}
@@ -31,9 +35,7 @@ const DateInputField = <T extends FieldValues>({
         )}
       />
 
-      {errors?.[name] && (
-        <p className="text-red-500 text-sm">{errors[name]?.message as any}</p>
-      )}
+      <ErrorComponent errors={errors} name={name} />
     </div>
   );
 };

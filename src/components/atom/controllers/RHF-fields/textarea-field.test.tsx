@@ -1,7 +1,12 @@
-import { FormProvider, useForm } from "react-hook-form";
-import TextareaFiled from "./textarea-field";
-import { fireEvent, render, screen } from "@testing-library/react";
-import { useEffect } from "react";
+import {
+  fireEvent,
+  FormProvider,
+  render,
+  useEffect,
+  useForm,
+  screen,
+  TextareaFiled,
+} from "../imports";
 
 const Wrapper = ({ withError = false }) => {
   const defaultValues = { description: "Initial text" };
