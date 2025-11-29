@@ -1,12 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
-
 export type AuthType = "signin" | "signup";
 
-export interface AuthProps {
-  setPage: Dispatch<SetStateAction<AuthType>>;
-}
-
-export interface SignupProps extends AuthProps {
+export interface SignupProps {
   changeStep: (newStep: string) => void;
 }
 
@@ -19,4 +13,6 @@ export type CartType = {
   title: string;
   description: string;
   onClick: () => void;
+  price?: number;
+  icon: React.ReactNode;
 };

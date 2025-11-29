@@ -1,18 +1,28 @@
 "use client";
 
-import { useMemo } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { authSchema } from "../schema";
-import InputField from "@/src/components/atom/controllers/input-field";
-import { useAuth } from "@/src/hooks/useAuth";
-import { AuthProps, FormValues } from "../type";
-import { useRouter } from "next/navigation";
+import {
+  Button,
+  FormProvider,
+  FormValues,
+  Icon,
+  InputField,
+  authSchema,
+  useAuth,
+  useForm,
+  useMemo,
+  useRouter,
+  useSnackbar,
+  useState,
+  yupResolver,
+} from "../imports";
 
-const SigninComponent = ({ setPage }: AuthProps) => {
+const SigninComponent = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
 
   const { signinWithEmail } = useAuth();
+
+  const [loading, setLoading] = useState(false);
 
   const defaultValues: FormValues = useMemo(
     () => ({
@@ -28,42 +38,74 @@ const SigninComponent = ({ setPage }: AuthProps) => {
   });
 
   const signupUser = async (values: FormValues) => {
-    const email = values.email;
-    const password = values.password;
+    setLoading(true);
 
-    await signinWithEmail({ email, password }).unwrap();
+    try {
+      await signinWithEmail({
+        email: values.email,
+        password: values.password,
+      }).unwrap();
 
-    router.push("/");
+      router.push("/dashboard");
+    } catch (error: any) {
+      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+        variant: "error",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="lg:w-[500px] border p-4 rounded-sm">
+    <div className="lg:w-[500px] border-2 border-amber-300 p-4 pt-8 rounded-sm bg-white ">
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(signupUser)}>
+        <form onSubmit={methods.handleSubmit(signupUser)} autoComplete="on">
           <InputField
             name="email"
             label="Email"
             placeholder="Enter your email"
+            type="email"
+            autoFocus
+            autoComplete="email"
           />
 
           <InputField
             name="password"
             label="Password"
             placeholder="Enter your password"
+            type="password"
+            autoComplete="current-password"
           />
 
           <div className="flex justify-end items-center">
-            <button
+            <Button
               type="submit"
-              className="cursor-pointer rounded-sm px-8 py-2 border mt-4"
+              isLoading={loading}
+              className="mt-6 bg-blue-500 text-white border-2
+                hover:bg-transparent hover:border-blue-500
+               hover:text-blue-500 rounded-sm px-8 py-2 
+                transition-all duration-200
+            "
             >
-              Sign in
-            </button>
+              Signin
+            </Button>
           </div>
         </form>
       </FormProvider>
 
-      <button onClick={() => setPage("signup")}>{"Signup ->"}</button>
+      <Button
+        onClick={() => router.push("/auth/signup")}
+        className="text-amber-500 hover:text-amber-600 font-semibold"
+        icon={
+          <Icon
+            icon="grommet-icons:link-next"
+            width={12}
+            className="mt-1 ml-1"
+          />
+        }
+      >
+        Signup Page
+      </Button>
     </div>
   );
 };

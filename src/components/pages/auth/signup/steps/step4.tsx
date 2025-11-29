@@ -1,8 +1,13 @@
 "use client";
 
-import { SignupProps } from "../../type";
-import { PlanType } from "@/src/types/global";
-import CartComponent from "./cart";
+import BackButton from "@/src/components/atom/button/back-button";
+import {
+  Button,
+  Icon,
+  PlanCartComponent,
+  PlanType,
+  SignupProps,
+} from "../../imports";
 
 const Step4Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
   const BackToPlan = () => {
@@ -28,35 +33,29 @@ const Step4Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
   };
 
   return (
-    <div className="w-screen h-screen p-4">
-      <button
-        type="button"
-        className="border-2 rounded-sm px-8 py-2 cursor-pointer"
-        onClick={BackToPlan}
-      >
-        Back
-      </button>
+    <div className="w-screen h-screen flex justify-center items-center ">
+      <div className="w-[800px] h-[450px] bg-white p-8 border-2 border-amber-300 rounded-sm">
+        <div className="w-full flex justify-start mb-8">
+          <BackButton onClick={BackToPlan} />
+        </div>
 
-      <div className="w-full h-full flex justify-center items-center gap-8">
-        <CartComponent
-          title="Monthly"
-          description={`
-            With this plan you pay monthly to use the app.
+        <div className=" w-full flex justify-center items-center gap-8">
+          <PlanCartComponent
+            title="Monthly"
+            description={"Monthly Payment"}
+            price={10}
+            onClick={() => choosePlanHandler("monthly")}
+            icon={<Icon icon={"fluent:payment-20-filled"} className="text-9xl" />}
+          />
 
-            price: 10$
-          `}
-          onClick={() => choosePlanHandler("monthly")}
-        />
-
-        <CartComponent
-          title="Yearly"
-          description={`
-            With this plan you pay yearly to use the app.
-
-            price: 120$
-          `}
-          onClick={() => choosePlanHandler("yearly")}
-        />
+          <PlanCartComponent
+            title="Yearly"
+            description={"Yearly Payment"}
+            price={120}
+            onClick={() => choosePlanHandler("yearly")}
+            icon={<Icon icon={"fluent:payment-20-filled"} className="text-9xl" />}
+          />
+        </div>
       </div>
     </div>
   );

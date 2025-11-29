@@ -1,25 +1,31 @@
-import InputField from "@/src/components/atom/controllers/input-field";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useMemo, useRef, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { ProfileSchema } from "../../schema";
-import DateInputField from "@/src/components/atom/controllers/date-input-field";
-import Image from "next/image";
-import { useAuth } from "@/src/hooks/useAuth";
-import { useQueryClient } from "@tanstack/react-query";
-import { SignupProps } from "../../type";
-import { ProfileProps } from "@/src/types/global";
-import ModalContainer from "@/src/components/atom/modal";
-import BackToSignup from "./modal/back-to-signup";
+import AvatarUpload from "@/src/components/atom/upload/avatar";
+import {
+  BackToSignup,
+  Button,
+  DateInputField,
+  FormProvider,
+  Icon,
+  InputField,
+  ModalContainer,
+  ProfileProps,
+  ProfileSchema,
+  SignupProps,
+  useAuth,
+  useForm,
+  useMemo,
+  useSnackbar,
+  useState,
+  yupResolver,
+} from "../../imports";
+import BackButton from "@/src/components/atom/button/back-button";
 
 const Step2Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
-  const queryClient = useQueryClient();
-
-  const [open, setOpen] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
 
   const { saveUserProfile, user } = useAuth();
 
-  const photoRef = useRef<HTMLInputElement | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const defaultValues: ProfileProps = useMemo(
     () => ({
@@ -36,10 +42,6 @@ const Step2Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
     mode: "onSubmit",
   });
 
-  const photoRefHandler = () => {
-    photoRef.current?.click();
-  };
-
   const uploadPhotoHandler = (event: any) => {
     const file = event?.target?.files?.[0];
 
@@ -51,24 +53,27 @@ const Step2Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
   };
 
   const setProfileHandler = async (values: ProfileProps) => {
-    const userId = user?.userId as string;
-
-    const data = {
-      photo: values?.photo,
-      userName: values?.userName,
-      birthday: values?.birthday,
-    };
+    setLoading(true);
 
     try {
-      const result = await saveUserProfile({ userId, data }).unwrap();
+      await saveUserProfile({
+        userId: user?.userId as string,
+        data: {
+          photo: values?.photo,
+          userName: values?.userName,
+          birthday: values?.birthday,
+        },
+      }).unwrap();
 
-      await queryClient.invalidateQueries({
-        queryKey: ["userProfile", result.userId],
-      });
+      enqueueSnackbar("profile updated successfully", { variant: "success" });
 
       changeStep("2");
-    } catch (error) {
-      console.log("Error: ", error);
+    } catch (error: any) {
+      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+        variant: "error",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -81,14 +86,10 @@ const Step2Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
   };
 
   return (
-    <div className="lg:w-[500px] border p-4 rounded-sm">
-      <button
-        type="button"
-        className="border-2 rounded-sm px-8 py-2 cursor-pointer"
-        onClick={handleOpenModal}
-      >
-        Back
-      </button>
+    <div className="lg:w-[500px] border-2 border-amber-300 p-4 rounded-sm bg-white">
+      <div className="mb-2">
+        <BackButton onClick={handleOpenModal} />
+      </div>
 
       <ModalContainer open={open} handleClose={handleCloseModal}>
         <BackToSignup changeStep={changeStep} handleClose={handleCloseModal} />
@@ -96,47 +97,33 @@ const Step2Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
 
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(setProfileHandler)}>
-          <div className="mb-8">
-            {methods.watch("photo") && (
-              <Image
-                src={methods.watch("photo")!}
-                width={120}
-                height={120}
-                alt="Selected photo"
-                className="rounded-full object-cover w-[100px] h-[100px]"
-              />
-            )}
-
-            <InputField
-              name="photo"
-              type="file"
-              label="Photo"
-              placeholder="Enter your email"
-              ref={photoRef}
-              onChange={uploadPhotoHandler}
-              className="hidden"
+          <div className="mb-4">
+            <AvatarUpload
+              photo={methods.watch("photo")}
+              uploadHandler={uploadPhotoHandler}
             />
-
-            <button type="button" onClick={photoRefHandler}>
-              Upload
-            </button>
           </div>
 
           <InputField
             name="userName"
-            label="Email"
+            label="Username"
             placeholder="Enter your email"
           />
 
           <DateInputField name="birthday" label="Birthday" />
 
           <div className="flex justify-end items-center">
-            <button
+            <Button
               type="submit"
-              className="cursor-pointer rounded-sm px-8 py-2 border mt-4"
+              isLoading={loading}
+              className="mt-6 bg-blue-500 text-white border-2
+                 hover:bg-transparent hover:border-blue-500
+               hover:text-blue-500 rounded-sm px-8 py-2 
+                transition-all duration-200
+            "
             >
               Next
-            </button>
+            </Button>
           </div>
         </form>
       </FormProvider>

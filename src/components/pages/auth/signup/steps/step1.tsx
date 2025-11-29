@@ -1,15 +1,29 @@
 "use client";
 
-import { useMemo } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { authSchema } from "../../schema";
-import InputField from "@/src/components/atom/controllers/input-field";
-import { useAuth } from "@/src/hooks/useAuth";
-import { FormValues, SignupProps } from "../../type";
+import {
+  authSchema,
+  Button,
+  FormProvider,
+  FormValues,
+  Icon,
+  InputField,
+  SignupProps,
+  useAuth,
+  useForm,
+  useMemo,
+  useRouter,
+  useSnackbar,
+  useState,
+  yupResolver,
+} from "../../imports";
 
-const Step1Component = ({ setPage, changeStep }: SignupProps) => {
+const Step1Component = ({ changeStep }: SignupProps) => {
+  const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
+
   const { signupWithEmail } = useAuth();
+
+  const [loading, setLoading] = useState(false);
 
   const defaultValues: FormValues = useMemo(
     () => ({
@@ -25,28 +39,35 @@ const Step1Component = ({ setPage, changeStep }: SignupProps) => {
   });
 
   const signupUser = async (values: FormValues) => {
-    const email = values.email;
-    const password = values.password;
+    setLoading(true);
 
     try {
-      const result = await signupWithEmail({ email, password }).unwrap();
+      await signupWithEmail({
+        email: values?.email,
+        password: values?.password,
+      }).unwrap();
 
-      if (result) {
-        changeStep("1");
-      }
-    } catch (error) {
-      console.log("Error: ", error);
+      enqueueSnackbar("Account created successfully", { variant: "success" });
+
+      changeStep("1");
+    } catch (error: any) {
+      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+        variant: "error",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="lg:w-[500px] border p-4 rounded-sm">
+    <div className="w-[500px]  p-4 border-2 border-amber-300 rounded-sm pt-8 bg-white">
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(signupUser)}>
           <InputField
             name="email"
             label="Email"
             placeholder="Enter your email"
+            autoFocus
           />
 
           <InputField
@@ -56,17 +77,34 @@ const Step1Component = ({ setPage, changeStep }: SignupProps) => {
           />
 
           <div className="flex justify-end items-center">
-            <button
+            <Button
               type="submit"
-              className="cursor-pointer rounded-sm px-8 py-2 border mt-4"
+              isLoading={loading}
+              className="mt-6 bg-blue-500 text-white border-2
+                 hover:bg-transparent hover:border-blue-500
+               hover:text-blue-500 rounded-sm px-8 py-2 
+                transition-all duration-200
+            "
             >
-              Sign up
-            </button>
+              Signup
+            </Button>
           </div>
         </form>
       </FormProvider>
 
-      <button onClick={() => setPage("signin")}>{"Signin ->"}</button>
+      <Button
+        onClick={() => router.push("/auth/signin")}
+        className="text-amber-500 hover:text-amber-600 font-semibold"
+        icon={
+          <Icon
+            icon="grommet-icons:link-next"
+            width={16}
+            className="mt-1 ml-1 "
+          />
+        }
+      >
+        Signin Page
+      </Button>
     </div>
   );
 };

@@ -1,5 +1,6 @@
+"use client";
+
 import { useRouter } from "next/navigation";
-import React from "react";
 
 const PaymentFailedComponent = () => {
   const router = useRouter();

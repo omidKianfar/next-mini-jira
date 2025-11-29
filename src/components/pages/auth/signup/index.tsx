@@ -1,15 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState } from "../imports";
 
 import Step1Component from "./steps/step1";
 import Step2Component from "./steps/step2";
 import Step3Component from "./steps/step3";
-import { AuthProps } from "../type";
 import Step4Component from "./steps/step4";
 
-const SignupComponent = ({ setPage }: AuthProps) => {
-  const [stepNumber, setStepNumber] = useState<string>(() => {
+const SignupComponent = () => {
+  const [stepNumber, setStepNumber] = useState(() => {
+    if (typeof window === "undefined") {
+      return "0";
+    }
     return localStorage.getItem("step") || "0";
   });
 
@@ -21,7 +23,7 @@ const SignupComponent = ({ setPage }: AuthProps) => {
   const renderStep = () => {
     switch (stepNumber) {
       case "0":
-        return <Step1Component setPage={setPage} changeStep={changeStep} />;
+        return <Step1Component changeStep={changeStep} />;
       case "1":
         return <Step2Component changeStep={changeStep} />;
       case "2":
@@ -31,7 +33,7 @@ const SignupComponent = ({ setPage }: AuthProps) => {
     }
   };
 
-  return <>{renderStep()}</>;
+  return renderStep();
 };
 
 export default SignupComponent;
