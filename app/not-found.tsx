@@ -22,7 +22,7 @@ export default function NotFound() {
           icon={<Icon icon="grommet-icons:link-next" width={16} className="ml-2"/>}
           className="mt-6 bg-blue-500 text-white border-2
                  hover:bg-transparent hover:border-blue-500
-               hover:text-blue-500 rounded-sm px-8 py-3 
+               hover:text-blue-500 rounded-lg px-8 py-3 
                 transition-all duration-200 text-lg
             "
         >
