@@ -6,6 +6,7 @@ import Button from "../button/next-button";
 import { Icon } from "@iconify/react";
 
 const AvatarUpload = ({ photo, uploadHandler }: UploadAvatarProps) => {
+  
   const photoRef = useRef<HTMLInputElement | null>(null);
 
   const photoRefHandler = () => {
@@ -16,7 +17,7 @@ const AvatarUpload = ({ photo, uploadHandler }: UploadAvatarProps) => {
     <div className="flex flex-col justify-center items-center">
       {photo ? (
         <Image
-          src={photo!}
+          src={photo}
           width={120}
           height={120}
           alt=""
