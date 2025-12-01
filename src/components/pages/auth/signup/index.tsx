@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "../imports";
+import { useAuth } from "../imports";
 
 import Step1Component from "./steps/step1";
 import Step2Component from "./steps/step2";
@@ -8,28 +8,20 @@ import Step3Component from "./steps/step3";
 import Step4Component from "./steps/step4";
 
 const SignupComponent = () => {
-  const [stepNumber, setStepNumber] = useState(() => {
-    if (typeof window === "undefined") {
-      return "0";
-    }
-    return localStorage.getItem("step") || "0";
-  });
-
-  const changeStep = (newStep: string) => {
-    setStepNumber(newStep);
-    localStorage.setItem("step", newStep);
-  };
+  const { stepNumber } = useAuth();
 
   const renderStep = () => {
     switch (stepNumber) {
       case "0":
-        return <Step1Component changeStep={changeStep} />;
+        return <Step1Component />;
       case "1":
-        return <Step2Component changeStep={changeStep} />;
+        return <Step2Component />;
       case "2":
-        return <Step3Component changeStep={changeStep} />;
+        return <Step3Component />;
       case "3":
-        return <Step4Component changeStep={changeStep} />;
+        return <Step4Component />;
+      default:
+        return null;
     }
   };
 

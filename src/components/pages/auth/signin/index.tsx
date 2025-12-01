@@ -5,6 +5,7 @@ import {
   FormProvider,
   FormValues,
   Icon,
+  Image,
   InputField,
   authSchema,
   useAuth,
@@ -23,6 +24,7 @@ const SigninComponent = () => {
   const { signinWithEmail } = useAuth();
 
   const [loading, setLoading] = useState(false);
+  const [passwordShow, setPasswordShow] = useState(false);
 
   const defaultValues: FormValues = useMemo(
     () => ({
@@ -37,16 +39,14 @@ const SigninComponent = () => {
     resolver: yupResolver(authSchema),
   });
 
-  const signupUser = async (values: FormValues) => {
+  const signinUser = async (values: FormValues) => {
     setLoading(true);
 
     try {
       await signinWithEmail({
         email: values.email,
         password: values.password,
-      }).unwrap();
-
-      router.push("/dashboard");
+      });
     } catch (error: any) {
       enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
         variant: "error",
@@ -57,55 +57,95 @@ const SigninComponent = () => {
   };
 
   return (
-    <div className="lg:w-[500px] border-2 border-amber-300 p-4 pt-8 rounded-sm bg-white ">
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(signupUser)} autoComplete="on">
-          <InputField
-            name="email"
-            label="Email"
-            placeholder="Enter your email"
-            type="email"
-            autoFocus
-            autoComplete="email"
-          />
+    <div className="w-full h-full flex flex-col items-center justify-center">
+      <div className="text-center mb-8 h-18 rounded-lg flex ">
+        <h1 className="text-6xl font-bold text-amber-500 pr-1">Mini</h1>
 
-          <InputField
-            name="password"
-            label="Password"
-            placeholder="Enter your password"
-            type="password"
-            autoComplete="current-password"
-          />
+        <h1 className="text-6xl font-bold  bg-blue-900 text-white px-6 rounded-lg">
+          Jira
+        </h1>
+      </div>
 
-          <div className="flex justify-end items-center">
-            <Button
-              type="submit"
-              isLoading={loading}
-              className="mt-6 bg-blue-500 text-white border-2
-                hover:bg-transparent hover:border-blue-500
-               hover:text-blue-500 rounded-sm px-8 py-2 
-                transition-all duration-200
-            "
-            >
-              Signin
-            </Button>
-          </div>
-        </form>
-      </FormProvider>
+      <div className=" flex items-center justify-center">
+        <div className="w-[500px] h-[400px] flex items-center justify-center">
+          <Image
+            src="/images/auth.png"
+            alt=""
+            width={500}
+            height={400}
+            className="object-contain"
+          />{" "}
+        </div>
 
-      <Button
-        onClick={() => router.push("/auth/signup")}
-        className="text-amber-500 hover:text-amber-600 font-semibold"
-        icon={
-          <Icon
-            icon="grommet-icons:link-next"
-            width={12}
-            className="mt-1 ml-1"
-          />
-        }
-      >
-        Signup Page
-      </Button>
+        <div className="w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white ">
+          <h1 className="text-2xl font-bold text-center mb-8 text-amber-500">
+            Signin Page
+          </h1>
+
+          <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(signinUser)}>
+              <InputField
+                name="email"
+                label="Email"
+                placeholder="Enter your email"
+                type="email"
+                autoFocus
+                icon={
+                  <Icon icon={"ic:baseline-email"} className="text-red-400" />
+                }
+              />
+
+              <InputField
+                name="password"
+                label="Password"
+                placeholder="Enter your password"
+                type={passwordShow ? "text" : "password"}
+                icon={
+                  passwordShow ? (
+                    <Icon
+                      icon={"mdi:show"}
+                      className="text-green-400 cursor-pointer"
+                      onClick={() => setPasswordShow(false)}
+                    />
+                  ) : (
+                    <Icon
+                      icon={"mdi:hide"}
+                      className="text-gray-400 cursor-pointer"
+                      onClick={() => setPasswordShow(true)}
+                    />
+                  )
+                }
+              />
+
+              <div className="flex justify-end items-center">
+                <Button
+                  type="submit"
+                  isLoading={loading}
+                  className="mt-6 bg-blue-500 text-white border-2 hover:bg-transparent
+                  hover:border-blue-500 hover:text-blue-500 rounded-lg px-8 py-2 
+                  transition-all duration-200"
+                >
+                  Signin
+                </Button>
+              </div>
+            </form>
+          </FormProvider>
+
+          <Button
+            onClick={() => router.push("/signup")}
+            className="text-amber-500 hover:text-amber-600 font-semibold"
+            icon={
+              <Icon
+                icon="grommet-icons:link-next"
+                width={12}
+                className="mt-1 ml-1"
+              />
+            }
+          >
+            Signup Page
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };

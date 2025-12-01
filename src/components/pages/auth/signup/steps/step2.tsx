@@ -1,28 +1,30 @@
-import AvatarUpload from "@/src/components/atom/upload/avatar";
 import {
   BackToSignup,
   Button,
   DateInputField,
   FormProvider,
   Icon,
+  Image,
   InputField,
   ModalContainer,
   ProfileProps,
   ProfileSchema,
-  SignupProps,
   useAuth,
   useForm,
   useMemo,
   useSnackbar,
   useState,
   yupResolver,
+  FramerMotion,
+  BackButton,
+  AvatarUpload
 } from "../../imports";
-import BackButton from "@/src/components/atom/button/back-button";
 
-const Step2Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
+
+const Step2Component = () => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const { saveUserProfile, user } = useAuth();
+  const { saveUserProfile, user,changeStep } = useAuth();
 
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -63,7 +65,7 @@ const Step2Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
           userName: values?.userName,
           birthday: values?.birthday,
         },
-      }).unwrap();
+      });
 
       enqueueSnackbar("profile updated successfully", { variant: "success" });
 
@@ -86,48 +88,77 @@ const Step2Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
   };
 
   return (
-    <div className="lg:w-[500px] border-2 border-amber-300 p-4 rounded-sm bg-white">
-      <div className="mb-2">
-        <BackButton onClick={handleOpenModal} />
-      </div>
+    <FramerMotion>
+      <div className="w-full h-full flex flex-col items-center justify-center">
+        <div className=" flex items-center justify-center">
+          <div className="lg:w-[500px] border-2 border-amber-300 p-4 rounded-lg bg-white">
+            <div className="mb-2">
+              <BackButton onClick={handleOpenModal} />
+            </div>
 
-      <ModalContainer open={open} handleClose={handleCloseModal}>
-        <BackToSignup changeStep={changeStep} handleClose={handleCloseModal} />
-      </ModalContainer>
+            <ModalContainer open={open} handleClose={handleCloseModal}>
+              <BackToSignup
+                changeStep={changeStep}
+                handleClose={handleCloseModal}
+              />
+            </ModalContainer>
 
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(setProfileHandler)}>
-          <div className="mb-4">
-            <AvatarUpload
-              photo={methods.watch("photo")}
-              uploadHandler={uploadPhotoHandler}
-            />
-          </div>
+            <h1 className="text-2xl font-bold text-center mb-8 text-amber-500">
+              Profile Page
+            </h1>
 
-          <InputField
-            name="userName"
-            label="Username"
-            placeholder="Enter your email"
-          />
+            <FormProvider {...methods}>
+              <form onSubmit={methods.handleSubmit(setProfileHandler)}>
+                <div className="mb-4">
+                  <AvatarUpload
+                    photo={methods.watch("photo")}
+                    uploadHandler={uploadPhotoHandler}
+                  />
+                </div>
 
-          <DateInputField name="birthday" label="Birthday" />
+                <InputField
+                  name="userName"
+                  label="Username"
+                  placeholder="Enter your email"
+                  icon={
+                    <Icon
+                      icon={"tabler:user-filled"}
+                      className="text-gray-600 "
+                    />
+                  }
+                />
 
-          <div className="flex justify-end items-center">
-            <Button
-              type="submit"
-              isLoading={loading}
-              className="mt-6 bg-blue-500 text-white border-2
+                <DateInputField name="birthday" label="Birthday" />
+
+                <div className="flex justify-end items-center">
+                  <Button
+                    type="submit"
+                    isLoading={loading}
+                    className="mt-6 bg-blue-500 text-white border-2
                  hover:bg-transparent hover:border-blue-500
-               hover:text-blue-500 rounded-sm px-8 py-2 
+               hover:text-blue-500 rounded-lg px-8 py-2 
                 transition-all duration-200
             "
-            >
-              Next
-            </Button>
+                  >
+                    Next
+                  </Button>
+                </div>
+              </form>
+            </FormProvider>
           </div>
-        </form>
-      </FormProvider>
-    </div>
+
+          <div className="w-[500px] h-[600px] flex items-center justify-center">
+            <Image
+              src="/images/profile.svg"
+              alt=""
+              width={500}
+              height={400}
+              className="object-contain"
+            />{" "}
+          </div>
+        </div>
+      </div>
+    </FramerMotion>
   );
 };
 

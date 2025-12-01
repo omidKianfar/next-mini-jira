@@ -1,8 +1,5 @@
 export type AuthType = "signin" | "signup";
 
-export interface SignupProps {
-  changeStep: (newStep: string) => void;
-}
 
 export interface FormValues {
   email: string;

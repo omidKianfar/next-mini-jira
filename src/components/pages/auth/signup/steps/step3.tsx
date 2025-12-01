@@ -1,22 +1,23 @@
-import BackButton from "@/src/components/atom/button/back-button";
 import {
   PaymentCartComponent,
   dayjs,
   db,
   doc,
-  SignupProps,
   updateDoc,
   useAuth,
   useRouter,
   Icon,
   useSnackbar,
+  Image,
+  FramerMotion,
+  BackButton,
 } from "../../imports";
 
-const Step3Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
+const Step3Component = () => {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { user } = useAuth();
+  const { user,changeStep } = useAuth();
 
   const BackProfile = () => {
     changeStep("1");
@@ -33,6 +34,8 @@ const Step3Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
 
       enqueueSnackbar("Terial Mode is Active", { variant: "success" });
 
+      changeStep("0");
+
       router.push("/dashboard");
     } catch (error: any) {
       enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
@@ -46,29 +49,46 @@ const Step3Component = ({ changeStep }: Pick<SignupProps, "changeStep">) => {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center ">
-      <div className="w-[800px] h-[450px] bg-white p-8 border-2 border-amber-300 rounded-sm">
-        <div className="w-full flex justify-start mb-8">
-          <BackButton onClick={BackProfile} />
+    <FramerMotion>
+      <div className="w-screen h-screen flex justify-center items-center relative">
+        <div className="absolute top-0">
+          <Image
+            src="/images/Wallet.svg"
+            alt=""
+            width={300}
+            height={300}
+            className="object-contain"
+          />
         </div>
 
-        <div className=" w-full flex justify-center items-center gap-8">
-          <PaymentCartComponent
-            title="Terial Mode"
-            description="You get 10 days of free access to the app."
-            onClick={freeModeHandler}
-            icon={<Icon icon={"tabler:free-rights"} className="text-8xl" />}
-          />
+        <div className="w-[900px] h-[600px] bg-white p-8 border-2 border-amber-300 rounded-lg ">
+          <div className="w-full flex justify-start mb-[135px]">
+            <BackButton onClick={BackProfile} />
+          </div>
 
-          <PaymentCartComponent
-            title="Payment Mode"
-            description="Go to payment plan page"
-            onClick={paymentModeHandler}
-            icon={<Icon icon={"streamline:payment-10-solid"} className="text-8xl" />}
-          />
+          <div className=" w-full flex justify-center items-center gap-8">
+            <PaymentCartComponent
+              title="Terial Mode"
+              description="You get 10 days of free access to the app."
+              onClick={freeModeHandler}
+              icon={<Icon icon={"tabler:free-rights"} className="text-8xl" />}
+            />
+
+            <PaymentCartComponent
+              title="Payment Mode"
+              description="Go to payment plan page"
+              onClick={paymentModeHandler}
+              icon={
+                <Icon
+                  icon={"streamline:payment-10-solid"}
+                  className="text-8xl"
+                />
+              }
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </FramerMotion>
   );
 };
 

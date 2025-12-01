@@ -8,8 +8,8 @@ const PaymentCartComponent = ({
 }: Partial<CartType>) => {
   return (
     <div
-      className="w-[300px] h-[300px] border-2 border-blue-500
-       text-blue-500 rounded-sm max-w-md p-4 text-center
+      className="w-[300px] h-[300px] backdrop-blur-sm border-2 border-blue-500
+       text-blue-500 rounded-lg max-w-md p-4 text-center
        hover:bg-blue-500 hover:border-blue-500
        hover:text-white cursor-pointer relative"
       onClick={onClick}
