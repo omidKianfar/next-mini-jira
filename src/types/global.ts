@@ -23,6 +23,35 @@ export type MyUserType = {
   };
 };
 
+export type AuthContextActionType = "INITIALIZE" | "IS_LOADING" | "ERROR";
+
+export type AuthLoading =
+  | "SIGN_OUT"
+  | "INITIALIZING"
+  | "SIGN_UP_WITH_EMAIL"
+  | "SIGN_IN_WITH_EMAIL"
+  | "SIGN_IN_WITH_GOOGLE";
+
+export type AuthContextStateType = {
+  user: MyUserType | null;
+  isLoading: AuthLoading | null;
+  isInitialized: boolean;
+  isAuthenticated: boolean;
+};
+
+export type AuthContextProps = AuthContextStateType & {
+  signupWithEmail: ({
+    email,
+    password,
+  }: SignPropsType) => Promise<MyUserType | void>;
+  signinWithEmail: ({
+    email,
+    password,
+  }: SignPropsType) => Promise<MyUserType | void>;
+  logout: () => Promise<void>;
+  saveUserProfile: ({ userId, data }: UserProfileType) => Promise<void>;
+};
+
 export type SignPropsType = {
   email: string;
   password: string;
