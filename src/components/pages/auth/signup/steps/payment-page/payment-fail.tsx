@@ -2,12 +2,15 @@
 
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
-import { Button } from "../../../imports";
+import { Button, useAuth } from "../../../imports";
 
 const PaymentFailedComponent = () => {
   const router = useRouter();
+  const { changeStep } = useAuth();
 
   const finishHandler = () => {
+    changeStep("0");
+
     router.push("/payment");
   };
 
@@ -15,7 +18,10 @@ const PaymentFailedComponent = () => {
     <div className="w-full h-screen flex items-center justify-center bg-gray-100">
       <div className="w-[600px] h-[500px]  p-6 border-2 border-amber-300 rounded-lg bg-white">
         <div className="flex justify-center mb-10 mt-8">
-          <Icon icon={"streamline-freehand:cash-payment-bill"} className="text-[150px] text-amber-500" />
+          <Icon
+            icon={"streamline-freehand:cash-payment-bill"}
+            className="text-[150px] text-amber-500"
+          />
         </div>
 
         <h1 className=" font-bold text-3xl text-red-600 ">Payment failed.</h1>
