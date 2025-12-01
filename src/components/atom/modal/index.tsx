@@ -15,7 +15,7 @@ export default function ModalContainer({
       data-testid="modal-backdrop"
     >
       <div
-        className="relative bg-white rounded-sm shadow-xl p-4 max-w-lg w-full mx-4"
+        className="relative bg-white rounded-lg shadow-xl p-4 max-w-lg w-full mx-4"
         onClick={(e) => e.stopPropagation()}
       >
         {children}
