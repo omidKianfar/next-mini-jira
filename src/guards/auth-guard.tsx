@@ -10,7 +10,7 @@ const AuthGuard = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     if (isInitialized && !isAuthenticated) {
-      router.replace("/auth/signin");
+      router.replace("/signin");
     }
   }, [isInitialized, isAuthenticated, router]);
 
