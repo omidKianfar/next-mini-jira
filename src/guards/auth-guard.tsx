@@ -4,18 +4,19 @@ import { PropsWithChildren, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../hooks/useAuth";
 
-const AuthGuard = ({ children }:PropsWithChildren) => {
+const AuthGuard = ({ children }: PropsWithChildren) => {
   const router = useRouter();
-  const { user, isLoading } = useAuth();
-  
+  const { isInitialized, isAuthenticated } = useAuth();
 
   useEffect(() => {
-    if (!isLoading && !user) {
+    if (isInitialized && !isAuthenticated) {
       router.replace("/auth/signin");
     }
-  }, [user, isLoading, router]);
+  }, [isInitialized, isAuthenticated, router]);
 
-  if (isLoading || !user) return null;
+  if (!isInitialized) return null;
+
+  if (!isAuthenticated) return null;
 
   return children;
 };
