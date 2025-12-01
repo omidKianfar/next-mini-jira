@@ -50,6 +50,8 @@ export type AuthContextProps = AuthContextStateType & {
   }: SignPropsType) => Promise<MyUserType | void>;
   logout: () => Promise<void>;
   saveUserProfile: ({ userId, data }: UserProfileType) => Promise<void>;
+  changeStep: (newStep: string) => void;
+  stepNumber: string;
 };
 
 export type SignPropsType = {

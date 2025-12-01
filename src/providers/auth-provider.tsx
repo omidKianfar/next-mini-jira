@@ -6,6 +6,7 @@ import {
   useEffect,
   useReducer,
   useRef,
+  useState,
 } from "react";
 import {
   createUserWithEmailAndPassword,
@@ -35,6 +36,7 @@ import {
   UserProfileType,
   UserType,
 } from "../types/global";
+import { useSnackbar } from "notistack";
 
 const app = initializeApp(config.firebase);
 const auth = getAuth(app);
@@ -82,15 +84,26 @@ export const authContext = createContext<AuthContextProps>({
   signinWithEmail: ({ email, password }: SignPropsType) => Promise.resolve(),
   logout: () => Promise.resolve(),
   saveUserProfile: ({ userId, data }: UserProfileType) => Promise.resolve(),
+  changeStep: (newStep: string) => {},
   user: null,
   isLoading: null,
   isAuthenticated: false,
-  isInitialized:false
+  isInitialized: false,
+  stepNumber: "0",
 });
 
 const AuthProvider = ({ children }: PropsWithChildren) => {
+  const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
   // const queryClient = useQueryClient();
+
+  const [stepNumber, setStepNumber] = useState("0");
+
+  useEffect(() => {
+    const saved =
+      typeof window !== "undefined" ? localStorage.getItem("step") : null;
+    if (saved) setStepNumber(saved);
+  }, []);
 
   const unsubDocRef = useRef<null | (() => void)>(null);
 
@@ -108,7 +121,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     return {
       userId: currentUser.uid,
       email: currentUser.email ?? null,
-      photo: currentUser.photoURL ?? null,
+      photo: profile.photo ?? null,
       userName: profile.userName ?? null,
       birthday: profile.birthday ?? null,
       userType: profile.userType ?? UserType.Client,
@@ -194,17 +207,19 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 
       const user = await mapFirebaseUserToUser(currentUser);
 
-      dispatch({
-        type: "INITIALIZE",
-        payload: {
-          user: user,
-          isAuthenticated: true,
-          isLoading: null,
-          isInitialized: true,
-        },
-      });
+      if (user) {
+        dispatch({
+          type: "INITIALIZE",
+          payload: {
+            user: user,
+            isAuthenticated: true,
+            isLoading: null,
+            isInitialized: true,
+          },
+        });
 
-      router.push("/");
+        router.push("/dashboard");
+      }
     } catch (error) {
       console.log("User signin firebase error: ", error);
     } finally {
@@ -216,8 +231,6 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
   };
 
   const signupWithEmail = async ({ email, password }: SignPropsType) => {
-    console.log(email, password);
-
     dispatch({
       type: "IS_LOADING",
       payload: { isLoading: "SIGN_UP_WITH_EMAIL" },
@@ -241,19 +254,29 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 
       const user = await mapFirebaseUserToUser(newUser.user);
 
-      dispatch({
-        type: "INITIALIZE",
-        payload: {
-          user,
-          isAuthenticated: true,
-          isLoading: null,
-          isInitialized: true,
-        },
-      });
+      if (user) {
+        enqueueSnackbar("Account created successfully", { variant: "success" });
 
-      return user;
-    } catch (error) {
+        dispatch({
+          type: "INITIALIZE",
+          payload: {
+            user,
+            isAuthenticated: true,
+            isLoading: null,
+            isInitialized: true,
+          },
+        });
+
+        changeStep("1");
+
+        return user;
+      }
+    } catch (error: any) {
       console.log("User signin firebase error: ", error);
+
+      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+        variant: "error",
+      });
     } finally {
       dispatch({
         type: "IS_LOADING",
@@ -297,6 +320,11 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const changeStep = (newStep: string) => {
+    setStepNumber(newStep);
+    localStorage.setItem("step", newStep);
+  };
+
   return (
     <authContext.Provider
       value={{
@@ -304,10 +332,12 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         signinWithEmail,
         logout,
         saveUserProfile,
+        changeStep,
         user: state.user ?? null,
         isLoading: state.isLoading ?? null,
         isAuthenticated: state.isAuthenticated ?? false,
-        isInitialized: state.isInitialized ?? false
+        isInitialized: state.isInitialized ?? false,
+        stepNumber,
       }}
     >
       {children}
@@ -316,4 +346,3 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 };
 
 export default AuthProvider;
-
