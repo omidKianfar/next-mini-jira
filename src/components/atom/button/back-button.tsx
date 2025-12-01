@@ -6,7 +6,7 @@ const BackButton = ({ onClick }: BackButtonProps) => {
   return (
     <Button
       onClick={onClick}
-      className="text-amber-500 "
+      className="text-amber-500 hover:text-amber-600"
       icon={
         <Icon
           icon="grommet-icons:link-next"
