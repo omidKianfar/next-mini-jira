@@ -6,6 +6,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { useRouter, useSearchParams } from "next/navigation";
 import dayjs from "dayjs";
 import { db } from "@/config";
+import { Button, Icon } from "../../../imports";
 
 const PaymentSuccessComponent = () => {
   const router = useRouter();
@@ -74,23 +75,40 @@ const PaymentSuccessComponent = () => {
       },
     });
 
-    router.push("/");
+    router.push("/dashboard");
   };
 
   if (loading) return <div>Processing your payment...</div>;
 
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center gap-6">
-      <h1 className="text-2xl font-bold">Payment Successful</h1>
+    <div className="w-full h-screen flex items-center justify-center bg-gray-100">
+      <div className="w-[600px] h-[500px]  p-6 border-2 border-amber-300 rounded-lg bg-white">
+        <div className="flex justify-center mb-10 mt-8">
+          <Icon icon={"streamline-freehand:cash-payment-bill"} className="text-[150px] text-green-500" />
+        </div>
 
-      <p>Your subscription is now active.</p>
+        <h1 className=" font-bold text-3xl text-green-600 ">
+          Payment successful.
+        </h1>
 
-      <button
-        onClick={finishHandler}
-        className="px-6 py-3 bg-blue-600 text-white rounded-md"
-      >
-        Finish & Save
-      </button>
+        <p className=" mt-4 mb-12">
+          Your transaction has been completed and your{" "}
+          {planType == "monthly" ? "Monthly" : "Yearly"} subscription is now
+          active. Thank you for your purchase!
+        </p>
+
+        <div className="flex justify-center">
+          <Button
+            onClick={finishHandler}
+            className="mt-6 bg-blue-500 text-white border-2
+                 hover:bg-transparent hover:border-blue-500
+               hover:text-blue-500 rounded-lg px-8 py-2 
+                transition-all duration-200"
+          >
+            Finish
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
