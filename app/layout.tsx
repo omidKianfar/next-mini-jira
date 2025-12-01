@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {  Poppins, Inter, Outfit } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const OutfitFont = Outfit({
+  variable: "--font-Outfit",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const PoppinsFont = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const InterFont = Inter({
+  variable: "--font-Inter",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -23,9 +31,14 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang="en">
+    <html lang="en" className={InterFont.className}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`
+      
+          ${OutfitFont.variable} 
+          ${PoppinsFont.variable} 
+          ${InterFont.variable} 
+          antialiased`}
       >
         {children}
       </body>
