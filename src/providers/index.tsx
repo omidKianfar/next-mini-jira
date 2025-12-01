@@ -1,17 +1,16 @@
 "use client";
 
 import { PropsWithChildren } from "react";
-import { Provider } from "react-redux";
-import { store } from "../store";
 import AuthProvider from "./auth-provider";
 import NotistackProvider from "../components/atom/error-handler/notistack";
+import FramerMotion from "../components/atom/animation";
 
 const ProvidersWrapper = ({ children }: PropsWithChildren) => {
   return (
     <NotistackProvider>
-      <Provider store={store}>
-        <AuthProvider>{children}</AuthProvider>
-      </Provider>
+      <AuthProvider>
+        <FramerMotion>{children}</FramerMotion>
+      </AuthProvider>
     </NotistackProvider>
   );
 };
