@@ -7,11 +7,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 import dayjs from "dayjs";
 import { db } from "@/config";
 import { Button, Icon } from "../../../imports";
+import PageLoading from "@/src/components/atom/loading/page-loader";
 
 const PaymentSuccessComponent = () => {
   const router = useRouter();
   const params = useSearchParams();
-  const { user } = useAuth();
+  const { user, changeStep } = useAuth();
 
   const planType = params.get("planType");
   const sessionId = params.get("session_id");
@@ -63,7 +64,7 @@ const PaymentSuccessComponent = () => {
       return;
     }
 
-    await updateDoc(doc(db, "users", user.userId), {
+    const setData = await updateDoc(doc(db, "users", user.userId), {
       payment: {
         freeTrialEnabled: false,
         trialEnd: now,
@@ -75,16 +76,21 @@ const PaymentSuccessComponent = () => {
       },
     });
 
+    changeStep("0");
+
     router.push("/dashboard");
   };
 
-  if (loading) return <div>Processing your payment...</div>;
+  if (loading) return <PageLoading />;
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-gray-100">
       <div className="w-[600px] h-[500px]  p-6 border-2 border-amber-300 rounded-lg bg-white">
         <div className="flex justify-center mb-10 mt-8">
-          <Icon icon={"streamline-freehand:cash-payment-bill"} className="text-[150px] text-green-500" />
+          <Icon
+            icon={"streamline-freehand:cash-payment-bill"}
+            className="text-[150px] text-green-500"
+          />
         </div>
 
         <h1 className=" font-bold text-3xl text-green-600 ">
