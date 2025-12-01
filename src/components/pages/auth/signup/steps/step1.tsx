@@ -59,9 +59,9 @@ const Step1Component = () => {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
       <div className="text-center mb-8 h-18 rounded-lg flex ">
-        <h1 className="text-6xl font-bold text-amber-500 pr-1">Mini</h1>
+        <h1 className="text-6xl font-bold text-amber-500 pr-1 p-1">Mini</h1>
 
-        <h1 className="text-6xl font-bold  bg-blue-900 text-white px-6 rounded-lg">
+        <h1 className="text-6xl font-bold  bg-blue-900 text-white px-6 p-1 rounded-lg">
           Jira
         </h1>
       </div>
