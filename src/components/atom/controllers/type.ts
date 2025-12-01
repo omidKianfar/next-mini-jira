@@ -1,3 +1,4 @@
+import { IconifyIcon } from "@iconify/react";
 import { RefObject } from "react";
 import { FieldValues, Path } from "react-hook-form";
 
@@ -14,7 +15,8 @@ export interface InputControllerProps<T extends FieldValues>
   ref?: RefObject<HTMLInputElement | null>;
   onChange?: (event: any) => void;
   autoFocus?: boolean;
-  autoComplete?: string;
+  icon?:React.ReactNode
+  autoComplete?:string
 }
 
 export type TextareaControllerProps<T extends FieldValues> =

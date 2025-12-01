@@ -1,5 +1,6 @@
 "use client";
 
+import { Icon } from "@iconify/react";
 import {
   Controller,
   ErrorComponent,
@@ -17,6 +18,7 @@ const InputField = <T extends FieldValues>({
   className,
   ref,
   autoFocus,
+  icon,
   autoComplete,
   onChange,
 }: InputControllerProps<T>) => {
@@ -33,21 +35,26 @@ const InputField = <T extends FieldValues>({
         name={name}
         control={control}
         render={({ field }) => (
-          <input
-            {...field}
-            id={name}
-            type={type}
-            placeholder={placeholder}
-            autoFocus={autoFocus}
-            autoComplete={autoComplete}
-            ref={ref}
-            value={type == "file" ? undefined : field.value || ""}
-            onChange={(event) => {
-              field.onChange(event);
-              onChange?.(event);
-            }}
-            className="w-full border p-2 my-1 rounded-lg text-sm focus:outline-blue-400 placeholder:text-sm px-2"
-          />
+          <div className="relative">
+            <input
+              {...field}
+              id={name}
+              type={type}
+              placeholder={placeholder}
+              autoFocus={autoFocus}
+              autoComplete={autoComplete}
+              ref={ref}
+              value={type == "file" ? undefined : field.value || ""}
+              onChange={(event) => {
+                field.onChange(event);
+                onChange?.(event);
+              }}
+              className="w-full border p-2 my-1 rounded-lg text-sm focus:outline-blue-400 placeholder:text-sm pl-2 pr-8"
+            />
+            <div className="absolute bottom-3 right-1 z-50 text-2xl text-gray-400">
+              {icon}
+            </div>
+          </div>
         )}
       />
 
