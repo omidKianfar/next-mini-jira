@@ -21,6 +21,7 @@ export { useSnackbar } from "notistack";
 export { Icon } from "@iconify/react";
 export { doc, updateDoc } from "firebase/firestore";
 export { db } from "@/config";
+export { useIsMobile } from "@/src/hooks/mobile-size";
 
 export type { FormValues } from "./type";
 export type { ProfileProps, PlanType, SignPropsType } from "@/src/types/global";

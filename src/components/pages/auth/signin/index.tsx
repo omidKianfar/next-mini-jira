@@ -10,6 +10,7 @@ import {
   authSchema,
   useAuth,
   useForm,
+  useIsMobile,
   useMemo,
   useRouter,
   useSnackbar,
@@ -22,6 +23,7 @@ const SigninComponent = () => {
   const router = useRouter();
 
   const { signinWithEmail, googleSignin } = useAuth();
+  const isMobile = useIsMobile();
 
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
@@ -69,29 +71,31 @@ const SigninComponent = () => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center">
-      <div className="text-center mb-8 h-18 rounded-lg flex ">
-        <h1 className="text-6xl font-bold text-amber-500 pr-1 p-1">Mini</h1>
+    <div className="w-full h-full flex flex-col items-center justify-center p-4 ">
+      <div className="text-center mb-0 lg:mb-8  rounded-lg flex ">
+        <h1 className="text-4xl lg:text-6xl font-bold text-amber-500 pr-1 p-1">
+          Mini
+        </h1>
 
-        <h1 className="text-6xl font-bold  bg-blue-900 text-white px-6 p-1 rounded-lg">
+        <h1 className="text-4xl lg:text-6xl font-bold  bg-blue-900 text-white px-2 lg:px-6 py-1 rounded-lg">
           Jira
         </h1>
       </div>
 
-      <div className=" flex items-center justify-center">
-        <div className="w-[500px] h-[400px] flex items-center justify-center">
+      <div className=" flex items-center justify-center flex-col lg:flex-row">
+        <div className="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center">
           <Image
             src="/images/auth.png"
             alt=""
-            width={500}
-            height={400}
+            width={isMobile ? 300 : 500}
+            height={isMobile ? 200 : 400}
             className="object-contain"
           />{" "}
         </div>
 
-        <div className="w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white ">
+        <div className="w-[90vw] lg:w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white ">
           <h1 className="text-2xl font-bold text-center mb-8 text-amber-500">
-            Signin 
+            Signin
           </h1>
 
           <FormProvider {...methods}>

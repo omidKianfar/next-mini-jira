@@ -12,10 +12,12 @@ import {
   FramerMotion,
   SignPropsType,
   authSchema,
+  useIsMobile,
 } from "../../imports";
 
 const PasswordStep = () => {
   const { user, updatePassword } = useAuth();
+  const isMobile = useIsMobile();
 
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
@@ -50,9 +52,9 @@ const PasswordStep = () => {
 
   return (
     <FramerMotion>
-      <div className="w-full h-full flex flex-col items-center justify-center">
-        <div className=" flex items-center justify-center">
-          <div className="lg:w-[500px] border-2 border-amber-300 p-4 rounded-lg bg-white">
+      <div className="w-full h-full flex flex-col items-center justify-center p-4">
+        <div className=" flex items-center justify-center flex-col lg:flex-row">
+          <div className="w-[90vw] lg:w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white mb-10 lg:mb-0">
             <h1 className="text-2xl font-bold text-center mb-8 text-amber-500">
               Password
             </h1>
@@ -110,12 +112,12 @@ const PasswordStep = () => {
             </FormProvider>
           </div>
 
-          <div className="w-[500px] h-[600px] flex items-center justify-center">
+          <div className="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center">
             <Image
               src="/images/set-password.svg"
               alt=""
-              width={500}
-              height={400}
+              width={isMobile ? 300 : 500}
+              height={isMobile ? 200 : 400}
               className="object-contain"
             />{" "}
           </div>

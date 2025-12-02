@@ -4,7 +4,7 @@ import ProvidersWrapper from "@/src/providers";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="w-screen h-screen overflow-hidden bg-gray-100">
+    <div className="w-full h-full lg:w-screen lg:h-screen bg-gray-100  over lg:overflow-hidden">
       <ProvidersWrapper>{children}</ProvidersWrapper>
     </div>
   );

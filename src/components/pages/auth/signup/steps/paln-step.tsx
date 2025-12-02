@@ -1,5 +1,6 @@
 "use client";
 
+import { usePlanAction } from "@/src/hooks/payment";
 import {
   BackButton,
   FramerMotion,
@@ -8,14 +9,17 @@ import {
   PlanCartComponent,
   PlanType,
   useAuth,
+  useIsMobile,
   useState,
 } from "../../imports";
 import PageLoading from "@/src/components/atom/loading/page-loader";
 
 const PalnStep = () => {
   const [loading, setLoading] = useState(false);
+  const isMobile = useIsMobile();
 
   const { changeStep } = useAuth();
+  const { choosePlan } = usePlanAction();
 
   const BackToPlan = () => {
     changeStep("2");
@@ -24,27 +28,7 @@ const PalnStep = () => {
   const choosePlanHandler = async (selectedPlan: PlanType) => {
     setLoading(true);
 
-    try {
-      const response = await fetch("/api/create-strip-checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ planType: selectedPlan }),
-      });
-
-      const result = await response.json();
-
-      if (result.url) {
-        window.location.href = result.url;
-      } else {
-        console.log("Error creating Stripe session");
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log("Error: ", error);
-      setLoading(false);
-    }
+    await choosePlan({ selectedPlan, setLoading });
   };
 
   if (loading) {
@@ -53,23 +37,23 @@ const PalnStep = () => {
 
   return (
     <FramerMotion>
-      <div className="w-screen h-screen flex justify-center items-center relative">
+      <div className="w-full h-full flex flex-col items-center justify-center p-4">
         <div className="absolute top-0">
           <Image
             src="/images/Wallet.svg"
             alt=""
-            width={300}
-            height={300}
+            width={isMobile ? 150 : 300}
+            height={isMobile ? 150 : 300}
             className="object-contain"
           />
         </div>
 
-        <div className="w-[900px] h-[600px] bg-white p-8 border-2 border-amber-300 rounded-lg ">
-          <div className="w-full flex justify-start mb-[135px]">
+        <div className="w-[90vw] lg:w-[900px] lg:h-[600px] bg-white p-8 border-2 border-amber-300 rounded-lg ">
+          <div className="w-full flex justify-start mb-[50px] lg:mb-[135px]">
             <BackButton onClick={BackToPlan} />
           </div>
 
-          <div className=" w-full flex justify-center items-center gap-8">
+          <div className=" w-full flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-8">
             <PlanCartComponent
               title="Monthly"
               description={"Try a month payment"}

@@ -5,10 +5,12 @@ import {
   Image,
   FramerMotion,
   BackButton,
+  useIsMobile,
 } from "../../imports";
 
 const PaymentStep = () => {
   const { user, changeStep, terialMode } = useAuth();
+  const isMobile = useIsMobile();
 
   const BackProfile = () => {
     changeStep("1");
@@ -28,23 +30,23 @@ const PaymentStep = () => {
 
   return (
     <FramerMotion>
-      <div className="w-screen h-screen flex justify-center items-center relative">
+      <div className="w-full h-full flex flex-col items-center justify-center p-4">
         <div className="absolute top-0">
           <Image
             src="/images/Wallet.svg"
             alt=""
-            width={300}
-            height={300}
+            width={isMobile ? 150 : 300}
+            height={isMobile ? 150 : 300}
             className="object-contain"
           />
         </div>
 
-        <div className="w-[900px] h-[600px] bg-white p-8 border-2 border-amber-300 rounded-lg ">
-          <div className="w-full flex justify-start mb-[135px]">
+        <div className="w-[90vw] lg:w-[900px] lg:h-[600px] bg-white p-8 border-2 border-amber-300 rounded-lg ">
+          <div className="w-full flex justify-start mb-[50px] lg:mb-[135px]">
             <BackButton onClick={BackProfile} />
           </div>
 
-          <div className=" w-full flex justify-center items-center gap-8">
+          <div className=" w-full flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-8">
             <PaymentCartComponent
               title="Terial Mode"
               description="You get 10 days of free access to the app."
