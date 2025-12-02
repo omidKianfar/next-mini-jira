@@ -15,7 +15,7 @@ export { useMemo, useState } from "react";
 export { FormProvider, useForm } from "react-hook-form";
 export { yupResolver } from "@hookform/resolvers/yup";
 export { authSchema, ProfileSchema } from "./schema";
-export { useAuth } from "@/src/hooks/useAuth";
+export { useAuth } from "@/src/hooks/auth/use-auth";
 export { useRouter } from "next/navigation";
 export { useSnackbar } from "notistack";
 export { Icon } from "@iconify/react";

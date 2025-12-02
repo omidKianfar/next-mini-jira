@@ -1,7 +1,7 @@
 "use client";
 
 import { PropsWithChildren } from "react";
-import AuthProvider from "./auth-provider";
+import AuthProvider from "./auth/auth-provider";
 import NotistackProvider from "../components/atom/error-handler/notistack";
 import FramerMotion from "../components/atom/animation";
 

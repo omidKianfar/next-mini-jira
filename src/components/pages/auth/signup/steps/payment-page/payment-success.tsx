@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useAuth } from "@/src/hooks/useAuth";
+import { useAuth } from "@/src/hooks/auth/use-auth";
 import { doc, updateDoc } from "firebase/firestore";
 import { useRouter, useSearchParams } from "next/navigation";
 import dayjs from "dayjs";

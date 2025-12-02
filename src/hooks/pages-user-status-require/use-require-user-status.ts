@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
-import { useAuth } from "./useAuth";
+import { useAuth } from "../auth/use-auth";
 
 export const useRequireUserStatus = () => {
   const router = useRouter();
