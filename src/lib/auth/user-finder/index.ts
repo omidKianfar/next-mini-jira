@@ -1,7 +1,4 @@
-import { db } from "@/config";
-import { MyUserType, UserType } from "@/src/types/global";
-import { User } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import {db, doc, getDoc, MyUserType, User, UserType} from '../imports'
 
 export const findFirestoreUser = async (
   currentUser: User
