@@ -7,9 +7,9 @@ export { default as PaymentCartComponent } from "./signup/steps/cart/payment-car
 export { default as PlanCartComponent } from "./signup/steps/cart/plan-cart";
 export { default as dayjs } from "dayjs";
 export { default as Image } from "next/image";
-export { default as BackButton} from "@/src/components/atom/button/back-button";
-export { default as FramerMotion} from "@/src/components/atom/animation";
-export { default as AvatarUpload} from "@/src/components/atom/upload/avatar";
+export { default as BackButton } from "@/src/components/atom/button/back-button";
+export { default as FramerMotion } from "@/src/components/atom/animation";
+export { default as AvatarUpload } from "@/src/components/atom/upload/avatar";
 
 export { useMemo, useState } from "react";
 export { FormProvider, useForm } from "react-hook-form";
@@ -23,4 +23,4 @@ export { doc, updateDoc } from "firebase/firestore";
 export { db } from "@/config";
 
 export type { FormValues } from "./type";
-export type { ProfileProps, PlanType } from "@/src/types/global";
+export type { ProfileProps, PlanType, SignPropsType } from "@/src/types/global";

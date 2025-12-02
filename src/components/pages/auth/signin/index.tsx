@@ -21,7 +21,7 @@ const SigninComponent = () => {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
 
-  const { signinWithEmail } = useAuth();
+  const { signinWithEmail, googleSignin } = useAuth();
 
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
@@ -56,6 +56,18 @@ const SigninComponent = () => {
     }
   };
 
+  const signupGoogle = async () => {
+    setLoading(true);
+
+    try {
+      await googleSignin();
+    } catch (error: any) {
+      console.log("Signup Error: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
       <div className="text-center mb-8 h-18 rounded-lg flex ">
@@ -79,7 +91,7 @@ const SigninComponent = () => {
 
         <div className="w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white ">
           <h1 className="text-2xl font-bold text-center mb-8 text-amber-500">
-            Signin Page
+            Signin 
           </h1>
 
           <FormProvider {...methods}>
@@ -117,11 +129,18 @@ const SigninComponent = () => {
                 }
               />
 
-              <div className="flex justify-end items-center">
+              <div className="flex justify-end items-center my-8">
+                <div
+                  className={`${loading ? "mr-20" : "mr-[100px]"} hover:bg-blue-200 p-2 rounded-full cursor-pointer hover:rotate-12 transition-all duration-200`}
+                  onClick={signupGoogle}
+                >
+                  <Icon icon={"devicon:google"} className=" text-4xl" />
+                </div>
+
                 <Button
                   type="submit"
                   isLoading={loading}
-                  className="mt-6 bg-blue-500 text-white border-2 hover:bg-transparent
+                  className=" bg-blue-500 text-white border-2 hover:bg-transparent
                   hover:border-blue-500 hover:text-blue-500 rounded-lg px-8 py-2 
                   transition-all duration-200"
                 >

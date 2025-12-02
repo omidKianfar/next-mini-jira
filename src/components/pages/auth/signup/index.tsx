@@ -1,11 +1,11 @@
 "use client";
 
 import { useAuth } from "../imports";
-
-import Step1Component from "./steps/step1";
-import Step2Component from "./steps/step2";
-import Step3Component from "./steps/step3";
-import Step4Component from "./steps/step4";
+import SignupStep from "./steps/signup-step";
+import ProfileStep from "./steps/profile-step";
+import PaymentStep from "./steps/payment-step";
+import PalnStep from "./steps/paln-step";
+import PasswordStep from "./steps/password-step";
 
 const SignupComponent = () => {
   const { stepNumber } = useAuth();
@@ -13,13 +13,15 @@ const SignupComponent = () => {
   const renderStep = () => {
     switch (stepNumber) {
       case "0":
-        return <Step1Component />;
+        return <SignupStep />;
       case "1":
-        return <Step2Component />;
+        return <ProfileStep />;
       case "2":
-        return <Step3Component />;
+        return <PaymentStep />;
       case "3":
-        return <Step4Component />;
+        return <PalnStep />;
+      case "4":
+        return <PasswordStep />;
       default:
         return null;
     }

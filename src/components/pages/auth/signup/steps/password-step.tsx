@@ -1,0 +1,128 @@
+import {
+  Button,
+  FormProvider,
+  Icon,
+  Image,
+  InputField,
+  useAuth,
+  useForm,
+  useMemo,
+  useState,
+  yupResolver,
+  FramerMotion,
+  SignPropsType,
+  authSchema,
+} from "../../imports";
+
+const PasswordStep = () => {
+  const { user, updatePassword } = useAuth();
+
+  const [loading, setLoading] = useState(false);
+  const [passwordShow, setPasswordShow] = useState(false);
+
+  const defaultValues: SignPropsType = useMemo(
+    () => ({
+      email: user?.email ?? "",
+      password: "",
+    }),
+    []
+  );
+
+  const methods = useForm<SignPropsType>({
+    defaultValues,
+    resolver: yupResolver(authSchema),
+    mode: "onSubmit",
+  });
+
+  const setProfileHandler = async (values: SignPropsType) => {
+    setLoading(true);
+
+    try {
+      await updatePassword({
+        newPassword: values.password,
+      });
+    } catch (error: any) {
+      console.log("Error: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <FramerMotion>
+      <div className="w-full h-full flex flex-col items-center justify-center">
+        <div className=" flex items-center justify-center">
+          <div className="lg:w-[500px] border-2 border-amber-300 p-4 rounded-lg bg-white">
+            <h1 className="text-2xl font-bold text-center mb-8 text-amber-500">
+              Password
+            </h1>
+
+            <FormProvider {...methods}>
+              <form onSubmit={methods.handleSubmit(setProfileHandler)}>
+                <InputField
+                  name="email"
+                  label="Email"
+                  type="email"
+                  placeholder="Enter your email"
+                  disabled
+                  icon={
+                    <Icon icon={"ic:baseline-email"} className="text-red-400" />
+                  }
+                />
+
+                <InputField
+                  name="password"
+                  label="Password"
+                  type={passwordShow ? "text" : "password"}
+                  placeholder="Enter your password"
+                  autoComplete="new-password"
+                  autoFocus
+                  icon={
+                    passwordShow ? (
+                      <Icon
+                        icon={"mdi:show"}
+                        className="text-green-400 cursor-pointer"
+                        onClick={() => setPasswordShow(false)}
+                      />
+                    ) : (
+                      <Icon
+                        icon={"mdi:hide"}
+                        className="text-gray-400 cursor-pointer"
+                        onClick={() => setPasswordShow(true)}
+                      />
+                    )
+                  }
+                />
+
+                <div className="flex justify-end items-center">
+                  <Button
+                    type="submit"
+                    isLoading={loading}
+                    className="mt-6 bg-blue-500 text-white border-2
+                    hover:bg-transparent hover:border-blue-500
+                    hover:text-blue-500 rounded-lg px-8 py-2 
+                    transition-all duration-200"
+                  >
+                    Next
+                  </Button>
+                </div>
+              </form>
+            </FormProvider>
+          </div>
+
+          <div className="w-[500px] h-[600px] flex items-center justify-center">
+            <Image
+              src="/images/set-password.svg"
+              alt=""
+              width={500}
+              height={400}
+              className="object-contain"
+            />{" "}
+          </div>
+        </div>
+      </div>
+    </FramerMotion>
+  );
+};
+
+export default PasswordStep;

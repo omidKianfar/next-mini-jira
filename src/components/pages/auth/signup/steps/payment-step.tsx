@@ -1,23 +1,14 @@
 import {
   PaymentCartComponent,
-  dayjs,
-  db,
-  doc,
-  updateDoc,
   useAuth,
-  useRouter,
   Icon,
-  useSnackbar,
   Image,
   FramerMotion,
   BackButton,
 } from "../../imports";
 
-const Step3Component = () => {
-  const router = useRouter();
-  const { enqueueSnackbar } = useSnackbar();
-
-  const { user,changeStep } = useAuth();
+const PaymentStep = () => {
+  const { user, changeStep, terialMode } = useAuth();
 
   const BackProfile = () => {
     changeStep("1");
@@ -25,22 +16,9 @@ const Step3Component = () => {
 
   const freeModeHandler = async () => {
     try {
-      await updateDoc(doc(db, "users", user?.userId as string), {
-        payment: {
-          freeTrialEnabled: true,
-          trialEnd: dayjs().add(10, "day").format("YYYY-MM-DD"),
-        },
-      });
-
-      enqueueSnackbar("Terial Mode is Active", { variant: "success" });
-
-      changeStep("0");
-
-      router.push("/dashboard");
+      await terialMode({ userId: user?.userId as string });
     } catch (error: any) {
-      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
-        variant: "error",
-      });
+      console.log("Terial Mode Error: ", error);
     }
   };
 
@@ -92,4 +70,4 @@ const Step3Component = () => {
   );
 };
 
-export default Step3Component;
+export default PaymentStep;

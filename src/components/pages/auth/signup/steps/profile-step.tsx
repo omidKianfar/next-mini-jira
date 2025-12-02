@@ -12,19 +12,15 @@ import {
   useAuth,
   useForm,
   useMemo,
-  useSnackbar,
   useState,
   yupResolver,
   FramerMotion,
   BackButton,
-  AvatarUpload
+  AvatarUpload,
 } from "../../imports";
 
-
-const Step2Component = () => {
-  const { enqueueSnackbar } = useSnackbar();
-
-  const { saveUserProfile, user,changeStep } = useAuth();
+const ProfileStep = () => {
+  const { saveUserProfile, user, changeStep } = useAuth();
 
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
@@ -66,14 +62,8 @@ const Step2Component = () => {
           birthday: values?.birthday,
         },
       });
-
-      enqueueSnackbar("profile updated successfully", { variant: "success" });
-
-      changeStep("2");
     } catch (error: any) {
-      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
-        variant: "error",
-      });
+      console.log("Profile Error: ", error);
     } finally {
       setLoading(false);
     }
@@ -104,7 +94,7 @@ const Step2Component = () => {
             </ModalContainer>
 
             <h1 className="text-2xl font-bold text-center mb-8 text-amber-500">
-              Profile Page
+              Profile
             </h1>
 
             <FormProvider {...methods}>
@@ -162,4 +152,4 @@ const Step2Component = () => {
   );
 };
 
-export default Step2Component;
+export default ProfileStep;

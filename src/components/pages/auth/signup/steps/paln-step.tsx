@@ -12,7 +12,7 @@ import {
 } from "../../imports";
 import PageLoading from "@/src/components/atom/loading/page-loader";
 
-const Step4Component = () => {
+const PalnStep = () => {
   const [loading, setLoading] = useState(false);
 
   const { changeStep } = useAuth();
@@ -96,4 +96,4 @@ const Step4Component = () => {
   );
 };
 
-export default Step4Component;
+export default PalnStep;
