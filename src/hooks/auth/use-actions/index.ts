@@ -1,27 +1,28 @@
 "use client";
 
-import { enqueueSnackbar } from "notistack";
-import { auth, db } from "@/config";
-import { useRouter } from "next/navigation";
 import {
-  SignPropsType,
-  UserPasswordUpdateType,
-  UserProfileType,
-} from "@/src/types/global";
-import {
+  auth,
+  createUserDocument,
   createUserWithEmailAndPassword,
+  dayjs,
+  db,
+  doc,
   EmailAuthProvider,
+  enqueueSnackbar,
+  findFirestoreUser,
+  getDoc,
   GoogleAuthProvider,
   linkWithCredential,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-} from "firebase/auth";
-import { findFirestoreUser } from "@/src/lib/auth/user-finder";
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { UseAuthActionProps } from "./type";
-import { createUserDocument } from "@/src/lib/auth/create-user";
-import dayjs from "dayjs";
+  SignPropsType,
+  updateFirestoreUser,
+  useRouter,
+  UserPasswordUpdateType,
+  UserProfileType,
+} from "../../imports";
+import { UseAuthActionProps } from "../../type";
 
 export const useAuthActions = ({
   dispatch,
@@ -220,7 +221,9 @@ export const useAuthActions = ({
 
   const saveUserProfile = async ({ userId, data }: UserProfileType) => {
     try {
-      await setDoc(doc(db, "users", userId), data, { merge: true });
+      if (!data) return;
+
+      await updateFirestoreUser(userId, data);
 
       if (state.user && state.user.userId === userId) {
         dispatch({
@@ -232,7 +235,7 @@ export const useAuthActions = ({
           },
         });
 
-        enqueueSnackbar("Password updated successfully", {
+        enqueueSnackbar("Profile updated successfully", {
           variant: "success",
         });
 
@@ -249,11 +252,9 @@ export const useAuthActions = ({
 
   const terialMode = async ({ userId }: UserProfileType) => {
     try {
-      await updateDoc(doc(db, "users", userId as string), {
-        payment: {
-          freeTrialEnabled: true,
-          trialEnd: dayjs().add(10, "day").format("YYYY-MM-DD"),
-        },
+      await updateFirestoreUser(userId, {
+        "payment.freeTrialEnabled": true,
+        "payment.trialEnd": dayjs().add(10, "day").format("YYYY-MM-DD"),
       });
 
       enqueueSnackbar("Terial Mode is Active", { variant: "success" });

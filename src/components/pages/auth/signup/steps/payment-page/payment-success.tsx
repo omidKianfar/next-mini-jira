@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "@/src/hooks/auth/use-auth";
-import { doc, updateDoc } from "firebase/firestore";
 import { useRouter, useSearchParams } from "next/navigation";
 import dayjs from "dayjs";
-import { db } from "@/config";
 import { Button, Icon } from "../../../imports";
 import PageLoading from "@/src/components/atom/loading/page-loader";
+import { updateFirestoreUser } from "@/src/lib/auth/update-user";
+import { useSetSubscriptionId } from "@/src/hooks/auth/use-payment-success";
 
 const PaymentSuccessComponent = () => {
   const router = useRouter();
@@ -17,41 +17,14 @@ const PaymentSuccessComponent = () => {
   const planType = params.get("planType");
   const sessionId = params.get("session_id");
 
+  const [subscriptionId, setSubscriptionId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
   const now = dayjs().format("YYYY-MM-DD");
   const oneMonth = dayjs().add(1, "month").format("YYYY-MM-DD");
   const oneYear = dayjs().add(1, "year").format("YYYY-MM-DD");
 
-  const [subscriptionId, setSubscriptionId] = useState<string | null>(null);
-
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchSubscription = async () => {
-      if (!sessionId) return;
-
-      try {
-        const res = await fetch("/api/get-strip-with-session-id", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ sessionId }),
-        });
-
-        const data = await res.json();
-
-        if (data.subscriptionId) {
-          setSubscriptionId(data.subscriptionId);
-        }
-      } catch (err) {
-        console.log("Error fetching subscription:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSubscription();
-  }, [sessionId]);
+  useSetSubscriptionId({ sessionId, setLoading, setSubscriptionId });
 
   const finishHandler = async () => {
     if (!user?.userId) {
@@ -64,16 +37,14 @@ const PaymentSuccessComponent = () => {
       return;
     }
 
-    const setData = await updateDoc(doc(db, "users", user.userId), {
-      payment: {
-        freeTrialEnabled: false,
-        trialEnd: now,
-        isPaid: true,
-        planType: planType,
-        subscriptionId: subscriptionId,
-        createdAt: now,
-        endAt: planType === "monthly" ? oneMonth : oneYear,
-      },
+    await updateFirestoreUser(user.userId, {
+      "payment.freeTrialEnabled": false,
+      "payment.trialEnd": now,
+      "payment.isPaid": true,
+      "payment.planType": planType,
+      "payment.subscriptionId": subscriptionId,
+      "payment.createdAt": now,
+      "payment.endAt": planType === "monthly" ? oneMonth : oneYear,
     });
 
     changeStep("0");
@@ -84,8 +55,8 @@ const PaymentSuccessComponent = () => {
   if (loading) return <PageLoading />;
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-[600px] h-[500px]  p-6 border-2 border-amber-300 rounded-lg bg-white">
+    <div className="w-full h-full lg:w-screen lg:h-screen flex items-center justify-center bg-gray-100">
+      <div className="w-full h-full lg:w-[600px] lg:h-[500px]  p-6 border-2 border-amber-300 rounded-lg bg-white">
         <div className="flex justify-center mb-10 mt-8">
           <Icon
             icon={"streamline-freehand:cash-payment-bill"}

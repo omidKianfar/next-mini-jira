@@ -1,6 +1,5 @@
-import { useContext } from "react";
-import { AuthContextProps } from "../../../types/global";
-import { authContext } from "../../../providers/auth/auth-provider";
+import { authContext, AuthContextProps, useContext } from "../../imports";
+
 
 export function useAuth(): AuthContextProps {
   return useContext(authContext);

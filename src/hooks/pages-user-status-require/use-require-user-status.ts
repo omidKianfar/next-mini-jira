@@ -1,9 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import dayjs from "dayjs";
-import { useAuth } from "../auth/use-auth";
+import { dayjs, useAuth, useEffect, useRouter } from '../imports'
 
 export const useRequireUserStatus = () => {
   const router = useRouter();

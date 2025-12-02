@@ -1,11 +1,10 @@
-import  { useEffect } from 'react'
-import { UseSetStepNumberProps } from './type';
+import { UseSetStepNumberProps } from "../../type";
+import { useEffect } from "../../imports";
 
-export const useSetStepNumber = ({setStepNumber}:UseSetStepNumberProps) => {
-   useEffect(() => {
+export const useSetStepNumber = ({ setStepNumber }: UseSetStepNumberProps) => {
+  useEffect(() => {
     const saved =
       typeof window !== "undefined" ? localStorage.getItem("step") : null;
     if (saved) setStepNumber(saved);
   }, []);
-}
-
+};
