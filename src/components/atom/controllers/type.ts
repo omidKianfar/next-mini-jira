@@ -1,4 +1,3 @@
-import { IconifyIcon } from "@iconify/react";
 import { RefObject } from "react";
 import { FieldValues, Path } from "react-hook-form";
 
@@ -9,14 +8,16 @@ export interface BaseControllerProps<T extends FieldValues> {
   className?: string;
 }
 
-export interface InputControllerProps<T extends FieldValues>
-  extends BaseControllerProps<T> {
+export interface InputControllerProps<
+  T extends FieldValues,
+> extends BaseControllerProps<T> {
   type?: string;
   ref?: RefObject<HTMLInputElement | null>;
   onChange?: (event: any) => void;
   autoFocus?: boolean;
-  icon?:React.ReactNode
-  autoComplete?:string
+  icon?: React.ReactNode;
+  autoComplete?: string;
+  disabled?: boolean;
 }
 
 export type TextareaControllerProps<T extends FieldValues> =
@@ -29,8 +30,9 @@ export interface SelectOption {
   value: string | number;
 }
 
-export interface SelectControllerProps<T extends FieldValues>
-  extends BaseControllerProps<T> {
+export interface SelectControllerProps<
+  T extends FieldValues,
+> extends BaseControllerProps<T> {
   options: SelectOption[];
 }
 

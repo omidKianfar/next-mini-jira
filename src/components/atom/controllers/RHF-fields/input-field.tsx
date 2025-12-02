@@ -20,6 +20,7 @@ const InputField = <T extends FieldValues>({
   autoFocus,
   icon,
   autoComplete,
+  disabled,
   onChange,
 }: InputControllerProps<T>) => {
   const {
@@ -44,6 +45,7 @@ const InputField = <T extends FieldValues>({
               autoFocus={autoFocus}
               autoComplete={autoComplete}
               ref={ref}
+              disabled={disabled}
               value={type == "file" ? undefined : field.value || ""}
               onChange={(event) => {
                 field.onChange(event);
@@ -51,7 +53,7 @@ const InputField = <T extends FieldValues>({
               }}
               className="w-full border p-2 my-1 rounded-lg text-sm focus:outline-blue-400 placeholder:text-sm pl-2 pr-8"
             />
-            <div className="absolute bottom-3 right-1 z-50 text-2xl text-gray-400">
+            <div className="absolute bottom-3 right-1 text-2xl text-gray-400">
               {icon}
             </div>
           </div>
