@@ -48,8 +48,11 @@ export type AuthContextProps = AuthContextStateType & {
     email,
     password,
   }: SignPropsType) => Promise<MyUserType | void>;
+  googleSignin: () => Promise<void>;
+  updatePassword: ({ newPassword }: UserPasswordUpdateType) => Promise<void>;
   logout: () => Promise<void>;
   saveUserProfile: ({ userId, data }: UserProfileType) => Promise<void>;
+  terialMode: ({ userId }: UserProfileType) => Promise<void>;
   changeStep: (newStep: string) => void;
   stepNumber: string;
 };
@@ -61,7 +64,11 @@ export type SignPropsType = {
 
 export type UserProfileType = {
   userId: string;
-  data: Partial<MyUserType>;
+  data?: Partial<MyUserType>;
+};
+
+export type UserPasswordUpdateType = {
+  newPassword: string;
 };
 
 export type AuthStateType = {

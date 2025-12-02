@@ -3,15 +3,25 @@
 import { enqueueSnackbar } from "notistack";
 import { auth, db } from "@/config";
 import { useRouter } from "next/navigation";
-import { SignPropsType, UserProfileType, UserType } from "@/src/types/global";
+import {
+  SignPropsType,
+  UserPasswordUpdateType,
+  UserProfileType,
+} from "@/src/types/global";
 import {
   createUserWithEmailAndPassword,
+  EmailAuthProvider,
+  GoogleAuthProvider,
+  linkWithCredential,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import { findFirestoreUser } from "@/src/lib/auth/user-finder";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { UseAuthActionProps } from "./type";
+import { createUserDocument } from "@/src/lib/auth/create-user";
+import dayjs from "dayjs";
 
 export const useAuthActions = ({
   dispatch,
@@ -20,7 +30,10 @@ export const useAuthActions = ({
 }: UseAuthActionProps) => {
   const router = useRouter();
 
-  // const queryClient = useQueryClient();
+  const changeStep = (newStep: string) => {
+    setStepNumber(newStep);
+    localStorage.setItem("step", newStep);
+  };
 
   const signinWithEmail = async ({ email, password }: SignPropsType) => {
     dispatch({
@@ -75,21 +88,11 @@ export const useAuthActions = ({
         password
       );
 
-      await setDoc(doc(db, "users", newUser.user.uid), {
-        userId: newUser.user.uid,
-        email: newUser.user.email,
-        userName: null,
-        userType: UserType.Client,
-        isActive: true,
-        photo: null,
-        birthday: null,
-      });
+      await createUserDocument(newUser.user);
 
       const user = await findFirestoreUser(newUser.user);
 
       if (user) {
-        enqueueSnackbar("Account created successfully", { variant: "success" });
-
         dispatch({
           type: "INITIALIZE",
           payload: {
@@ -100,7 +103,10 @@ export const useAuthActions = ({
           },
         });
 
+        enqueueSnackbar("Account created successfully", { variant: "success" });
+
         changeStep("1");
+
         return user;
       }
     } catch (error: any) {
@@ -117,7 +123,84 @@ export const useAuthActions = ({
     }
   };
 
+  const googleSignin = async () => {
+    dispatch({
+      type: "IS_LOADING",
+      payload: { isLoading: "SIGN_IN_WITH_GOOGLE" },
+    });
 
+    try {
+      const provider = new GoogleAuthProvider();
+
+      const result = await signInWithPopup(auth, provider);
+
+      const currentUser = result.user;
+
+      const userRef = doc(db, "users", currentUser.uid);
+
+      const snap = await getDoc(userRef);
+
+      if (!snap.exists()) {
+        await createUserDocument(currentUser);
+
+        enqueueSnackbar("Account created successfully", { variant: "success" });
+
+        changeStep("4");
+      } else {
+        const user = await findFirestoreUser(currentUser);
+
+        if (user) {
+          dispatch({
+            type: "INITIALIZE",
+            payload: {
+              user,
+              isAuthenticated: true,
+              isLoading: null,
+              isInitialized: true,
+            },
+          });
+        }
+
+        router.push("/dashboard");
+      }
+    } catch (error: any) {
+      console.log("User signin firebase error: ", error);
+
+      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+        variant: "error",
+      });
+    } finally {
+      dispatch({
+        type: "IS_LOADING",
+        payload: { isLoading: null },
+      });
+    }
+  };
+
+  const updatePassword = async ({ newPassword }: UserPasswordUpdateType) => {
+    try {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      const credential = EmailAuthProvider.credential(user.email!, newPassword);
+
+      const result = await linkWithCredential(user, credential);
+
+      if (result) {
+        enqueueSnackbar("Password updated successfully", {
+          variant: "success",
+        });
+
+        changeStep("1");
+      }
+    } catch (error: any) {
+      console.log("Password update error:", error);
+
+      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+        variant: "error",
+      });
+    }
+  };
 
   const logout = () => {
     return signOut(auth).then(() => {
@@ -136,32 +219,63 @@ export const useAuthActions = ({
   };
 
   const saveUserProfile = async ({ userId, data }: UserProfileType) => {
-    await setDoc(doc(db, "users", userId), data, { merge: true });
+    try {
+      await setDoc(doc(db, "users", userId), data, { merge: true });
 
-    // queryClient.invalidateQueries({
-    //   queryKey: ["userProfile", userId],
-    // });
+      if (state.user && state.user.userId === userId) {
+        dispatch({
+          type: "INITIALIZE",
+          payload: {
+            user: { ...state.user, ...data },
+            isAuthenticated: true,
+            isInitialized: true,
+          },
+        });
 
-    if (state.user && state.user.userId === userId) {
-      dispatch({
-        type: "INITIALIZE",
-        payload: {
-          user: { ...state.user, ...data },
-          isAuthenticated: true,
-          isInitialized: true,
-        },
+        enqueueSnackbar("Password updated successfully", {
+          variant: "success",
+        });
+
+        changeStep("2");
+      }
+    } catch (error: any) {
+      console.log("Profile update error:", error);
+
+      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+        variant: "error",
       });
     }
   };
 
-  const changeStep = (newStep: string) => {
-    setStepNumber(newStep);
-    localStorage.setItem("step", newStep);
+  const terialMode = async ({ userId }: UserProfileType) => {
+    try {
+      await updateDoc(doc(db, "users", userId as string), {
+        payment: {
+          freeTrialEnabled: true,
+          trialEnd: dayjs().add(10, "day").format("YYYY-MM-DD"),
+        },
+      });
+
+      enqueueSnackbar("Terial Mode is Active", { variant: "success" });
+
+      changeStep("0");
+
+      router.push("/dashboard");
+    } catch (error: any) {
+      console.log("Profile update error:", error);
+
+      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+        variant: "error",
+      });
+    }
   };
 
   return {
     signinWithEmail,
     signupWithEmail,
+    googleSignin,
+    updatePassword,
+    terialMode,
     logout,
     saveUserProfile,
     changeStep,

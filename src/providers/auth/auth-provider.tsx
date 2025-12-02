@@ -8,6 +8,7 @@ import { authReducer, initialState } from "@/src/providers/auth/auth-reducer";
 import {
   AuthContextProps,
   SignPropsType,
+  UserPasswordUpdateType,
   UserProfileType,
 } from "@/src/types/global";
 import { initializeApp } from "firebase/app";
@@ -28,8 +29,11 @@ export const db = getFirestore(app);
 export const authContext = createContext<AuthContextProps>({
   signupWithEmail: ({ email, password }: SignPropsType) => Promise.resolve(),
   signinWithEmail: ({ email, password }: SignPropsType) => Promise.resolve(),
+  googleSignin: () => Promise.resolve(),
+  updatePassword: ({ newPassword }:UserPasswordUpdateType) => Promise.resolve(),
   logout: () => Promise.resolve(),
   saveUserProfile: ({ userId, data }: UserProfileType) => Promise.resolve(),
+  terialMode: ({ userId }: UserProfileType) => Promise.resolve(),
   changeStep: (newStep: string) => {},
   user: null,
   isLoading: null,
@@ -56,8 +60,11 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
   const {
     signupWithEmail,
     signinWithEmail,
+    googleSignin,
+    updatePassword,
     logout,
     saveUserProfile,
+    terialMode,
     changeStep,
   } = useAuthActions({ state, dispatch, setStepNumber });
 
@@ -66,8 +73,11 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       value={{
         signupWithEmail,
         signinWithEmail,
+        googleSignin,
+        updatePassword,
         logout,
         saveUserProfile,
+        terialMode,
         changeStep,
         user: state.user ?? null,
         isLoading: state.isLoading ?? null,
