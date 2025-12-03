@@ -122,11 +122,11 @@ const ProfileStep = () => {
 
                 <DateInputField name="birthday" label="Birthday" />
 
-                <div className="flex justify-end items-center">
+                <div className="flex justify-end items-center mt-6">
                   <Button
                     type="submit"
                     isLoading={loading}
-                    className="mt-6 bg-blue-500 text-white border-2
+                    className=" bg-blue-500 text-white border-2
                  hover:bg-transparent hover:border-blue-500
                hover:text-blue-500 rounded-lg px-8 py-2 
                 transition-all duration-200
