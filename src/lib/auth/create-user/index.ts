@@ -1,4 +1,4 @@
-import {dayjs, db, doc, MyUserType, setDoc, User, UserType} from '../imports'
+import {dayjs, db, doc, MyUserType, setDoc, User, UserType} from '../../imports'
 
 
 export const createUserDocument = async (user: User): Promise<MyUserType> => {

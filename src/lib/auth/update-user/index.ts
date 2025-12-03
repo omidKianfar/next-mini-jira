@@ -1,4 +1,4 @@
-import {db, doc, getDoc, MyUserType, setDoc} from '../imports'
+import {db, doc, getDoc, MyUserType, setDoc} from '../../imports'
 
 
 export const updateFirestoreUser = async (

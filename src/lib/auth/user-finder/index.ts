@@ -1,4 +1,4 @@
-import {db, doc, getDoc, MyUserType, User, UserType} from '../imports'
+import {db, doc, getDoc, MyUserType, User, UserType} from '../../imports'
 
 export const findFirestoreUser = async (
   currentUser: User
