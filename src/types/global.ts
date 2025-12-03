@@ -83,17 +83,34 @@ export interface ProfileProps {
   birthday: string;
 }
 
-export type Column = {
+export type PlanType = "monthly" | "yearly";
+
+export type TaskStatus = "todo" | "inprogress" | "done";
+export type TagType = "task" | "bug";
+
+export type Task = {
+  id: string;
+  title: string;
+  description: string;
+  status: TaskStatus;
+  tag: TagType;
+  createdAt: string;
+  fileUrl?: string | null;
+  userId: string;
+};
+
+export type TaskForm = {
+  title: string;
+  description: string;
+  tag: TagType;
+  fileUrl?: string | null;
+};
+
+export type TaskState = {
+  tasks: Task[];
+};
+
+export type Columns = {
   label: string;
   value: string;
 };
-
-export type Task = {
-  id: number;
-  title: string;
-  description?: string;
-  status: string;
-  assignedTo?: number;
-};
-
-export type PlanType = "monthly" | "yearly";
