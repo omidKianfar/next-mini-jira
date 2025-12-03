@@ -37,15 +37,19 @@ const PaymentSuccessComponent = () => {
       return;
     }
 
-    await updateFirestoreUser(user.userId, {
-      "payment.freeTrialEnabled": false,
-      "payment.trialEnd": now,
-      "payment.isPaid": true,
-      "payment.planType": planType,
-      "payment.subscriptionId": subscriptionId,
-      "payment.createdAt": now,
-      "payment.endAt": planType === "monthly" ? oneMonth : oneYear,
-    });
+    const data = {
+      payment: {
+        freeTrialEnabled: false,
+        trialEnd: now,
+        isPaid: true,
+        planType: planType,
+        subscriptionId: subscriptionId,
+        createdAt: now,
+        endAt: planType === "monthly" ? oneMonth : oneYear,
+      },
+    };
+
+    await updateFirestoreUser(user.userId, data);
 
     changeStep("0");
 
