@@ -147,6 +147,8 @@ export const useAuthActions = ({
         enqueueSnackbar("Account created successfully", { variant: "success" });
 
         changeStep("4");
+
+        router.push("/signup");
       } else {
         const user = await findFirestoreUser(currentUser);
 
@@ -252,10 +254,14 @@ export const useAuthActions = ({
 
   const terialMode = async ({ userId }: UserProfileType) => {
     try {
-      await updateFirestoreUser(userId, {
-        "payment.freeTrialEnabled": true,
-        "payment.trialEnd": dayjs().add(10, "day").format("YYYY-MM-DD"),
-      });
+      const data = {
+        payment: {
+          freeTrialEnabled: true,
+          trialEnd: dayjs().add(10, "day").format("YYYY-MM-DD"),
+        },
+      };
+      
+      await updateFirestoreUser(userId, data);
 
       enqueueSnackbar("Terial Mode is Active", { variant: "success" });
 
