@@ -6,22 +6,35 @@ export { default as TextareaFiled } from "@/src/components/atom/controllers/RHF-
 export { default as InputField } from "@/src/components/atom/controllers/RHF-fields/input-field";
 export { default as dayjs } from "dayjs";
 export { default as Button } from "@/src/components/atom/button/next-button";
+export { default as BackButton } from "@/src/components/atom/button/back-button";
 export { default as ColumnComponent } from "./board/column";
 export { default as TaskCardComponent } from "./board/task";
+export { default as PageLoading } from "@/src/components/atom/loading/page-loader";
+export { default as Image } from "next/image";
 
-export { useMemo, useState } from "react";
+export { useMemo, useState, useEffect } from "react";
 export { FormProvider, useForm } from "react-hook-form";
 export { yupResolver } from "@hookform/resolvers/yup";
-export { useRouter } from "next/navigation";
+export { useRouter, useSearchParams } from "next/navigation";
 export { useRequireUserStatus } from "@/src/hooks/pages-user-status-require/use-require-user-status";
 export { useAuth } from "@/src/hooks/auth/use-auth";
 export { createTaskDocument } from "@/src/lib/tasks/create-task";
 export { useDispatch, useSelector } from "react-redux";
-export { addTask } from "@/src/store/slices/tasks";
+export {
+  setTasks,
+  clearTasks,
+  addTask,
+  updateTask,
+  removeTask,
+} from "@/src/store/slices/tasks";
 export { TaskShema } from "./board/schema";
 export { useTaskListener } from "@/src/hooks/tasks/use-task-listener";
 export { useDroppable, useDraggable, DndContext } from "@dnd-kit/core";
 export { updateTaskStatus } from "@/src/lib/tasks/update-task-status";
+export { fetchTask } from "@/src/lib/tasks/fetch-task";
+export { deleteTask } from "@/src/lib/auth/delete-task";
+export { Icon } from "@iconify/react";
+export { useIsMobile } from "@/src/hooks/mobile-size";
 
 export type { ModalProps } from "@/src/components/atom/modal/type";
 export type { Columns, Task, TaskForm } from "@/src/types/global";

@@ -4,8 +4,11 @@ import {
   AddTaskFormComponent,
   BoardComponent,
   Button,
+  clearTasks,
+  Icon,
   ModalContainer,
   useAuth,
+  useDispatch,
   useRequireUserStatus,
   useRouter,
   useState,
@@ -14,6 +17,7 @@ import {
 
 const DashboardComponent = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
 
@@ -33,29 +37,34 @@ const DashboardComponent = () => {
 
   const handleLogout = () => {
     logout();
+    dispatch(clearTasks());
+
     router.push("/signin");
   };
 
   return (
     <div className="w-full h-full p-4">
-      <div>
-        <Button
-          onClick={handleOpenModal}
-          className=" bg-blue-500 text-white border-2
-           hover:bg-transparent hover:border-blue-500
-           hover:text-blue-500 rounded-lg px-8 py-2 
-           transition-all duration-200"
-        >
-          Add Task
-        </Button>
+      <div className="flex justify-between items-center mb-4">
         <Button onClick={handleLogout}>logout</Button>
 
-        <ModalContainer open={open} handleClose={handleCloseModal}>
-          <AddTaskFormComponent handleClose={handleCloseModal} />
-        </ModalContainer>
+        
+
+        <Button
+          onClick={handleOpenModal}
+          icon={
+            <Icon
+              icon="fluent:task-list-square-add-20-filled"
+              className="text-5xl text-blue-500 hover:text-blue-700"
+            />
+          }
+        ></Button>
       </div>
 
       <BoardComponent />
+
+      <ModalContainer open={open} handleClose={handleCloseModal}>
+        <AddTaskFormComponent handleClose={handleCloseModal} />
+      </ModalContainer>
     </div>
   );
 };
