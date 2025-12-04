@@ -4,7 +4,9 @@ import { PropsWithChildren } from "react";
 import AuthGuard from "@/src/guards/auth-guard";
 import ProvidersWrapper from "@/src/providers";
 
-const AuthProtectedLayout = ({ children }: PropsWithChildren) => {
+
+const DashboardLayout = ({ children }: PropsWithChildren) => {
+ 
   return (
     <div className="w-screen h-screen overflow-hidden bg-gray-100">
       <ProvidersWrapper>
@@ -14,4 +16,4 @@ const AuthProtectedLayout = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default AuthProtectedLayout;
+export default DashboardLayout;
