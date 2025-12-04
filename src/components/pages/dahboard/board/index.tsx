@@ -20,7 +20,6 @@ import {
 const BoardComponent = () => {
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
 
-  // SENSORS برای فعال شدن در موبایل
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(TouchSensor, {
@@ -52,7 +51,7 @@ const BoardComponent = () => {
 
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-      <div className="flex justify-center gap-4">
+      <div className="flex justify-center gap-4 px-2">
         <ColumnComponent id="todo">{renderColumn("todo")}</ColumnComponent>
         <ColumnComponent id="inprogress">
           {renderColumn("inprogress")}
