@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Button,
   Columns,
@@ -21,7 +23,6 @@ const AddTaskFormComponent = ({
   handleClose,
 }: Pick<ModalProps, "handleClose">) => {
   const { user } = useAuth();
-
 
   const defaultValues: TaskForm = useMemo(
     () => ({
