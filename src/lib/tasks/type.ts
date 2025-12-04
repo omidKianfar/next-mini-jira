@@ -13,3 +13,6 @@ export interface UpdateTaskStatusProps {
 export interface FetchTaskProps {
   taskId: string;
 }
+export interface DeleteTaskProps {
+  taskId: string;
+}
