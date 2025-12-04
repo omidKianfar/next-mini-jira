@@ -12,6 +12,8 @@ export { authContext } from "../providers/auth/auth-provider";
 export { createUserDocument } from "@/src/lib/auth/create-user";
 export { updateFirestoreUser } from "@/src/lib/auth/update-user";
 export { enqueueSnackbar } from "notistack";
+export { listenToTasks } from "@/src/lib/tasks/listener";
+export { useDispatch } from "react-redux";
 export {
   createUserWithEmailAndPassword,
   EmailAuthProvider,

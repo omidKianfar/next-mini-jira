@@ -1,7 +1,9 @@
 import {
   AuthContextActionType,
   AuthContextStateType,
+  MyUserType,
   PlanType,
+  UserType,
 } from "@/src/types/global";
 import { ActionDispatch, RefObject } from "react";
 import { Dispatch, SetStateAction } from "react";
@@ -13,7 +15,7 @@ export interface UseAuthListenerProps {
       action: {
         payload: Partial<AuthContextStateType>;
         type: AuthContextActionType;
-      },
+      }
     ]
   >;
   unsubDocRef: RefObject<(() => void) | null>;
@@ -30,7 +32,7 @@ export interface UseAuthActionProps {
       action: {
         payload: Partial<AuthContextStateType>;
         type: AuthContextActionType;
-      },
+      }
     ]
   >;
   setStepNumber: Dispatch<SetStateAction<string>>;
@@ -43,5 +45,9 @@ export interface UsePaymentSuccessProps {
 }
 export interface UsePlanActionProps {
   setLoading: Dispatch<SetStateAction<boolean>>;
-  selectedPlan:PlanType
+  selectedPlan: PlanType;
+}
+
+export interface useTaskListenerProps {
+  user: MyUserType | null;
 }
