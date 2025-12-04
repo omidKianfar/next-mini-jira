@@ -1,5 +1,4 @@
 import {
-  addTask,
   Button,
   Columns,
   createTaskDocument,
@@ -13,7 +12,6 @@ import {
   TaskShema,
   TextareaFiled,
   useAuth,
-  useDispatch,
   useForm,
   useMemo,
   yupResolver,
@@ -24,7 +22,6 @@ const AddTaskFormComponent = ({
 }: Pick<ModalProps, "handleClose">) => {
   const { user } = useAuth();
 
-  const dispatch = useDispatch();
 
   const defaultValues: TaskForm = useMemo(
     () => ({
@@ -54,8 +51,6 @@ const AddTaskFormComponent = ({
     };
 
     await createTaskDocument(newTask);
-
-    await dispatch(addTask(newTask));
 
     handleClose();
   };
