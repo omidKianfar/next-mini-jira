@@ -9,17 +9,19 @@ import {
   useRequireUserStatus,
   useRouter,
   useState,
+  useTaskListener,
 } from "./imports";
 
 const DashboardComponent = () => {
   const router = useRouter();
+
   const [open, setOpen] = useState(false);
 
   const { user, logout } = useAuth();
 
-  console.log(user);
-
   useRequireUserStatus();
+
+  useTaskListener({ user });
 
   const handleOpenModal = () => {
     setOpen(true);
