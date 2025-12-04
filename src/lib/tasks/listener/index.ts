@@ -1,3 +1,5 @@
+"use client";
+
 import { ListenToTasksProps } from "../type";
 
 import { collection, db, onSnapshot, query, Task, where } from "../../imports";
