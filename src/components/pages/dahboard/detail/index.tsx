@@ -86,8 +86,8 @@ const TaskDetailComponent = () => {
         </h1>
       </div>
 
-      <div className="border-2 rounded-lg p-4 border-amber-300 bg-white shadow">
-        <div className="flex justify-between items-center mb-4 lg:mb-0">
+      <div className="border-2 rounded-lg p-4 border-amber-300 bg-white shadow ">
+        <div className="flex justify-between items-center mb-4 lg:mb-2">
           <BackButton onClick={BackDashboard} />
 
           <Button
@@ -96,7 +96,7 @@ const TaskDetailComponent = () => {
             icon={
               <Icon
                 icon={"mingcute:delete-fill"}
-                className="text-3xl text-red-500 hover:text-red-700"
+                className="text-3xl text-red-500 hover:text-red-700 z-50"
               />
             }
           ></Button>
@@ -106,7 +106,8 @@ const TaskDetailComponent = () => {
           <div className="w-[90vw] lg:w-[500px]  ">
             <div className="flex justify-between mb-4 lg:mb-8 flex-col lg:flex-row ">
               <p className="text-blue-600 capitalize">
-                <span className="font-bold text-black">Status:</span> {task.status}
+                <span className="font-bold text-black">Status:</span>{" "}
+                {task.status}
               </p>
 
               <p className="text-blue-600 capitalize">
@@ -114,7 +115,8 @@ const TaskDetailComponent = () => {
               </p>
 
               <p className="text-blue-600 capitalize">
-                <span className="font-bold text-black">Created:</span> {task.createdAt}
+                <span className="font-bold text-black">Created:</span>{" "}
+                {task.createdAt}
               </p>
             </div>
 
@@ -129,8 +131,8 @@ const TaskDetailComponent = () => {
             <Image
               src="/images/todo-detail.svg"
               alt=""
-              width={isMobile ? 300 : 500}
-              height={isMobile ? 200 : 400}
+              width={isMobile ? 300 : 400}
+              height={isMobile ? 200 : 300}
               className="object-contain"
             />{" "}
           </div>
