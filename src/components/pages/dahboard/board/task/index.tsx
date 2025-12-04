@@ -1,10 +1,13 @@
 import { Icon } from "@iconify/react";
-import { useDraggable, useRouter } from "../../imports";
+import { useDraggable, useIsMobile, useRouter } from "../../imports";
 import { TaskCardProps } from "../type";
 import { stringSlicer } from "@/src/components/atom/string-slicer";
 
 export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
   const router = useRouter();
+
+  const isMobile = useIsMobile();
+
   const { transform, setNodeRef, listeners, attributes } = useDraggable({ id });
 
   const style = transform
@@ -15,42 +18,43 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
     <div
       ref={setNodeRef}
       style={style}
-      className=" p-3 bg-white border-2 border-blue-300 rounded-lg mb-2  flex justify-between items-center"
+      className=" bg-white border-2 border-amber-400 rounded-lg mb-2  flex justify-between items-center shadow"
     >
-      <div
-        className="w-[93%] flex justify-start items-center cursor-grab pr-1"
-        {...listeners}
-        {...attributes}
-      >
-        <div>
+      <div className="w-full">
+        <div className="flex justify-between items-center p-1 bg-amber-500 rounded-t-lg">
           <Icon
             icon={
               task.tag == "bug"
                 ? "solar:bug-bold-duotone"
                 : "material-symbols:task"
             }
-            className="mr-1 text-amber-500 text-2xl"
+            className="mr-1 text-white text-2xl"
           />
+
+          <div>
+            <Icon
+              data-no-dnd="true"
+              icon="grommet-icons:link-next"
+              className=" cursor-pointer text-white hover:text-blue-500 text-2xl"
+              onClick={() =>
+                router.push(`/dashboard/task-detail?taskId=${task.id}`)
+              }
+            />
+          </div>
         </div>
 
-        <div>
-          <p className="break-all">{stringSlicer({ string: task.title, slice: 50 })}</p>
-          <p className="break-all">
-            {stringSlicer({ string: task.description, slice: 100 })}
+        <div className="cursor-grab p-2" {...listeners} {...attributes}>
+          <p className="wrap-break-word font-bold mb-2">
+            {stringSlicer({ string: task.title, slice: isMobile ? 25 : 50 })}
+          </p>
+
+          <p className="wrap-break-word text-sm">
+            {stringSlicer({
+              string: task.description,
+              slice: isMobile ? 50 : 100,
+            })}
           </p>
         </div>
-      </div>
-
-      <div className="w-[7%] ">
-        <Icon
-          data-no-dnd="true"
-          icon="grommet-icons:link-next"
-          width={24}
-          className=" cursor-pointer text-amber-500 hover:text-amber-700 "
-          onClick={() =>
-            router.push(`/dashboard/task-detail?taskId=${task.id}`)
-          }
-        />
       </div>
     </div>
   );

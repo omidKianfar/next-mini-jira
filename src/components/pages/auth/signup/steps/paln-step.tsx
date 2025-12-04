@@ -48,7 +48,7 @@ const PalnStep = () => {
           />
         </div>
 
-        <div className="w-[90vw] lg:w-[900px] lg:h-[600px] bg-white p-8 border-2 border-amber-300 rounded-lg ">
+        <div className="w-[90vw] lg:w-[900px] lg:h-[600px] bg-white p-8 border-2 border-amber-300 rounded-lg shadow">
           <div className="w-full flex justify-start mb-[50px] lg:mb-[135px]">
             <BackButton onClick={BackToPlan} />
           </div>

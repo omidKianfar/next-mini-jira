@@ -43,8 +43,8 @@ const DashboardComponent = () => {
   };
 
   return (
-    <div className="w-full h-full p-4">
-      <div className="flex justify-between items-center mb-4">
+    <div className="w-full h-full ">
+      <div className="flex justify-between items-center mb-4 bg-white px-4 py-2 backdrop-blur-md shadow sticky">
         <Button onClick={handleLogout}>logout</Button>
 
         

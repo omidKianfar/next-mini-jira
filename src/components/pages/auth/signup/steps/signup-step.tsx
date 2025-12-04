@@ -73,7 +73,7 @@ const SignupStep = () => {
           Mini
         </h1>
 
-        <h1 className="text-4xl lg:text-6xl font-bold  bg-blue-900 text-white px-2 lg:px-6 py-1 rounded-lg">
+        <h1 className="text-4xl lg:text-6xl font-bold  bg-blue-900 text-white px-2 lg:px-6 py-1 rounded-lg shadow">
           Jira
         </h1>
       </div>
@@ -89,7 +89,7 @@ const SignupStep = () => {
           />{" "}
         </div>
 
-        <div className="w-[90vw] lg:w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white ">
+        <div className="w-[90vw] lg:w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white shadow">
           <h1 className="text-2xl font-bold text-center mb-8 text-amber-500">
             Signup
           </h1>

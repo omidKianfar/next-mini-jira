@@ -16,7 +16,7 @@ const PaymentFailedComponent = () => {
 
   return (
     <div className="w-full h-full lg:w-screen lg:h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full h-full lg:w-[600px] lg:h-[500px]  p-6 border-2 border-amber-300 rounded-lg bg-white">
+      <div className="w-full h-full lg:w-[600px] lg:h-[500px]  p-6 border-2 border-amber-300 rounded-lg bg-white shadow">
         <div className="flex justify-center mb-10 mt-8">
           <Icon
             icon={"streamline-freehand:cash-payment-bill"}

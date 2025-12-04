@@ -83,7 +83,7 @@ const ProfileStep = () => {
     <FramerMotion>
       <div className="w-full h-full flex flex-col items-center justify-center p-4">
         <div className=" flex items-center justify-center flex-col lg:flex-row">
-          <div className="w-[90vw] lg:w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white mb-10 lg:mb-0">
+          <div className="w-[90vw] lg:w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white mb-10 lg:mb-0 shadow">
             <div className="mb-2">
               <BackButton onClick={handleOpenModal} />
             </div>

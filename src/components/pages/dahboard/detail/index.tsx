@@ -81,13 +81,13 @@ const TaskDetailComponent = () => {
           Mini
         </h1>
 
-        <h1 className="text-4xl lg:text-6xl font-bold  bg-blue-900 text-white px-2 lg:px-6 py-1 rounded-lg">
+        <h1 className="text-4xl lg:text-6xl font-bold  bg-blue-900 text-white px-2 lg:px-6 py-1 rounded-lg shadow">
           Jira
         </h1>
       </div>
 
-      <div className="border-2 rounded-lg p-4 border-amber-300 bg-white">
-        <div className="flex justify-between items-center mb-8">
+      <div className="border-2 rounded-lg p-4 border-amber-300 bg-white shadow">
+        <div className="flex justify-between items-center mb-4 lg:mb-0">
           <BackButton onClick={BackDashboard} />
 
           <Button
@@ -104,14 +104,25 @@ const TaskDetailComponent = () => {
 
         <div className="flex flex-col lg:flex-row justify-center items-center gap-4">
           <div className="w-[90vw] lg:w-[500px]  ">
-            <h1 className="text-xl font-semibold break-all mb-8">
+            <div className="flex justify-between mb-4 lg:mb-8 flex-col lg:flex-row ">
+              <p className="text-blue-600 capitalize">
+                <span className="font-bold text-black">Status:</span> {task.status}
+              </p>
+
+              <p className="text-blue-600 capitalize">
+                <span className="font-bold text-black">Tag:</span> {task.tag}
+              </p>
+
+              <p className="text-blue-600 capitalize">
+                <span className="font-bold text-black">Created:</span> {task.createdAt}
+              </p>
+            </div>
+
+            <h1 className="text-xl font-semibold wrap-break-word mb-4">
               {task.title}
             </h1>
-            <p className="mt-2 break-all mb-8">{task.description}</p>
 
-            <div className="mb-8">Status: {task.status}</div>
-            <div className="mb-8">Tag: {task.tag}</div>
-            <div className="mb-8">Created: {task.createdAt}</div>
+            <p className="mt-2 wrap-break-word mb-8">{task.description}</p>
           </div>
 
           <div className="w-[300px] h-[200px] lg:w-[400px] lg:h-[300px] flex items-center justify-center">

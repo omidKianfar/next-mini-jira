@@ -11,7 +11,7 @@ const PaymentCartComponent = ({
       className="w-[250px] h-[230px] lg:w-[300px] lg:h-[300px] backdrop-blur-sm border-2 border-blue-500
        text-blue-500 rounded-lg max-w-md p-4 text-center
        hover:bg-blue-500 hover:border-blue-500
-       hover:text-white cursor-pointer relative"
+       hover:text-white cursor-pointer relative shadow"
       onClick={onClick}
     >
       <h1 className="mb-6 font-bold text-2xl text-amber-500">{title}</h1>
