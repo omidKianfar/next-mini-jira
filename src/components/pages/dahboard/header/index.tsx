@@ -49,11 +49,11 @@ const DashboardHeader = () => {
         {modalcounter == 1 ? (
           <AddTaskFormComponent handleClose={handleCloseModal} />
         ) : modalcounter == 2 ? (
-          <div className="mt-8">
+          <div >
             <SearchTasks handleClose={handleCloseModal} />
           </div>
         ) : modalcounter == 3 ? (
-          <div className="mt-8">
+          <div >
             <FilterTask handleClose={handleCloseModal} />
           </div>
         ) : null}
