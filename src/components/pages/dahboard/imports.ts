@@ -29,7 +29,15 @@ export {
 } from "@/src/store/slices/tasks";
 export { TaskShema } from "./board/schema";
 export { useTaskListener } from "@/src/hooks/tasks/use-task-listener";
-export { useDroppable, useDraggable, DndContext } from "@dnd-kit/core";
+export {
+  useDroppable,
+  useDraggable,
+  DndContext,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 export { updateTaskStatus } from "@/src/lib/tasks/update-task-status";
 export { fetchTask } from "@/src/lib/tasks/fetch-task";
 export { deleteTask } from "@/src/lib/auth/delete-task";
