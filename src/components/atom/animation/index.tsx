@@ -6,12 +6,27 @@ import { FarmerMotionProps } from "../type";
 const FramerMotion = ({ children }: FarmerMotionProps) => {
   const isMobile = useIsMobile();
 
+  const initial = isMobile
+    ? { opacity: 0, y: 70 }
+    : { opacity: 0, x: 70 };
+
+  const animate = isMobile
+    ? { opacity: 1, y: 0 }
+    : { opacity: 1, x: 0 };
+
+  const exit = isMobile
+    ? { opacity: 0, y: -35 }
+    : { opacity: 0, x: -35 };
+
   return (
     <motion.div
-      initial={isMobile ? { opacity: 0, y: 30 } : { opacity: 0, x: 50 }}
-      animate={isMobile ? { opacity: 1, y: 0 } : { opacity: 1, x: 0 }}
-      exit={isMobile ? { opacity: 0, y: -10 } : { opacity: 0, x: -10 }}
-      transition={{ duration: 1, ease: "easeOut" }}
+      initial={initial}
+      animate={animate}
+      exit={exit}
+      transition={{
+        duration: 0.42,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       className="w-full h-full"
     >
       {children}
