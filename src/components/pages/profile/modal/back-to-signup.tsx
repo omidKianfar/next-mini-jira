@@ -1,19 +1,18 @@
-import { Button } from "../../../imports";
-import { SignupProps } from "../../../type";
-import { ModalProps } from "@/src/components/atom/modal/type";
+import { Button, ModalProps, useAuth } from "../../imports";
 
-const BackToSignup = ({
-  changeStep,
-  handleClose,
-}: Pick<SignupProps, "changeStep"> & Pick<ModalProps, "handleClose">) => {
+const BackToSignup = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
+  const { changeStep } = useAuth();
+
   const BackProfile = () => {
     changeStep("0");
   };
 
   return (
     <div>
-      <h1 className="text-amber-500 font-semibold">Your account has been created.</h1>
-     
+      <h1 className="text-amber-500 font-semibold">
+        Your account has been created.
+      </h1>
+
       <p className="mt-4">
         If you return to the signup step, you won’t be able to register with
         this account again. You must log in to the app and complete the payment
