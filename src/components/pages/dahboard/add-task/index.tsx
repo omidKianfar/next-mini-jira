@@ -78,7 +78,7 @@ const AddTaskFormComponent = ({
   return (
     <div>
       <h1 className="text-2xl font-bold text-center mb-4 text-amber-500">
-        Task
+        Create Task
       </h1>
 
       <FormProvider {...methods}>
@@ -117,7 +117,7 @@ const AddTaskFormComponent = ({
                 hover:text-blue-500 rounded-lg px-8 py-2 
                 transition-all duration-200"
             >
-              Add {methods.watch("tag") == "task" ? "Task" : "Bug"}
+              Create
             </Button>
           </div>
         </form>
