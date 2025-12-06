@@ -6,7 +6,7 @@ import {
   useForm,
   screen,
   TextareaFiled,
-} from "../imports";
+} from "../../imports";
 
 const Wrapper = ({ withError = false }) => {
   const defaultValues = { description: "Initial text" };

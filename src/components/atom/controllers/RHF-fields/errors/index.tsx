@@ -1,4 +1,6 @@
-import { DateInputFieldProps, ErrorProps, FieldValues } from "../../imports";
+"use client";
+
+import { DateInputFieldProps, ErrorProps, FieldValues } from "../../../imports";
 
 const ErrorComponent = <T extends FieldValues>({
   errors,

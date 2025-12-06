@@ -1,7 +1,7 @@
 "use client";
 
-import ButtonLoading from "../loading/button-loader";
-import { ButtonProps } from "./type";
+import { ButtonProps } from "../type";
+import { ButtonLoading } from "../imports";
 
 const Button = ({
   type = "button",

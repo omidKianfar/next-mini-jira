@@ -6,7 +6,7 @@ import {
   useEffect,
   useForm,
   screen,
-} from "../imports";
+} from "../../imports";
 
 const Wrapper = ({ withError = false }) => {
   const methods = useForm({

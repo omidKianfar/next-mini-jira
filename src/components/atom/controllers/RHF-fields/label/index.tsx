@@ -1,4 +1,6 @@
-import { DateInputFieldProps, FieldValues } from "../../imports";
+"use client";
+
+import { DateInputFieldProps, FieldValues } from "../../../imports";
 
 const LabelComponent = <T extends FieldValues>({
   label,

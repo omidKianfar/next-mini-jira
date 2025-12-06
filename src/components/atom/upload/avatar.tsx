@@ -1,12 +1,9 @@
-import { useRef } from "react";
-import InputField from "../controllers/RHF-fields/input-field";
-import Image from "next/image";
-import { UploadAvatarProps } from "./type";
-import Button from "../button/next-button";
-import { Icon } from "@iconify/react";
+"use client";
+
+import { UploadAvatarProps } from "../type";
+import { Button, FileInputField, Icon, Image, useRef } from "../imports";
 
 const AvatarUpload = ({ photo, uploadHandler }: UploadAvatarProps) => {
-  
   const photoRef = useRef<HTMLInputElement | null>(null);
 
   const photoRefHandler = () => {
@@ -27,14 +24,11 @@ const AvatarUpload = ({ photo, uploadHandler }: UploadAvatarProps) => {
         <div className="rounded-full  w-[100px] h-[100px] bg-gray-200 border-2 border-blue-500"></div>
       )}
 
-      <InputField
+      <FileInputField
         name="photo"
-        type="file"
         label="Photo"
-        placeholder="Enter your email"
         ref={photoRef}
         onChange={uploadHandler}
-        className="hidden"
       />
 
       <Button

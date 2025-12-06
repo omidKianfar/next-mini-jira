@@ -7,7 +7,7 @@ import {
   InputControllerProps,
   LabelComponent,
   useFormContext,
-} from "../imports";
+} from "../../imports";
 
 const InputField = <T extends FieldValues>({
   name,
@@ -15,12 +15,10 @@ const InputField = <T extends FieldValues>({
   placeholder,
   type = "text",
   className,
-  ref,
   autoFocus,
   icon,
   autoComplete,
   disabled,
-  onChange,
 }: InputControllerProps<T>) => {
   const {
     control,
@@ -43,14 +41,8 @@ const InputField = <T extends FieldValues>({
               placeholder={placeholder}
               autoFocus={autoFocus}
               autoComplete={autoComplete}
-              ref={ref}
               disabled={disabled}
-              value={type == "file" ? undefined : field.value || ""}
-              onChange={(event) => {
-                field.onChange(event);
-                onChange?.(event);
-              }}
-              className="w-full border p-2 my-1 rounded-lg text-sm focus:outline-blue-400 placeholder:text-sm pl-2 pr-8 focus:border-2"
+              className="w-full p-2 my-1 border-2 rounded-lg text-sm border-blue-400 focus:outline-blue-700 placeholder:text-sm pl-2 pr-8 "
             />
             <div className="absolute bottom-3 right-1 text-2xl text-gray-400">
               {icon}

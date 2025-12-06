@@ -6,7 +6,7 @@ import {
   useForm,
   screen,
   InputField,
-} from "../imports";
+} from "../../imports";
 
 const Wrapper = ({ withError = false }) => {
   const defaultValues = { name: "Initial text" };

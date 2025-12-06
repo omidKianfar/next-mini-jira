@@ -1,5 +1,6 @@
 "use client";
-import { SnackbarProvider } from "notistack";
+
+import { SnackbarProvider } from "../imports";
 
 const NotistackProvider = ({ children }: React.PropsWithChildren) => {
   return (

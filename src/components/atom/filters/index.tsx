@@ -1,14 +1,23 @@
-import { FormProvider, useForm } from "react-hook-form";
-import { DateInputField, SelectField } from "../controllers/imports";
-import { resetFilters, setDate, setType } from "@/src/store/slices/filters";
-import { FilterFormType } from "./type";
-import { useDispatch, useSelector } from "react-redux";
-import Button from "../button/next-button";
-import { ModalProps } from "../modal/type";
-import { yupResolver } from "@hookform/resolvers/yup";
+"use client";
+
+import {
+  Button,
+  DateInputField,
+  FormProvider,
+  resetFilters,
+  RootState,
+  SelectField,
+  setDate,
+  setType,
+  useDispatch,
+  useForm,
+  useMemo,
+  useSelector,
+  yupResolver,
+} from "../imports";
+
+import { FilterFormType, ModalProps } from "../type";
 import { filterSchema } from "./schema";
-import { RootState } from "@/src/store";
-import { useMemo } from "react";
 
 const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   const dispatch = useDispatch();
@@ -43,6 +52,10 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(filterHandeler)}>
+        <h1 className="text-2xl font-bold text-amber-500 text-center mb-4">
+          Filters Todos
+        </h1>
+
         <div className="mb-4">
           <SelectField name="tag" label="Tag" options={Tags} />
         </div>

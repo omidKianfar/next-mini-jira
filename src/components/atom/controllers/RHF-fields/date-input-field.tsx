@@ -7,7 +7,7 @@ import {
   FieldValues,
   LabelComponent,
   useFormContext,
-} from "../imports";
+} from "../../imports";
 
 const DateInputField = <T extends FieldValues>({
   name,
@@ -30,7 +30,7 @@ const DateInputField = <T extends FieldValues>({
             {...field}
             id={name}
             type="date"
-            className="w-full my-1 border p-2 rounded-lg focus:outline-blue-400 px-2 text-sm focus:border-2"
+            className="w-full my-1 border-2  p-2 rounded-lg border-blue-400 focus:outline-blue-700 px-2 text-sm "
           />
         )}
       />

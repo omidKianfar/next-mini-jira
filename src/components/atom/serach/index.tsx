@@ -1,14 +1,17 @@
 "use client";
 
-import { RootState } from "@/src/store";
-import { Task } from "@/src/types/global";
-import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
-import { useSelector } from "react-redux";
-import { stringSlicer } from "../string-slicer";
-import { useIsMobile } from "@/src/hooks/mobile-size";
-import { Icon } from "@iconify/react";
-import { ModalProps } from "../modal/type";
+import {
+  ChangeEvent,
+  Icon,
+  RootState,
+  stringSlicer,
+  useIsMobile,
+  useRouter,
+  useSelector,
+  useState,
+} from "../imports";
+
+import { ModalProps } from "../type";
 
 const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   const router = useRouter();
@@ -46,6 +49,9 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
 
   return (
     <div className=" w-full">
+      <h1 className="text-2xl font-bold text-amber-500 text-center mb-4">
+        Search Todo
+      </h1>
       <div className="relative">
         <Icon
           icon={"tabler:zoom"}

@@ -7,7 +7,7 @@ import {
   LabelComponent,
   TextareaControllerProps,
   useFormContext,
-} from "../imports";
+} from "../../imports";
 
 const TextareaFiled = <T extends FieldValues>({
   name,
@@ -34,7 +34,7 @@ const TextareaFiled = <T extends FieldValues>({
             id={name}
             placeholder={placeholder}
             rows={rows}
-            className="w-full my-1 border p-2 rounded-lg text-sm focus:outline-blue-400 placeholder:text-sm px-2 focus:border-2"
+            className="w-full my-1 border-2 p-2 rounded-lg text-sm border-blue-400 focus:outline-blue-700 placeholder:text-sm px-2 "
           />
         )}
       />

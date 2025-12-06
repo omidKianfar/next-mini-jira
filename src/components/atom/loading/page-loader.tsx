@@ -1,4 +1,6 @@
-import { PulseLoader } from "react-spinners";
+"use client";
+
+import { PulseLoader } from "../imports";
 
 const PageLoading = () => {
   return (

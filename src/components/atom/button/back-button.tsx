@@ -1,6 +1,7 @@
-import Button from "./next-button";
-import { Icon } from "@iconify/react";
-import { BackButtonProps } from "./type";
+"use client";
+
+import { BackButtonProps } from "../type";
+import { Button, Icon } from "../imports";
 
 const BackButton = ({ onClick }: BackButtonProps) => {
   return (

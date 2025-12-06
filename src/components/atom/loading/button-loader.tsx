@@ -1,5 +1,7 @@
-import { ClipLoader } from "react-spinners";
-import { LoadingProps } from "./type";
+"use client";
+
+import { LoadingProps } from "../type";
+import { ClipLoader } from "../imports";
 
 const ButtonLoading = ({ color, size }: LoadingProps) => {
   return <ClipLoader color={color} size={size} />;
