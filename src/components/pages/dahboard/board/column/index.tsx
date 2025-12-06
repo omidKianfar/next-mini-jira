@@ -7,7 +7,7 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
   return (
     <div
       ref={setNodeRef}
-      className={`w-80 bg-gray-100 mt-2 rounded-lg p-2 transition border-2 border-blue-300 shadow
+      className={`w-full lg:w-80 bg-gray-100 mt-2 rounded-lg  transition border-2 border-blue-300 shadow-2xl
       ${isOver ? "bg-blue-300" : "bg-white"}
       `}
       style={{
@@ -15,10 +15,11 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
         touchAction: "none",
       }}
     >
-      <h1 className="mb-2 text-center capitalize font-bold lg:text-2xl text-white bg-blue-500 rounded-lg p-2">
+      <h1 className="mb-2 text-center capitalize font-bold  text-white bg-blue-500 rounded-t-lg p-2 shadow">
         {id}
       </h1>
-      <div className="flex flex-col gap-2">{children}</div>
+      
+      <div className="flex flex-col gap-2 p-2">{children}</div>
     </div>
   );
 };
