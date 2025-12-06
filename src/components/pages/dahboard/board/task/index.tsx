@@ -18,10 +18,14 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
     <div
       ref={setNodeRef}
       style={style}
-      className="w-full bg-white border-2 border-amber-400 rounded-lg mb-2  flex justify-between items-center shadow"
+      className="w-full bg-white border-2 border-amber-400 rounded-lg mb-2 
+       flex justify-between items-center shadow"
     >
       <div className="w-full">
-        <div className="flex justify-between items-center p-1 bg-amber-400 rounded-t-lg">
+        <div
+          className="flex justify-between items-center p-1 bg- rounded-t-lg
+          bg-linear-to-r bg-linear-[80deg] from-amber-500 via-amber-400 to-amber-500"
+        >
           <Icon
             icon={
               task.tag == "bug"
