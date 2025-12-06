@@ -1,5 +1,5 @@
 import { ColumnProps } from "../type";
-import { useDroppable } from "../../imports";
+import { Icon, useDroppable } from "../../imports";
 
 const ColumnComponent = ({ id, children }: ColumnProps) => {
   const { setNodeRef, isOver } = useDroppable({ id });
@@ -15,10 +15,22 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
         touchAction: "none",
       }}
     >
-      <h1 className="mb-2 text-center capitalize font-bold  text-white bg-blue-500 rounded-t-lg p-2 shadow">
+      <h1
+        className="mb-2 text-center capitalize font-bold  text-white
+          bg-linear-to-r bg-linear-[80deg] from-blue-500 via-blue-400 to-blue-500
+          rounded-t-lg p-2 shadow flex justify-center items-center gap-2
+          "
+      >
         {id}
+        {id == "todo" ? (
+          <Icon icon={"ri:todo-line"} className="text-2xl" />
+        ) : id == "inprogress" ? (
+          <Icon icon={"carbon:in-progress"} className="text-2xl" />
+        ) : (
+          <Icon icon={"ant-design:file-done-outlined"} className="text-2xl" />
+        )}
       </h1>
-      
+
       <div className="flex flex-col gap-2 p-2">{children}</div>
     </div>
   );
