@@ -8,17 +8,21 @@ import { ModalProps } from "../modal/type";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { filterSchema } from "./schema";
 import { RootState } from "@/src/store";
+import { useMemo } from "react";
 
 const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   const dispatch = useDispatch();
 
   const filters = useSelector((state: RootState) => state.filters);
 
-  const defaultValues: FilterFormType = {
-    tag: filters.tag ?? "all",
-    from: filters.date.from ?? "",
-    to: filters.date.to ?? "",
-  };
+  const defaultValues: FilterFormType = useMemo(
+    () => ({
+      tag: filters.tag ?? "all",
+      from: filters.date.from ?? "",
+      to: filters.date.to ?? "",
+    }),
+    []
+  );
 
   const methods = useForm<FilterFormType>({
     defaultValues,
@@ -44,11 +48,11 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
         </div>
 
         <div className="mb-4">
-          <DateInputField name="from" label="Start Time"/>
+          <DateInputField name="from" label="Start Time" />
         </div>
 
         <div className="mb-4">
-          <DateInputField name="to" label="End Time"/>
+          <DateInputField name="to" label="End Time" />
         </div>
 
         <div className="flex justify-end items-center">
