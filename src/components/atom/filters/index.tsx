@@ -1,53 +1,65 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { DateInputField, SelectField } from "../controllers/imports";
-import { setDate, setType } from "@/src/store/slices/filters";
-import { FilterFormType, FilterTaskProps } from "./type";
-import { useDispatch } from "react-redux";
+import { resetFilters, setDate, setType } from "@/src/store/slices/filters";
+import { FilterFormType } from "./type";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../button/next-button";
+import { ModalProps } from "../modal/type";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { filterSchema } from "./schema";
+import { RootState } from "@/src/store";
 
-const FilterTask = ({ handleCloseModal }: FilterTaskProps) => {
+const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   const dispatch = useDispatch();
 
+  const filters = useSelector((state: RootState) => state.filters);
+
   const defaultValues: FilterFormType = {
-    tag: "all",
-    from: "",
-    to: "",
+    tag: filters.tag ?? "all",
+    from: filters.date.from ?? "",
+    to: filters.date.to ?? "",
   };
 
   const methods = useForm<FilterFormType>({
     defaultValues,
-    // resolver: yupResolver()
+    resolver: yupResolver(filterSchema),
   });
 
   const filterHandeler = (values: FilterFormType) => {
     dispatch(setDate({ from: values.from ?? "", to: values.to ?? "" }));
     dispatch(setType(values.tag ?? "all"));
+    handleClose();
+  };
+
+  const resetFilterHandler = () => {
+    dispatch(resetFilters());
+    handleClose();
   };
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(filterHandeler)}>
         <div className="mb-4">
-          <SelectField name="tag" options={Tags} />
+          <SelectField name="tag" label="Tag" options={Tags} />
         </div>
 
         <div className="mb-4">
-          <DateInputField name="from" />
+          <DateInputField name="from" label="Start Time"/>
         </div>
 
         <div className="mb-4">
-          <DateInputField name="to" />
+          <DateInputField name="to" label="End Time"/>
         </div>
 
         <div className="flex justify-end items-center">
           <Button
-            onClick={handleCloseModal}
+            onClick={resetFilterHandler}
             className=" bg-blue-500 text-white border-2
             hover:bg-transparent hover:border-blue-500
             hover:text-blue-500 rounded-lg px-8 py-2 
             transition-all duration-200 mr-2"
           >
-            Cancel
+            Clear
           </Button>
 
           <Button
