@@ -1,3 +1,5 @@
+"use client";
+
 import {
   PaymentCartComponent,
   useAuth,
@@ -6,7 +8,7 @@ import {
   FramerMotion,
   BackButton,
   useIsMobile,
-} from "../../imports";
+} from "../../../imports";
 
 const PaymentStep = () => {
   const { user, changeStep, terialMode } = useAuth();

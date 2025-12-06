@@ -17,7 +17,7 @@ import {
   useSearchParams,
   useSelector,
   useState,
-} from "../imports";
+} from "../../imports";
 
 const TaskDetailComponent = () => {
   const router = useRouter();

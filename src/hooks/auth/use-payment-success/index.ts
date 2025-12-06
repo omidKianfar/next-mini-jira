@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "../../imports";
 import { UsePaymentSuccessProps } from "../../type";
 

@@ -13,7 +13,7 @@ import {
   useSelector,
   useSensor,
   useSensors,
-} from "../imports";
+} from "../../imports";
 
 const BoardComponent = () => {
   const sensors = useSensors(

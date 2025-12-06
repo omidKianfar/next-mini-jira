@@ -1,5 +1,12 @@
-import React, { useState } from "react";
-import { AddTaskFormComponent, Button, Icon, ModalContainer } from "../imports";
+"use client";
+
+import { useState } from "react";
+import {
+  AddTaskFormComponent,
+  Button,
+  Icon,
+  ModalContainer,
+} from "../../imports";
 import SearchTasks from "@/src/components/atom/serach";
 import FilterTask from "@/src/components/atom/filters";
 
@@ -49,11 +56,11 @@ const DashboardHeader = () => {
         {modalcounter == 1 ? (
           <AddTaskFormComponent handleClose={handleCloseModal} />
         ) : modalcounter == 2 ? (
-          <div >
+          <div>
             <SearchTasks handleClose={handleCloseModal} />
           </div>
         ) : modalcounter == 3 ? (
-          <div >
+          <div>
             <FilterTask handleClose={handleCloseModal} />
           </div>
         ) : null}

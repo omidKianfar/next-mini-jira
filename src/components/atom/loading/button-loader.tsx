@@ -1,5 +1,3 @@
-"use client";
-
 import { LoadingProps } from "../type";
 import { ClipLoader } from "../imports";
 

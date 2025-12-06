@@ -1,3 +1,5 @@
+"use client";
+
 import { listenToTasks, useDispatch, useEffect } from "../../imports";
 import { useTaskListenerProps } from "../../type";
 

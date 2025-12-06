@@ -3,7 +3,6 @@ import {
   AuthContextStateType,
   MyUserType,
   PlanType,
-  UserType,
 } from "@/src/types/global";
 import { ActionDispatch, RefObject } from "react";
 import { Dispatch, SetStateAction } from "react";

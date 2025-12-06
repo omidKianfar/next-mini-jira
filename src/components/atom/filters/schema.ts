@@ -1,5 +1,5 @@
 import * as Yup from "yup";
-import { FilterFormType } from "./type";
+import { FilterFormType } from "../type";
 
 export const filterSchema = Yup.object({
   tag: Yup.string().required("Enter your tag"),

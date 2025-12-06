@@ -1,5 +1,3 @@
-"use client";
-
 import { ModalProps } from "../type";
 import { Icon } from "../imports";
 

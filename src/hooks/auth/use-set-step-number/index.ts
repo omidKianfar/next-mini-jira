@@ -1,3 +1,5 @@
+"use client";
+
 import { UseSetStepNumberProps } from "../../type";
 import { useEffect } from "../../imports";
 

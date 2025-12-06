@@ -1,6 +1,4 @@
-"use client";
-
-import { useAuth } from "../imports";
+import { useAuth } from "../../imports";
 import SignupStep from "./steps/signup-step";
 import ProfileStep from "./steps/profile-step";
 import PaymentStep from "./steps/payment-step";

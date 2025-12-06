@@ -5,7 +5,7 @@ import {
   useAuth,
   useRequireUserStatus,
   useTaskListener,
-} from "./imports";
+} from "../imports";
 
 const DashboardComponent = () => {
   const { user } = useAuth();

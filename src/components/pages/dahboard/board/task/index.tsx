@@ -1,6 +1,8 @@
+"use client";
+
 import { Icon } from "@iconify/react";
-import { useDraggable, useIsMobile, useRouter } from "../../imports";
-import { TaskCardProps } from "../type";
+import { useDraggable, useIsMobile, useRouter } from "../../../imports";
+import { TaskCardProps } from "../../../type";
 import { stringSlicer } from "@/src/components/atom/string-slicer";
 
 export const TaskCardComponent = ({ id, task }: TaskCardProps) => {

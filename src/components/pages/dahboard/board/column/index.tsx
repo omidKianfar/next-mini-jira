@@ -1,5 +1,7 @@
-import { ColumnProps } from "../type";
-import { Icon, useDroppable } from "../../imports";
+"use client";
+
+import { ColumnProps } from "../../../type";
+import { Icon, useDroppable } from "../../../imports";
 
 const ColumnComponent = ({ id, children }: ColumnProps) => {
   const { setNodeRef, isOver } = useDroppable({ id });
