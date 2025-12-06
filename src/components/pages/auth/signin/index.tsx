@@ -71,6 +71,7 @@ const SigninComponent = () => {
   };
 
   return (
+    
     <div className="w-full h-full flex flex-col items-center justify-center p-4 ">
       <div className="text-center mb-0 lg:mb-8  rounded-lg flex ">
         <h1 className="text-4xl lg:text-6xl font-bold text-amber-500 pr-1 p-1">
@@ -99,13 +100,14 @@ const SigninComponent = () => {
           </h1>
 
           <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(signinUser)}>
+            <form onSubmit={methods.handleSubmit(signinUser)} autoComplete="on">
               <InputField
                 name="email"
                 label="Email"
                 placeholder="Enter your email"
                 type="email"
                 autoFocus
+                autoComplete="email"
                 icon={
                   <Icon icon={"ic:baseline-email"} className="text-red-400" />
                 }
@@ -116,6 +118,7 @@ const SigninComponent = () => {
                 label="Password"
                 placeholder="Enter your password"
                 type={passwordShow ? "text" : "password"}
+                autoComplete="current-password"
                 icon={
                   passwordShow ? (
                     <Icon
@@ -135,7 +138,9 @@ const SigninComponent = () => {
 
               <div className="flex justify-end items-center my-8">
                 <div
-                  className={`${loading ? "mr-20" : "mr-[100px]"} hover:bg-blue-200 p-2 rounded-full cursor-pointer hover:rotate-12 transition-all duration-200`}
+                  className={`${
+                    loading ? "mr-20" : "mr-[100px]"
+                  } hover:bg-blue-200 p-2 rounded-full cursor-pointer hover:rotate-12 transition-all duration-200`}
                   onClick={signupGoogle}
                 >
                   <Icon icon={"devicon:google"} className=" text-4xl" />

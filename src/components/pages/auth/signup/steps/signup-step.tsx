@@ -95,7 +95,7 @@ const SignupStep = () => {
           </h1>
 
           <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(signupUser)} autoComplete="on">
+            <form onSubmit={methods.handleSubmit(signupUser)} autoComplete="on" autoCapitalize="off" autoCorrect="off">
               <InputField
                 name="email"
                 label="Email"
