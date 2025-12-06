@@ -18,10 +18,10 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
     <div
       ref={setNodeRef}
       style={style}
-      className=" bg-white border-2 border-amber-400 rounded-lg mb-2  flex justify-between items-center shadow"
+      className="w-full bg-white border-2 border-amber-400 rounded-lg mb-2  flex justify-between items-center shadow"
     >
       <div className="w-full">
-        <div className="flex justify-between items-center p-1 bg-amber-500 rounded-t-lg">
+        <div className="flex justify-between items-center p-1 bg-amber-400 rounded-t-lg">
           <Icon
             icon={
               task.tag == "bug"
@@ -34,7 +34,7 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
           <div>
             <Icon
               data-no-dnd="true"
-              icon="grommet-icons:link-next"
+              icon="carbon:task-view"
               className=" cursor-pointer text-white hover:text-blue-500 text-2xl"
               onClick={() =>
                 router.push(`/dashboard/task-detail?taskId=${task.id}`)
@@ -44,7 +44,7 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
         </div>
 
         <div className="cursor-grab p-2" {...listeners} {...attributes}>
-          <p className="wrap-break-word font-bold mb-2">
+          <p className="wrap-break-word font-bold mb-2 text-blue-500">
             {stringSlicer({ string: task.title, slice: isMobile ? 25 : 50 })}
           </p>
 
