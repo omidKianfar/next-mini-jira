@@ -114,3 +114,11 @@ export type Columns = {
   label: string;
   value: string;
 };
+
+export type FiltersState = {
+  tag: string | null;
+  date: {
+    from: string | null;
+    to: string | null;
+  };
+};

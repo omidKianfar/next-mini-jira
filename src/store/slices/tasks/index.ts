@@ -28,6 +28,7 @@ const taskSlice = createSlice({
     clearTasks: (state) => {
       state.tasks = [];
     },
+    
   },
 });
 
