@@ -1,4 +1,4 @@
-import PaymentSuccessComponent from "@/src/components/pages/auth/signup/steps/payment-page/payment-success";
+import PaymentSuccessComponent from "@/src/components/pages/payment/payment-page/payment-success";
 
 const PaymentSuccessPage = () => {
   return <PaymentSuccessComponent />;

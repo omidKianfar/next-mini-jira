@@ -2,7 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
-import { Button, useAuth } from "../../../imports";
+import { Button, useAuth } from "../../imports";
 
 const PaymentFailedComponent = () => {
   const router = useRouter();
