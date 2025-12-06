@@ -45,7 +45,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   };
 
   return (
-    <div className="relative w-full">
+    <div className=" w-full">
       <div className="relative">
         <Icon
           icon={"tabler:zoom"}
@@ -73,11 +73,11 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
 
       {openMenu ? (
         filteredTasks.length > 0 ? (
-          <div className="absolute left-0 right-0 mt-1 backdrop-blur-8xl max-h-60  z-20 bg-blue-50 p-2 rounded-lg overflow-y-auto scrollbar-hide shadow-2xl ">
+          <div className=" mt-4  max-h-80 overflow-y-auto scrollbar-hide  ">
             {filteredTasks.map((task) => (
               <div
                 key={task.id}
-                className=" bg-white border-2 border-amber-400 rounded-lg mb-2  flex justify-between items-center cursor-pointer "
+                className=" bg-white border-2 border-amber-400 rounded-lg mb-4  flex justify-between items-center cursor-pointer "
                 onClick={() => {
                   router.push(`/dashboard/task-detail?taskId=${task.id}`);
                   handleClose();
@@ -115,7 +115,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
             ))}
           </div>
         ) : (
-          <div className="absolute left-0 right-0 mt-1 bg-white border rounded shadow p-3 text-gray-500 z-20">
+          <div className=" mt-1 bg-white border rounded shadow p-3 text-gray-500 z-20">
             No results
           </div>
         )

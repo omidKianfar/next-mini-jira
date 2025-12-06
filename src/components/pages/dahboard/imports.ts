@@ -43,6 +43,7 @@ export { fetchTask } from "@/src/lib/tasks/fetch-task";
 export { deleteTask } from "@/src/lib/auth/delete-task";
 export { Icon } from "@iconify/react";
 export { useIsMobile } from "@/src/hooks/mobile-size";
+export { enqueueSnackbar } from "notistack";
 
 export type { ModalProps } from "@/src/components/atom/modal/type";
 export type { Columns, Task, TaskForm } from "@/src/types/global";

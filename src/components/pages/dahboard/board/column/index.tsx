@@ -7,7 +7,7 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
   return (
     <div
       ref={setNodeRef}
-      className={`w-full lg:w-80 bg-gray-100 mt-2 rounded-lg  transition border-2 border-blue-300 shadow-2xl
+      className={`w-full lg:w-80 bg-gray-100  rounded-lg  transition border-2 border-blue-300 shadow-2xl
       ${isOver ? "bg-blue-300" : "bg-white"}
       `}
       style={{

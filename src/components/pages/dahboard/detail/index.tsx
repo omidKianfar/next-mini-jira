@@ -4,6 +4,7 @@ import {
   BackButton,
   Button,
   deleteTask,
+  enqueueSnackbar,
   fetchTask,
   Icon,
   Image,
@@ -54,17 +55,32 @@ const TaskDetailComponent = () => {
         fetchTaskHandler();
       }
     };
+
     operationTask();
   }, [taskId, tasks]);
 
   const deleteTaskHandler = async () => {
     if (!taskId) return;
 
-    setDeleting(true);
+    try {
+      setDeleting(true);
 
-    await deleteTask({ taskId: taskId! });
+      await deleteTask({ taskId: taskId! });
 
-    router.push("/dashboard");
+      enqueueSnackbar(`Todo delted successfully`, {
+        variant: "success",
+      });
+
+      router.push("/dashboard");
+    } catch (error: any) {
+      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+        variant: "error",
+      });
+
+      setDeleting(false);
+    } finally {
+      setDeleting(false);
+    }
   };
 
   const BackDashboard = () => {
@@ -93,6 +109,7 @@ const TaskDetailComponent = () => {
           <Button
             onClick={deleteTaskHandler}
             isLoading={deleting}
+            disable={deleting}
             icon={
               <Icon
                 icon={"mingcute:delete-fill"}

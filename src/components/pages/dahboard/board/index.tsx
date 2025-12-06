@@ -70,7 +70,7 @@ const BoardComponent = () => {
 
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-      <div className="flex flex-col lg:flex-row justify-center gap-4 px-2">
+      <div className="flex flex-col lg:flex-row justify-center gap-4 ">
         <ColumnComponent id="todo">{renderColumn("todo")}</ColumnComponent>
         <ColumnComponent id="inprogress">
           {renderColumn("inprogress")}

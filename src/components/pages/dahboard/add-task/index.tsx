@@ -5,6 +5,7 @@ import {
   Columns,
   createTaskDocument,
   dayjs,
+  enqueueSnackbar,
   FormProvider,
   InputField,
   ModalProps,
@@ -16,6 +17,7 @@ import {
   useAuth,
   useForm,
   useMemo,
+  useState,
   yupResolver,
 } from "../imports";
 
@@ -23,6 +25,8 @@ const AddTaskFormComponent = ({
   handleClose,
 }: Pick<ModalProps, "handleClose">) => {
   const { user } = useAuth();
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const defaultValues: TaskForm = useMemo(
     () => ({
@@ -40,20 +44,35 @@ const AddTaskFormComponent = ({
   });
 
   const onSubmit = async (values: TaskForm) => {
-    const newTask: Task = {
-      id: crypto.randomUUID(),
-      title: values.title,
-      description: values.description,
-      status: "todo",
-      tag: values.tag,
-      createdAt: dayjs().format("YYYY-MM-DD"),
-      fileUrl: values.fileUrl,
-      userId: user?.userId as string,
-    };
+    setLoading(true);
 
-    await createTaskDocument(newTask);
+    try {
+      const newTask: Task = {
+        id: crypto.randomUUID(),
+        title: values.title,
+        description: values.description,
+        status: "todo",
+        tag: values.tag,
+        createdAt: dayjs().format("YYYY-MM-DD"),
+        fileUrl: values.fileUrl,
+        userId: user?.userId as string,
+      };
 
-    handleClose();
+      await createTaskDocument(newTask);
+
+      enqueueSnackbar(`Todo created successfully`, {
+        variant: "success",
+      });
+
+      handleClose();
+    } catch (error: any) {
+      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+        variant: "error",
+      });
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -92,6 +111,7 @@ const AddTaskFormComponent = ({
 
             <Button
               type="submit"
+              isLoading={loading}
               className=" bg-blue-500 text-white border-2
                 hover:bg-transparent hover:border-blue-500
                 hover:text-blue-500 rounded-lg px-8 py-2 
