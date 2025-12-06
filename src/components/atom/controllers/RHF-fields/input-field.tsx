@@ -1,6 +1,5 @@
 "use client";
 
-import { Icon } from "@iconify/react";
 import {
   Controller,
   ErrorComponent,
@@ -51,7 +50,7 @@ const InputField = <T extends FieldValues>({
                 field.onChange(event);
                 onChange?.(event);
               }}
-              className="w-full border p-2 my-1 rounded-lg text-sm focus:outline-blue-400 placeholder:text-sm pl-2 pr-8"
+              className="w-full border p-2 my-1 rounded-lg text-sm focus:outline-blue-400 placeholder:text-sm pl-2 pr-8 focus:border-2"
             />
             <div className="absolute bottom-3 right-1 text-2xl text-gray-400">
               {icon}

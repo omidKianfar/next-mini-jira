@@ -30,7 +30,7 @@ const DateInputField = <T extends FieldValues>({
             {...field}
             id={name}
             type="date"
-            className="w-full my-1 border p-2 rounded-lg focus:outline-blue-400 px-2 text-sm"
+            className="w-full my-1 border p-2 rounded-lg focus:outline-blue-400 px-2 text-sm focus:border-2"
           />
         )}
       />

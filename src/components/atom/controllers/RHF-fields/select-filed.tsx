@@ -32,7 +32,7 @@ const SelectField = <T extends FieldValues>({
             id={name}
             {...field}
             onChange={(e) => field.onChange(e.target.value)}
-            className="w-full border p-2 my-1 rounded-lg text-sm focus:outline-blue-400 cursor-pointer"
+            className="w-full border p-2 my-1 rounded-lg text-sm focus:border-blue-400 cursor-pointer focus:border-2 "
           >
             {options.map((option) => (
               <option key={option.value} value={option.value}>
