@@ -1,3 +1,5 @@
+"use client"
+
 export { default as InputField } from "./controllers/RHF-fields/input-field";
 export { default as TextareaFiled } from "./controllers/RHF-fields/textarea-field";
 export { default as SelectField } from "./controllers/RHF-fields/select-filed";

@@ -1,5 +1,6 @@
-export { default as dayjs } from "dayjs";
+"use client";
 
+export { default as dayjs } from "dayjs";
 export { useRouter } from "next/navigation";
 export { useAuth } from "./auth/use-auth";
 export { useEffect, useState } from "react";

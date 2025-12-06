@@ -1,5 +1,6 @@
-export { default as dayjs } from "dayjs";
+"use client";
 
+export { default as dayjs } from "dayjs";
 export { db } from "@/config";
 export { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 export {

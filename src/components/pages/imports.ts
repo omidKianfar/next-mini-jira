@@ -1,3 +1,5 @@
+"use client";
+
 export { default as InputField } from "@/src/components/atom/controllers/RHF-fields/input-field";
 export { default as DateInputField } from "@/src/components/atom/controllers/RHF-fields/date-input-field";
 export { default as Button } from "@/src/components/atom/button/next-button";
