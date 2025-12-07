@@ -1,8 +1,8 @@
 "use client";
 
-import { dayjs, useAuth, useEffect, useRouter } from '../imports'
+import { dayjs, useAuth, useEffect, useRouter } from "../imports";
 
-export const useRequireUserStatus = () => {
+export const useRequirePaymentStatus = () => {
   const router = useRouter();
   const auth = useAuth();
 
@@ -16,11 +16,6 @@ export const useRequireUserStatus = () => {
     const now = dayjs();
 
     const payment = user?.payment;
-
-    if (!user?.isActive) {
-      router.push("/active-page");
-      return;
-    }
 
     if (payment?.freeTrialEnabled) {
       if (now.isAfter(payment.trialEnd)) {
