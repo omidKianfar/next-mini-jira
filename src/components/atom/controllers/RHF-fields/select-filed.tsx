@@ -52,7 +52,7 @@ const SelectField = <T extends FieldValues>({
               ))}
             </select>
 
-            <div className="absolute top-2.5 right-2.5 text-2xl text-blue-300">
+            <div className="absolute top-2.5 right-2.5 text-2xl text-gray-300">
               {changeStatus ? (
                 <Icon icon={"ic:baseline-swipe-up"} />
               ) : (
