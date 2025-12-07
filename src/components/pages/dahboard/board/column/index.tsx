@@ -19,7 +19,8 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
     >
       <h1
         className="mb-2 text-center capitalize font-bold  text-white
-          bg-linear-to-r bg-linear-[80deg] from-blue-500 via-blue-400 to-blue-500
+bg-gradient-to-r from-blue-500 via-blue-400 to-blue-500
+
           rounded-t-lg p-2 shadow flex justify-center items-center gap-2
           "
       >

@@ -26,7 +26,7 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
       <div className="w-full">
         <div
           className="flex justify-between items-center p-1 bg- rounded-t-lg
-          bg-linear-to-r bg-linear-[80deg] from-amber-500 via-amber-400 to-amber-500"
+          bg-gradient-to-r  from-amber-500 via-amber-400 to-amber-500"
         >
           <Icon
             icon={

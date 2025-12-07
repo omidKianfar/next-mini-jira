@@ -91,7 +91,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
                 }}
               >
                 <div className="w-full">
-                  <div className="flex justify-between items-center p-1 bg-amber-400 rounded-t-lg ">
+                  <div className="flex justify-between items-center p-1 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 rounded-t-lg ">
                     <Icon
                       icon={
                         task.tag == "bug"
