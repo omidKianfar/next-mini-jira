@@ -15,9 +15,14 @@ import {
   SignPropsType,
   authSchema,
   useIsMobile,
+  useRequireActiveStatus,
+  useRequirePaymentStatus,
 } from "../imports";
 
 const PasswordComponent = () => {
+  useRequireActiveStatus();
+  useRequirePaymentStatus();
+
   const { user, updatePassword } = useAuth();
   const isMobile = useIsMobile();
 

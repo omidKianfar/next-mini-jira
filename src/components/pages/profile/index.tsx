@@ -16,6 +16,8 @@ import {
   useForm,
   useIsMobile,
   useMemo,
+  useRequireActiveStatus,
+  useRequirePaymentStatus,
   useState,
   yupResolver,
 } from "../imports";
@@ -23,7 +25,11 @@ import { ProfileSchema } from "./schema";
 import BackToSignup from "./modal/back-to-signup";
 
 const ProfileComponent = () => {
+  useRequireActiveStatus();
+  useRequirePaymentStatus();
+  
   const { saveUserProfile, user } = useAuth();
+
   const isMobile = useIsMobile();
 
   const [loading, setLoading] = useState(false);
@@ -91,9 +97,7 @@ const ProfileComponent = () => {
             </div>
 
             <ModalContainer open={open} handleClose={handleCloseModal}>
-              <BackToSignup
-                handleClose={handleCloseModal}
-              />
+              <BackToSignup handleClose={handleCloseModal} />
             </ModalContainer>
 
             <h1 className="text-2xl font-bold text-center mb-8 text-amber-500">

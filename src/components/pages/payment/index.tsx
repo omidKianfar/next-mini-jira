@@ -10,11 +10,14 @@ import {
   PlanType,
   useAuth,
   useIsMobile,
+  useRequireActiveStatus,
   useState,
 } from "../imports";
 import PlanCartComponent from "./cart/plan-cart";
 
 const PalnComponent = () => {
+  useRequireActiveStatus();
+
   const [loading, setLoading] = useState(false);
   const isMobile = useIsMobile();
 

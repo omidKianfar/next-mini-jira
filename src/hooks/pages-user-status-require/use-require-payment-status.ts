@@ -1,10 +1,12 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { dayjs, useAuth, useEffect, useRouter } from "../imports";
 
 export const useRequirePaymentStatus = () => {
   const router = useRouter();
   const auth = useAuth();
+  const pathname = usePathname();
 
   const user = auth?.user;
   const isLoading = auth?.isLoading;
@@ -12,6 +14,7 @@ export const useRequirePaymentStatus = () => {
   useEffect(() => {
     if (isLoading) return;
     if (!user) return;
+    if (pathname.includes("/signup")) return;
 
     const now = dayjs();
 

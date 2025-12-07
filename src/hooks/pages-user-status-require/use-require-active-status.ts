@@ -1,8 +1,11 @@
 "use client";
 
-import {  useAuth, useEffect, useRouter } from "../imports";
+import { usePathname } from "next/navigation";
+import { useAuth, useEffect, useRouter } from "../imports";
 
 export const useRequireActiveStatus = () => {
+  const pathname = usePathname();
+
   const router = useRouter();
   const auth = useAuth();
 
@@ -12,6 +15,7 @@ export const useRequireActiveStatus = () => {
   useEffect(() => {
     if (isLoading) return;
     if (!user) return;
+    if (pathname.includes("/signup")) return;
 
     if (!user?.isActive) {
       router.push("/active-page");
