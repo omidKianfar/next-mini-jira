@@ -3,14 +3,16 @@
 import {
   BoardComponent,
   useAuth,
-  useRequireUserStatus,
+  useRequireActiveStatus,
+  useRequirePaymentStatus,
   useTaskListener,
 } from "../imports";
 
 const DashboardComponent = () => {
   const { user } = useAuth();
 
-  useRequireUserStatus();
+  useRequireActiveStatus();
+  useRequirePaymentStatus();
 
   useTaskListener({ user });
 

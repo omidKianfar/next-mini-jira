@@ -43,7 +43,8 @@ export { updateTaskStatus } from "@/src/lib/tasks/update-task-status";
 export { fetchTask } from "@/src/lib/tasks/fetch-task";
 export { deleteTask } from "@/src/lib/auth/delete-task";
 export { enqueueSnackbar } from "notistack";
-export { useRequireUserStatus } from "@/src/hooks/pages-user-status-require/use-require-user-status";
+export { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
+export { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
 export { createTaskDocument } from "@/src/lib/tasks/create-task";
 export { useDispatch, useSelector } from "react-redux";
 export {
