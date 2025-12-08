@@ -8,9 +8,9 @@ export { default as LabelComponent } from "./controllers/RHF-fields/label";
 export { default as ErrorComponent } from "./controllers/RHF-fields/errors";
 export { default as Button } from "./button/next-button";
 export { default as ButtonLoading } from "./loading/button-loader";
-export { default as Image } from "next/image";
 export { default as FileInputField } from "./controllers/RHF-fields/file-input-field";
 export { default as MyIcon } from "./icon";
+export { default as MyImage } from "./image";
 
 export { useEffect, useState, useMemo, useRef } from "react";
 export { FormProvider, useForm } from "react-hook-form";

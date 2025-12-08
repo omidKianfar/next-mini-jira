@@ -6,7 +6,7 @@ export { default as Button } from "@/src/components/atom/button/next-button";
 export { default as ModalContainer } from "@/src/components/atom/modal";
 export { default as PaymentCartComponent } from "./auth/signup/steps/cart/payment-cart";
 export { default as dayjs } from "dayjs";
-export { default as Image } from "next/image";
+export { default as MyImage } from "@/src/components/atom/image";
 export { default as BackButton } from "@/src/components/atom/button/back-button";
 export { default as FramerMotion } from "@/src/components/atom/animation";
 export { default as AvatarUpload } from "@/src/components/atom/upload/avatar";
