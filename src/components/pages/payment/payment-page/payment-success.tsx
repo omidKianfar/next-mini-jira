@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useRouter, useSearchParams } from "next/navigation";
 import dayjs from "dayjs";
-import { Button, Icon, MyIcon } from "../../imports";
+import { Button, MyIcon } from "../../imports";
 import PageLoading from "@/src/components/atom/loading/page-loader";
 import { updateFirestoreUser } from "@/src/lib/auth/update-user";
 import { useSetSubscriptionId } from "@/src/hooks/auth/use-payment-success";

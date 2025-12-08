@@ -3,7 +3,6 @@
 import { useState } from "react";
 import SearchTasks from "@/src/components/atom/serach";
 import FilterTask from "@/src/components/atom/filters";
-import Button from "@/src/components/atom/button/next-button";
 import ModalContainer from "@/src/components/atom/modal";
 import AddTaskFormComponent from "@/src/components/pages/dahboard/add-task";
 import MyIcon from "@/src/components/atom/icon";
