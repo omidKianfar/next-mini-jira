@@ -6,7 +6,7 @@ import AuthGuard from "@/src/guards/auth-guard";
 
 const ProviderLayout = ({ children }: PropsWithChildren) => {
   return (
-    <div className="w-screen h-screen overflow-hidden bg-gray-100">
+    <div className="w-screen h-screen overflow-hidden">
       <ProvidersWrapper>
         <AuthGuard>{children}</AuthGuard>
       </ProvidersWrapper>
