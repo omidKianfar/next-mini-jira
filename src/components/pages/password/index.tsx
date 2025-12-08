@@ -3,7 +3,6 @@
 import {
   Button,
   FormProvider,
-  Icon,
   Image,
   InputField,
   useAuth,
@@ -17,6 +16,7 @@ import {
   useIsMobile,
   useRequireActiveStatus,
   useRequirePaymentStatus,
+  MyIcon,
 } from "../imports";
 
 const PasswordComponent = () => {
@@ -75,33 +75,35 @@ const PasswordComponent = () => {
                   placeholder="Enter your email"
                   disabled
                   icon={
-                    <Icon icon={"ic:baseline-email"} className="text-red-400" />
+                    <MyIcon
+                      icon={"ic:baseline-email"}
+                      className="text-red-400"
+                    />
                   }
                 />
 
                 <InputField
-                  name="password"
-                  label="Password"
-                  type={passwordShow ? "text" : "password"}
-                  placeholder="Enter your password"
-                  autoComplete="new-password"
-                  autoFocus
-                  icon={
-                    passwordShow ? (
-                      <Icon
-                        icon={"mdi:show"}
-                        className="text-green-400 cursor-pointer"
-                        onClick={() => setPasswordShow(false)}
-                      />
-                    ) : (
-                      <Icon
-                        icon={"mdi:hide"}
-                        className="text-gray-400 cursor-pointer"
-                        onClick={() => setPasswordShow(true)}
-                      />
-                    )
-                  }
-                />
+                name="password"
+                label="Password"
+                placeholder="Enter your password"
+                type={passwordShow ? "text" : "password"}
+                autoComplete="current-password"
+                icon={
+                  passwordShow ? (
+                    <MyIcon
+                      icon={"mdi:show"}
+                      className="text-green-400 cursor-pointer"
+                      onClick={() => setPasswordShow(false)}
+                    />
+                  ) : (
+                    <MyIcon
+                      icon={"mdi:hide"}
+                      className="text-gray-400 cursor-pointer"
+                      onClick={() => setPasswordShow(true)}
+                    />
+                  )
+                }
+              />
 
                 <div className="flex justify-end items-center">
                   <Button

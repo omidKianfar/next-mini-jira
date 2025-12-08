@@ -56,6 +56,7 @@ const AddTaskFormComponent = ({
         createdAt: dayjs().format("YYYY-MM-DD"),
         fileUrl: values.fileUrl,
         userId: user?.userId as string,
+        updatedAt: "",
       };
 
       await createTaskDocument(newTask);

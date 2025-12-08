@@ -7,10 +7,10 @@ import {
   DateInputField,
   FormProvider,
   FramerMotion,
-  Icon,
   Image,
   InputField,
   ModalContainer,
+  MyIcon,
   ProfileProps,
   useAuth,
   useForm,
@@ -27,7 +27,7 @@ import BackToSignup from "./modal/back-to-signup";
 const ProfileComponent = () => {
   useRequireActiveStatus();
   useRequirePaymentStatus();
-  
+
   const { saveUserProfile, user } = useAuth();
 
   const isMobile = useIsMobile();
@@ -118,9 +118,9 @@ const ProfileComponent = () => {
                   label="Username"
                   placeholder="Enter your email"
                   icon={
-                    <Icon
+                    <MyIcon
                       icon={"tabler:user-filled"}
-                      className="text-gray-600 "
+                      className="text-gray-600"
                     />
                   }
                 />
@@ -132,9 +132,9 @@ const ProfileComponent = () => {
                     type="submit"
                     isLoading={loading}
                     className=" bg-blue-500 text-white border-2
-                 hover:bg-transparent hover:border-blue-500
-               hover:text-blue-500 rounded-lg px-8 py-2 
-                transition-all duration-200
+                      hover:bg-transparent hover:border-blue-500
+                    hover:text-blue-500 rounded-lg px-8 py-2 
+                      transition-all duration-200
             "
                   >
                     Next

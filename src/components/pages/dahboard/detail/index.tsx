@@ -8,6 +8,7 @@ import {
   fetchTask,
   Icon,
   Image,
+  MyIcon,
   PageLoading,
   RootState,
   Task,
@@ -92,16 +93,6 @@ const TaskDetailComponent = () => {
 
   return (
     <div className="p-6 w-full  h-full flex flex-col justify-center items-center overflow-y-auto">
-      <div className="text-center mb-4 lg:mb-8  rounded-lg flex mt-4 lg:mt-0">
-        <h1 className="text-4xl lg:text-6xl font-bold text-amber-500 pr-1 p-1">
-          Mini
-        </h1>
-
-        <h1 className="text-4xl lg:text-6xl font-bold  bg-blue-900 text-white px-2 lg:px-6 py-1 rounded-lg shadow">
-          Jira
-        </h1>
-      </div>
-
       <div className="border-2 rounded-lg p-4 border-amber-300 bg-white shadow ">
         <div className="flex justify-between items-center mb-4 lg:mb-2">
           <BackButton onClick={BackDashboard} />
@@ -111,7 +102,7 @@ const TaskDetailComponent = () => {
             isLoading={deleting}
             disable={deleting}
             icon={
-              <Icon
+              <MyIcon
                 icon={"mingcute:delete-fill"}
                 className="text-3xl text-red-500 hover:text-red-700 z-50"
               />

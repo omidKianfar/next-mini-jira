@@ -4,9 +4,9 @@ import { usePathname } from "next/navigation";
 import {
   Button,
   FormProvider,
-  Icon,
   Image,
   InputField,
+  MyIcon,
   authSchema,
   useAuth,
   useForm,
@@ -114,7 +114,7 @@ const AuthComponent = () => {
                 autoFocus
                 autoComplete="email"
                 icon={
-                  <Icon icon={"ic:baseline-email"} className="text-red-400" />
+                  <MyIcon icon={"ic:baseline-email"} className="text-red-400" />
                 }
               />
 
@@ -126,13 +126,13 @@ const AuthComponent = () => {
                 autoComplete="current-password"
                 icon={
                   passwordShow ? (
-                    <Icon
+                    <MyIcon
                       icon={"mdi:show"}
                       className="text-green-400 cursor-pointer"
                       onClick={() => setPasswordShow(false)}
                     />
                   ) : (
-                    <Icon
+                    <MyIcon
                       icon={"mdi:hide"}
                       className="text-gray-400 cursor-pointer"
                       onClick={() => setPasswordShow(true)}
@@ -142,14 +142,13 @@ const AuthComponent = () => {
               />
 
               <div className="flex justify-end items-center my-8">
-                <div
+                <MyIcon
+                  icon={"devicon:google"}
                   className={`${
                     loading ? "mr-20" : "mr-[100px]"
-                  } hover:bg-blue-200 p-2 rounded-full cursor-pointer hover:rotate-12 transition-all duration-200`}
+                  } hover:bg-blue-200 p-2 rounded-full cursor-pointer hover:rotate-12 transition-all duration-200 text-4xl`}
                   onClick={authGoogle}
-                >
-                  <Icon icon={"devicon:google"} className=" text-4xl" />
-                </div>
+                />
 
                 <Button
                   type="submit"
@@ -172,10 +171,10 @@ const AuthComponent = () => {
             }
             className="text-amber-500 hover:text-amber-600 font-semibold"
             icon={
-              <Icon
-                icon="grommet-icons:link-next"
-                width={12}
-                className="mt-1 ml-1"
+              <MyIcon
+                icon={"grommet-icons:link-next"}
+                className="mt-1 ml-1 text-[12px]"
+                onClick={() => setPasswordShow(true)}
               />
             }
           >

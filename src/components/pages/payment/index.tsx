@@ -4,8 +4,8 @@ import { usePlanAction } from "@/src/hooks/payment";
 import {
   BackButton,
   FramerMotion,
-  Icon,
   Image,
+  MyIcon,
   PageLoading,
   PlanType,
   useAuth,
@@ -63,7 +63,10 @@ const PalnComponent = () => {
               price={10}
               onClick={() => choosePlanHandler("monthly")}
               icon={
-                <Icon icon={"fluent:payment-20-filled"} className="text-9xl" />
+                <MyIcon
+                  icon={"fluent:payment-20-filled"}
+                  className="text-9xl"
+                />
               }
             />
 
@@ -73,7 +76,10 @@ const PalnComponent = () => {
               price={120}
               onClick={() => choosePlanHandler("yearly")}
               icon={
-                <Icon icon={"fluent:payment-20-filled"} className="text-9xl" />
+                <MyIcon
+                  icon={"fluent:payment-20-filled"}
+                  className="text-9xl"
+                />
               }
             />
           </div>

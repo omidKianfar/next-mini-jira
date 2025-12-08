@@ -2,7 +2,7 @@
 
 import {
   ChangeEvent,
-  Icon,
+  MyIcon,
   RootState,
   stringSlicer,
   Task,
@@ -48,26 +48,28 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
     setOpenMenu(true);
   };
 
+  const handelClear = () => {
+    setSearchValue("");
+    setFilteredTasks([]);
+    setOpenMenu(false);
+  };
+
   return (
     <div className=" w-full">
       <h1 className="text-2xl font-bold text-amber-500 text-center mb-4">
         Search Todo
       </h1>
       <div className="relative">
-        <Icon
-          icon={"tabler:zoom"}
+        <MyIcon
+          icon="tabler:zoom"
           className="absolute top-3 left-1 text-2xl text-blue-500"
         />
 
         {filteredTasks.length > 0 && (
-          <Icon
-            icon={"material-symbols:close-rounded"}
+          <MyIcon
+            icon="material-symbols:close-rounded"
             className="absolute top-3 right-1 text-2xl text-gray-400 hover:text-red-500 cursor-pointer"
-            onClick={() => {
-              setSearchValue("");
-              setFilteredTasks([]);
-              setOpenMenu(false);
-            }}
+            onClick={handelClear}
           />
         )}
 
@@ -92,7 +94,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
               >
                 <div className="w-full">
                   <div className="flex justify-between items-center p-1 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 rounded-t-lg ">
-                    <Icon
+                    <MyIcon
                       icon={
                         task.tag == "bug"
                           ? "solar:bug-bold-duotone"

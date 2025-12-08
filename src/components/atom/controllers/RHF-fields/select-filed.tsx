@@ -4,8 +4,8 @@ import {
   Controller,
   ErrorComponent,
   FieldValues,
-  Icon,
   LabelComponent,
+  MyIcon,
   SelectControllerProps,
   useFormContext,
   useState,
@@ -52,11 +52,17 @@ const SelectField = <T extends FieldValues>({
               ))}
             </select>
 
-            <div className="absolute top-2.5 right-2.5 text-2xl text-gray-300">
+            <div>
               {changeStatus ? (
-                <Icon icon={"ic:baseline-swipe-up"} />
+                <MyIcon
+                  icon="ic:baseline-swipe-up"
+                  className="absolute top-2.5 right-2.5 text-2xl text-gray-300"
+                />
               ) : (
-                <Icon icon={"ic:round-swipe-down"} />
+                <MyIcon
+                  icon="ic:round-swipe-down"
+                  className="absolute top-2.5 right-2.5 text-2xl text-gray-300"
+                />
               )}
             </div>
           </div>

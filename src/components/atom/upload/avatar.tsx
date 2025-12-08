@@ -1,7 +1,7 @@
 "use client";
 
 import { UploadAvatarProps } from "../type";
-import { Button, FileInputField, Icon, Image, useRef } from "../imports";
+import { Button, FileInputField, Image, MyIcon, useRef } from "../imports";
 
 const AvatarUpload = ({ photo, uploadHandler }: UploadAvatarProps) => {
   const photoRef = useRef<HTMLInputElement | null>(null);
@@ -34,7 +34,10 @@ const AvatarUpload = ({ photo, uploadHandler }: UploadAvatarProps) => {
       <Button
         onClick={photoRefHandler}
         icon={
-          <Icon icon={"line-md:download"} className="text-4xl text-blue-500" />
+          <MyIcon
+            icon="line-md:download"
+            className="text-4xl text-blue-500"
+          />
         }
       ></Button>
     </div>

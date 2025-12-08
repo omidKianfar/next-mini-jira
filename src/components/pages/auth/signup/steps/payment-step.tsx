@@ -3,11 +3,11 @@
 import {
   PaymentCartComponent,
   useAuth,
-  Icon,
   Image,
   FramerMotion,
   BackButton,
   useIsMobile,
+  MyIcon,
 } from "../../../imports";
 
 const PaymentStep = () => {
@@ -53,7 +53,7 @@ const PaymentStep = () => {
               title="Terial Mode"
               description="You get 10 days of free access to the app."
               onClick={freeModeHandler}
-              icon={<Icon icon={"tabler:free-rights"} className="text-8xl" />}
+              icon={<MyIcon icon={"tabler:free-rights"} className="text-8xl" />}
             />
 
             <PaymentCartComponent
@@ -61,7 +61,7 @@ const PaymentStep = () => {
               description="Go to payment plan page"
               onClick={paymentModeHandler}
               icon={
-                <Icon
+                <MyIcon
                   icon={"streamline:payment-10-solid"}
                   className="text-8xl"
                 />

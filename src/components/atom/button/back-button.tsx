@@ -1,7 +1,7 @@
 "use client";
 
 import { BackButtonProps } from "../type";
-import { Button, Icon } from "../imports";
+import { Button, MyIcon } from "../imports";
 
 const BackButton = ({ onClick }: BackButtonProps) => {
   return (
@@ -9,10 +9,9 @@ const BackButton = ({ onClick }: BackButtonProps) => {
       onClick={onClick}
       className="text-amber-500 hover:text-amber-600"
       icon={
-        <Icon
+        <MyIcon
           icon="grommet-icons:link-next"
-          width={24}
-          className=" rotate-180"
+          className="text-[24px] rotate-180"
         />
       }
     ></Button>
