@@ -1,9 +1,13 @@
 "use client";
 
-import { Icon } from "@iconify/react";
-import { useDraggable, useIsMobile, useRouter } from "../../../imports";
+import {
+  MyIcon,
+  stringSlicer,
+  useDraggable,
+  useIsMobile,
+  useRouter,
+} from "../../../imports";
 import { TaskCardProps } from "../../../type";
-import { stringSlicer } from "@/src/components/atom/string-slicer";
 
 export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
   const router = useRouter();
@@ -12,9 +16,18 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
 
   const { transform, setNodeRef, listeners, attributes } = useDraggable({ id });
 
+  const baseStyle = {
+    transition: "box-shadow 0.2s ease, transform 0.04s linear",
+  };
+
   const style = transform
-    ? { transform: `translate(${transform.x}px, ${transform.y}px)` }
-    : undefined;
+    ? {
+        ...baseStyle,
+        transform: `translate(${transform.x}px, ${transform.y}px) scale(1.03)`,
+        boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
+        zIndex: 50,
+      }
+    : baseStyle;
 
   return (
     <div
@@ -28,7 +41,7 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
           className="flex justify-between items-center p-1 bg- rounded-t-lg
           bg-gradient-to-r  from-amber-500 via-amber-400 to-amber-500"
         >
-          <Icon
+          <MyIcon
             icon={
               task.tag == "bug"
                 ? "solar:bug-bold-duotone"
@@ -37,11 +50,10 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
             className="mr-1 text-white text-2xl"
           />
 
-          <div>
-            <Icon
-              data-no-dnd="true"
-              icon="carbon:task-view"
-              className=" cursor-pointer text-white hover:text-blue-500 text-2xl"
+          <div data-no-dnd="true">
+            <MyIcon
+              icon={"carbon:task-view"}
+              className="cursor-pointer text-white hover:text-blue-500 text-2xl"
               onClick={() =>
                 router.push(`/dashboard/task-detail?taskId=${task.id}`)
               }
