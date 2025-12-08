@@ -44,11 +44,9 @@ export interface ErrorProps {
   errors: any;
 }
 
-
 export interface FarmerMotionProps {
   children: React.ReactNode;
 }
-
 
 export type ButtonType = "button" | "submit" | "reset";
 
@@ -68,8 +66,8 @@ export interface BackButtonProps {
 
 export type FilterFormType = {
   tag: string;
-  from?: string ;
-  to?: string ;
+  from?: string;
+  to?: string;
 };
 
 export interface LoadingProps {
@@ -90,4 +88,11 @@ export interface StringSlicerProps {
 export interface UploadAvatarProps {
   photo: string | undefined;
   uploadHandler: (event: any) => void;
+}
+
+export interface MyIconProps {
+  onClick?: () => void;
+  className?: string;
+  icon: string;
+  iconClass?: string;
 }
