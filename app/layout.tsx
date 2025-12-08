@@ -31,7 +31,7 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang="en" className={InterFont.className}>
+    <html lang="en" className={PoppinsFont.className}>
       <body
         className={`
       
