@@ -17,6 +17,7 @@ export { default as BoardComponent } from "./dahboard/board";
 export { default as AddTaskFormComponent } from "./dahboard/add-task";
 export { default as ColumnComponent } from "./dahboard/board/column";
 export { default as TaskCardComponent } from "./dahboard/board/task";
+export { default as MyIcon } from "@/src/components/atom/icon";
 
 export { useMemo, useState, useEffect } from "react";
 export { FormProvider, useForm } from "react-hook-form";
@@ -25,7 +26,6 @@ export { authSchema } from "./auth/schema";
 export { useAuth } from "@/src/hooks/auth/use-auth";
 export { useRouter, useSearchParams } from "next/navigation";
 export { useSnackbar } from "notistack";
-export { Icon } from "@iconify/react";
 export { doc, updateDoc } from "firebase/firestore";
 export { db } from "@/config";
 export { useIsMobile } from "@/src/hooks/mobile-size";
@@ -55,6 +55,7 @@ export {
   removeTask,
 } from "@/src/store/slices/tasks";
 export { TaskShema } from "./dahboard/board/schema";
+export { stringSlicer } from "@/src/components/atom/string-slicer";
 
 export type { ProfileProps, PlanType, SignPropsType } from "@/src/types/global";
 export type { ModalProps } from "@/src/components/atom/type";

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 export { default as InputField } from "./controllers/RHF-fields/input-field";
 export { default as TextareaFiled } from "./controllers/RHF-fields/textarea-field";
@@ -10,12 +10,13 @@ export { default as Button } from "./button/next-button";
 export { default as ButtonLoading } from "./loading/button-loader";
 export { default as Image } from "next/image";
 export { default as FileInputField } from "./controllers/RHF-fields/file-input-field";
+export { default as MyIcon } from "./icon";
 
 export { useEffect, useState, useMemo, useRef } from "react";
 export { FormProvider, useForm } from "react-hook-form";
 export { fireEvent, render, screen } from "@testing-library/react";
 export { Controller, useFormContext } from "react-hook-form";
-export { Icon } from "@iconify/react";
+
 export { motion } from "framer-motion";
 export { useIsMobile } from "@/src/hooks/mobile-size";
 export { SnackbarProvider } from "notistack";
