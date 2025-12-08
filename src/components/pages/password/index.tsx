@@ -3,7 +3,6 @@
 import {
   Button,
   FormProvider,
-  Image,
   InputField,
   useAuth,
   useForm,
@@ -17,6 +16,7 @@ import {
   useRequireActiveStatus,
   useRequirePaymentStatus,
   MyIcon,
+  MyImage,
 } from "../imports";
 
 const PasswordComponent = () => {
@@ -83,27 +83,27 @@ const PasswordComponent = () => {
                 />
 
                 <InputField
-                name="password"
-                label="Password"
-                placeholder="Enter your password"
-                type={passwordShow ? "text" : "password"}
-                autoComplete="current-password"
-                icon={
-                  passwordShow ? (
-                    <MyIcon
-                      icon={"mdi:show"}
-                      className="text-green-400 cursor-pointer"
-                      onClick={() => setPasswordShow(false)}
-                    />
-                  ) : (
-                    <MyIcon
-                      icon={"mdi:hide"}
-                      className="text-gray-400 cursor-pointer"
-                      onClick={() => setPasswordShow(true)}
-                    />
-                  )
-                }
-              />
+                  name="password"
+                  label="Password"
+                  placeholder="Enter your password"
+                  type={passwordShow ? "text" : "password"}
+                  autoComplete="current-password"
+                  icon={
+                    passwordShow ? (
+                      <MyIcon
+                        icon={"mdi:show"}
+                        className="text-green-400 cursor-pointer"
+                        onClick={() => setPasswordShow(false)}
+                      />
+                    ) : (
+                      <MyIcon
+                        icon={"mdi:hide"}
+                        className="text-gray-400 cursor-pointer"
+                        onClick={() => setPasswordShow(true)}
+                      />
+                    )
+                  }
+                />
 
                 <div className="flex justify-end items-center">
                   <Button
@@ -120,16 +120,15 @@ const PasswordComponent = () => {
               </form>
             </FormProvider>
           </div>
-
-          <div className="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center">
-            <Image
-              src="/images/set-password.svg"
-              alt=""
-              width={isMobile ? 300 : 500}
-              height={isMobile ? 200 : 400}
-              className="object-contain"
-            />{" "}
-          </div>
+          
+          <MyImage
+            src="/images/set-password.svg"
+            alt=""
+            width={isMobile ? 300 : 500}
+            height={isMobile ? 200 : 400}
+            className="object-contain"
+            wrapperClass="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center"
+          />{" "}
         </div>
       </div>
     </FramerMotion>

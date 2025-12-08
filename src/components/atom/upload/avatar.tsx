@@ -1,7 +1,7 @@
 "use client";
 
 import { UploadAvatarProps } from "../type";
-import { Button, FileInputField, Image, MyIcon, useRef } from "../imports";
+import { Button, FileInputField, MyIcon, MyImage, useRef } from "../imports";
 
 const AvatarUpload = ({ photo, uploadHandler }: UploadAvatarProps) => {
   const photoRef = useRef<HTMLInputElement | null>(null);
@@ -13,12 +13,12 @@ const AvatarUpload = ({ photo, uploadHandler }: UploadAvatarProps) => {
   return (
     <div className="flex flex-col justify-center items-center">
       {photo ? (
-        <Image
+        <MyImage
           src={photo}
           width={120}
           height={120}
           alt=""
-          className="rounded-full object-cover w-[100px] h-[100px]"
+          className="rounded-full object-cover"
         />
       ) : (
         <div className="rounded-full  w-[100px] h-[100px] bg-gray-200 border-2 border-blue-500"></div>
@@ -34,10 +34,7 @@ const AvatarUpload = ({ photo, uploadHandler }: UploadAvatarProps) => {
       <Button
         onClick={photoRefHandler}
         icon={
-          <MyIcon
-            icon="line-md:download"
-            className="text-4xl text-blue-500"
-          />
+          <MyIcon icon="line-md:download" className="text-4xl text-blue-500" />
         }
       ></Button>
     </div>

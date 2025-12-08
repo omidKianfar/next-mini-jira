@@ -6,9 +6,8 @@ import {
   deleteTask,
   enqueueSnackbar,
   fetchTask,
-  Icon,
-  Image,
   MyIcon,
+  MyImage,
   PageLoading,
   RootState,
   Task,
@@ -135,15 +134,14 @@ const TaskDetailComponent = () => {
             <p className="mt-2 wrap-break-word mb-8">{task.description}</p>
           </div>
 
-          <div className="w-[300px] h-[200px] lg:w-[400px] lg:h-[300px] flex items-center justify-center">
-            <Image
+            <MyImage
               src="/images/todo-detail.svg"
               alt=""
               width={isMobile ? 300 : 400}
               height={isMobile ? 200 : 300}
               className="object-contain"
+              wrapperClass="w-[300px] h-[200px] lg:w-[400px] lg:h-[300px] flex items-center justify-center"
             />{" "}
-          </div>
         </div>
       </div>
     </div>

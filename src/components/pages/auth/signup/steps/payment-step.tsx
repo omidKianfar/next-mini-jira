@@ -3,11 +3,11 @@
 import {
   PaymentCartComponent,
   useAuth,
-  Image,
   FramerMotion,
   BackButton,
   useIsMobile,
   MyIcon,
+  MyImage,
 } from "../../../imports";
 
 const PaymentStep = () => {
@@ -33,15 +33,14 @@ const PaymentStep = () => {
   return (
     <FramerMotion>
       <div className="w-full h-full flex flex-col items-center justify-center p-4">
-        <div className="absolute top-0">
-          <Image
-            src="/images/Wallet.svg"
-            alt=""
-            width={isMobile ? 150 : 300}
-            height={isMobile ? 150 : 300}
-            className="object-contain"
-          />
-        </div>
+        <MyImage
+          src="/images/Wallet.svg"
+          alt=""
+          width={isMobile ? 150 : 300}
+          height={isMobile ? 150 : 300}
+          className="object-contain"
+          wrapperClass="absolute top-0"
+        />
 
         <div className="w-[90vw] lg:w-[900px] lg:h-[600px] bg-white p-8 border-2 border-amber-300 rounded-lg shadow ">
           <div className="w-full flex justify-start mb-[50px] lg:mb-[135px]">

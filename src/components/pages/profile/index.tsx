@@ -7,10 +7,10 @@ import {
   DateInputField,
   FormProvider,
   FramerMotion,
-  Image,
   InputField,
   ModalContainer,
   MyIcon,
+  MyImage,
   ProfileProps,
   useAuth,
   useForm,
@@ -144,15 +144,14 @@ const ProfileComponent = () => {
             </FormProvider>
           </div>
 
-          <div className="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center">
-            <Image
-              src="/images/profile.svg"
-              alt=""
-              width={isMobile ? 300 : 500}
-              height={isMobile ? 200 : 400}
-              className="object-contain"
-            />{" "}
-          </div>
+          <MyImage
+            src="/images/profile.svg"
+            alt=""
+            width={isMobile ? 300 : 500}
+            height={isMobile ? 200 : 400}
+            className="object-contain"
+            wrapperClass="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center"
+          />{" "}
         </div>
       </div>
     </FramerMotion>

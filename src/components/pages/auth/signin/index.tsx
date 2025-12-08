@@ -4,9 +4,9 @@ import { usePathname } from "next/navigation";
 import {
   Button,
   FormProvider,
-  Image,
   InputField,
   MyIcon,
+  MyImage,
   authSchema,
   useAuth,
   useForm,
@@ -89,15 +89,14 @@ const AuthComponent = () => {
       </div>
 
       <div className=" flex items-center justify-center flex-col lg:flex-row">
-        <div className="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center">
-          <Image
+          <MyImage
             src="/images/auth.png"
             alt=""
             width={isMobile ? 300 : 500}
             height={isMobile ? 200 : 400}
             className="object-contain"
+            wrapperClass="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center"
           />{" "}
-        </div>
 
         <div className="w-[90vw] lg:w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white shadow">
           <h1 className="text-2xl font-bold text-center mb-8 text-amber-500">
