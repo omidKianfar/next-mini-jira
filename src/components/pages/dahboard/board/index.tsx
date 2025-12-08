@@ -2,6 +2,7 @@
 
 import {
   ColumnComponent,
+  dayjs,
   DndContext,
   DragEndEvent,
   PointerSensor,
@@ -63,6 +64,10 @@ const BoardComponent = () => {
   const renderColumn = (status: string) => {
     return finalTasks
       .filter((task: Task) => task?.status === status)
+      .sort(
+        (a, b) =>
+          dayjs(b.updatedAt ?? 0).valueOf() - dayjs(a.updatedAt ?? 0).valueOf()
+      )
       .map((task: Task) => (
         <TaskCardComponent key={task?.id} id={task?.id} task={task} />
       ));

@@ -97,6 +97,7 @@ export type Task = {
   createdAt: string;
   fileUrl?: string | null;
   userId: string;
+  updatedAt?: string;
 };
 
 export type TaskForm = {
