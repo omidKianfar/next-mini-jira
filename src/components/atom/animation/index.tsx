@@ -6,6 +6,9 @@ import { FarmerMotionProps } from "../type";
 const FramerMotion = ({ children }: FarmerMotionProps) => {
   const isMobile = useIsMobile();
 
+  if (isMobile === null) return null; // or loading skeleton
+
+
   const initial = isMobile
     ? { opacity: 0, y: 70 }
     : { opacity: 0, x: 70 };
