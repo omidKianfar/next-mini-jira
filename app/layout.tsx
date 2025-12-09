@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import {  Poppins, Inter, Outfit } from "next/font/google";
+import { Poppins, Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import ProvidersWrapper from "@/src/providers";
 
 const OutfitFont = Outfit({
   variable: "--font-Outfit",
@@ -40,7 +41,11 @@ const RootLayout = ({
           ${InterFont.variable} 
           antialiased`}
       >
-        {children}
+        <ProvidersWrapper>
+          <div className="w-screen h-screen overflow-y-auto scrollbar-hide">
+            {children}
+          </div>
+        </ProvidersWrapper>
       </body>
     </html>
   );

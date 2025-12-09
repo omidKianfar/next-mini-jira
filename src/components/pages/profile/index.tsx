@@ -89,7 +89,7 @@ const ProfileComponent = () => {
 
   return (
     <FramerMotion>
-      <div className="w-full h-full flex flex-col items-center justify-center p-4">
+      <div className="w-full min-h-screen flex flex-col items-center justify-center p-4">
         <div className=" flex items-center justify-center flex-col lg:flex-row">
           <div className="w-[90vw] lg:w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white mb-10 lg:mb-0 shadow">
             <div className="mb-2">
@@ -151,7 +151,7 @@ const ProfileComponent = () => {
             height={isMobile ? 200 : 400}
             className="object-contain"
             wrapperClass="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center"
-          />{" "}
+          />
         </div>
       </div>
     </FramerMotion>

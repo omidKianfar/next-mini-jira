@@ -18,8 +18,9 @@ const DashboardComponent = () => {
   useTaskListener({ user });
 
   return (
-    <div className="w-full h-full min-h-screen overflow-y-auto">
+    <div className="w-screen min-h-screen overflow-y-auto scrollbar-hide">
       <DashboardHeader />
+
       <BoardComponent />
     </div>
   );

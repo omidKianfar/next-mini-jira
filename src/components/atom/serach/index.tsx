@@ -7,7 +7,7 @@ import {
   stringSlicer,
   Task,
   useIsMobile,
-  useRouter,
+  useNavigation,
   useSelector,
   useState,
 } from "../imports";
@@ -15,7 +15,7 @@ import {
 import { ModalProps } from "../type";
 
 const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
-  const router = useRouter();
+  const navigation = useNavigation();
 
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
 
@@ -88,7 +88,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
                 key={task.id}
                 className=" bg-white border-2 border-amber-400 rounded-lg mb-4  flex justify-between items-center cursor-pointer "
                 onClick={() => {
-                  router.push(`/dashboard/task-detail?taskId=${task.id}`);
+                  navigation.taskDetail(task.id);
                   handleClose();
                 }}
               >

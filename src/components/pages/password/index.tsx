@@ -59,7 +59,7 @@ const PasswordComponent = () => {
 
   return (
     <FramerMotion>
-      <div className="w-full h-full flex flex-col items-center justify-center p-4">
+      <div className="w-full min-h-screen flex flex-col items-center justify-center p-4">
         <div className=" flex items-center justify-center flex-col lg:flex-row">
           <div className="w-[90vw] lg:w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white mb-10 lg:mb-0 shadow">
             <h1 className="text-2xl font-bold text-center mb-8 text-amber-500">

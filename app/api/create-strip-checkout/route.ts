@@ -1,3 +1,4 @@
+import { routes } from "@/src/lib/route/routes";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
@@ -29,8 +30,8 @@ export const POST = async (request: NextRequest) => {
       ],
       success_url: `${request.headers.get(
         "origin"
-      )}/payment-success?planType=${planType}&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${request.headers.get("origin")}/payment-failed`,
+      )}/payment-success?planType=${planType}&session_id={CHECKOUT_SESSION_ID}` ,
+      cancel_url: `${request.headers.get("origin")}${routes.paymentFailed}`,
     });
 
     return NextResponse.json({ url: session.url });

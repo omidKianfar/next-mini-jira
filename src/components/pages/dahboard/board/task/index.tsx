@@ -5,13 +5,12 @@ import {
   stringSlicer,
   useDraggable,
   useIsMobile,
-  useRouter,
+  useNavigation,
 } from "../../../imports";
 import { TaskCardProps } from "../../../type";
 
 export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
-  const router = useRouter();
-
+  const navigation = useNavigation();
   const isMobile = useIsMobile();
 
   const { transform, setNodeRef, listeners, attributes } = useDraggable({ id });
@@ -54,9 +53,7 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
             <MyIcon
               icon={"carbon:task-view"}
               className="cursor-pointer text-white hover:text-blue-500 text-2xl"
-              onClick={() =>
-                router.push(`/dashboard/task-detail?taskId=${task.id}`)
-              }
+              onClick={() => navigation.taskDetail(task.id)}
             />
           </div>
         </div>

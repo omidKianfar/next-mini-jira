@@ -1,10 +1,10 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { dayjs, useAuth, useEffect, useRouter } from "../imports";
+import { dayjs, useAuth, useEffect, useNavigation } from "../imports";
 
 export const useRequirePaymentStatus = () => {
-  const router = useRouter();
+  const navigation = useNavigation();
   const auth = useAuth();
   const pathname = usePathname();
 
@@ -22,16 +22,16 @@ export const useRequirePaymentStatus = () => {
 
     if (payment?.freeTrialEnabled) {
       if (now.isAfter(payment.trialEnd)) {
-        router.push("/payment");
+        navigation.payment();
         return;
       }
     }
 
     if (payment?.isPaid) {
       if (now.isAfter(payment.endAt)) {
-        router.push("/payment");
+        navigation.payment();
         return;
       }
     }
-  }, [isLoading, user, router]);
+  }, [isLoading, user, navigation]);
 };

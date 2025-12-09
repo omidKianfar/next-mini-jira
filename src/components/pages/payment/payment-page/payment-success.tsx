@@ -2,16 +2,17 @@
 
 import { useState } from "react";
 import { useAuth } from "@/src/hooks/auth/use-auth";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import dayjs from "dayjs";
-import { Button, MyIcon } from "../../imports";
+import { Button, MyIcon, useNavigation } from "../../imports";
 import PageLoading from "@/src/components/atom/loading/page-loader";
 import { updateFirestoreUser } from "@/src/lib/auth/update-user";
 import { useSetSubscriptionId } from "@/src/hooks/auth/use-payment-success";
 
 const PaymentSuccessComponent = () => {
-  const router = useRouter();
   const params = useSearchParams();
+
+  const navigation = useNavigation();
   const { user, changeStep } = useAuth();
 
   const planType = params.get("planType");
@@ -53,14 +54,14 @@ const PaymentSuccessComponent = () => {
 
     changeStep("0");
 
-    router.push("/dashboard");
+    navigation.dashboard();
   };
 
   if (loading) return <PageLoading />;
 
   return (
-    <div className="w-full h-full lg:w-screen lg:h-screen flex items-center justify-center ">
-      <div className="w-full h-full lg:w-[600px] lg:h-[500px]  p-6 border-2 border-amber-300 rounded-lg bg-white shadow">
+    <div className="w-full min-h-screen flex items-center justify-center ">
+      <div className="w-screen h-screen lg:w-[600px] lg:h-[500px]  p-6 lg:border-2 border-amber-300 rounded-lg bg-white shadow">
         <MyIcon
           icon={"streamline-freehand:cash-payment-bill"}
           className="text-[150px] text-green-500 mb-10 mt-8"

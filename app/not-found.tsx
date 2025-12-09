@@ -1,10 +1,10 @@
 "use client";
 import Button from "@/src/components/atom/button/next-button";
 import MyIcon from "@/src/components/atom/icon";
-import { useRouter } from "next/navigation";
+import { useNavigation } from "@/src/hooks/navigation";
 
 export default function NotFound() {
-  const router = useRouter();
+  const navigation = useNavigation();
 
   return (
     <div className="w-screen h-screen p-4 flex flex-col items-center justify-center">
@@ -13,20 +13,20 @@ export default function NotFound() {
       </div>
 
       <div className="flex flex-col justify-start">
-        <h1 className="text-4xl lg:text-6xl font-bold mb-4">
+        <h1 className="text-3xl lg:text-6xl font-bold mb-4">
           Somthing went wrong
         </h1>
-        <p className="mb-6 text-2xl lg:text-3xl">Page not found.</p>
+        <p className="mb-6 text-lg lg:text-3xl">Page not found.</p>
       </div>
       <div>
         <Button
-          onClick={() => router.push("/dashboard")}
+          onClick={() => navigation.dashboard()}
           icon={
             <MyIcon icon="grommet-icons:link-next" className="ml-2 w-[16px]" />
           }
           className="mt-6 bg-blue-500 text-white border-2
                  hover:bg-transparent hover:border-blue-500
-               hover:text-blue-500 rounded-lg px-8 py-3 
+               hover:text-blue-500 rounded-lg px-6 py-3 
                 transition-all duration-200 text-lg
             "
         >

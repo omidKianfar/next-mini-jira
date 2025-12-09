@@ -1,21 +1,20 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { Button, MyIcon, useAuth } from "../../imports";
+import { Button, MyIcon, useAuth, useNavigation } from "../../imports";
 
 const PaymentFailedComponent = () => {
-  const router = useRouter();
+  const navigation = useNavigation();
   const { changeStep } = useAuth();
 
   const finishHandler = () => {
     changeStep("0");
 
-    router.push("/payment");
+    navigation.payment();
   };
 
   return (
-    <div className="w-full h-full lg:w-screen lg:h-screen flex items-center justify-center">
-      <div className="w-full h-full lg:w-[600px] lg:h-[500px]  p-6 border-2 border-amber-300 rounded-lg bg-white shadow">
+    <div className="w-full min-h-screen flex items-center justify-center">
+      <div className="w-screen h-screen lg:w-[600px] lg:h-[500px]  p-6 lg:border-2 border-amber-300 rounded-lg bg-white shadow">
         <MyIcon
           icon={"streamline-freehand:cash-payment-bill"}
           className="text-[150px] text-amber-500 mb-10 mt-8"

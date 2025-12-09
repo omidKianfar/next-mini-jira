@@ -24,7 +24,7 @@ export { FormProvider, useForm } from "react-hook-form";
 export { yupResolver } from "@hookform/resolvers/yup";
 export { authSchema } from "./auth/schema";
 export { useAuth } from "@/src/hooks/auth/use-auth";
-export { useRouter, useSearchParams } from "next/navigation";
+export { useSearchParams } from "next/navigation";
 export { useSnackbar } from "notistack";
 export { doc, updateDoc } from "firebase/firestore";
 export { db } from "@/config";
@@ -56,6 +56,7 @@ export {
 } from "@/src/store/slices/tasks";
 export { TaskShema } from "./dahboard/board/schema";
 export { stringSlicer } from "@/src/components/atom/string-slicer";
+export { useNavigation } from "@/src/hooks/navigation";
 
 export type { ProfileProps, PlanType, SignPropsType } from "@/src/types/global";
 export type { ModalProps } from "@/src/components/atom/type";

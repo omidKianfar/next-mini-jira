@@ -40,7 +40,7 @@ const PalnComponent = () => {
 
   return (
     <FramerMotion>
-      <div className="w-full h-full flex flex-col items-center justify-center p-4">
+      <div className="w-full min-h-screen flex flex-col items-center justify-center p-4">
         <MyImage
           src="/images/Wallet.svg"
           alt=""

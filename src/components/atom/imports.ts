@@ -24,8 +24,8 @@ export { resetFilters, setDate, setType } from "@/src/store/slices/filters";
 export { useDispatch, useSelector } from "react-redux";
 export { yupResolver } from "@hookform/resolvers/yup";
 export { ClipLoader, PulseLoader } from "react-spinners";
-export { useRouter } from "next/navigation";
 export { stringSlicer } from "./string-slicer";
+export { useNavigation } from "@/src/hooks/navigation";
 
 export type { FieldValues } from "react-hook-form";
 export type {

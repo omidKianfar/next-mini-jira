@@ -18,7 +18,7 @@ import {
   signOut,
   SignPropsType,
   updateFirestoreUser,
-  useRouter,
+  useNavigation,
   UserPasswordUpdateType,
   UserProfileType,
 } from "../../imports";
@@ -29,7 +29,7 @@ export const useAuthActions = ({
   state,
   setStepNumber,
 }: UseAuthActionProps) => {
-  const router = useRouter();
+  const navigation = useNavigation();
 
   const changeStep = (newStep: string) => {
     setStepNumber(newStep);
@@ -64,7 +64,7 @@ export const useAuthActions = ({
           },
         });
 
-        router.push("/dashboard");
+        navigation.dashboard();
       }
     } catch (error) {
       console.log("User signin firebase error: ", error);
@@ -148,7 +148,7 @@ export const useAuthActions = ({
 
         changeStep("4");
 
-        router.push("/signup");
+        navigation.signup();
       } else {
         const user = await findFirestoreUser(currentUser);
 
@@ -164,7 +164,7 @@ export const useAuthActions = ({
           });
         }
 
-        router.push("/dashboard");
+        navigation.dashboard();
       }
     } catch (error: any) {
       console.log("User signin firebase error: ", error);
@@ -217,7 +217,7 @@ export const useAuthActions = ({
         },
       });
 
-      router.push("/signin");
+      navigation.signin();
     });
   };
 
@@ -260,14 +260,14 @@ export const useAuthActions = ({
           trialEnd: dayjs().add(10, "day").format("YYYY-MM-DD"),
         },
       };
-      
+
       await updateFirestoreUser(userId, data);
 
       enqueueSnackbar("Terial Mode is Active", { variant: "success" });
 
       changeStep("0");
 
-      router.push("/dashboard");
+      navigation.dashboard();
     } catch (error: any) {
       console.log("Profile update error:", error);
 

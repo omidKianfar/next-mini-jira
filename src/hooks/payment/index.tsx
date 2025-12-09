@@ -1,9 +1,13 @@
+import { routes } from "@/src/lib/route/routes";
 import { UsePlanActionProps } from "../type";
 
 export function usePlanAction() {
-  const choosePlan = async ({ selectedPlan, setLoading }: UsePlanActionProps) => {
+  const choosePlan = async ({
+    selectedPlan,
+    setLoading,
+  }: UsePlanActionProps) => {
     try {
-      const response = await fetch("/api/create-strip-checkout", {
+      const response = await fetch(routes.api.createStripCheckout, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,7 +1,6 @@
 "use client";
 
 export { default as dayjs } from "dayjs";
-export { useRouter } from "next/navigation";
 export { useAuth } from "./auth/use-auth";
 export { useEffect, useState } from "react";
 export { auth, db } from "@/config";
@@ -24,6 +23,7 @@ export {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+export { useNavigation } from "@/src/hooks/navigation";
 
 export type {
   AuthContextProps,

@@ -13,14 +13,14 @@ import {
   Task,
   useEffect,
   useIsMobile,
-  useRouter,
+  useNavigation,
   useSearchParams,
   useSelector,
   useState,
 } from "../../imports";
 
 const TaskDetailComponent = () => {
-  const router = useRouter();
+  const navigation = useNavigation();
 
   const params = useSearchParams();
   const taskId = params.get("taskId");
@@ -71,7 +71,7 @@ const TaskDetailComponent = () => {
         variant: "success",
       });
 
-      router.push("/dashboard");
+      navigation.dashboard();
     } catch (error: any) {
       enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
         variant: "error",
@@ -84,15 +84,15 @@ const TaskDetailComponent = () => {
   };
 
   const BackDashboard = () => {
-    router.push("/dashboard");
+    navigation.dashboard();
   };
 
   if (loading) return <PageLoading />;
   if (!task) return <div>Task not found</div>;
 
   return (
-    <div className="p-6 w-full  h-full flex flex-col justify-center items-center overflow-y-auto">
-      <div className="border-2 rounded-lg p-4 border-amber-300 bg-white shadow ">
+    <div className=" w-full  min-h-screen flex flex-col justify-center items-center overflow-y-auto">
+      <div className="w-screen h-screen lg:w-[900px] lg:h-full lg:border-2 rounded-lg p-4 border-amber-300 bg-white shadow">
         <div className="flex justify-between items-center mb-4 lg:mb-2">
           <BackButton onClick={BackDashboard} />
 
@@ -133,15 +133,14 @@ const TaskDetailComponent = () => {
 
             <p className="mt-2 wrap-break-word mb-8">{task.description}</p>
           </div>
-
-            <MyImage
-              src="/images/todo-detail.svg"
-              alt=""
-              width={isMobile ? 300 : 400}
-              height={isMobile ? 200 : 300}
-              className="object-contain"
-              wrapperClass="w-[300px] h-[200px] lg:w-[400px] lg:h-[300px] flex items-center justify-center"
-            />{" "}
+          <MyImage
+            src="/images/todo-detail.svg"
+            alt=""
+            width={isMobile ? 300 : 400}
+            height={isMobile ? 200 : 300}
+            className="object-contain"
+            wrapperClass="w-[300px] h-[200px] lg:w-[400px] lg:h-[300px] flex items-center justify-center"
+          />{" "}
         </div>
       </div>
     </div>
