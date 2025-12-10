@@ -49,7 +49,7 @@ describe("Textarea Component", () => {
     render(<Wrapper />);
 
     const textarea = screen.getByPlaceholderText(
-      "Enter your description"
+      "Enter your description",
     ) as HTMLInputElement;
 
     fireEvent.change(textarea, { target: { value: "It's my description" } });
@@ -61,7 +61,7 @@ describe("Textarea Component", () => {
     render(<Wrapper />);
 
     const textarea = screen.getByDisplayValue(
-      "Initial text"
+      "Initial text",
     ) as HTMLInputElement;
 
     expect(textarea).toBeInTheDocument();
@@ -89,7 +89,7 @@ describe("Textarea Component", () => {
     render(<Wrapper withError />);
 
     const textarea = screen.getByText(
-      "Enter your description"
+      "Enter your description",
     ) as HTMLInputElement;
 
     expect(textarea).toBeInTheDocument();

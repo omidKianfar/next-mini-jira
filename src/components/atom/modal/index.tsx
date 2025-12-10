@@ -1,7 +1,7 @@
 "use client";
 
 import { ModalProps } from "../type";
-import { Button, MyIcon } from "../imports";
+import { MyIcon } from "../imports";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function ModalContainer({
@@ -23,7 +23,7 @@ export default function ModalContainer({
         >
           <motion.div
             key="modal"
-            className="relative bg-white rounded-lg shadow-xl p-4 max-w-lg w-full mx-4"
+            className="relative mx-4 w-full max-w-lg rounded-xl bg-white p-4 shadow-xl"
             onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, scale: 0.92, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -35,15 +35,11 @@ export default function ModalContainer({
           >
             {children}
 
-            <Button
+            <MyIcon
+              icon="zondicons:close-outline"
+              className="absolute right-4 top-4 cursor-pointer text-subtitle text-gray-500 hover:text-error-500"
               onClick={handleClose}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 cursor-pointer"
-            >
-              <MyIcon
-                icon="zondicons:close-outline"
-                className="text-[20px] hover:text-red-500"
-              />
-            </Button>
+            />
           </motion.div>
         </motion.div>
       )}

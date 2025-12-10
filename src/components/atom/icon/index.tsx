@@ -4,7 +4,7 @@ import { MyIconProps } from "../type";
 const MyIcon = ({ onClick, className, icon, iconClass }: MyIconProps) => {
   return (
     <div
-      className={`flex justify-center items-center ${className}`}
+      className={`flex items-center justify-center ${className}`}
       onClick={onClick}
     >
       <Icon icon={icon} className={iconClass} />

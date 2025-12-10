@@ -3,7 +3,7 @@
 import { ButtonProps } from "../type";
 import { ButtonLoading } from "../imports";
 
-const Button = ({
+const ButtonFreeClass = ({
   type = "button",
   children,
   isLoading = false,
@@ -17,16 +17,12 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={isLoading || disable}
-      className={`
-        flex justify-center items-center cursor-pointer
-        disabled:opacity-60 disabled:cursor-not-allowed
-        ${className}
-      `}
+      className={`flex cursor-pointer items-center justify-center disabled:cursor-not-allowed disabled:opacity-60 ${className} `}
     >
       {children}
       {icon ? icon : null}
       {isLoading && (
-        <span className="flex justify-center items-center ml-2">
+        <span className="ml-2 flex items-center justify-center">
           <ButtonLoading size={20} color="currentColor" />
         </span>
       )}
@@ -34,4 +30,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default ButtonFreeClass;

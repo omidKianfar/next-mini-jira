@@ -9,7 +9,9 @@ const ErrorComponent = <T extends FieldValues>({
   return (
     <>
       {errors?.[name] && (
-        <p className="text-red-500 text-sm">{errors[name]?.message as any}</p>
+        <p className="text-caption text-error-500">
+          {errors[name]?.message as any}
+        </p>
       )}
     </>
   );

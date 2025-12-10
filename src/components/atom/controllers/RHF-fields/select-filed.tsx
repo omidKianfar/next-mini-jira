@@ -43,7 +43,7 @@ const SelectField = <T extends FieldValues>({
                 field.onChange(event.target.value);
                 setChangeStatus(false);
               }}
-              className="w-full border-2 p-2 my-1 rounded-lg text-sm border-blue-400 focus:outline-blue-700 cursor-pointer appearance-none "
+              className="my-1 w-full cursor-pointer appearance-none rounded-xl border-2 border-primary-400 p-2 text-bodySm focus:outline-primary-700"
             >
               {options.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -56,12 +56,12 @@ const SelectField = <T extends FieldValues>({
               {changeStatus ? (
                 <MyIcon
                   icon="ic:baseline-swipe-up"
-                  className="absolute top-2.5 right-2.5 text-2xl text-gray-300"
+                  className="absolute right-2.5 top-2.5 text-title text-gray-400"
                 />
               ) : (
                 <MyIcon
                   icon="ic:round-swipe-down"
-                  className="absolute top-2.5 right-2.5 text-2xl text-gray-300"
+                  className="absolute right-2.5 top-2.5 text-title text-gray-400"
                 />
               )}
             </div>

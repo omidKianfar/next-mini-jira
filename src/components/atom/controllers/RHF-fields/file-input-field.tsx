@@ -4,11 +4,10 @@ import {
   Controller,
   ErrorComponent,
   FieldValues,
+  FileInputControllerProps,
   LabelComponent,
   useFormContext,
 } from "../../imports";
-
-import { FileInputControllerProps } from "../../type";
 
 const FileInputField = <T extends FieldValues>({
   name,

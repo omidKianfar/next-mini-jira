@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  Button,
+  ButtonNext,
   DateInputField,
   FormProvider,
   resetFilters,
@@ -15,7 +15,6 @@ import {
   useSelector,
   yupResolver,
 } from "../imports";
-
 import { FilterFormType, ModalProps } from "../type";
 import { filterSchema } from "./schema";
 
@@ -30,7 +29,7 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
       from: filters.date.from ?? "",
       to: filters.date.to ?? "",
     }),
-    []
+    [],
   );
 
   const methods = useForm<FilterFormType>({
@@ -52,7 +51,7 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(filterHandeler)}>
-        <h1 className="text-2xl font-bold text-amber-500 text-center mb-4">
+        <h1 className="mb-4 text-center text-title font-bold text-warning-500">
           Filters Todos
         </h1>
 
@@ -68,26 +67,12 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
           <DateInputField name="to" label="End Time" />
         </div>
 
-        <div className="flex justify-end items-center">
-          <Button
-            onClick={resetFilterHandler}
-            className=" bg-blue-500 text-white border-2
-            hover:bg-transparent hover:border-blue-500
-            hover:text-blue-500 rounded-lg px-8 py-2 
-            transition-all duration-200 mr-2"
-          >
+        <div className="flex items-center justify-end">
+          <ButtonNext onClick={resetFilterHandler} className="mr-2">
             Clear
-          </Button>
+          </ButtonNext>
 
-          <Button
-            type="submit"
-            className=" bg-blue-500 text-white border-2
-            hover:bg-transparent hover:border-blue-500
-            hover:text-blue-500 rounded-lg px-8 py-2 
-            transition-all duration-200"
-          >
-            Filter
-          </Button>
+          <ButtonNext type="submit">Filter</ButtonNext>
         </div>
       </form>
     </FormProvider>

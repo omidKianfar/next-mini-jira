@@ -44,7 +44,7 @@ describe("InputField component", () => {
     render(<Wrapper />);
 
     const textInput = screen.getByPlaceholderText(
-      "Enter your name"
+      "Enter your name",
     ) as HTMLInputElement;
 
     fireEvent.change(textInput, { target: { value: "omid" } });
@@ -56,7 +56,7 @@ describe("InputField component", () => {
     render(<Wrapper />);
 
     const textInput = screen.getByDisplayValue(
-      "Initial text"
+      "Initial text",
     ) as HTMLInputElement;
 
     expect(textInput).toBeInTheDocument();

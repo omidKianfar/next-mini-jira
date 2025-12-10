@@ -18,4 +18,4 @@ export const filterSchema = Yup.object({
         return from && value ? value > from : false;
       }
     }),
-})  as unknown as Yup.ObjectSchema<FilterFormType>;
+}) as unknown as Yup.ObjectSchema<FilterFormType>;

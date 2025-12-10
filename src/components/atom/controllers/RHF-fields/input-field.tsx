@@ -42,9 +42,9 @@ const InputField = <T extends FieldValues>({
               autoFocus={autoFocus}
               autoComplete={autoComplete}
               disabled={disabled}
-              className="w-full p-2 my-1 border-2 rounded-lg text-sm border-blue-400 focus:outline-blue-700 placeholder:text-sm pl-2 pr-8 "
+              className="my-1 w-full rounded-xl border-2 border-primary-400 p-2 pl-2 pr-8 text-bodySm placeholder:text-bodySm focus:outline-primary-700"
             />
-            <div className="absolute bottom-3 right-1 text-2xl text-gray-400">
+            <div className="absolute bottom-3 right-1 text-title text-gray-400">
               {icon}
             </div>
           </div>
