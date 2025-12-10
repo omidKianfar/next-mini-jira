@@ -1,12 +1,15 @@
 export const FontSize = {
-  xs: ["0.75rem", { lineHeight: "1rem" }],
-  sm: ["0.875rem", { lineHeight: "1.25rem" }],
-  base: ["1rem", { lineHeight: "1.5rem" }],
-  lg: ["1.125rem", { lineHeight: "1.75rem" }],
-  xl: ["1.25rem", { lineHeight: "1.75rem" }],
-  "2xl": ["1.5rem", { lineHeight: "2rem" }],
-  "3xl": ["1.875rem", { lineHeight: "2.25rem" }],
-  "4xl": ["2.25rem", { lineHeight: "2.5rem" }],
-  "5xl": ["3rem", { lineHeight: "1" }],
-  "6xl": ["3.75rem", { lineHeight: "1" }],
+  h1: ["48px", { lineHeight: "56px" }],
+  h2: ["40px", { lineHeight: "48px" }],
+  h3: ["32px", { lineHeight: "40px" }],
+  h4: ["28px", { lineHeight: "36px" }],
+
+  title: ["24px", { lineHeight: "32px" }],
+  subtitle: ["20px", { lineHeight: "28px" }],
+
+  body: ["16px", { lineHeight: "24px" }],
+  bodySm: ["14px", { lineHeight: "20px" }],
+
+  label: ["14px", { lineHeight: "20px" }],
+  caption: ["12px", { lineHeight: "16px" }],
 };

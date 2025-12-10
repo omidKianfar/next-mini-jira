@@ -15,7 +15,7 @@ module.exports = {
         inter: ["Inter", "sans-serif"],
         outfit: ["Outfit", "sans-serif"],
       },
-      fonSize: FontSize,
+      fontSize: FontSize,
       borderRadius: BorderRadius,
       boxShadow: BoxShadow,
     },
