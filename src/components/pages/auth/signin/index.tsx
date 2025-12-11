@@ -87,7 +87,7 @@ const AuthComponent = () => {
           className="object-contain"
           wrapperClass="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center"
         />{" "}
-        <div className="w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-sm lg:w-[500px]">
+        <div className="w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-md lg:w-[500px]">
           <h1 className="mb-8 text-center text-title font-bold text-warning-500">
             {pathname.includes("signin") ? "Signin" : "Signup"}
           </h1>

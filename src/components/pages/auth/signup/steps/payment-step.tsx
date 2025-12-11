@@ -40,7 +40,7 @@ const PaymentStep = () => {
           wrapperClass="absolute top-0"
         />
 
-        <div className="w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-8 shadow-sm lg:h-[600px] lg:w-[900px]">
+        <div className="w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-8 shadow-md lg:h-[600px] lg:w-[900px]">
           <div className="mb-[50px] flex w-full justify-start lg:mb-[135px]">
             <ButtonBack onClick={BackProfile} />
           </div>

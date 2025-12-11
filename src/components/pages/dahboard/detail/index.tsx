@@ -1,7 +1,7 @@
 "use client";
 
 import ButtonBack from "@/src/components/atom/button/button-back";
-import ButtonNext from "@/src/components/atom/button/button-next";
+import ButtonFreeClass from "@/src/components/atom/button/button-free-class";
 import MyIcon from "@/src/components/atom/icon";
 import MyImage from "@/src/components/atom/image";
 import PageLoading from "@/src/components/organisms/page-loading";
@@ -89,11 +89,11 @@ const TaskDetailComponent = () => {
 
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-center">
-      <div className="h-full w-full rounded-xl border-amber-300 bg-white p-4 shadow-sm lg:h-full lg:w-[900px] lg:border-2">
+      <div className="h-full w-full rounded-xl border-amber-300 bg-white p-4 shadow-md lg:h-full lg:w-[900px] lg:border-2">
         <div className="mb-4 flex items-center justify-between lg:mb-2">
           <ButtonBack onClick={BackDashboard} />
 
-          <ButtonNext
+          <ButtonFreeClass
             onClick={deleteTaskHandler}
             isLoading={deleting}
             disable={deleting}
@@ -103,7 +103,7 @@ const TaskDetailComponent = () => {
                 className="z-50 text-h3 text-error-500 hover:text-error-700"
               />
             }
-          ></ButtonNext>
+          ></ButtonFreeClass>
         </div>
 
         <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">

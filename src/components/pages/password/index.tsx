@@ -68,7 +68,7 @@ const PasswordComponent = () => {
     <FramerMotion>
       <div className="flex min-h-screen w-full flex-col items-center justify-center p-4">
         <div className="flex flex-col items-center justify-center lg:flex-row">
-          <div className="mb-10 w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-sm lg:mb-0 lg:w-[500px]">
+          <div className="mb-10 w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-md lg:mb-0 lg:w-[500px]">
             {pathName.includes("profile") && (
               <div className="mb-2">
                 <ButtonBack onClick={handelBack} />

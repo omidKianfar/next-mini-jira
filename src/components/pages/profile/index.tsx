@@ -21,6 +21,7 @@ import ButtonNext from "../../atom/button/button-next";
 import MyImage from "../../atom/image";
 import { usePathname } from "next/navigation";
 import { useNavigation } from "@/src/hooks/navigation";
+import ButtonFreeClass from "../../atom/button/button-free-class";
 
 const ProfileComponent = () => {
   const pathName = usePathname();
@@ -95,14 +96,32 @@ const ProfileComponent = () => {
       navigation.dashboard();
     }
   };
+  const goPasswordHandler = () => {
+    navigation.changePassword();
+  };
 
   return (
     <FramerMotion>
       <div className="flex min-h-screen w-full flex-col items-center justify-center p-4">
         <div className="flex flex-col items-center justify-center lg:flex-row">
-          <div className="mb-10 w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-sm lg:mb-0 lg:w-[500px]">
-            <div className="mb-2">
+          <div className="mb-10 w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-md lg:mb-0 lg:w-[500px]">
+            <div className="mb-4 flex items-center justify-between">
               <ButtonBack onClick={handelBack} />
+
+              {pathName.includes("profile") && (
+                <ButtonFreeClass
+                  className="ml-4 text-primary-500 hover:text-primary-600"
+                  onClick={goPasswordHandler}
+                  icon={
+                    <MyIcon
+                      icon="grommet-icons:link-next"
+                      className="ml-2 text-body"
+                    />
+                  }
+                >
+                  Password
+                </ButtonFreeClass>
+              )}
             </div>
 
             <ModalContainer open={open} handleClose={handleCloseModal}>
@@ -125,7 +144,7 @@ const ProfileComponent = () => {
                 <InputField
                   name="userName"
                   label="Username"
-                  placeholder="Enter your email"
+                  placeholder="Enter your username"
                   icon={
                     <MyIcon
                       icon={"tabler:user-filled"}
@@ -138,7 +157,7 @@ const ProfileComponent = () => {
 
                 <div className="mt-6 flex items-center justify-end">
                   <ButtonNext type="submit" isLoading={loading}>
-                    Next
+                    {pathName.includes("profile") ? "Save" : "Next"}
                   </ButtonNext>
                 </div>
               </form>
