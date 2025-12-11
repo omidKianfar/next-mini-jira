@@ -30,7 +30,8 @@ export const authContext = createContext<AuthContextProps>({
   signupWithEmail: ({ email, password }: SignPropsType) => Promise.resolve(),
   signinWithEmail: ({ email, password }: SignPropsType) => Promise.resolve(),
   googleSignin: () => Promise.resolve(),
-  updatePassword: ({ newPassword }:UserPasswordUpdateType) => Promise.resolve(),
+  updatePassword: ({ newPassword }: UserPasswordUpdateType) =>
+    Promise.resolve(),
   logout: () => Promise.resolve(),
   saveUserProfile: ({ userId, data }: UserProfileType) => Promise.resolve(),
   terialMode: ({ userId }: UserProfileType) => Promise.resolve(),

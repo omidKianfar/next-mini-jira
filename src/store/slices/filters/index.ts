@@ -19,7 +19,7 @@ const filterSlice = createSlice({
 
     setDate: (
       state,
-      action: PayloadAction<{ from: string | null; to: string | null }>
+      action: PayloadAction<{ from: string | null; to: string | null }>,
     ) => {
       state.date = action.payload;
     },

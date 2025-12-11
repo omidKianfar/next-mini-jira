@@ -1,4 +1,7 @@
-import { AuthContextActionType, AuthContextStateType } from "@/src/types/global";
+import {
+  AuthContextActionType,
+  AuthContextStateType,
+} from "@/src/types/global";
 
 export const initialState: AuthContextStateType = {
   user: null,
@@ -12,7 +15,7 @@ export const authReducer = (
   action: {
     payload: Partial<AuthContextStateType>;
     type: AuthContextActionType;
-  }
+  },
 ) => {
   const { isAuthenticated, isLoading, isInitialized, user } = action.payload;
 

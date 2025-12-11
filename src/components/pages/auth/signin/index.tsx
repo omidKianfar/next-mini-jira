@@ -1,23 +1,21 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import {
-  Button,
-  FormProvider,
-  InputField,
-  MyIcon,
-  MyImage,
-  authSchema,
-  useAuth,
-  useForm,
-  useIsMobile,
-  useMemo,
-  useNavigation,
-  useState,
-  yupResolver,
-} from "../../imports";
 
 import { FormValues } from "../../type";
+import { useNavigation } from "@/src/hooks/navigation";
+import { useIsMobile } from "@/src/hooks/mobile-size";
+import { useAuth } from "@/src/hooks/auth/use-auth";
+import { useMemo, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { authSchema } from "../schema";
+import MyImage from "@/src/components/atom/image";
+import InputField from "@/src/components/molecule/controllers/RHF-fields/input-field";
+import MyIcon from "@/src/components/atom/icon";
+import ButtonNext from "@/src/components/atom/button/button-next";
+import ButtonFreeClass from "@/src/components/atom/button/button-free-class";
+import Logo from "@/src/components/atom/logo";
 
 const AuthComponent = () => {
   const navigation = useNavigation();
@@ -34,7 +32,7 @@ const AuthComponent = () => {
       email: "",
       password: "",
     }),
-    []
+    [],
   );
 
   const methods = useForm<FormValues>({
@@ -77,18 +75,10 @@ const AuthComponent = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-center p-4 ">
-      <div className="text-center mb-0 lg:mb-8  rounded-lg flex ">
-        <h1 className="text-4xl lg:text-6xl font-bold text-amber-500 pr-1 p-1">
-          Mini
-        </h1>
+    <div className="flex min-h-screen w-full flex-col items-center justify-center p-4">
+      <Logo />
 
-        <h1 className="text-4xl lg:text-6xl font-bold  bg-blue-900 text-white px-2 lg:px-6 py-1 rounded-lg shadow">
-          Jira
-        </h1>
-      </div>
-
-      <div className=" flex items-center justify-center flex-col lg:flex-row">
+      <div className="flex flex-col items-center justify-center lg:flex-row">
         <MyImage
           src="/images/auth.png"
           alt=""
@@ -97,8 +87,8 @@ const AuthComponent = () => {
           className="object-contain"
           wrapperClass="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center"
         />{" "}
-        <div className="w-[90vw] lg:w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white shadow">
-          <h1 className="text-2xl font-bold text-center mb-8 text-amber-500">
+        <div className="w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-sm lg:w-[500px]">
+          <h1 className="mb-8 text-center text-title font-bold text-warning-500">
             {pathname.includes("signin") ? "Signin" : "Signup"}
           </h1>
 
@@ -112,7 +102,10 @@ const AuthComponent = () => {
                 autoFocus
                 autoComplete="email"
                 icon={
-                  <MyIcon icon={"ic:baseline-email"} className="text-red-400" />
+                  <MyIcon
+                    icon={"ic:baseline-email"}
+                    className="text-error-400"
+                  />
                 }
               />
 
@@ -126,58 +119,52 @@ const AuthComponent = () => {
                   passwordShow ? (
                     <MyIcon
                       icon={"mdi:show"}
-                      className="text-green-400 cursor-pointer"
+                      className="cursor-pointer text-success-400"
                       onClick={() => setPasswordShow(false)}
                     />
                   ) : (
                     <MyIcon
                       icon={"mdi:hide"}
-                      className="text-gray-400 cursor-pointer"
+                      className="cursor-pointer text-gray-400"
                       onClick={() => setPasswordShow(true)}
                     />
                   )
                 }
               />
 
-              <div className="flex justify-end items-center my-8">
+              <div className="my-8 flex items-center justify-end">
                 <MyIcon
                   icon={"devicon:google"}
                   className={`${
                     loading ? "mr-20" : "mr-[100px]"
-                  } hover:bg-blue-200 p-2 rounded-full cursor-pointer hover:rotate-12 transition-all duration-200 text-4xl`}
+                  } cursor-pointer rounded-full p-2 text-h3 transition-all duration-200 hover:rotate-12 hover:bg-primary-200`}
                   onClick={authGoogle}
                 />
 
-                <Button
-                  type="submit"
-                  isLoading={loading}
-                  className=" bg-blue-500 text-white border-2 hover:bg-transparent
-                  hover:border-blue-500 hover:text-blue-500 rounded-lg px-8 py-2 
-                  transition-all duration-200"
-                >
+                <ButtonNext type="submit" isLoading={loading}>
                   {pathname.includes("signin") ? "Signin" : "Signup"}
-                </Button>
+                </ButtonNext>
               </div>
             </form>
           </FormProvider>
 
-          <Button
+          <ButtonFreeClass
             onClick={() =>
               pathname.includes("signin")
                 ? navigation.signup()
                 : navigation.signin()
             }
-            className="text-amber-500 hover:text-amber-600 font-semibold"
+            className="font-semibold text-warning-500 hover:text-warning-600"
             icon={
               <MyIcon
                 icon={"grommet-icons:link-next"}
-                className="mt-1 ml-1 text-[12px]"
+                className="ml-1 mt-1 text-caption"
                 onClick={() => setPasswordShow(true)}
               />
             }
           >
             {pathname.includes("signin") ? "Signup Page" : "Signin Page"}
-          </Button>
+          </ButtonFreeClass>
         </div>
       </div>
     </div>

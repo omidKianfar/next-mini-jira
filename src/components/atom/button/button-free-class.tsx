@@ -1,7 +1,7 @@
 "use client";
 
+import LoadingCircle from "../loading-circle";
 import { ButtonProps } from "../type";
-import { ButtonLoading } from "../imports";
 
 const ButtonFreeClass = ({
   type = "button",
@@ -23,7 +23,7 @@ const ButtonFreeClass = ({
       {icon ? icon : null}
       {isLoading && (
         <span className="ml-2 flex items-center justify-center">
-          <ButtonLoading size={20} color="currentColor" />
+          <LoadingCircle size={20} color="currentColor" />
         </span>
       )}
     </button>

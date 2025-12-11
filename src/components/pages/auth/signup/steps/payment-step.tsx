@@ -1,14 +1,12 @@
 "use client";
 
-import {
-  PaymentCartComponent,
-  useAuth,
-  FramerMotion,
-  BackButton,
-  useIsMobile,
-  MyIcon,
-  MyImage,
-} from "../../../imports";
+import FramerMotion from "@/src/components/atom/animation";
+import ButtonBack from "@/src/components/atom/button/button-back";
+import MyIcon from "@/src/components/atom/icon";
+import MyImage from "@/src/components/atom/image";
+import PaymentCardComponent from "@/src/components/molecule/card/payment-cart";
+import { useAuth } from "@/src/hooks/auth/use-auth";
+import { useIsMobile } from "@/src/hooks/mobile-size";
 
 const PaymentStep = () => {
   const { user, changeStep, terialMode } = useAuth();
@@ -32,7 +30,7 @@ const PaymentStep = () => {
 
   return (
     <FramerMotion>
-      <div className="w-full min-h-screen flex flex-col items-center justify-center p-4">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center p-4">
         <MyImage
           src="/images/Wallet.svg"
           alt=""
@@ -42,20 +40,20 @@ const PaymentStep = () => {
           wrapperClass="absolute top-0"
         />
 
-        <div className="w-[90vw] lg:w-[900px] lg:h-[600px] bg-white p-8 border-2 border-amber-300 rounded-lg shadow ">
-          <div className="w-full flex justify-start mb-[50px] lg:mb-[135px]">
-            <BackButton onClick={BackProfile} />
+        <div className="w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-8 shadow-sm lg:h-[600px] lg:w-[900px]">
+          <div className="mb-[50px] flex w-full justify-start lg:mb-[135px]">
+            <ButtonBack onClick={BackProfile} />
           </div>
 
-          <div className=" w-full flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-8">
-            <PaymentCartComponent
+          <div className="flex w-full flex-col items-center justify-center gap-4 lg:flex-row lg:gap-8">
+            <PaymentCardComponent
               title="Terial Mode"
               description="You get 10 days of free access to the app."
               onClick={freeModeHandler}
               icon={<MyIcon icon={"tabler:free-rights"} className="text-8xl" />}
             />
 
-            <PaymentCartComponent
+            <PaymentCardComponent
               title="Payment Mode"
               description="Go to payment plan page"
               onClick={paymentModeHandler}

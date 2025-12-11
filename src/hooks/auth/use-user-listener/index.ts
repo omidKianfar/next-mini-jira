@@ -1,7 +1,11 @@
 "use client";
 
-import {  auth, db, doc, findFirestoreUser, onAuthStateChanged,  onSnapshot,  useEffect,  } from "../../imports";
+import { useEffect } from "react";
 import { UseAuthListenerProps } from "../../type";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "@/config";
+import { doc, onSnapshot } from "firebase/firestore";
+import { findFirestoreUser } from "@/src/lib/auth/user-finder";
 
 export const useUserListener = ({
   state,

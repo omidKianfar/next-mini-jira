@@ -1,11 +1,11 @@
 "use client";
 
-import { useAuth } from "../../imports";
 import SignupStep from "./steps/signup-step";
 import ProfileStep from "./steps/profile-step";
 import PaymentStep from "./steps/payment-step";
 import PalnStep from "./steps/paln-step";
 import PasswordStep from "./steps/password-step";
+import { useAuth } from "@/src/hooks/auth/use-auth";
 
 const SignupComponent = () => {
   const { stepNumber } = useAuth();

@@ -1,28 +1,27 @@
 "use client";
 
 import {
-  auth,
-  createUserDocument,
+  SignPropsType,
+  UserPasswordUpdateType,
+  UserProfileType,
+} from "@/src/types/global";
+import { useNavigation } from "../../navigation";
+import { UseAuthActionProps } from "../../type";
+import {
   createUserWithEmailAndPassword,
-  dayjs,
-  db,
-  doc,
   EmailAuthProvider,
-  enqueueSnackbar,
-  findFirestoreUser,
-  getDoc,
   GoogleAuthProvider,
   linkWithCredential,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  SignPropsType,
-  updateFirestoreUser,
-  useNavigation,
-  UserPasswordUpdateType,
-  UserProfileType,
-} from "../../imports";
-import { UseAuthActionProps } from "../../type";
+} from "firebase/auth";
+import { auth, db } from "@/config";
+import { findFirestoreUser } from "@/src/lib/auth/user-finder";
+import { createUserDocument } from "@/src/lib/auth/create-user";
+import { enqueueSnackbar } from "notistack";
+import { doc, getDoc } from "firebase/firestore";
+import { updateFirestoreUser } from "@/src/lib/auth/update-user";
 
 export const useAuthActions = ({
   dispatch,
@@ -46,7 +45,7 @@ export const useAuthActions = ({
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
 
       const currentUser = userCredential.user;
@@ -86,7 +85,7 @@ export const useAuthActions = ({
       const newUser = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
 
       await createUserDocument(newUser.user);

@@ -1,13 +1,11 @@
 "use client";
 
-import {
-  BoardComponent,
-  useAuth,
-  useRequireActiveStatus,
-  useRequirePaymentStatus,
-  useTaskListener,
-} from "../imports";
-import DashboardHeader from "../../molecule/headers/dashboard-header";
+import { useAuth } from "@/src/hooks/auth/use-auth";
+import DashboardHeader from "../../organisms/headers/dashboard-header";
+import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
+import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
+import { useTaskListener } from "@/src/hooks/tasks/use-task-listener";
+import BoardComponent from "../../organisms/board";
 
 const DashboardComponent = () => {
   const { user } = useAuth();
@@ -18,7 +16,7 @@ const DashboardComponent = () => {
   useTaskListener({ user });
 
   return (
-    <div className="w-screen min-h-screen overflow-y-auto scrollbar-hide">
+    <div className="min-h-screen w-full">
       <DashboardHeader />
 
       <BoardComponent />

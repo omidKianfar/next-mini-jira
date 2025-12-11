@@ -1,6 +1,6 @@
 export const BorderRadius = {
-  sm: "4px",
-  DEFAULT: "8px",
+  xs: "4px",
+  sm: "8px",
   md: "10px",
   lg: "12px",
   xl: "16px",

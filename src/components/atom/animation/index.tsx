@@ -1,6 +1,7 @@
 "use client";
 
-import { useIsMobile, motion } from "../imports";
+import { useIsMobile } from "@/src/hooks/mobile-size";
+import { motion } from "framer-motion";
 import { FarmerMotionProps } from "../type";
 
 const FramerMotion = ({ children }: FarmerMotionProps) => {

@@ -1,6 +1,9 @@
 "use client";
 
-import { Button, MyIcon, useAuth, useNavigation } from "../../imports";
+import ButtonNext from "@/src/components/atom/button/button-next";
+import MyIcon from "@/src/components/atom/icon";
+import { useAuth } from "@/src/hooks/auth/use-auth";
+import { useNavigation } from "@/src/hooks/navigation";
 
 const PaymentFailedComponent = () => {
   const navigation = useNavigation();
@@ -13,37 +16,33 @@ const PaymentFailedComponent = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center">
-      <div className="w-screen h-screen lg:w-[600px] lg:h-[500px]  p-6 lg:border-2 border-amber-300 rounded-lg bg-white shadow">
+    <div className="flex min-h-screen w-full items-center justify-center">
+      <div className="h-screen w-screen rounded-xl border-warning-300 bg-white p-6 shadow-sm lg:h-[500px] lg:w-[600px] lg:border-2">
         <MyIcon
           icon={"streamline-freehand:cash-payment-bill"}
-          className="text-[150px] text-amber-500 mb-10 mt-8"
+          className="mb-10 mt-8 text-[150px] text-warning-500"
         />
 
-        <h1 className=" font-bold text-3xl text-red-600 ">Payment failed.</h1>
+        <h1 className="text-h3 font-bold text-error-600">Payment failed.</h1>
 
-        <p className=" mt-4 mb-6">
+        <p className="mb-6 mt-4">
           Please check your card details or try another payment method. If the
           amount has been deducted from your account but the payment still shows
           as failed, please contact support for further assistance.
         </p>
 
-        <div className="flex justify-center">
-          <Button
+        <div className="mt-6 flex justify-center">
+          <ButtonNext
             onClick={finishHandler}
             icon={
               <MyIcon
                 icon={"grommet-icons:link-next"}
-                className="text-[16px] ml-2 mt-1"
+                className="ml-2 mt-1 text-body"
               />
             }
-            className="mt-6 bg-blue-500 text-white border-2
-                 hover:bg-transparent hover:border-blue-500
-               hover:text-blue-500 rounded-lg px-8 py-2 
-                transition-all duration-200"
           >
             Go To Payment
-          </Button>
+          </ButtonNext>
         </div>
       </div>
     </div>

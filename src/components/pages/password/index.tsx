@@ -1,25 +1,28 @@
 "use client";
 
-import {
-  Button,
-  FormProvider,
-  InputField,
-  useAuth,
-  useForm,
-  useMemo,
-  useState,
-  yupResolver,
-  FramerMotion,
-  SignPropsType,
-  authSchema,
-  useIsMobile,
-  useRequireActiveStatus,
-  useRequirePaymentStatus,
-  MyIcon,
-  MyImage,
-} from "../imports";
+import { useAuth } from "@/src/hooks/auth/use-auth";
+import { useIsMobile } from "@/src/hooks/mobile-size";
+import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
+import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
+import { SignPropsType } from "@/src/types/global";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useMemo, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { authSchema } from "../auth/schema";
+import FramerMotion from "../../atom/animation";
+import InputField from "../../molecule/controllers/RHF-fields/input-field";
+import MyIcon from "../../atom/icon";
+import ButtonNext from "../../atom/button/button-next";
+import MyImage from "../../atom/image";
+import ButtonBack from "../../atom/button/button-back";
+import { usePathname } from "next/navigation";
+import { useNavigation } from "@/src/hooks/navigation";
 
 const PasswordComponent = () => {
+  const pathName = usePathname();
+
+  const navigation = useNavigation();
+
   useRequireActiveStatus();
   useRequirePaymentStatus();
 
@@ -34,7 +37,7 @@ const PasswordComponent = () => {
       email: user?.email ?? "",
       password: "",
     }),
-    []
+    [],
   );
 
   const methods = useForm<SignPropsType>({
@@ -57,12 +60,22 @@ const PasswordComponent = () => {
     }
   };
 
+  const handelBack = () => {
+    navigation.profile();
+  };
+
   return (
     <FramerMotion>
-      <div className="w-full min-h-screen flex flex-col items-center justify-center p-4">
-        <div className=" flex items-center justify-center flex-col lg:flex-row">
-          <div className="w-[90vw] lg:w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white mb-10 lg:mb-0 shadow">
-            <h1 className="text-2xl font-bold text-center mb-8 text-amber-500">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center p-4">
+        <div className="flex flex-col items-center justify-center lg:flex-row">
+          <div className="mb-10 w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-sm lg:mb-0 lg:w-[500px]">
+            {pathName.includes("profile") && (
+              <div className="mb-2">
+                <ButtonBack onClick={handelBack} />
+              </div>
+            )}
+
+            <h1 className="mb-8 text-center text-title font-bold text-warning-500">
               Password
             </h1>
 
@@ -77,7 +90,7 @@ const PasswordComponent = () => {
                   icon={
                     <MyIcon
                       icon={"ic:baseline-email"}
-                      className="text-red-400"
+                      className="text-error-400"
                     />
                   }
                 />
@@ -92,35 +105,27 @@ const PasswordComponent = () => {
                     passwordShow ? (
                       <MyIcon
                         icon={"mdi:show"}
-                        className="text-green-400 cursor-pointer"
+                        className="cursor-pointer text-success-400"
                         onClick={() => setPasswordShow(false)}
                       />
                     ) : (
                       <MyIcon
                         icon={"mdi:hide"}
-                        className="text-gray-400 cursor-pointer"
+                        className="cursor-pointer text-gray-400"
                         onClick={() => setPasswordShow(true)}
                       />
                     )
                   }
                 />
 
-                <div className="flex justify-end items-center">
-                  <Button
-                    type="submit"
-                    isLoading={loading}
-                    className="mt-6 bg-blue-500 text-white border-2
-                    hover:bg-transparent hover:border-blue-500
-                    hover:text-blue-500 rounded-lg px-8 py-2 
-                    transition-all duration-200"
-                  >
+                <div className="mt-6 flex items-center justify-end">
+                  <ButtonNext type="submit" isLoading={loading}>
                     Next
-                  </Button>
+                  </ButtonNext>
                 </div>
               </form>
             </FormProvider>
           </div>
-          
           <MyImage
             src="/images/set-password.svg"
             alt=""

@@ -1,23 +1,20 @@
 "use client";
 
-import {
-  BackButton,
-  Button,
-  deleteTask,
-  enqueueSnackbar,
-  fetchTask,
-  MyIcon,
-  MyImage,
-  PageLoading,
-  RootState,
-  Task,
-  useEffect,
-  useIsMobile,
-  useNavigation,
-  useSearchParams,
-  useSelector,
-  useState,
-} from "../../imports";
+import ButtonBack from "@/src/components/atom/button/button-back";
+import ButtonNext from "@/src/components/atom/button/button-next";
+import MyIcon from "@/src/components/atom/icon";
+import MyImage from "@/src/components/atom/image";
+import PageLoading from "@/src/components/organisms/page-loading";
+import { useIsMobile } from "@/src/hooks/mobile-size";
+import { useNavigation } from "@/src/hooks/navigation";
+import { deleteTask } from "@/src/lib/auth/delete-task";
+import { fetchTask } from "@/src/lib/tasks/fetch-task";
+import { RootState } from "@/src/store";
+import { Task } from "@/src/types/global";
+import { useSearchParams } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const TaskDetailComponent = () => {
   const navigation = useNavigation();
@@ -91,47 +88,47 @@ const TaskDetailComponent = () => {
   if (!task) return <div>Task not found</div>;
 
   return (
-    <div className=" w-full  min-h-screen flex flex-col justify-center items-center overflow-y-auto">
-      <div className="w-screen h-screen lg:w-[900px] lg:h-full lg:border-2 rounded-lg p-4 border-amber-300 bg-white shadow">
-        <div className="flex justify-between items-center mb-4 lg:mb-2">
-          <BackButton onClick={BackDashboard} />
+    <div className="flex min-h-screen w-full flex-col items-center justify-center">
+      <div className="h-full w-full rounded-xl border-amber-300 bg-white p-4 shadow-sm lg:h-full lg:w-[900px] lg:border-2">
+        <div className="mb-4 flex items-center justify-between lg:mb-2">
+          <ButtonBack onClick={BackDashboard} />
 
-          <Button
+          <ButtonNext
             onClick={deleteTaskHandler}
             isLoading={deleting}
             disable={deleting}
             icon={
               <MyIcon
                 icon={"mingcute:delete-fill"}
-                className="text-3xl text-red-500 hover:text-red-700 z-50"
+                className="z-50 text-h3 text-error-500 hover:text-error-700"
               />
             }
-          ></Button>
+          ></ButtonNext>
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-4">
-          <div className="w-[90vw] lg:w-[500px]  ">
-            <div className="flex justify-between mb-4 lg:mb-8 flex-col lg:flex-row ">
-              <p className="text-blue-600 capitalize">
+        <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
+          <div className="w-[90vw] lg:w-[500px]">
+            <div className="mb-4 flex flex-col justify-between lg:mb-8 lg:flex-row">
+              <p className="capitalize text-primary-600">
                 <span className="font-bold text-black">Status:</span>{" "}
                 {task.status}
               </p>
 
-              <p className="text-blue-600 capitalize">
+              <p className="capitalize text-primary-600">
                 <span className="font-bold text-black">Tag:</span> {task.tag}
               </p>
 
-              <p className="text-blue-600 capitalize">
+              <p className="capitalize text-primary-600">
                 <span className="font-bold text-black">Created:</span>{" "}
                 {task.createdAt}
               </p>
             </div>
 
-            <h1 className="text-xl font-semibold wrap-break-word mb-4">
+            <h1 className="wrap-break-word mb-4 text-subtitle font-semibold">
               {task.title}
             </h1>
 
-            <p className="mt-2 wrap-break-word mb-8">{task.description}</p>
+            <p className="wrap-break-word mb-8 mt-2">{task.description}</p>
           </div>
           <MyImage
             src="/images/todo-detail.svg"

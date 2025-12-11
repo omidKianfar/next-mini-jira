@@ -1,5 +1,6 @@
 "use client";
-import Button from "@/src/components/atom/button/next-button";
+import ButtonNext from "@/src/components/atom/button/button-next";
+import Button from "@/src/components/atom/button/button-next";
 import MyIcon from "@/src/components/atom/icon";
 import { useNavigation } from "@/src/hooks/navigation";
 
@@ -7,31 +8,28 @@ export default function NotFound() {
   const navigation = useNavigation();
 
   return (
-    <div className="w-screen h-screen p-4 flex flex-col items-center justify-center">
-      <div className="flex justify-center mb-4">
-        <h1 className="text-5xl lg:text-6xl font-bold text-amber-500">404</h1>
+    <div className="flex h-full w-full flex-col items-center justify-center p-4">
+      <div className="mb-4 flex justify-center">
+        <h1 className="text-h2 font-bold text-warning-500 lg:text-h1">404</h1>
       </div>
 
       <div className="flex flex-col justify-start">
-        <h1 className="text-3xl lg:text-6xl font-bold mb-4">
+        <h1 className="mb-4 text-h4 font-bold lg:text-h2">
           Somthing went wrong
         </h1>
-        <p className="mb-6 text-lg lg:text-3xl">Page not found.</p>
+
+        <p className="mb-6 text-subtitle lg:text-h4">Page not found.</p>
       </div>
-      <div>
-        <Button
+
+      <div className="mt-6">
+        <ButtonNext
           onClick={() => navigation.dashboard()}
           icon={
-            <MyIcon icon="grommet-icons:link-next" className="ml-2 w-[16px]" />
+            <MyIcon icon="grommet-icons:link-next" className="ml-2 text-body" />
           }
-          className="mt-6 bg-blue-500 text-white border-2
-                 hover:bg-transparent hover:border-blue-500
-               hover:text-blue-500 rounded-lg px-6 py-3 
-                transition-all duration-200 text-lg
-            "
         >
           Go Home
-        </Button>
+        </ButtonNext>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { routes } from "@/src/lib/route/routes";
 import { UsePlanActionProps } from "../type";
 
-export function usePlanAction() {
+export const usePlanAction = () => {
   const choosePlan = async ({
     selectedPlan,
     setLoading,
@@ -30,4 +30,4 @@ export function usePlanAction() {
   };
 
   return { choosePlan };
-}
+};

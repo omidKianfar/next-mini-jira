@@ -2,9 +2,9 @@
 
 import { PropsWithChildren } from "react";
 import AuthProvider from "./auth/auth-provider";
-import NotistackProvider from "../components/atom/error-handler/notistack";
 import { Provider } from "react-redux";
 import { store } from "../store";
+import NotistackProvider from "./notistack/notistack";
 
 const ProvidersWrapper = ({ children }: PropsWithChildren) => {
   return (

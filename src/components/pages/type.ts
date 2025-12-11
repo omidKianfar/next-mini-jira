@@ -1,21 +1,11 @@
-import { Task } from "./imports";
+import { Task } from "@/src/types/global";
 
 export type AuthType = "signin" | "signup";
-
 
 export interface FormValues {
   email: string;
   password: string;
 }
-
-export type CartType = {
-  title: string;
-  description: string;
-  onClick: () => void;
-  price?: number;
-  icon: React.ReactNode;
-};
-
 export interface ColumnProps {
   id: string;
   children: React.ReactNode;

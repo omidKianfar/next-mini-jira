@@ -1,9 +1,10 @@
-import {db, doc, getDoc, MyUserType, setDoc} from '../../imports'
-
+import { db } from "@/config";
+import { MyUserType } from "@/src/types/global";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export const updateFirestoreUser = async (
   userId: string,
-  data: Record<string, any>
+  data: Record<string, any>,
 ): Promise<MyUserType> => {
   await setDoc(doc(db, "users", userId), data, { merge: true });
 

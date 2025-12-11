@@ -1,14 +1,15 @@
 "use client";
 
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { ListenToTasksProps } from "../type";
-
-import { collection, db, onSnapshot, query, Task, where } from "../../imports";
 import { setTasks } from "@/src/store/slices/tasks";
+import { Task } from "@/src/types/global";
+import { db } from "@/config";
 
 export const listenToTasks = ({ userId, dispatch }: ListenToTasksProps) => {
   const userIdInTasksQuery = query(
     collection(db, "tasks"),
-    where("userId", "==", userId)
+    where("userId", "==", userId),
   );
 
   return onSnapshot(userIdInTasksQuery, (snapshot) => {

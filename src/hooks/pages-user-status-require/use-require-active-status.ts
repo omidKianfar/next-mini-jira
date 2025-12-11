@@ -1,7 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useAuth, useEffect, useNavigation } from "../imports";
+import { useNavigation } from "../navigation";
+import { useAuth } from "../auth/use-auth";
+import { useEffect } from "react";
 
 export const useRequireActiveStatus = () => {
   const pathname = usePathname();

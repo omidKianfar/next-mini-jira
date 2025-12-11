@@ -4,10 +4,12 @@ import { useState } from "react";
 import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useSearchParams } from "next/navigation";
 import dayjs from "dayjs";
-import { Button, MyIcon, useNavigation } from "../../imports";
-import PageLoading from "@/src/components/atom/loading/page-loader";
 import { updateFirestoreUser } from "@/src/lib/auth/update-user";
 import { useSetSubscriptionId } from "@/src/hooks/auth/use-payment-success";
+import { useNavigation } from "@/src/hooks/navigation";
+import PageLoading from "@/src/components/organisms/page-loading";
+import MyIcon from "@/src/components/atom/icon";
+import ButtonNext from "@/src/components/atom/button/button-next";
 
 const PaymentSuccessComponent = () => {
   const params = useSearchParams();
@@ -60,33 +62,25 @@ const PaymentSuccessComponent = () => {
   if (loading) return <PageLoading />;
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center ">
-      <div className="w-screen h-screen lg:w-[600px] lg:h-[500px]  p-6 lg:border-2 border-amber-300 rounded-lg bg-white shadow">
+    <div className="flex min-h-screen w-full items-center justify-center">
+      <div className="h-screen w-screen rounded-xl border-warning-300 bg-white p-6 shadow-sm lg:h-[500px] lg:w-[600px] lg:border-2">
         <MyIcon
           icon={"streamline-freehand:cash-payment-bill"}
-          className="text-[150px] text-green-500 mb-10 mt-8"
+          className="mb-10 mt-8 text-[150px] text-success-500"
         />
 
-        <h1 className=" font-bold text-3xl text-green-600 ">
+        <h1 className="text-h3 font-bold text-success-600">
           Payment successful.
         </h1>
 
-        <p className=" mt-4 mb-12">
+        <p className="mb-12 mt-4">
           Your transaction has been completed and your{" "}
           {planType == "monthly" ? "Monthly" : "Yearly"} subscription is now
           active. Thank you for your purchase!
         </p>
 
-        <div className="flex justify-center">
-          <Button
-            onClick={finishHandler}
-            className="mt-6 bg-blue-500 text-white border-2
-                 hover:bg-transparent hover:border-blue-500
-               hover:text-blue-500 rounded-lg px-8 py-2 
-                transition-all duration-200"
-          >
-            Finish
-          </Button>
+        <div className="mt-6 flex justify-center">
+          <ButtonNext onClick={finishHandler}>Finish</ButtonNext>
         </div>
       </div>
     </div>

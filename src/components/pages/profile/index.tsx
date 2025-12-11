@@ -1,39 +1,40 @@
 "use client";
 
-import {
-  AvatarUpload,
-  BackButton,
-  Button,
-  DateInputField,
-  FormProvider,
-  FramerMotion,
-  InputField,
-  ModalContainer,
-  MyIcon,
-  MyImage,
-  ProfileProps,
-  useAuth,
-  useForm,
-  useIsMobile,
-  useMemo,
-  useRequireActiveStatus,
-  useRequirePaymentStatus,
-  useState,
-  yupResolver,
-} from "../imports";
 import { ProfileSchema } from "./schema";
-import BackToSignup from "./modal/back-to-signup";
+import BackToSignup from "../../molecule/modals/back-to-signup";
+import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
+import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
+import { useAuth } from "@/src/hooks/auth/use-auth";
+import { useIsMobile } from "@/src/hooks/mobile-size";
+import { useMemo, useState } from "react";
+import { ProfileProps } from "@/src/types/global";
+import { FormProvider, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import FramerMotion from "../../atom/animation";
+import ButtonBack from "../../atom/button/button-back";
+import ModalContainer from "../../molecule/modal-component";
+import AvatarUpload from "../../molecule/upload/avatar";
+import InputField from "../../molecule/controllers/RHF-fields/input-field";
+import MyIcon from "../../atom/icon";
+import DateInputField from "../../molecule/controllers/RHF-fields/date-input-field";
+import ButtonNext from "../../atom/button/button-next";
+import MyImage from "../../atom/image";
+import { usePathname } from "next/navigation";
+import { useNavigation } from "@/src/hooks/navigation";
 
 const ProfileComponent = () => {
-  useRequireActiveStatus();
-  useRequirePaymentStatus();
+  const pathName = usePathname();
+
+  const isMobile = useIsMobile();
+  const navigation = useNavigation();
 
   const { saveUserProfile, user } = useAuth();
 
-  const isMobile = useIsMobile();
-
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+
+  useRequireActiveStatus();
+  useRequirePaymentStatus();
 
   const defaultValues: ProfileProps = useMemo(
     () => ({
@@ -41,7 +42,7 @@ const ProfileComponent = () => {
       userName: user?.userName ?? "",
       birthday: user?.birthday ?? "",
     }),
-    []
+    [],
   );
 
   const methods = useForm<ProfileProps>({
@@ -87,20 +88,28 @@ const ProfileComponent = () => {
     setOpen(false);
   };
 
+  const handelBack = () => {
+    if (pathName.includes("signup")) {
+      handleOpenModal();
+    } else {
+      navigation.dashboard();
+    }
+  };
+
   return (
     <FramerMotion>
-      <div className="w-full min-h-screen flex flex-col items-center justify-center p-4">
-        <div className=" flex items-center justify-center flex-col lg:flex-row">
-          <div className="w-[90vw] lg:w-[500px]  border-2 border-amber-300  p-4 pt-8 rounded-lg bg-white mb-10 lg:mb-0 shadow">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center p-4">
+        <div className="flex flex-col items-center justify-center lg:flex-row">
+          <div className="mb-10 w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-sm lg:mb-0 lg:w-[500px]">
             <div className="mb-2">
-              <BackButton onClick={handleOpenModal} />
+              <ButtonBack onClick={handelBack} />
             </div>
 
             <ModalContainer open={open} handleClose={handleCloseModal}>
               <BackToSignup handleClose={handleCloseModal} />
             </ModalContainer>
 
-            <h1 className="text-2xl font-bold text-center mb-8 text-amber-500">
+            <h1 className="mb-8 text-center text-title font-bold text-warning-500">
               Profile
             </h1>
 
@@ -127,18 +136,10 @@ const ProfileComponent = () => {
 
                 <DateInputField name="birthday" label="Birthday" />
 
-                <div className="flex justify-end items-center mt-6">
-                  <Button
-                    type="submit"
-                    isLoading={loading}
-                    className=" bg-blue-500 text-white border-2
-                      hover:bg-transparent hover:border-blue-500
-                    hover:text-blue-500 rounded-lg px-8 py-2 
-                      transition-all duration-200
-            "
-                  >
+                <div className="mt-6 flex items-center justify-end">
+                  <ButtonNext type="submit" isLoading={loading}>
                     Next
-                  </Button>
+                  </ButtonNext>
                 </div>
               </form>
             </FormProvider>
