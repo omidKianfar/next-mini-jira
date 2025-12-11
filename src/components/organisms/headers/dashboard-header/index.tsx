@@ -22,7 +22,7 @@ const DashboardHeader = () => {
   };
   return (
     <>
-      <div className="sticky top-0 mb-4 flex h-[60px] flex-row items-center justify-between border border-white/30 bg-white/20 px-4 shadow-lg backdrop-blur-lg lg:h-[80px]">
+      <div className="sticky top-0 z-50 mb-4 flex h-[60px] flex-row items-center justify-between border border-white/30 bg-white/20 px-4 shadow-lg backdrop-blur-lg lg:h-[80px]">
         <div className="flex w-1/3 items-center justify-start">
           <MyIcon
             icon={"mingcute:menu-fill"}
@@ -49,7 +49,7 @@ const DashboardHeader = () => {
 
           <MyIcon
             icon={"hugeicons:task-add-01"}
-            className="text-title text-primary-500 hover:text-primary-700 lg:text-h3"
+            className="cursor-pointer text-title text-primary-500 hover:text-primary-700 lg:text-h3"
             onClick={() => handleOpenModal(1)}
           />
         </div>

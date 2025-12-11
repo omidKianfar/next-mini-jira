@@ -35,10 +35,7 @@ const PaymentFailedComponent = () => {
           <ButtonNext
             onClick={finishHandler}
             icon={
-              <MyIcon
-                icon={"grommet-icons:link-next"}
-                className="ml-2 mt-1 text-body"
-              />
+              <MyIcon icon={"maki:arrow"} className="ml-2 mt-1 text-body" />
             }
           >
             Go To Payment

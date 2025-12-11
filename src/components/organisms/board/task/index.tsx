@@ -30,7 +30,7 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
     <div
       ref={setNodeRef}
       style={style}
-      className="mb-2 flex w-full items-center justify-between rounded-lg border-2 border-warning-400 bg-white shadow-md"
+      className="flex w-full items-center justify-between rounded-lg border-2 border-warning-400 bg-white shadow-md"
     >
       <div className="w-full">
         <div className="cursor-grab" {...listeners} {...attributes}>
@@ -59,7 +59,7 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
 
           <div data-no-dnd="true">
             <MyIcon
-              icon={"grommet-icons:link-next"}
+              icon={"maki:arrow"}
               className="cursor-pointer text-subtitle text-white hover:text-blue-500"
               onClick={() => navigation.taskDetail(task.id)}
             />

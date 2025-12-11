@@ -23,9 +23,7 @@ export default function NotFound() {
       <div className="mt-6">
         <ButtonNext
           onClick={() => navigation.dashboard()}
-          icon={
-            <MyIcon icon="grommet-icons:link-next" className="ml-2 text-body" />
-          }
+          icon={<MyIcon icon="maki:arrow" className="ml-2 text-body" />}
         >
           Go Home
         </ButtonNext>

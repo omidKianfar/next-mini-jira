@@ -16,7 +16,7 @@ const DashboardComponent = () => {
   useTaskListener({ user });
 
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen w-full pb-2">
       <DashboardHeader />
 
       <BoardComponent />

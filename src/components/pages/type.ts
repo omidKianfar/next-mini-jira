@@ -6,8 +6,11 @@ export interface FormValues {
   email: string;
   password: string;
 }
+
+export type ColumnID = "todo" | "inprogress" | "done";
+
 export interface ColumnProps {
-  id: string;
+  id: ColumnID;
   children: React.ReactNode;
 }
 export interface TaskCardProps {

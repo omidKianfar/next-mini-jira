@@ -112,12 +112,7 @@ const ProfileComponent = () => {
                 <ButtonFreeClass
                   className="ml-4 text-primary-500 hover:text-primary-600"
                   onClick={goPasswordHandler}
-                  icon={
-                    <MyIcon
-                      icon="grommet-icons:link-next"
-                      className="ml-2 text-body"
-                    />
-                  }
+                  icon={<MyIcon icon="maki:arrow" className="ml-2 text-body" />}
                 >
                   Password
                 </ButtonFreeClass>

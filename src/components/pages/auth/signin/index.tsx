@@ -154,11 +154,11 @@ const AuthComponent = () => {
                 ? navigation.signup()
                 : navigation.signin()
             }
-            className="font-semibold text-warning-500 hover:text-warning-600"
+            className="text-body font-semibold text-warning-500 hover:text-warning-600"
             icon={
               <MyIcon
-                icon={"grommet-icons:link-next"}
-                className="ml-1 mt-1 text-caption"
+                icon={"maki:arrow"}
+                className="ml-1 mt-1 text-body"
                 onClick={() => setPasswordShow(true)}
               />
             }
