@@ -21,7 +21,7 @@ const BackToSignup = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
         and profile setup separately in your account.
       </p>
 
-      <div className="mt-8 flex justify-end gap-4">
+      <div className="mt-8 flex justify-center gap-4 lg:justify-end">
         <ButtonNext onClick={handleClose}>Cancel</ButtonNext>
 
         <ButtonNext onClick={BackProfile}>Back</ButtonNext>

@@ -93,7 +93,7 @@ const AddTaskFormComponent = ({
             placeholder="Enter your description"
           />
 
-          <div className="mt-4 flex justify-end">
+          <div className="mt-4 flex justify-center lg:justify-end">
             <ButtonNext onClick={handleClose} className="mr-4">
               Cancel
             </ButtonNext>

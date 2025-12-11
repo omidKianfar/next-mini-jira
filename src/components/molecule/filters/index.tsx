@@ -61,7 +61,7 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
           <DateInputField name="to" label="End Time" />
         </div>
 
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-center lg:justify-end">
           <ButtonNext onClick={resetFilterHandler} className="mr-2">
             Clear
           </ButtonNext>
