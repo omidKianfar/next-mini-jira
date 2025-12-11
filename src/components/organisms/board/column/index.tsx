@@ -3,9 +3,12 @@
 import MyIcon from "@/src/components/atom/icon";
 import { ColumnProps } from "@/src/components/pages/type";
 import { useDroppable } from "@dnd-kit/core";
+import EmptyColumn from "../empty-column";
 
 const ColumnComponent = ({ id, children }: ColumnProps) => {
   const { setNodeRef, isOver } = useDroppable({ id });
+
+  const ChildrenArray = Array.isArray(children);
 
   return (
     <div
@@ -16,7 +19,7 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
         touchAction: "none",
       }}
     >
-      <h1 className="mb-2 flex items-center justify-center gap-2 rounded-t-xl bg-gradient-to-r from-primary-500 via-primary-400 to-primary-500 p-2 text-center font-bold capitalize text-white shadow-sm">
+      <h1 className="relative mb-2 flex items-center justify-center gap-2 rounded-t-xl bg-gradient-to-r from-primary-500 via-primary-400 to-primary-500 p-2 text-center font-bold capitalize text-white shadow-sm">
         {id}
         {id == "todo" ? (
           <MyIcon icon={"ri:todo-line"} className="text-title" />
@@ -28,9 +31,15 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
             className="text-title"
           />
         )}
+
+        <div className="absolute right-4 text-body text-white">
+          {ChildrenArray && children.length > 0 && children.length}
+        </div>
       </h1>
 
-      <div className="flex flex-col gap-2 p-2">{children}</div>
+      <div className="flex flex-col gap-2 p-2">
+        {ChildrenArray && children.length == 0 ? <EmptyColumn /> : children}
+      </div>
     </div>
   );
 };
