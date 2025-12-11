@@ -75,12 +75,18 @@ const BoardComponent = () => {
 
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-      <div className="flex flex-col justify-center gap-4 px-4 py-1 lg:flex-row">
-        <ColumnComponent id="todo">{renderColumn("todo")}</ColumnComponent>
-        <ColumnComponent id="inprogress">
-          {renderColumn("inprogress")}
+      <div className="flex flex-col items-start justify-center gap-4 px-4 py-1 lg:flex-row">
+        <ColumnComponent key="todo" id="todo">
+          {renderColumn("todo") ?? []}
         </ColumnComponent>
-        <ColumnComponent id="done">{renderColumn("done")}</ColumnComponent>
+
+        <ColumnComponent key="inprogress" id="inprogress">
+          {renderColumn("inprogress") ?? []}
+        </ColumnComponent>
+
+        <ColumnComponent key="done" id="done">
+          {renderColumn("done") ?? []}
+        </ColumnComponent>
       </div>
     </DndContext>
   );
