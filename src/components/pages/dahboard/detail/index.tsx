@@ -88,8 +88,8 @@ const TaskDetailComponent = () => {
   if (!task) return <div>Task not found</div>;
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center">
-      <div className="h-full w-full rounded-xl border-amber-300 bg-white p-4 shadow-md lg:h-full lg:w-[900px] lg:border-2">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center p-4">
+      <div className="h-full w-full rounded-xl border-2 border-amber-300 bg-white p-4 shadow-md lg:h-full">
         <div className="mb-4 flex items-center justify-between lg:mb-2">
           <ButtonBack onClick={BackDashboard} />
 
@@ -100,35 +100,36 @@ const TaskDetailComponent = () => {
             icon={
               <MyIcon
                 icon={"mingcute:delete-fill"}
-                className="z-50 text-h3 text-error-500 hover:text-error-700"
+                className="z-50 text-h4 text-error-500 hover:text-error-700"
               />
             }
           ></ButtonFreeClass>
         </div>
 
         <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
-          <div className="w-[90vw] lg:w-[500px]">
-            <div className="mb-4 flex flex-col justify-between lg:mb-8 lg:flex-row">
+          <div className="w-[90vw] p-4 lg:w-full">
+            <div className="mb-4 flex flex-col justify-between lg:mb-8 lg:w-[500px] lg:flex-row">
               <p className="capitalize text-primary-600">
-                <span className="font-bold text-black">Status:</span>{" "}
+                <span className="text-body font-bold text-black">Status:</span>{" "}
                 {task.status}
               </p>
 
               <p className="capitalize text-primary-600">
-                <span className="font-bold text-black">Tag:</span> {task.tag}
+                <span className="text-body font-bold text-black">Tag:</span>{" "}
+                {task.tag}
               </p>
 
               <p className="capitalize text-primary-600">
-                <span className="font-bold text-black">Created:</span>{" "}
+                <span className="text-body font-bold text-black">Created:</span>{" "}
                 {task.createdAt}
               </p>
             </div>
 
-            <h1 className="wrap-break-word mb-4 text-subtitle font-semibold">
+            <h1 className="break-word mb-4 text-body font-semibold">
               {task.title}
             </h1>
 
-            <p className="wrap-break-word mb-8 mt-2">{task.description}</p>
+            <p className="break-word mb-8 mt-2 text-body">{task.description}</p>
           </div>
           <MyImage
             src="/images/todo-detail.svg"
