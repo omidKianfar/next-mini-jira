@@ -9,6 +9,7 @@ import { Task } from "@/src/types/global";
 import { RootState } from "@/src/store";
 import MyIcon from "../../atom/icon";
 import { stringSlicer } from "../../utils/string-slicer";
+import EmptyColumn from "../../organisms/board/empty-column";
 
 const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   const navigation = useNavigation();
@@ -71,7 +72,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
         )}
 
         <input
-          className="my-1 w-full rounded-xl border-2 border-primary-400 px-8 py-2 text-bodySm shadow-sm focus:outline-primary-600"
+          className="my-1 w-full rounded-lg border-2 border-primary-400 px-8 py-2 text-bodySm shadow-sm focus:outline-primary-600"
           value={searchValue}
           onChange={(event) => serachHandler(event)}
         />
@@ -90,37 +91,40 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
                 }}
               >
                 <div className="w-full">
-                  <MyIcon
-                    icon={
-                      task.tag == "bug"
-                        ? "solar:bug-bold-duotone"
-                        : "material-symbols:task"
-                    }
-                    className="flex items-center justify-between rounded-t-xl bg-gradient-to-r from-warning-500 via-warning-400 to-warning-500 p-1 text-title text-white"
-                  />
+                  <div>
+                    <div className="rounded-t-lg bg-gradient-to-r from-warning-400 via-warning-300 to-warning-400 p-2 shadow-md">
+                      <p className="break-word text-bodySm font-bold">
+                        {stringSlicer({
+                          string: task.title,
+                          slice: isMobile ? 45 : 90,
+                        })}
+                      </p>
+                    </div>
 
-                  <div className="p-2">
-                    <p className="wrap-break-word mb-2 font-bold text-primary-500">
-                      {stringSlicer({
-                        string: task.title,
-                        slice: isMobile ? 25 : 50,
-                      })}
-                    </p>
-
-                    <p className="wrap-break-word text-bodySm">
+                    <p className="break-words p-2 text-bodySm">
                       {stringSlicer({
                         string: task.description,
-                        slice: isMobile ? 50 : 100,
+                        slice: isMobile ? 90 : 180,
                       })}
                     </p>
+                  </div>
+                  <div className="flex items-center justify-between rounded-b-lg bg-gradient-to-r from-warning-400 via-warning-300 to-warning-400 px-2 py-1">
+                    <MyIcon
+                      icon={
+                        task.tag == "bug"
+                          ? "solar:bug-bold-duotone"
+                          : "material-symbols:task"
+                      }
+                      className="mr-2 text-title text-white"
+                    />
                   </div>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <div className="z-20 mt-1 rounded-xl border-2 bg-white p-3 text-gray-500 shadow-sm">
-            No results
+          <div className="mt-2">
+            <EmptyColumn />
           </div>
         )
       ) : null}
