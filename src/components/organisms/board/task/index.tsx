@@ -30,39 +30,40 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
     <div
       ref={setNodeRef}
       style={style}
-      className="mb-2 flex w-full items-center justify-between rounded-xl border-2 border-warning-400 bg-white shadow-sm"
+      className="mb-2 flex w-full items-center justify-between rounded-lg border-2 border-warning-400 bg-white shadow-md"
     >
       <div className="w-full">
-        <div className="bg- flex items-center justify-between rounded-t-xl bg-gradient-to-r from-warning-500 via-warning-400 to-warning-500 p-1">
+        <div className="cursor-grab" {...listeners} {...attributes}>
+          <div className="rounded-t-lg bg-gradient-to-r from-warning-400 via-warning-300 to-warning-400 p-2 shadow-md">
+            <p className="break-word text-bodySm font-bold">
+              {stringSlicer({ string: task.title, slice: isMobile ? 45 : 90 })}
+            </p>
+          </div>
+
+          <p className="break-words p-2 text-bodySm">
+            {stringSlicer({
+              string: task.description,
+              slice: isMobile ? 90 : 180,
+            })}
+          </p>
+        </div>
+        <div className="flex items-center justify-between rounded-b-lg bg-gradient-to-r from-warning-400 via-warning-300 to-warning-400 px-2 py-1">
           <MyIcon
             icon={
               task.tag == "bug"
                 ? "solar:bug-bold-duotone"
                 : "material-symbols:task"
             }
-            className="mr-1 text-title text-white"
+            className="mr-2 text-title text-white"
           />
 
           <div data-no-dnd="true">
             <MyIcon
-              icon={"carbon:task-view"}
-              className="cursor-pointer text-title text-white hover:text-primary-500"
+              icon={"grommet-icons:link-next"}
+              className="cursor-pointer text-subtitle text-white hover:text-blue-500"
               onClick={() => navigation.taskDetail(task.id)}
             />
           </div>
-        </div>
-
-        <div className="cursor-grab p-2" {...listeners} {...attributes}>
-          <p className="wrap-break-word mb-2 font-bold text-primary-500">
-            {stringSlicer({ string: task.title, slice: isMobile ? 25 : 50 })}
-          </p>
-
-          <p className="wrap-break-word text-bodySm">
-            {stringSlicer({
-              string: task.description,
-              slice: isMobile ? 50 : 100,
-            })}
-          </p>
         </div>
       </div>
     </div>
