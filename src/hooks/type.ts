@@ -14,7 +14,7 @@ export interface UseAuthListenerProps {
       action: {
         payload: Partial<AuthContextStateType>;
         type: AuthContextActionType;
-      }
+      },
     ]
   >;
   unsubDocRef: RefObject<(() => void) | null>;
@@ -31,7 +31,7 @@ export interface UseAuthActionProps {
       action: {
         payload: Partial<AuthContextStateType>;
         type: AuthContextActionType;
-      }
+      },
     ]
   >;
   setStepNumber: Dispatch<SetStateAction<string>>;
@@ -50,3 +50,5 @@ export interface UsePlanActionProps {
 export interface useTaskListenerProps {
   user: MyUserType | null;
 }
+
+export type fileType = "image" | "video" | "file" | "voice";

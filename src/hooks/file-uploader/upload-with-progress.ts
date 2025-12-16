@@ -1,0 +1,46 @@
+export function uploadWithProgress(
+  signedUrl: string,
+  file: File,
+  onProgress: (p: number) => void,
+  xhrRef: React.MutableRefObject<XMLHttpRequest | null>,
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhrRef.current = xhr;
+
+    let abortedByUser = false;
+
+    xhr.upload.onprogress = (event) => {
+      if (event.lengthComputable) {
+        const percent = Math.round((event.loaded / event.total) * 100);
+        onProgress(percent);
+      }
+    };
+
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        onProgress(100);
+        resolve();
+      } else {
+        reject(new Error("Upload failed"));
+      }
+    };
+
+    xhr.onabort = () => {
+      abortedByUser = true;
+      resolve();
+    };
+
+    xhr.onerror = () => {
+      if (abortedByUser || xhr.status === 0) {
+        return resolve();
+      }
+
+      reject(new Error("Network error during upload"));
+    };
+
+    xhr.open("PUT", signedUrl);
+    xhr.setRequestHeader("Content-Type", file.type);
+    xhr.send(file);
+  });
+}
