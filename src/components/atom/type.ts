@@ -33,12 +33,21 @@ export interface MyIconProps {
 export interface MyImageProps {
   src: string;
   alt: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
+  fill?: boolean;
   className?: string;
   wrapperClass?: string;
 }
 
 export interface LogoProps {
   small?: boolean;
+}
+
+export interface MyVideoProps {
+  src: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  className?: string;
 }

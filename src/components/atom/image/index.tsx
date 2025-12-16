@@ -6,6 +6,7 @@ const MyImage = ({
   alt,
   width,
   height,
+  fill,
   className,
   wrapperClass,
 }: MyImageProps) => {
@@ -16,6 +17,7 @@ const MyImage = ({
         alt={alt}
         width={width}
         height={height}
+        fill={fill}
         className={className}
       />
     </div>
