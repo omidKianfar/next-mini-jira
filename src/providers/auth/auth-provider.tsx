@@ -1,6 +1,6 @@
 "use client";
 
-import config from "@/config";
+import config from "@/config/firebase";
 import { useAuthActions } from "@/src/hooks/auth/use-actions";
 import { useSetStepNumber } from "@/src/hooks/auth/use-set-step-number";
 import { useUserListener } from "@/src/hooks/auth/use-user-listener";
