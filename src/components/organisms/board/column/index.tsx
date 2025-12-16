@@ -39,7 +39,9 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
         touchAction: "none",
       }}
     >
-      <div className="relative flex items-center justify-center gap-2 rounded-t-xl bg-gradient-to-r from-primary-500 via-primary-400 to-primary-500 p-2 text-center font-bold capitalize text-white shadow-sm">
+      <div
+        className={`relative flex items-center justify-center gap-2 ${!show ? "rounded-lg" : "rounded-t-xl"} bg-gradient-to-r from-primary-500 via-primary-400 to-primary-500 p-2 text-center font-bold capitalize text-white shadow-sm`}
+      >
         <h1>{id}</h1>
 
         {id === "todo" ? (
