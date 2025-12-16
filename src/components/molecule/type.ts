@@ -21,6 +21,7 @@ export interface FileInputControllerProps<T extends FieldValues>
   extends BaseControllerProps<T> {
   ref?: RefObject<HTMLInputElement | null>;
   onChange?: (event: any) => void;
+  disabled?: boolean;
 }
 
 export type TextareaControllerProps<T extends FieldValues> =
