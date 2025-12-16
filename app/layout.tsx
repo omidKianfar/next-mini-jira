@@ -34,15 +34,10 @@ const RootLayout = ({
   return (
     <html lang="en" className={PoppinsFont.className}>
       <body
-        className={`
-      
-          ${OutfitFont.variable} 
-          ${PoppinsFont.variable} 
-          ${InterFont.variable} 
-          antialiased`}
+        className={` ${OutfitFont.variable} ${PoppinsFont.variable} ${InterFont.variable} antialiased`}
       >
         <ProvidersWrapper>
-          <div className="w-screen h-screen overflow-y-auto scrollbar-hide">
+          <div className="scrollbar-hide h-screen w-screen overflow-y-auto">
             {children}
           </div>
         </ProvidersWrapper>
