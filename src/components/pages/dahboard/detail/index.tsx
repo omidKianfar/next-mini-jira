@@ -4,6 +4,7 @@ import ButtonBack from "@/src/components/atom/button/button-back";
 import ButtonFreeClass from "@/src/components/atom/button/button-free-class";
 import MyIcon from "@/src/components/atom/icon";
 import MyImage from "@/src/components/atom/image";
+import MyVideo from "@/src/components/atom/video";
 import PageLoading from "@/src/components/organisms/page-loading";
 import { useIsMobile } from "@/src/hooks/mobile-size";
 import { useNavigation } from "@/src/hooks/navigation";
@@ -130,6 +131,24 @@ const TaskDetailComponent = () => {
             </h1>
 
             <p className="break-word mb-8 mt-2 text-body">{task.description}</p>
+
+            {task.attachment?.fileType ? (
+              task.attachment?.fileType === "image" ? (
+                <MyImage
+                  src={task?.attachment?.fileUrl as string}
+                  alt="preview"
+                  fill
+                  wrapperClass="relative w-full max-w-[500px] h-[500px] overflow-hidden rounded-lg p-1 shadow-md border-2 border-gray-100 p-1"
+                  className="object-cover"
+                />
+              ) : (
+                <MyVideo
+                  src={task?.attachment?.fileUrl as string}
+                  alt="preview"
+                  className="w-full max-w-[500px] rounded-lg border-2 border-gray-100 p-1 shadow-md"
+                />
+              )
+            ) : null}
           </div>
           <MyImage
             src="/images/todo-detail.svg"
