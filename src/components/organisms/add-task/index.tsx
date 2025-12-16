@@ -1,24 +1,28 @@
 "use client";
 
-import { Columns, Task, TaskForm } from "@/src/types/global";
-import { FormProvider, useForm } from "react-hook-form";
 import { useMemo, useState } from "react";
+import AddTaskFormComponent from "./steps/add-task-form";
+import { AddTaskProps } from "../type";
+import { Task, TaskForm } from "@/src/types/global";
+import { useAuth } from "@/src/hooks/auth/use-auth";
+import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TaskShema } from "../board/schema";
-import dayjs from "dayjs";
 import { createTaskDocument } from "@/src/lib/tasks/create-task";
-import ButtonNext from "@/src/components/atom/button/button-next";
-import { useAuth } from "@/src/hooks/auth/use-auth";
 import { enqueueSnackbar } from "notistack";
-import SelectField from "../../molecule/controllers/RHF-fields/select-filed";
-import InputField from "../../molecule/controllers/RHF-fields/input-field";
-import TextareaFiled from "../../molecule/controllers/RHF-fields/textarea-field";
-import { ModalProps } from "../../molecule/type";
+import dayjs from "dayjs";
+import AddTaskUploadCmponent from "./steps/upload";
+import { useFileUploader } from "@/src/hooks/file-uploader";
 
-const AddTaskFormComponent = ({
-  handleClose,
-}: Pick<ModalProps, "handleClose">) => {
+const AddTask = ({ handleClose }: Pick<AddTaskProps, "handleClose">) => {
+  const [number, setNumber] = useState(0);
+
   const { user } = useAuth();
+
+  const { cancel, error, fileType, progress, reset, upload, uploading, url } =
+    useFileUploader({
+      accept: ["image/*", "video/*"],
+    });
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -27,7 +31,10 @@ const AddTaskFormComponent = ({
       title: "",
       description: "",
       tag: "task",
-      fileUrl: null,
+      attachment: {
+        fileUrl: null,
+        fileType: null,
+      },
     }),
     [],
   );
@@ -36,6 +43,21 @@ const AddTaskFormComponent = ({
     defaultValues,
     resolver: yupResolver(TaskShema),
   });
+
+  const uploadProcessHandler = async (file: File) => {
+    await upload(file);
+  };
+
+  const handleSave = () => {
+    methods.setValue("attachment.fileUrl", url);
+    setNumber(0);
+  };
+
+  const handleCancel = () => {
+    methods.setValue("attachment.fileUrl", "");
+    cancel();
+    setNumber(0);
+  };
 
   const onSubmit = async (values: TaskForm) => {
     setLoading(true);
@@ -48,16 +70,21 @@ const AddTaskFormComponent = ({
         status: "todo",
         tag: values.tag,
         createdAt: dayjs().format("YYYY-MM-DD"),
-        fileUrl: values.fileUrl,
+        attachment: {
+          fileUrl: values.attachment?.fileUrl,
+          fileType: fileType,
+        },
         userId: user?.userId as string,
         updatedAt: "",
       };
 
       await createTaskDocument(newTask);
 
-      enqueueSnackbar(`Todo created successfully`, {
+      enqueueSnackbar(`Task created successfully`, {
         variant: "success",
       });
+
+      reset();
 
       handleClose();
     } catch (error: any) {
@@ -71,46 +98,29 @@ const AddTaskFormComponent = ({
   };
 
   return (
-    <div>
-      <h1 className="mb-4 text-center text-title font-bold text-warning-500">
-        Create Task
-      </h1>
-
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <SelectField name="tag" options={columns} label={"Tag"} />
-
-          <InputField
-            name="title"
-            label="Title"
-            placeholder="Enter your title"
-            autoFocus
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        {number == 0 ? (
+          <AddTaskFormComponent
+            handleClose={handleClose}
+            setNumber={setNumber}
+            loading={loading}
           />
-
-          <TextareaFiled
-            name="description"
-            label="Description"
-            placeholder="Enter your description"
+        ) : (
+          <AddTaskUploadCmponent
+            uploadProcessHandler={uploadProcessHandler}
+            handleCancel={handleCancel}
+            handleSave={handleSave}
+            progress={progress}
+            uploading={uploading}
+            error={error}
+            fileType={fileType}
+            url={url}
           />
-
-          <div className="mt-4 flex justify-center lg:justify-end">
-            <ButtonNext onClick={handleClose} className="mr-4">
-              Cancel
-            </ButtonNext>
-
-            <ButtonNext type="submit" isLoading={loading}>
-              Create
-            </ButtonNext>
-          </div>
-        </form>
-      </FormProvider>
-    </div>
+        )}
+      </form>
+    </FormProvider>
   );
 };
 
-export default AddTaskFormComponent;
-
-export const columns: Columns[] = [
-  { label: "Bug", value: "bug" },
-  { label: "Task", value: "task" },
-];
+export default AddTask;
