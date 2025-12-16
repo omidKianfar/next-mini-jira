@@ -1,4 +1,4 @@
-import { db } from "@/config";
+import { db } from "@/config/firebase";
 import { MyUserType, UserType } from "@/src/types/global";
 import { User } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
