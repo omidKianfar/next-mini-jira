@@ -16,12 +16,13 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { auth, db } from "@/config";
+import { auth, db } from "@/config/firebase";
 import { findFirestoreUser } from "@/src/lib/auth/user-finder";
 import { createUserDocument } from "@/src/lib/auth/create-user";
 import { enqueueSnackbar } from "notistack";
 import { doc, getDoc } from "firebase/firestore";
 import { updateFirestoreUser } from "@/src/lib/auth/update-user";
+import dayjs from "dayjs";
 
 export const useAuthActions = ({
   dispatch,
