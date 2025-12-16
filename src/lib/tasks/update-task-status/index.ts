@@ -1,6 +1,6 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { UpdateTaskStatusProps } from "../type";
-import { db } from "@/config";
+import { db } from "@/config/firebase";
 import dayjs from "dayjs";
 
 export const updateTaskStatus = async ({

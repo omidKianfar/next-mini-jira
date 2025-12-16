@@ -4,7 +4,7 @@ import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { ListenToTasksProps } from "../type";
 import { setTasks } from "@/src/store/slices/tasks";
 import { Task } from "@/src/types/global";
-import { db } from "@/config";
+import { db } from "@/config/firebase";
 
 export const listenToTasks = ({ userId, dispatch }: ListenToTasksProps) => {
   const userIdInTasksQuery = query(

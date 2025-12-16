@@ -1,7 +1,7 @@
 import { Task } from "@/src/types/global";
 import { FetchTaskProps } from "../type";
-import { db } from "@/config";
 import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/config/firebase";
 
 export const fetchTask = async ({
   taskId,
@@ -21,7 +21,10 @@ export const fetchTask = async ({
     status: data.status ?? "todo",
     tag: data.tag ?? "",
     createdAt: data.createdAt ?? "",
-    fileUrl: data.fileUrl ?? "",
+    attachment: {
+      fileUrl: data?.fileUrl ?? "",
+      fileType: data?.fileType ?? "",
+    },
     userId: data.userId ?? "",
   };
 

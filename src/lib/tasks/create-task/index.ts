@@ -1,4 +1,4 @@
-import { db } from "@/config";
+import { db } from "@/config/firebase";
 import { Task } from "@/src/types/global";
 import { doc, setDoc } from "firebase/firestore";
 
