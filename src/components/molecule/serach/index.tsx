@@ -53,29 +53,31 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
 
   return (
     <div className="w-full">
-      <h1 className="mb-4 text-center text-title font-bold text-warning-500">
+      <h1 className="mb-4 text-center text-subtitle font-bold text-warning-500">
         Search Todo
       </h1>
 
-      <div className="relative">
-        <MyIcon
-          icon="tabler:zoom"
-          className="absolute left-1 top-3 text-title text-primary-500"
-        />
-
-        {filteredTasks.length > 0 && (
+      <div className="mb-4 rounded-lg bg-gray-50 p-1 shadow-md">
+        <div className="relative rounded-lg bg-gray-100 p-1">
           <MyIcon
-            icon="material-symbols:close-rounded"
-            className="absolute right-1 top-3 cursor-pointer text-title text-gray-400 hover:text-error-500"
-            onClick={handelClear}
+            icon="tabler:zoom"
+            className="absolute left-2 top-4 text-title text-primary-500"
           />
-        )}
 
-        <input
-          className="my-1 w-full rounded-lg border-2 border-primary-400 px-8 py-2 text-bodySm shadow-sm focus:outline-primary-600"
-          value={searchValue}
-          onChange={(event) => serachHandler(event)}
-        />
+          {filteredTasks.length > 0 && (
+            <MyIcon
+              icon="material-symbols:close-rounded"
+              className="absolute right-2 top-4 cursor-pointer text-title text-gray-400 hover:text-error-500"
+              onClick={handelClear}
+            />
+          )}
+
+          <input
+            className="my-1 w-full rounded-lg border-2 border-primary-400 px-8 py-2 text-bodySm shadow-md focus:outline-primary-700"
+            value={searchValue}
+            onChange={(event) => serachHandler(event)}
+          />
+        </div>
       </div>
 
       {openMenu ? (
@@ -84,38 +86,40 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
             {filteredTasks.map((task) => (
               <div
                 key={task.id}
-                className="mb-4 flex cursor-pointer items-center justify-between rounded-xl border-2 border-warning-400 bg-white"
+                className="mb-4 flex w-full cursor-pointer items-center justify-between rounded-lg border-2 border-warning-400 bg-white shadow-md"
                 onClick={() => {
                   navigation.taskDetail(task.id);
                   handleClose();
                 }}
               >
-                <div className="w-full">
-                  <div>
-                    <div className="rounded-t-lg bg-gradient-to-r from-warning-400 via-warning-300 to-warning-400 p-2 shadow-md">
+                <div className="w-full p-1">
+                  <div className="rounded-lg border border-gray-100 bg-gray-50 shadow-md">
+                    <div className="p-2">
                       <p className="break-word text-bodySm font-bold">
                         {stringSlicer({
                           string: task.title,
-                          slice: isMobile ? 45 : 90,
+                          slice: isMobile ? 50 : 100,
                         })}
                       </p>
                     </div>
 
-                    <p className="break-words p-2 text-bodySm">
-                      {stringSlicer({
-                        string: task.description,
-                        slice: isMobile ? 90 : 180,
-                      })}
-                    </p>
+                    <div className="border-t-2 border-dotted">
+                      <p className="break-words p-2 text-bodySm">
+                        {stringSlicer({
+                          string: task.description,
+                          slice: isMobile ? 100 : 200,
+                        })}
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between rounded-b-lg bg-gradient-to-r from-warning-400 via-warning-300 to-warning-400 px-2 py-1">
+                  <div className="flex items-center justify-between rounded-b-lg px-2 pb-1 pt-2">
                     <MyIcon
                       icon={
                         task.tag == "bug"
                           ? "solar:bug-bold-duotone"
                           : "material-symbols:task"
                       }
-                      className="mr-2 text-title text-white"
+                      className="mr-2 text-title text-warning-500"
                     />
                   </div>
                 </div>
