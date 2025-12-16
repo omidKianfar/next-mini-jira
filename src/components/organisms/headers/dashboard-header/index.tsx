@@ -3,10 +3,10 @@
 import { useState } from "react";
 import MyIcon from "@/src/components/atom/icon";
 import ModalContainer from "@/src/components/molecule/modal-component";
-import AddTaskFormComponent from "../../add-task";
 import SearchTasks from "@/src/components/molecule/serach";
 import FilterTask from "@/src/components/molecule/filters";
 import Logo from "@/src/components/atom/logo";
+import AddTask from "../../add-task";
 
 const DashboardHeader = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -14,6 +14,7 @@ const DashboardHeader = () => {
 
   const handleOpenModal = (modalNumber: number) => {
     setModalCounter(modalNumber);
+
     setOpen(true);
   };
 
@@ -57,7 +58,7 @@ const DashboardHeader = () => {
 
       <ModalContainer open={open} handleClose={handleCloseModal}>
         {modalcounter == 1 ? (
-          <AddTaskFormComponent handleClose={handleCloseModal} />
+          <AddTask handleClose={handleCloseModal}  />
         ) : modalcounter == 2 ? (
           <div>
             <SearchTasks handleClose={handleCloseModal} />
