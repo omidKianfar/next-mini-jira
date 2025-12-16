@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { UseAuthListenerProps } from "../../type";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "@/config";
+import { auth, db } from "@/config/firebase";
 import { doc, onSnapshot } from "firebase/firestore";
 import { findFirestoreUser } from "@/src/lib/auth/user-finder";
 
