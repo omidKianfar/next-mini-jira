@@ -95,7 +95,10 @@ export type Task = {
   status: TaskStatus;
   tag: TagType;
   createdAt: string;
-  fileUrl?: string | null;
+  attachment?: {
+    fileUrl?: string | null;
+    fileType?: string | null;
+  };
   userId: string;
   updatedAt?: string;
 };
@@ -104,7 +107,10 @@ export type TaskForm = {
   title: string;
   description: string;
   tag: TagType;
-  fileUrl?: string | null;
+  attachment?: {
+    fileUrl?: string | null;
+    fileType?: string | null;
+  };
 };
 
 export type TaskState = {
