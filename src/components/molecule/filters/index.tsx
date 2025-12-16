@@ -45,20 +45,20 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(filterHandeler)}>
-        <h1 className="mb-4 text-center text-title font-bold text-warning-500">
+        <h1 className="mb-4 text-center text-subtitle font-bold text-warning-500">
           Filter Todos
         </h1>
 
-        <div className="mb-4">
-          <SelectField name="tag" label="Tag" options={Tags} />
-        </div>
+        <div className="mb-4 rounded-lg bg-gray-50 p-1 shadow-md">
+          <div className="rounded-lg bg-gray-100 p-2">
+            <SelectField name="tag" label="Tag" options={Tags} />
 
-        <div className="mb-4">
-          <DateInputField name="from" label="Start Time" />
-        </div>
+            <div className="my-2">
+              <DateInputField name="from" label="Start Time" />
+            </div>
 
-        <div className="mb-4">
-          <DateInputField name="to" label="End Time" />
+            <DateInputField name="to" label="End Time" />
+          </div>
         </div>
 
         <div className="flex items-center justify-center lg:justify-end">
