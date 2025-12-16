@@ -32,35 +32,41 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
       style={style}
       className="flex w-full items-center justify-between rounded-lg border-2 border-warning-400 bg-white shadow-md"
     >
-      <div className="w-full">
-        <div className="cursor-grab" {...listeners} {...attributes}>
-          <div className="rounded-t-lg bg-gradient-to-r from-warning-400 via-warning-300 to-warning-400 p-2 shadow-md">
+      <div className="w-full p-1">
+        <div
+          className="cursor-grab rounded-lg border border-gray-100 bg-gray-50 shadow-md"
+          {...listeners}
+          {...attributes}
+        >
+          <div className="p-2">
             <p className="break-word text-bodySm font-bold">
-              {stringSlicer({ string: task.title, slice: isMobile ? 45 : 90 })}
+              {stringSlicer({ string: task.title, slice: isMobile ? 50 : 100 })}
             </p>
           </div>
 
-          <p className="break-words p-2 text-bodySm">
-            {stringSlicer({
-              string: task.description,
-              slice: isMobile ? 90 : 180,
-            })}
-          </p>
+          <div className="border-t-2 border-dotted">
+            <p className="break-words p-2 text-bodySm">
+              {stringSlicer({
+                string: task.description,
+                slice: isMobile ? 100 : 200,
+              })}
+            </p>
+          </div>
         </div>
-        <div className="flex items-center justify-between rounded-b-lg bg-gradient-to-r from-warning-400 via-warning-300 to-warning-400 px-2 py-1">
+        <div className="flex items-center justify-between rounded-b-lg px-2 pb-1 pt-2">
           <MyIcon
             icon={
               task.tag == "bug"
                 ? "solar:bug-bold-duotone"
                 : "material-symbols:task"
             }
-            className="mr-2 text-title text-white"
+            className="mr-2 text-title text-warning-500"
           />
 
           <div data-no-dnd="true">
             <MyIcon
               icon={"maki:arrow"}
-              className="cursor-pointer text-subtitle text-white hover:text-blue-500"
+              className="cursor-pointer text-subtitle text-warning-500 hover:text-blue-500"
               onClick={() => navigation.taskDetail(task.id)}
             />
           </div>
