@@ -19,8 +19,8 @@ export interface BackButtonProps {
 }
 
 export interface LoadingProps {
-  color: string;
-  size: number;
+  color?: string;
+  size?: number;
 }
 
 export interface MyIconProps {
