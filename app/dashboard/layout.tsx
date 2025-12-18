@@ -2,9 +2,16 @@
 
 import { PropsWithChildren } from "react";
 import AuthGuard from "@/src/guards/auth-guard";
+import Header from "@/src/components/organisms/headers/indx";
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {
-  return <AuthGuard>{children}</AuthGuard>;
+  return (
+    <AuthGuard>
+      <Header />
+
+      {children}
+    </AuthGuard>
+  );
 };
 
 export default DashboardLayout;
