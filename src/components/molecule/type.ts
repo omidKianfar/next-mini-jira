@@ -77,3 +77,8 @@ export interface CropProps {
   onCancel: () => void;
   onSave: (file: File) => void | Promise<void>;
 }
+
+export interface LightBoxProps {
+  children: React.ReactNode;
+  url: string;
+}
