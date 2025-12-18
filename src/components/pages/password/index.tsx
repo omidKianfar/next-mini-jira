@@ -6,7 +6,7 @@ import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/us
 import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
 import { SignPropsType } from "@/src/types/global";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { authSchema } from "../auth/schema";
 import FramerMotion from "../../atom/animation";
@@ -32,19 +32,25 @@ const PasswordComponent = () => {
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
 
-  const defaultValues: SignPropsType = useMemo(
-    () => ({
-      email: user?.email ?? "",
-      password: "",
-    }),
-    [],
-  );
+  const defaultValues: SignPropsType = {
+    email: user?.email ?? "",
+    password: "",
+  };
 
   const methods = useForm<SignPropsType>({
     defaultValues,
     resolver: yupResolver(authSchema),
     mode: "onSubmit",
   });
+
+  useEffect(() => {
+    if (user) {
+      methods.reset({
+        email: user?.email ?? "",
+        password: "",
+      });
+    }
+  }, [user, methods]);
 
   const setProfileHandler = async (values: SignPropsType) => {
     setLoading(true);
