@@ -55,6 +55,7 @@ export type FilterFormType = {
 export type ModalProps = React.PropsWithChildren & {
   open: boolean;
   handleClose: () => void;
+  handleOpenModal?: (modalNumber: number) => void;
 };
 
 export interface UploadAvatarProps {
