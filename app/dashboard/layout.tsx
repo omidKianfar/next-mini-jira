@@ -1,15 +1,20 @@
 "use client";
 
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useState } from "react";
 import AuthGuard from "@/src/guards/auth-guard";
-import Header from "@/src/components/organisms/headers/indx";
+import Header from "@/src/components/organisms/header/indx";
+import SideBar from "@/src/components/organisms/sidebar";
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {
+  const [showSidebar, setShowSidebar] = useState(false);
+
   return (
     <AuthGuard>
-      <Header />
+      <Header showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
 
-      {children}
+      <SideBar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
+
+      <div onClick={() => setShowSidebar(false)}>{children}</div>
     </AuthGuard>
   );
 };
