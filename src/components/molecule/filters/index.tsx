@@ -3,7 +3,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { filterSchema } from "./schema";
 import { FilterFormType, ModalProps } from "../type";
-import { useMemo } from "react";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { RootState } from "@/src/store";
@@ -17,19 +17,26 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
 
   const filters = useSelector((state: RootState) => state.filters);
 
-  const defaultValues: FilterFormType = useMemo(
-    () => ({
-      tag: filters.tag ?? "all",
-      from: filters.date.from ?? "",
-      to: filters.date.to ?? "",
-    }),
-    [],
-  );
+  const defaultValues: FilterFormType = {
+    tag: filters.tag ?? "all",
+    from: filters.date.from ?? "",
+    to: filters.date.to ?? "",
+  };
 
   const methods = useForm<FilterFormType>({
     defaultValues,
     resolver: yupResolver(filterSchema),
   });
+
+  useEffect(() => {
+    if (filters) {
+      methods.reset({
+        tag: filters.tag ?? "all",
+        from: filters.date.from ?? "",
+        to: filters.date.to ?? "",
+      });
+    }
+  }, [filters, methods]);
 
   const filterHandeler = (values: FilterFormType) => {
     dispatch(setDate({ from: values.from ?? "", to: values.to ?? "" }));
