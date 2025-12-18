@@ -30,8 +30,11 @@ export const authContext = createContext<AuthContextProps>({
   signupWithEmail: ({ email, password }: SignPropsType) => Promise.resolve(),
   signinWithEmail: ({ email, password }: SignPropsType) => Promise.resolve(),
   googleSignin: () => Promise.resolve(),
-  updatePassword: ({ newPassword }: UserPasswordUpdateType) =>
+  updatePasswordGoogle: ({ newPassword }: UserPasswordUpdateType) =>
     Promise.resolve(),
+  addOrUpdatePasswordForCurrentUser: ({
+    newPassword,
+  }: UserPasswordUpdateType) => Promise.resolve(),
   logout: () => Promise.resolve(),
   saveUserProfile: ({ userId, data }: UserProfileType) => Promise.resolve(),
   terialMode: ({ userId }: UserProfileType) => Promise.resolve(),
@@ -62,7 +65,8 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     signupWithEmail,
     signinWithEmail,
     googleSignin,
-    updatePassword,
+    updatePasswordGoogle,
+    addOrUpdatePasswordForCurrentUser,
     logout,
     saveUserProfile,
     terialMode,
@@ -75,7 +79,8 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         signupWithEmail,
         signinWithEmail,
         googleSignin,
-        updatePassword,
+        updatePasswordGoogle,
+        addOrUpdatePasswordForCurrentUser,
         logout,
         saveUserProfile,
         terialMode,

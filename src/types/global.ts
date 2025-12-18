@@ -49,7 +49,12 @@ export type AuthContextProps = AuthContextStateType & {
     password,
   }: SignPropsType) => Promise<MyUserType | void>;
   googleSignin: () => Promise<void>;
-  updatePassword: ({ newPassword }: UserPasswordUpdateType) => Promise<void>;
+  updatePasswordGoogle: ({
+    newPassword,
+  }: UserPasswordUpdateType) => Promise<void>;
+  addOrUpdatePasswordForCurrentUser: ({
+    newPassword,
+  }: UserPasswordUpdateType) => Promise<void>;
   logout: () => Promise<void>;
   saveUserProfile: ({ userId, data }: UserProfileType) => Promise<void>;
   terialMode: ({ userId }: UserProfileType) => Promise<void>;

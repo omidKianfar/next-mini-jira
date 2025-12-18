@@ -26,7 +26,8 @@ const PasswordComponent = () => {
   useRequireActiveStatus();
   useRequirePaymentStatus();
 
-  const { user, updatePassword } = useAuth();
+  const { user, updatePasswordGoogle, addOrUpdatePasswordForCurrentUser } =
+    useAuth();
   const isMobile = useIsMobile();
 
   const [loading, setLoading] = useState(false);
@@ -56,9 +57,15 @@ const PasswordComponent = () => {
     setLoading(true);
 
     try {
-      await updatePassword({
-        newPassword: values.password,
-      });
+      if (pathName.includes("/signup")) {
+        await updatePasswordGoogle({
+          newPassword: values.password,
+        });
+      } else {
+        await addOrUpdatePasswordForCurrentUser({
+          newPassword: values.password,
+        });
+      }
     } catch (error: any) {
       console.log("Error: ", error);
     } finally {

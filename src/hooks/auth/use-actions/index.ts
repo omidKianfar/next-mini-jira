@@ -15,6 +15,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updatePassword,
 } from "firebase/auth";
 import { auth, db } from "@/config/firebase";
 import { findFirestoreUser } from "@/src/lib/auth/user-finder";
@@ -66,8 +67,12 @@ export const useAuthActions = ({
 
         navigation.dashboard();
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log("User signin firebase error: ", error);
+
+      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+        variant: "error",
+      });
     } finally {
       dispatch({
         type: "IS_LOADING",
@@ -180,7 +185,9 @@ export const useAuthActions = ({
     }
   };
 
-  const updatePassword = async ({ newPassword }: UserPasswordUpdateType) => {
+  const updatePasswordGoogle = async ({
+    newPassword,
+  }: UserPasswordUpdateType) => {
     try {
       const user = auth.currentUser;
       if (!user) return;
@@ -202,6 +209,54 @@ export const useAuthActions = ({
       enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
         variant: "error",
       });
+    }
+  };
+
+  const addOrUpdatePasswordForCurrentUser = async ({
+    newPassword,
+  }: UserPasswordUpdateType) => {
+    try {
+      const user = auth.currentUser;
+
+      if (!user || !user.email) {
+        enqueueSnackbar("User not authenticated", { variant: "error" });
+        return;
+      }
+
+      const credential = EmailAuthProvider.credential(user.email, newPassword);
+
+      try {
+        await linkWithCredential(user, credential);
+
+        enqueueSnackbar(
+          "Password linked successfully ✅ (Email & Password enabled)",
+          { variant: "success" },
+        );
+
+        return;
+      } catch (linkError: any) {
+        if (linkError.code === "auth/provider-already-linked") {
+          await updatePassword(user, newPassword);
+
+          enqueueSnackbar("Password updated successfully ✅", {
+            variant: "success",
+          });
+
+          return;
+        } else {
+          throw linkError;
+        }
+      }
+    } catch (error: any) {
+      console.log("Password link/update error:", error);
+
+      if (error.code === "auth/weak-password") {
+        enqueueSnackbar("Password is too weak", { variant: "error" });
+      } else {
+        enqueueSnackbar(error.message || "Something went wrong", {
+          variant: "error",
+        });
+      }
     }
   };
 
@@ -281,7 +336,8 @@ export const useAuthActions = ({
     signinWithEmail,
     signupWithEmail,
     googleSignin,
-    updatePassword,
+    updatePasswordGoogle,
+    addOrUpdatePasswordForCurrentUser,
     terialMode,
     logout,
     saveUserProfile,
