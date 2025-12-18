@@ -10,8 +10,9 @@ import AddTask from "../add-task";
 import SearchTasks from "../../molecule/serach";
 import FilterTask from "../../molecule/filters";
 import { useState } from "react";
+import { HeaderProps } from "../type";
 
-const Header = () => {
+const Header = ({ showSidebar,setShowSidebar }: HeaderProps) => {
   const pathname = usePathname();
 
   const [open, setOpen] = useState<boolean>(false);
@@ -29,11 +30,12 @@ const Header = () => {
 
   return (
     <>
-      <div className="sticky top-0 z-50  flex h-[60px] flex-row items-center justify-between border border-white/30 bg-white/20 px-4 shadow-lg backdrop-blur-lg lg:h-[80px]">
+      <div className="sticky top-0 z-50 flex h-[60px] flex-row items-center justify-between border border-white/30 bg-white/20 px-4 shadow-lg backdrop-blur-md lg:h-[80px]">
         <div className="flex w-1/3 items-center justify-start">
           <MyIcon
             icon={"mingcute:menu-fill"}
             className="cursor-pointer text-title text-primary-500 hover:text-primary-700 lg:text-h3"
+            onClick={()=> setShowSidebar(!showSidebar)}
           />
         </div>
 
