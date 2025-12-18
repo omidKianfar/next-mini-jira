@@ -6,7 +6,7 @@ import { FormValues } from "../../type";
 import { useNavigation } from "@/src/hooks/navigation";
 import { useIsMobile } from "@/src/hooks/mobile-size";
 import { useAuth } from "@/src/hooks/auth/use-auth";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authSchema } from "../schema";
@@ -27,13 +27,10 @@ const AuthComponent = () => {
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
 
-  const defaultValues: FormValues = useMemo(
-    () => ({
-      email: "",
-      password: "",
-    }),
-    [],
-  );
+  const defaultValues: FormValues = {
+    email: "",
+    password: "",
+  };
 
   const methods = useForm<FormValues>({
     defaultValues,
