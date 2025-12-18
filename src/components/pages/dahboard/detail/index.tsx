@@ -90,8 +90,8 @@ const TaskDetailComponent = () => {
   if (!task) return <div>Task not found</div>;
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center p-4">
-      <div className="h-full w-full rounded-xl border-2 border-amber-300 bg-white p-4 shadow-md lg:h-full">
+    <div className="flex w-full flex-col items-start justify-center p-4">
+      <div className="h-full w-full rounded-xl border-2 border-amber-300 bg-white p-4 shadow-md">
         <div className="mb-4 flex items-center justify-between lg:mb-2">
           <ButtonBack onClick={BackDashboard} />
 
@@ -110,18 +110,18 @@ const TaskDetailComponent = () => {
 
         <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
           <div className="w-[90vw] p-4 lg:w-full">
-            <div className=" flex flex-col justify-between lg:mb-4 lg:w-[500px] lg:flex-row">
-              <p className="capitalize text-primary-600 mb-4">
+            <div className="flex flex-col justify-between lg:mb-4 lg:w-[500px] lg:flex-row">
+              <p className="mb-4 capitalize text-primary-600">
                 <span className="text-body font-bold text-black">Status:</span>{" "}
                 {task.status}
               </p>
 
-              <p className="capitalize text-primary-600 mb-4">
+              <p className="mb-4 capitalize text-primary-600">
                 <span className="text-body font-bold text-black">Tag:</span>{" "}
                 {task.tag}
               </p>
 
-              <p className="capitalize text-primary-600 mb-4" >
+              <p className="mb-4 capitalize text-primary-600">
                 <span className="text-body font-bold text-black">Created:</span>{" "}
                 {task.createdAt}
               </p>

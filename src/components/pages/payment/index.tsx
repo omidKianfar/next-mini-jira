@@ -54,7 +54,9 @@ const PalnComponent = () => {
 
   return (
     <FramerMotion>
-      <div className="flex min-h-screen w-full flex-col items-center justify-center p-4">
+      <div
+        className={`flex w-full flex-col items-center justify-center p-4 ${pathName.includes("/signup") && "min-h-screen"}`}
+      >
         {pathName.includes("payment") && now.isAfter(user?.payment?.endAt) ? (
           <div className="w-[90vw] rounded-xl border-2 border-warning-500 p-4 lg:w-[500px]">
             <div className="mb-4 flex items-center justify-start">
@@ -87,14 +89,14 @@ const PalnComponent = () => {
             </div>
           </div>
         ) : (
-          <>
+          <div className="relative">
             <MyImage
               src="/images/Wallet.svg"
               alt=""
-              width={isMobile ? 150 : 300}
-              height={isMobile ? 150 : 300}
+              width={isMobile ? 150 : 200}
+              height={isMobile ? 150 : 200}
               className="object-contain"
-              wrapperClass="absolute top-0"
+              wrapperClass="absolute w-full top-[-20px] flex justify-center items-center"
             />
 
             <div className="w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-8 shadow-md lg:h-[600px] lg:w-[900px]">
@@ -130,7 +132,7 @@ const PalnComponent = () => {
                 />
               </div>
             </div>
-          </>
+          </div>
         )}
       </div>
     </FramerMotion>
