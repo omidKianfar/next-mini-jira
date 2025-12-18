@@ -84,3 +84,12 @@ export interface uploadProps {
   avatar?: boolean;
   userId?: string;
 }
+export interface uploadWithProgressProps {
+  signedUrl: string;
+  file: File;
+  onProgress: (p: number) => void;
+  xhrRef: React.MutableRefObject<XMLHttpRequest | null>;
+}
+export interface deleteUploadedFileProps {
+  path: string | null;
+}

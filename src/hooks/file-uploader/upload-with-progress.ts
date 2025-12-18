@@ -1,9 +1,11 @@
-export function uploadWithProgress(
-  signedUrl: string,
-  file: File,
-  onProgress: (p: number) => void,
-  xhrRef: React.MutableRefObject<XMLHttpRequest | null>,
-): Promise<void> {
+import { uploadWithProgressProps } from "../type";
+
+export function uploadWithProgress({
+  signedUrl,
+  file,
+  onProgress,
+  xhrRef,
+}: uploadWithProgressProps): Promise<void> {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhrRef.current = xhr;

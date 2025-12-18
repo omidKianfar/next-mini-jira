@@ -2,19 +2,12 @@
 
 import { supabase } from "@/config/supabase";
 import { useState, useCallback, useRef } from "react";
-import { fileType } from "../type";
+import { fileType, FileUploaderOptions, uploadProps } from "../type";
 
 import { detectFileType, getFolderFromType } from "./helpers";
 import { validateFile } from "./validate-file";
 import { deleteFile } from "./delete-file";
 import { uploadWithProgress } from "./upload-with-progress";
-
-type FileUploaderOptions = {
-  accept?: string[];
-  except?: string[];
-  signedUrlExpiresIn?: number;
-  maxSizeMB?: number;
-};
 
 export function useFileUploader(options: FileUploaderOptions = {}) {
   const {
@@ -34,7 +27,7 @@ export function useFileUploader(options: FileUploaderOptions = {}) {
   const xhrRef = useRef<XMLHttpRequest | null>(null);
 
   const upload = useCallback(
-    async (file: File) => {
+    async ({ file, avatar, userId }: uploadProps) => {
       setError(null);
       setProgress(0);
       setUrl(null);
@@ -48,10 +41,40 @@ export function useFileUploader(options: FileUploaderOptions = {}) {
         return null;
       }
 
-      if (realPath) await deleteFile(realPath);
+      if (realPath) await deleteFile({ path: realPath });
 
-      const folder = getFolderFromType(type);
-      const finalPath = `${folder}/${crypto.randomUUID()}-${file.name}`;
+      let folder: string | fileType;
+      let finalPath: string;
+
+      if (avatar && userId) {
+        folder = "avatars";
+
+        const nameExt = file.name.split(".").pop()?.toLowerCase();
+        const mimeExt = file.type.split("/").pop()?.toLowerCase();
+        const ext = nameExt || mimeExt || "png";
+
+        finalPath = `${folder}/${userId}.${ext}`;
+
+        try {
+          const { data: listData } = await supabase.storage
+            .from("uploads")
+            .list(folder, { limit: 100 });
+
+          const oldAvatar = listData?.find((obj) =>
+            obj.name.startsWith(userId + "."),
+          );
+
+          if (oldAvatar) {
+            await deleteFile({ path: `${folder}/${oldAvatar.name}` });
+          }
+        } catch (listErr) {
+          console.warn("Avatar cleanup failed:", listErr);
+        }
+      } else {
+        folder = getFolderFromType(type);
+
+        finalPath = `${folder}/${crypto.randomUUID()}-${file.name}`;
+      }
 
       setUploading(true);
 
@@ -65,7 +88,12 @@ export function useFileUploader(options: FileUploaderOptions = {}) {
         const rp = data.path;
         setRealPath(rp);
 
-        await uploadWithProgress(data.signedUrl, file, setProgress, xhrRef);
+        await uploadWithProgress({
+          signedUrl: data.signedUrl,
+          file: file,
+          onProgress: setProgress,
+          xhrRef: xhrRef,
+        });
 
         const { data: signedUrlData, error: urlErr } = await supabase.storage
           .from("uploads")
@@ -76,7 +104,7 @@ export function useFileUploader(options: FileUploaderOptions = {}) {
         setUrl(signedUrlData.signedUrl);
         return signedUrlData.signedUrl;
       } catch (err: any) {
-        await deleteFile(realPath);
+        await deleteFile({ path: realPath });
         setRealPath(null);
         setError(err.message ?? "Upload failed");
         return null;
@@ -101,7 +129,7 @@ export function useFileUploader(options: FileUploaderOptions = {}) {
     }
 
     if (realPath) {
-      await deleteFile(realPath);
+      await deleteFile({ path: realPath });
       setRealPath(null);
     }
 
