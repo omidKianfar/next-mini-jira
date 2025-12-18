@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import AddTaskFormComponent from "./steps/add-task-form";
 import { AddTaskProps } from "../type";
 import { Task, TaskForm } from "@/src/types/global";
@@ -13,11 +13,12 @@ import { enqueueSnackbar } from "notistack";
 import dayjs from "dayjs";
 import AddTaskUploadCmponent from "./steps/upload";
 import { useFileUploader } from "@/src/hooks/file-uploader";
+import { useImageProcessor } from "@/src/hooks/image-processor";
 
 const AddTask = ({ handleClose }: Pick<AddTaskProps, "handleClose">) => {
-  const [number, setNumber] = useState(0);
-
   const { user } = useAuth();
+
+  const { processImage } = useImageProcessor({ size: 1024 });
 
   const { cancel, error, fileType, progress, reset, upload, uploading, url } =
     useFileUploader({
@@ -25,19 +26,17 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, "handleClose">) => {
     });
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [number, setNumber] = useState(0);
 
-  const defaultValues: TaskForm = useMemo(
-    () => ({
-      title: "",
-      description: "",
-      tag: "task",
-      attachment: {
-        fileUrl: null,
-        fileType: null,
-      },
-    }),
-    [],
-  );
+  const defaultValues: TaskForm = {
+    title: "",
+    description: "",
+    tag: "task",
+    attachment: {
+      fileUrl: null,
+      fileType: null,
+    },
+  };
 
   const methods = useForm<TaskForm>({
     defaultValues,
@@ -45,7 +44,15 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, "handleClose">) => {
   });
 
   const uploadProcessHandler = async (file: File) => {
-    await upload(file);
+    let finalFile = file;
+
+    if (file.type.startsWith("image/")) {
+      const processed = await processImage(file);
+
+      finalFile = processed;
+    }
+
+    await upload({ file: finalFile });
   };
 
   const handleSave = () => {
