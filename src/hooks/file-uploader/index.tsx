@@ -13,7 +13,7 @@ export function useFileUploader(options: FileUploaderOptions = {}) {
   const {
     accept = null,
     except = null,
-    signedUrlExpiresIn = 3600,
+    signedUrlExpiresIn = 60 * 60 * 24 * 7,
     maxSizeMB = 100,
   } = options;
 
