@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins, Inter, Outfit } from "next/font/google";
-import "./globals.css";
+import "@/src/styles/globals.css";
 import ProvidersWrapper from "@/src/providers";
 
 const OutfitFont = Outfit({
