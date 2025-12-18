@@ -22,6 +22,7 @@ export interface FileInputControllerProps<T extends FieldValues>
   ref?: RefObject<HTMLInputElement | null>;
   onChange?: (event: any) => void;
   disabled?: boolean;
+  accept?: string;
 }
 
 export type TextareaControllerProps<T extends FieldValues> =
@@ -59,6 +60,8 @@ export type ModalProps = React.PropsWithChildren & {
 export interface UploadAvatarProps {
   photo: string | undefined;
   uploadHandler: (event: any) => void;
+  uploading?: boolean;
+  progress?: number;
 }
 
 export type CartType = {
@@ -68,3 +71,9 @@ export type CartType = {
   price?: number;
   icon: React.ReactNode;
 };
+
+export interface CropProps {
+  file: never;
+  onCancel: () => void;
+  onSave: (file: File) => void | Promise<void>;
+}

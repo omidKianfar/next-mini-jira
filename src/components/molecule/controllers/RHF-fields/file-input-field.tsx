@@ -11,6 +11,7 @@ const FileInputField = <T extends FieldValues>({
   ref,
   onChange,
   disabled,
+  accept
 }: FileInputControllerProps<T>) => {
   const {
     control,
@@ -31,6 +32,7 @@ const FileInputField = <T extends FieldValues>({
               id={name}
               type={"file"}
               ref={ref}
+              accept={accept}
               value={undefined}
               disabled={disabled}
               onChange={(event) => {
