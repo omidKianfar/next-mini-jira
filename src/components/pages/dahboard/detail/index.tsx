@@ -5,6 +5,7 @@ import ButtonFreeClass from "@/src/components/atom/button/button-free-class";
 import MyIcon from "@/src/components/atom/icon";
 import MyImage from "@/src/components/atom/image";
 import MyVideo from "@/src/components/atom/video";
+import LightBoxComponent from "@/src/components/molecule/light-box";
 import PageLoading from "@/src/components/organisms/page-loading";
 import { useIsMobile } from "@/src/hooks/mobile-size";
 import { useNavigation } from "@/src/hooks/navigation";
@@ -109,54 +110,65 @@ const TaskDetailComponent = () => {
 
         <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
           <div className="w-[90vw] p-4 lg:w-full">
-            <div className="mb-4 flex flex-col justify-between lg:mb-8 lg:w-[500px] lg:flex-row">
-              <p className="capitalize text-primary-600">
+            <div className=" flex flex-col justify-between lg:mb-4 lg:w-[500px] lg:flex-row">
+              <p className="capitalize text-primary-600 mb-4">
                 <span className="text-body font-bold text-black">Status:</span>{" "}
                 {task.status}
               </p>
 
-              <p className="capitalize text-primary-600">
+              <p className="capitalize text-primary-600 mb-4">
                 <span className="text-body font-bold text-black">Tag:</span>{" "}
                 {task.tag}
               </p>
 
-              <p className="capitalize text-primary-600">
+              <p className="capitalize text-primary-600 mb-4" >
                 <span className="text-body font-bold text-black">Created:</span>{" "}
                 {task.createdAt}
               </p>
             </div>
 
-            <h1 className="break-word mb-4 text-body font-semibold">
-              {task.title}
-            </h1>
+            <div className="rounded-md border border-dashed border-gray-400 bg-gray-50 p-4 shadow-md">
+              <h1 className="break-word mb-4 text-body font-semibold">
+                {task.title}
+              </h1>
 
-            <p className="break-word mb-8 mt-2 text-body">{task.description}</p>
+              <hr className="border border-dashed border-gray-300" />
 
-            {task.attachment?.fileType ? (
-              task.attachment?.fileType === "image" ? (
-                <MyImage
-                  src={task?.attachment?.fileUrl as string}
-                  alt="preview"
-                  fill
-                  wrapperClass="relative w-full max-w-[500px] h-[500px] overflow-hidden rounded-lg p-1 shadow-md border-2 border-gray-100 p-1"
-                  className="object-cover"
-                />
-              ) : (
-                <MyVideo
-                  src={task?.attachment?.fileUrl as string}
-                  alt="preview"
-                  className="w-full max-w-[500px] rounded-lg border-2 border-gray-100 p-1 shadow-md"
-                />
-              )
-            ) : null}
+              <p className="break-word mb-4 mt-2 text-body">
+                {task.description}
+              </p>
+              <div className="flex items-center justify-center">
+                {task.attachment?.fileType ? (
+                  task.attachment?.fileType === "image" ? (
+                    <LightBoxComponent
+                      url={task?.attachment?.fileUrl as string}
+                    >
+                      <MyImage
+                        src={task?.attachment?.fileUrl as string}
+                        alt="preview"
+                        fill
+                        wrapperClass="relative cursor-pointer w-[250px] h-[250px] overflow-hidden rounded-lg p-1 shadow-md border-2 border-gray-100 p-1"
+                        className="object-cover"
+                      />
+                    </LightBoxComponent>
+                  ) : (
+                    <MyVideo
+                      src={task?.attachment?.fileUrl as string}
+                      alt="preview"
+                      className="w-full max-w-[500px] rounded-lg border-2 border-gray-100 p-1 shadow-md"
+                    />
+                  )
+                ) : null}
+              </div>
+            </div>
           </div>
           <MyImage
             src="/images/todo-detail.svg"
             alt=""
             width={isMobile ? 300 : 400}
-            height={isMobile ? 200 : 300}
+            height={isMobile ? 300 : 400}
             className="object-contain"
-            wrapperClass="w-[300px] h-[200px] lg:w-[400px] lg:h-[300px] flex items-center justify-center"
+            wrapperClass="w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] flex items-center justify-center"
           />{" "}
         </div>
       </div>

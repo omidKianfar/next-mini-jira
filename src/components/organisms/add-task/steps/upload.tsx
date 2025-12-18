@@ -4,6 +4,7 @@ import DragDropUploader from "@/src/components/molecule/upload/drag-drop";
 import LoadingCircle from "@/src/components/atom/loading-circle";
 import MyImage from "@/src/components/atom/image";
 import MyVideo from "@/src/components/atom/video";
+import LightBoxComponent from "@/src/components/molecule/light-box";
 
 const AddTaskUploadComponent = ({
   uploadProcessHandler,
@@ -35,20 +36,22 @@ const AddTaskUploadComponent = ({
         <div
           className={`flex h-[200px] w-full cursor-not-allowed items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 transition-all`}
         >
-          <LoadingCircle  size={40} />
+          <LoadingCircle size={40} />
         </div>
       )}
 
       {url && (
         <div className="mt-4 flex items-center justify-center">
           {fileType! === "image" && (
-            <MyImage
-              src={url as string}
-              alt="preview"
-              fill
-              wrapperClass="relative w-full h-full max-w-[500px] max-h-[500px] overflow-hidden rounded-lg p-1 shadow-md border-2 border-gray-100 p-1"
-              className="object-cover"
-            />
+            <LightBoxComponent url={url as string}>
+              <MyImage
+                src={url as string}
+                alt="preview"
+                fill
+                wrapperClass="relative cursor-pointer w-[500px] h-[500px] overflow-hidden rounded-lg p-1 shadow-md border-2 border-gray-100 p-1"
+                className="object-cover"
+              />
+            </LightBoxComponent>
           )}
           {fileType! === "video" && (
             <MyVideo
@@ -66,7 +69,9 @@ const AddTaskUploadComponent = ({
             Cancel
           </ButtonNext>
 
-          <ButtonNext onClick={handleSave}>Save</ButtonNext>
+          <ButtonNext onClick={handleSave} className="w-[130px]">
+            Save
+          </ButtonNext>
 
           {error! && <p className="mt-1 text-red-500">{error}</p>}
         </div>
