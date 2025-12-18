@@ -9,6 +9,7 @@ const MyImage = ({
   fill,
   className,
   wrapperClass,
+  onClick
 }: MyImageProps) => {
   return (
     <div className={wrapperClass}>
@@ -19,6 +20,7 @@ const MyImage = ({
         height={height}
         fill={fill}
         className={className}
+        onClick={onClick}
       />
     </div>
   );

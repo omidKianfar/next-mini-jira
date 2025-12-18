@@ -38,6 +38,7 @@ export interface MyImageProps {
   fill?: boolean;
   className?: string;
   wrapperClass?: string;
+  onClick?: () => void;
 }
 
 export interface LogoProps {
