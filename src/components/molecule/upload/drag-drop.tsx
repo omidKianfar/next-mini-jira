@@ -47,7 +47,7 @@ const DragDropUploader = ({
   };
 
   return (
-    <div className="shadow-md rounded-lg">
+    <div className="rounded-lg shadow-md">
       <FileInputField
         name="fileUrl"
         label="FileUrl"
@@ -68,9 +68,9 @@ const DragDropUploader = ({
         } `}
         onClick={openFilePicker}
       >
-        <div className="text-center text-bodySm lg:text-body ">
+        <div className="text-center text-bodySm lg:text-body">
           {uploading && !progress ? (
-            <LoadingCircle color="#3b82f6" size={40} />
+            <LoadingCircle size={40} />
           ) : uploading && progress ? (
             <p className="text-primary-500">{progress}%</p>
           ) : isDragging ? (
