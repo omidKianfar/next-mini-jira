@@ -6,7 +6,7 @@ import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/us
 import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
 import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useIsMobile } from "@/src/hooks/mobile-size";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { ProfileProps } from "@/src/types/global";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -22,29 +22,33 @@ import MyImage from "../../atom/image";
 import { usePathname } from "next/navigation";
 import { useNavigation } from "@/src/hooks/navigation";
 import ButtonFreeClass from "../../atom/button/button-free-class";
+import { useFileUploader } from "@/src/hooks/file-uploader";
+import { useImageProcessor } from "@/src/hooks/image-processor";
 
 const ProfileComponent = () => {
   const pathName = usePathname();
-
   const isMobile = useIsMobile();
   const navigation = useNavigation();
 
   const { saveUserProfile, user } = useAuth();
 
-  const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
+  const { processImage } = useImageProcessor();
+
+  const { progress, reset, upload, uploading } = useFileUploader({
+    accept: ["image/*"],
+  });
 
   useRequireActiveStatus();
   useRequirePaymentStatus();
 
-  const defaultValues: ProfileProps = useMemo(
-    () => ({
-      photo: user?.photo ?? "",
-      userName: user?.userName ?? "",
-      birthday: user?.birthday ?? "",
-    }),
-    [],
-  );
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const defaultValues: ProfileProps = {
+    photo: user?.photo ?? "",
+    userName: user?.userName ?? "",
+    birthday: user?.birthday ?? "",
+  };
 
   const methods = useForm<ProfileProps>({
     defaultValues,
@@ -52,14 +56,27 @@ const ProfileComponent = () => {
     mode: "onSubmit",
   });
 
-  const uploadPhotoHandler = (event: any) => {
-    const file = event?.target?.files?.[0];
+  useEffect(() => {
+    if (user) {
+      methods.reset({
+        photo: user.photo ?? "",
+        userName: user.userName ?? "",
+        birthday: user.birthday ?? "",
+      });
+    }
+  }, [user, methods]);
 
-    if (!file) return;
+  const uploadPhotoHandler = async (file: File) => {
+    const finalFile = await processImage(file);
 
-    const url = URL.createObjectURL(file);
+    const uploadedUrl = await upload({
+      file: finalFile,
+      avatar: true,
+      userId: user?.userId as string,
+    });
 
-    methods.setValue("photo", url);
+    methods.setValue("photo", uploadedUrl as string);
+    reset();
   };
 
   const setProfileHandler = async (values: ProfileProps) => {
@@ -74,6 +91,8 @@ const ProfileComponent = () => {
           birthday: values?.birthday,
         },
       });
+
+      reset();
     } catch (error: any) {
       console.log("Profile Error: ", error);
     } finally {
@@ -96,6 +115,7 @@ const ProfileComponent = () => {
       navigation.dashboard();
     }
   };
+
   const goPasswordHandler = () => {
     navigation.changePassword();
   };
@@ -133,6 +153,8 @@ const ProfileComponent = () => {
                   <AvatarUpload
                     photo={methods.watch("photo")}
                     uploadHandler={uploadPhotoHandler}
+                    uploading={uploading}
+                    progress={progress}
                   />
                 </div>
 
