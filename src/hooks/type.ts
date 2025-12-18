@@ -52,3 +52,35 @@ export interface useTaskListenerProps {
 }
 
 export type fileType = "image" | "video" | "file" | "voice";
+
+export interface useImageProcessorProps {
+  size?: number;
+}
+
+export interface progressiveProps {
+  img: ImageBitmap;
+  size: number;
+}
+
+export type SourceProps = {
+  width: number;
+  height: number;
+};
+export interface drawFinalProps {
+  source: CanvasImageSource & SourceProps;
+  size: number;
+  scale: number;
+}
+
+export type FileUploaderOptions = {
+  accept?: string[];
+  except?: string[];
+  signedUrlExpiresIn?: number;
+  maxSizeMB?: number;
+};
+
+export interface uploadProps {
+  file: File;
+  avatar?: boolean;
+  userId?: string;
+}
