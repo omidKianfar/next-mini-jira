@@ -112,8 +112,14 @@ const PasswordComponent = () => {
 
                 <InputField
                   name="password"
-                  label="Password"
-                  placeholder="Enter your password"
+                  label={
+                    pathName.includes("/password") ? "New Password" : "Password"
+                  }
+                  placeholder={
+                    pathName.includes("/password")
+                      ? "Enter your new password"
+                      : "Enter your password"
+                  }
                   type={passwordShow ? "text" : "password"}
                   autoComplete="current-password"
                   icon={
@@ -135,7 +141,7 @@ const PasswordComponent = () => {
 
                 <div className="mt-6 flex items-center justify-end">
                   <ButtonNext type="submit" isLoading={loading}>
-                    Next
+                    {pathName.includes("/password") ? "Save" : "Next"}
                   </ButtonNext>
                 </div>
               </form>
