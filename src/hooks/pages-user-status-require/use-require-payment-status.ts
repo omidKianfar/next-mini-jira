@@ -8,33 +8,36 @@ import dayjs from "dayjs";
 
 export const useRequirePaymentStatus = () => {
   const navigation = useNavigation();
-  const auth = useAuth();
+  const { user, isLoading } = useAuth();
   const pathname = usePathname();
 
-  const user = auth?.user;
-  const isLoading = auth?.isLoading;
-
   useEffect(() => {
-    if (isLoading) return;
-    if (!user) return;
+    if (isLoading || !user) return;
+
     if (pathname.includes("/signup")) return;
 
     const now = dayjs();
-
-    const payment = user?.payment;
+    const payment = user.payment;
 
     if (payment?.freeTrialEnabled) {
-      if (now.isAfter(payment.trialEnd)) {
+      if (payment.trialEnd && now.isAfter(payment.trialEnd)) {
         navigation.payment();
         return;
       }
+      return;
     }
 
-    if (payment?.isPaid) {
+    if (payment?.endAt) {
       if (now.isAfter(payment.endAt)) {
         navigation.payment();
         return;
       }
+      return;
     }
-  }, [isLoading, user, navigation]);
+
+    if (!payment?.isPaid && !payment?.freeTrialEnabled) {
+      navigation.payment();
+      return;
+    }
+  }, [isLoading, user, pathname, navigation]);
 };
