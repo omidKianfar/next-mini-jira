@@ -15,22 +15,29 @@ const UserProfile = ({
   };
   return (
     <div className="mt-4 flex w-full flex-col items-center justify-center">
-      <div className="flex h-[80px] w-[80px] cursor-pointer items-center justify-center overflow-hidden rounded-full border-2 border-primary-500 bg-gray-200">
-        <MyImage
-          src={user?.photo as string}
-          alt=""
-          fill={true}
-          className="object-cover"
-          wrapperClass="relative w-full h-full"
-          onClick={goProfile}
-        />
+      <div className="flex cursor-pointer items-center justify-center overflow-hidden">
+        {user?.photo ? (
+          <MyImage
+            src={user?.photo as string}
+            alt=""
+            fill={true}
+            className="object-cover rounded-full"
+            wrapperClass="relative h-[80px] w-[80px] rounded-full border-2 border-primary-500 "
+            onClick={goProfile}
+          />
+        ) : (
+          <div
+            className="h-[80px] w-[80px] rounded-full border-2 border-primary-500 bg-gray-200"
+            onClick={goProfile}
+          ></div>
+        )}
       </div>
 
-      <p className="mt-2 capitalize text-primary-700 font-semibold">
+      <p className="mt-2 font-semibold capitalize text-primary-700">
         {stringSlicer({ string: user?.userName as string, slice: 60 })}
       </p>
 
-      <hr className="border border-dotted border-gray-300 mt-6 w-[200px]" />
+      <hr className="mt-6 w-[200px] border border-dotted border-gray-300" />
     </div>
   );
 };
