@@ -1,22 +1,33 @@
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
-import { filterSchema } from "./schema";
-import { FilterFormType, ModalProps } from "../type";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+
+// schema
+import { filterSchema } from "./schema";
+
+// type
+import { FilterFormType, ModalProps } from "../../molecule/type";
+
+// redux
 import { RootState } from "@/src/store";
 import { resetFilters, setDate, setType } from "@/src/store/slices/filters";
-import SelectField from "../controllers/RHF-fields/select-filed";
-import DateInputField from "../controllers/RHF-fields/date-input-field";
+
+// ui
+import SelectField from "../../molecule/controllers/RHF-fields/select-filed";
+import DateInputField from "../../molecule/controllers/RHF-fields/date-input-field";
 import ButtonNext from "../../atom/button/button-next";
 
 const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
+  // redux
   const dispatch = useDispatch();
 
+  // redux state
   const filters = useSelector((state: RootState) => state.filters);
 
+  // form
   const defaultValues: FilterFormType = {
     tag: filters.tag ?? "all",
     from: filters.date.from ?? "",
@@ -28,6 +39,7 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
     resolver: yupResolver(filterSchema),
   });
 
+  // functions
   useEffect(() => {
     if (filters) {
       methods.reset({

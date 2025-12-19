@@ -1,6 +1,8 @@
-import { progressiveProps } from "../type";
 import { createSmoothCanvas } from "./create-smooth-canvas";
 import { progressiveDownscale } from "./progressive-down-scale";
+
+// type
+import { progressiveProps } from "../type";
 
 export const drawProportional = ({
   img,

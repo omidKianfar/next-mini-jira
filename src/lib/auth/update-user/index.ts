@@ -1,6 +1,8 @@
 import { db } from "@/config/firebase";
-import { MyUserType } from "@/src/types/global";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+
+// type
+import { MyUserType } from "@/src/types/global";
 
 export const updateFirestoreUser = async (
   userId: string,

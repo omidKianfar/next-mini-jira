@@ -1,27 +1,40 @@
 "use client";
 
-import { useNavigation } from "@/src/hooks/navigation";
-import { ModalProps } from "../type";
-import { useSelector } from "react-redux";
-import { useIsMobile } from "@/src/hooks/mobile-size";
 import { ChangeEvent, useState } from "react";
+import { useSelector } from "react-redux";
+
+// hooks
+import { useNavigation } from "@/src/hooks/navigation";
+import { useIsMobile } from "@/src/hooks/mobile-size";
+
+// type
+import { ModalProps } from "../../molecule/type";
 import { Task } from "@/src/types/global";
+
+// redux
 import { RootState } from "@/src/store";
+
+// ui
 import MyIcon from "../../atom/icon";
+import EmptyColumn from "../board/empty-column";
+
+// utiles
 import { stringSlicer } from "../../utils/string-slicer";
-import EmptyColumn from "../../organisms/board/empty-column";
 
 const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
+  // hooks
   const navigation = useNavigation();
-
-  const tasks = useSelector((state: RootState) => state.tasks.tasks);
-
   const isMobile = useIsMobile();
 
+  // redux
+  const tasks = useSelector((state: RootState) => state.tasks.tasks);
+
+  // states
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>("");
   const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
 
+  // functions
   const serachHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value as string;
 
@@ -112,6 +125,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
                       </p>
                     </div>
                   </div>
+
                   <div className="flex items-center justify-between rounded-b-lg px-2 pb-1 pt-2">
                     <MyIcon
                       icon={

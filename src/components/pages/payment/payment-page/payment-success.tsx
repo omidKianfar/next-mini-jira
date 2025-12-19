@@ -1,37 +1,47 @@
 "use client";
 
 import { useState } from "react";
-import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useSearchParams } from "next/navigation";
 import dayjs from "dayjs";
-import { updateFirestoreUser } from "@/src/lib/auth/update-user";
+
+// hooks
+import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useSetSubscriptionId } from "@/src/hooks/auth/use-payment-success";
 import { useNavigation } from "@/src/hooks/navigation";
-import PageLoading from "@/src/components/organisms/page-loading";
-import MyIcon from "@/src/components/atom/icon";
-import ButtonNext from "@/src/components/atom/button/button-next";
 import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
 import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
 
-const PaymentSuccessComponent = () => {
-  const params = useSearchParams();
+// ui
+import PageLoading from "@/src/components/organisms/page-loading";
+import MyIcon from "@/src/components/atom/icon";
+import ButtonNext from "@/src/components/atom/button/button-next";
 
+// firestore
+import { updateFirestoreUser } from "@/src/lib/auth/update-user";
+
+const PaymentSuccessComponent = () => {
+  // hooks
+  const params = useSearchParams();
   const navigation = useNavigation();
   const { user, changeStep } = useAuth();
 
   useRequireActiveStatus();
   useRequirePaymentStatus();
 
+  // addressbar parametrs
   const planType = params.get("planType");
   const sessionId = params.get("session_id");
 
+  // states
   const [subscriptionId, setSubscriptionId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // date
   const now = dayjs().format("YYYY-MM-DD");
   const oneMonth = dayjs().add(1, "month").format("YYYY-MM-DD");
   const oneYear = dayjs().add(1, "year").format("YYYY-MM-DD");
 
+  // functions
   useSetSubscriptionId({ sessionId, setLoading, setSubscriptionId });
 
   const finishHandler = async () => {
@@ -64,6 +74,7 @@ const PaymentSuccessComponent = () => {
     navigation.dashboard();
   };
 
+  // ui
   if (loading) return <PageLoading />;
 
   return (

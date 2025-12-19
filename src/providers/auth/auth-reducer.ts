@@ -1,3 +1,4 @@
+// type
 import {
   AuthContextActionType,
   AuthContextStateType,

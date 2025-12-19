@@ -1,4 +1,6 @@
 import MyIcon from "../../atom/icon";
+
+// type
 import { SidebarItemProps } from "../type";
 
 const SidebarItems = ({ item }: SidebarItemProps) => {
@@ -9,7 +11,7 @@ const SidebarItems = ({ item }: SidebarItemProps) => {
     >
       <MyIcon icon={item.icon} className="mr-1 text-title" />
 
-      <p className="text-[16px] capitalize font-semibold">{item.title}</p>
+      <p className="text-[16px] font-semibold capitalize">{item.title}</p>
 
       {item.notification?.type === "count" && (
         <div className="absolute right-[-24px] top-0 text-subtitle font-semibold text-warning-500">

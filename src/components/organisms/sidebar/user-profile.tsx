@@ -1,14 +1,23 @@
-import MyImage from "../../atom/image";
-import { stringSlicer } from "../../utils/string-slicer";
+// hooks
 import { useNavigation } from "@/src/hooks/navigation";
+
+// ui
+import MyImage from "../../atom/image";
+
+// utiles
+import { stringSlicer } from "../../utils/string-slicer";
+
+// type
 import { sidebarProps } from "../type";
 
 const UserProfile = ({
   user,
   setShowSidebar,
 }: Pick<sidebarProps, "user" | "setShowSidebar">) => {
+  // hooks
   const navigation = useNavigation();
 
+  // functions
   const goProfile = () => {
     navigation.profile();
     setShowSidebar(false);
@@ -21,7 +30,7 @@ const UserProfile = ({
             src={user?.photo as string}
             alt=""
             fill={true}
-            className="object-cover rounded-full"
+            className="rounded-full object-cover"
             wrapperClass="relative h-[80px] w-[80px] rounded-full border-2 border-primary-500 "
             onClick={goProfile}
           />

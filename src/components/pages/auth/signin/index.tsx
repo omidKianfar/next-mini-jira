@@ -1,15 +1,22 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-
-import { FormValues } from "../../type";
-import { useNavigation } from "@/src/hooks/navigation";
-import { useIsMobile } from "@/src/hooks/mobile-size";
-import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+
+// hooks
+import { useNavigation } from "@/src/hooks/navigation";
+import { useIsMobile } from "@/src/hooks/mobile-size";
+import { useAuth } from "@/src/hooks/auth/use-auth";
+
+// type
+import { FormValues } from "../../type";
+
+// schema
 import { authSchema } from "../schema";
+
+// ui
 import MyImage from "@/src/components/atom/image";
 import InputField from "@/src/components/molecule/controllers/RHF-fields/input-field";
 import MyIcon from "@/src/components/atom/icon";
@@ -18,15 +25,18 @@ import ButtonFreeClass from "@/src/components/atom/button/button-free-class";
 import Logo from "@/src/components/atom/logo";
 
 const AuthComponent = () => {
+  // hooks
   const navigation = useNavigation();
   const pathname = usePathname();
 
   const { signinWithEmail, signupWithEmail, googleSignin } = useAuth();
   const isMobile = useIsMobile();
 
+  // states
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
 
+  // form
   const defaultValues: FormValues = {
     email: "",
     password: "",
@@ -37,6 +47,7 @@ const AuthComponent = () => {
     resolver: yupResolver(authSchema),
   });
 
+  // functions
   const authUser = async (values: FormValues) => {
     setLoading(true);
 

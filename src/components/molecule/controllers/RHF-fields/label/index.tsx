@@ -1,6 +1,8 @@
 "use client";
 
 import { FieldValues } from "react-hook-form";
+
+// type
 import { DateInputFieldProps } from "../../../type";
 
 const LabelComponent = <T extends FieldValues>({

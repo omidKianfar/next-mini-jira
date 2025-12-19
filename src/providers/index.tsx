@@ -1,10 +1,14 @@
 "use client";
 
 import { PropsWithChildren } from "react";
-import AuthProvider from "./auth/auth-provider";
 import { Provider } from "react-redux";
-import { store } from "../store";
 import NotistackProvider from "./notistack/notistack";
+
+// provider
+import AuthProvider from "./auth/auth-provider";
+
+// redux
+import { store } from "../store";
 
 const ProvidersWrapper = ({ children }: PropsWithChildren) => {
   return (

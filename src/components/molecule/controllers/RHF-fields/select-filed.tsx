@@ -1,8 +1,12 @@
 "use client";
 
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
-import { SelectControllerProps } from "../../type";
 import { useState } from "react";
+
+// type
+import { SelectControllerProps } from "../../type";
+
+// ui
 import LabelComponent from "./label";
 import MyIcon from "@/src/components/atom/icon";
 import ErrorComponent from "./errors";

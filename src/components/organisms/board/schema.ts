@@ -1,5 +1,7 @@
-import { TaskForm } from "@/src/types/global";
 import * as Yup from "yup";
+
+// type
+import { TaskForm } from "@/src/types/global";
 
 export const TaskShema = Yup.object({
   title: Yup.string().required("Enter your title"),

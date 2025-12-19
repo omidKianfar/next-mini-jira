@@ -1,19 +1,30 @@
 "use client";
 
+import { lazy, Suspense, useState } from "react";
+import { usePathname } from "next/navigation";
+import dayjs from "dayjs";
+
+// hooks
 import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
 import { usePlanAction } from "@/src/hooks/payment";
-import { PlanType } from "@/src/types/global";
 import { useNavigation } from "@/src/hooks/navigation";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
-import dayjs from "dayjs";
-import FramerMotion from "../../atom/animation";
+
+// type
+import { PlanType } from "@/src/types/global";
+
+// ui
 import PageLoading from "../../organisms/page-loading";
-import ActivePaymentComponent from "./payment-page/ActivePayment";
-import ChoosePlanComponent from "./payment-page/ChoosePlan";
+import FramerMotion from "../../atom/animation";
+
+// lazy
+const ActivePaymentComponent = lazy(
+  () => import("./payment-page/ActivePayment"),
+);
+const ChoosePlanComponent = lazy(() => import("./payment-page/ChoosePlan"));
 
 const PlanComponent = () => {
+  // hooks
   const pathName = usePathname();
   const navigation = useNavigation();
 
@@ -22,19 +33,24 @@ const PlanComponent = () => {
 
   useRequireActiveStatus();
 
+  // states
   const [loading, setLoading] = useState(false);
 
+  // date
   const now = dayjs();
 
+  // pathnames
   const isSignupPage = pathName.includes("/signup");
   const isDashboard = pathName.includes("/dashboard");
 
+  // payments
   const payment = user?.payment;
 
   const hasActivePayment = Boolean(
     payment?.endAt && now.isBefore(payment.endAt),
   );
 
+  // functions
   const BackToPlan = () => {
     if (isSignupPage) {
       changeStep("2");
@@ -47,33 +63,35 @@ const PlanComponent = () => {
 
   const choosePlanHandler = async (selectedPlan: PlanType) => {
     setLoading(true);
-
     await choosePlan({ selectedPlan, setLoading });
   };
 
+  // ui
   if (loading) return <PageLoading />;
 
   return (
-    <FramerMotion>
-      <div
-        className={`flex w-full flex-col items-center justify-center p-4 ${
-          isSignupPage ? "min-h-screen" : ""
-        }`}
-      >
-        {isDashboard && hasActivePayment ? (
-          <ActivePaymentComponent
-            payment={payment}
-            onBack={BackDashboard}
-            now={now}
-          />
-        ) : (
-          <ChoosePlanComponent
-            onBack={BackToPlan}
-            onChoosePlan={choosePlanHandler}
-          />
-        )}
-      </div>
-    </FramerMotion>
+    <Suspense fallback={<PageLoading />}>
+      <FramerMotion>
+        <div
+          className={`flex w-full flex-col items-center justify-center p-4 ${
+            isSignupPage ? "min-h-screen" : ""
+          }`}
+        >
+          {isDashboard && hasActivePayment ? (
+            <ActivePaymentComponent
+              payment={payment}
+              onBack={BackDashboard}
+              now={now}
+            />
+          ) : (
+            <ChoosePlanComponent
+              onBack={BackToPlan}
+              onChoosePlan={choosePlanHandler}
+            />
+          )}
+        </div>
+      </FramerMotion>
+    </Suspense>
   );
 };
 

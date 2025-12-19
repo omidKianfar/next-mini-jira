@@ -1,5 +1,6 @@
-// components/media/MyVideo.tsx
 import React from "react";
+
+// type
 import { MyVideoProps } from "../type";
 
 const MyVideo: React.FC<MyVideoProps> = ({

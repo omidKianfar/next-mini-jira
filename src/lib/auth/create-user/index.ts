@@ -1,8 +1,10 @@
 import { db } from "@/config/firebase";
-import { MyUserType, UserType } from "@/src/types/global";
 import dayjs from "dayjs";
-import { User } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import { User } from "firebase/auth";
+
+// type
+import { MyUserType, UserType } from "@/src/types/global";
 
 export const createUserDocument = async (user: User): Promise<MyUserType> => {
   const userData: MyUserType = {

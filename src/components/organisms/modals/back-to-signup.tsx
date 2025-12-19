@@ -1,5 +1,9 @@
+// hooks
 import { useAuth } from "@/src/hooks/auth/use-auth";
-import { ModalProps } from "../type";
+// type
+import { ModalProps } from "../../molecule/type";
+
+// ui
 import ButtonNext from "../../atom/button/button-next";
 
 const BackToSignup = ({ handleClose }: Pick<ModalProps, "handleClose">) => {

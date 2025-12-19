@@ -1,11 +1,13 @@
+import { ActionDispatch, RefObject } from "react";
+import { Dispatch, SetStateAction } from "react";
+
+// type
 import {
   AuthContextActionType,
   AuthContextStateType,
   MyUserType,
   PlanType,
 } from "@/src/types/global";
-import { ActionDispatch, RefObject } from "react";
-import { Dispatch, SetStateAction } from "react";
 
 export interface UseAuthListenerProps {
   state: Partial<AuthContextStateType>;
@@ -19,11 +21,9 @@ export interface UseAuthListenerProps {
   >;
   unsubDocRef: RefObject<(() => void) | null>;
 }
-
 export interface UseSetStepNumberProps {
   setStepNumber: Dispatch<SetStateAction<string>>;
 }
-
 export interface UseAuthActionProps {
   state: Partial<AuthContextStateType>;
   dispatch: ActionDispatch<
@@ -36,7 +36,6 @@ export interface UseAuthActionProps {
   >;
   setStepNumber: Dispatch<SetStateAction<string>>;
 }
-
 export interface UsePaymentSuccessProps {
   sessionId: string | null;
   setLoading: Dispatch<SetStateAction<boolean>>;
@@ -46,7 +45,6 @@ export interface UsePlanActionProps {
   setLoading: Dispatch<SetStateAction<boolean>>;
   selectedPlan: PlanType;
 }
-
 export interface useTaskListenerProps {
   user: MyUserType | null;
 }
@@ -56,7 +54,6 @@ export type fileType = "image" | "video" | "file" | "voice";
 export interface useImageProcessorProps {
   size?: number;
 }
-
 export interface progressiveProps {
   img: ImageBitmap;
   size: number;
@@ -78,7 +75,6 @@ export type FileUploaderOptions = {
   signedUrlExpiresIn?: number;
   maxSizeMB?: number;
 };
-
 export interface uploadProps {
   file: File;
   avatar?: boolean;

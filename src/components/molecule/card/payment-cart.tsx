@@ -1,3 +1,4 @@
+// type
 import { CartType } from "../type";
 
 const PaymentCardComponent = ({

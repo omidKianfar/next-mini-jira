@@ -1,19 +1,22 @@
+// hooks
+import { useIsMobile } from "@/src/hooks/mobile-size";
+
+// ui
 import ButtonBack from "@/src/components/atom/button/button-back";
 import MyIcon from "@/src/components/atom/icon";
 import MyImage from "@/src/components/atom/image";
-import PlanCardComponent from "@/src/components/molecule/card/plan-cart";
-import { useIsMobile } from "@/src/hooks/mobile-size";
-import { PlanType } from "@/src/types/global";
 
-interface ChoosePlanSectionProps {
-  onBack: () => void;
-  onChoosePlan: (plan: PlanType) => void;
-}
+// card
+import PlanCardComponent from "@/src/components/molecule/card/plan-cart";
+
+// type
+import { ChoosePlanSectionProps } from "../../type";
 
 const ChoosePlanComponent = ({
   onBack,
   onChoosePlan,
 }: ChoosePlanSectionProps) => {
+  // hook
   const isMobile = useIsMobile();
 
   return (

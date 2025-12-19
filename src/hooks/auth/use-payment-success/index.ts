@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
+
+// type
 import { UsePaymentSuccessProps } from "../../type";
 
 export const useSetSubscriptionId = ({

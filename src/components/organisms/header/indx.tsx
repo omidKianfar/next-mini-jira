@@ -1,23 +1,32 @@
 "use client";
 
-import MyIcon from "@/src/components/atom/icon";
-
-import Logo from "@/src/components/atom/logo";
 import { usePathname } from "next/navigation";
+import { lazy, Suspense, useState } from "react";
+
+// ui
+import MyIcon from "@/src/components/atom/icon";
+import Logo from "@/src/components/atom/logo";
 import DashboardHeader from "./dashboard-header";
-import ModalContainer from "../../molecule/modal-component";
-import AddTask from "../add-task";
-import SearchTasks from "../../molecule/serach";
-import FilterTask from "../../molecule/filters";
-import { useState } from "react";
+import ModalContainer from "../modal-component";
+import PageLoading from "../page-loading";
+
+// type
 import { HeaderProps } from "../type";
 
-const Header = ({ showSidebar,setShowSidebar }: HeaderProps) => {
+// lazy
+const AddTask = lazy(() => import("../add-task"));
+const SearchTasks = lazy(() => import("../serach"));
+const FilterTask = lazy(() => import("../filters"));
+
+const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
+  // hooks
   const pathname = usePathname();
 
+  // states
   const [open, setOpen] = useState<boolean>(false);
   const [modalcounter, setModalCounter] = useState<number>(0);
 
+  // functions
   const handleOpenModal = (modalNumber: number) => {
     setModalCounter(modalNumber);
 
@@ -35,7 +44,7 @@ const Header = ({ showSidebar,setShowSidebar }: HeaderProps) => {
           <MyIcon
             icon={"mingcute:menu-fill"}
             className="cursor-pointer text-title text-primary-500 hover:text-primary-700 lg:text-h3"
-            onClick={()=> setShowSidebar(!showSidebar)}
+            onClick={() => setShowSidebar(!showSidebar)}
           />
         </div>
 
@@ -50,19 +59,21 @@ const Header = ({ showSidebar,setShowSidebar }: HeaderProps) => {
         </div>
       </div>
 
-      <ModalContainer open={open} handleClose={handleCloseModal}>
-        {modalcounter == 1 ? (
-          <AddTask handleClose={handleCloseModal} />
-        ) : modalcounter == 2 ? (
-          <div>
-            <SearchTasks handleClose={handleCloseModal} />
-          </div>
-        ) : modalcounter == 3 ? (
-          <div>
-            <FilterTask handleClose={handleCloseModal} />
-          </div>
-        ) : null}
-      </ModalContainer>
+      <Suspense fallback={<PageLoading />}>
+        <ModalContainer open={open} handleClose={handleCloseModal}>
+          {modalcounter == 1 ? (
+            <AddTask handleClose={handleCloseModal} />
+          ) : modalcounter == 2 ? (
+            <div>
+              <SearchTasks handleClose={handleCloseModal} />
+            </div>
+          ) : modalcounter == 3 ? (
+            <div>
+              <FilterTask handleClose={handleCloseModal} />
+            </div>
+          ) : null}
+        </ModalContainer>
+      </Suspense>
     </>
   );
 };

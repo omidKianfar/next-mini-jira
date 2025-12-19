@@ -1,19 +1,5 @@
 "use client";
 
-import config from "@/config/firebase";
-import { useAuthActions } from "@/src/hooks/auth/use-actions";
-import { useSetStepNumber } from "@/src/hooks/auth/use-set-step-number";
-import { useUserListener } from "@/src/hooks/auth/use-user-listener";
-import { authReducer, initialState } from "@/src/providers/auth/auth-reducer";
-import {
-  AuthContextProps,
-  SignPropsType,
-  UserPasswordUpdateType,
-  UserProfileType,
-} from "@/src/types/global";
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
 import {
   createContext,
   PropsWithChildren,
@@ -22,6 +8,29 @@ import {
   useState,
 } from "react";
 
+// config
+import config from "@/config/firebase";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+
+// hooks
+import { useAuthActions } from "@/src/hooks/auth/use-actions";
+import { useSetStepNumber } from "@/src/hooks/auth/use-set-step-number";
+import { useUserListener } from "@/src/hooks/auth/use-user-listener";
+
+// reducer
+import { authReducer, initialState } from "@/src/providers/auth/auth-reducer";
+
+// type
+import {
+  AuthContextProps,
+  SignPropsType,
+  UserPasswordUpdateType,
+  UserProfileType,
+} from "@/src/types/global";
+
+// firebase initialize
 export const app = initializeApp(config.firebase);
 export const auth = getAuth(app);
 export const db = getFirestore(app);

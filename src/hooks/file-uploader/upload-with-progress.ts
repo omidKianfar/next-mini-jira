@@ -1,3 +1,4 @@
+// type
 import { uploadWithProgressProps } from "../type";
 
 export function uploadWithProgress({

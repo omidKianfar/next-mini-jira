@@ -1,7 +1,10 @@
 "use client";
 
+// ui
 import ButtonFreeClass from "./button-free-class";
 import MyIcon from "../icon";
+
+// type
 import { BackButtonProps } from "../type";
 
 const ButtonBack = ({ onClick }: BackButtonProps) => {

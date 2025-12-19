@@ -1,4 +1,7 @@
+// routes
 import { routes } from "@/src/lib/route/routes";
+
+// type
 import { UsePlanActionProps } from "../type";
 
 export const usePlanAction = () => {
@@ -6,7 +9,6 @@ export const usePlanAction = () => {
     selectedPlan,
     setLoading,
   }: UsePlanActionProps) => {
-
     try {
       const response = await fetch(routes.api.createStripCheckout, {
         method: "POST",
@@ -17,8 +19,6 @@ export const usePlanAction = () => {
       });
 
       const result = await response.json();
-
-      
 
       if (result.url) {
         window.location.href = result.url;

@@ -1,6 +1,8 @@
 "use client";
 
 import { PropsWithChildren, useEffect } from "react";
+
+// hooks
 import { useAuth } from "../hooks/auth/use-auth";
 import { useNavigation } from "../hooks/navigation";
 

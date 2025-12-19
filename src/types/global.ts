@@ -81,7 +81,6 @@ export type AuthStateType = {
   isLoading: string | null;
   isAuthenticated: boolean;
 };
-
 export interface ProfileProps {
   photo?: string;
   userName: string;
@@ -91,6 +90,7 @@ export interface ProfileProps {
 export type PlanType = "monthly" | "yearly";
 
 export type TaskStatus = "todo" | "inprogress" | "done";
+
 export type TagType = "task" | "bug";
 
 export type Task = {

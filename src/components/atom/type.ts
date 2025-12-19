@@ -3,7 +3,6 @@ export interface FarmerMotionProps {
 }
 
 export type ButtonType = "button" | "submit" | "reset";
-
 export interface ButtonProps {
   type: ButtonType;
   children: React.ReactNode;
@@ -13,23 +12,19 @@ export interface ButtonProps {
   disable?: boolean;
   icon?: React.ReactNode;
 }
-
 export interface BackButtonProps {
   onClick: () => void;
 }
-
 export interface LoadingProps {
   color?: string;
   size?: number;
 }
-
 export interface MyIconProps {
   onClick?: () => void;
   className?: string;
   icon: string;
   iconClass?: string;
 }
-
 export interface MyImageProps {
   src: string;
   alt: string;
@@ -40,11 +35,9 @@ export interface MyImageProps {
   wrapperClass?: string;
   onClick?: () => void;
 }
-
 export interface LogoProps {
   small?: boolean;
 }
-
 export interface MyVideoProps {
   src: string;
   alt?: string;

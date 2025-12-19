@@ -1,5 +1,7 @@
-import { FiltersState } from "@/src/types/global";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+// type
+import { FiltersState } from "@/src/types/global";
 
 const initialState: FiltersState = {
   date: {

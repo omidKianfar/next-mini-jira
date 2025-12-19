@@ -1,19 +1,24 @@
 "use client";
 
-import ButtonNext from "@/src/components/atom/button/button-next";
-import MyIcon from "@/src/components/atom/icon";
-import { useAuth } from "@/src/hooks/auth/use-auth";
+// hook
 import { useNavigation } from "@/src/hooks/navigation";
 import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
 import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
 
+// ui
+import ButtonNext from "@/src/components/atom/button/button-next";
+import MyIcon from "@/src/components/atom/icon";
+import { useAuth } from "@/src/hooks/auth/use-auth";
+
 const PaymentFailedComponent = () => {
+  // hook
   const navigation = useNavigation();
   const { changeStep } = useAuth();
 
   useRequireActiveStatus();
   useRequirePaymentStatus();
 
+  // functions
   const finishHandler = () => {
     changeStep("0");
 

@@ -1,6 +1,9 @@
 "use client";
 
+// ui
 import MyIcon from "@/src/components/atom/icon";
+
+// type
 import { ModalProps } from "@/src/components/molecule/type";
 
 const DashboardHeader = ({

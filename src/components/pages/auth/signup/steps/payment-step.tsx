@@ -1,19 +1,27 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+
+// hooks
+import { useAuth } from "@/src/hooks/auth/use-auth";
+import { useIsMobile } from "@/src/hooks/mobile-size";
+
+// ui
 import FramerMotion from "@/src/components/atom/animation";
 import ButtonBack from "@/src/components/atom/button/button-back";
 import MyIcon from "@/src/components/atom/icon";
 import MyImage from "@/src/components/atom/image";
+
+// card
 import PaymentCardComponent from "@/src/components/molecule/card/payment-cart";
-import { useAuth } from "@/src/hooks/auth/use-auth";
-import { useIsMobile } from "@/src/hooks/mobile-size";
-import { usePathname } from "next/navigation";
 
 const PaymentStep = () => {
+  // hooks
   const pathName = usePathname();
   const { user, changeStep, terialMode } = useAuth();
   const isMobile = useIsMobile();
 
+  // functions
   const BackProfile = () => {
     changeStep("1");
   };

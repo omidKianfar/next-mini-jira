@@ -1,5 +1,7 @@
 import * as Yup from "yup";
-import { FilterFormType } from "../type";
+
+// type
+import { FilterFormType } from "../../molecule/type";
 
 export const filterSchema = Yup.object({
   tag: Yup.string().required("Enter your tag"),

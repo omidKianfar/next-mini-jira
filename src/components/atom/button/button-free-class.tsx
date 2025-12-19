@@ -1,6 +1,9 @@
 "use client";
 
+// ui
 import LoadingCircle from "../loading-circle";
+
+// type
 import { ButtonProps } from "../type";
 
 const ButtonFreeClass = ({

@@ -1,12 +1,12 @@
-import { MyUserType } from "@/src/types/global";
 import { Dispatch, SetStateAction } from "react";
 
+// type
+import { MyUserType } from "@/src/types/global";
 export interface AddTaskProps {
   handleClose: () => void;
   setNumber: Dispatch<SetStateAction<number>>;
   loading: boolean;
 }
-
 export interface AddTaskUploadProps {
   uploadProcessHandler: (file: File) => Promise<void>;
   handleCancel: () => void;
@@ -17,7 +17,6 @@ export interface AddTaskUploadProps {
   fileType?: string | null;
   url?: string | null;
 }
-
 export interface HeaderProps {
   showSidebar: boolean;
   setShowSidebar: Dispatch<SetStateAction<boolean>>;
@@ -38,7 +37,6 @@ export type sidebarItemsType = {
   direction: () => void | Promise<void>;
   notification?: SidebarNotification;
 };
-
 export interface SidebarItemProps {
   item: sidebarItemsType;
 }

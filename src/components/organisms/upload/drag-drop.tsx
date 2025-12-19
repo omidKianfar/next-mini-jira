@@ -1,7 +1,11 @@
 import { DragEvent, useRef, useState } from "react";
-import FileInputField from "../controllers/RHF-fields/file-input-field";
-import { AddTaskUploadProps } from "../../organisms/type";
+
+// ui
+import FileInputField from "../../molecule/controllers/RHF-fields/file-input-field";
 import LoadingCircle from "../../atom/loading-circle";
+
+// type
+import { AddTaskUploadProps } from "../type";
 
 const DragDropUploader = ({
   uploadProcessHandler,
@@ -11,13 +15,16 @@ const DragDropUploader = ({
   AddTaskUploadProps,
   "uploadProcessHandler" | "progress" | "uploading"
 >) => {
+  // ref
   const fileUploadRef = useRef<HTMLInputElement | null>(null);
 
+  // states
+  const [isDragging, setIsDragging] = useState(false);
+
+  // functions
   const openFilePicker = () => {
     fileUploadRef.current?.click();
   };
-
-  const [isDragging, setIsDragging] = useState(false);
 
   const dropFileHandler = async (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();

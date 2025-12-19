@@ -1,7 +1,11 @@
 "use client";
 
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
+
+// type
 import { TextareaControllerProps } from "../../type";
+
+// ui
 import LabelComponent from "./label";
 import ErrorComponent from "./errors";
 

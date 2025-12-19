@@ -1,38 +1,47 @@
 "use client";
 
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { usePathname } from "next/navigation";
+
+// hooks
+import { useNavigation } from "@/src/hooks/navigation";
 import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useIsMobile } from "@/src/hooks/mobile-size";
 import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
 import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
-import { SignPropsType } from "@/src/types/global";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
+
+// schema
 import { authSchema } from "../auth/schema";
+
+// type
+import { SignPropsType } from "@/src/types/global";
+
+// ui
 import FramerMotion from "../../atom/animation";
 import InputField from "../../molecule/controllers/RHF-fields/input-field";
 import MyIcon from "../../atom/icon";
 import ButtonNext from "../../atom/button/button-next";
 import MyImage from "../../atom/image";
 import ButtonBack from "../../atom/button/button-back";
-import { usePathname } from "next/navigation";
-import { useNavigation } from "@/src/hooks/navigation";
 
 const PasswordComponent = () => {
+  // hooks
   const pathName = usePathname();
-
   const navigation = useNavigation();
+  const isMobile = useIsMobile();
+  const { user, updatePasswordGoogle, addOrUpdatePasswordForCurrentUser } =
+    useAuth();
 
   useRequireActiveStatus();
   useRequirePaymentStatus();
 
-  const { user, updatePasswordGoogle, addOrUpdatePasswordForCurrentUser } =
-    useAuth();
-  const isMobile = useIsMobile();
-
+  // states
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
 
+  // form
   const defaultValues: SignPropsType = {
     email: user?.email ?? "",
     password: "",
@@ -44,6 +53,7 @@ const PasswordComponent = () => {
     mode: "onSubmit",
   });
 
+  // functions
   useEffect(() => {
     if (user) {
       methods.reset({
@@ -154,7 +164,7 @@ const PasswordComponent = () => {
             height={isMobile ? 200 : 400}
             className="object-contain"
             wrapperClass="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center"
-          />{" "}
+          />
         </div>
       </div>
     </FramerMotion>

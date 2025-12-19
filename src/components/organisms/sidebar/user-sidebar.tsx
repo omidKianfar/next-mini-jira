@@ -1,16 +1,24 @@
-import { useNavigation } from "@/src/hooks/navigation";
-import { sidebarItemsType, sidebarProps } from "../type";
 import { useMemo } from "react";
-import SidebarItems from "./items";
+
+// hooks
+import { useNavigation } from "@/src/hooks/navigation";
 import { useAuth } from "@/src/hooks/auth/use-auth";
+
+// type
+import { sidebarItemsType, sidebarProps } from "../type";
+
+// ui
+import SidebarItems from "./items";
 import MyIcon from "../../atom/icon";
 
 const UserSidebar = ({
   setShowSidebar,
 }: Pick<sidebarProps, "setShowSidebar">) => {
+  // ui
   const navigation = useNavigation();
   const { logout } = useAuth();
 
+  // sidebar items
   const userSidebarItems = useMemo<sidebarItemsType[]>(
     () => [
       {

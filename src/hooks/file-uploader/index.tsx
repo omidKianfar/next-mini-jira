@@ -1,13 +1,18 @@
 "use client";
 
-import { supabase } from "@/config/supabase";
 import { useState, useCallback, useRef } from "react";
+
+// config
+import { supabase } from "@/config/supabase";
+
+// type
 import { fileType, FileUploaderOptions, uploadProps } from "../type";
 
-import { detectFileType, getFolderFromType } from "./helpers";
+// upload
 import { validateFile } from "./validate-file";
 import { deleteFile } from "./delete-file";
 import { uploadWithProgress } from "./upload-with-progress";
+import { detectFileType, getFolderFromType } from "./helpers";
 
 export function useFileUploader(options: FileUploaderOptions = {}) {
   const {

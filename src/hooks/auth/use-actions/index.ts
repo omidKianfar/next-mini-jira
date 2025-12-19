@@ -1,13 +1,6 @@
 "use client";
 
 import {
-  SignPropsType,
-  UserPasswordUpdateType,
-  UserProfileType,
-} from "@/src/types/global";
-import { useNavigation } from "../../navigation";
-import { UseAuthActionProps } from "../../type";
-import {
   createUserWithEmailAndPassword,
   EmailAuthProvider,
   GoogleAuthProvider,
@@ -17,13 +10,28 @@ import {
   signOut,
   updatePassword,
 } from "firebase/auth";
-import { auth, db } from "@/config/firebase";
-import { findFirestoreUser } from "@/src/lib/auth/user-finder";
-import { createUserDocument } from "@/src/lib/auth/create-user";
 import { enqueueSnackbar } from "notistack";
 import { doc, getDoc } from "firebase/firestore";
-import { updateFirestoreUser } from "@/src/lib/auth/update-user";
 import dayjs from "dayjs";
+
+// navigation
+import { useNavigation } from "../../navigation";
+
+// type
+import {
+  SignPropsType,
+  UserPasswordUpdateType,
+  UserProfileType,
+} from "@/src/types/global";
+import { UseAuthActionProps } from "../../type";
+
+// config
+import { auth, db } from "@/config/firebase";
+
+// firestore
+import { findFirestoreUser } from "@/src/lib/auth/user-finder";
+import { createUserDocument } from "@/src/lib/auth/create-user";
+import { updateFirestoreUser } from "@/src/lib/auth/update-user";
 
 export const useAuthActions = ({
   dispatch,

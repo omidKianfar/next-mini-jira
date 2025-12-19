@@ -1,3 +1,4 @@
+// type
 import { fileType } from "../type";
 
 export const detectFileType = (file: File): fileType =>

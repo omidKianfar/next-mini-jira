@@ -1,10 +1,12 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { useNavigation } from "../navigation";
-import { useAuth } from "../auth/use-auth";
 import { useEffect } from "react";
 import dayjs from "dayjs";
+import { usePathname } from "next/navigation";
+
+// hooks
+import { useNavigation } from "../navigation";
+import { useAuth } from "../auth/use-auth";
 
 export const useRequirePaymentStatus = () => {
   const navigation = useNavigation();

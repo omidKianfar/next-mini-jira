@@ -1,21 +1,35 @@
 "use client";
 
-import { useState } from "react";
-import AddTaskFormComponent from "./steps/add-task-form";
-import { AddTaskProps } from "../type";
-import { Task, TaskForm } from "@/src/types/global";
-import { useAuth } from "@/src/hooks/auth/use-auth";
+import { lazy, Suspense, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { TaskShema } from "../board/schema";
-import { createTaskDocument } from "@/src/lib/tasks/create-task";
 import { enqueueSnackbar } from "notistack";
 import dayjs from "dayjs";
-import AddTaskUploadCmponent from "./steps/upload";
+
+// hook
+import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useFileUploader } from "@/src/hooks/file-uploader";
 import { useImageProcessor } from "@/src/hooks/image-processor";
 
+// type
+import { AddTaskProps } from "../type";
+import { Task, TaskForm } from "@/src/types/global";
+
+// schema
+import { TaskShema } from "../board/schema";
+
+// firestore
+import { createTaskDocument } from "@/src/lib/tasks/create-task";
+
+// ui
+import PageLoading from "../page-loading";
+
+// lazy
+const AddTaskFormComponent = lazy(() => import("./steps/add-task-form"));
+const AddTaskUploadCmponent = lazy(() => import("./steps/upload"));
+
 const AddTask = ({ handleClose }: Pick<AddTaskProps, "handleClose">) => {
+  // hooks
   const { user } = useAuth();
 
   const { processImage } = useImageProcessor({ size: 1024 });
@@ -25,9 +39,11 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, "handleClose">) => {
       accept: ["image/*", "video/*"],
     });
 
+  // states
   const [loading, setLoading] = useState<boolean>(false);
   const [number, setNumber] = useState(0);
 
+  // form
   const defaultValues: TaskForm = {
     title: "",
     description: "",
@@ -43,6 +59,7 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, "handleClose">) => {
     resolver: yupResolver(TaskShema),
   });
 
+  // functions
   const uploadProcessHandler = async (file: File) => {
     let finalFile = file;
 
@@ -105,28 +122,30 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, "handleClose">) => {
   };
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
-        {number == 0 ? (
-          <AddTaskFormComponent
-            handleClose={handleClose}
-            setNumber={setNumber}
-            loading={loading}
-          />
-        ) : (
-          <AddTaskUploadCmponent
-            uploadProcessHandler={uploadProcessHandler}
-            handleCancel={handleCancel}
-            handleSave={handleSave}
-            progress={progress}
-            uploading={uploading}
-            error={error}
-            fileType={fileType}
-            url={url}
-          />
-        )}
-      </form>
-    </FormProvider>
+    <Suspense fallback={<PageLoading />}>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          {number == 0 ? (
+            <AddTaskFormComponent
+              handleClose={handleClose}
+              setNumber={setNumber}
+              loading={loading}
+            />
+          ) : (
+            <AddTaskUploadCmponent
+              uploadProcessHandler={uploadProcessHandler}
+              handleCancel={handleCancel}
+              handleSave={handleSave}
+              progress={progress}
+              uploading={uploading}
+              error={error}
+              fileType={fileType}
+              url={url}
+            />
+          )}
+        </form>
+      </FormProvider>
+    </Suspense>
   );
 };
 

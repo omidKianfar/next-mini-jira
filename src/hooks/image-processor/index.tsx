@@ -1,8 +1,11 @@
 import { useCallback } from "react";
-import { useImageProcessorProps } from "../type";
+
 import { loadBitmap } from "./load-bitmap";
 import { drawProportional } from "./draw-proportional";
 import { compress } from "./compress";
+
+// type
+import { useImageProcessorProps } from "../type";
 
 export const useImageProcessor = ({ size }: useImageProcessorProps = {}) => {
   const processImage = useCallback(

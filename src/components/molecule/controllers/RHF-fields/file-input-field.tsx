@@ -1,7 +1,11 @@
 "use client";
 
 import { Controller, FieldValues, useFormContext } from "react-hook-form";
+
+// type
 import { FileInputControllerProps } from "../../type";
+
+// ui
 import LabelComponent from "./label";
 import ErrorComponent from "./errors";
 
@@ -11,7 +15,7 @@ const FileInputField = <T extends FieldValues>({
   ref,
   onChange,
   disabled,
-  accept
+  accept,
 }: FileInputControllerProps<T>) => {
   const {
     control,

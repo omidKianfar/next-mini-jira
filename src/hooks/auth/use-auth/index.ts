@@ -1,8 +1,12 @@
 "use client";
 
-import { authContext } from "@/src/providers/auth/auth-provider";
-import { AuthContextProps } from "@/src/types/global";
 import { useContext } from "react";
+
+// provider
+import { authContext } from "@/src/providers/auth/auth-provider";
+
+// type
+import { AuthContextProps } from "@/src/types/global";
 
 export function useAuth(): AuthContextProps {
   return useContext(authContext);

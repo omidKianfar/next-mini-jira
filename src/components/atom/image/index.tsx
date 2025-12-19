@@ -1,4 +1,7 @@
+// ui
 import Image from "next/image";
+
+// type
 import { MyImageProps } from "../type";
 
 const MyImage = ({
@@ -9,7 +12,7 @@ const MyImage = ({
   fill,
   className,
   wrapperClass,
-  onClick
+  onClick,
 }: MyImageProps) => {
   return (
     <div className={wrapperClass}>

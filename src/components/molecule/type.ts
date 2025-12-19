@@ -1,13 +1,11 @@
 import { RefObject } from "react";
 import { FieldValues, Path } from "react-hook-form";
-
 export interface BaseControllerProps<T extends FieldValues> {
   name: Path<T>;
   label?: string;
   placeholder?: string;
   className?: string;
 }
-
 export interface InputControllerProps<T extends FieldValues>
   extends BaseControllerProps<T> {
   type?: string;
@@ -29,19 +27,16 @@ export type TextareaControllerProps<T extends FieldValues> =
   BaseControllerProps<T> & {
     rows?: number;
   };
-
 export interface SelectOption {
   label: string;
   value: string | number;
 }
-
 export interface SelectControllerProps<T extends FieldValues>
   extends BaseControllerProps<T> {
   options: SelectOption[];
 }
 
 export type DateInputFieldProps<T extends FieldValues> = BaseControllerProps<T>;
-
 export interface ErrorProps {
   errors: any;
 }
@@ -57,7 +52,6 @@ export type ModalProps = React.PropsWithChildren & {
   handleClose: () => void;
   handleOpenModal?: (modalNumber: number) => void;
 };
-
 export interface UploadAvatarProps {
   photo: string | undefined;
   uploadHandler: (event: any) => void;
@@ -72,13 +66,11 @@ export type CartType = {
   price?: number;
   icon: React.ReactNode;
 };
-
 export interface CropProps {
   file: never;
   onCancel: () => void;
   onSave: (file: File) => void | Promise<void>;
 }
-
 export interface LightBoxProps {
   children: React.ReactNode;
   url: string;

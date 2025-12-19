@@ -1,4 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
+
+// redux
 import tasksReducer from "./slices/tasks";
 import filterReducer from "./slices/filters";
 

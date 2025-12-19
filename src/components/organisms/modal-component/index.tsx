@@ -1,7 +1,11 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { ModalProps } from "../type";
+
+// type
+import { ModalProps } from "../../molecule/type";
+
+// ui
 import MyIcon from "../../atom/icon";
 
 export default function ModalContainer({

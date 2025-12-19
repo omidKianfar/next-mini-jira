@@ -1,10 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import UserSidebar from "./user-sidebar";
 import { useAuth } from "@/src/hooks/auth/use-auth";
+
+// type
 import { UserType } from "@/src/types/global";
-import { HeaderProps, sidebarProps } from "../type";
+import { sidebarProps } from "../type";
+
+// ui
+import UserSidebar from "./user-sidebar";
 import UserProfile from "./user-profile";
 
 const sidebarVariants = {

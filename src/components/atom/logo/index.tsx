@@ -1,4 +1,4 @@
-import React from "react";
+// type
 import { LogoProps } from "../type";
 
 const Logo = ({ small }: LogoProps) => {
@@ -11,7 +11,7 @@ const Logo = ({ small }: LogoProps) => {
       </h1>
 
       <h1
-        className={`rounded-sm bg-primary-900 px-2 font-inter ${small ? "text-title" : "text-h4"} font-bold shadow-md text-white lg:${small ? "text-h3" : "text-h1"}`}
+        className={`rounded-sm bg-primary-900 px-2 font-inter ${small ? "text-title" : "text-h4"} font-bold text-white shadow-md lg:${small ? "text-h3" : "text-h1"}`}
       >
         Jira
       </h1>

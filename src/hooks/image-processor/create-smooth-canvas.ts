@@ -1,3 +1,4 @@
+// type
 import { SourceProps } from "../type";
 
 export const createSmoothCanvas = ({ width, height }: SourceProps) => {

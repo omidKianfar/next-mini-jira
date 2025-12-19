@@ -1,11 +1,14 @@
 "use client";
 
+// types
 import { Columns } from "@/src/types/global";
+import { AddTaskProps } from "../../type";
+
+// ui
 import ButtonNext from "@/src/components/atom/button/button-next";
 import SelectField from "../../../molecule/controllers/RHF-fields/select-filed";
 import InputField from "../../../molecule/controllers/RHF-fields/input-field";
 import TextareaFiled from "../../../molecule/controllers/RHF-fields/textarea-field";
-import { AddTaskProps } from "../../type";
 
 const AddTaskFormComponent = ({
   handleClose,

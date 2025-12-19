@@ -1,7 +1,11 @@
 "use client";
 
 import { PropsWithChildren, useState } from "react";
+
+// guard
 import AuthGuard from "@/src/guards/auth-guard";
+
+// ui
 import Header from "@/src/components/organisms/header/indx";
 import SideBar from "@/src/components/organisms/sidebar";
 

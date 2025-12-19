@@ -1,18 +1,24 @@
 "use client";
 
-import MyIcon from "@/src/components/atom/icon";
-import { ColumnProps, ColumnID } from "@/src/components/pages/type";
-import { useDroppable } from "@dnd-kit/core";
-import EmptyColumn from "../empty-column";
 import { useState, useEffect } from "react";
+import { useDroppable } from "@dnd-kit/core";
+
+// ui
+import MyIcon from "@/src/components/atom/icon";
+import EmptyColumn from "../empty-column";
+
+// type
+import { ColumnProps } from "@/src/components/pages/type";
 
 const ColumnComponent = ({ id, children }: ColumnProps) => {
   const { setNodeRef, isOver } = useDroppable({ id });
 
+  // initialize
   const ChildrenArray = Array.isArray(children);
 
   const storageKey = `column-collapse-${id}`;
 
+  // functions
   const [show, setShow] = useState<boolean>(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem(storageKey);

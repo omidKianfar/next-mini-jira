@@ -1,7 +1,9 @@
-import { Task } from "@/src/types/global";
-import { FetchTaskProps } from "../type";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/config/firebase";
+
+// type
+import { FetchTaskProps } from "../type";
+import { Task } from "@/src/types/global";
 
 export const fetchTask = async ({
   taskId,

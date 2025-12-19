@@ -1,18 +1,28 @@
 "use client";
 
-import MyIcon from "@/src/components/atom/icon";
-import { TaskCardProps } from "@/src/components/pages/type";
-import { stringSlicer } from "@/src/components/utils/string-slicer";
-import { useIsMobile } from "@/src/hooks/mobile-size";
-import { useNavigation } from "@/src/hooks/navigation";
 import { useDraggable } from "@dnd-kit/core";
 
+// hooks
+import { useIsMobile } from "@/src/hooks/mobile-size";
+import { useNavigation } from "@/src/hooks/navigation";
+
+// ui
+import MyIcon from "@/src/components/atom/icon";
+
+// type
+import { TaskCardProps } from "@/src/components/pages/type";
+
+// utiles
+import { stringSlicer } from "@/src/components/utils/string-slicer";
+
 export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
+  // hooks
   const navigation = useNavigation();
   const isMobile = useIsMobile();
 
   const { transform, setNodeRef, listeners, attributes } = useDraggable({ id });
 
+  // style
   const baseStyle = {
     transition: "box-shadow-sm 0.2s ease, transform 0.04s linear",
   };
@@ -53,6 +63,7 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
             </p>
           </div>
         </div>
+
         <div className="flex items-center justify-between rounded-b-lg px-2 pb-1 pt-2">
           <MyIcon
             icon={

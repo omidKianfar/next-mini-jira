@@ -1,5 +1,6 @@
 "use client";
 
+import { lazy, Suspense } from "react";
 import { RootState } from "@/src/store";
 import {
   DndContext,
@@ -10,13 +11,23 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { useSelector } from "react-redux";
-import TaskCardComponent from "./task";
-import ColumnComponent from "./column";
-import { updateTaskStatus } from "@/src/lib/tasks/update-task-status";
 import dayjs from "dayjs";
+
+// firestore
+import { updateTaskStatus } from "@/src/lib/tasks/update-task-status";
+
+// type
 import { Task } from "@/src/types/global";
 
+// ui
+import PageLoading from "../page-loading";
+
+// lazy
+const ColumnComponent = lazy(() => import("./column"));
+const TaskCardComponent = lazy(() => import("./task"));
+
 const BoardComponent = () => {
+  // mobile config
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(TouchSensor, {
@@ -27,9 +38,11 @@ const BoardComponent = () => {
     }),
   );
 
+  // redux states
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
   const filters = useSelector((state: RootState) => state.filters);
 
+  // functions
   const filteredTasks = tasks.filter((task) => {
     const taskDate = task.createdAt;
     const taskTag = task.tag;
@@ -74,21 +87,23 @@ const BoardComponent = () => {
   };
 
   return (
-    <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-      <div className="flex flex-col items-start justify-center gap-4 px-4 py-1 lg:flex-row">
-        <ColumnComponent key="todo" id="todo">
-          {renderColumn("todo") ?? []}
-        </ColumnComponent>
+    <Suspense fallback={<PageLoading />}>
+      <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+        <div className="flex flex-col items-start justify-center gap-4 px-4 py-1 lg:flex-row">
+          <ColumnComponent key="todo" id="todo">
+            {renderColumn("todo") ?? []}
+          </ColumnComponent>
 
-        <ColumnComponent key="inprogress" id="inprogress">
-          {renderColumn("inprogress") ?? []}
-        </ColumnComponent>
+          <ColumnComponent key="inprogress" id="inprogress">
+            {renderColumn("inprogress") ?? []}
+          </ColumnComponent>
 
-        <ColumnComponent key="done" id="done">
-          {renderColumn("done") ?? []}
-        </ColumnComponent>
-      </div>
-    </DndContext>
+          <ColumnComponent key="done" id="done">
+            {renderColumn("done") ?? []}
+          </ColumnComponent>
+        </div>
+      </DndContext>
+    </Suspense>
   );
 };
 
