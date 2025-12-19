@@ -6,7 +6,6 @@ export const usePlanAction = () => {
     selectedPlan,
     setLoading,
   }: UsePlanActionProps) => {
-          console.log('selectedPlan',selectedPlan);
 
     try {
       const response = await fetch(routes.api.createStripCheckout, {
@@ -19,7 +18,6 @@ export const usePlanAction = () => {
 
       const result = await response.json();
 
-      console.log('result',result);
       
 
       if (result.url) {
