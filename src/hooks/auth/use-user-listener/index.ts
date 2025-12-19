@@ -21,7 +21,7 @@ export const useUserListener = ({
             user: null,
             isAuthenticated: false,
             isLoading: null,
-            isInitialized: false,
+            isInitialized: true,
           },
         });
 
