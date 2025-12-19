@@ -6,6 +6,8 @@ export const usePlanAction = () => {
     selectedPlan,
     setLoading,
   }: UsePlanActionProps) => {
+          console.log('selectedPlan',selectedPlan);
+
     try {
       const response = await fetch(routes.api.createStripCheckout, {
         method: "POST",
@@ -16,6 +18,9 @@ export const usePlanAction = () => {
       });
 
       const result = await response.json();
+
+      console.log('result',result);
+      
 
       if (result.url) {
         window.location.href = result.url;
