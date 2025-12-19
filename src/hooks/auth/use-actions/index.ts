@@ -260,8 +260,10 @@ export const useAuthActions = ({
     }
   };
 
-  const logout = () => {
-    return signOut(auth).then(() => {
+  const logout = async () => {
+    try {
+      await signOut(auth);
+
       dispatch({
         type: "INITIALIZE",
         payload: {
@@ -273,7 +275,9 @@ export const useAuthActions = ({
       });
 
       navigation.signin();
-    });
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   const saveUserProfile = async ({ userId, data }: UserProfileType) => {
