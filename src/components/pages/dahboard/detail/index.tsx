@@ -9,6 +9,8 @@ import LightBoxComponent from "@/src/components/molecule/light-box";
 import PageLoading from "@/src/components/organisms/page-loading";
 import { useIsMobile } from "@/src/hooks/mobile-size";
 import { useNavigation } from "@/src/hooks/navigation";
+import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
+import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
 import { deleteTask } from "@/src/lib/auth/delete-task";
 import { fetchTask } from "@/src/lib/tasks/fetch-task";
 import { RootState } from "@/src/store";
@@ -19,6 +21,9 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const TaskDetailComponent = () => {
+  useRequireActiveStatus();
+  useRequirePaymentStatus();
+
   const navigation = useNavigation();
 
   const params = useSearchParams();
@@ -111,17 +116,17 @@ const TaskDetailComponent = () => {
         <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
           <div className="w-[90vw] p-4 lg:w-full">
             <div className="flex flex-col justify-between lg:mb-4 lg:w-[500px] lg:flex-row">
-              <p className="mb-4 capitalize text-primary-600">
+              <p className="mb-4 font-semibold capitalize text-primary-600">
                 <span className="text-body font-bold text-black">Status:</span>{" "}
                 {task.status}
               </p>
 
-              <p className="mb-4 capitalize text-primary-600">
+              <p className="mb-4 font-semibold capitalize text-primary-600">
                 <span className="text-body font-bold text-black">Tag:</span>{" "}
                 {task.tag}
               </p>
 
-              <p className="mb-4 capitalize text-primary-600">
+              <p className="mb-4 font-semibold capitalize text-primary-600">
                 <span className="text-body font-bold text-black">Created:</span>{" "}
                 {task.createdAt}
               </p>
