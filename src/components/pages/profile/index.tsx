@@ -167,7 +167,7 @@ const ProfileComponent = () => {
                   icon={
                     <MyIcon
                       icon={"tabler:user-filled"}
-                      className="text-gray-600"
+                      className="text-gray-600 text-subtitle"
                     />
                   }
                 />
