@@ -22,6 +22,23 @@ export interface HeaderProps {
   showSidebar: boolean;
   setShowSidebar: Dispatch<SetStateAction<boolean>>;
 }
-export interface sidebarProps extends HeaderProps{
- user?: MyUserType | null
+export interface sidebarProps extends HeaderProps {
+  user?: MyUserType | null;
+}
+
+export type SidebarNotification =
+  | { type: "none" }
+  | { type: "count"; value: number }
+  | { type: "dot" };
+
+export type sidebarItemsType = {
+  id: string;
+  icon: string;
+  title: string;
+  direction: () => void | Promise<void>;
+  notification?: SidebarNotification;
+};
+
+export interface SidebarItemProps {
+  item: sidebarItemsType;
 }
