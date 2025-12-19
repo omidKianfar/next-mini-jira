@@ -10,12 +10,17 @@ import { useNavigation } from "@/src/hooks/navigation";
 import PageLoading from "@/src/components/organisms/page-loading";
 import MyIcon from "@/src/components/atom/icon";
 import ButtonNext from "@/src/components/atom/button/button-next";
+import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
+import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
 
 const PaymentSuccessComponent = () => {
   const params = useSearchParams();
 
   const navigation = useNavigation();
   const { user, changeStep } = useAuth();
+
+  useRequireActiveStatus();
+  useRequirePaymentStatus();
 
   const planType = params.get("planType");
   const sessionId = params.get("session_id");

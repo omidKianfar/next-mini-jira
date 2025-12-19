@@ -4,10 +4,15 @@ import ButtonNext from "@/src/components/atom/button/button-next";
 import MyIcon from "@/src/components/atom/icon";
 import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useNavigation } from "@/src/hooks/navigation";
+import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
+import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
 
 const PaymentFailedComponent = () => {
   const navigation = useNavigation();
   const { changeStep } = useAuth();
+
+  useRequireActiveStatus();
+  useRequirePaymentStatus();
 
   const finishHandler = () => {
     changeStep("0");
