@@ -6,7 +6,7 @@ import { lazy, Suspense, useState } from "react";
 // ui
 import MyIcon from "@/src/components/atom/icon";
 import Logo from "@/src/components/atom/logo";
-import DashboardHeader from "./dashboard-header";
+import DashboardHeader from "./dashboard";
 import ModalContainer from "../modal-component";
 import PageLoading from "../page-loading";
 
