@@ -12,7 +12,7 @@ import { useIsMobile } from "@/src/hooks/mobile-size";
 import { useNavigation } from "@/src/hooks/navigation";
 
 // firestore
-import { deleteTask } from "@/src/lib/auth/delete-task";
+import { deleteTask } from "@/src/lib/tasks/delete-task";
 import { fetchTask } from "@/src/lib/tasks/fetch-task";
 
 // redux

@@ -14,8 +14,8 @@ import { enqueueSnackbar } from "notistack";
 import { doc, getDoc } from "firebase/firestore";
 import dayjs from "dayjs";
 
-// navigation
-import { useNavigation } from "../../navigation";
+// hooks
+import { useNavigation } from "../navigation";
 
 // type
 import {
@@ -23,7 +23,7 @@ import {
   UserPasswordUpdateType,
   UserProfileType,
 } from "@/src/types/global";
-import { UseAuthActionProps } from "../../type";
+import { UseAuthActionProps } from "../type";
 
 // config
 import { auth, db } from "@/config/firebase";

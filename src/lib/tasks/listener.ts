@@ -3,7 +3,7 @@
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 
 // type
-import { ListenToTasksProps } from "../type";
+import { ListenToTasksProps } from "./type";
 import { Task } from "@/src/types/global";
 
 // redux

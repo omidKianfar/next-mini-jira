@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 // type
-import { useTaskListenerProps } from "../../type";
+import { useTaskListenerProps } from "../type";
 
 //hook
 import { listenToTasks } from "@/src/lib/tasks/listener";

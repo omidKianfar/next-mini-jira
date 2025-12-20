@@ -20,7 +20,7 @@ import { useSetStepNumber } from "@/src/hooks/auth/use-set-step-number";
 import { useUserListener } from "@/src/hooks/auth/use-user-listener";
 
 // reducer
-import { authReducer, initialState } from "@/src/providers/auth/auth-reducer";
+import { authReducer, initialState } from "@/src/reducer/auth-reducer";
 
 // type
 import {

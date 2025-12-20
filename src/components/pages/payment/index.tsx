@@ -19,9 +19,9 @@ import FramerMotion from "../../atom/animation";
 
 // lazy
 const ActivePaymentComponent = lazy(
-  () => import("./payment-page/ActivePayment"),
+  () => import("./page/ActivePayment"),
 );
-const ChoosePlanComponent = lazy(() => import("./payment-page/ChoosePlan"));
+const ChoosePlanComponent = lazy(() => import("./page/ChoosePlan"));
 
 const PlanComponent = () => {
   // hooks

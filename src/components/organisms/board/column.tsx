@@ -5,7 +5,7 @@ import { useDroppable } from "@dnd-kit/core";
 
 // ui
 import MyIcon from "@/src/components/atom/icon";
-import EmptyColumn from "../empty-column";
+import EmptyColumn from "./empty-column";
 
 // type
 import { ColumnProps } from "@/src/components/pages/type";
