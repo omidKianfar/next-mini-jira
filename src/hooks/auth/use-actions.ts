@@ -22,6 +22,7 @@ import {
   SignPropsType,
   UserPasswordUpdateType,
   UserProfileType,
+  UserType,
 } from "@/src/types/global";
 import { UseAuthActionProps } from "../type";
 
@@ -73,7 +74,13 @@ export const useAuthActions = ({
           },
         });
 
-        navigation.dashboard();
+        if (user.userType == UserType?.Client) {
+          navigation.dashboard();
+        }
+
+        if (user.userType == UserType?.Admin) {
+          navigation.adminDashboard();
+        }
       }
     } catch (error: any) {
       console.log("User signin firebase error: ", error);
