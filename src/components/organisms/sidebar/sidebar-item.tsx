@@ -3,7 +3,7 @@ import MyIcon from "../../atom/icon";
 // type
 import { SidebarItemProps } from "../type";
 
-const SidebarItems = ({ item }: SidebarItemProps) => {
+const SidebarItem = ({ item }: SidebarItemProps) => {
   return (
     <div
       className="relative flex cursor-pointer items-center justify-start text-primary-700 hover:text-warning-600"
@@ -26,4 +26,4 @@ const SidebarItems = ({ item }: SidebarItemProps) => {
   );
 };
 
-export default SidebarItems;
+export default SidebarItem;

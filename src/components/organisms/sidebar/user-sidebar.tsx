@@ -8,17 +8,19 @@ import { useAuth } from "@/src/hooks/auth/use-auth";
 import { sidebarItemsType, sidebarProps } from "../type";
 
 // ui
-import SidebarItems from "./items";
 import MyIcon from "../../atom/icon";
+import SidebarItem from "./sidebar-item";
+import { UserType } from "@/src/types/global";
 
 const UserSidebar = ({
+  user,
   setShowSidebar,
-}: Pick<sidebarProps, "setShowSidebar">) => {
+}: Pick<sidebarProps, "setShowSidebar" | "user">) => {
   // ui
   const navigation = useNavigation();
   const { logout } = useAuth();
 
-  // sidebar items
+  // client sidebar items
   const userSidebarItems = useMemo<sidebarItemsType[]>(
     () => [
       {
@@ -55,14 +57,47 @@ const UserSidebar = ({
     [navigation, setShowSidebar],
   );
 
+  // admin sidebar items
+  const AdminSidebarItems = useMemo<sidebarItemsType[]>(
+    () => [
+      {
+        id: "adminProfile",
+        icon: "gg:profile",
+        title: "profile",
+        direction: () => {
+          navigation.adminProfile();
+          setShowSidebar(false);
+        },
+        notification: { type: "none" },
+      },
+      {
+        id: "adminDashboard",
+        icon: "material-symbols:dashboard-rounded",
+        title: "dashboard",
+        direction: () => {
+          navigation.adminDashboard();
+          setShowSidebar(false);
+        },
+        notification: { type: "none" },
+      },
+    ],
+    [navigation, setShowSidebar],
+  );
+
   return (
     <div className="mt-6 flex flex-col items-start justify-center">
       <div className="h-[45vh] overflow-y-auto">
-        {userSidebarItems?.map((item: sidebarItemsType) => (
-          <div key={item.id} className="mb-4">
-            <SidebarItems item={item} />
-          </div>
-        ))}
+        {user?.userType === UserType?.Client
+          ? userSidebarItems?.map((item: sidebarItemsType) => (
+              <div key={item.id} className="mb-4">
+                <SidebarItem item={item} />
+              </div>
+            ))
+          : AdminSidebarItems?.map((item: sidebarItemsType) => (
+              <div key={item.id} className="mb-4">
+                <SidebarItem item={item} />
+              </div>
+            ))}
       </div>
 
       <hr className="mt-6 w-[190px] border border-dotted border-gray-300" />

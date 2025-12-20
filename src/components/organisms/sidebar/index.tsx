@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useAuth } from "@/src/hooks/auth/use-auth";
 
 // type
-import { UserType } from "@/src/types/global";
 import { sidebarProps } from "../type";
 
 // ui
@@ -44,9 +43,7 @@ const SideBar = ({ showSidebar, setShowSidebar }: sidebarProps) => {
     >
       <UserProfile setShowSidebar={setShowSidebar} user={user} />
 
-      {user?.userType == UserType.Client ? (
-        <UserSidebar setShowSidebar={setShowSidebar} />
-      ) : null}
+      <UserSidebar setShowSidebar={setShowSidebar} user={user}/>
     </motion.div>
   );
 };
