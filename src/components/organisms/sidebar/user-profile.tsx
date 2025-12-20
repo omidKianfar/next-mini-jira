@@ -5,7 +5,7 @@ import { useNavigation } from "@/src/hooks/navigation";
 import MyImage from "../../atom/image";
 
 // utiles
-import { stringSlicer } from "../../utils/string-slicer";
+import { stringSlicer } from "@/src/utils/string-slicer";
 
 // type
 import { sidebarProps } from "../type";

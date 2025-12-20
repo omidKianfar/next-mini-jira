@@ -13,7 +13,7 @@ import MyIcon from "@/src/components/atom/icon";
 import { TaskCardProps } from "@/src/components/pages/type";
 
 // utiles
-import { stringSlicer } from "@/src/components/utils/string-slicer";
+import { stringSlicer } from "@/src/utils/string-slicer";
 
 export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
   // hooks

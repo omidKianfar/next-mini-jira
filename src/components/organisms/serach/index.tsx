@@ -19,7 +19,7 @@ import MyIcon from "../../atom/icon";
 import EmptyColumn from "../board/empty-column";
 
 // utiles
-import { stringSlicer } from "../../utils/string-slicer";
+import { stringSlicer } from "@/src/utils/string-slicer";
 
 const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   // hooks
