@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 // hooks
 import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
-import { usePlanAction } from "@/src/hooks/payment";
+import { usePlanAction } from "@/src/hooks/payment/usePlanAction";
 import { useNavigation } from "@/src/hooks/navigation";
 
 // type

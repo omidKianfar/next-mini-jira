@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 
 // hooks
 import { useAuth } from "@/src/hooks/auth/use-auth";
-import { useSetSubscriptionId } from "@/src/hooks/auth/use-payment-success";
+import { useSetSubscriptionId } from "@/src/hooks/payment/useSetSubscriptionId";
 import { useNavigation } from "@/src/hooks/navigation";
 import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
 import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";

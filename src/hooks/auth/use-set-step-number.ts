@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 // type
-import { UseSetStepNumberProps } from "../../type";
+import { UseSetStepNumberProps } from "../type";
 
 export const useSetStepNumber = ({ setStepNumber }: UseSetStepNumberProps) => {
   useEffect(() => {

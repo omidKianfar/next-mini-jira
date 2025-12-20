@@ -5,7 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 
 // type
-import { UseAuthListenerProps } from "../../type";
+import { UseAuthListenerProps } from "../type";
 
 // config
 import { auth, db } from "@/config/firebase";

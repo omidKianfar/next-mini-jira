@@ -3,7 +3,10 @@
 import { useEffect } from "react";
 
 // type
-import { UsePaymentSuccessProps } from "../../type";
+import { UsePaymentSuccessProps } from "../type";
+
+// roues
+import { routes } from "@/src/lib/route/routes";
 
 export const useSetSubscriptionId = ({
   sessionId,
@@ -15,7 +18,7 @@ export const useSetSubscriptionId = ({
       if (!sessionId) return;
 
       try {
-        const res = await fetch("/api/get-strip-with-session-id", {
+        const res = await fetch(routes.api.getStripWithSessionId, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
