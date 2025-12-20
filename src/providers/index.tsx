@@ -10,13 +10,19 @@ import AuthProvider from "./auth-provider";
 // redux
 import { store } from "../store";
 
+// common
+import ErrorBoundary from "../components/common/error-boundary";
+import ErrorFallback from "../components/common/error-fallback";
+
 const ProvidersWrapper = ({ children }: PropsWithChildren) => {
   return (
-    <NotistackProvider>
-      <AuthProvider>
-        <Provider store={store}>{children}</Provider>
-      </AuthProvider>
-    </NotistackProvider>
+    <ErrorBoundary fallback={<ErrorFallback />}>
+      <NotistackProvider>
+        <AuthProvider>
+          <Provider store={store}>{children}</Provider>
+        </AuthProvider>
+      </NotistackProvider>
+    </ErrorBoundary>
   );
 };
 
