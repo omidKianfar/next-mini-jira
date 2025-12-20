@@ -1,7 +1,7 @@
 import FramerMotion from "@/src/components/atom/animation";
 import TaskDetailComponent from "@/src/components/pages/dahboard/detail";
 
-const DashboardPage = () => {
+const TaskDeatailPage = () => {
   return (
     <FramerMotion>
       <TaskDetailComponent />
@@ -9,4 +9,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default TaskDeatailPage;
