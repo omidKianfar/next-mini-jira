@@ -9,7 +9,6 @@ import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useSetSubscriptionId } from "@/src/hooks/payment/useSetSubscriptionId";
 import { useNavigation } from "@/src/hooks/navigation";
 import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
-import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
 
 // ui
 import PageLoading from "@/src/components/organisms/page-loading";
@@ -26,7 +25,6 @@ const PaymentSuccessComponent = () => {
   const { user, changeStep } = useAuth();
 
   useRequireActiveStatus();
-  useRequirePaymentStatus();
 
   // addressbar parametrs
   const planType = params.get("planType");
@@ -96,7 +94,13 @@ const PaymentSuccessComponent = () => {
         </p>
 
         <div className="mt-6 flex justify-center">
-          <ButtonNext onClick={finishHandler}>Finish</ButtonNext>
+          <ButtonNext
+            onClick={finishHandler}
+            disable={!user || !subscriptionId}
+            isLoading={!user || !subscriptionId}
+          >
+            Finish
+          </ButtonNext>
         </div>
       </div>
     </div>
