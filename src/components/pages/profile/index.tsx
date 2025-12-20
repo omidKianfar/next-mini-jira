@@ -31,7 +31,7 @@ import ButtonFreeClass from "../../atom/button/button-free-class";
 import PageLoading from "../../organisms/page-loading";
 
 // type
-import { ProfileProps } from "@/src/types/global";
+import { ProfileProps, UserType } from "@/src/types/global";
 
 // lazy
 const AvatarUpload = lazy(() => import("../../organisms/upload/avatar"));
@@ -44,6 +44,8 @@ const ProfileComponent = () => {
 
   const { saveUserProfile, user } = useAuth();
   const { processImage } = useImageProcessor();
+
+  console.log("user", user);
 
   const { progress, reset, upload, uploading } = useFileUploader({
     accept: ["image/*"],
@@ -145,17 +147,18 @@ const ProfileComponent = () => {
               <div className="mb-4 flex items-center justify-between">
                 <ButtonBack onClick={handelBack} />
 
-                {pathName.includes("profile") && (
-                  <ButtonFreeClass
-                    className="ml-4 text-primary-500 hover:text-primary-600"
-                    onClick={goPasswordHandler}
-                    icon={
-                      <MyIcon icon="maki:arrow" className="ml-2 text-body" />
-                    }
-                  >
-                    Password
-                  </ButtonFreeClass>
-                )}
+                {user?.userType === UserType.Client &&
+                  pathName.includes("profile") && (
+                    <ButtonFreeClass
+                      className="ml-4 text-primary-500 hover:text-primary-600"
+                      onClick={goPasswordHandler}
+                      icon={
+                        <MyIcon icon="maki:arrow" className="ml-2 text-body" />
+                      }
+                    >
+                      Password
+                    </ButtonFreeClass>
+                  )}
               </div>
 
               <ModalContainer open={open} handleClose={handleCloseModal}>
