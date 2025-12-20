@@ -15,4 +15,8 @@ export const routes = {
     payment: "/dashboard/payment",
     taskDetail: (taskId: string) => `/dashboard/task-detail?taskId=${taskId}`,
   },
+  admin: {
+    dashboard: "/admin/dashboard",
+    profile: "/admin/profile",
+  },
 } as const;
