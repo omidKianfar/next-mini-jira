@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 // hooks
 import { useNavigation } from "../navigation";
 import { useAuth } from "../auth/use-auth";
+import { UserType } from "@/src/types/global";
 
 export const useRequirePaymentStatus = () => {
   const navigation = useNavigation();
@@ -14,6 +15,8 @@ export const useRequirePaymentStatus = () => {
   const pathname = usePathname();
 
   useEffect(() => {
+    if (user?.userType == UserType?.Admin) return;
+
     if (isLoading || !user) return;
 
     if (pathname.includes("/signup")) return;
