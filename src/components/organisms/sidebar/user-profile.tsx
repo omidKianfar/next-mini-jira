@@ -29,7 +29,7 @@ const UserProfile = ({
           <MyImage
             src={user?.photo as string}
             alt=""
-            fill={true}
+            fill
             className="rounded-full object-cover"
             wrapperClass="relative h-[80px] w-[80px] rounded-full border-2 border-primary-500 "
             onClick={goProfile}
