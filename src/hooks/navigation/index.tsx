@@ -21,5 +21,7 @@ export const useNavigation = () => {
     payment: () => router.push(routes.dashboard.payment),
     taskDetail: (taskId: string) =>
       router.push(routes.dashboard.taskDetail(taskId)),
+    adminDashboard: () => router.push(routes.admin.dashboard),
+    adminProfile: () => router.push(routes.admin.profile),
   };
 };
