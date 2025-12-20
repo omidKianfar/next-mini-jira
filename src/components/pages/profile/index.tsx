@@ -45,8 +45,6 @@ const ProfileComponent = () => {
   const { saveUserProfile, user } = useAuth();
   const { processImage } = useImageProcessor();
 
-  console.log("user", user);
-
   const { progress, reset, upload, uploading } = useFileUploader({
     accept: ["image/*"],
   });
