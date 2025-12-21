@@ -46,7 +46,7 @@ const UserProfile = ({
         {stringSlicer({ string: user?.userName as string, slice: 60 })}
       </p>
 
-      <hr className="mt-6 w-[200px] border border-dotted border-gray-300" />
+      <hr className="mt-6 w-[200px] border border-dashed border-gray-200" />
     </div>
   );
 };
