@@ -71,3 +71,7 @@ export type PaginationProps = {
   onPageChange: (page: number) => void;
   onPageSizeChange: (size: number) => void;
 };
+export interface ListComponentProps  {
+  children: React.ReactNode;
+  title?: string;
+};

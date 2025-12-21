@@ -11,23 +11,29 @@ import { stringSlicer } from "@/src/utils/string-slicer";
 // type
 import { MyUserType } from "@/src/types/global";
 import { UsersTableProps } from "../../type";
-import { updateFirestoreUser } from "@/src/lib/auth/update-user";
+import { useState } from "react";
+import PaginationComponent from "@/src/components/atom/pagination";
 
-const UsersTable = ({ users }: UsersTableProps) => {
-  const goDetail = (userId: string) => {};
+const UsersTable = ({ users, goDetail, toogleActive }: UsersTableProps) => {
+  // pagination
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
 
-  const toogleActive = async (user: MyUserType) => {
-    await updateFirestoreUser(user.userId as string, {
-      isActive: !user.isActive,
-    });
-  };
+  const totalPages = Math.max(1, Math.ceil(users.length / pageSize));
+
+  const safePage = Math.min(page, totalPages);
+
+  const paginatedUsers = users.slice(
+    (safePage - 1) * pageSize,
+    safePage * pageSize,
+  );
 
   const columns = [
     {
       head: <span className="text-primary-500">Username</span>,
 
       column: (user: MyUserType) => (
-        <div className="flex items-center">
+        <div className="flex items-center justify-start">
           <div className="mr-2">
             {user.photo ? (
               <MyImage
@@ -73,19 +79,21 @@ const UsersTable = ({ users }: UsersTableProps) => {
 
       column: (user: MyUserType) => (
         <div className="flex items-center justify-start">
-          {user.isActive ? (
-            <MyIcon
-              icon="solar:user-bold-duotone"
-              iconClass="cursor-pointer text-h2 text-success-500"
-              onClick={() => toogleActive(user)}
-            />
-          ) : (
-            <MyIcon
-              icon="solar:user-bold-duotone"
-              iconClass="cursor-pointer text-h2 text-warning-500"
-              onClick={() => toogleActive(user)}
-            />
-          )}
+          <div title={user.isActive === true ? "Active" : "Deactive"}>
+            {user.isActive ? (
+              <MyIcon
+                icon="solar:user-bold-duotone"
+                iconClass="cursor-pointer text-h3 text-success-500"
+                onClick={() => toogleActive(user)}
+              />
+            ) : (
+              <MyIcon
+                icon="solar:user-bold-duotone"
+                iconClass="cursor-pointer text-h3 text-warning-500"
+                onClick={() => toogleActive(user)}
+              />
+            )}
+          </div>
         </div>
       ),
     },
@@ -104,7 +112,22 @@ const UsersTable = ({ users }: UsersTableProps) => {
     },
   ];
 
-  return <TableComponent data={users} columns={columns} />;
+  return (
+    <div>
+      <TableComponent data={paginatedUsers} columns={columns} />
+
+      <PaginationComponent
+        currentPage={safePage}
+        totalPages={totalPages}
+        pageSize={pageSize}
+        onPageChange={setPage}
+        onPageSizeChange={(size) => {
+          setPageSize(size);
+          setPage(1);
+        }}
+      />
+    </div>
+  );
 };
 
 export default UsersTable;
