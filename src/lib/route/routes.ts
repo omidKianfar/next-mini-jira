@@ -17,6 +17,8 @@ export const routes = {
   },
   admin: {
     dashboard: "/admin/dashboard",
+    userDetail: (userId: string) =>
+      `/admin/dashboard/user-detail?userId=${userId}`,
     profile: "/admin/profile",
   },
 } as const;
