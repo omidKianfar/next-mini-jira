@@ -23,5 +23,7 @@ export const useNavigation = () => {
       router.push(routes.dashboard.taskDetail(taskId)),
     adminDashboard: () => router.push(routes.admin.dashboard),
     adminProfile: () => router.push(routes.admin.profile),
+    adminUserDetail: (userId: string) =>
+      router.push(routes.admin.userDetail(userId)),
   };
 };
