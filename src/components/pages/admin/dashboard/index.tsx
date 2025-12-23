@@ -1,5 +1,7 @@
 "use client";
 
+import { useDispatch, useSelector } from "react-redux";
+
 // hooks
 import { useUsersListener } from "@/src/hooks/users/use-user-listener";
 import { useIsMobile } from "@/src/hooks/mobile-size";
@@ -17,13 +19,16 @@ import { MyUserType, UserType } from "@/src/types/global";
 import { updateFirestoreUser } from "@/src/lib/auth/update-user";
 
 // redux
-import { useSelector } from "react-redux";
 import { RootState } from "@/src/store";
+import { toggleSortByCreatedAt } from "@/src/store/slices/users/users";
+import MyIcon from "@/src/components/atom/icon";
+import { useState } from "react";
 
 const AdminDashboardComponent = () => {
   // hooks
   const isMobile = useIsMobile();
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   // redux
   const users = useSelector((state: RootState) => state.users);
@@ -31,6 +36,9 @@ const AdminDashboardComponent = () => {
 
   // hooks
   useUsersListener();
+
+  // state
+  const [sort, setSort] = useState<boolean>(false);
 
   // functions
   const goDetail = (userId: string) => {
@@ -72,16 +80,38 @@ const AdminDashboardComponent = () => {
     return true;
   });
 
+  // functions
+
+  const SortHandler = () => {
+    setSort(!sort);
+
+    dispatch(toggleSortByCreatedAt());
+  };
+
   // ui
   if (!finalUsers) return <PageLoading />;
 
   return (
     <div className="h-full w-full p-4">
       <div className="rounded-md bg-white p-4 shadow-md">
-        <div className="mb-4 w-full text-center">
+        <div className="mb-4 flex w-full items-center justify-center">
           <h2 className="mx-2 text-title font-bold text-warning-500">
             Users List
           </h2>
+
+          {sort ? (
+            <MyIcon
+              icon="ph:sort-ascending-bold"
+              className="cursor-pointer text-h4 text-blue-500"
+              onClick={SortHandler}
+            />
+          ) : (
+            <MyIcon
+              icon="ph:sort-descending-bold"
+              className="cursor-pointer text-h4 text-blue-500"
+              onClick={SortHandler}
+            />
+          )}
         </div>
 
         {isMobile ? (

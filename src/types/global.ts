@@ -135,8 +135,11 @@ export type TaskFiltersState = {
   };
 };
 
+export type SortOrder = "asc" | "desc";
+
 export type UserState = {
   users: MyUserType[];
+  sortOrder: SortOrder;
 };
 
 export type UserFiltersState = {

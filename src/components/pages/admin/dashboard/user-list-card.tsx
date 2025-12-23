@@ -29,19 +29,21 @@ const UserListCard = ({ users, goDetail, toggleActive }: UsersTableProps) => {
               {stringSlicer({ string: user.userName as string, slice: 40 })}
             </h3>
 
-            {user.isActive ? (
-              <MyIcon
-                icon="solar:user-bold-duotone"
-                iconClass="cursor-pointer text-title text-success-500"
-                onClick={() => toggleActive(user)}
-              />
-            ) : (
-              <MyIcon
-                icon="solar:user-bold-duotone"
-                iconClass="cursor-pointer text-title text-warning-500"
-                onClick={() => toggleActive(user)}
-              />
-            )}
+            <div onClick={(e) => e.stopPropagation()}>
+              {user.isActive ? (
+                <MyIcon
+                  icon="solar:user-bold-duotone"
+                  iconClass="cursor-pointer text-title text-success-500"
+                  onClick={() => toggleActive(user)}
+                />
+              ) : (
+                <MyIcon
+                  icon="solar:user-bold-duotone"
+                  iconClass="cursor-pointer text-title text-warning-500"
+                  onClick={() => toggleActive(user)}
+                />
+              )}
+            </div>
           </div>
 
           <div className="mt-2 space-y-1 text-sm text-gray-600">

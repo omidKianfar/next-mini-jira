@@ -101,10 +101,10 @@ const UsersTable = ({ users, goDetail, toggleActive }: UsersTableProps) => {
       head: "",
 
       column: (user: MyUserType) => (
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-end ">
           <MyIcon
             icon="weui:arrow-filled"
-            iconClass="cursor-pointer text-h2"
+            iconClass="cursor-pointer text-h2 text-warning-500 hover:text-warning-700"
             onClick={() => goDetail(user.userId)}
           />
         </div>

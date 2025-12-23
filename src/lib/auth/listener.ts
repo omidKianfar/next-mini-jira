@@ -1,6 +1,6 @@
 "use client";
 
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "@/config/firebase";
 
 // type
@@ -11,7 +11,7 @@ import { MyUserType } from "@/src/types/global";
 import { setUsers } from "@/src/store/slices/users/users";
 
 export const listenToUsers = ({ dispatch }: ListenToUserProps) => {
-  const q = query(collection(db, "users"));
+  const q = query(collection(db, "users"), orderBy("createdAt", "desc"));
 
   return onSnapshot(q, (snap) => {
     const users = snap.docs.map((doc) => ({
