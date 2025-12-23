@@ -127,9 +127,21 @@ export type Columns = {
   value: string;
 };
 
-export type FiltersState = {
+export type TaskFiltersState = {
   tag: string | null;
   date: {
+    from: string | null;
+    to: string | null;
+  };
+};
+
+export type UserState = {
+  users: MyUserType[];
+};
+
+export type UserFiltersState = {
+  isActive: string | null;
+  createdAt: {
     from: string | null;
     to: string | null;
   };

@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // type
-import { FiltersState } from "@/src/types/global";
+import { TaskFiltersState } from "@/src/types/global";
 
-const initialState: FiltersState = {
+const initialState: TaskFiltersState = {
   date: {
     from: null,
     to: null,
@@ -11,28 +11,28 @@ const initialState: FiltersState = {
   tag: null,
 };
 
-const filterSlice = createSlice({
+const filterTaskSlice = createSlice({
   name: "filters",
   initialState,
   reducers: {
-    setType: (state, action: PayloadAction<string | null>) => {
+    setTaskType: (state, action: PayloadAction<string | null>) => {
       state.tag = action.payload;
     },
 
-    setDate: (
+    setTaskDate: (
       state,
       action: PayloadAction<{ from: string | null; to: string | null }>,
     ) => {
       state.date = action.payload;
     },
 
-    resetFilters: (state) => {
+    resetTaskFilters: (state) => {
       state.tag = null;
       state.date = { from: null, to: null };
     },
   },
 });
 
-export const { setType, setDate, resetFilters } = filterSlice.actions;
+export const { setTaskType, setTaskDate, resetTaskFilters } = filterTaskSlice.actions;
 
-export default filterSlice.reducer;
+export default filterTaskSlice.reducer;

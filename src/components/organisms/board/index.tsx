@@ -40,16 +40,16 @@ const BoardComponent = () => {
 
   // redux states
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
-  const filters = useSelector((state: RootState) => state.filters);
+  const taskFilters = useSelector((state: RootState) => state.taskFilters);
 
   // functions
   const filteredTasks = tasks.filter((task) => {
     const taskDate = task.createdAt;
     const taskTag = task.tag;
 
-    const tag = filters.tag;
-    const from = filters.date.from;
-    const to = filters.date.to;
+    const tag = taskFilters.tag;
+    const from = taskFilters.date.from;
+    const to = taskFilters.date.to;
 
     if (tag && tag !== "all") {
       if (taskTag !== tag) return false;

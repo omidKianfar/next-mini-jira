@@ -13,7 +13,7 @@ import { FilterFormType, ModalProps } from "../../molecule/type";
 
 // redux
 import { RootState } from "@/src/store";
-import { resetFilters, setDate, setType } from "@/src/store/slices/filters";
+import { resetTaskFilters, setTaskDate, setTaskType } from "@/src/store/slices/tasks/task-filters";
 
 // ui
 import SelectField from "../../molecule/controllers/RHF-fields/select-filed";
@@ -25,13 +25,13 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   const dispatch = useDispatch();
 
   // redux state
-  const filters = useSelector((state: RootState) => state.filters);
+  const taskFilters = useSelector((state: RootState) => state.taskFilters);
 
   // form
   const defaultValues: FilterFormType = {
-    tag: filters.tag ?? "all",
-    from: filters.date.from ?? "",
-    to: filters.date.to ?? "",
+    tag: taskFilters.tag ?? "all",
+    from: taskFilters.date.from ?? "",
+    to: taskFilters.date.to ?? "",
   };
 
   const methods = useForm<FilterFormType>({
@@ -41,23 +41,23 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
 
   // functions
   useEffect(() => {
-    if (filters) {
+    if (taskFilters) {
       methods.reset({
-        tag: filters.tag ?? "all",
-        from: filters.date.from ?? "",
-        to: filters.date.to ?? "",
+        tag: taskFilters.tag ?? "all",
+        from: taskFilters.date.from ?? "",
+        to: taskFilters.date.to ?? "",
       });
     }
-  }, [filters, methods]);
+  }, [taskFilters, methods]);
 
   const filterHandeler = (values: FilterFormType) => {
-    dispatch(setDate({ from: values.from ?? "", to: values.to ?? "" }));
-    dispatch(setType(values.tag ?? "all"));
+    dispatch(setTaskDate({ from: values.from ?? "", to: values.to ?? "" }));
+    dispatch(setTaskType(values.tag ?? "all"));
     handleClose();
   };
 
   const resetFilterHandler = () => {
-    dispatch(resetFilters());
+    dispatch(resetTaskFilters());
     handleClose();
   };
 

@@ -7,7 +7,7 @@ import { ListenToTasksProps } from "./type";
 import { Task } from "@/src/types/global";
 
 // redux
-import { setTasks } from "@/src/store/slices/tasks";
+import { setTasks } from "@/src/store/slices/tasks/tasks";
 
 // config
 import { db } from "@/config/firebase";
