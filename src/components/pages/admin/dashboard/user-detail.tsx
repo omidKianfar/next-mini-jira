@@ -1,8 +1,6 @@
 "use client";
 
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
-import { enqueueSnackbar } from "notistack";
 import { useSearchParams } from "next/navigation";
 
 // ui
@@ -13,76 +11,62 @@ import PageLoading from "@/src/components/organisms/page-loading";
 // hooks
 import { useNavigation } from "@/src/hooks/navigation";
 
-// firestore
-import { findFirestoreUserById } from "@/src/lib/auth/find-user-by-userId";
-
 // type
+import { useUserListenerById } from "@/src/hooks/users/use-user-listener-by-id";
+import ButtonNext from "@/src/components/atom/button/button-next";
 import { MyUserType } from "@/src/types/global";
+import { updateFirestoreUser } from "@/src/lib/auth/update-user";
+import ButtonFreeClass from "@/src/components/atom/button/button-free-class";
 
 const AdminUserDetailComponent = () => {
   // hooks
   const navigation = useNavigation();
-
   const params = useSearchParams();
   const userId = params.get("userId");
+
+  const { user, loading } = useUserListenerById(userId);
 
   // date
   const now = dayjs();
 
-  // states
-  const [user, setUser] = useState<MyUserType | null>(null);
-
-  // functions
-  useEffect(() => {
-    if (!userId) return;
-
-    const userFetcher = async () => {
-      try {
-        const result = await findFirestoreUserById(userId);
-
-        setUser(result);
-      } catch (error: any) {
-        console.log("Error:", error);
-
-        enqueueSnackbar(`Error: ${error?.message || error}`, {
-          variant: "error",
-        });
-      }
-    };
-
-    userFetcher();
-  }, [userId]);
-
+  // payment status
   const payment = user?.payment;
 
   const hasActivePayment = Boolean(
     payment?.endAt && now.isBefore(payment.endAt),
   );
 
+  // functions
   const onBack = () => {
     navigation.adminDashboard();
   };
 
+  const toggleActive = async () => {
+    await updateFirestoreUser(userId as string, {
+      isActive: !user?.isActive,
+    });
+  };
+
   // ui
-  if (!user) return <PageLoading />;
+  if (loading || !user) return <PageLoading />;
 
   return (
     <div className="flex h-full w-full items-center justify-center p-4">
-      <div className="w-[90vw] rounded-xl border-2 border-warning-500 p-4 shadow-md lg:w-[500px]">
-        <div className="mb-4 flex items-center justify-start">
+      <div className="w-[90vw] rounded-xl border-2 border-warning-500 bg-white p-4 pb-2  shadow-md lg:w-[500px]">
+        <div className="flex items-center justify-start">
           <ButtonBack onClick={onBack} />
         </div>
 
         <div className="text-center">
-          <p className="mb-6 text-title font-bold text-warning-500">
-            User Detail{" "}
+          <p className="mb-4 text-title font-bold text-warning-500">
+            User Detail
           </p>
 
-          <div className="flex flex-col items-start justify-start rounded-sm border border-dashed border-gray-400 bg-gray-200 p-4 shadow-md">
+          <div className="mb-4 flex flex-col items-start justify-start rounded-sm border border-dashed border-gray-400 bg-gray-200 p-4 shadow-md">
             <div className="mb-4 flex w-full items-center justify-center overflow-hidden">
               {user?.photo ? (
                 <MyImage
-                  src={user?.photo as string}
+                  src={user.photo as string}
                   alt=""
                   fill
                   className="rounded-full object-cover"
@@ -140,11 +124,16 @@ const AdminUserDetailComponent = () => {
             {user.payment.freeTrialEnabled && (
               <>
                 <p className="text-body font-semibold capitalize text-primary-600">
-                  <span className="font-bold text-black">Terial Mode:</span>{" "}
-                  True
+                  <span className="font-bold text-black">Trial Mode:</span> True
                 </p>
               </>
             )}
+          </div>
+
+          <div className="flex w-full items-center justify-center">
+            <ButtonNext onClick={toggleActive}>
+              {user.isActive ? "Deactivated User" : "Activated User"}
+            </ButtonNext>
           </div>
         </div>
       </div>
