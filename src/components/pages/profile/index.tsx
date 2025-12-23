@@ -126,7 +126,11 @@ const ProfileComponent = () => {
     if (pathName.includes("signup")) {
       handleOpenModal();
     } else {
-      navigation.dashboard();
+      if (user?.userType === UserType.Admin) {
+        navigation.adminDashboard();
+      } else {
+        navigation.dashboard();
+      }
     }
   };
 
