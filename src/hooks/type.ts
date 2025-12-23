@@ -48,6 +48,9 @@ export interface UsePlanActionProps {
 export interface useTaskListenerProps {
   user: MyUserType | null;
 }
+export interface useUsersListenerProps {
+  users: MyUserType[] | null;
+}
 
 export type fileType = "image" | "video" | "file" | "voice";
 

@@ -1,29 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { collection, onSnapshot, query } from "firebase/firestore";
-import { db } from "@/config/firebase";
-import { MyUserType } from "@/src/types/global";
+import { listenToUsers } from "@/src/lib/auth/listener";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 export const useUsersListener = () => {
-  const [users, setUsers] = useState<MyUserType[]>([]);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const q = query(collection(db, "users"));
-
-    const unsub = onSnapshot(q, (snap) => {
-      const arr = snap.docs.map((doc) => ({
-        ...(doc.data() as MyUserType),
-        userId: doc.id,
-      }));
-
-      setUsers(arr);
-      setLoading(false);
-    });
-
+    const unsub = listenToUsers({ dispatch });
     return () => unsub();
-  }, []);
-
-  return { users, loading };
+  }, [dispatch]);
 };
