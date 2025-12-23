@@ -16,7 +16,7 @@ import { HeaderProps } from "../type";
 // lazy
 const AddTask = lazy(() => import("../add-task"));
 const SearchTasks = lazy(() => import("../serach"));
-const FilterTask = lazy(() => import("../filters"));
+const FilterTask = lazy(() => import("../filters/tasks"));
 
 const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
   // hooks

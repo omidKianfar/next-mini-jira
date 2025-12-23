@@ -6,14 +6,18 @@ import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 // schema
-import { filterSchema } from "./schema";
+import { tasksfilterSchema } from "./schema";
 
 // type
-import { FilterFormType, ModalProps } from "../../molecule/type";
+import { TasksFilterFormType, ModalProps } from "../../molecule/type";
 
 // redux
 import { RootState } from "@/src/store";
-import { resetTaskFilters, setTaskDate, setTaskType } from "@/src/store/slices/tasks/task-filters";
+import {
+  resetTaskFilters,
+  setTaskDate,
+  setTaskType,
+} from "@/src/store/slices/tasks/tasks-filters";
 
 // ui
 import SelectField from "../../molecule/controllers/RHF-fields/select-filed";
@@ -28,15 +32,15 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   const taskFilters = useSelector((state: RootState) => state.taskFilters);
 
   // form
-  const defaultValues: FilterFormType = {
+  const defaultValues: TasksFilterFormType = {
     tag: taskFilters.tag ?? "all",
     from: taskFilters.date.from ?? "",
     to: taskFilters.date.to ?? "",
   };
 
-  const methods = useForm<FilterFormType>({
+  const methods = useForm<TasksFilterFormType>({
     defaultValues,
-    resolver: yupResolver(filterSchema),
+    resolver: yupResolver(tasksfilterSchema),
   });
 
   // functions
@@ -50,7 +54,7 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
     }
   }, [taskFilters, methods]);
 
-  const filterHandeler = (values: FilterFormType) => {
+  const filterHandeler = (values: TasksFilterFormType) => {
     dispatch(setTaskDate({ from: values.from ?? "", to: values.to ?? "" }));
     dispatch(setTaskType(values.tag ?? "all"));
     handleClose();
@@ -65,7 +69,7 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(filterHandeler)}>
         <h1 className="mb-4 text-center text-subtitle font-bold text-warning-500">
-          Filter Todos
+          Filter Tasks
         </h1>
 
         <div className="mb-4 rounded-lg bg-gray-50 p-1 shadow-md">
