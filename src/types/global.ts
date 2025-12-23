@@ -140,7 +140,7 @@ export type UserState = {
 };
 
 export type UserFiltersState = {
-  isActive: string | null;
+  status: string | null;
   createdAt: {
     from: string | null;
     to: string | null;

@@ -12,7 +12,7 @@ const initialState: TaskFiltersState = {
 };
 
 const filterTaskSlice = createSlice({
-  name: "filters",
+  name: "taskFilters",
   initialState,
   reducers: {
     setTaskType: (state, action: PayloadAction<string | null>) => {
