@@ -29,4 +29,6 @@ export interface ActivePaymentSectionProps {
 }
 export interface UsersTableProps {
   users: MyUserType[];
+  goDetail: (userId: string) => void;
+  toggleActive: (user: MyUserType) => Promise<void>;
 }
