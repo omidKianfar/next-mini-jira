@@ -48,7 +48,7 @@ const UsersTable = ({ users, goDetail, toggleActive }: UsersTableProps) => {
           </div>
 
           <p
-            className="font-semibold capitalize"
+            className="font-semibold"
             title={user.userName as string}
           >
             {stringSlicer({ string: user.userName as string, slice: 60 })}

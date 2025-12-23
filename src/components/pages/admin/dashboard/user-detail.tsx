@@ -7,16 +7,16 @@ import { useSearchParams } from "next/navigation";
 import ButtonBack from "@/src/components/atom/button/button-back";
 import MyImage from "@/src/components/atom/image";
 import PageLoading from "@/src/components/organisms/page-loading";
+import ButtonNext from "@/src/components/atom/button/button-next";
 
 // hooks
 import { useNavigation } from "@/src/hooks/navigation";
 
 // type
 import { useUserListenerById } from "@/src/hooks/users/use-user-listener-by-id";
-import ButtonNext from "@/src/components/atom/button/button-next";
-import { MyUserType } from "@/src/types/global";
+
+// firestore
 import { updateFirestoreUser } from "@/src/lib/auth/update-user";
-import ButtonFreeClass from "@/src/components/atom/button/button-free-class";
 
 const AdminUserDetailComponent = () => {
   // hooks
@@ -52,7 +52,7 @@ const AdminUserDetailComponent = () => {
 
   return (
     <div className="flex h-full w-full items-center justify-center p-4">
-      <div className="w-[90vw] rounded-xl border-2 border-warning-500 bg-white p-4 pb-2  shadow-md lg:w-[500px]">
+      <div className="w-[90vw] rounded-xl border-2 border-warning-500 bg-white p-4 pb-2 shadow-md lg:w-[500px]">
         <div className="flex items-center justify-start">
           <ButtonBack onClick={onBack} />
         </div>
@@ -73,25 +73,25 @@ const AdminUserDetailComponent = () => {
                   wrapperClass="relative h-[100px] w-[100px] rounded-full border-2 border-primary-500 "
                 />
               ) : (
-                <div className="h-[80px] w-[80px] rounded-full border-2 border-primary-500 bg-gray-200"></div>
+                <div className="h-[100px] w-[100px] rounded-full border-2 border-primary-500 bg-gray-200"></div>
               )}
             </div>
 
-            <p className="mb-4 text-body font-semibold capitalize text-primary-600">
+            <p className="mb-4 text-body font-semibold text-primary-600">
               <span className="font-bold text-black">Username:</span>{" "}
               {user.userName}
             </p>
 
-            <p className="mb-4 text-body font-semibold capitalize text-primary-600">
+            <p className="mb-4 text-body font-semibold text-primary-600">
               <span className="font-bold text-black">Email:</span> {user.email}
             </p>
 
-            <p className="mb-4 text-body font-semibold capitalize text-primary-600">
+            <p className="mb-4 text-body font-semibold text-primary-600">
               <span className="font-bold text-black">Birthday:</span>{" "}
               {dayjs(user.birthday).format("MM-DD-YYYY")}
             </p>
 
-            <p className="mb-4 text-body font-semibold capitalize text-primary-600">
+            <p className="mb-4 text-body font-semibold text-primary-600">
               <span className="font-bold text-black">Status:</span>{" "}
               <span
                 className={`${user.isActive ? "text-success-500" : "text-warning-500"}`}
@@ -100,7 +100,7 @@ const AdminUserDetailComponent = () => {
               </span>
             </p>
 
-            <p className="mb-4 text-body font-semibold capitalize text-primary-600">
+            <p className="mb-4 text-body font-semibold text-primary-600">
               <span className="font-bold text-black">Created At:</span>{" "}
               {dayjs(user.createdAt).format("MM-DD-YYYY")}
             </p>
@@ -109,12 +109,12 @@ const AdminUserDetailComponent = () => {
 
             {hasActivePayment && (
               <>
-                <p className="mb-4 text-body font-semibold capitalize text-primary-600">
+                <p className="mb-4 text-body font-semibold text-primary-600">
                   <span className="font-bold text-black">Plan Type:</span>{" "}
                   {user.payment.planType}
                 </p>
 
-                <p className="text-body font-semibold capitalize text-primary-600">
+                <p className="text-body font-semibold text-primary-600">
                   <span className="font-bold text-black">End At:</span>{" "}
                   {dayjs(user.payment.endAt).format("MM-DD-YYYY")}
                 </p>
@@ -123,7 +123,7 @@ const AdminUserDetailComponent = () => {
 
             {user.payment.freeTrialEnabled && (
               <>
-                <p className="text-body font-semibold capitalize text-primary-600">
+                <p className="text-body font-semibold text-primary-600">
                   <span className="font-bold text-black">Trial Mode:</span> True
                 </p>
               </>

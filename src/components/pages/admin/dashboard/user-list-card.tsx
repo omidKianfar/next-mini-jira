@@ -21,7 +21,7 @@ const UserListCard = ({ users, goDetail, toggleActive }: UsersTableProps) => {
       {visibleUsers.map((user) => (
         <div
           key={user.userId}
-          className="w-full cursor-pointer rounded-lg border bg-gray-50 p-2 shadow-sm hover:bg-gray-100"
+          className="w-full cursor-pointer rounded-lg border bg-gray-50 p-2 shadow-md hover:bg-gray-100"
           onClick={() => goDetail(user?.userId)}
         >
           <div className="flex items-center justify-between">
@@ -46,24 +46,22 @@ const UserListCard = ({ users, goDetail, toggleActive }: UsersTableProps) => {
             </div>
           </div>
 
-          <div className="mt-2 space-y-1 text-sm text-gray-600">
-            <p>
-              Email: {stringSlicer({ string: user.email as string, slice: 40 })}
+            <p className="mt-2 space-y-1 text-label text-gray-600">
+              {stringSlicer({ string: user.email as string, slice: 40 })}
             </p>
-          </div>
         </div>
       ))}
 
       {hasMore && (
-        <div ref={loaderRef} className="py-4 text-center text-sm text-gray-500">
+        <p ref={loaderRef} className="py-4 text-center text-body text-gray-500">
           Loading more...
-        </div>
+        </p>
       )}
 
       {!hasMore && (
-        <div className="py-4 text-center text-sm text-gray-400">
+        <p className="py-4 text-center text-body text-gray-400">
           No more users
-        </div>
+        </p>
       )}
     </ListComponent>
   );

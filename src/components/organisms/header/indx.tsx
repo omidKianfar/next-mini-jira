@@ -9,15 +9,17 @@ import Logo from "@/src/components/atom/logo";
 import DashboardHeader from "./dashboard";
 import ModalContainer from "../modal-component";
 import PageLoading from "../page-loading";
+import AdminDashboardHeader from "./admin-dashboard";
+import FilterUsers from "../filters/users";
+import SearchUsers from "../serach/serach-users";
 
 // type
 import { HeaderProps } from "../type";
-import AdminDashboardHeader from "./admin-dashboard";
-import FilterUsers from "../filters/users";
+
 
 // lazy
 const AddTask = lazy(() => import("../add-task"));
-const SearchTasks = lazy(() => import("../serach"));
+const SearchTasks = lazy(() => import("../serach/search-tasks"));
 const FilterTask = lazy(() => import("../filters/tasks"));
 
 const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
@@ -77,7 +79,7 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
             </div>
           ) : modalcounter == 4 ? (
             <div>
-              <SearchTasks handleClose={handleCloseModal} />
+              <SearchUsers handleClose={handleCloseModal} />
             </div>
           ) : modalcounter == 5 ? (
             <div>

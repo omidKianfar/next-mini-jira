@@ -31,7 +31,7 @@ const AdminDashboardComponent = () => {
   const dispatch = useDispatch();
 
   // redux
-  const users = useSelector((state: RootState) => state.users);
+  const users = useSelector((state: RootState) => state.users.users);
   const usersFilters = useSelector((state: RootState) => state.usersFilters);
 
   // hooks
@@ -53,7 +53,7 @@ const AdminDashboardComponent = () => {
 
   // filters
   // remove admin
-  const usersWithoutAdmin = users.users.filter(
+  const usersWithoutAdmin = users.filter(
     (user) => user.userType !== UserType.Admin,
   );
 
