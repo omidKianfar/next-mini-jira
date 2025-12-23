@@ -1,4 +1,4 @@
-import React from "react";
+// type
 import { TableProps } from "../type";
 
 export function TableComponent<T>({ data, columns }: TableProps<T>) {
