@@ -100,7 +100,7 @@ const UserSidebar = ({
             ))}
       </div>
 
-      <hr className="mt-6 w-[190px] border border-dotted border-gray-300" />
+      <hr className="mt-6 w-[190px] border border-dashed border-gray-200" />
 
       <div
         className="relative flex w-full cursor-pointer items-center justify-center pt-4 text-primary-700 hover:text-warning-600"
