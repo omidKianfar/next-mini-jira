@@ -14,7 +14,7 @@ import { UsersTableProps } from "../../type";
 import { useState } from "react";
 import PaginationComponent from "@/src/components/atom/pagination";
 
-const UsersTable = ({ users, goDetail, toogleActive }: UsersTableProps) => {
+const UsersTable = ({ users, goDetail, toggleActive }: UsersTableProps) => {
   // pagination
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -84,13 +84,13 @@ const UsersTable = ({ users, goDetail, toogleActive }: UsersTableProps) => {
               <MyIcon
                 icon="solar:user-bold-duotone"
                 iconClass="cursor-pointer text-h3 text-success-500"
-                onClick={() => toogleActive(user)}
+                onClick={() => toggleActive(user)}
               />
             ) : (
               <MyIcon
                 icon="solar:user-bold-duotone"
                 iconClass="cursor-pointer text-h3 text-warning-500"
-                onClick={() => toogleActive(user)}
+                onClick={() => toggleActive(user)}
               />
             )}
           </div>
