@@ -30,7 +30,7 @@ import { UseAuthActionProps } from "../type";
 import { auth, db } from "@/config/firebase";
 
 // firestore
-import { findFirestoreUser } from "@/src/lib/auth/user-finder";
+import { findFirestoreCurrentUser  } from "@/src/lib/auth/current-user-finder";
 import { createUserDocument } from "@/src/lib/auth/create-user";
 import { updateFirestoreUser } from "@/src/lib/auth/update-user";
 
@@ -61,7 +61,7 @@ export const useAuthActions = ({
 
       const currentUser = userCredential.user;
 
-      const user = await findFirestoreUser(currentUser);
+      const user = await findFirestoreCurrentUser(currentUser);
 
       if (user) {
         dispatch({
@@ -111,7 +111,7 @@ export const useAuthActions = ({
 
       await createUserDocument(newUser.user);
 
-      const user = await findFirestoreUser(newUser.user);
+      const user = await findFirestoreCurrentUser(newUser.user);
 
       if (user) {
         dispatch({
@@ -170,7 +170,7 @@ export const useAuthActions = ({
 
         navigation.signup();
       } else {
-        const user = await findFirestoreUser(currentUser);
+        const user = await findFirestoreCurrentUser(currentUser);
 
         if (user) {
           dispatch({

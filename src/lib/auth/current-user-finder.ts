@@ -5,7 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 // type
 import { MyUserType, UserType } from "@/src/types/global";
 
-export const findFirestoreUser = async (
+export const findFirestoreCurrentUser = async (
   currentUser: User,
 ): Promise<MyUserType> => {
   const docRef = doc(db, "users", currentUser.uid);

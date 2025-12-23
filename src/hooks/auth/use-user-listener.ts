@@ -6,7 +6,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 
 import { UseAuthListenerProps } from "../type";
 import { auth, db } from "@/config/firebase";
-import { findFirestoreUser } from "@/src/lib/auth/user-finder";
+import { findFirestoreCurrentUser } from "@/src/lib/auth/current-user-finder";
 import { MyUserType } from "@/src/types/global";
 
 export const useUserListener = ({
@@ -47,7 +47,7 @@ export const useUserListener = ({
       unsubDocRef.current = onSnapshot(ref, async (snap) => {
         const newUserData = snap.exists() ? snap.data() : {};
 
-        const newFullUser = await findFirestoreUser(currentUser);
+        const newFullUser = await findFirestoreCurrentUser(currentUser);
 
         if (
           JSON.stringify(lastUserRef.current) === JSON.stringify(newFullUser)
