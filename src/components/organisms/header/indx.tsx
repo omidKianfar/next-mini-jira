@@ -12,6 +12,8 @@ import PageLoading from "../page-loading";
 
 // type
 import { HeaderProps } from "../type";
+import AdminDashboardHeader from "./admin-dashboard";
+import FilterUsers from "../filters/users";
 
 // lazy
 const AddTask = lazy(() => import("../add-task"));
@@ -55,6 +57,8 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
         <div className="w-1/3">
           {pathname == "/dashboard" ? (
             <DashboardHeader handleOpenModal={handleOpenModal} />
+          ) : pathname == "/admin/dashboard" ? (
+            <AdminDashboardHeader handleOpenModal={handleOpenModal} />
           ) : null}
         </div>
       </div>
@@ -70,6 +74,14 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
           ) : modalcounter == 3 ? (
             <div>
               <FilterTask handleClose={handleCloseModal} />
+            </div>
+          ) : modalcounter == 4 ? (
+            <div>
+              <SearchTasks handleClose={handleCloseModal} />
+            </div>
+          ) : modalcounter == 5 ? (
+            <div>
+              <FilterUsers handleClose={handleCloseModal} />
             </div>
           ) : null}
         </ModalContainer>

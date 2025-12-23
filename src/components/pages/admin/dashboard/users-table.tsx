@@ -17,7 +17,7 @@ import PaginationComponent from "@/src/components/atom/pagination";
 const UsersTable = ({ users, goDetail, toggleActive }: UsersTableProps) => {
   // pagination
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(5);
 
   const totalPages = Math.max(1, Math.ceil(users.length / pageSize));
 

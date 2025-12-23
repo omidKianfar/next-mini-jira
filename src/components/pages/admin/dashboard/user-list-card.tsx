@@ -25,7 +25,9 @@ const UserListCard = ({ users, goDetail, toggleActive }: UsersTableProps) => {
           onClick={() => goDetail(user?.userId)}
         >
           <div className="flex items-center justify-between">
-            <h3 className="font-semibold">{user.userName}</h3>
+            <h3 className="font-semibold">
+              {stringSlicer({ string: user.userName as string, slice: 40 })}
+            </h3>
 
             {user.isActive ? (
               <MyIcon
