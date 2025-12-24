@@ -94,7 +94,7 @@ const AdminDashboardComponent = () => {
   return (
     <div className="h-full w-full p-4">
       <div className="rounded-md bg-white p-4 shadow-md">
-        <div className="mb-4 flex w-full items-center justify-center">
+        <div className="mb-4 flex w-full items-center justify-between">
           <h2 className="mx-2 text-title font-bold text-warning-500">
             Users List
           </h2>
@@ -102,13 +102,13 @@ const AdminDashboardComponent = () => {
           {sort ? (
             <MyIcon
               icon="ph:sort-ascending-bold"
-              className="cursor-pointer text-h4 text-blue-500"
+              className="cursor-pointer text-h4 text-blue-400"
               onClick={SortHandler}
             />
           ) : (
             <MyIcon
               icon="ph:sort-descending-bold"
-              className="cursor-pointer text-h4 text-blue-500"
+              className="cursor-pointer text-h4 text-blue-400"
               onClick={SortHandler}
             />
           )}
