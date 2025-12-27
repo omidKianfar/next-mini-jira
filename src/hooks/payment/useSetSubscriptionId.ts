@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { UsePaymentSuccessProps } from "../type";
 
 // roues
-import { routes } from "@/src/lib/route/routes";
+import { routes } from "@/src/helper/routes/routes";
 
 export const useSetSubscriptionId = ({
   sessionId,

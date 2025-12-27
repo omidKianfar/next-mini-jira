@@ -1,5 +1,5 @@
 // routes
-import { routes } from "@/src/lib/route/routes";
+import { routes } from "@/src/helper/routes/routes";
 
 // type
 import { UsePlanActionProps } from "../type";
