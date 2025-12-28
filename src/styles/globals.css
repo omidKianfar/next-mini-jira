@@ -8,6 +8,10 @@
   --font-Outfit: var(--font-Outfit);
   --font-poppins: var(--font-poppins);
   --font-inter: var(--font-Inter);
+
+  scrollbar-color: #f59e0b #fff;
+  scrollbar-width: thin;
+  scrollbar-arrow-color: #f59e0b ;
 }
 
 body {
