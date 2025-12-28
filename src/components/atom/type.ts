@@ -4,9 +4,9 @@ export interface FarmerMotionProps {
 
 export type ButtonType = "button" | "submit" | "reset";
 export interface ButtonProps {
-  type: ButtonType;
-  children: React.ReactNode;
-  isLoading: boolean;
+  type?: ButtonType;
+  children?: React.ReactNode;
+  isLoading?: boolean;
   onClick?: () => void;
   className?: string;
   disable?: boolean;
@@ -27,7 +27,7 @@ export interface MyIconProps {
 }
 export interface MyImageProps {
   src: string;
-  alt: string;
+  alt?: string;
   width?: number;
   height?: number;
   fill?: boolean;
