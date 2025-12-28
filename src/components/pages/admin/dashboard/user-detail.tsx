@@ -62,7 +62,7 @@ const AdminUserDetailComponent = () => {
             User Detail
           </p>
 
-          <div className="mb-4 flex flex-col items-start justify-start rounded-sm border border-dashed border-gray-400 bg-gray-200 p-4 shadow-md">
+          <div className="mb-4 flex flex-col items-start justify-start rounded-sm border-2 border-warning-400 bg-gray-50 p-4 shadow-md">
             <div className="mb-4 flex w-full items-center justify-center overflow-hidden">
               {user?.photo ? (
                 <MyImage
@@ -82,14 +82,20 @@ const AdminUserDetailComponent = () => {
               {user.userName}
             </p>
 
+            <hr className="mb-4 w-full border border-dashed border-gray-300" />
+
             <p className="mb-4 text-body font-semibold text-primary-600">
               <span className="font-bold text-black">Email:</span> {user.email}
             </p>
+
+            <hr className="mb-4 w-full border border-dashed border-gray-300" />
 
             <p className="mb-4 text-body font-semibold text-primary-600">
               <span className="font-bold text-black">Birthday:</span>{" "}
               {dayjs(user.birthday).format("MM-DD-YYYY")}
             </p>
+
+            <hr className="mb-4 w-full border border-dashed border-gray-300" />
 
             <p className="mb-4 text-body font-semibold text-primary-600">
               <span className="font-bold text-black">Status:</span>{" "}
@@ -99,6 +105,8 @@ const AdminUserDetailComponent = () => {
                 {user.isActive ? "Active" : "Deactive"}
               </span>
             </p>
+
+            <hr className="mb-4 w-full border border-dashed border-gray-300" />
 
             <p className="mb-4 text-body font-semibold text-primary-600">
               <span className="font-bold text-black">Created At:</span>{" "}
