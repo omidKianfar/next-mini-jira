@@ -67,20 +67,20 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   return (
     <div className="w-full">
       <h1 className="mb-4 text-center text-subtitle font-bold text-warning-500">
-        Search Todo
+        Search Tasks
       </h1>
 
-      <div className="mb-4 rounded-lg bg-gray-50 p-1 shadow-md">
-        <div className="relative rounded-lg bg-gray-100 p-1">
+      <div className="relative mb-4 rounded-lg border-2  border-warning-400 bg-gray-50 p-2 shadow-md">
+        <div>
           <MyIcon
             icon="tabler:zoom"
-            className="absolute left-2 top-4 text-title text-primary-500"
+            className="absolute left-3 top-5 text-title text-primary-500"
           />
 
           {filteredTasks.length > 0 && (
             <MyIcon
               icon="material-symbols:close-rounded"
-              className="absolute right-2 top-4 cursor-pointer text-title text-gray-400 hover:text-error-500"
+              className="absolute right-3 top-5 cursor-pointer text-title text-gray-400 hover:text-error-500"
               onClick={handelClear}
             />
           )}
@@ -89,6 +89,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
             className="my-1 w-full rounded-lg border-2 border-primary-400 px-8 py-2 text-bodySm shadow-md focus:outline-primary-700"
             value={searchValue}
             onChange={(event) => serachHandler(event)}
+            autoFocus
           />
         </div>
       </div>
@@ -106,7 +107,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
                 }}
               >
                 <div className="w-full p-1">
-                  <div className="rounded-lg border border-gray-100 bg-gray-50 shadow-md">
+                  <div className="rounded-lg border border-gray-300 bg-gray-50 shadow-md">
                     <div className="p-2">
                       <p className="break-word text-bodySm font-bold">
                         {stringSlicer({
@@ -116,14 +117,14 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
                       </p>
                     </div>
 
-                    <div className="border-t-2 border-dotted">
-                      <p className="break-words p-2 text-bodySm">
-                        {stringSlicer({
-                          string: task.description,
-                          slice: isMobile ? 100 : 200,
-                        })}
-                      </p>
-                    </div>
+                    <hr className="mx-2 border border-dashed border-gray-300" />
+
+                    <p className="break-words p-2 text-bodySm">
+                      {stringSlicer({
+                        string: task.description,
+                        slice: isMobile ? 100 : 200,
+                      })}
+                    </p>
                   </div>
 
                   <div className="flex items-center justify-between rounded-b-lg px-2 pb-1 pt-2">

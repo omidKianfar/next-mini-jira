@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 // hooks
 import { useNavigation } from "@/src/hooks/navigation";
-import { useIsMobile } from "@/src/hooks/mobile-size";
 
 // type
 import { ModalProps } from "../../molecule/type";
@@ -70,17 +69,17 @@ const SearchUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
         Search Users
       </h1>
 
-      <div className="mb-4 rounded-lg bg-gray-50 p-1 shadow-md">
-        <div className="relative rounded-lg bg-gray-100 p-1">
+      <div className="relative mb-4 rounded-lg border-2 border-warning-400 bg-gray-50 p-2 shadow-md">
+        <div>
           <MyIcon
             icon="tabler:zoom"
-            className="absolute left-2 top-4 text-title text-primary-500"
+            className="absolute left-3 top-5 text-title text-primary-500"
           />
 
           {filteredUsers.length > 0 && (
             <MyIcon
               icon="material-symbols:close-rounded"
-              className="absolute right-2 top-4 cursor-pointer text-title text-gray-400 hover:text-error-500"
+              className="absolute right-3 top-5 cursor-pointer text-title text-gray-400 hover:text-error-500"
               onClick={handelClear}
             />
           )}
@@ -99,7 +98,7 @@ const SearchUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
             {filteredUsers.map((user) => (
               <div
                 key={user.userId}
-                className="mb-4 flex w-full cursor-pointer items-center justify-start rounded-lg border-2 border-warning-400 bg-white p-4 shadow-md"
+                className="mb-4 flex w-full cursor-pointer items-center justify-start rounded-lg border-2 border-warning-400 bg-gray-50 p-4 shadow-md"
                 onClick={() => {
                   navigation.adminUserDetail(user.userId);
                   handleClose();
@@ -120,7 +119,7 @@ const SearchUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
                 </div>
 
                 <div>
-                  <h3 className="text-body font-semibold">
+                  <h3 className="text-body font-semibold mb-1">
                     {stringSlicer({
                       string: user.userName as string,
                       slice: 40,
