@@ -89,7 +89,7 @@ const BoardComponent = () => {
   return (
     <Suspense fallback={<PageLoading />}>
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-        <div className="flex flex-col items-start justify-center gap-4 px-4 py-1 lg:flex-row">
+        <div className="flex flex-col items-start justify-center gap-4  lg:flex-row">
           <ColumnComponent key="todo" id="todo">
             {renderColumn("todo") ?? []}
           </ColumnComponent>

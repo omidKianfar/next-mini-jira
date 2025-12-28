@@ -44,7 +44,7 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
     >
       <div className="w-full p-1">
         <div
-          className="cursor-grab rounded-lg border border-gray-100 bg-gray-50 shadow-md"
+          className="cursor-grab rounded-lg border border-gray-300 bg-gray-50 shadow-md"
           {...listeners}
           {...attributes}
         >
@@ -54,14 +54,14 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
             </p>
           </div>
 
-          <div className="border-t-2 border-dotted">
-            <p className="break-words p-2 text-bodySm">
-              {stringSlicer({
-                string: task.description,
-                slice: isMobile ? 100 : 200,
-              })}
-            </p>
-          </div>
+          <hr className="border border-dashed border-gray-300 mx-2" />
+
+          <p className="break-words p-2 text-bodySm">
+            {stringSlicer({
+              string: task.description,
+              slice: isMobile ? 100 : 200,
+            })}
+          </p>
         </div>
 
         <div className="flex items-center justify-between rounded-b-lg px-2 pb-1 pt-2">
