@@ -25,7 +25,7 @@ const DashboardComponent = () => {
   useTaskListener({ user });
 
   return (
-    <div className="min-h-screen w-full px-2 py-4">
+    <div className="min-h-screen w-full">
       <Suspense fallback={<PageLoading />}>
         <BoardComponent />
       </Suspense>

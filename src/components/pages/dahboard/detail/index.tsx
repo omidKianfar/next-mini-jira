@@ -114,7 +114,7 @@ const TaskDetailComponent = () => {
 
   return (
     <Suspense>
-      <div className="flex w-full flex-col items-start justify-center p-4">
+      <div className="flex w-full flex-col items-start justify-center">
         <div className="h-full w-full rounded-xl border-2 border-amber-300 bg-white p-4 shadow-md">
           <div className="mb-4 flex items-center justify-between lg:mb-2">
             <ButtonBack onClick={BackDashboard} />
@@ -155,7 +155,7 @@ const TaskDetailComponent = () => {
                 </p>
               </div>
 
-              <div className="rounded-md border border-dashed border-gray-400 bg-gray-50 p-4 shadow-md">
+              <div className="rounded-md border border-gray-300 bg-gray-50 p-4 shadow-md">
                 <h1 className="break-word mb-4 text-body font-semibold">
                   {task.title}
                 </h1>
