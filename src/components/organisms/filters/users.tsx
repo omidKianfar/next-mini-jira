@@ -72,8 +72,8 @@ const FilterUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
           Filter Users
         </h1>
 
-        <div className="mb-4 rounded-lg bg-gray-50 p-1 shadow-md">
-          <div className="rounded-lg bg-gray-100 p-2">
+        <div className="mb-4 rounded-lg border-2 border-warning-400 bg-gray-50 p-3 shadow-md">
+          <div>
             <SelectField name="status" label="Tag" options={statusList} />
 
             <div className="my-2">
