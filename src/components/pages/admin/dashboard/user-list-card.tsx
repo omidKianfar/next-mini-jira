@@ -21,7 +21,7 @@ const UserListCard = ({ users, goDetail, toggleActive }: UsersTableProps) => {
       {visibleUsers.map((user) => (
         <div
           key={user.userId}
-          className="w-full cursor-pointer rounded-lg border bg-gray-50 p-2 shadow-md hover:bg-gray-100"
+          className="w-full cursor-pointer rounded-lg border-2 border-warning-500 bg-gray-50 p-2 shadow-md hover:bg-gray-100"
           onClick={() => goDetail(user?.userId)}
         >
           <div className="flex items-center justify-between">
