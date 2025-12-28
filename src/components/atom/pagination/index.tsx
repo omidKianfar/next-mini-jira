@@ -42,7 +42,7 @@ const PaginationComponent = ({
 
   return (
     <div className="mt-4 flex items-center justify-center gap-2">
-      <div className="flex justify-center gap-2 rounded-md border border-dashed border-gray-400 bg-white p-2 shadow-md lg:flex-row">
+      <div className="flex justify-center gap-2 rounded-md border-2 border-warning-500 bg-white p-2 shadow-md lg:flex-row">
         <button
           onClick={() => onPageChange(1)}
           disabled={currentPage === 1}
@@ -96,7 +96,7 @@ const PaginationComponent = ({
         </button>
       </div>
 
-      <div className="rounded-md border border-dashed border-gray-400 bg-white p-2 shadow-md">
+      <div className="rounded-md border-2 border-warning-500 bg-white p-2 shadow-md">
         <select
           value={pageSize}
           onChange={(e) => onPageSizeChange(Number(e.target.value))}
