@@ -3,11 +3,13 @@
 import { useState, useCallback } from "react";
 
 export const useImageCrop = () => {
+  // states
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedPixels, setCroppedPixels] = useState<any>(null);
 
+  // functions
   const onCropComplete = useCallback((_: any, croppedAreaPixels: any) => {
     setCroppedPixels(croppedAreaPixels);
   }, []);

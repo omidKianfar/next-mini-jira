@@ -4,10 +4,15 @@ import { useEffect, useRef } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 
+// type
 import { UseAuthListenerProps } from "../type";
-import { auth, db } from "@/config/firebase";
-import { findFirestoreCurrentUser } from "@/src/lib/auth/current-user-finder";
 import { MyUserType } from "@/src/types/global";
+
+// config
+import { auth, db } from "@/configs/firebase";
+
+// firestore
+import { findFirestoreCurrentUser } from "@/src/libs/auth/current-user-finder";
 
 export const useUserListener = ({
   dispatch,

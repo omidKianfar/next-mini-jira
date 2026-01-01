@@ -5,10 +5,13 @@ import { useEffect } from "react";
 
 // hooks
 import { useAuth } from "../auth/use-auth";
-import { useNavigation } from "../navigation";
+import { useNavigation } from "../navigation/use-navigation";
+
+// types
 import { UserType } from "@/src/types/global";
 
 export const useRequireActiveStatus = () => {
+  // hooks
   const pathname = usePathname();
   const navigation = useNavigation();
   const auth = useAuth();
@@ -16,6 +19,7 @@ export const useRequireActiveStatus = () => {
   const user = auth?.user;
   const isLoading = auth?.isLoading;
 
+  // functions
   useEffect(() => {
     if (user?.userType == UserType?.Admin) return;
 

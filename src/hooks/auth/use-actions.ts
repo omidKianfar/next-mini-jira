@@ -15,7 +15,7 @@ import { doc, getDoc } from "firebase/firestore";
 import dayjs from "dayjs";
 
 // hooks
-import { useNavigation } from "../navigation";
+import { useNavigation } from "../navigation/use-navigation";
 
 // type
 import {
@@ -27,12 +27,12 @@ import {
 import { UseAuthActionProps } from "../type";
 
 // config
-import { auth, db } from "@/config/firebase";
+import { auth, db } from "@/configs/firebase";
 
 // firestore
-import { findFirestoreCurrentUser  } from "@/src/lib/auth/current-user-finder";
-import { createUserDocument } from "@/src/lib/auth/create-user";
-import { updateFirestoreUser } from "@/src/lib/auth/update-user";
+import { findFirestoreCurrentUser  } from "@/src/libs/auth/current-user-finder";
+import { createUserDocument } from "@/src/libs/auth/create-user";
+import { updateFirestoreUser } from "@/src/libs/auth/update-user";
 
 export const useAuthActions = ({
   dispatch,

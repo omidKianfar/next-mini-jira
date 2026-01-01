@@ -9,28 +9,35 @@ export function uploadWithProgress({
 }: uploadWithProgressProps): Promise<void> {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
+
     xhrRef.current = xhr;
 
     let abortedByUser = false;
 
+    // count upload progress
     xhr.upload.onprogress = (event) => {
       if (event.lengthComputable) {
         const percent = Math.round((event.loaded / event.total) * 100);
+
         onProgress(percent);
       }
     };
 
+    // set status
     xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status < 300) {
         onProgress(100);
+
         resolve();
       } else {
         reject(new Error("Upload failed"));
       }
     };
 
+    // error
     xhr.onabort = () => {
       abortedByUser = true;
+
       resolve();
     };
 
@@ -43,7 +50,9 @@ export function uploadWithProgress({
     };
 
     xhr.open("PUT", signedUrl);
+
     xhr.setRequestHeader("Content-Type", file.type);
+
     xhr.send(file);
   });
 }

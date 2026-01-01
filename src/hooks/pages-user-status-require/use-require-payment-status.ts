@@ -5,15 +5,19 @@ import dayjs from "dayjs";
 import { usePathname } from "next/navigation";
 
 // hooks
-import { useNavigation } from "../navigation";
+import { useNavigation } from "../navigation/use-navigation";
 import { useAuth } from "../auth/use-auth";
+
+// types
 import { UserType } from "@/src/types/global";
 
 export const useRequirePaymentStatus = () => {
+  // hooks
   const navigation = useNavigation();
   const { user, isLoading } = useAuth();
   const pathname = usePathname();
 
+  // functions
   useEffect(() => {
     if (user?.userType == UserType?.Admin) return;
 

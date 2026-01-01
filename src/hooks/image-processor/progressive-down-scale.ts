@@ -1,3 +1,4 @@
+// ./image-processor
 import { createSmoothCanvas } from "./create-smooth-canvas";
 
 // type

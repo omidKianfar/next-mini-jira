@@ -97,3 +97,10 @@ export interface useUnreadCountProps {
   chatId: string;
   senderType: UserType;
 }
+
+export interface validateFileProps {
+  file: File;
+  accept: string[] | null;
+  except: string[] | null;
+  maxSizeMB: number;
+}

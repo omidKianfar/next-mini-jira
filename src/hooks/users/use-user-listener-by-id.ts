@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
+
+// type
 import { MyUserType } from "@/src/types/global";
-import { listenToUserById } from "@/src/lib/auth/find-user-by-userId";
+
+// firestore
+import { listenToUserById } from "@/src/libs/auth/find-user-by-userId";
 
 export const useUserListenerById = (userId: string | null) => {
+  // states
   const [user, setUser] = useState<MyUserType | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // functions
   useEffect(() => {
     if (!userId) return;
 

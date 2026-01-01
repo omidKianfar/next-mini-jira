@@ -7,11 +7,13 @@ import { useEffect } from "react";
 import { useTaskListenerProps } from "../type";
 
 //hook
-import { listenToTasks } from "@/src/lib/tasks/listener";
+import { listenToTasks } from "@/src/libs/tasks/listener";
 
 export const useTaskListener = ({ user }: useTaskListenerProps) => {
+  // hooks
   const dispatch = useDispatch();
 
+  // functions
   useEffect(() => {
     if (!user) return;
 

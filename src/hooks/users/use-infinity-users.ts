@@ -6,12 +6,14 @@ import { useState, useRef, useCallback, useMemo } from "react";
 import { MyUserType } from "@/src/types/global";
 
 export const useInfiniteUsers = (users: MyUserType[], batchSize = 10) => {
+  // states
   const [cursor, setCursor] = useState(batchSize);
 
   const safeCursor = Math.min(cursor, users.length);
 
   const effectiveCursor = users.length === 0 ? 0 : safeCursor;
 
+  // functions
   const visibleUsers = useMemo(() => {
     return users.slice(0, effectiveCursor);
   }, [users, effectiveCursor]);

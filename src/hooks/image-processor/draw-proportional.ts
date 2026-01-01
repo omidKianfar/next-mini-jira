@@ -1,3 +1,4 @@
+// ./image-procrssor
 import { createSmoothCanvas } from "./create-smooth-canvas";
 import { progressiveDownscale } from "./progressive-down-scale";
 

@@ -1,4 +1,4 @@
-import { supabase } from "@/config/supabase";
+import { supabase } from "@/configs/supabase";
 
 // type
 import { deleteUploadedFileProps } from "../type";
