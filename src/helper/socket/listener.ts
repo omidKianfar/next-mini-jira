@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 
 // config
-import { SOCKET_URL } from "@/config/socket";
+import { SOCKET_URL } from "@/configs/socket";
 
 export const socket = io(SOCKET_URL, {
   transports: ["websocket"],
