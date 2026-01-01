@@ -1,5 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "@/config/firebase";
+
+// configs
+import { db } from "@/configs/firebase";
 
 // type
 import { FetchTaskProps } from "./type";

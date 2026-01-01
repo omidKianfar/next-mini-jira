@@ -10,7 +10,7 @@ import { Task } from "@/src/types/global";
 import { setTasks } from "@/src/store/slices/tasks/tasks";
 
 // config
-import { db } from "@/config/firebase";
+import { db } from "@/configs/firebase";
 
 export const listenToTasks = ({ userId, dispatch }: ListenToTasksProps) => {
   const userIdInTasksQuery = query(

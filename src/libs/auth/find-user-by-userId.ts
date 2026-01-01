@@ -1,10 +1,14 @@
-import { db } from "@/config/firebase";
 import { doc, onSnapshot } from "firebase/firestore";
+
+// type
 import { MyUserType, UserType } from "@/src/types/global";
+
+// configs
+import { db } from "@/configs/firebase";
 
 export const listenToUserById = (
   userId: string,
-  callback: (user: MyUserType | null) => void
+  callback: (user: MyUserType | null) => void,
 ) => {
   const ref = doc(db, "users", userId);
 

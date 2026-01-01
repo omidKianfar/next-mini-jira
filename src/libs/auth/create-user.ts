@@ -1,7 +1,9 @@
-import { db } from "@/config/firebase";
 import dayjs from "dayjs";
 import { doc, setDoc } from "firebase/firestore";
 import { User } from "firebase/auth";
+
+// configs
+import { db } from "@/configs/firebase";
 
 // type
 import { MyUserType, UserType } from "@/src/types/global";

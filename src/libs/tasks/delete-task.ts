@@ -1,5 +1,7 @@
 import { deleteDoc, doc } from "firebase/firestore";
-import { db } from "@/config/firebase";
+
+// configs
+import { db } from "@/configs/firebase";
 
 // type
 import { DeleteTaskProps } from "./type";

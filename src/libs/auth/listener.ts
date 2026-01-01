@@ -1,7 +1,9 @@
 "use client";
 
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { db } from "@/config/firebase";
+
+// configs
+import { db } from "@/configs/firebase";
 
 // type
 import { ListenToUserProps } from "./type";

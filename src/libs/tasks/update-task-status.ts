@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import { UpdateTaskStatusProps } from "./type";
 
 // config
-import { db } from "@/config/firebase";
+import { db } from "@/configs/firebase";
 
 export const updateTaskStatus = async ({
   id,

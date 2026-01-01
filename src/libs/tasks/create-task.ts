@@ -1,5 +1,7 @@
-import { db } from "@/config/firebase";
 import { doc, setDoc } from "firebase/firestore";
+
+// configs
+import { db } from "@/configs/firebase";
 
 // type
 import { Task } from "@/src/types/global";
