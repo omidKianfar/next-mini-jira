@@ -3,11 +3,11 @@
 import { Component } from "react";
 
 // type
-import { Props, State } from "./type";
+import { ErrorBoundaryProps, ErrorBoundaryState } from "../type";
 
-export default class ErrorBoundary extends Component<Props, State> {
+export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   // state
-  state: State = { hasError: false };
+  state: ErrorBoundaryState = { hasError: false };
 
   // functions
   static getDerivedStateFromError() {
