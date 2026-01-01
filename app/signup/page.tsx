@@ -1,4 +1,4 @@
-import FramerMotion from "@/src/components/atom/animation";
+import FramerMotion from "@/src/components/atom/animation-component";
 import SignupComponent from "@/src/components/pages/auth/signup";
 
 const PaymentSuccessPage = () => {

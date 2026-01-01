@@ -1,4 +1,4 @@
-import FramerMotion from "@/src/components/atom/animation";
+import FramerMotion from "@/src/components/atom/animation-component";
 import AdminUserDetailComponent from "@/src/components/pages/admin/dashboard/user-detail";
 
 const AdminUserDetailPage = () => {

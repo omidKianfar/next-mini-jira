@@ -1,4 +1,4 @@
-import FramerMotion from "@/src/components/atom/animation";
+import FramerMotion from "@/src/components/atom/animation-component";
 import PasswordComponent from "@/src/components/pages/password";
 
 const PasswordPage = () => {

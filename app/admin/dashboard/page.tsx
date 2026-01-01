@@ -1,5 +1,5 @@
-import FramerMotion from "@/src/components/atom/animation";
-import AdminDashboardComponent from "@/src/components/pages/admin/dashboard";
+import FramerMotion from "@/src/components/atom/animation-component";
+import AdminDashboardComponent from "@/src/components/pages/admin/dashboard/admin-dashboard";
 
 const AdminDashboardPage = () => {
   return (

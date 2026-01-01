@@ -1,5 +1,5 @@
-import FramerMotion from "@/src/components/atom/animation";
-import DashboardComponent from "@/src/components/pages/dahboard";
+import FramerMotion from "@/src/components/atom/animation-component";
+import DashboardComponent from "@/src/components/pages/dahboard/user-dashboard";
 
 const DashboardPage = () => {
   return (

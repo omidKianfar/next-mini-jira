@@ -1,5 +1,5 @@
-import FramerMotion from "@/src/components/atom/animation";
-import PaymentSuccessComponent from "@/src/components/pages/payment/page/payment-success";
+import FramerMotion from "@/src/components/atom/animation-component";
+import PaymentSuccessComponent from "@/src/components/pages/payment/payment-success";
 
 const PaymentSuccessPage = () => {
   return (

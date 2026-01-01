@@ -7,8 +7,8 @@ import AuthGuard from "@/src/guards/auth-guard";
 import RoleGuard from "@/src/guards/role-guard";
 
 // ui
-import Header from "@/src/components/organisms/header/indx";
-import SideBar from "@/src/components/organisms/sidebar/user-sidebar/index";
+import SideBar from "@/src/components/organisms/sidebar-component/user-sidebar/index";
+import Header from "@/src/components/organisms/header-component/indx";
 
 // type
 import { UserType } from "@/src/types/global";
