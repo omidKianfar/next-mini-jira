@@ -21,8 +21,8 @@ const AddTaskFormComponent = ({
         Create Task
       </h1>
 
-      <div className="mb-4 rounded-lg bg-gray-50 p-1 shadow-md">
-        <div className="b rounded-lg bg-gray-100 p-2">
+      <div className="mb-4 rounded-lg border-2 border-warning-400 bg-gray-50 p-3 shadow-md">
+        <div>
           <SelectField name="tag" options={columns} label={"Tag"} />
 
           <div className="my-2">

@@ -56,7 +56,7 @@ const AddTaskUploadComponent = ({
                   src={url as string}
                   alt="preview"
                   fill
-                  wrapperClass="relative cursor-pointer w-[500px] h-[500px] overflow-hidden rounded-lg p-1 shadow-md border-2 border-gray-100 p-1"
+                  wrapperClass="relative cursor-pointer w-[500px] h-[500px] overflow-hidden rounded-lg p-1 shadow-md border-2 border-warning-400"
                   className="object-cover"
                 />
               </LightBoxComponent>
@@ -65,7 +65,7 @@ const AddTaskUploadComponent = ({
               <MyVideo
                 src={url! as string}
                 alt="preview"
-                className="w-full max-w-[500px] rounded-lg border-2 border-gray-100 p-1 shadow-md"
+                className="w-full max-w-[500px] rounded-lg border-2 border-warning-400 shadow-md"
               />
             )}
           </div>

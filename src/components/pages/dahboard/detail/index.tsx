@@ -176,7 +176,7 @@ const TaskDetailComponent = () => {
                           src={task?.attachment?.fileUrl as string}
                           alt="preview"
                           fill
-                          wrapperClass="relative cursor-pointer w-[250px] h-[250px] overflow-hidden rounded-lg p-1 shadow-md border-2 border-gray-100 p-1"
+                          wrapperClass="relative cursor-pointer w-[250px] h-[250px] overflow-hidden rounded-lg  shadow-md border-2 border-warning-400 "
                           className="object-cover"
                         />
                       </LightBoxComponent>
@@ -184,7 +184,7 @@ const TaskDetailComponent = () => {
                       <MyVideo
                         src={task?.attachment?.fileUrl as string}
                         alt="preview"
-                        className="w-full max-w-[500px] rounded-lg border-2 border-gray-100 p-1 shadow-md"
+                        className="border-warning-400shadow-md w-full max-w-[500px] rounded-lg border-2"
                       />
                     )
                   ) : null}
