@@ -42,17 +42,8 @@ export interface ErrorProps {
   errors: any;
 }
 
-export type TasksFilterFormType = {
-  tag: string;
-  from?: string;
-  to?: string;
-};
 
-export type UsersFilterFormType = {
-  status: string;
-  from?: string;
-  to?: string;
-};
+
 
 export interface UploadAvatarProps {
   photo: string | undefined;
