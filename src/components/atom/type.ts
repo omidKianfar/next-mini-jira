@@ -45,33 +45,3 @@ export interface MyVideoProps {
   height?: number;
   className?: string;
 }
-
-export type CellContent<T> =
-  | string
-  | number
-  | React.ReactNode
-  | ((row: T) => React.ReactNode);
-
-export type Column<T> = {
-  key?: string;
-  head: CellContent<T>;
-  column: CellContent<T>;
-  className?: string;
-};
-
-export type TableProps<T> = {
-  data: T[];
-  columns: Column<T>[];
-};
-
-export type PaginationProps = {
-  currentPage: number;
-  totalPages: number;
-  pageSize: number;
-  onPageChange: (page: number) => void;
-  onPageSizeChange: (size: number) => void;
-};
-export interface ListComponentProps  {
-  children: React.ReactNode;
-  title?: string;
-};

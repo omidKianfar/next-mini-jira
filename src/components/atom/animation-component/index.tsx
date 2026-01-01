@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 
 // hooks
-import { useIsMobile } from "@/src/hooks/mobile-size";
+import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
 
 // type
 import { FarmerMotionProps } from "../type";

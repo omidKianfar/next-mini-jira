@@ -2,7 +2,7 @@
 
 // ui
 import ButtonFreeClass from "./button-free-class";
-import MyIcon from "../icon";
+import MyIcon from "../icon-components";
 
 // type
 import { BackButtonProps } from "../type";

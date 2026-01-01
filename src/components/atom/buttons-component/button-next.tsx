@@ -1,12 +1,12 @@
 "use client";
 
 // ui
-import LoadingCircle from "../loading-circle";
+import LoadingCircle from "../loadings/loading-circle";
 
 // type
 import { ButtonProps } from "../type";
 
-const ButtonFreeClass = ({
+const ButtonNext = ({
   type = "button",
   children,
   isLoading = false,
@@ -20,7 +20,7 @@ const ButtonFreeClass = ({
       type={type}
       onClick={onClick}
       disabled={isLoading || disable}
-      className={`flex cursor-pointer items-center justify-center disabled:cursor-not-allowed disabled:opacity-60 ${className} `}
+      className={`flex cursor-pointer items-center justify-center rounded-lg border-2 bg-primary-500 px-8 py-2 text-body text-white transition-all duration-200 hover:border-primary-500 hover:bg-transparent hover:text-primary-500 disabled:cursor-not-allowed disabled:opacity-60 ${className} `}
     >
       {children}
       {icon ? icon : null}
@@ -33,4 +33,4 @@ const ButtonFreeClass = ({
   );
 };
 
-export default ButtonFreeClass;
+export default ButtonNext;
