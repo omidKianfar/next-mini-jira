@@ -1,5 +1,7 @@
-// type
+// hooks
 import { useAuth } from "@/src/hooks/auth/use-auth";
+
+// type
 import { ChatMessageItemProps } from "../type";
 import { UserType } from "@/src/types/global";
 

@@ -1,3 +1,4 @@
+import { ChatMessage } from "@/src/types/global";
 import { RefObject } from "react";
 import { FieldValues, Path } from "react-hook-form";
 export interface BaseControllerProps<T extends FieldValues> {
@@ -53,11 +54,6 @@ export type UsersFilterFormType = {
   to?: string;
 };
 
-export type ModalProps = React.PropsWithChildren & {
-  open: boolean;
-  handleClose: () => void;
-  handleOpenModal?: (modalNumber: number) => void;
-};
 export interface UploadAvatarProps {
   photo: string | undefined;
   uploadHandler: (event: any) => void;
@@ -72,12 +68,6 @@ export type CartType = {
   price?: number;
   icon: React.ReactNode;
 };
-export interface CropProps {
-  file: never;
-  onCancel: () => void;
-  onSave: (file: File) => void | Promise<void>;
-}
-export interface LightBoxProps {
-  children: React.ReactNode;
-  url: string;
+export interface ChatMessageItemProps {
+  message: ChatMessage;
 }

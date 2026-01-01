@@ -8,7 +8,7 @@ import { SelectControllerProps } from "../../type";
 
 // ui
 import LabelComponent from "./label";
-import MyIcon from "@/src/components/atom/icon";
+import MyIcon from "@/src/components/atom/icon-components";
 import ErrorComponent from "./errors";
 
 const SelectField = <T extends FieldValues>({
