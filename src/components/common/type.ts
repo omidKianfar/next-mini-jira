@@ -11,11 +11,7 @@ export interface LightBoxProps {
   children: React.ReactNode;
   url: string;
 }
-export type ModalProps = React.PropsWithChildren & {
-  open: boolean;
-  handleClose: () => void;
-  handleOpenModal?: (modalNumber: number) => void;
-};
+
 export interface CropProps {
   file: never;
   onCancel: () => void;
