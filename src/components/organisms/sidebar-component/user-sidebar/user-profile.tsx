@@ -1,14 +1,14 @@
 // hooks
-import { useNavigation } from "@/src/hooks/navigation";
+import { useNavigation } from "@/src/hooks/navigation/use-navigation";
 
 // ui
-import MyImage from "../../atom/image";
+import MyImage from "../../../atom/image-components";
 
 // utiles
 import { stringSlicer } from "@/src/utils/string-slicer";
 
 // type
-import { sidebarProps } from "../type";
+import { sidebarProps } from "../../type";
 
 const UserProfile = ({
   user,
@@ -22,6 +22,7 @@ const UserProfile = ({
     navigation.profile();
     setShowSidebar(false);
   };
+
   return (
     <div className="mt-4 flex w-full flex-col items-center justify-center">
       <div className="flex cursor-pointer items-center justify-center overflow-hidden">
@@ -42,11 +43,11 @@ const UserProfile = ({
         )}
       </div>
 
-      <p className="mt-2 font-semibold capitalize text-primary-700">
+      <p className="mt-2 font-semibold text-primary-700">
         {stringSlicer({ string: user?.userName as string, slice: 60 })}
       </p>
 
-      <hr className="mt-6 w-[200px] border border-dashed border-gray-200" />
+      <hr className="mt-6 w-[200px] border border-dashed border-gray-300" />
     </div>
   );
 };

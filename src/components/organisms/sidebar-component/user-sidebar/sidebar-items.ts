@@ -1,24 +1,26 @@
 import { useMemo } from "react";
-
-// hooks
-import { useNavigation } from "@/src/hooks/navigation";
-import { useAuth } from "@/src/hooks/auth/use-auth";
-
-// type
-import { sidebarItemsType, sidebarProps } from "../type";
-
-// ui
-import MyIcon from "../../atom/icon";
-import SidebarItem from "./sidebar-item";
+import { sidebarItemsType, sidebarProps } from "../../type";
+import { useNavigation } from "@/src/hooks/navigation/use-navigation";
+import { useUnreadCount } from "@/src/hooks/chat/use-unread-count";
+import { useAdminTotalUnreadCount } from "@/src/libs/chat/admin-unread-message-listener";
 import { UserType } from "@/src/types/global";
+import { MessgesRead } from "@/src/libs/chat/message-read";
 
-const UserSidebar = ({
+export const SidebarItems = ({
   user,
   setShowSidebar,
 }: Pick<sidebarProps, "setShowSidebar" | "user">) => {
-  // ui
+  // hooks
   const navigation = useNavigation();
-  const { logout } = useAuth();
+
+  // user unread message
+  const UserUnreadCount = useUnreadCount({
+    chatId: user?.userId as string,
+    senderType: UserType.Admin,
+  });
+
+  // admin unread count
+  const AdminUnraedCount = useAdminTotalUnreadCount();
 
   // client sidebar items
   const userSidebarItems = useMemo<sidebarItemsType[]>(
@@ -44,6 +46,24 @@ const UserSidebar = ({
         notification: { type: "none" },
       },
       {
+        id: "support",
+        icon: "bx:support",
+        title: "Support",
+        direction: () => {
+          MessgesRead({
+            chatId: user?.userId as string,
+            senderType: UserType.Admin,
+          });
+
+          navigation.support();
+          setShowSidebar(false);
+        },
+        notification:
+          UserUnreadCount > 0
+            ? { type: "count", value: UserUnreadCount }
+            : { type: "none" },
+      },
+      {
         id: "payment",
         icon: "fluent:payment-16-filled",
         title: "payment",
@@ -54,7 +74,7 @@ const UserSidebar = ({
         notification: { type: "none" },
       },
     ],
-    [navigation, setShowSidebar],
+    [navigation, setShowSidebar, UserUnreadCount],
   );
 
   // admin sidebar items
@@ -80,38 +100,22 @@ const UserSidebar = ({
         },
         notification: { type: "none" },
       },
+      {
+        id: "support",
+        icon: "bx:support",
+        title: "Support",
+        direction: () => {
+          navigation.adminSupport();
+          setShowSidebar(false);
+        },
+        notification:
+          AdminUnraedCount > 0
+            ? { type: "count", value: AdminUnraedCount }
+            : { type: "none" },
+      },
     ],
-    [navigation, setShowSidebar],
+    [navigation, setShowSidebar, AdminUnraedCount],
   );
 
-  return (
-    <div className="mt-6 flex flex-col items-start justify-center">
-      <div className="h-[45vh] overflow-y-auto">
-        {user?.userType === UserType?.Client
-          ? userSidebarItems?.map((item: sidebarItemsType) => (
-              <div key={item.id} className="mb-4">
-                <SidebarItem item={item} />
-              </div>
-            ))
-          : AdminSidebarItems?.map((item: sidebarItemsType) => (
-              <div key={item.id} className="mb-4">
-                <SidebarItem item={item} />
-              </div>
-            ))}
-      </div>
-
-      <hr className="mt-6 w-[190px] border border-dashed border-gray-200" />
-
-      <div
-        className="relative flex w-full cursor-pointer items-center justify-center pt-4 text-primary-700 hover:text-warning-600"
-        onClick={logout}
-      >
-        <MyIcon icon={"tabler:logout"} className="mr-1 text-title" />
-
-        <p className="text-[16px] font-semibold capitalize">Logout</p>
-      </div>
-    </div>
-  );
+  return { userSidebarItems, AdminSidebarItems };
 };
-
-export default UserSidebar;

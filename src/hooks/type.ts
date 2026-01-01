@@ -7,6 +7,7 @@ import {
   AuthContextStateType,
   MyUserType,
   PlanType,
+  UserType,
 } from "@/src/types/global";
 
 export interface UseAuthListenerProps {
@@ -91,4 +92,8 @@ export interface uploadWithProgressProps {
 }
 export interface deleteUploadedFileProps {
   path: string | null;
+}
+export interface useUnreadCountProps {
+  chatId: string;
+  senderType: UserType;
 }

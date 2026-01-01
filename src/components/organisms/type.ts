@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 // type
-import { MyUserType } from "@/src/types/global";
+import { ChatMessage, MyUserType } from "@/src/types/global";
 export interface AddTaskProps {
   handleClose: () => void;
   setNumber: Dispatch<SetStateAction<number>>;
@@ -39,4 +39,38 @@ export type sidebarItemsType = {
 };
 export interface SidebarItemProps {
   item: sidebarItemsType;
+}
+
+export type CellContent<T> =
+  | string
+  | number
+  | React.ReactNode
+  | ((row: T) => React.ReactNode);
+
+export type Column<T> = {
+  key?: string;
+  head: CellContent<T>;
+  column: CellContent<T>;
+  className?: string;
+};
+
+export type TableProps<T> = {
+  data: T[];
+  columns: Column<T>[];
+};
+
+export type PaginationProps = {
+  currentPage: number;
+  totalPages: number;
+  pageSize: number;
+  onPageChange: (page: number) => void;
+  onPageSizeChange: (size: number) => void;
+};
+export interface ListComponentProps {
+  children: React.ReactNode;
+  title?: string;
+}
+
+export interface ChatMessagesProps {
+  messages: ChatMessage[] 
 }

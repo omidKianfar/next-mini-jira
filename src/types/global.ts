@@ -149,3 +149,44 @@ export type UserFiltersState = {
     to: string | null;
   };
 };
+
+export type ChatMessage = {
+  id?: string;
+  chatId?: string;
+  senderId: string;
+  receiverId: string;
+  text?: string;
+  createdAt?: string;
+  senderType: UserType;
+  read?: boolean;
+  attachment?: {
+    fileUrl?: string | null;
+    fileType?: string | null;
+  };
+};
+
+export type ChatContextType = {
+  messages: ChatMessage[];
+  chatId: string | null;
+};
+
+export type ChatMessageType = {
+  createdAt: string;
+  lastMessageSenderId: UserType;
+  lastMessageText: string;
+  updatedAt: string;
+};
+
+export type ChatUserType = {
+  email: string;
+  photo: string;
+  status: boolean;
+  userId: string;
+  username: string;
+};
+
+export type ChatsType = {
+  id: string;
+  message: ChatMessageType;
+  user: ChatUserType;
+};
