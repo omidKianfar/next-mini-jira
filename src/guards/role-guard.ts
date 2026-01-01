@@ -1,15 +1,13 @@
 "use client";
 
 import { useEffect } from "react";
-import { useNavigation } from "../hooks/navigation";
+
+// hooks
+import { useNavigation } from "../hooks/navigation/use-navigation";
 import { useAuth } from "../hooks/auth/use-auth";
+import { RoleGuardProps } from "./type";
 
-interface Props {
-  accessTypes: string[];
-  children: React.ReactNode;
-}
-
-const RoleGuard = ({ accessTypes, children }: Props) => {
+const RoleGuard = ({ accessTypes, children }: RoleGuardProps) => {
   const navigation = useNavigation();
   const { user } = useAuth();
 
