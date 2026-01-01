@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 
 // type
-import { ModalProps } from "../type";
+import { ModalProps } from "@/src/types/global";
 
 // ui
 import MyIcon from "../../atom/icon-components";
