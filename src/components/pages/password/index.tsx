@@ -6,9 +6,9 @@ import { FormProvider, useForm } from "react-hook-form";
 import { usePathname } from "next/navigation";
 
 // hooks
-import { useNavigation } from "@/src/hooks/navigation";
+import { useNavigation } from "@/src/hooks/navigation/use-navigation";
 import { useAuth } from "@/src/hooks/auth/use-auth";
-import { useIsMobile } from "@/src/hooks/mobile-size";
+import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
 import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
 import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
 
@@ -19,12 +19,12 @@ import { authSchema } from "../auth/schema";
 import { SignPropsType } from "@/src/types/global";
 
 // ui
-import FramerMotion from "../../atom/animation";
-import InputField from "../../molecule/controllers/RHF-fields/input-field";
-import MyIcon from "../../atom/icon";
-import ButtonNext from "../../atom/button/button-next";
-import MyImage from "../../atom/image";
-import ButtonBack from "../../atom/button/button-back";
+import FramerMotion from "../../atom/animation-component";
+import InputField from "../../molecule/RHF-controllers-components/RHF-fields/input-field";
+import MyIcon from "../../atom/icon-components";
+import ButtonNext from "../../atom/buttons-component/button-next";
+import MyImage from "../../atom/image-components";
+import ButtonBack from "../../atom/buttons-component/button-back";
 
 const PasswordComponent = () => {
   // hooks

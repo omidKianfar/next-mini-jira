@@ -8,12 +8,12 @@ import { useSearchParams } from "next/navigation";
 // hooks
 import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
 import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
-import { useIsMobile } from "@/src/hooks/mobile-size";
-import { useNavigation } from "@/src/hooks/navigation";
+import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
+import { useNavigation } from "@/src/hooks/navigation/use-navigation";
 
 // firestore
-import { deleteTask } from "@/src/lib/tasks/delete-task";
-import { fetchTask } from "@/src/lib/tasks/fetch-task";
+import { deleteTask } from "@/src/libs/tasks/delete-task";
+import { fetchTask } from "@/src/libs/tasks/fetch-task";
 
 // redux
 import { RootState } from "@/src/store";
@@ -22,16 +22,16 @@ import { RootState } from "@/src/store";
 import { Task } from "@/src/types/global";
 
 // ui
-import ButtonBack from "@/src/components/atom/button/button-back";
-import ButtonFreeClass from "@/src/components/atom/button/button-free-class";
-import MyIcon from "@/src/components/atom/icon";
-import MyImage from "@/src/components/atom/image";
-import PageLoading from "@/src/components/organisms/page-loading";
+import ButtonBack from "@/src/components/atom/buttons-component/button-back";
+import ButtonFreeClass from "@/src/components/atom/buttons-component/button-free-class";
+import MyIcon from "@/src/components/atom/icon-components";
+import MyImage from "@/src/components/atom/image-components";
+import PageLoading from "@/src/components/common/page-loading";
 
 // lazy
-const MyVideo = lazy(() => import("@/src/components/atom/video"));
+const MyVideo = lazy(() => import("@/src/components/atom/video-component"));
 const LightBoxComponent = lazy(
-  () => import("@/src/components/organisms/light-box"),
+  () => import("@/src/components/common/light-box"),
 );
 
 const TaskDetailComponent = () => {
@@ -109,6 +109,7 @@ const TaskDetailComponent = () => {
     navigation.dashboard();
   };
 
+  // ui
   if (loading) return <PageLoading />;
   if (!task) return <div>Task not found</div>;
 

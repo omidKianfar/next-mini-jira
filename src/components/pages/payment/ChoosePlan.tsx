@@ -1,16 +1,16 @@
 // hooks
-import { useIsMobile } from "@/src/hooks/mobile-size";
+import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
 
 // ui
-import ButtonBack from "@/src/components/atom/button/button-back";
-import MyIcon from "@/src/components/atom/icon";
-import MyImage from "@/src/components/atom/image";
+import ButtonBack from "@/src/components/atom/buttons-component/button-back";
+import MyIcon from "@/src/components/atom/icon-components";
+import MyImage from "@/src/components/atom/image-components";
 
 // card
-import PlanCardComponent from "@/src/components/molecule/card/plan-cart";
+import PlanCardComponent from "@/src/components/molecule/cards/plan-cart";
 
 // type
-import { ChoosePlanSectionProps } from "../../type";
+import { ChoosePlanSectionProps } from "../type";
 
 const ChoosePlanComponent = ({
   onBack,

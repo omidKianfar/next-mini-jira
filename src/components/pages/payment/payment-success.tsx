@@ -7,16 +7,16 @@ import dayjs from "dayjs";
 // hooks
 import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useSetSubscriptionId } from "@/src/hooks/payment/useSetSubscriptionId";
-import { useNavigation } from "@/src/hooks/navigation";
+import { useNavigation } from "@/src/hooks/navigation/use-navigation";
 import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
 
 // ui
-import PageLoading from "@/src/components/organisms/page-loading";
-import MyIcon from "@/src/components/atom/icon";
-import ButtonNext from "@/src/components/atom/button/button-next";
+import PageLoading from "@/src/components/common/page-loading";
+import MyIcon from "@/src/components/atom/icon-components";
+import ButtonNext from "@/src/components/atom/buttons-component/button-next";
 
 // firestore
-import { updateFirestoreUser } from "@/src/lib/auth/update-user";
+import { updateFirestoreUser } from "@/src/libs/auth/update-user";
 
 const PaymentSuccessComponent = () => {
   // hooks

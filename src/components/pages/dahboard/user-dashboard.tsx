@@ -9,10 +9,10 @@ import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/u
 import { useTaskListener } from "@/src/hooks/tasks/use-task-listener";
 
 // ui
-import PageLoading from "../../organisms/page-loading";
+import PageLoading from "../../common/page-loading";
 
 // lazy
-const BoardComponent = lazy(() => import("../../organisms/board"));
+const BoardComponent = lazy(() => import("../../organisms/tasks-boards"));
 
 const DashboardComponent = () => {
   // hooks

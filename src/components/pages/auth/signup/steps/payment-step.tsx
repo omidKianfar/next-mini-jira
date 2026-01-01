@@ -4,16 +4,16 @@ import { usePathname } from "next/navigation";
 
 // hooks
 import { useAuth } from "@/src/hooks/auth/use-auth";
-import { useIsMobile } from "@/src/hooks/mobile-size";
+import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
 
 // ui
-import FramerMotion from "@/src/components/atom/animation";
-import ButtonBack from "@/src/components/atom/button/button-back";
-import MyIcon from "@/src/components/atom/icon";
-import MyImage from "@/src/components/atom/image";
+import FramerMotion from "@/src/components/atom/animation-component";
+import ButtonBack from "@/src/components/atom/buttons-component/button-back";
+import MyIcon from "@/src/components/atom/icon-components";
+import MyImage from "@/src/components/atom/image-components";
 
 // card
-import PaymentCardComponent from "@/src/components/molecule/card/payment-cart";
+import PaymentCardComponent from "@/src/components/molecule/cards/payment-cart";
 
 const PaymentStep = () => {
   // hooks

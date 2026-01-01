@@ -8,20 +8,20 @@ import dayjs from "dayjs";
 import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
 import { usePlanAction } from "@/src/hooks/payment/usePlanAction";
-import { useNavigation } from "@/src/hooks/navigation";
+import { useNavigation } from "@/src/hooks/navigation/use-navigation";
 
 // type
 import { PlanType } from "@/src/types/global";
 
 // ui
-import PageLoading from "../../organisms/page-loading";
-import FramerMotion from "../../atom/animation";
+import PageLoading from "../../common/page-loading";
+import FramerMotion from "../../atom/animation-component";
 
 // lazy
 const ActivePaymentComponent = lazy(
-  () => import("./page/ActivePayment"),
+  () => import("./ActivePayment"),
 );
-const ChoosePlanComponent = lazy(() => import("./page/ChoosePlan"));
+const ChoosePlanComponent = lazy(() => import("./ChoosePlan"));
 
 const PlanComponent = () => {
   // hooks

@@ -1,28 +1,28 @@
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
 // hooks
 import { useUsersListener } from "@/src/hooks/users/use-user-listener";
-import { useIsMobile } from "@/src/hooks/mobile-size";
-import { useNavigation } from "@/src/hooks/navigation";
+import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
+import { useNavigation } from "@/src/hooks/navigation/use-navigation";
 
 // ui
-import PageLoading from "@/src/components/organisms/page-loading";
-import UsersTable from "./users-table";
-import UserListCard from "./user-list-card";
+import PageLoading from "@/src/components/common/page-loading";
+import UsersTable from "../../../organisms/tables/admin-users-table";
+import UserListCard from "../../../organisms/lists/admin-users-list";
+import MyIcon from "@/src/components/atom/icon-components";
 
 // type
 import { MyUserType, UserType } from "@/src/types/global";
 
 // firestore
-import { updateFirestoreUser } from "@/src/lib/auth/update-user";
+import { updateFirestoreUser } from "@/src/libs/auth/update-user";
 
 // redux
 import { RootState } from "@/src/store";
 import { toggleSortByCreatedAt } from "@/src/store/slices/users/users";
-import MyIcon from "@/src/components/atom/icon";
-import { useState } from "react";
 
 const AdminDashboardComponent = () => {
   // hooks

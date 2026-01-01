@@ -9,32 +9,32 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
 import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
 import { useAuth } from "@/src/hooks/auth/use-auth";
-import { useIsMobile } from "@/src/hooks/mobile-size";
-import { useNavigation } from "@/src/hooks/navigation";
-import { useFileUploader } from "@/src/hooks/file-uploader";
-import { useImageProcessor } from "@/src/hooks/image-processor";
+import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
+import { useNavigation } from "@/src/hooks/navigation/use-navigation";
+import { useFileUploader } from "@/src/hooks/file-uploader/use-file-uploader";
+import { useImageProcessor } from "@/src/hooks/image-processor/use-image-processor";
 
 // schema
 import { ProfileSchema } from "./schema";
 
 // ui
-import BackToSignup from "../../organisms/modals/back-to-signup";
-import FramerMotion from "../../atom/animation";
-import ButtonBack from "../../atom/button/button-back";
-import ModalContainer from "../../organisms/modal-component";
-import InputField from "../../molecule/controllers/RHF-fields/input-field";
-import MyIcon from "../../atom/icon";
-import DateInputField from "../../molecule/controllers/RHF-fields/date-input-field";
-import ButtonNext from "../../atom/button/button-next";
-import MyImage from "../../atom/image";
-import ButtonFreeClass from "../../atom/button/button-free-class";
-import PageLoading from "../../organisms/page-loading";
+import BackToSignup from "../../molecule/modals/back-to-signup";
+import FramerMotion from "../../atom/animation-component";
+import ButtonBack from "../../atom/buttons-component/button-back";
+import ModalContainer from "../../common/modal-component";
+import InputField from "../../molecule/RHF-controllers-components/RHF-fields/input-field";
+import MyIcon from "../../atom/icon-components";
+import DateInputField from "../../molecule/RHF-controllers-components/RHF-fields/date-input-field";
+import ButtonNext from "../../atom/buttons-component/button-next";
+import MyImage from "../../atom/image-components";
+import ButtonFreeClass from "../../atom/buttons-component/button-free-class";
+import PageLoading from "../../common/page-loading";
 
 // type
 import { ProfileProps, UserType } from "@/src/types/global";
 
 // lazy
-const AvatarUpload = lazy(() => import("../../organisms/upload/avatar"));
+const AvatarUpload = lazy(() => import("../../molecule/uploads/avatar"));
 
 const ProfileComponent = () => {
   // hooks

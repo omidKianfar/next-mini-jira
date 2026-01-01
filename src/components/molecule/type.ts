@@ -1,6 +1,7 @@
 import { ChatMessage } from "@/src/types/global";
 import { RefObject } from "react";
 import { FieldValues, Path } from "react-hook-form";
+
 export interface BaseControllerProps<T extends FieldValues> {
   name: Path<T>;
   label?: string;
@@ -41,9 +42,6 @@ export type DateInputFieldProps<T extends FieldValues> = BaseControllerProps<T>;
 export interface ErrorProps {
   errors: any;
 }
-
-
-
 
 export interface UploadAvatarProps {
   photo: string | undefined;

@@ -6,8 +6,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 // hooks
-import { useNavigation } from "@/src/hooks/navigation";
-import { useIsMobile } from "@/src/hooks/mobile-size";
+import { useNavigation } from "@/src/hooks/navigation/use-navigation";
+import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
 import { useAuth } from "@/src/hooks/auth/use-auth";
 
 // type
@@ -17,12 +17,12 @@ import { FormValues } from "../../type";
 import { authSchema } from "../schema";
 
 // ui
-import MyImage from "@/src/components/atom/image";
-import InputField from "@/src/components/molecule/controllers/RHF-fields/input-field";
-import MyIcon from "@/src/components/atom/icon";
-import ButtonNext from "@/src/components/atom/button/button-next";
-import ButtonFreeClass from "@/src/components/atom/button/button-free-class";
-import Logo from "@/src/components/atom/logo";
+import MyImage from "@/src/components/atom/image-components";
+import InputField from "@/src/components/molecule/RHF-controllers-components/RHF-fields/input-field";
+import MyIcon from "@/src/components/atom/icon-components";
+import ButtonNext from "@/src/components/atom/buttons-component/button-next";
+import ButtonFreeClass from "@/src/components/atom/buttons-component/button-free-class";
+import Logo from "@/src/components/atom/logo-component";
 
 const AuthComponent = () => {
   // hooks

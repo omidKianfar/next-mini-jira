@@ -6,7 +6,7 @@ import { lazy, Suspense } from "react";
 import { useAuth } from "@/src/hooks/auth/use-auth";
 
 // ui
-import PageLoading from "@/src/components/organisms/page-loading";
+import PageLoading from "@/src/components/common/page-loading";
 
 // lazy
 const SignupStep = lazy(() => import("./steps/signup-step"));

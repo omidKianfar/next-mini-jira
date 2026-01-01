@@ -4,19 +4,17 @@ import dayjs from "dayjs";
 import { useSearchParams } from "next/navigation";
 
 // ui
-import ButtonBack from "@/src/components/atom/button/button-back";
-import MyImage from "@/src/components/atom/image";
-import PageLoading from "@/src/components/organisms/page-loading";
-import ButtonNext from "@/src/components/atom/button/button-next";
+import ButtonBack from "@/src/components/atom/buttons-component/button-back";
+import MyImage from "@/src/components/atom/image-components";
+import PageLoading from "@/src/components/common/page-loading";
+import ButtonNext from "@/src/components/atom/buttons-component/button-next";
 
 // hooks
-import { useNavigation } from "@/src/hooks/navigation";
-
-// type
+import { useNavigation } from "@/src/hooks/navigation/use-navigation";
 import { useUserListenerById } from "@/src/hooks/users/use-user-listener-by-id";
 
 // firestore
-import { updateFirestoreUser } from "@/src/lib/auth/update-user";
+import { updateFirestoreUser } from "@/src/libs/auth/update-user";
 
 const AdminUserDetailComponent = () => {
   // hooks

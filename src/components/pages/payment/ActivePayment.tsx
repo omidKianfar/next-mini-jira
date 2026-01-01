@@ -1,10 +1,10 @@
 import dayjs from "dayjs";
 
 // ui
-import ButtonBack from "@/src/components/atom/button/button-back";
+import ButtonBack from "@/src/components/atom/buttons-component/button-back";
 
 // type
-import { ActivePaymentSectionProps } from "../../type";
+import { ActivePaymentSectionProps } from "../type";
 
 const ActivePaymentComponent = ({
   payment,

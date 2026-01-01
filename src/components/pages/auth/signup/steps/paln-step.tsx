@@ -1,4 +1,4 @@
-import PalnComponent from "../../../payment";
+import PalnComponent from "../../../payment/payment";
 
 const PalnStep = () => {
   return <PalnComponent />;

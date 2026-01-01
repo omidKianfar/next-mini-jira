@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 
 // type
-import { MyUserType, PlanType, Task } from "@/src/types/global";
+import { PlanType, Task } from "@/src/types/global";
 
 export type AuthType = "signin" | "signup";
 export interface FormValues {
@@ -26,9 +26,4 @@ export interface ActivePaymentSectionProps {
   payment: any;
   onBack: () => void;
   now: dayjs.Dayjs;
-}
-export interface UsersTableProps {
-  users: MyUserType[];
-  goDetail: (userId: string) => void;
-  toggleActive: (user: MyUserType) => Promise<void>;
 }

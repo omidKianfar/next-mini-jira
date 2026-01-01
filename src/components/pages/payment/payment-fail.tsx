@@ -1,13 +1,13 @@
 "use client";
 
 // hook
-import { useNavigation } from "@/src/hooks/navigation";
+import { useNavigation } from "@/src/hooks/navigation/use-navigation";
 import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
+import { useAuth } from "@/src/hooks/auth/use-auth";
 
 // ui
-import ButtonNext from "@/src/components/atom/button/button-next";
-import MyIcon from "@/src/components/atom/icon";
-import { useAuth } from "@/src/hooks/auth/use-auth";
+import ButtonNext from "@/src/components/atom/buttons-component/button-next";
+import MyIcon from "@/src/components/atom/icon-components";
 
 const PaymentFailedComponent = () => {
   // hook

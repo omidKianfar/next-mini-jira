@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 
 // type
 import { ChatMessage, MyUserType } from "@/src/types/global";
+
 export interface AddTaskProps {
   handleClose: () => void;
   setNumber: Dispatch<SetStateAction<number>>;
