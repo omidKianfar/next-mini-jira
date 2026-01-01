@@ -190,3 +190,9 @@ export type ChatsType = {
   message: ChatMessageType;
   user: ChatUserType;
 };
+
+export type ModalProps = React.PropsWithChildren & {
+  open: boolean;
+  handleClose: () => void;
+  handleOpenModal?: (modalNumber: number) => void;
+};

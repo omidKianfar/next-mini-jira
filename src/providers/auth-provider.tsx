@@ -9,7 +9,7 @@ import {
 } from "react";
 
 // config
-import config from "@/config/firebase";
+import config from "@/configs/firebase";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
