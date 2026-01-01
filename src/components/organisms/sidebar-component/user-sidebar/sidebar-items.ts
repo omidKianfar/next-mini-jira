@@ -1,9 +1,15 @@
 import { useMemo } from "react";
+
+// type
 import { sidebarItemsType, sidebarProps } from "../../type";
+import { UserType } from "@/src/types/global";
+
+// hooks
 import { useNavigation } from "@/src/hooks/navigation/use-navigation";
 import { useUnreadCount } from "@/src/hooks/chat/use-unread-count";
+
+// firestore
 import { useAdminTotalUnreadCount } from "@/src/libs/chat/admin-unread-message-listener";
-import { UserType } from "@/src/types/global";
 import { MessgesRead } from "@/src/libs/chat/message-read";
 
 export const SidebarItems = ({

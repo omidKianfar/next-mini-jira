@@ -1,16 +1,21 @@
-import ButtonNext from "@/src/components/atom/button/button-next";
-import { AddTaskUploadProps } from "../../type";
-import LoadingCircle from "@/src/components/atom/loading-circle";
-import MyImage from "@/src/components/atom/image";
 import { lazy, Suspense } from "react";
-import PageLoading from "../../page-loading";
 
+// ui
+import ButtonNext from "@/src/components/atom/buttons-component/button-next";
+import LoadingCircle from "@/src/components/atom/loadings/loading-circle";
+import MyImage from "@/src/components/atom/image-components";
+import PageLoading from "@/src/components/common/page-loading";
+
+// type
+import { AddTaskUploadProps } from "../../../type";
+
+// lazy
 const LightBoxComponent = lazy(
-  () => import("@/src/components/organisms/light-box"),
+  () => import("@/src/components/common/light-box"),
 );
-const MyVideo = lazy(() => import("@/src/components/atom/video"));
+const MyVideo = lazy(() => import("@/src/components/atom/video-component"));
 const DragDropUploader = lazy(
-  () => import("@/src/components/organisms/upload/drag-drop"),
+  () => import("@/src/components/organisms/uploads/drag-drop"),
 );
 
 const AddTaskUploadComponent = ({

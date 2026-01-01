@@ -8,21 +8,21 @@ import dayjs from "dayjs";
 
 // hook
 import { useAuth } from "@/src/hooks/auth/use-auth";
-import { useFileUploader } from "@/src/hooks/file-uploader";
-import { useImageProcessor } from "@/src/hooks/image-processor";
+import { useFileUploader } from "@/src/hooks/file-uploader/use-file-uploader";
+import { useImageProcessor } from "@/src/hooks/image-processor/use-image-processor";
 
 // type
-import { AddTaskProps } from "../type";
+import { AddTaskProps } from "../../type";
 import { Task, TaskForm } from "@/src/types/global";
 
 // schema
-import { TaskShema } from "../board/schema";
+import { TaskShema } from "./schema";
 
 // firestore
-import { createTaskDocument } from "@/src/lib/tasks/create-task";
+import { createTaskDocument } from "@/src/libs/tasks/create-task";
 
 // ui
-import PageLoading from "../page-loading";
+import PageLoading from "../../../common/page-loading";
 
 // lazy
 const AddTaskFormComponent = lazy(() => import("./steps/add-task-form"));

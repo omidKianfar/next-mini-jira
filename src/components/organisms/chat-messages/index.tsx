@@ -1,8 +1,8 @@
 // type
+import { ChatMessagesProps } from "../type";
 
 // ui
-import ChatMessageItem from "../../../molecule/chat/chat-message-item";
-import { ChatMessagesProps } from "../../type";
+import ChatMessageItem from "../../molecule/chat/chat-message-item";
 
 const ChatMessages = ({ messages }: ChatMessagesProps) => {
   return (

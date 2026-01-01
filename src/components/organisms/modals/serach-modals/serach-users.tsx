@@ -4,22 +4,21 @@ import { ChangeEvent, useState } from "react";
 import { useSelector } from "react-redux";
 
 // hooks
-import { useNavigation } from "@/src/hooks/navigation";
+import { useNavigation } from "@/src/hooks/navigation/use-navigation";
 
 // type
-import { ModalProps } from "../../molecule/type";
-import { MyUserType } from "@/src/types/global";
+import { MyUserType, ModalProps } from "@/src/types/global";
 
 // redux
 import { RootState } from "@/src/store";
 
 // ui
-import MyIcon from "../../atom/icon";
-import EmptyColumn from "../board/empty-column";
+import MyIcon from "../../../atom/icon-components";
+import EmptyColumn from "../../../atom/empty-components/empty-column";
+import MyImage from "../../../atom/image-components";
 
-// utiles
+// utils
 import { stringSlicer } from "@/src/utils/string-slicer";
-import MyImage from "../../atom/image";
 
 const SearchUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   // hooks
@@ -119,7 +118,7 @@ const SearchUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
                 </div>
 
                 <div>
-                  <h3 className="text-body font-semibold mb-1">
+                  <h3 className="mb-1 text-body font-semibold">
                     {stringSlicer({
                       string: user.userName as string,
                       slice: 40,

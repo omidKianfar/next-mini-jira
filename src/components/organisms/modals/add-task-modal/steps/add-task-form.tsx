@@ -2,13 +2,13 @@
 
 // types
 import { Columns } from "@/src/types/global";
-import { AddTaskProps } from "../../type";
+import { AddTaskProps } from "../../../type";
 
 // ui
-import ButtonNext from "@/src/components/atom/button/button-next";
-import SelectField from "../../../molecule/controllers/RHF-fields/select-filed";
-import InputField from "../../../molecule/controllers/RHF-fields/input-field";
-import TextareaFiled from "../../../molecule/controllers/RHF-fields/textarea-field";
+import ButtonNext from "@/src/components/atom/buttons-component/button-next";
+import SelectField from "@/src/components/molecule/RHF-controllers-components/RHF-fields/select-filed";
+import InputField from "@/src/components/molecule/RHF-controllers-components/RHF-fields/input-field";
+import TextareaFiled from "@/src/components/molecule/RHF-controllers-components/RHF-fields/textarea-field";
 
 const AddTaskFormComponent = ({
   handleClose,

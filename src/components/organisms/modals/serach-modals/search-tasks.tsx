@@ -4,21 +4,20 @@ import { ChangeEvent, useState } from "react";
 import { useSelector } from "react-redux";
 
 // hooks
-import { useNavigation } from "@/src/hooks/navigation";
-import { useIsMobile } from "@/src/hooks/mobile-size";
+import { useNavigation } from "@/src/hooks/navigation/use-navigation";
+import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
 
 // type
-import { ModalProps } from "../../molecule/type";
-import { Task } from "@/src/types/global";
+import { Task, ModalProps } from "@/src/types/global";
 
 // redux
 import { RootState } from "@/src/store";
 
 // ui
-import MyIcon from "../../atom/icon";
-import EmptyColumn from "../board/empty-column";
+import MyIcon from "../../../atom/icon-components";
+import EmptyColumn from "../../../atom/empty-components/empty-column";
 
-// utiles
+// utils
 import { stringSlicer } from "@/src/utils/string-slicer";
 
 const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
@@ -70,7 +69,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
         Search Tasks
       </h1>
 
-      <div className="relative mb-4 rounded-lg border-2  border-warning-400 bg-gray-50 p-2 shadow-md">
+      <div className="relative mb-4 rounded-lg border-2 border-warning-400 bg-gray-50 p-2 shadow-md">
         <div>
           <MyIcon
             icon="tabler:zoom"

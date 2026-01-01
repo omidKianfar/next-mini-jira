@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { useDroppable } from "@dnd-kit/core";
 
 // ui
-import MyIcon from "@/src/components/atom/icon";
-import EmptyColumn from "./empty-column";
+import MyIcon from "@/src/components/atom/icon-components";
+import EmptyColumn from "../../atom/empty-components/empty-column";
 
 // type
 import { ColumnProps } from "@/src/components/pages/type";

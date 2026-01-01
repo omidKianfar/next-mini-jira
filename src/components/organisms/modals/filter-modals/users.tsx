@@ -9,7 +9,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { usersfilterSchema } from "./schema";
 
 // type
-import { UsersFilterFormType, ModalProps } from "../../molecule/type";
+import { ModalProps } from "@/src/types/global";
+import { UsersFilterFormType } from "../../type";
 
 // redux
 import { RootState } from "@/src/store";
@@ -20,9 +21,9 @@ import {
 } from "@/src/store/slices/users/users-filter";
 
 // ui
-import SelectField from "../../molecule/controllers/RHF-fields/select-filed";
-import DateInputField from "../../molecule/controllers/RHF-fields/date-input-field";
-import ButtonNext from "../../atom/button/button-next";
+import SelectField from "../../../molecule/RHF-controllers-components/RHF-fields/select-filed";
+import DateInputField from "../../../molecule/RHF-controllers-components/RHF-fields/date-input-field";
+import ButtonNext from "../../../atom/buttons-component/button-next";
 
 const FilterUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   // redux

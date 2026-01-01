@@ -1,8 +1,8 @@
 import { DragEvent, useRef, useState } from "react";
 
 // ui
-import FileInputField from "../../molecule/controllers/RHF-fields/file-input-field";
-import LoadingCircle from "../../atom/loading-circle";
+import FileInputField from "../../molecule/RHF-controllers-components/RHF-fields/file-input-field";
+import LoadingCircle from "../../atom/loadings/loading-circle";
 
 // type
 import { AddTaskUploadProps } from "../type";

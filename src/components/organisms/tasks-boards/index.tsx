@@ -14,17 +14,17 @@ import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 
 // firestore
-import { updateTaskStatus } from "@/src/lib/tasks/update-task-status";
+import { updateTaskStatus } from "@/src/libs/tasks/update-task-status";
 
 // type
 import { Task } from "@/src/types/global";
 
 // ui
-import PageLoading from "../page-loading";
+import PageLoading from "../../common/page-loading";
 
 // lazy
 const ColumnComponent = lazy(() => import("./column"));
-const TaskCardComponent = lazy(() => import("./task"));
+const TaskCardComponent = lazy(() => import("../../molecule/cards/task-card"));
 
 const BoardComponent = () => {
   // mobile config

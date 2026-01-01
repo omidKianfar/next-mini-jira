@@ -9,7 +9,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { tasksfilterSchema } from "./schema";
 
 // type
-import { TasksFilterFormType, ModalProps } from "../../molecule/type";
+import { ModalProps } from "@/src/types/global";
+import { TasksFilterFormType } from "../../type";
 
 // redux
 import { RootState } from "@/src/store";
@@ -20,9 +21,9 @@ import {
 } from "@/src/store/slices/tasks/tasks-filters";
 
 // ui
-import SelectField from "../../molecule/controllers/RHF-fields/select-filed";
-import DateInputField from "../../molecule/controllers/RHF-fields/date-input-field";
-import ButtonNext from "../../atom/button/button-next";
+import SelectField from "../../../molecule/RHF-controllers-components/RHF-fields/select-filed";
+import DateInputField from "../../../molecule/RHF-controllers-components/RHF-fields/date-input-field";
+import ButtonNext from "../../../atom/buttons-component/button-next";
 
 const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   // redux

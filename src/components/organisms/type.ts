@@ -72,5 +72,23 @@ export interface ListComponentProps {
 }
 
 export interface ChatMessagesProps {
-  messages: ChatMessage[] 
+  messages: ChatMessage[];
 }
+
+export interface UsersTableProps {
+  users: MyUserType[];
+  goDetail: (userId: string) => void;
+  toggleActive: (user: MyUserType) => Promise<void>;
+}
+
+export type UsersFilterFormType = {
+  status: string;
+  from?: string;
+  to?: string;
+};
+
+export type TasksFilterFormType = {
+  tag: string;
+  from?: string;
+  to?: string;
+};

@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 // type
-import { TasksFilterFormType, UsersFilterFormType } from "../../molecule/type";
+import { TasksFilterFormType, UsersFilterFormType } from "../../type";
 
 // tasks
 export const tasksfilterSchema = Yup.object({
