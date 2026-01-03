@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 // type
-import { ChatMessage, MyUserType } from "@/src/types/global";
+import { ChatMessage, ChatsType, MyUserType } from "@/src/types/global";
 
 export interface AddTaskProps {
   handleClose: () => void;
@@ -24,6 +24,9 @@ export interface HeaderProps {
 }
 export interface sidebarProps extends HeaderProps {
   user?: MyUserType | null;
+}
+export interface chatSidebarProps extends HeaderProps {
+  chat: ChatsType;
 }
 
 export type SidebarNotification =

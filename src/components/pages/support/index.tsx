@@ -15,9 +15,11 @@ import ChatInput from "../../molecule/chat/chat-input";
 
 // type
 import { UserType } from "@/src/types/global";
+import { usePathname } from "next/navigation";
 
 const SupportComponent = () => {
   // hooks
+  const pathname = usePathname();
   const chat = useChat();
   const { user } = useAuth();
 
@@ -38,7 +40,7 @@ const SupportComponent = () => {
 
   return (
     <div
-      className={`relative h-[calc(100vh-130px)] w-full rounded-md border-2 border-warning-400 bg-white`}
+      className={`relative ${pathname.includes("admin") ? "h-[calc(100vh-150px)]" : "h-[calc(100vh-90px)]"} w-full rounded-md border-2 border-warning-400 bg-white shadow-md lg:h-[calc(100vh-110px)]`}
     >
       <ChatMessages messages={chat.messages} />
 

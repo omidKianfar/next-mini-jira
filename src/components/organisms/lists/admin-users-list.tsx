@@ -47,7 +47,7 @@ const UserListCard = ({ users, goDetail, toggleActive }: UsersTableProps) => {
             </div>
           </div>
 
-          <p className="mt-2 space-y-1 text-label text-gray-600">
+          <p className="mt-2 my-1 text-label text-gray-600">
             {stringSlicer({ string: user.email as string, slice: 40 })}
           </p>
         </div>

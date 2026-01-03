@@ -10,15 +10,13 @@ import { ChatsListener } from "@/src/libs/chat/chats-listener";
 
 // type
 import { ChatsType } from "@/src/types/global";
+import { chatSidebarProps } from "../../type";
 
 const ChatSidebar = ({
-  setSidebarShow,
-}: {
-  setSidebarShow: (show: boolean) => void;
-}) => {
-  // hooks
+  setShowSidebar,
+}: Pick<chatSidebarProps, "setShowSidebar">) => {
+  // states
   const [chats, setChats] = useState<ChatsType[]>([]);
-  console.log("chats", chats);
 
   // functions
   useEffect(() => {
@@ -32,10 +30,10 @@ const ChatSidebar = ({
   }, []);
 
   return (
-    <div className="h-full w-[85vw] lg:w-[300px]">
+    <div className="h-full w-full">
       {chats.map((chat) => (
         <div key={chat.id} className="mb-2">
-          <AdminSupportUserCard chat={chat} setSidebarShow={setSidebarShow} />
+          <AdminSupportUserCard chat={chat} setShowSidebar={setShowSidebar} />
         </div>
       ))}
     </div>

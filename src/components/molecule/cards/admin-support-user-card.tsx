@@ -6,24 +6,25 @@ import { useNavigation } from "@/src/hooks/navigation/use-navigation";
 import { MessgesRead } from "@/src/libs/chat/message-read";
 
 // type
-import { ChatsType, UserType } from "@/src/types/global";
+import { UserType } from "@/src/types/global";
+import { chatSidebarProps } from "../../organisms/type";
 
 const AdminSupportUserCard = ({
   chat,
-  setSidebarShow,
-}: {
-  chat: ChatsType;
-  setSidebarShow: (shoe: boolean) => void;
-}) => {
+  setShowSidebar,
+}: Pick<chatSidebarProps, "chat" | "setShowSidebar">) => {
   // hooks
   const navigation = useNavigation();
-  const unreadCount = useUnreadCount({chatId:chat.id,senderType : UserType.Client});
+  const unreadCount = useUnreadCount({
+    chatId: chat.id,
+    senderType: UserType.Client,
+  });
 
   // functions
   const goToChat = (chatId: string) => {
     MessgesRead({ chatId: chatId, senderType: UserType.Client });
 
-    setSidebarShow(false);
+    setShowSidebar(false);
 
     navigation.adminSupportChat(chatId);
   };
@@ -34,7 +35,7 @@ const AdminSupportUserCard = ({
       onClick={() => goToChat(chat.id)}
     >
       {chat.user.username}
-      
+
       {unreadCount}
     </div>
   );

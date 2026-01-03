@@ -1,10 +1,10 @@
 import FramerMotion from "@/src/components/atom/animation-component";
-import AdminSupportComponent from "@/src/components/pages/admin/support";
+import AdminEmptySupportComponent from "@/src/components/atom/empty-components/empty-support-chat";
 
 const AdminSupportPage = () => {
   return (
     <FramerMotion>
-      <AdminSupportComponent />
+      <AdminEmptySupportComponent />
     </FramerMotion>
   );
 };

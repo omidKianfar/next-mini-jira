@@ -19,7 +19,7 @@ const DateInputField = <T extends FieldValues>({
   } = useFormContext();
 
   return (
-    <div className="space-y-1">
+    <div className="my-1">
       <LabelComponent label={label} name={name} />
 
       <Controller
