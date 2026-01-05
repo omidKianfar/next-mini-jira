@@ -90,6 +90,10 @@ export type UsersFilterFormType = {
   from?: string;
   to?: string;
 };
+export type ChatsFilterFormType = {
+  from?: string;
+  to?: string;
+};
 
 export type TasksFilterFormType = {
   tag: string;

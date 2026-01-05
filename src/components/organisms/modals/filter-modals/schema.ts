@@ -1,7 +1,11 @@
 import * as Yup from "yup";
 
 // type
-import { TasksFilterFormType, UsersFilterFormType } from "../../type";
+import {
+  UsersFilterFormType,
+  ChatsFilterFormType,
+  TasksFilterFormType,
+} from "../../type";
 
 // tasks
 export const tasksfilterSchema = Yup.object({
@@ -42,3 +46,22 @@ export const usersfilterSchema = Yup.object({
       }
     }),
 }) as unknown as Yup.ObjectSchema<UsersFilterFormType>;
+
+// chats
+export const chatsfilterSchema = Yup.object({
+  from: Yup.string()
+    .transform((value, option) => (option === undefined ? undefined : value))
+    .notRequired(),
+  to: Yup.string()
+    .transform((value, option) => (option === undefined ? undefined : value))
+    .notRequired()
+    .test("is-after", "End time must be after start time", function (value) {
+      const { from } = this.parent;
+
+      if (!from) {
+        return true;
+      } else {
+        return from && value ? value > from : false;
+      }
+    }),
+}) as unknown as Yup.ObjectSchema<ChatsFilterFormType>;

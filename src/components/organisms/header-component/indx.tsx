@@ -9,18 +9,20 @@ import Logo from "@/src/components/atom/logo-component";
 import ModalContainer from "../../common/modal-component";
 import PageLoading from "../../common/page-loading";
 import AdminDashboardHeader from "../../molecule/headers/admin-dashboard";
-import DashboardHeader from "../../molecule/headers/dashboard";
+import DashboardHeader from "../../molecule/headers/user-dashboard";
 
 // type
 import { UserType } from "@/src/types/global";
 import { HeaderProps } from "../type";
 
 // firestore
-import { useAdminTotalUnreadCount } from "@/src/libs/chat/admin-unread-message-listener";
+import { AdminUnreadMeassesListener } from "@/src/libs/chat/admin-unread-messages-count";
 
 // hooks
 import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useUnreadCount } from "@/src/hooks/chat/use-unread-count";
+import AdminSupportHeader from "../../molecule/headers/admin-support";
+import FilterChats from "../modals/filter-modals/chats";
 
 // lazy
 const AddTask = lazy(() => import("../modals/add-task-modal"));
@@ -46,7 +48,7 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
   });
 
   // admin unread count
-  const AdminUnraedCount = useAdminTotalUnreadCount();
+  const AdminUnraedCount = AdminUnreadMeassesListener();
 
   const handleOpenModal = (modalNumber: number) => {
     setModalCounter(modalNumber);
@@ -86,6 +88,8 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
             <DashboardHeader handleOpenModal={handleOpenModal} />
           ) : pathname == "/admin/dashboard" ? (
             <AdminDashboardHeader handleOpenModal={handleOpenModal} />
+          ) : pathname.includes("/admin/support") ? (
+            <AdminSupportHeader handleOpenModal={handleOpenModal} />
           ) : null}
         </div>
       </div>
@@ -109,6 +113,14 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
           ) : modalcounter == 5 ? (
             <div>
               <FilterUsers handleClose={handleCloseModal} />
+            </div>
+          ) : modalcounter == 6 ? (
+            <div>
+              <SearchUsers handleClose={handleCloseModal} />
+            </div>
+          ) : modalcounter == 7 ? (
+            <div>
+              <FilterChats handleClose={handleCloseModal} />
             </div>
           ) : null}
         </ModalContainer>

@@ -70,7 +70,11 @@ const DashboardLayout = ({ children }: PropsWithChildren) => {
             <div
               className={`h-full w-full rounded-lg border-2 border-warning-500 bg-white p-2 shadow-md`}
             >
-              <div className="flex items-center justify-end">
+              <div className="flex items-center justify-between">
+                <h2 className="mx-2 text-subtitle font-semibold text-warning-500">
+                  Chats List
+                </h2>
+
                 <ButtonFreeClass
                   onClick={handleCloseSidebar}
                   className={`"border-2 rounded-lg border-gray-200 bg-gray-50 p-1 shadow-md`}

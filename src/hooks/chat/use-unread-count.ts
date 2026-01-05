@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { SetStateAction } from "react";
 
 // fiestore
-import { userUnreadCountListener } from "@/src/libs/chat/get-user-unread-messages-count";
+import { userUnreadMessagesListener } from "@/src/libs/chat/user-unread-messages-listener";
 
 // type
 import { useUnreadCountProps } from "../type";
@@ -16,7 +16,7 @@ export const useUnreadCount = ({ chatId, senderType }: useUnreadCountProps) => {
       return;
     }
 
-    const unsubscribe = userUnreadCountListener({
+    const unsubscribe = userUnreadMessagesListener({
       chatId: chatId,
       senderType: senderType,
       callback: (count: number) => {

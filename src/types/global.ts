@@ -141,10 +141,19 @@ export type UserState = {
   users: MyUserType[];
   sortOrder: SortOrder;
 };
+export type chatsState = {
+  chats: ChatsType[];
+};
 
 export type UserFiltersState = {
   status: string | null;
   createdAt: {
+    from: string | null;
+    to: string | null;
+  };
+};
+export type ChatFiltersState = {
+  updatedAt: {
     from: string | null;
     to: string | null;
   };
@@ -172,9 +181,15 @@ export type ChatContextType = {
 
 export type ChatMessageType = {
   createdAt: string;
+  updatedAt: string;
   lastMessageSenderId: UserType;
   lastMessageText: string;
-  updatedAt: string;
+  lastMessageSenderType: string;
+  lastMessageRead: boolean;
+  lastMessageAttachment: {
+    fileUrl: string;
+    fileType: string;
+  };
 };
 
 export type ChatUserType = {
