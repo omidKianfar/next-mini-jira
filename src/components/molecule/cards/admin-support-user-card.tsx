@@ -8,12 +8,20 @@ import { MessgesRead } from "@/src/libs/chat/message-read";
 // type
 import { UserType } from "@/src/types/global";
 import { chatSidebarProps } from "../../organisms/type";
+import MyImage from "../../atom/image-components";
+import { stringSlicer } from "@/src/utils/string-slicer";
+import UnSeenMessageCalc from "@/src/utils/unseen-calc";
+import { useSearchParams } from "next/navigation";
+import MyIcon from "../../atom/icon-components";
 
 const AdminSupportUserCard = ({
   chat,
   setShowSidebar,
 }: Pick<chatSidebarProps, "chat" | "setShowSidebar">) => {
   // hooks
+  const params = useSearchParams();
+  const chatId = params.get("chatId");
+
   const navigation = useNavigation();
   const unreadCount = useUnreadCount({
     chatId: chat.id,
@@ -31,12 +39,59 @@ const AdminSupportUserCard = ({
 
   return (
     <div
-      className="rounded-md border-2 border-gray-400 p-2"
+      className={`relative mb-4 w-full cursor-pointer rounded-lg border-2 ${chatId === chat.id ? "border-success-400 shadow-sm" : "border-warning-400 shadow-md"} bg-gray-50 p-2`}
       onClick={() => goToChat(chat.id)}
     >
-      {chat.user.username}
+      <div className="mb-2 flex items-center justify-between">
+        <div className="flex items-center justify-start">
+          <div className="mr-2 overflow-hidden">
+            {chat.user.photo ? (
+              <MyImage
+                src={chat.user.photo as string}
+                alt=""
+                fill
+                className="rounded-full object-cover"
+                wrapperClass="relative h-[40px] w-[40px] rounded-full border-2 border-primary-500 "
+              />
+            ) : (
+              <div className="h-[40px] w-[40px] rounded-full border-2 border-primary-500 bg-gray-200"></div>
+            )}
+          </div>
 
-      {unreadCount}
+          <p className="text-label text-gray-600">
+            {stringSlicer({
+              string: chat.user.email as string,
+              slice: 30,
+            })}
+          </p>
+        </div>
+
+        {chatId === chat.id && (
+          <MyIcon
+            icon="teenyicons:tick-circle-solid"
+            className="text-success-400"
+          />
+        )}
+      </div>
+
+      <div className="rounded-sm border border-gray-100 p-2 shadow-md">
+        <h6 className="break-words text-label font-semibold">
+          {stringSlicer({
+            string: chat.message.lastMessageText as string,
+            slice: 80,
+          })}
+        </h6>
+      </div>
+
+      {unreadCount ? (
+        <div className="mt-2 flex w-full items-center justify-between">
+          <UnSeenMessageCalc date={chat.message.updatedAt} />
+
+          <p className="rounded-full bg-warning-500 px-2 text-label text-white">
+            {unreadCount}
+          </p>
+        </div>
+      ) : null}
     </div>
   );
 };
