@@ -3,17 +3,23 @@
 import { PropsWithChildren, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
+// ui
 import ChatSidebar from "@/src/components/organisms/sidebar-component/chat-sidebar";
 import ButtonFreeClass from "@/src/components/atom/buttons-component/button-free-class";
 import MyIcon from "@/src/components/atom/icon-components";
 
+// hooks
 import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {
+  // hooks
   const isMobile = useIsMobile();
+
+  // states
   const [showSidebar, setShowSidebar] = useState(true);
   const [isSidebarClosed, setIsSidebarClosed] = useState(false);
 
+  // functions
   const handleCloseSidebar = () => {
     setShowSidebar(false);
     setIsSidebarClosed(false);
@@ -95,6 +101,7 @@ const DashboardLayout = ({ children }: PropsWithChildren) => {
 
 export default DashboardLayout;
 
+// animation data
 const sidebarVariants = {
   open: {
     x: 0,
