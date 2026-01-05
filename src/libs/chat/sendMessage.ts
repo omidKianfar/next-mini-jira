@@ -16,7 +16,7 @@ import { SendMessageProps } from "./type";
 
 export const sendChatMessage = async ({ user, message }: SendMessageProps) => {
   const chatRef = doc(db, "chat", user.userId);
-  
+
   const chatSnap = await getDoc(chatRef);
 
   const now = dayjs().format("YYYY-MM-DD HH:mm:ss");
@@ -35,13 +35,26 @@ export const sendChatMessage = async ({ user, message }: SendMessageProps) => {
         updatedAt: now,
         lastMessageText: message.text || "",
         lastMessageSenderId: message.senderId,
+        lastMessageSenderType: message.senderType || "",
+        lastMessageRead: false,
+        lastMessageAttachment: {
+          fileUrl: message.attachment?.fileUrl || "",
+          fileType: message.attachment?.fileType || "",
+        },
       },
     });
   } else {
     await updateDoc(chatRef, {
+      "message.createdAt": now,
       "message.updatedAt": now,
       "message.lastMessageText": message.text || "",
-      "message.lastMessageSenderId": message.senderId,
+      "message.lastMessageSenderId": message.senderId || "",
+      "message.lastMessageSenderType": message.senderType || "",
+      "message.lastMessageRead": message.read || false,
+      "message.lastMessageAttachment.fileUrl":
+        message.attachment?.fileUrl || "",
+      "message.lastMessageAttachment.fileType":
+        message.attachment?.fileType || "",
     });
   }
 

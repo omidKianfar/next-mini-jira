@@ -18,7 +18,7 @@ import { UserType } from "@/src/types/global";
 // config
 import { db } from "@/configs/firebase";
 
-export const useAdminTotalUnreadCount = (): number => {
+export const AdminUnreadMeassesListener= (): number => {
   // hooks
   const { user: currentUser } = useAuth();
 

@@ -1,6 +1,6 @@
+import { AppDispatch } from "@/src/store";
 import {
   ChatMessage,
-  ChatsType,
   MyUserType,
   UserType,
 } from "@/src/types/global";
@@ -20,12 +20,12 @@ export interface ChatMessagesListenerProps {
   onReceive: (messages: ChatMessage[]) => void;
 }
 
-export interface userUnreadCountListenerProps {
+export interface userUnreadMessageListenerProps {
   chatId: string;
   senderType: UserType;
   callback: (count: number) => void;
 }
 
-export interface ChatsListenerProps {
-  callback: (data: ChatsType[]) => void;
+export interface AdminChatsListenerProps {
+  dispatch: AppDispatch;
 }

@@ -4,13 +4,13 @@ import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "@/configs/firebase";
 
 // type
-import { userUnreadCountListenerProps } from "./type";
+import { userUnreadMessageListenerProps } from "./type";
 
-export const userUnreadCountListener = ({
+export const userUnreadMessagesListener = ({
   chatId,
   senderType,
   callback,
-}: userUnreadCountListenerProps) => {
+}: userUnreadMessageListenerProps) => {
   if (!chatId) {
     return () => {};
   }

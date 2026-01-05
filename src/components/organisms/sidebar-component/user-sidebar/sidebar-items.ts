@@ -9,7 +9,7 @@ import { useNavigation } from "@/src/hooks/navigation/use-navigation";
 import { useUnreadCount } from "@/src/hooks/chat/use-unread-count";
 
 // firestore
-import { useAdminTotalUnreadCount } from "@/src/libs/chat/admin-unread-message-listener";
+import { AdminUnreadMeassesListener } from "@/src/libs/chat/admin-unread-messages-count";
 import { MessgesRead } from "@/src/libs/chat/message-read";
 
 export const SidebarItems = ({
@@ -26,7 +26,7 @@ export const SidebarItems = ({
   });
 
   // admin unread count
-  const AdminUnraedCount = useAdminTotalUnreadCount();
+  const AdminUnraedCount = AdminUnreadMeassesListener();
 
   // client sidebar items
   const userSidebarItems = useMemo<sidebarItemsType[]>(
