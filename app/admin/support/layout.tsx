@@ -119,7 +119,7 @@ const sidebarVariants = {
       type: "spring" as const,
       stiffness: 350,
       damping: 30,
-      duration: 0.2,
+      duration: 0.1,
     },
   },
 };
