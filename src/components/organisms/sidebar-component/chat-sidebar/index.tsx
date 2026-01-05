@@ -32,7 +32,7 @@ const ChatSidebar = ({
   return (
     <div className="h-full w-full">
       {chats.map((chat) => (
-        <div key={chat.id} className="mb-2">
+        <div key={chat.id} className="mb-4">
           <AdminSupportUserCard chat={chat} setShowSidebar={setShowSidebar} />
         </div>
       ))}
