@@ -45,7 +45,7 @@ const UserSidebar = ({
         <ButtonFreeClass
           className="cursor-pointer text-[16px] font-semibold text-primary-700 hover:text-warning-600"
           onClick={logout}
-          icon={<MyIcon icon={"tabler:logout"} className="mr-1 text-title" />}
+          icon={<MyIcon icon={"tabler:logout"} className="ml-1 text-title" />}
         >
           Logout
         </ButtonFreeClass>
