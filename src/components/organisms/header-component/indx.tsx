@@ -23,6 +23,7 @@ import { useAuth } from "@/src/hooks/auth/use-auth";
 import { useUnreadCount } from "@/src/hooks/chat/use-unread-count";
 import AdminSupportHeader from "../../molecule/headers/admin-support";
 import FilterChats from "../modals/filter-modals/chats";
+import SearchSupportChats from "../modals/serach-modals/search-support-chats";
 
 // lazy
 const AddTask = lazy(() => import("../modals/add-task-modal"));
@@ -116,7 +117,7 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
             </div>
           ) : modalcounter == 6 ? (
             <div>
-              <SearchUsers handleClose={handleCloseModal} />
+              <SearchSupportChats handleClose={handleCloseModal} />
             </div>
           ) : modalcounter == 7 ? (
             <div>
