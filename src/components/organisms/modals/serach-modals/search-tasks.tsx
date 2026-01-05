@@ -48,8 +48,8 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
     const query = value.toLowerCase();
 
     const filtered = tasks.filter((task) => {
-      const title = task?.title.toLowerCase() || "";
-      const description = task?.description.toLowerCase() || "";
+      const title = task?.title?.toLowerCase() || "";
+      const description = task?.description?.toLowerCase() || "";
       return title.includes(query) || description.includes(query);
     });
 

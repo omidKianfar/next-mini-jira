@@ -47,8 +47,8 @@ const SearchUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
     const query = value.toLowerCase();
 
     const filtered = users.filter((user) => {
-      const username = user?.userName.toLowerCase() || "";
-      const email = user?.email.toLowerCase() || "";
+      const username = user?.userName?.toLowerCase() || "";
+      const email = user?.email?.toLowerCase() || "";
       return username.includes(query) || email.includes(query);
     });
 
