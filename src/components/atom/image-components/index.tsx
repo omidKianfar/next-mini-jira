@@ -18,7 +18,7 @@ const MyImage = ({
     <div className={wrapperClass}>
       <Image
         src={src}
-        alt={alt}
+        alt={alt || ""}
         width={width}
         height={height}
         fill={fill}
