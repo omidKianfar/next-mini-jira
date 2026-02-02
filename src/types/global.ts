@@ -1,6 +1,11 @@
+import { Dispatch, SetStateAction } from 'react';
+import { RenderElementProps, RenderLeafProps } from 'slate-react';
+import { CustomEmoji } from '../components/molecule/slatejs-editor-component/type';
+import { Descendant } from 'slate';
+
 export enum UserType {
-  Client = "client",
-  Admin = "admin",
+  Client = 'client',
+  Admin = 'admin',
 }
 
 export type MyUserType = {
@@ -23,14 +28,14 @@ export type MyUserType = {
   };
 };
 
-export type AuthContextActionType = "INITIALIZE" | "IS_LOADING" | "ERROR";
+export type AuthContextActionType = 'INITIALIZE' | 'IS_LOADING' | 'ERROR';
 
 export type AuthLoading =
-  | "SIGN_OUT"
-  | "INITIALIZING"
-  | "SIGN_UP_WITH_EMAIL"
-  | "SIGN_IN_WITH_EMAIL"
-  | "SIGN_IN_WITH_GOOGLE";
+  | 'SIGN_OUT'
+  | 'INITIALIZING'
+  | 'SIGN_UP_WITH_EMAIL'
+  | 'SIGN_IN_WITH_EMAIL'
+  | 'SIGN_IN_WITH_GOOGLE';
 
 export type AuthContextStateType = {
   user: MyUserType | null;
@@ -87,11 +92,11 @@ export interface ProfileProps {
   birthday: string;
 }
 
-export type PlanType = "monthly" | "yearly";
+export type PlanType = 'monthly' | 'yearly';
 
-export type TaskStatus = "todo" | "inprogress" | "done";
+export type TaskStatus = 'todo' | 'inprogress' | 'done';
 
-export type TagType = "task" | "bug";
+export type TagType = 'task' | 'bug';
 
 export type Task = {
   id: string;
@@ -135,7 +140,7 @@ export type TaskFiltersState = {
   };
 };
 
-export type SortOrder = "asc" | "desc";
+export type SortOrder = 'asc' | 'desc';
 
 export type UserState = {
   users: MyUserType[];
@@ -210,4 +215,30 @@ export type ModalProps = React.PropsWithChildren & {
   open: boolean;
   handleClose: () => void;
   handleOpenModal?: (modalNumber: number) => void;
+};
+
+export type EditorContextType = {
+  editorOutput?: string;
+  setEditorOutput?: Dispatch<SetStateAction<string>>;
+  fontColorState?: string | null;
+  setFontColorState?: Dispatch<SetStateAction<string | null>>;
+  showColorDropdown?: boolean;
+  setShowColorDropdown?: Dispatch<SetStateAction<boolean>>;
+  fontBgColorState?: string | null;
+  setFontBgColorState?: Dispatch<SetStateAction<string | null>>;
+  showBackgroundDropdown?: boolean;
+  setShowBackgroundDropdown?: Dispatch<SetStateAction<boolean>>;
+  showEmojiPicker?: boolean;
+  setShowEmojiPicker?: Dispatch<SetStateAction<boolean>>;
+  fontFamilyState?: string;
+  setFontFamilyState?: Dispatch<SetStateAction<string>>;
+  renderElement?: (props: RenderElementProps) => React.ReactElement;
+  renderLeaf?: (props: RenderLeafProps) => React.ReactElement;
+  editor?: any;
+  document?: Document;
+  changeColor?: (color: string | null) => void;
+  changeBackgroundColor?: (color: string | null) => void;
+  changeFontFamily?: (fontFamily: string) => void;
+  insertEmoji?: (emoji: CustomEmoji) => void;
+  deserializedNodes?: Descendant[];
 };

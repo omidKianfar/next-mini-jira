@@ -1,5 +1,5 @@
-import { ActionDispatch, RefObject } from "react";
-import { Dispatch, SetStateAction } from "react";
+import { ActionDispatch, RefObject } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
 // type
 import {
@@ -8,7 +8,7 @@ import {
   MyUserType,
   PlanType,
   UserType,
-} from "@/src/types/global";
+} from '@/src/types/global';
 
 export interface UseAuthListenerProps {
   state: Partial<AuthContextStateType>;
@@ -53,7 +53,7 @@ export interface useUsersListenerProps {
   users: MyUserType[] | null;
 }
 
-export type fileType = "image" | "video" | "file" | "voice";
+export type fileType = 'image' | 'video' | 'file' | 'voice';
 
 export interface useImageProcessorProps {
   size?: number;
