@@ -1,5 +1,5 @@
-import FramerMotion from "@/src/components/atom/animation-component";
-import ProfileComponent from "@/src/components/pages/profile";
+import FramerMotion from '@/src/components/atom/animation-component';
+import ProfileComponent from '@/src/components/pages/profile';
 
 const AdminProfilePage = () => {
   return (
