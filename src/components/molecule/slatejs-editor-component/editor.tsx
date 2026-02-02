@@ -1,5 +1,5 @@
 import isHotkey from 'is-hotkey';
-import { Slate, Editable } from 'slate-react';
+import { Slate, Editable, ReactEditor } from 'slate-react';
 import { Editor, Descendant, Transforms } from 'slate';
 
 // data
@@ -50,24 +50,17 @@ const SlateEditorComponent = ({ editorKey }: SlateEditorProps) => {
   // states
   const [loading, setLoading] = useState(false);
 
+  // functions
   const resetEditor = () => {
-    editor.children.map(() => {
-      Transforms.delete(editor, { at: [0] });
+    Transforms.delete(editor, {
+      at: {
+        anchor: Editor.start(editor, []),
+        focus: Editor.end(editor, []),
+      },
     });
-
-    editor.children = [
-      {
-        type: 'paragraph',
-        children: [{ text: '' }],
-      },
-      {
-        type: 'paragraph',
-        children: [{ text: '' }],
-      },
-    ];
+    Transforms.setNodes(editor, { type: 'paragraph' } as any);
   };
 
-  // functions
   const handleSend = () => {
     console.log('editorOutput', editorOutput);
 
@@ -100,7 +93,6 @@ const SlateEditorComponent = ({ editorKey }: SlateEditorProps) => {
 
       setEditorOutput?.('');
       resetEditor();
-      console.log('editorOutput', editorOutput);
     } catch (error: any) {
       setLoading(false);
       enqueueSnackbar(`Error: ${error.message}`, { variant: 'error' });
