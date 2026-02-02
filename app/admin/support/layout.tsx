@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { PropsWithChildren, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { PropsWithChildren, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 // ui
-import ChatSidebar from "@/src/components/organisms/sidebar-component/chat-sidebar";
-import ButtonFreeClass from "@/src/components/atom/buttons-component/button-free-class";
-import MyIcon from "@/src/components/atom/icon-components";
+import ChatSidebar from '@/src/components/organisms/sidebar-component/chat-sidebar';
+import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
+import MyIcon from '@/src/components/atom/icon-components';
 
 // hooks
-import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {
   // hooks
@@ -111,16 +111,16 @@ const sidebarVariants = {
     x: 0,
     opacity: 1,
     transition: {
-      type: "spring" as const,
+      type: 'spring' as const,
       stiffness: 350,
       damping: 30,
     },
   },
   closed: {
-    x: "-100%",
+    x: '-100%',
     opacity: 0,
     transition: {
-      type: "spring" as const,
+      type: 'spring' as const,
       stiffness: 350,
       damping: 30,
       duration: 0.1,

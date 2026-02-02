@@ -1,26 +1,26 @@
 // hooks
-import { useUnreadCount } from "@/src/hooks/chat/use-unread-count";
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
+import { useUnreadCount } from '@/src/hooks/chat/use-unread-count';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 
 // firestore
-import { MessgesRead } from "@/src/libs/chat/message-read";
+import { MessgesRead } from '@/src/libs/chat/message-read';
 
 // type
-import { UserType } from "@/src/types/global";
-import { chatSidebarProps } from "../../organisms/type";
-import MyImage from "../../atom/image-components";
-import { stringSlicer } from "@/src/utils/string-slicer";
-import UnSeenMessageCalc from "@/src/utils/unseen-calc";
-import { useSearchParams } from "next/navigation";
-import MyIcon from "../../atom/icon-components";
+import { UserType } from '@/src/types/global';
+import { chatSidebarProps } from '../../organisms/type';
+import MyImage from '../../atom/image-components';
+import { stringSlicer } from '@/src/utils/string-slicer';
+import UnSeenMessageCalc from '@/src/utils/unseen-calc';
+import { useSearchParams } from 'next/navigation';
+import MyIcon from '../../atom/icon-components';
 
 const AdminSupportUserCard = ({
   chat,
   setShowSidebar,
-}: Pick<chatSidebarProps, "chat" | "setShowSidebar">) => {
+}: Pick<chatSidebarProps, 'chat' | 'setShowSidebar'>) => {
   // hooks
   const params = useSearchParams();
-  const chatId = params.get("chatId");
+  const chatId = params.get('chatId');
 
   const navigation = useNavigation();
   const unreadCount = useUnreadCount({
@@ -39,7 +39,7 @@ const AdminSupportUserCard = ({
 
   return (
     <div
-      className={`relative mb-4 w-full cursor-pointer rounded-lg border-2 ${chatId === chat.id ? "border-success-400 shadow-sm" : "border-warning-400 shadow-md"} bg-gray-50 p-2`}
+      className={`max relative mb-4 w-[250px] cursor-pointer rounded-lg border-2 ${chatId === chat.id ? 'border-success-400 shadow-sm' : 'border-warning-400 shadow-md'} bg-gray-50 p-2`}
       onClick={() => goToChat(chat.id)}
     >
       <div className="mb-2 flex items-center justify-between">
@@ -75,12 +75,15 @@ const AdminSupportUserCard = ({
       </div>
 
       <div className="rounded-sm border border-gray-100 p-2 shadow-md">
-        <h6 className="break-words text-label font-semibold">
-          {stringSlicer({
-            string: chat.message.lastMessageText as string,
-            slice: 80,
-          })}
-        </h6>
+        <div
+          className="break-words text-label font-semibold"
+          dangerouslySetInnerHTML={{
+            __html: stringSlicer({
+              string: chat.message.lastMessageText as string,
+              slice: 80,
+            }),
+          }}
+        ></div>
       </div>
 
       {unreadCount ? (
