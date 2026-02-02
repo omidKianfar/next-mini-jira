@@ -11,7 +11,7 @@ const ChatMessages = ({ messages }: ChatMessagesProps) => {
   return (
     <div
       className={`max-h-[calc(100vh-200px)] w-full overflow-y-auto rounded-t-md p-2
-         lg:max-h-[calc(100vh-180px)] lg:p-4 ${pathname.includes("admin") ? "max-h-[calc(100vh-220px)]" : "max-h-[calc(100vh-155px)]"}`}
+         lg:max-h-[calc(100vh-280px)] lg:p-4 ${pathname.includes("admin") ? "max-h-[calc(100vh-320px)]" : "max-h-[calc(100vh-255px)]"}`}
     >
       {messages.map((message) => (
         <ChatMessageItem key={message.id} message={message} />
