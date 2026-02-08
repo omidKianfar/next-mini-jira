@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 
 // type
-import { ChatMessage, ChatsType, MyUserType } from "@/src/types/global";
+import { ChatMessage, ChatsType, MyUserType } from '@/src/types/global';
 
 export interface AddTaskProps {
   handleClose: () => void;
@@ -30,9 +30,9 @@ export interface chatSidebarProps extends HeaderProps {
 }
 
 export type SidebarNotification =
-  | { type: "none" }
-  | { type: "count"; value: number }
-  | { type: "dot" };
+  | { type: 'none' }
+  | { type: 'count'; value: number }
+  | { type: 'dot' };
 
 export type sidebarItemsType = {
   id: string;
@@ -77,6 +77,7 @@ export interface ListComponentProps {
 
 export interface ChatMessagesProps {
   messages: ChatMessage[];
+  showMenu?: boolean;
 }
 
 export interface UsersTableProps {

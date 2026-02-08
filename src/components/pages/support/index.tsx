@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useEffect, useState } from 'react';
 
 // hooks
-import { useChat } from "@/src/hooks/chat/use-chat";
-import { useAuth } from "@/src/hooks/auth/use-auth";
+import { useChat } from '@/src/hooks/chat/use-chat';
+import { useAuth } from '@/src/hooks/auth/use-auth';
 
 // firestore
-import { MessgesRead } from "@/src/libs/chat/message-read";
+import { MessgesRead } from '@/src/libs/chat/message-read';
 
 // ui
-import ChatMessages from "../../organisms/chat-messages";
-import ChatInput from "../../molecule/chat/chat-input";
+import ChatMessages from '../../organisms/chat-messages';
+import ChatInput from '../../molecule/chat/chat-input';
 
 // type
-import { UserType } from "@/src/types/global";
-import { usePathname } from "next/navigation";
+import { UserType } from '@/src/types/global';
+import { usePathname } from 'next/navigation';
 
 const SupportComponent = () => {
   // hooks
@@ -24,6 +24,8 @@ const SupportComponent = () => {
   const { user } = useAuth();
 
   // states
+  const [showMenu, setShowMenu] = useState<boolean>(true);
+
   const isAdmin = user?.userType == UserType.Admin;
 
   // functions
@@ -35,16 +37,16 @@ const SupportComponent = () => {
   }, [chat]);
 
   if (!chat) {
-    throw new Error("ChatContext is not available!");
+    throw new Error('ChatContext is not available!');
   }
 
   return (
     <div
-      className={`relative ${pathname.includes("admin") ? "h-[calc(100vh-150px)]" : "h-[calc(100vh-90px)]"} w-full rounded-md border-2 border-warning-400 bg-white shadow-md lg:h-[calc(100vh-110px)]`}
+      className={`relative ${pathname.includes('admin') ? 'h-[calc(100vh-150px)]' : 'h-[calc(100vh-90px)]'} w-full rounded-md border-2 border-warning-400 bg-white shadow-md lg:h-[calc(100vh-110px)]`}
     >
-      <ChatMessages messages={chat.messages} />
+      <ChatMessages messages={chat.messages} showMenu={showMenu} />
 
-      <ChatInput />
+      <ChatInput setShowMenu={setShowMenu} showMenu={showMenu} />
     </div>
   );
 };
