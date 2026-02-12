@@ -126,7 +126,7 @@ const SlateEditorComponent = ({ editorKey }: SlateEditorProps) => {
           placeholder="Enter text..."
           spellCheck
           autoFocus
-          className="h-[90px] w-full overflow-y-auto overflow-x-hidden bg-white p-4 focus:outline-none"
+          className="h-[150px] w-full overflow-y-auto overflow-x-hidden bg-white p-4 focus:outline-none"
           onKeyDown={(event) => {
             if (isHotkey('mod+enter', event)) {
               event.preventDefault();
