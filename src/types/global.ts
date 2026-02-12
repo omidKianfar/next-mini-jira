@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import { RenderElementProps, RenderLeafProps } from 'slate-react';
 import { CustomEmoji } from '../components/molecule/slatejs-editor-component/type';
 import { Descendant } from 'slate';
+import { fileType, uploadProps } from '../hooks/type';
 
 export enum UserType {
   Client = 'client',
@@ -241,4 +242,16 @@ export type EditorContextType = {
   changeFontFamily?: (fontFamily: string) => void;
   insertEmoji?: (emoji: CustomEmoji) => void;
   deserializedNodes?: Descendant[];
+};
+
+export type FileUploaderType = {
+  upload: ({ file, avatar, userId }: uploadProps) => Promise<string | null>;
+  cancel: () => Promise<void>;
+  reset: () => void;
+  progress: number;
+  uploading: boolean;
+  url: string | null;
+  error: string | null;
+  fileType: fileType | null;
+  realPath: string | null;
 };

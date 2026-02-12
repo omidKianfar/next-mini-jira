@@ -1,11 +1,11 @@
-import { DragEvent, useRef, useState } from "react";
+import { DragEvent, useRef, useState } from 'react';
 
 // ui
-import FileInputField from "../../molecule/RHF-controllers-components/RHF-fields/file-input-field";
-import LoadingCircle from "../../atom/loadings/loading-circle";
+import FileInputField from '../../molecule/RHF-controllers-components/RHF-fields/file-input-field';
+import LoadingCircle from '../../atom/loadings/loading-circle';
 
 // type
-import { AddTaskUploadProps } from "../type";
+import { AddTaskUploadProps } from '../type';
 
 const DragDropUploader = ({
   uploadProcessHandler,
@@ -13,7 +13,7 @@ const DragDropUploader = ({
   uploading,
 }: Pick<
   AddTaskUploadProps,
-  "uploadProcessHandler" | "progress" | "uploading"
+  'uploadProcessHandler' | 'progress' | 'uploading'
 >) => {
   // ref
   const fileUploadRef = useRef<HTMLInputElement | null>(null);
@@ -34,7 +34,7 @@ const DragDropUploader = ({
   };
 
   const inputChangeHandler = async (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -54,7 +54,7 @@ const DragDropUploader = ({
   };
 
   return (
-    <div className="rounded-lg shadow-md">
+    <div className="h-full w-full rounded-lg shadow-md">
       <FileInputField
         name="fileUrl"
         label="FileUrl"
@@ -68,10 +68,10 @@ const DragDropUploader = ({
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDragEnd={() => setIsDragging(false)}
-        className={`flex h-[200px] w-full ${!!uploading || !!progress ? "cursor-not-allowed" : "cursor-pointer"} items-center justify-center rounded-lg border-2 border-dashed transition-all ${
+        className={`flex h-[200px] w-full ${!!uploading || !!progress ? 'cursor-not-allowed' : 'cursor-pointer'} items-center justify-center rounded-lg border-2 border-dashed transition-all ${
           !uploading && !progress
-            ? "border-primary-500 bg-primary-50"
-            : "border-zinc-300 bg-zinc-50"
+            ? 'border-primary-500 bg-primary-50'
+            : 'border-zinc-300 bg-zinc-50'
         } `}
         onClick={openFilePicker}
       >
@@ -83,7 +83,7 @@ const DragDropUploader = ({
           ) : isDragging ? (
             <p className="text-gray-500">Drop file here...</p>
           ) : (
-            <p className="text-gray-500">
+            <p className="text-wrap px-2 text-gray-500">
               Drag & Drop file here or click to upload
             </p>
           )}

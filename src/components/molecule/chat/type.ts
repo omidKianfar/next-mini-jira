@@ -1,3 +1,4 @@
+import { fileType } from '@/src/hooks/type';
 import { Dispatch, SetStateAction } from 'react';
 
 export interface ChatMenuProps {
@@ -7,3 +8,12 @@ export interface ChatMenuProps {
 }
 
 export type MenuType = 'text' | 'upload' | 'voice';
+
+export type UploadMenuForm = {
+  fileUrl?: string | null;
+};
+
+export interface ShowAttachmentProps {
+  url: string | null;
+  fileType: fileType | null;
+}
