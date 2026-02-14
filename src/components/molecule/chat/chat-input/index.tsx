@@ -13,6 +13,7 @@ import { ChatMenuProps, MenuType } from '../type';
 
 // hooks
 import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
+import VoiceMenuComponent from './menu/voice';
 
 const ChatInput = ({ showMenu, setShowMenu }: ChatMenuProps) => {
   // states
@@ -42,7 +43,9 @@ const ChatInput = ({ showMenu, setShowMenu }: ChatMenuProps) => {
             <SlateEditor />
           ) : Menu === 'upload' ? (
             <UploadMenuComponent fileUploader={fileUploader} />
-          ) : null
+          ) : (
+            <VoiceMenuComponent />
+          )
         ) : null}
       </div>
     </div>
