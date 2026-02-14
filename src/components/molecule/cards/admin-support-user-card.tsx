@@ -1,3 +1,5 @@
+import { useSearchParams } from 'next/navigation';
+
 // hooks
 import { useUnreadCount } from '@/src/hooks/chat/use-unread-count';
 import { useNavigation } from '@/src/hooks/navigation/use-navigation';
@@ -8,11 +10,14 @@ import { MessgesRead } from '@/src/libs/chat/message-read';
 // type
 import { UserType } from '@/src/types/global';
 import { chatSidebarProps } from '../../organisms/type';
+
+// components
 import MyImage from '../../atom/image-components';
+import MyIcon from '../../atom/icon-components';
+
+// utils
 import { stringSlicer } from '@/src/utils/string-slicer';
 import UnSeenMessageCalc from '@/src/utils/unseen-calc';
-import { useSearchParams } from 'next/navigation';
-import MyIcon from '../../atom/icon-components';
 
 const AdminSupportUserCard = ({
   chat,
@@ -75,15 +80,25 @@ const AdminSupportUserCard = ({
       </div>
 
       <div className="rounded-sm border border-gray-100 p-2 shadow-md">
-        <div
-          className="break-words text-label font-semibold"
-          dangerouslySetInnerHTML={{
-            __html: stringSlicer({
-              string: chat.message.lastMessageText as string,
-              slice: 80,
-            }),
-          }}
-        ></div>
+        {chat.message.lastMessageAttachment.fileType ? (
+          <div className="break-words text-label text-gray-400">
+            have a{' '}
+            <span className="text-gray-500">
+              {chat.message.lastMessageAttachment.fileType}
+            </span>{' '}
+            attachment
+          </div>
+        ) : (
+          <div
+            className="break-words text-label"
+            dangerouslySetInnerHTML={{
+              __html: stringSlicer({
+                string: chat.message.lastMessageText as string,
+                slice: 80,
+              }),
+            }}
+          ></div>
+        )}
       </div>
 
       {unreadCount ? (
