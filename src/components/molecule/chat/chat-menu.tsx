@@ -24,7 +24,7 @@ const ChatMenuComponent = ({
             onClick={() => MenuHandler?.(menu?.type as MenuType)}
           >
             <Icon
-              icon={'majesticons:text'}
+              icon={menu.icon}
               className="cursor-pointer text-h4 hover:text-primary-500"
               onClick={() => MenuHandler?.('text')}
             />
