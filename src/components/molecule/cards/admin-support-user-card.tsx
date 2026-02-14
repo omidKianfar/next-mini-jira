@@ -11,7 +11,7 @@ import { MessgesRead } from '@/src/libs/chat/message-read';
 import { UserType } from '@/src/types/global';
 import { chatSidebarProps } from '../../organisms/type';
 
-// components
+// ui
 import MyImage from '../../atom/image-components';
 import MyIcon from '../../atom/icon-components';
 

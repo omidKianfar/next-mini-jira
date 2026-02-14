@@ -1,4 +1,5 @@
 import { fileType } from '@/src/hooks/type';
+import { FileUploaderType } from '@/src/types/global';
 import { Dispatch, SetStateAction } from 'react';
 
 export interface ChatMenuProps {
@@ -16,4 +17,8 @@ export type UploadMenuForm = {
 export interface ShowAttachmentProps {
   url: string | null;
   fileType: fileType | null;
+}
+
+export interface UploadMenuComponentProps {
+  fileUploader: FileUploaderType;
 }

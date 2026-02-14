@@ -7,10 +7,11 @@ import { FormProvider, useForm } from 'react-hook-form';
 import ButtonNext from '@/src/components/atom/buttons-component/button-next';
 import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
 import PageLoading from '@/src/components/common/page-loading';
+import ShowAttachment from './show-attachment';
 
 // type
-import { FileUploaderType, MyUserType, UserType } from '@/src/types/global';
-import { UploadMenuForm } from '../../type';
+import { MyUserType, UserType } from '@/src/types/global';
+import { UploadMenuComponentProps, UploadMenuForm } from '../../type';
 
 // lib
 import { sendChatMessage } from '@/src/libs/chat/sendMessage';
@@ -21,15 +22,10 @@ import { useImageProcessor } from '@/src/hooks/image-processor/use-image-process
 
 // schema
 import { UploadMenuShema } from './schema';
-import ShowAttachment from './show-attachment';
 
 const DragDropUploader = lazy(
   () => import('@/src/components/organisms/uploads/drag-drop')
 );
-
-export interface UploadMenuComponentProps {
-  fileUploader: FileUploaderType;
-}
 
 const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
   const { cancel, error, fileType, progress, reset, upload, uploading, url } =

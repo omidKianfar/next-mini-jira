@@ -7,7 +7,7 @@ import { useAuth } from '@/src/hooks/auth/use-auth';
 import { ChatMessageItemProps } from '../type';
 import { UserType } from '@/src/types/global';
 
-// components
+// ui
 import MyImage from '../../atom/image-components';
 
 // lazy

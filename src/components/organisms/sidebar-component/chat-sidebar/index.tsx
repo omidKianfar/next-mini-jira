@@ -1,19 +1,21 @@
-"use client";
+'use client';
+
+import { useSelector } from 'react-redux';
+import { RootState } from '@/src/store';
 
 // ui
-import AdminSupportUserCard from "@/src/components/molecule/cards/admin-support-user-card";
+import AdminSupportUserCard from '@/src/components/molecule/cards/admin-support-user-card';
+import PageLoading from '@/src/components/common/page-loading';
 
 // type
-import { chatSidebarProps } from "../../type";
-import { useChatsListener } from "@/src/hooks/chat/use-user-listener";
-import { useSelector } from "react-redux";
-import { RootState } from "@/src/store";
-import PageLoading from "@/src/components/common/page-loading";
-import { UserType } from "@/src/types/global";
+import { chatSidebarProps } from '../../type';
+
+// hook
+import { useChatsListener } from '@/src/hooks/chat/use-user-listener';
 
 const ChatSidebar = ({
   setShowSidebar,
-}: Pick<chatSidebarProps, "setShowSidebar">) => {
+}: Pick<chatSidebarProps, 'setShowSidebar'>) => {
   // redux
   const chats = useSelector((state: RootState) => state.chats.chats);
   const chatsFilters = useSelector((state: RootState) => state.chatsFilters);
