@@ -9,6 +9,7 @@ import { UserType } from '@/src/types/global';
 
 // ui
 import MyImage from '../../atom/image-components';
+import WaveformPlayer from '../recorder/wave-form-player';
 
 // lazy
 const LightBoxComponent = lazy(
@@ -20,7 +21,6 @@ const ChatMessageItem = ({ message }: ChatMessageItemProps) => {
   // hooks
   const { user } = useAuth();
 
-  // states
   const isAdmin = message.senderId === 'admin';
 
   const menuPosition =
@@ -54,6 +54,14 @@ const ChatMessageItem = ({ message }: ChatMessageItemProps) => {
                   alt="preview"
                   className="w-[330px] rounded-lg border-2 border-warning-400 shadow-md"
                 />
+              )}
+
+              {message?.attachment?.fileType === 'voice' && (
+                <div className="flex h-[64px] w-[250px] items-center justify-center rounded-sm border-2 border-warning-400 bg-primary-100 p-2 px-2 shadow-md lg:w-[400px]">
+                  <WaveformPlayer
+                    audioUrl={message?.attachment?.fileUrl as string}
+                  />
+                </div>
               )}
             </div>
           ) : (
