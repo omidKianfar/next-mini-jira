@@ -1,6 +1,8 @@
-import { ChatMessage } from "@/src/types/global";
-import { RefObject } from "react";
-import { FieldValues, Path } from "react-hook-form";
+import { RefObject } from 'react';
+import { FieldValues, Path } from 'react-hook-form';
+
+// types
+import { ChatMessage, FileUploaderType } from '@/src/types/global';
 
 export interface BaseControllerProps<T extends FieldValues> {
   name: Path<T>;
@@ -8,8 +10,10 @@ export interface BaseControllerProps<T extends FieldValues> {
   placeholder?: string;
   className?: string;
 }
-export interface InputControllerProps<T extends FieldValues>
-  extends BaseControllerProps<T> {
+
+export interface InputControllerProps<
+  T extends FieldValues,
+> extends BaseControllerProps<T> {
   type?: string;
   ref?: RefObject<HTMLInputElement | null>;
   autoFocus?: boolean;
@@ -17,8 +21,10 @@ export interface InputControllerProps<T extends FieldValues>
   autoComplete?: string;
   disabled?: boolean;
 }
-export interface FileInputControllerProps<T extends FieldValues>
-  extends BaseControllerProps<T> {
+
+export interface FileInputControllerProps<
+  T extends FieldValues,
+> extends BaseControllerProps<T> {
   ref?: RefObject<HTMLInputElement | null>;
   onChange?: (event: any) => void;
   disabled?: boolean;
@@ -33,8 +39,9 @@ export interface SelectOption {
   label: string;
   value: string | number;
 }
-export interface SelectControllerProps<T extends FieldValues>
-  extends BaseControllerProps<T> {
+export interface SelectControllerProps<
+  T extends FieldValues,
+> extends BaseControllerProps<T> {
   options: SelectOption[];
 }
 
@@ -57,6 +64,19 @@ export type CartType = {
   price?: number;
   icon: React.ReactNode;
 };
+
 export interface ChatMessageItemProps {
   message: ChatMessage;
+}
+
+export interface WaveformPlayerProps {
+  audioUrl: string | null;
+}
+
+export interface RecorderProps {
+  fileUploader: FileUploaderType;
+}
+
+export interface RecorderComponentProps {
+  fileUploader: FileUploaderType;
 }

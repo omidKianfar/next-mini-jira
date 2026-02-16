@@ -1,10 +1,19 @@
 import { lazy } from 'react';
+import copy from 'clipboard-copy';
+import { enqueueSnackbar } from 'notistack';
 
 // type
 import { ShowAttachmentProps } from '../../type';
 
-// components
+// ui
 import MyImage from '@/src/components/atom/image-components';
+import MyIcon from '@/src/components/atom/icon-components';
+
+// utils
+import { stringSlicer } from '@/src/utils/string-slicer';
+
+// hooks
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 
 // lazy
 const LightBoxComponent = lazy(
@@ -13,8 +22,11 @@ const LightBoxComponent = lazy(
 const MyVideo = lazy(() => import('@/src/components/atom/video-component'));
 
 const ShowAttachment = ({ url, fileType }: ShowAttachmentProps) => {
+  // hook
+  const isMobile = useIsMobile();
+
   return (
-    <div className="flex h-full w-full items-center justify-start rounded-md border-2 border-dashed border-gray-300 bg-gray-50 p-2">
+    <div className="flex h-full w-full flex-col items-center justify-start rounded-md border-2 border-dashed border-gray-300 bg-gray-50 p-2 lg:flex-row">
       <div className="mr-4">
         {fileType! === 'image' && (
           <LightBoxComponent url={url as string}>
@@ -38,19 +50,36 @@ const ShowAttachment = ({ url, fileType }: ShowAttachmentProps) => {
       </div>
 
       <div className="h-full w-full">
-        <p className="mb-1">
+        <p className="mb-2 capitalize">
           <span className="mr-1 font-semibold text-primary-500">
             File Type:
           </span>
+
           {fileType}
         </p>
 
-        <div>
+        <div title={url as string}>
           <span className="mr-1 font-semibold text-primary-500">File URL</span>
 
-          <p className="mt-1 w-full break-all rounded-sm border-2 border-dashed border-warning-400 bg-white p-2 text-primary-400">
-            {url}
-          </p>
+          <div className="relative mt-1 rounded-sm border-2 border-dashed border-warning-400 bg-white p-2 pr-[32px]">
+            <p className="w-full cursor-default break-all text-gray-500">
+              {stringSlicer({
+                string: url as string,
+                slice: isMobile ? 20 : 100,
+              })}
+            </p>
+
+            <MyIcon
+              icon="solar:copy-bold-duotone"
+              className="text-primary-400"
+              iconClass="absolute right-[8px] top-[6px] text-h4 cursor-pointer"
+              onClick={() => {
+                copy(url as string);
+
+                enqueueSnackbar('Copied', { variant: 'success' });
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>

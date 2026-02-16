@@ -1,19 +1,18 @@
-// type
 import { useState } from 'react';
 
 // editor
 import SlateEditor from '../../slatejs-editor-component';
 
-// chat
+// ui
 import ChatMenuComponent from '../chat-menu';
 import UploadMenuComponent from './menu/upload';
+import VoiceMenuComponent from './menu/voice';
 
 // type
 import { ChatMenuProps, MenuType } from '../type';
 
 // hooks
 import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
-import VoiceMenuComponent from './menu/voice';
 
 const ChatInput = ({ showMenu, setShowMenu }: ChatMenuProps) => {
   // states
@@ -22,10 +21,11 @@ const ChatInput = ({ showMenu, setShowMenu }: ChatMenuProps) => {
   // functions
   const MenuHandler = (type: MenuType) => {
     setMenu(type as MenuType);
+    fileUploader.reset();
   };
 
   const fileUploader = useFileUploader({
-    accept: ['image/*', 'video/*'],
+    accept: ['image/*', 'video/*', 'audio/*'],
   });
 
   return (
@@ -38,13 +38,14 @@ const ChatInput = ({ showMenu, setShowMenu }: ChatMenuProps) => {
           showMenu={showMenu}
           setShowMenu={setShowMenu}
         />
+
         {showMenu ? (
           Menu === 'text' ? (
             <SlateEditor />
           ) : Menu === 'upload' ? (
             <UploadMenuComponent fileUploader={fileUploader} />
           ) : (
-            <VoiceMenuComponent />
+            <VoiceMenuComponent fileUploader={fileUploader} />
           )
         ) : null}
       </div>
