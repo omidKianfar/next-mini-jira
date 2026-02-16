@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -34,8 +34,7 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
   // hooks
   const { user: currentUser } = useAuth();
 
-  // states
-  const [loading, setLoading] = useState<boolean>(false);
+  const { processImage } = useImageProcessor({ size: 1024 });
 
   // form
   const defaultValues: UploadMenuForm = {
@@ -47,8 +46,7 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
     resolver: yupResolver(UploadMenuShema),
   });
 
-  const { processImage } = useImageProcessor({ size: 1024 });
-
+  // functions
   const uploadProcessHandler = async (file: File) => {
     let finalFile = file;
 
@@ -73,8 +71,6 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
   const admin = currentUser?.userType === UserType.Admin;
 
   const onSubmit = async (values: UploadMenuForm) => {
-    setLoading(true);
-
     try {
       const message = {
         senderId: admin ? 'admin' : (currentUser?.userId as string),
@@ -94,18 +90,15 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
       enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
         variant: 'error',
       });
-      setLoading(false);
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
     <Suspense fallback={<PageLoading />}>
-      <div className="rounded-md border-2 border-primary-500 bg-white p-2 pr-0">
+      <div className="rounded-md border-2 border-primary-500 bg-white p-2 lg:pr-0">
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <div className="flex h-full w-full">
+            <div className="flex h-full w-full flex-col lg:flex-row">
               <div className="h-full w-full">
                 {!url! && progress! < 100 && (
                   <DragDropUploader
@@ -126,14 +119,13 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
                 {url && <ShowAttachment fileType={fileType} url={url} />}
               </div>
 
-              <div className="w-[150px]">
-                <div className="flex flex-col items-center justify-center">
+              <div className="mt-4 w-full lg:mt-0 lg:w-[150px]">
+                <div className="flex flex-row items-center justify-end lg:flex-col lg:justify-center">
                   <ButtonNext
                     onClick={handleSave}
                     type="submit"
-                    className="mb-2 w-[90px] lg:w-[125px]"
-                    disable={loading}
-                    isLoading={loading}
+                    className="w-[90px] lg:mb-2 lg:w-[125px]"
+                    disable={!!!url}
                   >
                     Send
                   </ButtonNext>
@@ -141,6 +133,7 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
                   <ButtonNext
                     onClick={handleCancel}
                     className="w-[90px] lg:w-[125px]"
+                    disable={uploading || !!!url}
                   >
                     Cancel
                   </ButtonNext>
