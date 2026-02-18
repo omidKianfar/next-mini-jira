@@ -30,7 +30,7 @@ const ChatInput = ({ showMenu, setShowMenu }: ChatMenuProps) => {
 
   return (
     <div
-      className={`absolute bottom-0 left-0 flex h-[200px] w-full items-center justify-start rounded-b-md p-1 ${!showMenu ? 'lg:h-[32px]' : 'lg:h-[227px]'}`}
+      className={`absolute bottom-0 left-0 z-10 flex h-[200px] w-full items-center justify-start rounded-b-md p-1 ${!showMenu ? 'lg:h-[32px]' : 'lg:h-[227px]'}`}
     >
       <div className="relative h-full w-full">
         <ChatMenuComponent
