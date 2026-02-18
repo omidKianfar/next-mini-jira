@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { enqueueSnackbar } from 'notistack';
+import { useSearchParams } from 'next/navigation';
 
 // ui
 import ButtonNext from '@/src/components/atom/buttons-component/button-next';
@@ -11,6 +12,7 @@ import { UploadMenuComponentProps } from '../../type';
 
 // lib
 import { sendChatMessage } from '@/src/libs/chat/sendMessage';
+import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
 
 // hook
 import { useAuth } from '@/src/hooks/auth/use-auth';
@@ -22,9 +24,17 @@ const VoiceMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
   const { cancel, error, fileType, reset, uploading, url } = fileUploader;
 
   // hooks
+  const params = useSearchParams();
+  const reciverId = params.get('chatId');
+
   const { user: currentUser } = useAuth();
+  const { user: userChat } = useUserListenerById(reciverId);
 
   const admin = currentUser?.userType === UserType.Admin;
+
+  const userMessage = admin
+    ? (userChat as MyUserType)
+    : (currentUser as MyUserType);
 
   // functions
   const handleCancel = () => {
@@ -35,7 +45,7 @@ const VoiceMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
     try {
       const message = {
         senderId: admin ? 'admin' : (currentUser?.userId as string),
-        receiverId: admin ? (currentUser?.userId as string) : 'admin',
+        receiverId: admin ? (userChat?.userId as string) : 'admin',
         text: '',
         senderType: admin ? UserType.Admin : UserType.Client,
         attachment: {
@@ -44,7 +54,7 @@ const VoiceMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
         },
       };
 
-      sendChatMessage({ user: currentUser as MyUserType, message: message });
+      sendChatMessage({ user: userMessage as MyUserType, message: message });
 
       reset();
     } catch (error: any) {

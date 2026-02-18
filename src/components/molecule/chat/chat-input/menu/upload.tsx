@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useSearchParams } from 'next/navigation';
 
 // ui
 import ButtonNext from '@/src/components/atom/buttons-component/button-next';
@@ -15,6 +16,7 @@ import { UploadMenuComponentProps, UploadMenuForm } from '../../type';
 
 // lib
 import { sendChatMessage } from '@/src/libs/chat/sendMessage';
+import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
 
 // hook
 import { useAuth } from '@/src/hooks/auth/use-auth';
@@ -32,9 +34,20 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
     fileUploader;
 
   // hooks
+  const params = useSearchParams();
+  const reciverId = params.get('chatId');
+
   const { user: currentUser } = useAuth();
 
+  const { user: userChat } = useUserListenerById(reciverId);
+
   const { processImage } = useImageProcessor({ size: 1024 });
+
+  const admin = currentUser?.userType === UserType.Admin;
+
+  const userMessage = admin
+    ? (userChat as MyUserType)
+    : (currentUser as MyUserType);
 
   // form
   const defaultValues: UploadMenuForm = {
@@ -68,13 +81,11 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
     cancel();
   };
 
-  const admin = currentUser?.userType === UserType.Admin;
-
   const onSubmit = async (values: UploadMenuForm) => {
     try {
       const message = {
         senderId: admin ? 'admin' : (currentUser?.userId as string),
-        receiverId: admin ? (currentUser?.userId as string) : 'admin',
+        receiverId: admin ? (userChat?.userId as string) : 'admin',
         text: '',
         senderType: admin ? UserType.Admin : UserType.Client,
         attachment: {
@@ -83,7 +94,7 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
         },
       };
 
-      sendChatMessage({ user: currentUser as MyUserType, message: message });
+      sendChatMessage({ user: userMessage as MyUserType, message: message });
 
       reset();
     } catch (error: any) {
