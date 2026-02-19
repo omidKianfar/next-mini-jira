@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy, useState } from 'react';
 
 // hooks
 import { useAuth } from '@/src/hooks/auth/use-auth';
@@ -11,6 +11,14 @@ import { UserType } from '@/src/types/global';
 import MyImage from '../../atom/image-components';
 import WaveformPlayer from '../recorder/wave-form-player';
 import MyIcon from '../../atom/icon-components';
+import ModalContainer from '../../common/modal-container';
+import ModalComponent from '../modals/modal-component';
+
+// utils
+import { stringSlicer } from '@/src/utils/string-slicer';
+
+// lib
+import { deleteChatMessage } from '@/src/libs/chat/delete-message';
 
 // lazy
 const LightBoxComponent = lazy(
@@ -22,13 +30,41 @@ const ChatMessageItem = ({ message }: ChatMessageItemProps) => {
   // hooks
   const { user } = useAuth();
 
+  // states
+  const [open, setOpen] = useState(false);
+  const [modalId, setModalId] = useState(0);
+
   const isAdmin = message.senderId === 'admin';
+
+  const currentUser =
+    (user?.userType === UserType.Client && !isAdmin) ||
+    (user?.userType === UserType.Admin && isAdmin);
+
+  // functions
+  const deleteMessage = () => {
+    deleteChatMessage({
+      userId: message.chatId as string,
+      messageId: message.id as string,
+    });
+  };
+
+  const handleOpenModal = (id: number) => {
+    setModalId(id);
+
+    setOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalId(0);
+
+    setOpen(false);
+  };
 
   return (
     <div
       className={`w-full ${user?.userType == UserType.Client ? (isAdmin ? 'justify-start' : 'justify-end') : isAdmin ? 'justify-end' : 'justify-start'} mb-4 flex items-center`}
     >
-      <div className="relative max-w-[500px]">
+      <div className="relative min-w-[100px] max-w-[500px]">
         {message?.attachment?.fileType ? (
           <div>
             {message?.attachment?.fileType === 'image' && (
@@ -37,7 +73,9 @@ const ChatMessageItem = ({ message }: ChatMessageItemProps) => {
                   src={message?.attachment?.fileUrl as string}
                   alt="preview"
                   fill
-                  wrapperClass="relative cursor-pointer w-[190px] h-[190px] overflow-hidden rounded-lg p-1 shadow-md border-2 border-warning-400"
+                  wrapperClass={`relative cursor-pointer w-[190px] h-[190px]  overflow-hidden 
+                    
+                     shadow-md p-1 shadow-md border-2  ${isAdmin ? 'border-warning-400' : 'border-primary-400'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
                   className="object-cover"
                 />
               </LightBoxComponent>
@@ -47,13 +85,13 @@ const ChatMessageItem = ({ message }: ChatMessageItemProps) => {
               <MyVideo
                 src={message?.attachment?.fileUrl as string}
                 alt="preview"
-                className="w-[330px] rounded-lg border-2 border-warning-400 shadow-md"
+                className={`w-[330px] border-2 shadow-md ${isAdmin ? 'border-warning-400' : 'border-primary-400'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
               />
             )}
 
             {message?.attachment?.fileType === 'voice' && (
               <div
-                className={`flex h-[64px] w-[250px] items-center justify-center rounded-sm border-2 ${isAdmin ? 'border-warning-500' : 'border-primary-500'} bg-primary-100 p-2 px-2 shadow-md lg:w-[400px]`}
+                className={`flex h-[64px] w-[250px] items-center justify-center border-2 bg-primary-100 p-2 px-2 shadow-md lg:w-[400px] ${isAdmin ? 'border-warning-400' : 'border-primary-400'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
               >
                 <WaveformPlayer
                   audioUrl={message?.attachment?.fileUrl as string}
@@ -63,28 +101,47 @@ const ChatMessageItem = ({ message }: ChatMessageItemProps) => {
           </div>
         ) : (
           <div
-            className={`border-2 ${isAdmin ? 'border-warning-500 bg-warning-100' : 'border-primary-500 bg-primary-100'} break-words rounded-lg p-2 shadow-md`}
+            className={`break-words border-2 p-2 shadow-md ${isAdmin ? 'border-warning-400 bg-warning-100' : 'border-primary-400 bg-primary-100'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
             dangerouslySetInnerHTML={{ __html: message.text as string }}
           />
         )}
 
-        <div
-          className={`absolute top-1/3 ${
-            user?.userType == UserType.Client
-              ? isAdmin
-                ? 'right-[-24px]'
-                : 'left-[-24px]'
-              : isAdmin
-                ? 'left-[-24px]'
-                : 'right-[-24px]'
-          } mb-4 flex items-center`}
-        >
-          <MyIcon
-            icon="solar:menu-dots-square-bold-duotone"
-            className="cursor-pointer text-subtitle text-gray-500 hover:text-primary-500"
-          />
-        </div>
+        {currentUser ? (
+          <div
+            className={`flex h-full w-full items-center justify-between rounded-b-lg border-2 border-t-0 ${isAdmin ? 'border-warning-400' : 'border-primary-400'} p-2 shadow-md`}
+          >
+            <MyIcon
+              icon="mingcute:delete-fill"
+              className="cursor-pointer text-subtitle text-error-500 hover:text-error-700"
+              onClick={() => handleOpenModal(1)}
+            />
+
+            <MyIcon
+              icon="fa7-solid:file-edit"
+              className="cursor-pointer text-subtitle text-primary-500 hover:text-primary-700"
+              onClick={() => handleOpenModal(2)}
+            />
+          </div>
+        ) : null}
       </div>
+
+      <ModalContainer open={open} handleClose={handleCloseModal}>
+        {modalId == 1 ? (
+          <ModalComponent
+            isDelete
+            handleClose={handleCloseModal}
+            clickHandler={deleteMessage}
+            title={'Are you shure delete this message?.'}
+            description={
+              message.attachment?.fileType
+                ? `${message.attachment.fileType} Message`
+                : `
+              ${stringSlicer({ string: message.text as string, slice: 20 })}
+              `
+            }
+          />
+        ) : null}
+      </ModalContainer>
     </div>
   );
 };

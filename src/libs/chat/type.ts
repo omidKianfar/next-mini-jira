@@ -1,9 +1,8 @@
-import { AppDispatch } from "@/src/store";
-import {
-  ChatMessage,
-  MyUserType,
-  UserType,
-} from "@/src/types/global";
+// redux
+import { AppDispatch } from '@/src/store';
+
+// type
+import { ChatMessage, MyUserType, UserType } from '@/src/types/global';
 
 export interface SendMessageProps {
   user: MyUserType;
@@ -28,4 +27,8 @@ export interface userUnreadMessageListenerProps {
 
 export interface AdminChatsListenerProps {
   dispatch: AppDispatch;
+}
+export interface DeleteChatMessageProps {
+  userId: string;
+  messageId: string;
 }
