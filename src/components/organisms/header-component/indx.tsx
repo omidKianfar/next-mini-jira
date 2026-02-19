@@ -1,36 +1,36 @@
-"use client";
+'use client';
 
-import { usePathname } from "next/navigation";
-import { lazy, Suspense, useState } from "react";
+import { usePathname } from 'next/navigation';
+import { lazy, Suspense, useState } from 'react';
 
 // ui
-import MyIcon from "@/src/components/atom/icon-components";
-import Logo from "@/src/components/atom/logo-component";
-import ModalContainer from "../../common/modal-component";
-import PageLoading from "../../common/page-loading";
-import AdminDashboardHeader from "../../molecule/headers/admin-dashboard";
-import DashboardHeader from "../../molecule/headers/user-dashboard";
+import MyIcon from '@/src/components/atom/icon-components';
+import Logo from '@/src/components/atom/logo-component';
+import PageLoading from '../../common/page-loading';
+import AdminDashboardHeader from '../../molecule/headers/admin-dashboard';
+import DashboardHeader from '../../molecule/headers/user-dashboard';
+import ModalContainer from '../../common/modal-container';
 
 // type
-import { UserType } from "@/src/types/global";
-import { HeaderProps } from "../type";
+import { UserType } from '@/src/types/global';
+import { HeaderProps } from '../type';
 
 // firestore
-import { AdminUnreadMeassesListener } from "@/src/libs/chat/admin-unread-messages-count";
+import { AdminUnreadMeassesListener } from '@/src/libs/chat/admin-unread-messages-count';
 
 // hooks
-import { useAuth } from "@/src/hooks/auth/use-auth";
-import { useUnreadCount } from "@/src/hooks/chat/use-unread-count";
-import AdminSupportHeader from "../../molecule/headers/admin-support";
-import FilterChats from "../modals/filter-modals/chats";
-import SearchSupportChats from "../modals/serach-modals/search-support-chats";
+import { useAuth } from '@/src/hooks/auth/use-auth';
+import { useUnreadCount } from '@/src/hooks/chat/use-unread-count';
+import AdminSupportHeader from '../../molecule/headers/admin-support';
+import FilterChats from '../modals/filter-modals/chats';
+import SearchSupportChats from '../modals/serach-modals/search-support-chats';
 
 // lazy
-const AddTask = lazy(() => import("../modals/add-task-modal"));
-const SearchTasks = lazy(() => import("../modals/serach-modals/search-tasks"));
-const FilterTask = lazy(() => import("../modals/filter-modals/tasks"));
-const SearchUsers = lazy(() => import("../modals/serach-modals/serach-users"));
-const FilterUsers = lazy(() => import("../modals/filter-modals/users"));
+const AddTask = lazy(() => import('../modals/add-task-modal'));
+const SearchTasks = lazy(() => import('../modals/serach-modals/search-tasks'));
+const FilterTask = lazy(() => import('../modals/filter-modals/tasks'));
+const SearchUsers = lazy(() => import('../modals/serach-modals/serach-users'));
+const FilterUsers = lazy(() => import('../modals/filter-modals/users'));
 
 const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
   // hooks
@@ -66,7 +66,7 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
       <div className="sticky top-0 z-50 flex h-[60px] flex-row items-center justify-between border border-white/30 bg-white/20 px-4 shadow-lg backdrop-blur-md lg:h-[80px]">
         <div className="relative flex w-1/3 items-center justify-start">
           <MyIcon
-            icon={"mingcute:menu-fill"}
+            icon={'mingcute:menu-fill'}
             className="cursor-pointer text-title text-primary-500 hover:text-primary-700 lg:text-h3"
             onClick={() => setShowSidebar(!showSidebar)}
           />
@@ -85,11 +85,11 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
         </div>
 
         <div className="w-1/3">
-          {pathname == "/dashboard" ? (
+          {pathname == '/dashboard' ? (
             <DashboardHeader handleOpenModal={handleOpenModal} />
-          ) : pathname == "/admin/dashboard" ? (
+          ) : pathname == '/admin/dashboard' ? (
             <AdminDashboardHeader handleOpenModal={handleOpenModal} />
-          ) : pathname.includes("/admin/support") ? (
+          ) : pathname.includes('/admin/support') ? (
             <AdminSupportHeader handleOpenModal={handleOpenModal} />
           ) : null}
         </div>

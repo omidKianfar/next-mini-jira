@@ -80,3 +80,11 @@ export interface RecorderProps {
 export interface RecorderComponentProps {
   fileUploader: FileUploaderType;
 }
+
+export interface ModalComponentProps {
+  handleClose: () => void;
+  clickHandler: () => void;
+  isDelete?: boolean;
+  title: string;
+  description?: string;
+}

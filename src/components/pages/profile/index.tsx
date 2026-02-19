@@ -1,40 +1,41 @@
-"use client";
+'use client';
 
-import { lazy, Suspense, useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import { FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { FormProvider, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 // hooks
-import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
-import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
-import { useAuth } from "@/src/hooks/auth/use-auth";
-import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
-import { useFileUploader } from "@/src/hooks/file-uploader/use-file-uploader";
-import { useImageProcessor } from "@/src/hooks/image-processor/use-image-processor";
+import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
+import { useRequirePaymentStatus } from '@/src/hooks/pages-user-status-require/use-require-payment-status';
+import { useAuth } from '@/src/hooks/auth/use-auth';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
+import { useImageProcessor } from '@/src/hooks/image-processor/use-image-processor';
 
 // schema
-import { ProfileSchema } from "./schema";
+import { ProfileSchema } from './schema';
 
 // ui
-import BackToSignup from "../../molecule/modals/back-to-signup";
-import FramerMotion from "../../atom/animation-component";
-import ButtonBack from "../../atom/buttons-component/button-back";
-import ModalContainer from "../../common/modal-component";
-import InputField from "../../molecule/RHF-controllers-components/RHF-fields/input-field";
-import MyIcon from "../../atom/icon-components";
-import DateInputField from "../../molecule/RHF-controllers-components/RHF-fields/date-input-field";
-import ButtonNext from "../../atom/buttons-component/button-next";
-import MyImage from "../../atom/image-components";
-import ButtonFreeClass from "../../atom/buttons-component/button-free-class";
-import PageLoading from "../../common/page-loading";
+import ModalComponent from '../../molecule/modals/modal-component';
+import FramerMotion from '../../atom/animation-component';
+import ButtonBack from '../../atom/buttons-component/button-back';
+import ModalContainer from '../../common/modal-container';
+import InputField from '../../molecule/RHF-controllers-components/RHF-fields/input-field';
+import MyIcon from '../../atom/icon-components';
+import DateInputField from '../../molecule/RHF-controllers-components/RHF-fields/date-input-field';
+import ButtonNext from '../../atom/buttons-component/button-next';
+import MyImage from '../../atom/image-components';
+import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
+import PageLoading from '../../common/page-loading';
 
 // type
-import { ProfileProps, UserType } from "@/src/types/global";
+import { ProfileProps, UserType } from '@/src/types/global';
+import { backModalMessage } from './data';
 
 // lazy
-const AvatarUpload = lazy(() => import("../../molecule/uploads/avatar"));
+const AvatarUpload = lazy(() => import('../../molecule/uploads/avatar'));
 
 const ProfileComponent = () => {
   // hooks
@@ -42,11 +43,11 @@ const ProfileComponent = () => {
   const isMobile = useIsMobile();
   const navigation = useNavigation();
 
-  const { saveUserProfile, user } = useAuth();
+  const { saveUserProfile, user, changeStep } = useAuth();
   const { processImage } = useImageProcessor();
 
   const { progress, reset, upload, uploading } = useFileUploader({
-    accept: ["image/*"],
+    accept: ['image/*'],
   });
 
   useRequireActiveStatus();
@@ -58,24 +59,24 @@ const ProfileComponent = () => {
 
   // form
   const defaultValues: ProfileProps = {
-    photo: user?.photo ?? "",
-    userName: user?.userName ?? "",
-    birthday: user?.birthday ?? "",
+    photo: user?.photo ?? '',
+    userName: user?.userName ?? '',
+    birthday: user?.birthday ?? '',
   };
 
   const methods = useForm<ProfileProps>({
     defaultValues,
     resolver: yupResolver(ProfileSchema),
-    mode: "onSubmit",
+    mode: 'onSubmit',
   });
 
   // functions
   useEffect(() => {
     if (user) {
       methods.reset({
-        photo: user.photo ?? "",
-        userName: user.userName ?? "",
-        birthday: user.birthday ?? "",
+        photo: user.photo ?? '',
+        userName: user.userName ?? '',
+        birthday: user.birthday ?? '',
       });
     }
   }, [user, methods]);
@@ -89,7 +90,7 @@ const ProfileComponent = () => {
       userId: user?.userId as string,
     });
 
-    methods.setValue("photo", uploadedUrl as string);
+    methods.setValue('photo', uploadedUrl as string);
     reset();
   };
 
@@ -108,7 +109,7 @@ const ProfileComponent = () => {
 
       reset();
     } catch (error: any) {
-      console.log("Profile Error: ", error);
+      console.log('Profile Error: ', error);
     } finally {
       setLoading(false);
     }
@@ -123,7 +124,7 @@ const ProfileComponent = () => {
   };
 
   const handelBack = () => {
-    if (pathName.includes("signup")) {
+    if (pathName.includes('signup')) {
       handleOpenModal();
     } else {
       if (user?.userType === UserType.Admin) {
@@ -138,11 +139,15 @@ const ProfileComponent = () => {
     navigation.changePassword();
   };
 
+  const clickHandler = () => {
+    changeStep('0');
+  };
+
   return (
     <Suspense fallback={<PageLoading />}>
       <FramerMotion>
         <div
-          className={`flex w-full flex-col items-center justify-center p-4 ${pathName.includes("/signup") && "min-h-screen"}`}
+          className={`flex w-full flex-col items-center justify-center p-4 ${pathName.includes('/signup') && 'min-h-screen'}`}
         >
           <div className="flex flex-col items-center justify-center lg:flex-row">
             <div className="mb-10 w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-md lg:mb-0 lg:w-[500px]">
@@ -150,7 +155,7 @@ const ProfileComponent = () => {
                 <ButtonBack onClick={handelBack} />
 
                 {user?.userType === UserType.Client &&
-                  pathName.includes("profile") && (
+                  pathName.includes('profile') && (
                     <ButtonFreeClass
                       className="ml-4 text-primary-500 hover:text-primary-600"
                       onClick={goPasswordHandler}
@@ -164,7 +169,12 @@ const ProfileComponent = () => {
               </div>
 
               <ModalContainer open={open} handleClose={handleCloseModal}>
-                <BackToSignup handleClose={handleCloseModal} />
+                <ModalComponent
+                  handleClose={handleCloseModal}
+                  clickHandler={clickHandler}
+                  title={backModalMessage.title}
+                  description={backModalMessage.description}
+                />
               </ModalContainer>
 
               <h1 className="mb-8 text-center text-title font-bold text-warning-500">
@@ -175,7 +185,7 @@ const ProfileComponent = () => {
                 <form onSubmit={methods.handleSubmit(setProfileHandler)}>
                   <div className="mb-4">
                     <AvatarUpload
-                      photo={methods.watch("photo")}
+                      photo={methods.watch('photo')}
                       uploadHandler={uploadPhotoHandler}
                       uploading={uploading}
                       progress={progress}
@@ -188,7 +198,7 @@ const ProfileComponent = () => {
                     placeholder="Enter your username"
                     icon={
                       <MyIcon
-                        icon={"tabler:user-filled"}
+                        icon={'tabler:user-filled'}
                         className="text-subtitle text-gray-600"
                       />
                     }
@@ -198,7 +208,7 @@ const ProfileComponent = () => {
 
                   <div className="mt-6 flex items-center justify-end">
                     <ButtonNext type="submit" isLoading={loading}>
-                      {pathName.includes("profile") ? "Save" : "Next"}
+                      {pathName.includes('profile') ? 'Save' : 'Next'}
                     </ButtonNext>
                   </div>
                 </form>
