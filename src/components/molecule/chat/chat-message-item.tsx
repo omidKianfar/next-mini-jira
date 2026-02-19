@@ -134,10 +134,8 @@ const ChatMessageItem = ({ message }: ChatMessageItemProps) => {
             title={'Are you shure delete this message?.'}
             description={
               message.attachment?.fileType
-                ? `${message.attachment.fileType} Message`
-                : `
-              ${stringSlicer({ string: message.text as string, slice: 20 })}
-              `
+                ? message.attachment.fileType
+                : message.text
             }
           />
         ) : null}
