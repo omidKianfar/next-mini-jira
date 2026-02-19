@@ -1,4 +1,5 @@
 // ui
+import { stringSlicer } from '@/src/utils/string-slicer';
 import ButtonNext from '../../atom/buttons-component/button-next';
 import { ModalComponentProps } from '../type';
 
@@ -15,10 +16,19 @@ const ModalComponent = ({
         {title}
       </h1>
 
-      {description && (
+      {description && !isDelete && (
         <p className="mt-4 break-words rounded-lg bg-gray-100 p-2 text-body capitalize text-blue-500 shadow-md">
-          {description}
+          {stringSlicer({ string: description as string, slice: 30 })}
         </p>
+      )}
+
+      {description && isDelete && (
+        <div
+          className="mt-4 break-words rounded-lg bg-gray-100 p-2 text-body capitalize text-blue-500 shadow-md"
+          dangerouslySetInnerHTML={{
+            __html: stringSlicer({ string: description as string, slice: 30 }),
+          }}
+        />
       )}
 
       <div className="mt-4 flex justify-center gap-4 lg:justify-end">
