@@ -33,8 +33,8 @@ const ChatMenuComponent = ({
 
         <div className="border-primary-10 border-l border-dashed">
           <Icon
-            icon={'codex:chevron-down'}
-            className={`rotate-180 cursor-pointer text-h4 hover:text-primary-500 ${showMenu && 'rotate-0'}`}
+            icon={showMenu ? 'codex:chevron-down' : 'codex:chevron-up'}
+            className={`cursor-pointer text-h4 hover:text-primary-500`}
             onClick={() => setShowMenu?.(!showMenu)}
           />
         </div>
