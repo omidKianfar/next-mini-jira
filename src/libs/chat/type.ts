@@ -32,3 +32,8 @@ export interface DeleteChatMessageProps {
   userId: string;
   messageId: string;
 }
+export interface UpdateChatMessageProps {
+  userId: string;
+  messageId: string;
+  newText: string;
+}

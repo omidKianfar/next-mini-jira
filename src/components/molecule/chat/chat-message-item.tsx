@@ -14,9 +14,6 @@ import MyIcon from '../../atom/icon-components';
 import ModalContainer from '../../common/modal-container';
 import ModalComponent from '../modals/modal-component';
 
-// utils
-import { stringSlicer } from '@/src/utils/string-slicer';
-
 // lib
 import { deleteChatMessage } from '@/src/libs/chat/delete-message';
 
@@ -26,13 +23,15 @@ const LightBoxComponent = lazy(
 );
 const MyVideo = lazy(() => import('@/src/components/atom/video-component'));
 
-const ChatMessageItem = ({ message }: ChatMessageItemProps) => {
+const ChatMessageItem = ({
+  message,
+  handleTemplateSelect,
+}: ChatMessageItemProps) => {
   // hooks
   const { user } = useAuth();
 
   // states
   const [open, setOpen] = useState(false);
-  const [modalId, setModalId] = useState(0);
 
   const isAdmin = message.senderId === 'admin';
 
@@ -48,15 +47,11 @@ const ChatMessageItem = ({ message }: ChatMessageItemProps) => {
     });
   };
 
-  const handleOpenModal = (id: number) => {
-    setModalId(id);
-
+  const handleOpenModal = () => {
     setOpen(true);
   };
 
   const handleCloseModal = () => {
-    setModalId(0);
-
     setOpen(false);
   };
 
@@ -113,32 +108,32 @@ const ChatMessageItem = ({ message }: ChatMessageItemProps) => {
             <MyIcon
               icon="mingcute:delete-fill"
               className="cursor-pointer text-subtitle text-error-500 hover:text-error-700"
-              onClick={() => handleOpenModal(1)}
+              onClick={handleOpenModal}
             />
 
-            <MyIcon
-              icon="fa7-solid:file-edit"
-              className="cursor-pointer text-subtitle text-primary-500 hover:text-primary-700"
-              onClick={() => handleOpenModal(2)}
-            />
+            {message.text !== '' && (
+              <MyIcon
+                icon="fa7-solid:file-edit"
+                className="cursor-pointer text-subtitle text-primary-500 hover:text-primary-700"
+                onClick={() => handleTemplateSelect?.(message.text as string)}
+              />
+            )}
           </div>
         ) : null}
       </div>
 
       <ModalContainer open={open} handleClose={handleCloseModal}>
-        {modalId == 1 ? (
-          <ModalComponent
-            isDelete
-            handleClose={handleCloseModal}
-            clickHandler={deleteMessage}
-            title={'Are you shure delete this message?.'}
-            description={
-              message.attachment?.fileType
-                ? message.attachment.fileType
-                : message.text
-            }
-          />
-        ) : null}
+        <ModalComponent
+          isDelete
+          handleClose={handleCloseModal}
+          clickHandler={deleteMessage}
+          title={'Are you shure delete this message?.'}
+          description={
+            message.attachment?.fileType
+              ? message.attachment.fileType
+              : message.text
+          }
+        />
       </ModalContainer>
     </div>
   );

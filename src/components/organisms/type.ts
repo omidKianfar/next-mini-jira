@@ -78,6 +78,8 @@ export interface ListComponentProps {
 export interface ChatMessagesProps {
   messages: ChatMessage[];
   showMenu?: boolean;
+  handleTemplateSelect?: (text: string) => void;
+  setEditMessageId?: Dispatch<SetStateAction<string | null>>;
 }
 
 export interface UsersTableProps {

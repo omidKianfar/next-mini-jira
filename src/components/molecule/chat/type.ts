@@ -6,6 +6,9 @@ export interface ChatMenuProps {
   MenuHandler?: (type: MenuType) => void;
   showMenu?: boolean;
   setShowMenu?: Dispatch<SetStateAction<boolean>>;
+  editorKey?: number;
+  editMessageId?: string | null;
+  setEditMessageId?: Dispatch<SetStateAction<string | null>>;
 }
 
 export type MenuType = 'text' | 'upload' | 'voice';

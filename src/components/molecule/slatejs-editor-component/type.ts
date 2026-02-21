@@ -1,6 +1,6 @@
 import { ReactEditor } from 'slate-react';
 import { BaseEditor, Descendant, Element as SlateElement } from 'slate';
-import { ReactNode } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
 export type BlockFormat =
   | 'paragraph'
@@ -57,6 +57,8 @@ export interface SlateEditorProps {
   editorOutput?: string | undefined;
   setEditorOutput?: React.Dispatch<React.SetStateAction<string>>;
   editorKey?: number;
+  editMessageId?: string | null;
+  setEditMessageId?: Dispatch<SetStateAction<string | null>>;
 }
 
 export const BLOCK_TYPES: { format: BlockFormat; name: string }[] = [

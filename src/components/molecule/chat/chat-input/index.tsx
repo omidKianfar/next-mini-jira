@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 // editor
-import SlateEditor from '../../slatejs-editor-component';
+import SlateEditor from '../../slatejs-editor-component/editor';
 
 // ui
 import ChatMenuComponent from '../chat-menu';
@@ -13,8 +13,15 @@ import { ChatMenuProps, MenuType } from '../type';
 
 // hooks
 import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
+import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
 
-const ChatInput = ({ showMenu, setShowMenu }: ChatMenuProps) => {
+const ChatInput = ({
+  showMenu,
+  setShowMenu,
+  editorKey,
+  editMessageId,
+  setEditMessageId,
+}: ChatMenuProps) => {
   // states
   const [Menu, setMenu] = useState<MenuType>('text');
 
@@ -41,13 +48,21 @@ const ChatInput = ({ showMenu, setShowMenu }: ChatMenuProps) => {
 
         {showMenu ? (
           Menu === 'text' ? (
-            <SlateEditor />
+            <SlateEditor
+              editorKey={editorKey}
+              editMessageId={editMessageId}
+              setEditMessageId={setEditMessageId}
+            />
           ) : Menu === 'upload' ? (
             <UploadMenuComponent fileUploader={fileUploader} />
-          ) : (
+          ) : Menu === 'voice' ? (
             <VoiceMenuComponent fileUploader={fileUploader} />
+          ) : (
+            <LoadingCircle />
           )
-        ) : null}
+        ) : (
+          <LoadingCircle />
+        )}
       </div>
     </div>
   );

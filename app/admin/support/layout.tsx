@@ -11,6 +11,9 @@ import MyIcon from '@/src/components/atom/icon-components';
 // hooks
 import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 
+// providers
+import EditorProviderComponent from '@/src/providers/editor-provider';
+
 const DashboardLayout = ({ children }: PropsWithChildren) => {
   // hooks
   const isMobile = useIsMobile();
@@ -97,7 +100,9 @@ const DashboardLayout = ({ children }: PropsWithChildren) => {
       </AnimatePresence>
 
       {isMobile && showSidebar ? null : (
-        <div className="h-full w-full p-4 pt-0 lg:pt-4">{children}</div>
+        <EditorProviderComponent>
+          <div className="h-full w-full p-4 pt-0 lg:pt-4">{children}</div>
+        </EditorProviderComponent>
       )}
     </div>
   );

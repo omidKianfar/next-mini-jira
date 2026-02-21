@@ -67,6 +67,7 @@ export type CartType = {
 
 export interface ChatMessageItemProps {
   message: ChatMessage;
+  handleTemplateSelect?: (text: string) => void;
 }
 
 export interface WaveformPlayerProps {

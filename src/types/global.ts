@@ -241,7 +241,15 @@ export type EditorContextType = {
   changeBackgroundColor?: (color: string | null) => void;
   changeFontFamily?: (fontFamily: string) => void;
   insertEmoji?: (emoji: CustomEmoji) => void;
-  deserializedNodes?: Descendant[];
+  deserializedNodes?:
+    | Descendant[]
+    | {
+        type: string;
+        children: {
+          text: string;
+        }[];
+      }[];
+  resetEditor: () => void;
 };
 
 export type FileUploaderType = {

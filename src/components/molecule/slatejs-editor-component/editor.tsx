@@ -1,6 +1,9 @@
 import isHotkey from 'is-hotkey';
-import { Slate, Editable, ReactEditor } from 'slate-react';
-import { Editor, Descendant, Transforms } from 'slate';
+import { Slate, Editable } from 'slate-react';
+import { Editor, Descendant } from 'slate';
+import { useEffect, useState } from 'react';
+import { enqueueSnackbar } from 'notistack';
+import { useSearchParams } from 'next/navigation';
 
 // data
 import { HOTKEYS } from './data';
@@ -8,18 +11,20 @@ import { HOTKEYS } from './data';
 // type
 import { MarkFormat, SlateEditorProps } from './type';
 import { ToggleMark } from './components/toolbar/helper/toggle-mark';
+import { MyUserType, UserType } from '@/src/types/global';
 
 // hooks
 import { useEditor } from '@/src/hooks/editor/use-editor';
 
-// components
+// ui
 import ToolbarComponent from './components/toolbar';
 import { Serialize } from './components/serialize';
-import { useEffect, useState } from 'react';
-import { enqueueSnackbar } from 'notistack';
-import { MyUserType, UserType } from '@/src/types/global';
-import { sendChatMessage } from '@/src/libs/chat/sendMessage';
-import { useSearchParams } from 'next/navigation';
+
+// lib
+import { sendChatMessage } from '@/src/libs/chat/send-message';
+import { updateChatMessage } from '@/src/libs/chat/update-message';
+
+// hook
 import { useAuth } from '@/src/hooks/auth/use-auth';
 import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
 
@@ -30,8 +35,12 @@ const initialValue: Descendant[] = [
   },
 ];
 
-const SlateEditorComponent = ({ editorKey }: SlateEditorProps) => {
-  // hooks
+const SlateEditor = ({
+  editorKey,
+  editMessageId,
+  setEditMessageId,
+}: SlateEditorProps) => {
+  // hook
   const params = useSearchParams();
   const reciverId = params.get('chatId');
 
@@ -45,26 +54,23 @@ const SlateEditorComponent = ({ editorKey }: SlateEditorProps) => {
     renderElement,
     renderLeaf,
     editorOutput,
+    resetEditor,
   } = useEditor();
 
   // states
   const [loading, setLoading] = useState(false);
 
   // functions
-  const resetEditor = () => {
-    Transforms.delete(editor, {
-      at: {
-        anchor: Editor.start(editor, []),
-        focus: Editor.end(editor, []),
-      },
-    });
-    Transforms.setNodes(editor, { type: 'paragraph' } as any);
-  };
+  useEffect(() => {
+    resetEditor();
+  }, []);
 
-  const handleSend = () => {
-    console.log('editorOutput', editorOutput);
-
-    if (editorOutput == '') {
+  const handleSend = async () => {
+    if (
+      editorOutput == '' ||
+      editorOutput == '<p></p>' ||
+      editorOutput == '<p><p></p></p>'
+    ) {
       enqueueSnackbar('Please write your message', { variant: 'warning' });
       return;
     }
@@ -89,7 +95,17 @@ const SlateEditorComponent = ({ editorKey }: SlateEditorProps) => {
         },
       };
 
-      sendChatMessage({ user: userMessage, message: message });
+      if (editMessageId) {
+        await updateChatMessage({
+          userId: userMessage?.userId as string,
+          messageId: editMessageId as string,
+          newText: editorOutput as string,
+        });
+
+        setEditMessageId?.(null);
+      } else {
+        await sendChatMessage({ user: userMessage, message: message });
+      }
 
       setEditorOutput?.('');
       resetEditor();
@@ -101,15 +117,18 @@ const SlateEditorComponent = ({ editorKey }: SlateEditorProps) => {
     }
   };
 
-  useEffect(() => {
-    resetEditor();
-  }, []);
+  const getInitialValue = () => {
+    if (deserializedNodes && deserializedNodes.length > 0) {
+      return deserializedNodes as Descendant[];
+    }
+    return initialValue;
+  };
 
   return (
     <Slate
       key={editorKey}
       editor={editor}
-      initialValue={[...initialValue, ...(deserializedNodes as Descendant[])]}
+      initialValue={getInitialValue()}
       onChange={(value) => {
         const html = value.map((node) => Serialize(node)).join('');
         if (setEditorOutput) {
@@ -130,9 +149,11 @@ const SlateEditorComponent = ({ editorKey }: SlateEditorProps) => {
           onKeyDown={(event) => {
             if (isHotkey('mod+enter', event)) {
               event.preventDefault();
+
               Editor.insertBreak(editor);
             } else if (isHotkey('enter', event)) {
               event.preventDefault();
+
               handleSend();
             } else {
               for (const hotkey in HOTKEYS) {
@@ -155,4 +176,4 @@ const SlateEditorComponent = ({ editorKey }: SlateEditorProps) => {
   );
 };
 
-export default SlateEditorComponent;
+export default SlateEditor;

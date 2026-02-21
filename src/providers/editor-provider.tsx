@@ -6,11 +6,11 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { createEditor, Text, Transforms } from 'slate';
+import { createEditor, Editor, Text, Transforms } from 'slate';
 import { RenderElementProps, RenderLeafProps, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 
-// components
+// ui
 import { Deserialize } from '../components/molecule/slatejs-editor-component/components/deserialize';
 import { WithHtml } from '../components/molecule/slatejs-editor-component/components/with-html';
 import LeafComponent from '../components/molecule/slatejs-editor-component/components/leaf';
@@ -51,11 +51,6 @@ const EditorProviderComponent = ({ children }: PropsWithChildren) => {
   const editor = useMemo(
     () => WithHtml(withReact(withHistory(createEditor()))),
     []
-  );
-
-  const document = new DOMParser().parseFromString(
-    editorOutput || '<p></p>',
-    'text/html'
   );
 
   const changeColor = (color: string | null) => {
@@ -106,6 +101,16 @@ const EditorProviderComponent = ({ children }: PropsWithChildren) => {
     }
   }, [editor]);
 
+  const resetEditor = () => {
+    Transforms.delete(editor, {
+      at: {
+        anchor: Editor.start(editor, []),
+        focus: Editor.end(editor, []),
+      },
+    });
+    Transforms.setNodes(editor, { type: 'paragraph' } as any);
+  };
+
   useEffect(() => {
     removeSecondLine();
   }, [removeSecondLine]);
@@ -113,12 +118,19 @@ const EditorProviderComponent = ({ children }: PropsWithChildren) => {
   useEffect(() => {}, []);
 
   const deserializedNodes = useMemo(() => {
+    if (typeof window === 'undefined')
+      return [{ type: 'paragraph', children: [{ text: '' }] }];
+
+    const document = new DOMParser().parseFromString(
+      editorOutput || '<p></p>',
+      'text/html'
+    );
     const content = Deserialize(document.body);
 
     return Array.isArray(content)
       ? content.filter((item) => item !== '\n' && item !== null)
       : [content].filter((item) => item !== '\n' && item !== null);
-  }, [editorOutput, document.body]);
+  }, [editorOutput]);
 
   return (
     <editorContext.Provider
@@ -142,6 +154,7 @@ const EditorProviderComponent = ({ children }: PropsWithChildren) => {
         changeFontFamily,
         insertEmoji,
         deserializedNodes,
+        resetEditor,
       }}
     >
       {children}
