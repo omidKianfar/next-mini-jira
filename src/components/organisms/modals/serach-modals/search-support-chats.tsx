@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import { ChangeEvent, useState } from "react";
-import { useSelector } from "react-redux";
+import { ChangeEvent, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 // hooks
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 
 // type
-import { ModalProps, ChatsType, UserType } from "@/src/types/global";
+import { ModalProps, ChatsType, UserType } from '@/src/types/global';
 
 // redux
-import { RootState } from "@/src/store";
+import { RootState } from '@/src/store';
 
 // ui
-import MyIcon from "../../../atom/icon-components";
-import EmptyColumn from "../../../atom/empty-components/empty-column";
-import MyImage from "../../../atom/image-components";
+import MyIcon from '../../../atom/icon-components';
+import EmptyColumn from '../../../atom/empty-components/empty-column';
+import MyImage from '../../../atom/image-components';
 
 // utils
-import { stringSlicer } from "@/src/utils/string-slicer";
+import { stringSlicer } from '@/src/utils/string-slicer';
 
 // libs
-import { MessgesRead } from "@/src/libs/chat/message-read";
+import { MessgesRead } from '@/src/libs/chat/read-message';
 
 const SearchSupportChats = ({
   handleClose,
-}: Pick<ModalProps, "handleClose">) => {
+}: Pick<ModalProps, 'handleClose'>) => {
   // hooks
   const navigation = useNavigation();
 
@@ -34,7 +34,7 @@ const SearchSupportChats = ({
 
   // states
   const [openMenu, setOpenMenu] = useState<boolean>(false);
-  const [searchValue, setSearchValue] = useState<string>("");
+  const [searchValue, setSearchValue] = useState<string>('');
   const [filteredChats, setFilteredChats] = useState<ChatsType[]>([]);
 
   // functions
@@ -52,7 +52,7 @@ const SearchSupportChats = ({
     const query = value.toLowerCase();
 
     const filtered = chats.filter((chat) => {
-      const email = chat?.user.email?.toLowerCase() || "";
+      const email = chat?.user.email?.toLowerCase() || '';
       return email.includes(query);
     });
 
@@ -61,7 +61,7 @@ const SearchSupportChats = ({
   };
 
   const handelClear = () => {
-    setSearchValue("");
+    setSearchValue('');
     setFilteredChats([]);
     setOpenMenu(false);
   };

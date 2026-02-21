@@ -1,21 +1,21 @@
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
 // type
-import { sidebarItemsType, sidebarProps } from "../../type";
-import { UserType } from "@/src/types/global";
+import { sidebarItemsType, sidebarProps } from '../../type';
+import { UserType } from '@/src/types/global';
 
 // hooks
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
-import { useUnreadCount } from "@/src/hooks/chat/use-unread-count";
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { useUnreadCount } from '@/src/hooks/chat/use-unread-count';
 
 // firestore
-import { AdminUnreadMeassesListener } from "@/src/libs/chat/admin-unread-messages-count";
-import { MessgesRead } from "@/src/libs/chat/message-read";
+import { AdminUnreadMeassesListener } from '@/src/libs/chat/admin-unread-messages-count';
+import { MessgesRead } from '@/src/libs/chat/read-message';
 
 export const SidebarItems = ({
   user,
   setShowSidebar,
-}: Pick<sidebarProps, "setShowSidebar" | "user">) => {
+}: Pick<sidebarProps, 'setShowSidebar' | 'user'>) => {
   // hooks
   const navigation = useNavigation();
 
@@ -32,29 +32,29 @@ export const SidebarItems = ({
   const userSidebarItems = useMemo<sidebarItemsType[]>(
     () => [
       {
-        id: "profile",
-        icon: "gg:profile",
-        title: "profile",
+        id: 'profile',
+        icon: 'gg:profile',
+        title: 'profile',
         direction: () => {
           navigation.profile();
           setShowSidebar(false);
         },
-        notification: { type: "none" },
+        notification: { type: 'none' },
       },
       {
-        id: "dashboard",
-        icon: "material-symbols:dashboard-rounded",
-        title: "dashboard",
+        id: 'dashboard',
+        icon: 'material-symbols:dashboard-rounded',
+        title: 'dashboard',
         direction: () => {
           navigation.dashboard();
           setShowSidebar(false);
         },
-        notification: { type: "none" },
+        notification: { type: 'none' },
       },
       {
-        id: "support",
-        icon: "bx:support",
-        title: "Support",
+        id: 'support',
+        icon: 'bx:support',
+        title: 'Support',
         direction: () => {
           MessgesRead({
             chatId: user?.userId as string,
@@ -66,61 +66,61 @@ export const SidebarItems = ({
         },
         notification:
           UserUnreadCount > 0
-            ? { type: "count", value: UserUnreadCount }
-            : { type: "none" },
+            ? { type: 'count', value: UserUnreadCount }
+            : { type: 'none' },
       },
       {
-        id: "payment",
-        icon: "fluent:payment-16-filled",
-        title: "payment",
+        id: 'payment',
+        icon: 'fluent:payment-16-filled',
+        title: 'payment',
         direction: () => {
           navigation.payment();
           setShowSidebar(false);
         },
-        notification: { type: "none" },
+        notification: { type: 'none' },
       },
     ],
-    [navigation, setShowSidebar, UserUnreadCount],
+    [navigation, setShowSidebar, UserUnreadCount]
   );
 
   // admin sidebar items
   const AdminSidebarItems = useMemo<sidebarItemsType[]>(
     () => [
       {
-        id: "adminProfile",
-        icon: "gg:profile",
-        title: "profile",
+        id: 'adminProfile',
+        icon: 'gg:profile',
+        title: 'profile',
         direction: () => {
           navigation.adminProfile();
           setShowSidebar(false);
         },
-        notification: { type: "none" },
+        notification: { type: 'none' },
       },
       {
-        id: "adminDashboard",
-        icon: "material-symbols:dashboard-rounded",
-        title: "dashboard",
+        id: 'adminDashboard',
+        icon: 'material-symbols:dashboard-rounded',
+        title: 'dashboard',
         direction: () => {
           navigation.adminDashboard();
           setShowSidebar(false);
         },
-        notification: { type: "none" },
+        notification: { type: 'none' },
       },
       {
-        id: "support",
-        icon: "bx:support",
-        title: "Support",
+        id: 'support',
+        icon: 'bx:support',
+        title: 'Support',
         direction: () => {
           navigation.adminSupport();
           setShowSidebar(false);
         },
         notification:
           AdminUnraedCount > 0
-            ? { type: "count", value: AdminUnraedCount }
-            : { type: "none" },
+            ? { type: 'count', value: AdminUnraedCount }
+            : { type: 'none' },
       },
     ],
-    [navigation, setShowSidebar, AdminUnraedCount],
+    [navigation, setShowSidebar, AdminUnraedCount]
   );
 
   return { userSidebarItems, AdminSidebarItems };

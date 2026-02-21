@@ -15,7 +15,7 @@ import { MyUserType, UserType } from '@/src/types/global';
 import { UploadMenuComponentProps, UploadMenuForm } from '../../type';
 
 // lib
-import { sendChatMessage } from '@/src/libs/chat/sendMessage';
+import { sendChatMessage } from '@/src/libs/chat/send-message';
 import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
 
 // hook

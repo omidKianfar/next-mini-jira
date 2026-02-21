@@ -5,7 +5,7 @@ import { useUnreadCount } from '@/src/hooks/chat/use-unread-count';
 import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 
 // firestore
-import { MessgesRead } from '@/src/libs/chat/message-read';
+import { MessgesRead } from '@/src/libs/chat/read-message';
 
 // type
 import { UserType } from '@/src/types/global';
@@ -28,6 +28,7 @@ const AdminSupportUserCard = ({
   const chatId = params.get('chatId');
 
   const navigation = useNavigation();
+
   const unreadCount = useUnreadCount({
     chatId: chat.id,
     senderType: UserType.Client,
@@ -82,10 +83,10 @@ const AdminSupportUserCard = ({
       <div className="rounded-sm border border-gray-100 p-2 shadow-md">
         {chat.message.lastMessageAttachment.fileType ? (
           <div className="break-words text-label text-gray-400">
-            have a{' '}
-            <span className="text-gray-500">
+            have a
+            <span className="ml-1 text-gray-500">
               {chat.message.lastMessageAttachment.fileType}
-            </span>{' '}
+            </span>
             attachment
           </div>
         ) : (
