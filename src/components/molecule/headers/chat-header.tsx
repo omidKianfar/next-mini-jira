@@ -6,7 +6,7 @@ import MyIcon from '../../atom/icon-components';
 
 const ChatHeader = ({ userChat, currentUser }: ChatSidebar) => {
   return (
-    <div className="flex h-[60px] w-full items-center justify-start rounded-t-md bg-white/80 px-2 shadow-md backdrop-blur-sm">
+    <div className="absolute left-0 top-0 z-10 flex h-[60px] w-full items-center justify-start rounded-t-md bg-white/20 px-2 shadow-md backdrop-blur-sm">
       <div className="mr-2 overflow-hidden">
         {userChat?.photo ? (
           <MyImage
