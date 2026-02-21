@@ -2,7 +2,7 @@ import { RefObject } from 'react';
 import { FieldValues, Path } from 'react-hook-form';
 
 // types
-import { ChatMessage, FileUploaderType } from '@/src/types/global';
+import { ChatMessage, FileUploaderType, MyUserType } from '@/src/types/global';
 
 export interface BaseControllerProps<T extends FieldValues> {
   name: Path<T>;
@@ -88,4 +88,9 @@ export interface ModalComponentProps {
   isDelete?: boolean;
   title: string;
   description?: string;
+}
+
+export interface ChatSidebar {
+  userChat: MyUserType | null;
+  currentUser: MyUserType | null;
 }

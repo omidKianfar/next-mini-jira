@@ -17,6 +17,7 @@ import ChatInput from '../../molecule/chat/chat-input';
 
 // type
 import { UserType } from '@/src/types/global';
+import ChatHeader from '../../molecule/headers/chat-header';
 
 const SupportComponent = () => {
   // hook
@@ -53,6 +54,8 @@ const SupportComponent = () => {
     <div
       className={`relative ${pathname.includes('admin') ? 'h-[calc(100vh-150px)]' : 'h-[calc(100vh-90px)]'} w-full rounded-md border-2 border-warning-400 bg-white shadow-md lg:h-[calc(100vh-110px)]`}
     >
+      <ChatHeader userChat={chat.userChat} currentUser={user} />
+
       <ChatMessages
         messages={chat.messages}
         showMenu={showMenu}

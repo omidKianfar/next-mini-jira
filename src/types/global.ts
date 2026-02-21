@@ -183,6 +183,7 @@ export type ChatMessage = {
 export type ChatContextType = {
   messages: ChatMessage[];
   chatId: string | null;
+  userChat: MyUserType | null;
 };
 
 export type ChatMessageType = {

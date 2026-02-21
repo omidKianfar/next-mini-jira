@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { createContext, useEffect, useState, ReactNode } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { createContext, useEffect, useState, ReactNode } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 // type
 import {
@@ -9,25 +9,25 @@ import {
   ChatMessage,
   MyUserType,
   UserType,
-} from "../types/global";
+} from '../types/global';
 
 // chat
-import { ChatMessagesListener } from "../libs/chat/messages-listener";
+import { ChatMessagesListener } from '../libs/chat/messages-listener';
 
 // hooks
-import { useAuth } from "../hooks/auth/use-auth";
-import { useUserListenerById } from "../hooks/users/use-user-listener-by-id";
+import { useAuth } from '../hooks/auth/use-auth';
+import { useUserListenerById } from '../hooks/users/use-user-listener-by-id';
 
 // create context
 export const ChatContext = createContext<ChatContextType | undefined>(
-  undefined,
+  undefined
 );
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
   // hooks
   const pathname = usePathname();
   const params = useSearchParams();
-  const chatId = params.get("chatId");
+  const chatId = params.get('chatId');
 
   const { user: currentUser } = useAuth();
   const { user: userChat } = useUserListenerById(chatId);
@@ -41,7 +41,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
 
     const finalUser =
       currentUser?.userType === UserType.Admin &&
-      pathname.includes("/admin/support/chat")
+      pathname.includes('/admin/support/chat')
         ? (userChat as MyUserType)
         : (currentUser as MyUserType);
 
@@ -58,7 +58,7 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   }, [currentUser, userChat]);
 
   return (
-    <ChatContext.Provider value={{ messages, chatId }}>
+    <ChatContext.Provider value={{ messages, chatId, userChat }}>
       {children}
     </ChatContext.Provider>
   );
