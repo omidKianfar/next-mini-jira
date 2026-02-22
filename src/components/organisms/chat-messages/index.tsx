@@ -22,7 +22,7 @@ const ChatMessages = ({
         ? 'max-h-[calc(100vh-445px)] lg:max-h-[calc(100vh-380px)]'
         : !pathname.includes('admin') && !showMenu
           ? 'max-h-[calc(100vh-140px)] lg:max-h-[calc(100vh-160px)]'
-          : 'max-h-[calc(100vh-140px)] lg:max-h-[calc(100vh-380px)]';
+          : 'max-h-[calc(100vh-380px)]';
 
   return (
     <div

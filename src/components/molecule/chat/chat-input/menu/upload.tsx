@@ -106,12 +106,12 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
 
   return (
     <Suspense fallback={<PageLoading />}>
-      <div className={`rounded-md border-2 border-primary-500 bg-white p-2`}>
+      <div className={`p-2`}>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             <div className="flex h-full w-full flex-col lg:flex-row">
               {!url! && progress! < 100 && (
-                <div className="h-[220px] w-full lg:h-[200px]">
+                <div className="h-[223px] w-full lg:h-[200px]">
                   <DragDropUploader
                     uploadProcessHandler={uploadProcessHandler}
                     progress={progress}
@@ -121,7 +121,7 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
               )}
 
               {!url! && progress! === 100 && (
-                <div className="h-[220px] w-full lg:h-[200px]">
+                <div className="h-[223px] w-full lg:h-[200px]">
                   <div
                     className={`flex h-[220px] w-full cursor-not-allowed items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 transition-all lg:h-[200px]`}
                   >

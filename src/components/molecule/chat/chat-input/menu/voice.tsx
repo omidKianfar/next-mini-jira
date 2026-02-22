@@ -68,7 +68,7 @@ const VoiceMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
 
   return (
     <Suspense fallback={<PageLoading />}>
-      <div className="h-[242px] rounded-md border-2 border-primary-500 bg-white p-2 lg:h-[220px]">
+      <div className="h-[242px] p-2 lg:h-[220px]">
         <div className="flex h-full w-full flex-col lg:flex-row">
           <div className="flex h-[220px] w-full items-center justify-start rounded-md border-2 border-gray-400 bg-gray-50 p-2 lg:h-[200px]">
             <RecorderComponent fileUploader={fileUploader} />

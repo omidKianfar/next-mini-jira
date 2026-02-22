@@ -13,7 +13,7 @@ const ChatMenuComponent = ({
 }: ChatMenuProps) => {
   return (
     <div
-      className={`${showMenu ? 'top-[-35px]' : 'bottom-0'} absolute left-0 flex w-full items-center justify-center`}
+      className={`${showMenu ? 'top-[-36px]' : 'bottom-0'} absolute left-0 flex w-full items-center justify-center`}
     >
       <div
         className={`flex h-[38px] w-[150px] items-center justify-between border-2 ${showMenu ? 'rounded-t-md border-b-0 bg-white' : 'rounded-md bg-primary-50'} border-primary-500 p-2`}
@@ -21,12 +21,18 @@ const ChatMenuComponent = ({
         {menuItems?.map((menu) => (
           <div
             key={menu?.id}
-            onClick={() => MenuHandler?.(menu?.type as MenuType)}
+            onClick={() => {
+              MenuHandler?.(menu?.type as MenuType);
+              setShowMenu?.(true);
+            }}
           >
             <Icon
               icon={menu.icon}
               className="cursor-pointer text-h4 hover:text-primary-500"
-              onClick={() => MenuHandler?.('text')}
+              onClick={() => {
+                MenuHandler?.('text');
+                setShowMenu?.(true);
+              }}
             />
           </div>
         ))}

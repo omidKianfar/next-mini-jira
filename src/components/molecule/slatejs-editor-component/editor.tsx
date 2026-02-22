@@ -136,7 +136,7 @@ const SlateEditor = ({
         }
       }}
     >
-      <div className="h-full w-full rounded-sm border-2 border-primary-500">
+      <div className="h-full w-full">
         <ToolbarComponent handleSend={handleSend} loading={loading} />
 
         <Editable
@@ -145,7 +145,7 @@ const SlateEditor = ({
           placeholder="Enter text..."
           spellCheck
           autoFocus
-          className="h-[120px] w-full overflow-y-auto overflow-x-hidden bg-white p-4 focus:outline-none lg:h-[150px]"
+          className="h-[123px] w-full overflow-y-auto overflow-x-hidden rounded-b-lg bg-white p-4 focus:outline-none lg:h-[150px]"
           onKeyDown={(event) => {
             if (isHotkey('mod+enter', event)) {
               event.preventDefault();

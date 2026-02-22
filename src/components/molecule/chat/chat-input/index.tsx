@@ -46,23 +46,27 @@ const ChatInput = ({
           setShowMenu={setShowMenu}
         />
 
-        {showMenu ? (
-          Menu === 'text' ? (
-            <SlateEditor
-              editorKey={editorKey}
-              editMessageId={editMessageId}
-              setEditMessageId={setEditMessageId}
-            />
-          ) : Menu === 'upload' ? (
-            <UploadMenuComponent fileUploader={fileUploader} />
-          ) : Menu === 'voice' ? (
-            <VoiceMenuComponent fileUploader={fileUploader} />
-          ) : (
-            <LoadingCircle />
-          )
-        ) : (
-          <LoadingCircle />
-        )}
+        <div
+          className={`h-full w-full rounded-md ${showMenu ? 'border-2' : 'border-0'} border-primary-500 bg-white`}
+        >
+          {showMenu ? (
+            Menu === 'text' ? (
+              <SlateEditor
+                editorKey={editorKey}
+                editMessageId={editMessageId}
+                setEditMessageId={setEditMessageId}
+              />
+            ) : Menu === 'upload' ? (
+              <UploadMenuComponent fileUploader={fileUploader} />
+            ) : Menu === 'voice' ? (
+              <VoiceMenuComponent fileUploader={fileUploader} />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center rounded-md border-2 border-primary-500 bg-gray-300">
+                <LoadingCircle />
+              </div>
+            )
+          ) : null}
+        </div>
       </div>
     </div>
   );
