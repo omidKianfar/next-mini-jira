@@ -1,7 +1,9 @@
 // type
 import { UserType } from '@/src/types/global';
-import MyImage from '../../atom/image-components';
 import { ChatSidebar } from '../type';
+
+// ui
+import MyImage from '../../atom/image-components';
 import MyIcon from '../../atom/icon-components';
 
 const ChatHeader = ({ userChat, currentUser }: ChatSidebar) => {
@@ -16,8 +18,10 @@ const ChatHeader = ({ userChat, currentUser }: ChatSidebar) => {
             className="rounded-full object-cover"
             wrapperClass="relative h-[40px] w-[40px] rounded-full border-2 border-primary-500 "
           />
-        ) : (
+        ) : currentUser?.userType === UserType.Client ? (
           <MyIcon icon="bx:support" className="text-h3 text-orange-400" />
+        ) : (
+          <div className="h-[40px] w-[40px] rounded-full border-2 border-primary-500 bg-gray-200"></div>
         )}
       </div>
 
@@ -30,7 +34,7 @@ const ChatHeader = ({ userChat, currentUser }: ChatSidebar) => {
 
         <p className="text-caption text-gray-400">
           {currentUser?.userType === UserType.Admin
-            ? userChat?.userName
+            ? userChat?.email
             : 'Support'}
         </p>
       </div>

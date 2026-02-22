@@ -6,10 +6,13 @@ import { lazy, Suspense, useState } from 'react';
 // ui
 import MyIcon from '@/src/components/atom/icon-components';
 import Logo from '@/src/components/atom/logo-component';
-import PageLoading from '../../common/page-loading';
 import AdminDashboardHeader from '../../molecule/headers/admin-dashboard';
 import DashboardHeader from '../../molecule/headers/user-dashboard';
 import ModalContainer from '../../common/modal-container';
+import AdminSupportHeader from '../../molecule/headers/admin-support';
+import FilterChats from '../modals/filter-modals/chats';
+import SearchSupportChats from '../modals/serach-modals/search-support-chats';
+import LoadingCircle from '../../atom/loadings/loading-circle';
 
 // type
 import { UserType } from '@/src/types/global';
@@ -21,9 +24,6 @@ import { AdminUnreadMeassesListener } from '@/src/libs/chat/admin-unread-message
 // hooks
 import { useAuth } from '@/src/hooks/auth/use-auth';
 import { useUnreadCount } from '@/src/hooks/chat/use-unread-count';
-import AdminSupportHeader from '../../molecule/headers/admin-support';
-import FilterChats from '../modals/filter-modals/chats';
-import SearchSupportChats from '../modals/serach-modals/search-support-chats';
 
 // lazy
 const AddTask = lazy(() => import('../modals/add-task-modal'));
@@ -95,7 +95,7 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
         </div>
       </div>
 
-      <Suspense fallback={<PageLoading />}>
+      <Suspense fallback={<LoadingCircle />}>
         <ModalContainer open={open} handleClose={handleCloseModal}>
           {modalcounter == 1 ? (
             <AddTask handleClose={handleCloseModal} />
