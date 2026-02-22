@@ -1,21 +1,21 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense } from 'react';
 
 // ui
-import ButtonNext from "@/src/components/atom/buttons-component/button-next";
-import LoadingCircle from "@/src/components/atom/loadings/loading-circle";
-import MyImage from "@/src/components/atom/image-components";
-import PageLoading from "@/src/components/common/page-loading";
+import ButtonNext from '@/src/components/atom/buttons-component/button-next';
+import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
+import MyImage from '@/src/components/atom/image-components';
+import PageLoading from '@/src/components/common/page-loading';
 
 // type
-import { AddTaskUploadProps } from "../../../type";
+import { AddTaskUploadProps } from '../../../type';
 
 // lazy
 const LightBoxComponent = lazy(
-  () => import("@/src/components/common/light-box"),
+  () => import('@/src/components/common/light-box')
 );
-const MyVideo = lazy(() => import("@/src/components/atom/video-component"));
+const MyVideo = lazy(() => import('@/src/components/atom/video-component'));
 const DragDropUploader = lazy(
-  () => import("@/src/components/organisms/uploads/drag-drop"),
+  () => import('@/src/components/organisms/uploads/drag-drop')
 );
 
 const AddTaskUploadComponent = ({
@@ -38,11 +38,13 @@ const AddTaskUploadComponent = ({
         </div>
 
         {!url! && progress! < 100 && (
-          <DragDropUploader
-            uploadProcessHandler={uploadProcessHandler}
-            progress={progress}
-            uploading={uploading}
-          />
+          <div className="h-[200px] w-full">
+            <DragDropUploader
+              uploadProcessHandler={uploadProcessHandler}
+              progress={progress}
+              uploading={uploading}
+            />
+          </div>
         )}
 
         {!url! && progress! === 100 && (
@@ -55,7 +57,7 @@ const AddTaskUploadComponent = ({
 
         {url && (
           <div className="mt-4 flex items-center justify-center">
-            {fileType! === "image" && (
+            {fileType! === 'image' && (
               <LightBoxComponent url={url as string}>
                 <MyImage
                   src={url as string}
@@ -66,7 +68,7 @@ const AddTaskUploadComponent = ({
                 />
               </LightBoxComponent>
             )}
-            {fileType! === "video" && (
+            {fileType! === 'video' && (
               <MyVideo
                 src={url! as string}
                 alt="preview"

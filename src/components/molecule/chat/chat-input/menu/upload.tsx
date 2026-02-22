@@ -24,6 +24,8 @@ import { useImageProcessor } from '@/src/hooks/image-processor/use-image-process
 
 // schema
 import { UploadMenuShema } from './schema';
+import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
+import MyIcon from '@/src/components/atom/icon-components';
 
 const DragDropUploader = lazy(
   () => import('@/src/components/organisms/uploads/drag-drop')
@@ -106,52 +108,66 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
 
   return (
     <Suspense fallback={<PageLoading />}>
-      <div className="rounded-md border-2 border-primary-500 bg-white p-2 lg:pr-0">
+      <div className={`rounded-md border-2 border-primary-500 bg-white p-2`}>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             <div className="flex h-full w-full flex-col lg:flex-row">
-              <div className="h-full w-full">
-                {!url! && progress! < 100 && (
+              {!url! && progress! < 100 && (
+                <div className="h-[220px] w-full lg:h-[200px]">
                   <DragDropUploader
                     uploadProcessHandler={uploadProcessHandler}
                     progress={progress}
                     uploading={uploading}
                   />
-                )}
+                </div>
+              )}
 
-                {!url! && progress! === 100 && (
+              {!url! && progress! === 100 && (
+                <div className="h-[220px] w-full lg:h-[200px]">
                   <div
-                    className={`flex h-[200px] w-full cursor-not-allowed items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 transition-all`}
+                    className={`flex h-[220px] w-full cursor-not-allowed items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 transition-all lg:h-[200px]`}
                   >
                     <LoadingCircle size={40} />
                   </div>
-                )}
-
-                {url && <ShowAttachment fileType={fileType} url={url} />}
-              </div>
-
-              <div className="mt-4 w-full lg:mt-0 lg:w-[150px]">
-                <div className="flex flex-row items-center justify-end lg:flex-col lg:justify-center">
-                  <ButtonNext
-                    onClick={handleSave}
-                    type="submit"
-                    className="w-[90px] lg:mb-2 lg:w-[125px]"
-                    disable={!!!url}
-                  >
-                    Send
-                  </ButtonNext>
-
-                  <ButtonNext
-                    onClick={handleCancel}
-                    className="w-[90px] lg:w-[125px]"
-                    disable={uploading || !!!url}
-                  >
-                    Cancel
-                  </ButtonNext>
-
-                  {error! && <p className="mt-1 text-red-500">{error}</p>}
                 </div>
-              </div>
+              )}
+
+              {url && (
+                <div className="mb-2 h-[187px] w-full lg:mb-0 lg:h-[200px]">
+                  <ShowAttachment fileType={fileType} url={url} />
+                </div>
+              )}
+
+              {!!url && (
+                <div className="h-full w-full lg:w-[80px]">
+                  <div className="flex w-full flex-row-reverse items-center justify-between lg:flex-col lg:justify-center">
+                    <ButtonFreeClass
+                      onClick={handleSave}
+                      type="submit"
+                      className="lg:mb-2"
+                      disable={!!!url}
+                      icon={
+                        <MyIcon
+                          icon="iconamoon:send-fill"
+                          className="text-h4 text-primary-500 hover:text-primary-700 lg:text-h2"
+                        />
+                      }
+                    />
+                    <ButtonFreeClass
+                      onClick={handleCancel}
+                      disable={uploading || !!!url}
+                      icon={
+                        <MyIcon
+                          icon="mingcute:close-fill"
+                          className="text-h4 text-error-500 hover:text-error-700 lg:text-h2"
+                        />
+                      }
+                    />
+
+                    {error! && <p className="mt-1 text-red-500">{error}</p>}
+                  </div>
+                </div>
+              )}
             </div>
           </form>
         </FormProvider>

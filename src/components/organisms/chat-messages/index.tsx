@@ -15,9 +15,18 @@ const ChatMessages = ({
   // hooks
   const pathname = usePathname();
 
+  const menuHeight =
+    pathname.includes('admin') && !showMenu
+      ? 'max-h-[calc(100vh-200px)] lg:max-h-[calc(100vh-160px)] '
+      : pathname.includes('admin') && showMenu
+        ? 'max-h-[calc(100vh-445px)] lg:max-h-[calc(100vh-380px)]'
+        : !pathname.includes('admin') && !showMenu
+          ? 'max-h-[calc(100vh-140px)] lg:max-h-[calc(100vh-160px)]'
+          : 'max-h-[calc(100vh-140px)] lg:max-h-[calc(100vh-380px)]';
+
   return (
     <div
-      className={`max-h-[calc(100vh-200px)] w-full overflow-y-auto rounded-t-md p-2 ${!showMenu ? 'lg:max-h-[calc(100vh-120px)]' : 'lg:max-h-[calc(100vh-280px)]'} lg:p-4 ${pathname.includes('admin') ? 'max-h-[calc(100vh-320px)]' : 'max-h-[calc(100vh-255px)]'}`}
+      className={`h-full w-full overflow-y-auto rounded-t-md p-2 lg:p-4 ${menuHeight} `}
     >
       {messages.map((message) => (
         <ChatMessageItem

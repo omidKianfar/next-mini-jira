@@ -26,7 +26,7 @@ const ShowAttachment = ({ url, fileType }: ShowAttachmentProps) => {
   const isMobile = useIsMobile();
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-start rounded-md border-2 border-dashed border-gray-300 bg-gray-50 p-2 lg:flex-row">
+    <div className="flex h-full w-full flex-row items-center justify-start rounded-md border-2 border-dashed border-gray-300 bg-gray-50 p-2 lg:flex-row">
       <div className="mr-4">
         {fileType! === 'image' && (
           <LightBoxComponent url={url as string}>
@@ -34,7 +34,7 @@ const ShowAttachment = ({ url, fileType }: ShowAttachmentProps) => {
               src={url as string}
               alt="preview"
               fill
-              wrapperClass="relative cursor-pointer w-[190px] h-[190px] overflow-hidden rounded-lg p-1 shadow-md border-2 border-warning-400"
+              wrapperClass="relative cursor-pointer w-[150px] h-[150px] lg:w-[190px] lg:h-[190px] overflow-hidden rounded-lg p-1 shadow-md border-2 border-warning-400"
               className="object-cover"
             />
           </LightBoxComponent>

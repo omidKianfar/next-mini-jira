@@ -45,7 +45,7 @@ const AdminSupportUserCard = ({
 
   return (
     <div
-      className={`max relative mb-4 w-[250px] cursor-pointer rounded-lg border-2 ${chatId === chat.id ? 'border-success-400 shadow-sm' : 'border-warning-400 shadow-md'} bg-gray-50 p-2`}
+      className={`max relative mb-4 w-full cursor-pointer rounded-lg border-2 ${chatId === chat.id ? 'border-success-400 shadow-sm' : 'border-warning-400 shadow-md'} bg-gray-50 p-2`}
       onClick={() => goToChat(chat.id)}
     >
       <div className="mb-2 flex items-center justify-between">

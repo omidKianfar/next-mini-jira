@@ -68,7 +68,7 @@ const DragDropUploader = ({
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDragEnd={() => setIsDragging(false)}
-        className={`flex h-[200px] w-full ${!!uploading || !!progress ? 'cursor-not-allowed' : 'cursor-pointer'} items-center justify-center rounded-lg border-2 border-dashed transition-all ${
+        className={`flex h-full w-full ${!!uploading || !!progress ? 'cursor-not-allowed' : 'cursor-pointer'} items-center justify-center rounded-lg border-2 border-dashed transition-all ${
           !uploading && !progress
             ? 'border-primary-500 bg-primary-50'
             : 'border-zinc-300 bg-zinc-50'

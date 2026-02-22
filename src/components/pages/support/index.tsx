@@ -52,7 +52,7 @@ const SupportComponent = () => {
 
   return (
     <div
-      className={`relative w-full rounded-md border-2 border-warning-400 bg-white pt-[40px] shadow-md lg:h-[calc(100vh-110px)] ${pathname.includes('admin') ? 'h-[calc(100vh-150px)]' : 'h-[calc(100vh-90px)]'} `}
+      className={`relative w-full overflow-hidden rounded-md border-2 border-warning-400 bg-white pt-[40px] shadow-md lg:h-[calc(100vh-110px)] ${pathname.includes('admin') ? 'h-[calc(100vh-150px)]' : 'h-[calc(100vh-90px)]'} `}
     >
       <ChatHeader userChat={chat.userChat} currentUser={user} />
 
