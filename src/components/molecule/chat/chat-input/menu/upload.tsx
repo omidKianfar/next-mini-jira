@@ -5,11 +5,11 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useSearchParams } from 'next/navigation';
 
 // ui
-import ButtonNext from '@/src/components/atom/buttons-component/button-next';
 import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
 import PageLoading from '@/src/components/common/page-loading';
 import ShowAttachment from './show-attachment';
-
+import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
+import MyIcon from '@/src/components/atom/icon-components';
 // type
 import { MyUserType, UserType } from '@/src/types/global';
 import { UploadMenuComponentProps, UploadMenuForm } from '../../type';
@@ -24,8 +24,6 @@ import { useImageProcessor } from '@/src/hooks/image-processor/use-image-process
 
 // schema
 import { UploadMenuShema } from './schema';
-import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
-import MyIcon from '@/src/components/atom/icon-components';
 
 const DragDropUploader = lazy(
   () => import('@/src/components/organisms/uploads/drag-drop')

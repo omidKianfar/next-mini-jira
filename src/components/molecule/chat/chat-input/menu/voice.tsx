@@ -19,6 +19,8 @@ import { useAuth } from '@/src/hooks/auth/use-auth';
 
 // schema
 import RecorderComponent from '../../../recorder/recorder-component';
+import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
+import MyIcon from '@/src/components/atom/icon-components';
 
 const VoiceMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
   const { cancel, error, fileType, reset, uploading, url } = fileUploader;
@@ -66,34 +68,42 @@ const VoiceMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
 
   return (
     <Suspense fallback={<PageLoading />}>
-      <div className="h-[220px] rounded-md border-2 border-primary-500 bg-white p-2 lg:pr-0">
+      <div className="h-[242px] rounded-md border-2 border-primary-500 bg-white p-2 lg:h-[220px]">
         <div className="flex h-full w-full flex-col lg:flex-row">
-          <div className="flex h-full w-full items-center justify-start rounded-md border-2 border-gray-400 bg-gray-50 p-2">
+          <div className="flex h-[220px] w-full items-center justify-start rounded-md border-2 border-gray-400 bg-gray-50 p-2 lg:h-[200px]">
             <RecorderComponent fileUploader={fileUploader} />
           </div>
 
-          <div className="mt-4 w-full lg:mt-0 lg:w-[150px]">
-            <div className="flex flex-row items-center justify-end lg:flex-col lg:justify-center">
-              <ButtonNext
-                onClick={handleSend}
-                type="submit"
-                className="w-[90px] lg:mb-2 lg:w-[125px]"
-                disable={!!!url}
-              >
-                Send
-              </ButtonNext>
+          {!!url && (
+            <div className="h-full w-full p-1 lg:w-[80px] lg:p-0">
+              <div className="flex w-full flex-row-reverse items-center justify-between lg:flex-col lg:justify-center">
+                <ButtonFreeClass
+                  onClick={handleSend}
+                  type="submit"
+                  className="lg:mb-2"
+                  disable={!!!url}
+                  icon={
+                    <MyIcon
+                      icon="iconamoon:send-fill"
+                      className="text-h4 text-primary-500 hover:text-primary-700 lg:text-h2"
+                    />
+                  }
+                />
+                <ButtonFreeClass
+                  onClick={handleCancel}
+                  disable={uploading || !!!url}
+                  icon={
+                    <MyIcon
+                      icon="mingcute:close-fill"
+                      className="text-h4 text-error-500 hover:text-error-700 lg:text-h2"
+                    />
+                  }
+                />
 
-              <ButtonNext
-                onClick={handleCancel}
-                className="w-[90px] lg:w-[125px]"
-                disable={uploading || !!!url}
-              >
-                Cancel
-              </ButtonNext>
-
-              {error! && <p className="mt-1 text-red-500">{error}</p>}
+                {error! && <p className="mt-1 text-red-500">{error}</p>}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </Suspense>
