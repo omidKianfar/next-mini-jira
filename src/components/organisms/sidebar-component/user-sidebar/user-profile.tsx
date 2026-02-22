@@ -1,19 +1,19 @@
 // hooks
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 
 // ui
-import MyImage from "../../../atom/image-components";
+import MyImage from '../../../atom/image-components';
 
 // utiles
-import { stringSlicer } from "@/src/utils/string-slicer";
+import { stringSlicer } from '@/src/utils/string-slicer';
 
 // type
-import { sidebarProps } from "../../type";
+import { sidebarProps } from '../../type';
 
 const UserProfile = ({
   user,
   setShowSidebar,
-}: Pick<sidebarProps, "user" | "setShowSidebar">) => {
+}: Pick<sidebarProps, 'user' | 'setShowSidebar'>) => {
   // hooks
   const navigation = useNavigation();
 
@@ -44,7 +44,7 @@ const UserProfile = ({
       </div>
 
       <p className="mt-2 font-semibold text-primary-700">
-        {stringSlicer({ string: user?.userName as string, slice: 60 })}
+        {stringSlicer({ string: user?.userName as string, slice: 15 })}
       </p>
 
       <hr className="mt-6 w-[200px] border border-dashed border-gray-300" />
