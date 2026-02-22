@@ -84,7 +84,7 @@ const AdminSupportUserCard = ({
         {chat.message.lastMessageAttachment.fileType ? (
           <div className="break-words text-label text-gray-400">
             have a
-            <span className="ml-1 text-gray-500">
+            <span className="mx-1 text-gray-500">
               {chat.message.lastMessageAttachment.fileType}
             </span>
             attachment

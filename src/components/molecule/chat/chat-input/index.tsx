@@ -7,13 +7,13 @@ import SlateEditor from '../../slatejs-editor-component/editor';
 import ChatMenuComponent from '../chat-menu';
 import UploadMenuComponent from './menu/upload';
 import VoiceMenuComponent from './menu/voice';
+import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
 
 // type
 import { ChatMenuProps, MenuType } from '../type';
 
 // hooks
 import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
-import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
 
 const ChatInput = ({
   showMenu,
@@ -46,11 +46,11 @@ const ChatInput = ({
           setShowMenu={setShowMenu}
         />
 
-        <div
-          className={`h-full w-full rounded-md ${showMenu ? 'border-2' : 'border-0'} border-primary-500 bg-white`}
-        >
-          {showMenu ? (
-            Menu === 'text' ? (
+        {showMenu ? (
+          <div
+            className={`h-full w-full rounded-md ${showMenu ? 'border-2' : 'border-0'} border-primary-500 bg-white`}
+          >
+            {Menu === 'text' ? (
               <SlateEditor
                 editorKey={editorKey}
                 editMessageId={editMessageId}
@@ -64,9 +64,9 @@ const ChatInput = ({
               <div className="flex h-full w-full items-center justify-center rounded-md border-2 border-primary-500 bg-gray-300">
                 <LoadingCircle />
               </div>
-            )
-          ) : null}
-        </div>
+            )}
+          </div>
+        ) : null}
       </div>
     </div>
   );
