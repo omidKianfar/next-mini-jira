@@ -60,7 +60,9 @@ const SupportComponent = () => {
         messages={chat.messages}
         showMenu={showMenu}
         handleTemplateSelect={handleTemplateSelect}
+        editMessageId={editMessageId}
         setEditMessageId={setEditMessageId}
+        userChat={chat.userChat}
       />
 
       <ChatInput

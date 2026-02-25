@@ -79,7 +79,9 @@ export interface ChatMessagesProps {
   messages: ChatMessage[];
   showMenu?: boolean;
   handleTemplateSelect?: (text: string) => void;
+  editMessageId?: string | null;
   setEditMessageId?: Dispatch<SetStateAction<string | null>>;
+  userChat?: MyUserType | null;
 }
 
 export interface UsersTableProps {
