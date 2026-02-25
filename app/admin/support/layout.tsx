@@ -15,120 +15,92 @@ import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 import EditorProviderComponent from '@/src/providers/editor-provider';
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {
-  // hooks
+  // hook
   const isMobile = useIsMobile();
 
-  // states
+  // state
   const [showSidebar, setShowSidebar] = useState(true);
-  const [isSidebarClosed, setIsSidebarClosed] = useState(false);
 
-  // functions
-  const handleCloseSidebar = () => {
-    setShowSidebar(false);
-    setIsSidebarClosed(false);
-  };
-
-  const handleOpenSidebar = () => {
-    setShowSidebar(true);
-    setIsSidebarClosed(false);
-  };
-
-  const handleExitComplete = () => {
-    setIsSidebarClosed(true);
+  // animation data
+  const fastTransition = {
+    duration: 0.15,
+    ease: 'easeInOut' as const,
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-start justify-start lg:flex-row">
-      {!showSidebar && isSidebarClosed && (
-        <div className={`h-full p-4 lg:pr-0`}>
-          <div
-            className={`h-full w-full rounded-lg border-2 border-gray-300 bg-white p-1 shadow-md`}
+    <div className="relative flex h-full w-full flex-col overflow-hidden lg:flex-row">
+      <AnimatePresence mode="sync">
+        {!showSidebar ? (
+          <motion.div
+            key="open-btn-container"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={fastTransition}
+            className="z-50 p-4 lg:absolute lg:left-0 lg:top-0 lg:px-3"
           >
-            <div className="flex items-center justify-end">
+            <div className="flex items-center justify-start">
               <ButtonFreeClass
-                onClick={handleOpenSidebar}
-                className={`rounded-lg`}
+                onClick={() => setShowSidebar(true)}
+                className="rounded-lg border-2 border-gray-300 bg-white p-1 shadow-md"
                 icon={
                   <MyIcon
                     icon="fluent:arrow-exit-28-filled"
-                    className={`text-h4 text-primary-500 hover:text-primary-700 lg:text-gray-500`}
+                    className="text-h4 text-primary-500"
                   />
                 }
               />
             </div>
-          </div>
-        </div>
-      )}
-
-      <AnimatePresence initial={false} onExitComplete={handleExitComplete}>
-        {showSidebar && (
+          </motion.div>
+        ) : (
           <motion.div
-            key="chat-sidebar"
-            variants={sidebarVariants}
-            animate="open"
-            initial="closed"
-            exit="closed"
-            className={`h-[calc(100vh-60px)] w-[100vw] p-4 lg:h-[calc(100vh-78px)] lg:w-[400px] lg:pr-0`}
+            key="sidebar-container"
+            initial={isMobile ? { y: '-100%' } : { opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={isMobile ? { y: '-100%' } : { opacity: 0 }}
+            transition={fastTransition}
+            className={`z-40 h-[calc(100vh-60px)] shrink-0 lg:h-[calc(100vh-78px)] ${
+              isMobile ? 'w-full' : 'w-[300px]'
+            }`}
           >
-            <div
-              className={`h-full w-full rounded-lg border-2 border-warning-500 bg-white p-2 shadow-md`}
-            >
-              <div className="flex items-center justify-between">
-                <h2 className="mx-2 text-subtitle font-semibold text-warning-500">
-                  Chats List
-                </h2>
+            <div className="h-full w-full p-4 lg:pr-0">
+              <div className="h-full w-full rounded-lg border-2 border-warning-500 bg-white p-2 shadow-md">
+                <div className="flex items-center justify-between">
+                  <h2 className="mx-2 text-subtitle font-semibold text-warning-500">
+                    Chats List
+                  </h2>
 
-                <ButtonFreeClass
-                  onClick={handleCloseSidebar}
-                  className={`"border-2 rounded-lg border-gray-200 bg-gray-50 p-1 shadow-md`}
-                  icon={
-                    <MyIcon
-                      icon="fluent:arrow-exit-28-filled"
-                      iconClass="rotate-180"
-                      className={`text-h4 text-warning-500 hover:text-warning-700`}
-                    />
-                  }
-                />
-              </div>
+                  <ButtonFreeClass
+                    onClick={() => setShowSidebar(false)}
+                    className="rounded-md border-2 border-gray-200 bg-gray-50 p-1 shadow-md"
+                    icon={
+                      <MyIcon
+                        icon="fluent:arrow-exit-28-filled"
+                        iconClass="rotate-180"
+                        className="text-h4 text-warning-500"
+                      />
+                    }
+                  />
+                </div>
 
-              <div className="mt-4 h-[calc(100vh-178px)] overflow-y-auto rounded-md">
-                <ChatSidebar setShowSidebar={setShowSidebar} />
+                <div className="mt-4 h-[calc(100vh-178px)] overflow-y-auto rounded-md">
+                  <ChatSidebar setShowSidebar={setShowSidebar} />
+                </div>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {isMobile && showSidebar ? null : (
-        <EditorProviderComponent>
-          <div className="h-full w-full p-4 pt-0 lg:pt-4">{children}</div>
-        </EditorProviderComponent>
-      )}
+      <div
+        className={`h-full flex-1 overflow-hidden p-4 pt-0 transition-all duration-150 lg:pt-4 ${
+          isMobile && showSidebar ? 'hidden' : 'block'
+        } ${!showSidebar && !isMobile ? 'lg:pl-16' : ''}`}
+      >
+        <EditorProviderComponent>{children}</EditorProviderComponent>
+      </div>
     </div>
   );
 };
 
 export default DashboardLayout;
-
-// animation data
-const sidebarVariants = {
-  open: {
-    x: 0,
-    opacity: 1,
-    transition: {
-      type: 'spring' as const,
-      stiffness: 350,
-      damping: 30,
-    },
-  },
-  closed: {
-    x: '-100%',
-    opacity: 0,
-    transition: {
-      type: 'spring' as const,
-      stiffness: 350,
-      damping: 30,
-      duration: 0.1,
-    },
-  },
-};
