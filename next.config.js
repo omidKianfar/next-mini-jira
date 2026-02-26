@@ -3,11 +3,28 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "xoqztxrixfcvhyaeyjvo.supabase.co",
-        pathname: "/storage/v1/object/**",
+        protocol: 'https',
+        hostname: 'xoqztxrixfcvhyaeyjvo.supabase.co',
+        pathname: '/storage/v1/object/**',
       },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'require-corp', // یا 'credentialless' اگر با تصاویر به مشکل خوردی
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin',
+          },
+        ],
+      },
+    ];
   },
 };
 
