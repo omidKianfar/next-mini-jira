@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
 // hook
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 
 // ui
-import ButtonNext from "@/src/components/atom/buttons-component/button-next";
-import MyIcon from "@/src/components/atom/icon-components";
+import ButtonNext from '@/src/components/atom/buttons-component/button-next';
+import MyIcon from '@/src/components/atom/icon-components';
 
 export default function NotFound() {
   // hooks
@@ -22,10 +22,10 @@ export default function NotFound() {
           Somthing went wrong
         </h1>
 
-        <p className="mb-6 text-subtitle lg:text-h4">Page not found.</p>
+        <p className="mb-12 text-subtitle lg:text-h4">Page not found.</p>
       </div>
 
-      <div className="mt-6">
+      <div>
         <ButtonNext
           onClick={() => navigation.dashboard()}
           icon={<MyIcon icon="maki:arrow" className="ml-2 text-body" />}
