@@ -21,8 +21,8 @@ export interface AddTaskUploadProps {
   compressionProgress?: number;
 }
 export interface HeaderProps {
-  showSidebar: boolean;
-  setShowSidebar: Dispatch<SetStateAction<boolean>>;
+  showSidebar?: boolean;
+  setShowSidebar?: Dispatch<SetStateAction<boolean>>;
 }
 export interface sidebarProps extends HeaderProps {
   user?: MyUserType | null;

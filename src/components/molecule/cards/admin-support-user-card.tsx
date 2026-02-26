@@ -38,7 +38,7 @@ const AdminSupportUserCard = ({
   const goToChat = (chatId: string) => {
     MessgesRead({ chatId: chatId, senderType: UserType.Client });
 
-    setShowSidebar(false);
+    setShowSidebar?.(false);
 
     navigation.adminSupportChat(chatId);
   };
