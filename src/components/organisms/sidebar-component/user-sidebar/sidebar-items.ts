@@ -37,7 +37,7 @@ export const SidebarItems = ({
         title: 'profile',
         direction: () => {
           navigation.profile();
-          setShowSidebar(false);
+          setShowSidebar?.(false);
         },
         notification: { type: 'none' },
       },
@@ -47,7 +47,7 @@ export const SidebarItems = ({
         title: 'dashboard',
         direction: () => {
           navigation.dashboard();
-          setShowSidebar(false);
+          setShowSidebar?.(false);
         },
         notification: { type: 'none' },
       },
@@ -62,7 +62,7 @@ export const SidebarItems = ({
           });
 
           navigation.support();
-          setShowSidebar(false);
+          setShowSidebar?.(false);
         },
         notification:
           UserUnreadCount > 0
@@ -75,7 +75,7 @@ export const SidebarItems = ({
         title: 'payment',
         direction: () => {
           navigation.payment();
-          setShowSidebar(false);
+          setShowSidebar?.(false);
         },
         notification: { type: 'none' },
       },
@@ -92,7 +92,7 @@ export const SidebarItems = ({
         title: 'profile',
         direction: () => {
           navigation.adminProfile();
-          setShowSidebar(false);
+          setShowSidebar?.(false);
         },
         notification: { type: 'none' },
       },
@@ -102,7 +102,7 @@ export const SidebarItems = ({
         title: 'dashboard',
         direction: () => {
           navigation.adminDashboard();
-          setShowSidebar(false);
+          setShowSidebar?.(false);
         },
         notification: { type: 'none' },
       },
@@ -112,7 +112,7 @@ export const SidebarItems = ({
         title: 'Support',
         direction: () => {
           navigation.adminSupport();
-          setShowSidebar(false);
+          setShowSidebar?.(false);
         },
         notification:
           AdminUnraedCount > 0

@@ -65,11 +65,13 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
     <>
       <div className="sticky top-0 z-50 flex h-[60px] flex-row items-center justify-between border border-white/30 bg-white/20 px-4 shadow-lg backdrop-blur-md lg:h-[80px]">
         <div className="relative flex w-1/3 items-center justify-start">
-          <MyIcon
-            icon={'mingcute:menu-fill'}
-            className="cursor-pointer text-title text-primary-500 hover:text-primary-700 lg:text-h3"
-            onClick={() => setShowSidebar(!showSidebar)}
-          />
+          {pathname !== '/' && (
+            <MyIcon
+              icon={'mingcute:menu-fill'}
+              className="cursor-pointer text-title text-primary-500 hover:text-primary-700 lg:text-h3"
+              onClick={() => setShowSidebar?.(!showSidebar)}
+            />
+          )}
 
           {user?.userType === UserType.Client && UserUnreadCount > 0 && (
             <div className="absolute left-0 top-0 h-[10px] w-[10px] rounded-full bg-warning-500"></div>

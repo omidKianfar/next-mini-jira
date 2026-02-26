@@ -20,7 +20,7 @@ const UserProfile = ({
   // functions
   const goProfile = () => {
     navigation.profile();
-    setShowSidebar(false);
+    setShowSidebar?.(false);
   };
 
   return (
