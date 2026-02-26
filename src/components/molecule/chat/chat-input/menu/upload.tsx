@@ -10,6 +10,7 @@ import PageLoading from '@/src/components/common/page-loading';
 import ShowAttachment from './show-attachment';
 import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
 import MyIcon from '@/src/components/atom/icon-components';
+
 // type
 import { MyUserType, UserType } from '@/src/types/global';
 import { UploadMenuComponentProps, UploadMenuForm } from '../../type';
@@ -21,6 +22,7 @@ import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
 // hook
 import { useAuth } from '@/src/hooks/auth/use-auth';
 import { useImageProcessor } from '@/src/hooks/image-processor/use-image-processor';
+import { useVideoProcessor } from '@/src/hooks/video-processor/use-video-processor';
 
 // schema
 import { UploadMenuShema } from './schema';
@@ -30,18 +32,21 @@ const DragDropUploader = lazy(
 );
 
 const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
-  const { cancel, error, fileType, progress, reset, upload, uploading, url } =
-    fileUploader;
-
-  // hooks
+  // hook
   const params = useSearchParams();
   const reciverId = params.get('chatId');
+
+  const { cancel, error, fileType, progress, reset, upload, uploading, url } =
+    fileUploader;
 
   const { user: currentUser } = useAuth();
 
   const { user: userChat } = useUserListenerById(reciverId);
 
   const { processImage } = useImageProcessor({ size: 1024 });
+
+  const { compressVideo, isCompressing, compressionProgress } =
+    useVideoProcessor();
 
   const admin = currentUser?.userType === UserType.Admin;
 
@@ -64,9 +69,9 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
     let finalFile = file;
 
     if (file.type.startsWith('image/')) {
-      const processed = await processImage(file);
-
-      finalFile = processed;
+      finalFile = await processImage(file);
+    } else if (file.type.startsWith('video/')) {
+      finalFile = await compressVideo(file);
     }
 
     await upload({ file: finalFile });
@@ -110,14 +115,30 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
             <div className="flex h-full w-full flex-col lg:flex-row">
-              {!url! && progress! < 100 && (
-                <div className="h-[223px] w-full lg:h-[200px]">
-                  <DragDropUploader
-                    uploadProcessHandler={uploadProcessHandler}
-                    progress={progress}
-                    uploading={uploading}
-                  />
+              {isCompressing ? (
+                <div className="flex h-[223px] w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-primary-300 bg-primary-50 lg:h-[200px]">
+                  <p className="mb-2 mt-2 text-label font-semibold text-warning-500">
+                    Optimizing Video:
+                    <span className="ml-1 animate-pulse text-subtitle text-primary-500">
+                      {compressionProgress} %
+                    </span>
+                  </p>
+
+                  <p className="text-caption text-gray-400">
+                    Please wait, this happens in your browser...
+                  </p>
                 </div>
+              ) : (
+                !url &&
+                progress < 100 && (
+                  <div className="h-[223px] w-full lg:h-[200px]">
+                    <DragDropUploader
+                      uploadProcessHandler={uploadProcessHandler}
+                      progress={progress}
+                      uploading={uploading}
+                    />
+                  </div>
+                )
               )}
 
               {!url! && progress! === 100 && (
@@ -151,6 +172,7 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
                         />
                       }
                     />
+
                     <ButtonFreeClass
                       onClick={handleCancel}
                       disable={uploading || !!!url}

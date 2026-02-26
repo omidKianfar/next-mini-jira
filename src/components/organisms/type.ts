@@ -17,6 +17,8 @@ export interface AddTaskUploadProps {
   error?: string | null;
   fileType?: string | null;
   url?: string | null;
+  isCompressing?: boolean;
+  compressionProgress?: number;
 }
 export interface HeaderProps {
   showSidebar: boolean;

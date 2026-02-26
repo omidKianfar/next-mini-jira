@@ -1,42 +1,45 @@
-"use client";
+'use client';
 
-import { lazy, Suspense, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { enqueueSnackbar } from "notistack";
-import dayjs from "dayjs";
+import { lazy, Suspense, useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { enqueueSnackbar } from 'notistack';
+import dayjs from 'dayjs';
 
 // hook
-import { useAuth } from "@/src/hooks/auth/use-auth";
-import { useFileUploader } from "@/src/hooks/file-uploader/use-file-uploader";
-import { useImageProcessor } from "@/src/hooks/image-processor/use-image-processor";
+import { useAuth } from '@/src/hooks/auth/use-auth';
+import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
+import { useImageProcessor } from '@/src/hooks/image-processor/use-image-processor';
+import { useVideoProcessor } from '@/src/hooks/video-processor/use-video-processor';
 
 // type
-import { AddTaskProps } from "../../type";
-import { Task, TaskForm } from "@/src/types/global";
+import { AddTaskProps } from '../../type';
+import { Task, TaskForm } from '@/src/types/global';
 
 // schema
-import { TaskShema } from "./schema";
+import { TaskShema } from './schema';
 
 // firestore
-import { createTaskDocument } from "@/src/libs/tasks/create-task";
+import { createTaskDocument } from '@/src/libs/tasks/create-task';
 
 // ui
-import PageLoading from "../../../common/page-loading";
+import PageLoading from '../../../common/page-loading';
 
 // lazy
-const AddTaskFormComponent = lazy(() => import("./steps/add-task-form"));
-const AddTaskUploadCmponent = lazy(() => import("./steps/upload"));
+const AddTaskFormComponent = lazy(() => import('./steps/add-task-form'));
+const AddTaskUploadCmponent = lazy(() => import('./steps/upload'));
 
-const AddTask = ({ handleClose }: Pick<AddTaskProps, "handleClose">) => {
+const AddTask = ({ handleClose }: Pick<AddTaskProps, 'handleClose'>) => {
   // hooks
   const { user } = useAuth();
 
   const { processImage } = useImageProcessor({ size: 1024 });
+  const { compressVideo, isCompressing, compressionProgress } =
+    useVideoProcessor();
 
   const { cancel, error, fileType, progress, reset, upload, uploading, url } =
     useFileUploader({
-      accept: ["image/*", "video/*"],
+      accept: ['image/*', 'video/*'],
     });
 
   // states
@@ -45,9 +48,9 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, "handleClose">) => {
 
   // form
   const defaultValues: TaskForm = {
-    title: "",
-    description: "",
-    tag: "task",
+    title: '',
+    description: '',
+    tag: 'task',
     attachment: {
       fileUrl: null,
       fileType: null,
@@ -63,22 +66,22 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, "handleClose">) => {
   const uploadProcessHandler = async (file: File) => {
     let finalFile = file;
 
-    if (file.type.startsWith("image/")) {
-      const processed = await processImage(file);
-
-      finalFile = processed;
+    if (file.type.startsWith('image/')) {
+      finalFile = await processImage(file);
+    } else if (file.type.startsWith('video/')) {
+      finalFile = await compressVideo(file);
     }
 
     await upload({ file: finalFile });
   };
 
   const handleSave = () => {
-    methods.setValue("attachment.fileUrl", url);
+    methods.setValue('attachment.fileUrl', url);
     setNumber(0);
   };
 
   const handleCancel = () => {
-    methods.setValue("attachment.fileUrl", "");
+    methods.setValue('attachment.fileUrl', '');
     cancel();
     setNumber(0);
   };
@@ -91,21 +94,21 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, "handleClose">) => {
         id: crypto.randomUUID(),
         title: values.title,
         description: values.description,
-        status: "todo",
+        status: 'todo',
         tag: values.tag,
-        createdAt: dayjs().format("YYYY-MM-DD"),
+        createdAt: dayjs().format('YYYY-MM-DD'),
         attachment: {
           fileUrl: values.attachment?.fileUrl,
           fileType: fileType,
         },
         userId: user?.userId as string,
-        updatedAt: "",
+        updatedAt: '',
       };
 
       await createTaskDocument(newTask);
 
       enqueueSnackbar(`Task created successfully`, {
-        variant: "success",
+        variant: 'success',
       });
 
       reset();
@@ -113,7 +116,7 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, "handleClose">) => {
       handleClose();
     } catch (error: any) {
       enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
-        variant: "error",
+        variant: 'error',
       });
       setLoading(false);
     } finally {
@@ -141,6 +144,8 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, "handleClose">) => {
               error={error}
               fileType={fileType}
               url={url}
+              isCompressing={isCompressing}
+              compressionProgress={compressionProgress}
             />
           )}
         </form>

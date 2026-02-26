@@ -27,6 +27,8 @@ const AddTaskUploadComponent = ({
   uploading,
   fileType,
   url,
+  isCompressing,
+  compressionProgress,
 }: AddTaskUploadProps) => {
   return (
     <Suspense fallback={<PageLoading />}>
@@ -37,14 +39,30 @@ const AddTaskUploadComponent = ({
           </h1>
         </div>
 
-        {!url! && progress! < 100 && (
-          <div className="h-[200px] w-full">
-            <DragDropUploader
-              uploadProcessHandler={uploadProcessHandler}
-              progress={progress}
-              uploading={uploading}
-            />
+        {isCompressing ? (
+          <div className="flex h-[223px] w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-primary-300 bg-primary-50 lg:h-[200px]">
+            <p className="mb-2 mt-2 text-label font-semibold text-warning-500">
+              Optimizing Video:
+              <span className="ml-1 animate-pulse text-subtitle text-primary-500">
+                {compressionProgress} %
+              </span>
+            </p>
+
+            <p className="text-caption text-gray-400">
+              Please wait, this happens in your browser...
+            </p>
           </div>
+        ) : (
+          !url &&
+          progress! < 100 && (
+            <div className="h-[200px] w-full">
+              <DragDropUploader
+                uploadProcessHandler={uploadProcessHandler}
+                progress={progress}
+                uploading={uploading}
+              />
+            </div>
+          )
         )}
 
         {!url! && progress! === 100 && (
@@ -63,16 +81,17 @@ const AddTaskUploadComponent = ({
                   src={url as string}
                   alt="preview"
                   fill
-                  wrapperClass="relative cursor-pointer w-[500px] h-[500px] overflow-hidden rounded-lg p-1 shadow-md border-2 border-warning-400"
+                  wrapperClass="relative cursor-pointer w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] overflow-hidden rounded-lg p-1 shadow-md border-2 border-warning-400"
                   className="object-cover"
                 />
               </LightBoxComponent>
             )}
+
             {fileType! === 'video' && (
               <MyVideo
                 src={url! as string}
                 alt="preview"
-                className="w-full max-w-[500px] rounded-lg border-2 border-warning-400 shadow-md"
+                className="h-full max-h-[300px] w-full max-w-[300px] rounded-lg border-2 border-warning-400 shadow-md lg:max-h-[500px] lg:max-w-[500px]"
               />
             )}
           </div>
@@ -80,11 +99,19 @@ const AddTaskUploadComponent = ({
 
         <div>
           <div className="mt-4 flex items-center justify-center lg:justify-end">
-            <ButtonNext onClick={handleCancel} className="mr-4">
+            <ButtonNext
+              onClick={handleCancel}
+              className="mr-4"
+              disable={uploading || !!!url}
+            >
               Cancel
             </ButtonNext>
 
-            <ButtonNext onClick={handleSave} className="w-[130px]">
+            <ButtonNext
+              onClick={handleSave}
+              className="w-[130px]"
+              disable={!!!url}
+            >
               Save
             </ButtonNext>
 

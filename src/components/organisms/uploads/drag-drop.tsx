@@ -79,7 +79,13 @@ const DragDropUploader = ({
           {uploading && !progress ? (
             <LoadingCircle size={40} />
           ) : uploading && progress ? (
-            <p className="text-primary-500">{progress}%</p>
+            <div>
+              <p className="text-subtitle font-semibold text-primary-500">
+                {progress}%
+              </p>
+
+              <span className="text-xs text-warning-400">Please wait...</span>
+            </div>
           ) : isDragging ? (
             <p className="text-gray-500">Drop file here...</p>
           ) : (
