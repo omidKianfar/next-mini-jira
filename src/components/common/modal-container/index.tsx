@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from 'framer-motion';
 
 // type
-import { ModalProps } from "@/src/types/global";
+import { ModalProps } from '@/src/types/global';
 
 // ui
-import MyIcon from "../../atom/icon-components";
+import MyIcon from '../../atom/icon-components';
 
 export default function ModalContainer({
   open,
@@ -18,12 +18,13 @@ export default function ModalContainer({
       {open && (
         <motion.div
           key="backdrop"
+          data-testid="modal-backdrop"
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
           onClick={handleClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.18, ease: "easeOut" }}
+          transition={{ duration: 0.18, ease: 'easeOut' }}
         >
           <motion.div
             key="modal"
@@ -39,11 +40,13 @@ export default function ModalContainer({
           >
             {children}
 
-            <MyIcon
-              icon="zondicons:close-outline"
-              className="absolute right-4 top-4 cursor-pointer text-subtitle text-gray-500 hover:text-error-500"
+            <button
+              aria-label="close-modal"
               onClick={handleClose}
-            />
+              className="absolute right-4 top-4 cursor-pointer text-subtitle text-gray-500 transition-colors hover:text-error-500"
+            >
+              <MyIcon icon="zondicons:close-outline" />
+            </button>
           </motion.div>
         </motion.div>
       )}
