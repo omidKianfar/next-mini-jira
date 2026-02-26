@@ -14,17 +14,17 @@ import { MessgesRead } from '@/src/libs/chat/read-message';
 // ui
 import ChatMessages from '../../organisms/chat-messages';
 import ChatInput from '../../molecule/chat/chat-input';
+import ChatHeader from '../../molecule/headers/chat-header';
 
 // type
 import { UserType } from '@/src/types/global';
-import ChatHeader from '../../molecule/headers/chat-header';
 
 const SupportComponent = () => {
   // hook
   const pathname = usePathname();
   const chat = useChat();
   const { user } = useAuth();
-  const { setEditorOutput } = useEditor();
+  const { setEditorOutput, resetEditor } = useEditor();
 
   // state
   const [showMenu, setShowMenu] = useState<boolean>(true);
@@ -39,6 +39,8 @@ const SupportComponent = () => {
       chatId: !isAdmin ? (user?.userId as string) : (chat.chatId as string),
       senderType: !isAdmin ? UserType.Admin : UserType.Client,
     });
+
+    resetEditor();
   }, [chat]);
 
   const handleTemplateSelect = (content: string) => {

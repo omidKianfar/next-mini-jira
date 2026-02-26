@@ -1,7 +1,7 @@
 import isHotkey from 'is-hotkey';
 import { Slate, Editable } from 'slate-react';
 import { Editor, Descendant } from 'slate';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import { useSearchParams } from 'next/navigation';
 
@@ -45,6 +45,7 @@ const SlateEditor = ({
   const reciverId = params.get('chatId');
 
   const { user: currentUser } = useAuth();
+
   const { user: userChat } = useUserListenerById(reciverId);
 
   const {
@@ -60,11 +61,7 @@ const SlateEditor = ({
   // states
   const [loading, setLoading] = useState(false);
 
-  // functions
-  useEffect(() => {
-    resetEditor();
-  }, []);
-
+  // function
   const handleSend = async () => {
     if (
       editorOutput == '' ||
@@ -108,9 +105,11 @@ const SlateEditor = ({
       }
 
       setEditorOutput?.('');
+
       resetEditor();
     } catch (error: any) {
       setLoading(false);
+
       enqueueSnackbar(`Error: ${error.message}`, { variant: 'error' });
     } finally {
       setLoading(false);

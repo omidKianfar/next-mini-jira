@@ -115,8 +115,6 @@ const EditorProviderComponent = ({ children }: PropsWithChildren) => {
     removeSecondLine();
   }, [removeSecondLine]);
 
-  useEffect(() => {}, []);
-
   const deserializedNodes = useMemo(() => {
     if (typeof window === 'undefined')
       return [{ type: 'paragraph', children: [{ text: '' }] }];
