@@ -13,14 +13,14 @@ import 'swiper/css/effect-coverflow';
 
 const FeaturesComponent = () => {
   return (
-    <section className="bg-slate-50/50 px-4 py-[48px]">
-      <div className="mx-auto max-w-[90vw]">
+    <section className="bg-slate-50/50 px-2 py-[48px]">
+      <div className="mx-auto max-w-full">
         <div className="mb-[48px] text-center">
-          <h2 className="mb-4 text-subtitle font-semibold text-gray-700 lg:text-title">
+          <h2 className="mb-4 text-subtitle font-semibold text-gray-600 lg:text-title">
             Engineered for High-Performance Teams
           </h2>
 
-          <p className="text-gray-500">
+          <p className="font-semibold text-gray-500">
             Experience a smooth, interactive showcase of our core engine and
             specialized tools.
           </p>

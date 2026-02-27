@@ -8,7 +8,7 @@ import FeaturesComponent from './feature';
 
 const HomeComponent = () => {
   return (
-    <div className="min-h-screen w-full bg-gray-50 text-slate-900 selection:bg-warning-100">
+    <div className="min-h-screen w-full bg-gray-50 text-gray-800 selection:bg-warning-100">
       <HeroSectionComponent />
 
       <WorkflowComponent />
