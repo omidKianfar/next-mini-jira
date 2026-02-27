@@ -1,37 +1,39 @@
-"use client";
+'use client';
 
-import { lazy, Suspense, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { enqueueSnackbar } from "notistack";
-import { useSearchParams } from "next/navigation";
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { enqueueSnackbar } from 'notistack';
+import { useSearchParams } from 'next/navigation';
 
 // hooks
-import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
-import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
-import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
+import { useRequirePaymentStatus } from '@/src/hooks/pages-user-status-require/use-require-payment-status';
+import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 
 // firestore
-import { deleteTask } from "@/src/libs/tasks/delete-task";
-import { fetchTask } from "@/src/libs/tasks/fetch-task";
+import { deleteTask } from '@/src/libs/tasks/delete-task';
+import { fetchTask } from '@/src/libs/tasks/fetch-task';
 
 // redux
-import { RootState } from "@/src/store";
+import { RootState } from '@/src/store';
 
 // type
-import { Task } from "@/src/types/global";
+import { Task } from '@/src/types/global';
 
 // ui
-import ButtonBack from "@/src/components/atom/buttons-component/button-back";
-import ButtonFreeClass from "@/src/components/atom/buttons-component/button-free-class";
-import MyIcon from "@/src/components/atom/icon-components";
-import MyImage from "@/src/components/atom/image-components";
-import PageLoading from "@/src/components/common/page-loading";
+import ButtonBack from '@/src/components/atom/buttons-component/button-back';
+import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
+import MyIcon from '@/src/components/atom/icon-components';
+import MyImage from '@/src/components/atom/image-components';
+import PageLoading from '@/src/components/common/page-loading';
+import ModalContainer from '../../common/modal-container';
+import ModalComponent from '../../molecule/modals/modal-component';
 
 // lazy
-const MyVideo = lazy(() => import("@/src/components/atom/video-component"));
+const MyVideo = lazy(() => import('@/src/components/atom/video-component'));
 const LightBoxComponent = lazy(
-  () => import("@/src/components/common/light-box"),
+  () => import('@/src/components/common/light-box')
 );
 
 const TaskDetailComponent = () => {
@@ -44,7 +46,7 @@ const TaskDetailComponent = () => {
 
   // addressba parametrs
   const params = useSearchParams();
-  const taskId = params.get("taskId");
+  const taskId = params.get('taskId');
 
   // redux state
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
@@ -53,6 +55,7 @@ const TaskDetailComponent = () => {
   const [task, setTask] = useState<Task | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [deleting, setDeleting] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
 
   // functions
   const fetchTaskHandler = async () => {
@@ -90,19 +93,27 @@ const TaskDetailComponent = () => {
       await deleteTask({ taskId: taskId! });
 
       enqueueSnackbar(`Todo delted successfully`, {
-        variant: "success",
+        variant: 'success',
       });
 
       navigation.dashboard();
     } catch (error: any) {
       enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
-        variant: "error",
+        variant: 'error',
       });
 
       setDeleting(false);
     } finally {
       setDeleting(false);
     }
+  };
+
+  const handleOpenModal = () => {
+    setOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpen(false);
   };
 
   const BackDashboard = () => {
@@ -121,12 +132,12 @@ const TaskDetailComponent = () => {
             <ButtonBack onClick={BackDashboard} />
 
             <ButtonFreeClass
-              onClick={deleteTaskHandler}
+              onClick={handleOpenModal}
               isLoading={deleting}
               disable={deleting}
               icon={
                 <MyIcon
-                  icon={"mingcute:delete-fill"}
+                  icon={'mingcute:delete-fill'}
                   className="z-50 text-h4 text-error-500 hover:text-error-700"
                 />
               }
@@ -144,14 +155,14 @@ const TaskDetailComponent = () => {
                 </p>
 
                 <p className="mb-4 font-semibold capitalize text-primary-600">
-                  <span className="text-body font-bold text-black">Tag:</span>{" "}
+                  <span className="text-body font-bold text-black">Tag:</span>{' '}
                   {task.tag}
                 </p>
 
                 <p className="mb-4 font-semibold capitalize text-primary-600">
                   <span className="text-body font-bold text-black">
                     Created:
-                  </span>{" "}
+                  </span>{' '}
                   {task.createdAt}
                 </p>
               </div>
@@ -169,7 +180,7 @@ const TaskDetailComponent = () => {
 
                 <div className="flex items-center justify-center">
                   {task.attachment?.fileType ? (
-                    task.attachment?.fileType === "image" ? (
+                    task.attachment?.fileType === 'image' ? (
                       <LightBoxComponent
                         url={task?.attachment?.fileUrl as string}
                       >
@@ -192,6 +203,7 @@ const TaskDetailComponent = () => {
                 </div>
               </div>
             </div>
+
             <MyImage
               src="/images/todo-detail.svg"
               alt=""
@@ -203,6 +215,16 @@ const TaskDetailComponent = () => {
           </div>
         </div>
       </div>
+
+      <ModalContainer open={open} handleClose={handleCloseModal}>
+        <ModalComponent
+          isDelete
+          handleClose={handleCloseModal}
+          clickHandler={deleteTaskHandler}
+          title={task.title}
+          description={task.description}
+        />
+      </ModalContainer>
     </Suspense>
   );
 };

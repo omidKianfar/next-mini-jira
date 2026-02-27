@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { useDraggable } from "@dnd-kit/core";
+import { useDraggable } from '@dnd-kit/core';
 
 // hooks
-import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 
 // ui
-import MyIcon from "@/src/components/atom/icon-components";
+import MyIcon from '@/src/components/atom/icon-components';
 
 // type
-import { TaskCardProps } from "@/src/components/pages/type";
+import { TaskCardProps } from '@/src/components/pages/type';
 
 // utils
-import { stringSlicer } from "@/src/utils/string-slicer";
+import { stringSlicer } from '@/src/utils/string-slicer';
 
 export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
   // hooks
@@ -24,14 +24,14 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
 
   // style
   const baseStyle = {
-    transition: "box-shadow-sm 0.2s ease, transform 0.04s linear",
+    transition: 'box-shadow-sm 0.2s ease, transform 0.04s linear',
   };
 
   const style = transform
     ? {
         ...baseStyle,
         transform: `translate(${transform.x}px, ${transform.y}px) scale(1.03)`,
-        boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
+        boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
         zIndex: 50,
       }
     : baseStyle;
@@ -49,12 +49,12 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
           {...attributes}
         >
           <div className="p-2">
-            <p className="break-word text-bodySm font-bold">
+            <p className="break-words text-bodySm font-bold">
               {stringSlicer({ string: task.title, slice: isMobile ? 50 : 100 })}
             </p>
           </div>
 
-          <hr className="border border-dashed border-gray-300 mx-2" />
+          <hr className="mx-2 border border-dashed border-gray-300" />
 
           <p className="break-words p-2 text-bodySm">
             {stringSlicer({
@@ -67,16 +67,16 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
         <div className="flex items-center justify-between rounded-b-lg px-2 pb-1 pt-2">
           <MyIcon
             icon={
-              task.tag == "bug"
-                ? "solar:bug-bold-duotone"
-                : "material-symbols:task"
+              task.tag == 'bug'
+                ? 'solar:bug-bold-duotone'
+                : 'material-symbols:task'
             }
             className="mr-2 text-title text-warning-500"
           />
 
           <div data-no-dnd="true">
             <MyIcon
-              icon={"maki:arrow"}
+              icon={'maki:arrow'}
               className="cursor-pointer text-subtitle text-warning-500 hover:text-blue-500"
               onClick={() => navigation.taskDetail(task.id)}
             />

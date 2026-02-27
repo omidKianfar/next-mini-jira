@@ -12,13 +12,13 @@ const ModalComponent = ({
 }: ModalComponentProps) => {
   return (
     <div>
-      <h1 className="mb-4 text-subtitle font-semibold capitalize text-warning-500">
-        {title}
+      <h1 className="mb-4 mt-4 break-words font-semibold text-warning-500">
+        {stringSlicer({ string: title as string, slice: 50 })}
       </h1>
 
       {description && !isDelete && (
         <p className="mt-4 break-words rounded-lg bg-gray-100 p-2 text-body capitalize text-blue-500 shadow-md">
-          {stringSlicer({ string: description as string, slice: 30 })}
+          {stringSlicer({ string: description as string, slice: 100 })}
         </p>
       )}
 
@@ -26,7 +26,7 @@ const ModalComponent = ({
         <div
           className="mt-4 break-words rounded-lg bg-gray-100 p-2 text-body capitalize text-blue-500 shadow-md"
           dangerouslySetInnerHTML={{
-            __html: stringSlicer({ string: description as string, slice: 30 }),
+            __html: stringSlicer({ string: description as string, slice: 100 }),
           }}
         />
       )}
