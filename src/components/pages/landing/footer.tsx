@@ -18,7 +18,7 @@ const FooterComponent = () => {
 
         <div className="mt-4 flex items-center justify-center">
           <MyIcon
-            icon="mdi:github"
+            icon="github"
             onClick={() =>
               router.push('https://github.com/omidKianfar/next-mini-jira.git')
             }
@@ -26,7 +26,7 @@ const FooterComponent = () => {
           />
 
           <MyIcon
-            icon="mdi:linkedin"
+            icon="linkedin"
             onClick={() =>
               router.push('https://www.linkedin.com/in/kianfar-omid1990/')
             }

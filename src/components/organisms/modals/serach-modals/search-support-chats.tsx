@@ -83,13 +83,13 @@ const SearchSupportChats = ({
       <div className="relative mb-4 rounded-lg border-2 border-warning-400 bg-gray-50 p-2 shadow-md">
         <div>
           <MyIcon
-            icon="tabler:zoom"
+            icon="search"
             className="absolute left-3 top-5 text-title text-primary-500"
           />
 
           {filteredChats.length > 0 && (
             <MyIcon
-              icon="material-symbols:close-rounded"
+              icon="close"
               className="absolute right-3 top-5 cursor-pointer text-title text-gray-400 hover:text-error-500"
               onClick={handelClear}
             />

@@ -167,7 +167,7 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
                       disable={!!!url}
                       icon={
                         <MyIcon
-                          icon="iconamoon:send-fill"
+                          icon="send"
                           className="text-h4 text-primary-500 hover:text-primary-700 lg:text-h2"
                         />
                       }
@@ -178,7 +178,7 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
                       disable={uploading || !!!url}
                       icon={
                         <MyIcon
-                          icon="mingcute:close-fill"
+                          icon="close"
                           className="text-h4 text-error-500 hover:text-error-700 lg:text-h2"
                         />
                       }

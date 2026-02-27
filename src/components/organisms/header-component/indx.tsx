@@ -67,7 +67,7 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
         <div className="relative flex w-1/3 items-center justify-start">
           {pathname !== '/' && (
             <MyIcon
-              icon={'mingcute:menu-fill'}
+              icon="menu"
               className="cursor-pointer text-title text-primary-500 hover:text-primary-700 lg:text-h3"
               onClick={() => setShowSidebar?.(!showSidebar)}
             />

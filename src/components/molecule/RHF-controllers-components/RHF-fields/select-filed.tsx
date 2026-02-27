@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { Controller, FieldValues, useFormContext } from "react-hook-form";
-import { useState } from "react";
+import { Controller, FieldValues, useFormContext } from 'react-hook-form';
+import { useState } from 'react';
 
 // type
-import { SelectControllerProps } from "../../type";
+import { SelectControllerProps } from '../../type';
 
 // ui
-import LabelComponent from "./label";
-import MyIcon from "@/src/components/atom/icon-components";
-import ErrorComponent from "./errors";
+import LabelComponent from './label';
+import MyIcon from '@/src/components/atom/icon-components';
+import ErrorComponent from './errors';
 
 const SelectField = <T extends FieldValues>({
   name,
@@ -55,12 +55,12 @@ const SelectField = <T extends FieldValues>({
             <div>
               {changeStatus ? (
                 <MyIcon
-                  icon="ic:round-swipe-down"
+                  icon="swipe-down"
                   className="absolute right-2 top-2.5 text-title text-gray-400"
                 />
               ) : (
                 <MyIcon
-                  icon="ic:baseline-swipe-up"
+                  icon="swipe-up"
                   className="absolute right-2 top-2.5 text-title text-gray-400"
                 />
               )}

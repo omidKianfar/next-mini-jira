@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { lazy, Suspense, useRef, useState } from "react";
+import { lazy, Suspense, useRef, useState } from 'react';
 
 // type
-import { UploadAvatarProps } from "../type";
+import { UploadAvatarProps } from '../type';
 
 // ui
-import MyImage from "../../atom/image-components";
-import FileInputField from "../RHF-controllers-components/RHF-fields/file-input-field";
-import MyIcon from "../../atom/icon-components";
-import LoadingCircle from "../../atom/loadings/loading-circle";
-import PageLoading from "../../common/page-loading";
+import MyImage from '../../atom/image-components';
+import FileInputField from '../RHF-controllers-components/RHF-fields/file-input-field';
+import MyIcon from '../../atom/icon-components';
+import LoadingCircle from '../../atom/loadings/loading-circle';
+import PageLoading from '../../common/page-loading';
 
-const AvatarCropModal = lazy(() => import("../../common/avatar-crop"));
+const AvatarCropModal = lazy(() => import('../../common/avatar-crop'));
 
 const AvatarUpload = ({
   photo,
@@ -44,7 +44,7 @@ const AvatarUpload = ({
     await uploadHandler(file);
 
     if (photoRef.current) {
-      photoRef.current.value = "";
+      photoRef.current.value = '';
     }
   };
 
@@ -89,7 +89,7 @@ const AvatarUpload = ({
         />
 
         <MyIcon
-          icon="line-md:download"
+          icon="download"
           className="cursor-pointer text-h3 text-primary-500"
           onClick={photoRefHandler}
         />

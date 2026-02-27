@@ -1,20 +1,20 @@
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 
 // ui
-import MyImage from "@/src/components/atom/image-components";
-import MyIcon from "@/src/components/atom/icon-components";
+import MyImage from '@/src/components/atom/image-components';
+import MyIcon from '@/src/components/atom/icon-components';
 
 // utiles
-import { stringSlicer } from "@/src/utils/string-slicer";
+import { stringSlicer } from '@/src/utils/string-slicer';
 
 // type
-import { MyUserType } from "@/src/types/global";
-import { UsersTableProps } from "../type";
+import { MyUserType } from '@/src/types/global';
+import { UsersTableProps } from '../type';
 
 export const Cloumns = ({
   toggleActive,
   goDetail,
-}: Pick<UsersTableProps, "goDetail" | "toggleActive">) => {
+}: Pick<UsersTableProps, 'goDetail' | 'toggleActive'>) => {
   const columns = [
     {
       head: <span className="text-primary-500">Username</span>,
@@ -54,7 +54,7 @@ export const Cloumns = ({
 
       column: (user: MyUserType) => (
         <p className="font-semibold">
-          {dayjs(user.createdAt).format("YYYY-MM-DD")}
+          {dayjs(user.createdAt).format('YYYY-MM-DD')}
         </p>
       ),
     },
@@ -63,31 +63,23 @@ export const Cloumns = ({
 
       column: (user: MyUserType) => (
         <div className="flex items-center justify-start">
-          <div title={user.isActive === true ? "Active" : "Deactive"}>
-            {user.isActive ? (
-              <MyIcon
-                icon="solar:user-bold-duotone"
-                iconClass="cursor-pointer text-h3 text-success-500"
-                onClick={() => toggleActive(user)}
-              />
-            ) : (
-              <MyIcon
-                icon="solar:user-bold-duotone"
-                iconClass="cursor-pointer text-h3 text-warning-500"
-                onClick={() => toggleActive(user)}
-              />
-            )}
+          <div title={user.isActive === true ? 'Active' : 'Deactive'}>
+            <MyIcon
+              icon="user"
+              iconClass={`cursor-pointer text-h3 ${user.isActive ? 'text-success-500' : 'text-warning-500'}`}
+              onClick={() => toggleActive(user)}
+            />
           </div>
         </div>
       ),
     },
     {
-      head: "",
+      head: '',
 
       column: (user: MyUserType) => (
         <div className="flex items-center justify-end">
           <MyIcon
-            icon="weui:arrow-filled"
+            icon="arrow-enter"
             iconClass="cursor-pointer text-h2 text-warning-500 hover:text-warning-700"
             onClick={() => goDetail(user.userId)}
           />

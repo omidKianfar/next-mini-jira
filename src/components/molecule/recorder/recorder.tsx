@@ -105,13 +105,10 @@ const Recorder = ({ fileUploader }: RecorderProps) => {
             disable={fileUploader?.uploading}
             className="text-subtitle font-semibold"
             icon={
-              <MyIcon
-                icon="fluent:record-28-regular"
-                className="text-h1 text-error-500"
-              />
+              <MyIcon icon="microphone" className="text-h1 text-error-500" />
             }
           >
-            <MyIcon icon="pepicons-print:microphone-handheld" />
+            <MyIcon icon="record" />
             Start Record
           </ButtonFreeClass>
         ) : (
@@ -121,12 +118,7 @@ const Recorder = ({ fileUploader }: RecorderProps) => {
               disable={fileUploader?.uploading}
               onClick={stopRecording}
               className="text-subtitle font-semibold"
-              icon={
-                <MyIcon
-                  icon="fluent:record-stop-16-regular"
-                  className="text-h1 text-error-500"
-                />
-              }
+              icon={<MyIcon icon="stop" className="text-h1 text-error-500" />}
             >
               Stop Record
             </ButtonFreeClass>

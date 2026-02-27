@@ -37,10 +37,7 @@ const AdminEmptySupportComponent = () => {
         >
           <h4 className="text-h4 text-gray-400">No chat history</h4>
 
-          <MyIcon
-            icon="line-md:chat-round-dots-filled"
-            className="ml-2 text-h1 text-gray-400"
-          />
+          <MyIcon icon="chat" className="ml-2 text-h1 text-gray-400" />
         </motion.div>
       </div>
     </div>

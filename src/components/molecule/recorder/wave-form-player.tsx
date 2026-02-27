@@ -78,12 +78,12 @@ const WaveformPlayer = ({ audioUrl }: WaveformPlayerProps) => {
             icon={
               stopRecorder ? (
                 <MyIcon
-                  icon="solar:pause-bold"
+                  icon="pause"
                   className="text-h4 text-primary-500 hover:text-warning-500"
                 />
               ) : (
                 <MyIcon
-                  icon="solar:play-bold"
+                  icon="play"
                   className="text-h4 text-primary-500 hover:text-warning-500"
                 />
               )

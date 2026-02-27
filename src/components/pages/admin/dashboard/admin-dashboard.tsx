@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 
 // hooks
-import { useUsersListener } from "@/src/hooks/users/use-user-listener";
-import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
+import { useUsersListener } from '@/src/hooks/users/use-user-listener';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 
 // ui
-import PageLoading from "@/src/components/common/page-loading";
-import UsersTable from "../../../organisms/tables/admin-users-table";
-import UserListCard from "../../../organisms/lists/admin-users-list";
-import MyIcon from "@/src/components/atom/icon-components";
+import PageLoading from '@/src/components/common/page-loading';
+import UsersTable from '../../../organisms/tables/admin-users-table';
+import UserListCard from '../../../organisms/lists/admin-users-list';
+import MyIcon from '@/src/components/atom/icon-components';
 
 // type
-import { MyUserType, UserType } from "@/src/types/global";
+import { MyUserType, UserType } from '@/src/types/global';
 
 // firestore
-import { updateFirestoreUser } from "@/src/libs/auth/update-user";
+import { updateFirestoreUser } from '@/src/libs/auth/update-user';
 
 // redux
-import { RootState } from "@/src/store";
-import { toggleSortByCreatedAt } from "@/src/store/slices/users/users";
+import { RootState } from '@/src/store';
+import { toggleSortByCreatedAt } from '@/src/store/slices/users/users';
 
 const AdminDashboardComponent = () => {
   // hooks
@@ -54,7 +54,7 @@ const AdminDashboardComponent = () => {
   // filters
   // remove admin
   const usersWithoutAdmin = users.filter(
-    (user) => user.userType !== UserType.Admin,
+    (user) => user.userType !== UserType.Admin
   );
 
   // apply filters
@@ -66,8 +66,8 @@ const AdminDashboardComponent = () => {
 
     // status filter
     let statusBool: boolean | null = null;
-    if (status === "true") statusBool = true;
-    if (status === "false") statusBool = false;
+    if (status === 'true') statusBool = true;
+    if (status === 'false') statusBool = false;
 
     if (statusBool !== null && user.isActive !== statusBool) {
       return false;
@@ -101,13 +101,13 @@ const AdminDashboardComponent = () => {
 
           {sort ? (
             <MyIcon
-              icon="ph:sort-ascending-bold"
+              icon="ASC"
               className="cursor-pointer text-h4 text-blue-400"
               onClick={SortHandler}
             />
           ) : (
             <MyIcon
-              icon="ph:sort-descending-bold"
+              icon="DSCE"
               className="cursor-pointer text-h4 text-blue-400"
               onClick={SortHandler}
             />

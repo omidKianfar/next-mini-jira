@@ -45,7 +45,7 @@ export default function ModalContainer({
               onClick={handleClose}
               className="absolute right-4 top-4 cursor-pointer text-subtitle text-gray-500 transition-colors hover:text-error-500"
             >
-              <MyIcon icon="zondicons:close-outline" />
+              <MyIcon icon="close-round" />
             </button>
           </motion.div>
         </motion.div>

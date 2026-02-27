@@ -129,7 +129,7 @@ const ChatMessages = ({
               onClick={scrollToBottom}
               icon={
                 <MyIcon
-                  icon="uiw:down-circle"
+                  icon="scroll-down"
                   className="rounded-full text-h2 text-primary-500 shadow-sm hover:text-primary-700"
                 />
               }

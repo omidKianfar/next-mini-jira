@@ -19,7 +19,7 @@ const ChatHeader = ({ userChat, currentUser }: ChatSidebar) => {
             wrapperClass="relative h-[40px] w-[40px] rounded-full border-2 border-primary-500 "
           />
         ) : currentUser?.userType === UserType.Client ? (
-          <MyIcon icon="bx:support" className="text-h3 text-orange-400" />
+          <MyIcon icon="support" className="text-h3 text-orange-400" />
         ) : (
           <div className="h-[40px] w-[40px] rounded-full border-2 border-primary-500 bg-gray-200"></div>
         )}

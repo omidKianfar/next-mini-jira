@@ -1,16 +1,16 @@
 // hooks
-import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 
 // ui
-import ButtonBack from "@/src/components/atom/buttons-component/button-back";
-import MyIcon from "@/src/components/atom/icon-components";
-import MyImage from "@/src/components/atom/image-components";
+import ButtonBack from '@/src/components/atom/buttons-component/button-back';
+import MyIcon from '@/src/components/atom/icon-components';
+import MyImage from '@/src/components/atom/image-components';
 
 // card
-import PlanCardComponent from "@/src/components/molecule/cards/plan-cart";
+import PlanCardComponent from '@/src/components/molecule/cards/plan-cart';
 
 // type
-import { ChoosePlanSectionProps } from "../type";
+import { ChoosePlanSectionProps } from '../type';
 
 const ChoosePlanComponent = ({
   onBack,
@@ -40,20 +40,16 @@ const ChoosePlanComponent = ({
             title="Monthly"
             description="Try a month payment"
             price={10}
-            onClick={() => onChoosePlan("monthly")}
-            icon={
-              <MyIcon icon="fluent:payment-20-filled" className="text-9xl" />
-            }
+            onClick={() => onChoosePlan('monthly')}
+            icon={<MyIcon icon="monthly-payment" className="text-9xl" />}
           />
 
           <PlanCardComponent
             title="Yearly"
             description="Try a year payment"
             price={120}
-            onClick={() => onChoosePlan("yearly")}
-            icon={
-              <MyIcon icon="fluent:payment-20-filled" className="text-9xl" />
-            }
+            onClick={() => onChoosePlan('yearly')}
+            icon={<MyIcon icon="yearly-payment" className="text-9xl" />}
           />
         </div>
       </div>

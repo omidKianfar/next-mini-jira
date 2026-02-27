@@ -73,10 +73,7 @@ const AdminSupportUserCard = ({
         </div>
 
         {chatId === chat.id && (
-          <MyIcon
-            icon="teenyicons:tick-circle-solid"
-            className="text-success-400"
-          />
+          <MyIcon icon="tick" className="text-success-400" />
         )}
       </div>
 

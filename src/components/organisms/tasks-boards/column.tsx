@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { useDroppable } from "@dnd-kit/core";
+import { useState, useEffect } from 'react';
+import { useDroppable } from '@dnd-kit/core';
 
 // ui
-import MyIcon from "@/src/components/atom/icon-components";
-import EmptyColumn from "../../atom/empty-components/empty-column";
+import MyIcon from '@/src/components/atom/icon-components';
+import EmptyColumn from '../../atom/empty-components/empty-column';
 
 // type
-import { ColumnProps } from "@/src/components/pages/type";
+import { ColumnProps } from '@/src/components/pages/type';
 
 const ColumnComponent = ({ id, children }: ColumnProps) => {
   const { setNodeRef, isOver } = useDroppable({ id });
@@ -20,9 +20,9 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
 
   // functions
   const [show, setShow] = useState<boolean>(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       const saved = localStorage.getItem(storageKey);
-      return saved === null ? true : saved === "true";
+      return saved === null ? true : saved === 'true';
     }
     return true;
   });
@@ -39,23 +39,23 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
     <div
       ref={setNodeRef}
       className={`h-auto w-full rounded-xl border-2 border-primary-300 shadow-md transition lg:w-80 ${
-        isOver ? "bg-primary-200" : "bg-white"
+        isOver ? 'bg-primary-200' : 'bg-white'
       }`}
       style={{
-        touchAction: "none",
+        touchAction: 'none',
       }}
     >
       <div
-        className={`relative flex items-center justify-center gap-2 ${!show ? "rounded-lg" : "rounded-t-xl"} bg-gradient-to-r from-primary-500 via-primary-400 to-primary-500 p-2 text-center font-bold capitalize text-white shadow-sm`}
+        className={`relative flex items-center justify-center gap-2 ${!show ? 'rounded-lg' : 'rounded-t-xl'} bg-gradient-to-r from-primary-500 via-primary-400 to-primary-500 p-2 text-center font-bold capitalize text-white shadow-sm`}
       >
         <h1>{id}</h1>
 
-        {id === "todo" ? (
-          <MyIcon icon="ri:todo-line" className="text-title" />
-        ) : id === "inprogress" ? (
-          <MyIcon icon="carbon:in-progress" className="text-title" />
+        {id === 'todo' ? (
+          <MyIcon icon="todo" className="text-title" />
+        ) : id === 'inprogress' ? (
+          <MyIcon icon="progress" className="text-title" />
         ) : (
-          <MyIcon icon="ant-design:file-done-outlined" className="text-title" />
+          <MyIcon icon="done" className="text-title" />
         )}
 
         <div className="absolute left-4 text-body text-white">
@@ -67,7 +67,7 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
           onClick={toggleCollapse}
         >
           <MyIcon
-            icon={show ? "mdi:chevron-down" : "mdi:chevron-up"}
+            icon={show ? 'arrow-open' : 'arrow-close'}
             className="text-h4 hover:text-warning-500"
           />
         </button>

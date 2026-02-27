@@ -1,8 +1,9 @@
 // ui
-import { Icon } from "@iconify/react";
+import { Icon } from '@iconify/react';
+import { ICONS } from './icons';
 
 // type
-import { MyIconProps } from "../type";
+import { MyIconProps } from '../type';
 
 const MyIcon = ({ onClick, className, icon, iconClass }: MyIconProps) => {
   return (
@@ -10,7 +11,7 @@ const MyIcon = ({ onClick, className, icon, iconClass }: MyIconProps) => {
       className={`flex items-center justify-center ${className}`}
       onClick={onClick}
     >
-      <Icon icon={icon} className={iconClass} />
+      <Icon icon={ICONS[icon]} className={iconClass} />
     </div>
   );
 };

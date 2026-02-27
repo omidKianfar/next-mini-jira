@@ -1,30 +1,30 @@
-"use client";
+'use client';
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { usePathname } from "next/navigation";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect, useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { usePathname } from 'next/navigation';
 
 // hooks
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
-import { useAuth } from "@/src/hooks/auth/use-auth";
-import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
-import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
-import { useRequirePaymentStatus } from "@/src/hooks/pages-user-status-require/use-require-payment-status";
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { useAuth } from '@/src/hooks/auth/use-auth';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
+import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
+import { useRequirePaymentStatus } from '@/src/hooks/pages-user-status-require/use-require-payment-status';
 
 // schema
-import { authSchema } from "../auth/schema";
+import { authSchema } from '../auth/schema';
 
 // type
-import { SignPropsType } from "@/src/types/global";
+import { SignPropsType } from '@/src/types/global';
 
 // ui
-import FramerMotion from "../../atom/animation-component";
-import InputField from "../../molecule/RHF-controllers-components/RHF-fields/input-field";
-import MyIcon from "../../atom/icon-components";
-import ButtonNext from "../../atom/buttons-component/button-next";
-import MyImage from "../../atom/image-components";
-import ButtonBack from "../../atom/buttons-component/button-back";
+import FramerMotion from '../../atom/animation-component';
+import InputField from '../../molecule/RHF-controllers-components/RHF-fields/input-field';
+import MyIcon from '../../atom/icon-components';
+import ButtonNext from '../../atom/buttons-component/button-next';
+import MyImage from '../../atom/image-components';
+import ButtonBack from '../../atom/buttons-component/button-back';
 
 const PasswordComponent = () => {
   // hooks
@@ -43,22 +43,22 @@ const PasswordComponent = () => {
 
   // form
   const defaultValues: SignPropsType = {
-    email: user?.email ?? "",
-    password: "",
+    email: user?.email ?? '',
+    password: '',
   };
 
   const methods = useForm<SignPropsType>({
     defaultValues,
     resolver: yupResolver(authSchema),
-    mode: "onSubmit",
+    mode: 'onSubmit',
   });
 
   // functions
   useEffect(() => {
     if (user) {
       methods.reset({
-        email: user?.email ?? "",
-        password: "",
+        email: user?.email ?? '',
+        password: '',
       });
     }
   }, [user, methods]);
@@ -67,7 +67,7 @@ const PasswordComponent = () => {
     setLoading(true);
 
     try {
-      if (pathName.includes("/signup")) {
+      if (pathName.includes('/signup')) {
         await updatePasswordGoogle({
           newPassword: values.password,
         });
@@ -77,7 +77,7 @@ const PasswordComponent = () => {
         });
       }
     } catch (error: any) {
-      console.log("Error: ", error);
+      console.log('Error: ', error);
     } finally {
       setLoading(false);
     }
@@ -90,11 +90,11 @@ const PasswordComponent = () => {
   return (
     <FramerMotion>
       <div
-        className={`flex w-full flex-col items-center justify-center p-4 ${pathName.includes("/signup") && "min-h-screen"}`}
+        className={`flex w-full flex-col items-center justify-center p-4 ${pathName.includes('/signup') && 'min-h-screen'}`}
       >
         <div className="flex flex-col items-center justify-center lg:flex-row">
           <div className="mb-10 w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-md lg:mb-0 lg:w-[500px]">
-            {pathName.includes("profile") && (
+            {pathName.includes('profile') && (
               <div className="mb-2">
                 <ButtonBack onClick={handelBack} />
               </div>
@@ -112,36 +112,31 @@ const PasswordComponent = () => {
                   type="email"
                   placeholder="Enter your email"
                   disabled
-                  icon={
-                    <MyIcon
-                      icon={"ic:baseline-email"}
-                      className="text-error-400"
-                    />
-                  }
+                  icon={<MyIcon icon="email" className="text-error-400" />}
                 />
 
                 <InputField
                   name="password"
                   label={
-                    pathName.includes("/password") ? "New Password" : "Password"
+                    pathName.includes('/password') ? 'New Password' : 'Password'
                   }
                   placeholder={
-                    pathName.includes("/password")
-                      ? "Enter your new password"
-                      : "Enter your password"
+                    pathName.includes('/password')
+                      ? 'Enter your new password'
+                      : 'Enter your password'
                   }
-                  type={passwordShow ? "text" : "password"}
+                  type={passwordShow ? 'text' : 'password'}
                   autoComplete="current-password"
                   icon={
                     passwordShow ? (
                       <MyIcon
-                        icon={"mdi:show"}
+                        icon="show"
                         className="cursor-pointer text-success-400"
                         onClick={() => setPasswordShow(false)}
                       />
                     ) : (
                       <MyIcon
-                        icon={"mdi:hide"}
+                        icon="hide"
                         className="cursor-pointer text-gray-400"
                         onClick={() => setPasswordShow(true)}
                       />
@@ -151,7 +146,7 @@ const PasswordComponent = () => {
 
                 <div className="mt-6 flex items-center justify-end">
                   <ButtonNext type="submit" isLoading={loading}>
-                    {pathName.includes("/password") ? "Save" : "Next"}
+                    {pathName.includes('/password') ? 'Save' : 'Next'}
                   </ButtonNext>
                 </div>
               </form>

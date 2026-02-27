@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { ChangeEvent, useState } from "react";
-import { useSelector } from "react-redux";
+import { ChangeEvent, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 // hooks
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 
 // type
-import { MyUserType, ModalProps } from "@/src/types/global";
+import { MyUserType, ModalProps } from '@/src/types/global';
 
 // redux
-import { RootState } from "@/src/store";
+import { RootState } from '@/src/store';
 
 // ui
-import MyIcon from "../../../atom/icon-components";
-import EmptyColumn from "../../../atom/empty-components/empty-column";
-import MyImage from "../../../atom/image-components";
+import MyIcon from '../../../atom/icon-components';
+import EmptyColumn from '../../../atom/empty-components/empty-column';
+import MyImage from '../../../atom/image-components';
 
 // utils
-import { stringSlicer } from "@/src/utils/string-slicer";
+import { stringSlicer } from '@/src/utils/string-slicer';
 
-const SearchUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
+const SearchUsers = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
   // hooks
   const navigation = useNavigation();
 
@@ -29,7 +29,7 @@ const SearchUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
 
   // states
   const [openMenu, setOpenMenu] = useState<boolean>(false);
-  const [searchValue, setSearchValue] = useState<string>("");
+  const [searchValue, setSearchValue] = useState<string>('');
   const [filteredUsers, setFilteredUsers] = useState<MyUserType[]>([]);
 
   // functions
@@ -47,8 +47,8 @@ const SearchUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
     const query = value.toLowerCase();
 
     const filtered = users.filter((user) => {
-      const username = user?.userName?.toLowerCase() || "";
-      const email = user?.email?.toLowerCase() || "";
+      const username = user?.userName?.toLowerCase() || '';
+      const email = user?.email?.toLowerCase() || '';
       return username.includes(query) || email.includes(query);
     });
 
@@ -57,7 +57,7 @@ const SearchUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   };
 
   const handelClear = () => {
-    setSearchValue("");
+    setSearchValue('');
     setFilteredUsers([]);
     setOpenMenu(false);
   };
@@ -71,13 +71,13 @@ const SearchUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
       <div className="relative mb-4 rounded-lg border-2 border-warning-400 bg-gray-50 p-2 shadow-md">
         <div>
           <MyIcon
-            icon="tabler:zoom"
+            icon="search"
             className="absolute left-3 top-5 text-title text-primary-500"
           />
 
           {filteredUsers.length > 0 && (
             <MyIcon
-              icon="material-symbols:close-rounded"
+              icon="close-round"
               className="absolute right-3 top-5 cursor-pointer text-title text-gray-400 hover:text-error-500"
               onClick={handelClear}
             />

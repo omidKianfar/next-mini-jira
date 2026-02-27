@@ -17,7 +17,7 @@ const EmojiComponent = () => {
         }}
       >
         <MyIcon
-          icon="mingcute:emoji-fill"
+          icon="emoji"
           className={`text-subtitle ${showEmojiPicker ? 'text-primary-500' : 'text-gray-400'}`}
         />
       </button>

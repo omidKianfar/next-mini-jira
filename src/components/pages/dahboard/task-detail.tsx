@@ -137,7 +137,7 @@ const TaskDetailComponent = () => {
               disable={deleting}
               icon={
                 <MyIcon
-                  icon={'mingcute:delete-fill'}
+                  icon="delete"
                   className="z-50 text-h4 text-error-500 hover:text-error-700"
                 />
               }

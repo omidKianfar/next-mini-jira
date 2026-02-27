@@ -9,36 +9,15 @@ import { BlockTypeSelect } from '../helper/block-type-select';
 const ToolbarButtonsComponents = () => {
   return (
     <>
-      <MarkButton format="bold" icon={<MyIcon icon="ooui:bold-b" />} />
-
-      <MarkButton format="italic" icon={<MyIcon icon="tabler:italic" />} />
-
-      <MarkButton
-        format="underline"
-        icon={<MyIcon icon="mingcute:underline-fill" />}
-      />
-
-      <MarkButton
-        format="code"
-        icon={<MyIcon icon="material-symbols:code-rounded" />}
-      />
-
-      <BlockButton
-        format="numberedList"
-        icon={<MyIcon icon="f7:list-number" />}
-      />
-
-      <BlockButton
-        format="bulletedList"
-        icon={<MyIcon icon="pajamas:list-bulleted" />}
-      />
-
-      <BlockButton format="left" icon={<MyIcon icon="quill:text-left" />} />
-
-      <BlockButton format="center" icon={<MyIcon icon="quill:text-center" />} />
-
-      <BlockButton format="right" icon={<MyIcon icon="bi:text-right" />} />
-
+      <MarkButton format="bold" icon={<MyIcon icon="bold" />} />
+      <MarkButton format="italic" icon={<MyIcon icon="italic" />} />
+      <MarkButton format="underline" icon={<MyIcon icon="under-line" />} />
+      <MarkButton format="code" icon={<MyIcon icon="code" />} />
+      <BlockButton format="numberedList" icon={<MyIcon icon="number-list" />} />
+      <BlockButton format="bulletedList" icon={<MyIcon icon="bullet-list" />} />
+      <BlockButton format="left" icon={<MyIcon icon="align-left" />} />
+      <BlockButton format="center" icon={<MyIcon icon="align-center" />} />
+      <BlockButton format="right" icon={<MyIcon icon="align-right" />} />
       <BlockTypeSelect />
     </>
   );

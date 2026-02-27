@@ -28,7 +28,7 @@ export default function NotFound() {
       <div>
         <ButtonNext
           onClick={() => navigation.dashboard()}
-          icon={<MyIcon icon="maki:arrow" className="ml-2 text-body" />}
+          icon={<MyIcon icon="arrow-right" className="ml-2 text-body" />}
         >
           Go Home
         </ButtonNext>

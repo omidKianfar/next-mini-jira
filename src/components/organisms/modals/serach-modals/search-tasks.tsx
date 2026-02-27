@@ -1,26 +1,26 @@
-"use client";
+'use client';
 
-import { ChangeEvent, useState } from "react";
-import { useSelector } from "react-redux";
+import { ChangeEvent, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 // hooks
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
-import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 
 // type
-import { Task, ModalProps } from "@/src/types/global";
+import { Task, ModalProps } from '@/src/types/global';
 
 // redux
-import { RootState } from "@/src/store";
+import { RootState } from '@/src/store';
 
 // ui
-import MyIcon from "../../../atom/icon-components";
-import EmptyColumn from "../../../atom/empty-components/empty-column";
+import MyIcon from '../../../atom/icon-components';
+import EmptyColumn from '../../../atom/empty-components/empty-column';
 
 // utils
-import { stringSlicer } from "@/src/utils/string-slicer";
+import { stringSlicer } from '@/src/utils/string-slicer';
 
-const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
+const SearchTasks = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
   // hooks
   const navigation = useNavigation();
   const isMobile = useIsMobile();
@@ -30,7 +30,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
 
   // states
   const [openMenu, setOpenMenu] = useState<boolean>(false);
-  const [searchValue, setSearchValue] = useState<string>("");
+  const [searchValue, setSearchValue] = useState<string>('');
   const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
 
   // functions
@@ -48,8 +48,8 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
     const query = value.toLowerCase();
 
     const filtered = tasks.filter((task) => {
-      const title = task?.title?.toLowerCase() || "";
-      const description = task?.description?.toLowerCase() || "";
+      const title = task?.title?.toLowerCase() || '';
+      const description = task?.description?.toLowerCase() || '';
       return title.includes(query) || description.includes(query);
     });
 
@@ -58,7 +58,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
   };
 
   const handelClear = () => {
-    setSearchValue("");
+    setSearchValue('');
     setFilteredTasks([]);
     setOpenMenu(false);
   };
@@ -72,13 +72,13 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
       <div className="relative mb-4 rounded-lg border-2 border-warning-400 bg-gray-50 p-2 shadow-md">
         <div>
           <MyIcon
-            icon="tabler:zoom"
+            icon="search"
             className="absolute left-3 top-5 text-title text-primary-500"
           />
 
           {filteredTasks.length > 0 && (
             <MyIcon
-              icon="material-symbols:close-rounded"
+              icon="close-round"
               className="absolute right-3 top-5 cursor-pointer text-title text-gray-400 hover:text-error-500"
               onClick={handelClear}
             />
@@ -128,11 +128,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
 
                   <div className="flex items-center justify-between rounded-b-lg px-2 pb-1 pt-2">
                     <MyIcon
-                      icon={
-                        task.tag == "bug"
-                          ? "solar:bug-bold-duotone"
-                          : "material-symbols:task"
-                      }
+                      icon={task.tag == 'bug' ? 'bug' : 'task'}
                       className="mr-2 text-title text-warning-500"
                     />
                   </div>

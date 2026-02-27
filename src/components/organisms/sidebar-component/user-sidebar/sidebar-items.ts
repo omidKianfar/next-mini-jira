@@ -33,7 +33,7 @@ export const SidebarItems = ({
     () => [
       {
         id: 'profile',
-        icon: 'gg:profile',
+        icon: 'profile',
         title: 'profile',
         direction: () => {
           navigation.profile();
@@ -43,7 +43,7 @@ export const SidebarItems = ({
       },
       {
         id: 'dashboard',
-        icon: 'material-symbols:dashboard-rounded',
+        icon: 'dashboard',
         title: 'dashboard',
         direction: () => {
           navigation.dashboard();
@@ -53,7 +53,7 @@ export const SidebarItems = ({
       },
       {
         id: 'support',
-        icon: 'bx:support',
+        icon: 'support',
         title: 'Support',
         direction: () => {
           MessgesRead({
@@ -71,7 +71,7 @@ export const SidebarItems = ({
       },
       {
         id: 'payment',
-        icon: 'fluent:payment-16-filled',
+        icon: 'payment',
         title: 'payment',
         direction: () => {
           navigation.payment();
@@ -88,7 +88,7 @@ export const SidebarItems = ({
     () => [
       {
         id: 'adminProfile',
-        icon: 'gg:profile',
+        icon: 'profile',
         title: 'profile',
         direction: () => {
           navigation.adminProfile();
@@ -98,7 +98,7 @@ export const SidebarItems = ({
       },
       {
         id: 'adminDashboard',
-        icon: 'material-symbols:dashboard-rounded',
+        icon: 'dashboard',
         title: 'dashboard',
         direction: () => {
           navigation.adminDashboard();
@@ -108,7 +108,7 @@ export const SidebarItems = ({
       },
       {
         id: 'support',
-        icon: 'bx:support',
+        icon: 'support',
         title: 'Support',
         direction: () => {
           navigation.adminSupport();

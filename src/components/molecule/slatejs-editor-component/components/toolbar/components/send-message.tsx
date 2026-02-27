@@ -12,7 +12,7 @@ const SendMessage = ({ handleSend, loading }: ToolbarComponentProps) => {
         isLoading={loading}
         icon={
           <MyIcon
-            icon="iconamoon:send-fill"
+            icon="send"
             className="text-h4 text-primary-500 hover:text-primary-700 lg:text-h3"
           />
         }

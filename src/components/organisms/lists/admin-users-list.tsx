@@ -39,19 +39,11 @@ const UserListCard = ({ users, goDetail, toggleActive }: UsersTableProps) => {
             </h3>
 
             <div onClick={(e) => e.stopPropagation()}>
-              {user.isActive ? (
-                <MyIcon
-                  icon="solar:user-bold-duotone"
-                  iconClass="cursor-pointer text-title text-success-500"
-                  onClick={() => toggleActive(user)}
-                />
-              ) : (
-                <MyIcon
-                  icon="solar:user-bold-duotone"
-                  iconClass="cursor-pointer text-title text-warning-500"
-                  onClick={() => toggleActive(user)}
-                />
-              )}
+              <MyIcon
+                icon="user"
+                iconClass={`cursor-pointer text-title ${user.isActive ? 'text-success-500' : 'text-warning-500'}`}
+                onClick={() => toggleActive(user)}
+              />
             </div>
           </div>
 

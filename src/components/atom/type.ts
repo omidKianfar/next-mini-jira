@@ -1,8 +1,10 @@
+import { IconName } from './icon-components/icons';
+
 export interface FarmerMotionProps {
   children: React.ReactNode;
 }
 
-export type ButtonType = "button" | "submit" | "reset";
+export type ButtonType = 'button' | 'submit' | 'reset';
 export interface ButtonProps {
   type?: ButtonType;
   children?: React.ReactNode;
@@ -22,7 +24,7 @@ export interface LoadingProps {
 export interface MyIconProps {
   onClick?: () => void;
   className?: string;
-  icon: string;
+  icon: IconName;
   iconClass?: string;
 }
 export interface MyImageProps {

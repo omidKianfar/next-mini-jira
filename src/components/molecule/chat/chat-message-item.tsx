@@ -106,14 +106,14 @@ const ChatMessageItem = ({
             className={`flex h-full w-full items-center justify-between rounded-b-lg border-2 border-t-0 ${isAdmin ? 'border-warning-400' : 'border-primary-400'} p-2 shadow-md`}
           >
             <MyIcon
-              icon="mingcute:delete-fill"
+              icon="delete"
               className="cursor-pointer text-subtitle text-error-500 hover:text-error-700"
               onClick={handleOpenModal}
             />
 
             {message.text !== '' && (
               <MyIcon
-                icon="fa7-solid:file-edit"
+                icon="edit"
                 className="cursor-pointer text-subtitle text-primary-500 hover:text-primary-700"
                 onClick={() => handleTemplateSelect?.(message.text as string)}
               />

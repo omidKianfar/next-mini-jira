@@ -44,7 +44,7 @@ const HeroSectionComponent = () => {
               <ButtonNext
                 onClick={() => navigation.signin()}
                 className="max-w-[140px]"
-                icon={<MyIcon icon="maki:arrow" className="ml-2" />}
+                icon={<MyIcon icon="arrow-right" className="ml-2" />}
               >
                 Signin
               </ButtonNext>

@@ -30,7 +30,7 @@ export default function ActivePageComponent() {
       <div>
         <ButtonNext
           onClick={() => navigation.support()}
-          icon={<MyIcon icon="maki:arrow" className="ml-2 text-body" />}
+          icon={<MyIcon icon="arrow-right" className="ml-2 text-body" />}
         >
           Go support
         </ButtonNext>

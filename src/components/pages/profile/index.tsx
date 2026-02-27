@@ -160,7 +160,7 @@ const ProfileComponent = () => {
                       className="ml-4 text-primary-500 hover:text-primary-600"
                       onClick={goPasswordHandler}
                       icon={
-                        <MyIcon icon="maki:arrow" className="ml-2 text-body" />
+                        <MyIcon icon="arrow-right" className="ml-2 text-body" />
                       }
                     >
                       Password
@@ -198,7 +198,7 @@ const ProfileComponent = () => {
                     placeholder="Enter your username"
                     icon={
                       <MyIcon
-                        icon={'tabler:user-filled'}
+                        icon="user"
                         className="text-subtitle text-gray-600"
                       />
                     }

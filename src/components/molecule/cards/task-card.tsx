@@ -66,17 +66,13 @@ export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
 
         <div className="flex items-center justify-between rounded-b-lg px-2 pb-1 pt-2">
           <MyIcon
-            icon={
-              task.tag == 'bug'
-                ? 'solar:bug-bold-duotone'
-                : 'material-symbols:task'
-            }
+            icon={task.tag == 'bug' ? 'bug' : 'task'}
             className="mr-2 text-title text-warning-500"
           />
 
           <div data-no-dnd="true">
             <MyIcon
-              icon={'maki:arrow'}
+              icon="arrow-right"
               className="cursor-pointer text-subtitle text-warning-500 hover:text-blue-500"
               onClick={() => navigation.taskDetail(task.id)}
             />

@@ -7,6 +7,7 @@ import MyIcon from '../../atom/icon-components';
 
 // data
 import { containerVariants, itemVariants, TECH_STACK } from './data';
+import { IconName } from '../../atom/icon-components/icons';
 
 const WorkflowComponent = () => {
   return (
@@ -39,7 +40,7 @@ const WorkflowComponent = () => {
               className="flex cursor-default items-center gap-3 transition-colors duration-300"
             >
               <MyIcon
-                icon={tech.icon}
+                icon={tech.icon as IconName}
                 className="font-black text-gray-500 lg:text-subtitle"
               />
 

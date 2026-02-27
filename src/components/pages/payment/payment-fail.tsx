@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
 // hook
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
-import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
-import { useAuth } from "@/src/hooks/auth/use-auth";
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
+import { useAuth } from '@/src/hooks/auth/use-auth';
 
 // ui
-import ButtonNext from "@/src/components/atom/buttons-component/button-next";
-import MyIcon from "@/src/components/atom/icon-components";
+import ButtonNext from '@/src/components/atom/buttons-component/button-next';
+import MyIcon from '@/src/components/atom/icon-components';
 
 const PaymentFailedComponent = () => {
   // hook
@@ -18,7 +18,7 @@ const PaymentFailedComponent = () => {
 
   // functions
   const finishHandler = () => {
-    changeStep("0");
+    changeStep('0');
 
     navigation.payment();
   };
@@ -27,7 +27,7 @@ const PaymentFailedComponent = () => {
     <div className="flex min-h-screen w-full items-center justify-center">
       <div className="h-screen w-screen rounded-xl border-warning-300 bg-white p-6 shadow-md lg:h-[500px] lg:w-[600px] lg:border-2">
         <MyIcon
-          icon={"streamline-freehand:cash-payment-bill"}
+          icon="wallet"
           className="mb-10 mt-8 text-[150px] text-warning-500"
         />
 
@@ -42,9 +42,7 @@ const PaymentFailedComponent = () => {
         <div className="mt-6 flex justify-center">
           <ButtonNext
             onClick={finishHandler}
-            icon={
-              <MyIcon icon={"maki:arrow"} className="ml-2 mt-1 text-body" />
-            }
+            icon={<MyIcon icon="arrow-right" className="ml-2 mt-1 text-body" />}
           >
             Go To Payment
           </ButtonNext>

@@ -50,7 +50,7 @@ const RecorderComponent = ({ fileUploader }: RecorderComponentProps) => {
                 </p>
 
                 <MyIcon
-                  icon="solar:copy-bold-duotone"
+                  icon="copy"
                   className="text-primary-400"
                   iconClass="absolute right-[8px] top-[6px] text-h4 cursor-pointer"
                   onClick={() => {

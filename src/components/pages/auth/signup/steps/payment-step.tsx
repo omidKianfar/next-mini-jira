@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { usePathname } from "next/navigation";
+import { usePathname } from 'next/navigation';
 
 // hooks
-import { useAuth } from "@/src/hooks/auth/use-auth";
-import { useIsMobile } from "@/src/hooks/mobile-size/use-is-mobile";
+import { useAuth } from '@/src/hooks/auth/use-auth';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 
 // ui
-import FramerMotion from "@/src/components/atom/animation-component";
-import ButtonBack from "@/src/components/atom/buttons-component/button-back";
-import MyIcon from "@/src/components/atom/icon-components";
-import MyImage from "@/src/components/atom/image-components";
+import FramerMotion from '@/src/components/atom/animation-component';
+import ButtonBack from '@/src/components/atom/buttons-component/button-back';
+import MyIcon from '@/src/components/atom/icon-components';
+import MyImage from '@/src/components/atom/image-components';
 
 // card
-import PaymentCardComponent from "@/src/components/molecule/cards/payment-cart";
+import PaymentCardComponent from '@/src/components/molecule/cards/payment-cart';
 
 const PaymentStep = () => {
   // hooks
@@ -23,25 +23,25 @@ const PaymentStep = () => {
 
   // functions
   const BackProfile = () => {
-    changeStep("1");
+    changeStep('1');
   };
 
   const freeModeHandler = async () => {
     try {
       await terialMode({ userId: user?.userId as string });
     } catch (error: any) {
-      console.log("Terial Mode Error: ", error);
+      console.log('Terial Mode Error: ', error);
     }
   };
 
   const paymentModeHandler = () => {
-    changeStep("3");
+    changeStep('3');
   };
 
   return (
     <FramerMotion>
       <div
-        className={`relative flex w-full flex-col items-center justify-center p-4 ${pathName.includes("/signup") && "min-h-screen"}`}
+        className={`relative flex w-full flex-col items-center justify-center p-4 ${pathName.includes('/signup') && 'min-h-screen'}`}
       >
         <div className="relative">
           <MyImage
@@ -63,21 +63,14 @@ const PaymentStep = () => {
                 title="Terial Mode"
                 description="You get 10 days of free access to the app."
                 onClick={freeModeHandler}
-                icon={
-                  <MyIcon icon={"tabler:free-rights"} className="text-8xl" />
-                }
+                icon={<MyIcon icon="terial" className="text-8xl" />}
               />
 
               <PaymentCardComponent
                 title="Payment Mode"
                 description="Go to payment plan page"
                 onClick={paymentModeHandler}
-                icon={
-                  <MyIcon
-                    icon={"streamline:payment-10-solid"}
-                    className="text-8xl"
-                  />
-                }
+                icon={<MyIcon icon="cash-alot" className="text-8xl" />}
               />
             </div>
           </div>

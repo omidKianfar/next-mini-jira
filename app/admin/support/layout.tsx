@@ -44,10 +44,7 @@ const DashboardLayout = ({ children }: PropsWithChildren) => {
                 onClick={() => setShowSidebar(true)}
                 className="rounded-lg border-2 border-gray-300 bg-white p-1 shadow-md"
                 icon={
-                  <MyIcon
-                    icon="fluent:arrow-exit-28-filled"
-                    className="text-h4 text-primary-500"
-                  />
+                  <MyIcon icon="logout" className="text-h4 text-primary-500" />
                 }
               />
             </div>
@@ -75,7 +72,7 @@ const DashboardLayout = ({ children }: PropsWithChildren) => {
                     className="rounded-md border-2 border-gray-200 bg-gray-50 p-1 shadow-md"
                     icon={
                       <MyIcon
-                        icon="fluent:arrow-exit-28-filled"
+                        icon="logout"
                         iconClass="rotate-180"
                         className="text-h4 text-warning-500"
                       />

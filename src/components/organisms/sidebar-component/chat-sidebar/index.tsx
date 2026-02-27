@@ -81,7 +81,7 @@ const ChatSidebar = ({
           className="z-9 absolute right-0 top-0"
           icon={
             <MyIcon
-              icon="uiw:down-circle"
+              icon="scroll-down"
               className="rotate-180 text-h3 text-primary-500/50 hover:text-primary-700"
             />
           }
