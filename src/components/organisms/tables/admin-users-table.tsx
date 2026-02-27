@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 // ui
-import { TableComponent } from "@/src/components/organisms/table-component";
-import PaginationComponent from "@/src/components/organisms/pagination-component";
-import { Cloumns } from "./cloumns";
+import { TableComponent } from '@/src/components/organisms/table-component';
+import PaginationComponent from '@/src/components/organisms/pagination-component';
+import { Cloumns } from './cloumns';
+import LoadingCircle from '../../atom/loadings/loading-circle';
 
 // type
-import { UsersTableProps } from "../type";
+import { UsersTableProps } from '../type';
 
 const UsersTable = ({ users, goDetail, toggleActive }: UsersTableProps) => {
   // pagination
@@ -19,11 +20,18 @@ const UsersTable = ({ users, goDetail, toggleActive }: UsersTableProps) => {
 
   const paginatedUsers = users.slice(
     (safePage - 1) * pageSize,
-    safePage * pageSize,
+    safePage * pageSize
   );
 
   // columns data
   const columns = Cloumns({ goDetail, toggleActive });
+
+  if (!users)
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <LoadingCircle size={20} />
+      </div>
+    );
 
   return (
     <div>

@@ -1,21 +1,29 @@
-"use client";
+'use client';
 
 // ui
-import ListComponent from "@/src/components/organisms/list-component";
-import MyIcon from "@/src/components/atom/icon-components";
+import ListComponent from '@/src/components/organisms/list-component';
+import MyIcon from '@/src/components/atom/icon-components';
+import LoadingCircle from '../../atom/loadings/loading-circle';
 
 // utils
-import { stringSlicer } from "@/src/utils/string-slicer";
+import { stringSlicer } from '@/src/utils/string-slicer';
 
 // hooks
-import { useInfiniteUsers } from "@/src/hooks/users/use-infinity-users";
+import { useInfiniteUsers } from '@/src/hooks/users/use-infinity-users';
 
 // type
-import { UsersTableProps } from "../type";
+import { UsersTableProps } from '../type';
 
 const UserListCard = ({ users, goDetail, toggleActive }: UsersTableProps) => {
   // hooks
   const { visibleUsers, loaderRef, hasMore } = useInfiniteUsers(users, 10);
+
+  if (!users)
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <LoadingCircle size={20} />
+      </div>
+    );
 
   return (
     <ListComponent>
@@ -47,7 +55,7 @@ const UserListCard = ({ users, goDetail, toggleActive }: UsersTableProps) => {
             </div>
           </div>
 
-          <p className="mt-2 my-1 text-label text-gray-600">
+          <p className="my-1 mt-2 text-label text-gray-600">
             {stringSlicer({ string: user.email as string, slice: 40 })}
           </p>
         </div>
