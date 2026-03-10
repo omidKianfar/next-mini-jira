@@ -1,12 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-
-// type
-import { UsePaymentSuccessProps } from "../type";
-
-// roues
-import { routes } from "@/src/helper/routes/routes";
+import { useEffect, routes } from '../imports';
+import { UsePaymentSuccessProps } from '../type';
 
 export const useSetSubscriptionId = ({
   sessionId,
@@ -19,9 +14,9 @@ export const useSetSubscriptionId = ({
 
       try {
         const res = await fetch(routes.api.getStripWithSessionId, {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({ sessionId }),
         });
@@ -32,7 +27,7 @@ export const useSetSubscriptionId = ({
           setSubscriptionId(data.subscriptionId);
         }
       } catch (err) {
-        console.log("Error fetching subscription:", err);
+        console.log('Error fetching subscription:', err);
       } finally {
         setLoading(false);
       }

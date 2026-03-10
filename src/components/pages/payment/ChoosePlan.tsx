@@ -1,22 +1,17 @@
-// hooks
 import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 
-// ui
 import ButtonBack from '@/src/components/atom/buttons-component/button-back';
 import MyIcon from '@/src/components/atom/icon-components';
 import MyImage from '@/src/components/atom/image-components';
 
-// card
 import PlanCardComponent from '@/src/components/molecule/cards/plan-cart';
 
-// type
 import { ChoosePlanSectionProps } from '../type';
 
 const ChoosePlanComponent = ({
   onBack,
   onChoosePlan,
 }: ChoosePlanSectionProps) => {
-  // hook
   const isMobile = useIsMobile();
 
   return (

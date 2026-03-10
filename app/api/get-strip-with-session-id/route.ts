@@ -1,5 +1,4 @@
-import Stripe from 'stripe';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse, Stripe } from '@/app/imports';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
@@ -28,7 +27,6 @@ export const POST = async (request: NextRequest) => {
       customerId: session.customer || null,
     });
   } catch (error: any) {
-    console.error('Stripe get-session error:', error);
     return NextResponse.json(
       { error: error.message || 'Stripe error' },
       { status: 400 }

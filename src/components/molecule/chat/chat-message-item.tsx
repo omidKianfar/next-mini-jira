@@ -1,36 +1,24 @@
-import { lazy, useState } from 'react';
-
-// hooks
-import { useAuth } from '@/src/hooks/auth/use-auth';
-
-// type
-import { ChatMessageItemProps } from '../type';
-import { UserType } from '@/src/types/global';
-
-// ui
-import MyImage from '../../atom/image-components';
-import WaveformPlayer from '../recorder/wave-form-player';
-import MyIcon from '../../atom/icon-components';
-import ModalContainer from '../../common/modal-container';
+import {
+  deleteChatMessage,
+  LightBoxComponent,
+  ModalContainer,
+  MyIcon,
+  MyImage,
+  MyVideo,
+  useAuth,
+  UserType,
+  useState,
+} from '../imports';
 import ModalComponent from '../modals/modal-component';
-
-// lib
-import { deleteChatMessage } from '@/src/libs/chat/delete-message';
-
-// lazy
-const LightBoxComponent = lazy(
-  () => import('@/src/components/common/light-box')
-);
-const MyVideo = lazy(() => import('@/src/components/atom/video-component'));
+import WaveformPlayer from '../recorder/wave-form-player';
+import { ChatMessageItemProps } from '../type';
 
 const ChatMessageItem = ({
   message,
   handleTemplateSelect,
 }: ChatMessageItemProps) => {
-  // hooks
   const { user } = useAuth();
 
-  // states
   const [open, setOpen] = useState(false);
 
   const isAdmin = message.senderId === 'admin';
@@ -39,7 +27,6 @@ const ChatMessageItem = ({
     (user?.userType === UserType.Client && !isAdmin) ||
     (user?.userType === UserType.Admin && isAdmin);
 
-  // functions
   const deleteMessage = () => {
     deleteChatMessage({
       userId: message.chatId as string,

@@ -1,15 +1,10 @@
-// helpers
 import { Toolbar } from '../helpers/toolbar';
-
-// components
 import SendMessage from './components/send-message';
 import EmojiComponent from './components/emoji';
 import ToolbarButtonsComponents from './components/buttons';
 import ColorSelectComponent from './components/color-select';
 import FontSelectComponent from './components/font-select';
 import BGColorSelectComponent from './components/background-color-select';
-
-// type
 import { ToolbarComponentProps } from './type';
 
 const ToolbarComponent = ({ handleSend, loading }: ToolbarComponentProps) => {

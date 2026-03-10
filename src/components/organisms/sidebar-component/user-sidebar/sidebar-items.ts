@@ -1,34 +1,26 @@
-import { useMemo } from 'react';
-
-// type
+import {
+  AdminUnreadMeassesListener,
+  MessgesRead,
+  useMemo,
+  useNavigation,
+  UserType,
+  useUnreadCount,
+} from '../../imports';
 import { sidebarItemsType, sidebarProps } from '../../type';
-import { UserType } from '@/src/types/global';
-
-// hooks
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-import { useUnreadCount } from '@/src/hooks/chat/use-unread-count';
-
-// firestore
-import { AdminUnreadMeassesListener } from '@/src/libs/chat/admin-unread-messages-count';
-import { MessgesRead } from '@/src/libs/chat/read-message';
 
 export const SidebarItems = ({
   user,
   setShowSidebar,
 }: Pick<sidebarProps, 'setShowSidebar' | 'user'>) => {
-  // hooks
   const navigation = useNavigation();
 
-  // user unread message
   const UserUnreadCount = useUnreadCount({
     chatId: user?.userId as string,
     senderType: UserType.Admin,
   });
 
-  // admin unread count
   const AdminUnraedCount = AdminUnreadMeassesListener();
 
-  // client sidebar items
   const userSidebarItems = useMemo<sidebarItemsType[]>(
     () => [
       {
@@ -83,7 +75,6 @@ export const SidebarItems = ({
     [navigation, setShowSidebar, UserUnreadCount]
   );
 
-  // admin sidebar items
   const AdminSidebarItems = useMemo<sidebarItemsType[]>(
     () => [
       {

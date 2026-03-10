@@ -1,8 +1,13 @@
-import { ReactEditor } from 'slate-react';
-import { BaseEditor, Descendant, Element as SlateElement } from 'slate';
-import { Dispatch, ReactNode, SetStateAction } from 'react';
+import {
+  BaseEditor,
+  Descendant,
+  Dispatch,
+  ReactEditor,
+  ReactNode,
+  SetStateAction,
+} from '../imports';
 
-export type BlockFormat =
+type BlockFormat =
   | 'paragraph'
   | 'headingOne'
   | 'headingTwo'
@@ -15,18 +20,18 @@ export type BlockFormat =
   | 'listItem'
   | 'br';
 
-export type MarkFormat = 'bold' | 'italic' | 'underline' | 'code';
+type MarkFormat = 'bold' | 'italic' | 'underline' | 'code';
 
-export type AlignFormat = 'left' | 'center' | 'right';
+type AlignFormat = 'left' | 'center' | 'right';
 
-export type CustomElement = {
+type CustomElement = {
   type: BlockFormat;
   align?: AlignFormat;
   url?: string;
   children: (CustomText | CustomElement)[];
 };
 
-export type CustomText = {
+type CustomText = {
   text: string;
   color?: string | null;
   backgroundColor?: string | null;
@@ -40,20 +45,20 @@ export type CustomText = {
 declare module 'slate' {
   export interface CustomTypes {
     Editor: BaseEditor &
-      ReactEditor & { isVoid: (element: SlateElement) => boolean };
+      ReactEditor & { isVoid: (element: Element) => boolean };
     Element: CustomElement;
     Text: CustomText;
   }
 }
 
-export interface CustomEmoji {
+interface CustomEmoji {
   id: string;
   name: string;
   native: string;
   keywords: string[];
 }
 
-export interface SlateEditorProps {
+interface SlateEditorProps {
   editorOutput?: string | undefined;
   setEditorOutput?: React.Dispatch<React.SetStateAction<string>>;
   editorKey?: number;
@@ -61,7 +66,27 @@ export interface SlateEditorProps {
   setEditMessageId?: Dispatch<SetStateAction<string | null>>;
 }
 
-export const BLOCK_TYPES: { format: BlockFormat; name: string }[] = [
+interface BaseProps {
+  className: string;
+  [key: string]: any;
+}
+
+type SimpleForwardRefProps<T extends HTMLElement> =
+  React.PropsWithChildren<BaseProps> & React.RefAttributes<T>;
+
+type ButtonProps = {
+  active: boolean;
+  reversed: boolean;
+} & BaseProps & {
+    children?: ReactNode | undefined;
+  };
+
+type EditorValueProps = BaseProps & {
+  value: Descendant[];
+  children?: ReactNode | undefined;
+};
+
+const BLOCK_TYPES: { format: BlockFormat; name: string }[] = [
   { format: 'paragraph', name: 'P' },
   { format: 'headingOne', name: 'H1' },
   { format: 'headingTwo', name: 'H2' },
@@ -71,22 +96,17 @@ export const BLOCK_TYPES: { format: BlockFormat; name: string }[] = [
   { format: 'headingSix', name: 'H6' },
 ];
 
-export interface BaseProps {
-  className: string;
-  [key: string]: any;
-}
-
-export type SimpleForwardRefProps<T extends HTMLElement> =
-  React.PropsWithChildren<BaseProps> & React.RefAttributes<T>;
-
-export type ButtonProps = {
-  active: boolean;
-  reversed: boolean;
-} & BaseProps & {
-    children?: ReactNode | undefined;
-  };
-
-export type EditorValueProps = BaseProps & {
-  value: Descendant[];
-  children?: ReactNode | undefined;
+export type {
+  BlockFormat,
+  MarkFormat,
+  AlignFormat,
+  CustomElement,
+  CustomText,
+  CustomEmoji,
+  SlateEditorProps,
+  BaseProps,
+  SimpleForwardRefProps,
+  ButtonProps,
+  EditorValueProps,
 };
+export { BLOCK_TYPES };

@@ -1,18 +1,17 @@
 'use client';
 
-import { lazy, Suspense, useRef, useState } from 'react';
-
-// type
-import { UploadAvatarProps } from '../type';
-
-// ui
-import MyImage from '../../atom/image-components';
+import {
+  Suspense,
+  useRef,
+  useState,
+  MyImage,
+  MyIcon,
+  LoadingCircle,
+  PageLoading,
+  AvatarCropModal,
+} from '../imports';
 import FileInputField from '../RHF-controllers-components/RHF-fields/file-input-field';
-import MyIcon from '../../atom/icon-components';
-import LoadingCircle from '../../atom/loadings/loading-circle';
-import PageLoading from '../../common/page-loading';
-
-const AvatarCropModal = lazy(() => import('../../common/avatar-crop'));
+import { UploadAvatarProps } from '../type';
 
 const AvatarUpload = ({
   photo,
@@ -20,19 +19,17 @@ const AvatarUpload = ({
   progress,
   uploading,
 }: UploadAvatarProps) => {
-  // ref
   const photoRef = useRef<HTMLInputElement | null>(null);
 
-  // states
   const [cropFile, setCropFile] = useState(null);
 
-  // functions
   const photoRefHandler = () => {
     photoRef.current?.click();
   };
 
   const onFileSelect = (event: any) => {
     const file = event.target.files?.[0];
+
     if (!file) return;
 
     setCropFile(file);
@@ -48,7 +45,6 @@ const AvatarUpload = ({
     }
   };
 
-  // conditions
   const isUploading = uploading && progress !== null && progress !== undefined;
 
   return (

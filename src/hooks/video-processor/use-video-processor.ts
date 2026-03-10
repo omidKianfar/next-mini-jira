@@ -3,21 +3,15 @@ import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile, toBlobURL } from '@ffmpeg/util';
 
 export const useVideoProcessor = () => {
-  // ref
   const ffmpegRef = useRef(new FFmpeg());
 
-  // hook
   const [isCompressing, setIsCompressing] = useState(false);
-
-  // state
   const [compressionProgress, setCompressionProgress] = useState(0);
 
-  //   function
   const compressVideo = async (file: File): Promise<File> => {
     const ffmpeg = ffmpegRef.current;
 
     setIsCompressing(true);
-
     setCompressionProgress(0);
 
     try {
@@ -65,11 +59,9 @@ export const useVideoProcessor = () => {
 
       return new File([compressedBlob], file.name, { type: 'video/mp4' });
     } catch (err) {
-      console.error('Compression Error:', err);
       return file;
     } finally {
       setIsCompressing(false);
-
       setCompressionProgress(100);
     }
   };

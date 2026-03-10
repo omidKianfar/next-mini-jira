@@ -1,22 +1,19 @@
-import * as Yup from "yup";
-
-// type
+import { Yup } from '../../imports';
 import {
   UsersFilterFormType,
   ChatsFilterFormType,
   TasksFilterFormType,
-} from "../../type";
+} from '../../type';
 
-// tasks
-export const tasksfilterSchema = Yup.object({
-  tag: Yup.string().required("Enter your tag"),
+const tasksfilterSchema = Yup.object({
+  tag: Yup.string().required('Enter your tag'),
   from: Yup.string()
     .transform((value, option) => (option === undefined ? undefined : value))
     .notRequired(),
   to: Yup.string()
     .transform((value, option) => (option === undefined ? undefined : value))
     .notRequired()
-    .test("is-after", "End time must be after start time", function (value) {
+    .test('is-after', 'End time must be after start time', function (value) {
       const { from } = this.parent;
 
       if (!from) {
@@ -27,16 +24,15 @@ export const tasksfilterSchema = Yup.object({
     }),
 }) as unknown as Yup.ObjectSchema<TasksFilterFormType>;
 
-// users
-export const usersfilterSchema = Yup.object({
-  status: Yup.string().required("Enter your status"),
+const usersfilterSchema = Yup.object({
+  status: Yup.string().required('Enter your status'),
   from: Yup.string()
     .transform((value, option) => (option === undefined ? undefined : value))
     .notRequired(),
   to: Yup.string()
     .transform((value, option) => (option === undefined ? undefined : value))
     .notRequired()
-    .test("is-after", "End time must be after start time", function (value) {
+    .test('is-after', 'End time must be after start time', function (value) {
       const { from } = this.parent;
 
       if (!from) {
@@ -47,15 +43,14 @@ export const usersfilterSchema = Yup.object({
     }),
 }) as unknown as Yup.ObjectSchema<UsersFilterFormType>;
 
-// chats
-export const chatsfilterSchema = Yup.object({
+const chatsfilterSchema = Yup.object({
   from: Yup.string()
     .transform((value, option) => (option === undefined ? undefined : value))
     .notRequired(),
   to: Yup.string()
     .transform((value, option) => (option === undefined ? undefined : value))
     .notRequired()
-    .test("is-after", "End time must be after start time", function (value) {
+    .test('is-after', 'End time must be after start time', function (value) {
       const { from } = this.parent;
 
       if (!from) {
@@ -65,3 +60,5 @@ export const chatsfilterSchema = Yup.object({
       }
     }),
 }) as unknown as Yup.ObjectSchema<ChatsFilterFormType>;
+
+export { tasksfilterSchema, usersfilterSchema, chatsfilterSchema };

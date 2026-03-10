@@ -1,8 +1,5 @@
-// routes
-import { routes } from "@/src/helper/routes/routes";
-
-// type
-import { UsePlanActionProps } from "../type";
+import { routes } from '../imports';
+import { UsePlanActionProps } from '../type';
 
 export const usePlanAction = () => {
   const choosePlan = async ({
@@ -11,9 +8,9 @@ export const usePlanAction = () => {
   }: UsePlanActionProps) => {
     try {
       const response = await fetch(routes.api.createStripCheckout, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ planType: selectedPlan }),
       });
@@ -23,11 +20,11 @@ export const usePlanAction = () => {
       if (result.url) {
         window.location.href = result.url;
       } else {
-        console.log("Error creating Stripe session");
+        console.log('Error creating Stripe session');
         setLoading(false);
       }
     } catch (e) {
-      console.log("Stripe error:", e);
+      console.log('Stripe error:', e);
       setLoading(false);
     }
   };

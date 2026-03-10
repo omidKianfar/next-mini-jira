@@ -1,42 +1,31 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
-import { useSelector } from 'react-redux';
-
-// hooks
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
-
-// type
-import { Task, ModalProps } from '@/src/types/global';
-
-// redux
-import { RootState } from '@/src/store';
-
-// ui
-import MyIcon from '../../../atom/icon-components';
-import EmptyColumn from '../../../atom/empty-components/empty-column';
-
-// utils
-import { stringSlicer } from '@/src/utils/string-slicer';
+import {
+  ChangeEvent,
+  EmptyColumn,
+  ModalProps,
+  MyIcon,
+  RootState,
+  stringSlicer,
+  Task,
+  useIsMobile,
+  useNavigation,
+  useSelector,
+  useState,
+} from '../../imports';
 
 const SearchTasks = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
-  // hooks
   const navigation = useNavigation();
   const isMobile = useIsMobile();
 
-  // redux
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
 
-  // states
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
   const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
 
-  // functions
   const serachHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value as string;
-
     setSearchValue(value);
 
     if (!value.trim()) {
@@ -50,6 +39,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
     const filtered = tasks.filter((task) => {
       const title = task?.title?.toLowerCase() || '';
       const description = task?.description?.toLowerCase() || '';
+
       return title.includes(query) || description.includes(query);
     });
 

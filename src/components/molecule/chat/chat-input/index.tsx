@@ -1,22 +1,17 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-
-// editor
+import {
+  AnimatePresence,
+  useFileUploader,
+  useState,
+  motion,
+  LoadingCircle,
+} from '../../imports';
 import SlateEditor from '../../slatejs-editor-component/editor';
-
-// ui
 import ChatMenuComponent from '../chat-menu';
 import UploadMenuComponent from './menu/upload';
 import VoiceMenuComponent from './menu/voice';
-import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
-
-// type
 import { ChatMenuProps, MenuType } from '../type';
-
-// hooks
-import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
 
 const ChatInput = ({
   showMenu,
@@ -25,21 +20,17 @@ const ChatInput = ({
   editMessageId,
   setEditMessageId,
 }: ChatMenuProps) => {
-  // hook
   const fileUploader = useFileUploader({
     accept: ['image/*', 'video/*', 'audio/*'],
   });
 
-  // state
   const [Menu, setMenu] = useState<MenuType>('text');
 
-  // function
   const MenuHandler = (type: MenuType) => {
     setMenu(type as MenuType);
     fileUploader.reset();
   };
 
-  // animation style
   const fastTransition = {
     duration: 0.2,
     ease: 'easeOut' as const,

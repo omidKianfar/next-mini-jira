@@ -1,18 +1,21 @@
-import { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { fireEvent, render, screen } from "@testing-library/react";
-
-// ui
-import SelectField from "../select-filed";
+import {
+  useForm,
+  useEffect,
+  FormProvider,
+  render,
+  screen,
+  fireEvent,
+} from '../../../imports';
+import SelectField from '../select-filed';
 
 const options = [
-  { label: "Option A", value: "A" },
-  { label: "Option B", value: "B" },
-  { label: "Option C", value: "C" },
+  { label: 'Option A', value: 'A' },
+  { label: 'Option B', value: 'B' },
+  { label: 'Option C', value: 'C' },
 ];
 
 const Wrapper = ({ withError = false }) => {
-  const defaultValues = { category: "B" };
+  const defaultValues = { category: 'B' };
 
   const methods = useForm({
     defaultValues,
@@ -20,9 +23,9 @@ const Wrapper = ({ withError = false }) => {
 
   useEffect(() => {
     if (withError) {
-      methods.setError("category", {
-        type: "manual",
-        message: "Please select a category",
+      methods.setError('category', {
+        type: 'manual',
+        message: 'Please select a category',
       });
     }
   }, [withError, methods]);
@@ -39,34 +42,32 @@ const Wrapper = ({ withError = false }) => {
   );
 };
 
-describe("SelectField component", () => {
-  test("Renders select and label correctly", () => {
+describe('SelectField component', () => {
+  test('Renders select and label correctly', () => {
     render(<Wrapper />);
 
-    const select = screen.getByLabelText("Category") as HTMLSelectElement;
-
+    const select = screen.getByLabelText('Category') as HTMLSelectElement;
     expect(select).toBeInTheDocument();
   });
 
-  test("Shows default value from form", () => {
+  test('Shows default value from form', () => {
     render(<Wrapper />);
 
-    const select = screen.getByLabelText("Category") as HTMLSelectElement;
-
-    expect(select.value).toBe("B");
+    const select = screen.getByLabelText('Category') as HTMLSelectElement;
+    expect(select.value).toBe('B');
   });
 
-  test("Allows user to change selection", () => {
+  test('Allows user to change selection', () => {
     render(<Wrapper />);
 
-    const select = screen.getByLabelText("Category") as HTMLSelectElement;
+    const select = screen.getByLabelText('Category') as HTMLSelectElement;
 
-    fireEvent.change(select, { target: { value: "C" } });
+    fireEvent.change(select, { target: { value: 'C' } });
 
-    expect(select.value).toBe("C");
+    expect(select.value).toBe('C');
   });
 
-  test("Renders all options", () => {
+  test('Renders all options', () => {
     render(<Wrapper />);
 
     options.forEach((opt) => {
@@ -74,20 +75,19 @@ describe("SelectField component", () => {
     });
   });
 
-  test("Label is connected to select", () => {
+  test('Label is connected to select', () => {
     render(<Wrapper />);
 
-    const label = screen.getByText("Category");
-    const select = screen.getByLabelText("Category");
+    const label = screen.getByText('Category');
+    const select = screen.getByLabelText('Category');
 
-    expect(label).toHaveAttribute("for", select.id);
+    expect(label).toHaveAttribute('for', select.id);
   });
 
-  test("Displays error message", () => {
+  test('Displays error message', () => {
     render(<Wrapper withError />);
 
-    const error = screen.getByText("Please select a category");
-
+    const error = screen.getByText('Please select a category');
     expect(error).toBeInTheDocument();
   });
 });

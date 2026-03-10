@@ -1,7 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-// type
-import { ChatFiltersState } from "@/src/types/global";
+import { ChatFiltersState, createSlice, PayloadAction } from '../../imports';
 
 const initialState: ChatFiltersState = {
   updatedAt: {
@@ -11,12 +8,12 @@ const initialState: ChatFiltersState = {
 };
 
 const chatsFilterSlice = createSlice({
-  name: "usersFilters",
+  name: 'usersFilters',
   initialState,
   reducers: {
     setChatsDate: (
       state,
-      action: PayloadAction<{ from: string | null; to: string | null }>,
+      action: PayloadAction<{ from: string | null; to: string | null }>
     ) => {
       state.updatedAt = action.payload;
     },

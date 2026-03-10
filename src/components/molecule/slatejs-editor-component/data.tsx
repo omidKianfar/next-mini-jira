@@ -1,18 +1,15 @@
-//  --------------------------- types
-export const LIST_TYPES = ['numberedList', 'bulletedList'];
+const LIST_TYPES = ['numberedList', 'bulletedList'];
 
-export const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];
+const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify'];
 
-// font styles
-export const HOTKEYS = {
+const HOTKEYS = {
   'mod+b': 'bold',
   'mod+i': 'italic',
   'mod+u': 'underline',
   'mod+`': 'code',
 };
 
-// color items
-export const ColorItems = [
+const ColorItems = [
   { name: 'White', value: '#fff' },
   { name: 'Black', value: '#000' },
   { name: 'Brown', value: '#8B4513' },
@@ -25,11 +22,12 @@ export const ColorItems = [
   { name: 'Purple', value: '#800080' },
 ];
 
-// font items
-export const fontFamilyOptions = [
+const fontFamilyOptions = [
   { name: 'Arial', value: 'Arial, sans-serif' },
   { name: 'Georgia', value: 'Georgia, serif' },
   { name: 'Courier New', value: '"Courier New", Courier, monospace' },
   { name: 'Times New Roman', value: '"Times New Roman", Times, serif' },
   { name: 'Verdana', value: 'Verdana, sans-serif' },
 ];
+
+export { LIST_TYPES, TEXT_ALIGN_TYPES, HOTKEYS, ColorItems, fontFamilyOptions };

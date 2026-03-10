@@ -1,38 +1,28 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
-import { useSelector } from 'react-redux';
-
-// hooks
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-
-// type
-import { MyUserType, ModalProps } from '@/src/types/global';
-
-// redux
-import { RootState } from '@/src/store';
-
-// ui
-import MyIcon from '../../../atom/icon-components';
-import EmptyColumn from '../../../atom/empty-components/empty-column';
-import MyImage from '../../../atom/image-components';
-
-// utils
-import { stringSlicer } from '@/src/utils/string-slicer';
+import {
+  ChangeEvent,
+  EmptyColumn,
+  ModalProps,
+  MyIcon,
+  MyImage,
+  MyUserType,
+  RootState,
+  stringSlicer,
+  useNavigation,
+  useSelector,
+  useState,
+} from '../../imports';
 
 const SearchUsers = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
-  // hooks
   const navigation = useNavigation();
 
-  // redux
   const users = useSelector((state: RootState) => state.users.users);
 
-  // states
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
   const [filteredUsers, setFilteredUsers] = useState<MyUserType[]>([]);
 
-  // functions
   const serachHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value as string;
 

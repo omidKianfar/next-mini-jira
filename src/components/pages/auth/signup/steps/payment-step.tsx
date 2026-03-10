@@ -2,26 +2,21 @@
 
 import { usePathname } from 'next/navigation';
 
-// hooks
 import { useAuth } from '@/src/hooks/auth/use-auth';
 import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 
-// ui
 import FramerMotion from '@/src/components/atom/animation-component';
 import ButtonBack from '@/src/components/atom/buttons-component/button-back';
 import MyIcon from '@/src/components/atom/icon-components';
 import MyImage from '@/src/components/atom/image-components';
 
-// card
 import PaymentCardComponent from '@/src/components/molecule/cards/payment-cart';
 
 const PaymentStep = () => {
-  // hooks
   const pathName = usePathname();
   const { user, changeStep, terialMode } = useAuth();
   const isMobile = useIsMobile();
 
-  // functions
   const BackProfile = () => {
     changeStep('1');
   };
@@ -29,9 +24,7 @@ const PaymentStep = () => {
   const freeModeHandler = async () => {
     try {
       await terialMode({ userId: user?.userId as string });
-    } catch (error: any) {
-      console.log('Terial Mode Error: ', error);
-    }
+    } catch (error: any) {}
   };
 
   const paymentModeHandler = () => {

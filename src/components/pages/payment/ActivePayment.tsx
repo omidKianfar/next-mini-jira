@@ -1,20 +1,18 @@
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 
-// ui
-import ButtonBack from "@/src/components/atom/buttons-component/button-back";
+import ButtonBack from '@/src/components/atom/buttons-component/button-back';
 
-// type
-import { ActivePaymentSectionProps } from "../type";
+import { ActivePaymentSectionProps } from '../type';
 
 const ActivePaymentComponent = ({
   payment,
   onBack,
   now,
 }: ActivePaymentSectionProps) => {
-  const remainingDays = Math.max(0, dayjs(payment?.endAt).diff(now, "day"));
+  const remainingDays = Math.max(0, dayjs(payment?.endAt).diff(now, 'day'));
 
   return (
-    <div className="w-[90vw] rounded-xl border-2 border-warning-500 p-4 lg:w-[500px] bg-white">
+    <div className="w-[90vw] rounded-xl border-2 border-warning-500 bg-white p-4 lg:w-[500px]">
       <div className="mb-4 flex items-center justify-start">
         <ButtonBack onClick={onBack} />
       </div>
@@ -24,7 +22,7 @@ const ActivePaymentComponent = ({
           You Have Active Payment
         </p>
 
-        <div className="flex flex-col items-start justify-start rounded-sm border-2  border-warning-400 bg-gray-50 p-4 shadow-md">
+        <div className="flex flex-col items-start justify-start rounded-sm border-2 border-warning-400 bg-gray-50 p-4 shadow-md">
           <p className="mb-4 text-body font-semibold capitalize text-primary-600">
             <span className="font-bold text-black">Status:</span> Active
           </p>
@@ -32,14 +30,14 @@ const ActivePaymentComponent = ({
           <hr className="mb-4 w-full border border-dashed border-gray-300" />
 
           <p className="mb-4 text-body font-semibold text-primary-600">
-            <span className="font-bold capitalize text-black">Plan Type:</span>{" "}
-            {payment?.planType === "monthly" ? "Monthly" : "Yearly"}
+            <span className="font-bold capitalize text-black">Plan Type:</span>{' '}
+            {payment?.planType === 'monthly' ? 'Monthly' : 'Yearly'}
           </p>
 
           <hr className="mb-4 w-full border border-dashed border-gray-300" />
 
           <p className="text-body font-semibold text-primary-600">
-            <span className="font-bold capitalize text-black">Ends In:</span>{" "}
+            <span className="font-bold capitalize text-black">Ends In:</span>{' '}
             {remainingDays} days
           </p>
         </div>

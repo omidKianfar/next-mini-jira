@@ -1,7 +1,5 @@
-// ui
-import { stringSlicer } from '@/src/utils/string-slicer';
-import ButtonNext from '../../atom/buttons-component/button-next';
 import { ModalComponentProps } from '../type';
+import { ButtonNext, stringSlicer } from '../imports';
 
 const ModalComponent = ({
   handleClose,

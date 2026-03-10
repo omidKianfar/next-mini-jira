@@ -1,23 +1,15 @@
-import dayjs from "dayjs";
-import { doc, setDoc } from "firebase/firestore";
-import { User } from "firebase/auth";
-
-// configs
-import { db } from "@/configs/firebase";
-
-// type
-import { MyUserType, UserType } from "@/src/types/global";
+import { dayjs, db, doc, MyUserType, setDoc, User, UserType } from '../imports';
 
 export const createUserDocument = async (user: User): Promise<MyUserType> => {
   const userData: MyUserType = {
     userId: user.uid,
-    email: user.email || "",
+    email: user.email || '',
     userName: null,
     userType: UserType.Client,
     isActive: true,
     photo: null,
     birthday: null,
-    createdAt: dayjs().format("YYYY-MM-DD"),
+    createdAt: dayjs().format('YYYY-MM-DD'),
     payment: {
       isPaid: null,
       freeTrialEnabled: null,
@@ -29,7 +21,7 @@ export const createUserDocument = async (user: User): Promise<MyUserType> => {
     },
   };
 
-  await setDoc(doc(db, "users", user.uid), userData);
+  await setDoc(doc(db, 'users', user.uid), userData);
 
   return userData;
 };

@@ -1,25 +1,17 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-
-// hooks
-import { useAuth } from "@/src/hooks/auth/use-auth";
-
-// type
-import { sidebarProps } from "../../type";
-
-// ui
-import UserSidebar from "./user-sidebar";
-import UserProfile from "./user-profile";
+import { useAuth, motion } from '../../imports';
+import UserSidebar from './user-sidebar';
+import UserProfile from './user-profile';
+import { sidebarProps } from '../../type';
 
 const SideBar = ({ showSidebar, setShowSidebar }: sidebarProps) => {
-  // hooks
   const { user } = useAuth();
 
   return (
     <motion.div
       variants={sidebarVariants}
-      animate={showSidebar ? "open" : "closed"}
+      animate={showSidebar ? 'open' : 'closed'}
       initial="closed"
       className="fixed top-[70px] z-50 h-full w-[220px] rounded-r-md border border-gray-300 bg-white/20 p-4 shadow-md backdrop-blur-md lg:top-[90px]"
     >
@@ -32,22 +24,21 @@ const SideBar = ({ showSidebar, setShowSidebar }: sidebarProps) => {
 
 export default SideBar;
 
-// animation data
 const sidebarVariants = {
   open: {
     x: 0,
     opacity: 1,
     transition: {
-      type: "spring" as const,
+      type: 'spring' as const,
       stiffness: 180,
       damping: 25,
     },
   },
   closed: {
-    x: "-100%",
+    x: '-100%',
     opacity: 0,
     transition: {
-      type: "spring" as const,
+      type: 'spring' as const,
       stiffness: 220,
       damping: 30,
     },

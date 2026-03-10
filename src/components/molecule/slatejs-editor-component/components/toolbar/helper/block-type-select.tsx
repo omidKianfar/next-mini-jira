@@ -1,24 +1,15 @@
-import { useSlate } from 'slate-react';
-import { Editor, Element as SlateElement } from 'slate';
-
-// data
+import { useSlate, Element, Editor } from '../../../../imports';
 import { LIST_TYPES } from '../../../data';
-
-// components
 import { ToggleBlock } from './toggle-block';
-
-// type
 import { BLOCK_TYPES, BlockFormat, CustomElement } from '../../../type';
 
 export const BlockTypeSelect = () => {
-  // hook
   const editor = useSlate();
 
-  //   functions
   const getActiveBlockFormat = (): BlockFormat => {
     const [match] = Array.from(
       Editor.nodes(editor, {
-        match: (n) => SlateElement.isElement(n) && !Editor.isEditor(n),
+        match: (n) => Element.isElement(n) && !Editor.isEditor(n),
         mode: 'lowest',
       })
     );
@@ -29,11 +20,12 @@ export const BlockTypeSelect = () => {
       const [listMatch] = Array.from(
         Editor.nodes(editor, {
           match: (n) =>
-            SlateElement.isElement(n) &&
+            Element.isElement(n) &&
             LIST_TYPES.includes((n as CustomElement).type),
           mode: 'lowest',
         })
       );
+
       if (listMatch) return (listMatch[0] as CustomElement).type;
     }
 

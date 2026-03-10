@@ -1,13 +1,9 @@
-"use client";
+'use client';
 
-import { Controller, FieldValues, useFormContext } from "react-hook-form";
-
-// type
-import { DateInputFieldProps } from "../../type";
-
-// ui
-import LabelComponent from "./label";
-import ErrorComponent from "./errors";
+import { Controller, FieldValues, useFormContext } from '../../imports';
+import { DateInputFieldProps } from '../../type';
+import LabelComponent from './label';
+import ErrorComponent from './errors';
 
 const DateInputField = <T extends FieldValues>({
   name,

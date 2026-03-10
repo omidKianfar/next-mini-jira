@@ -1,40 +1,33 @@
-"use client";
+'use client';
 
-import dayjs from "dayjs";
-import { useSearchParams } from "next/navigation";
+import dayjs from 'dayjs';
+import { useSearchParams } from 'next/navigation';
 
-// ui
-import ButtonBack from "@/src/components/atom/buttons-component/button-back";
-import MyImage from "@/src/components/atom/image-components";
-import PageLoading from "@/src/components/common/page-loading";
-import ButtonNext from "@/src/components/atom/buttons-component/button-next";
+import ButtonBack from '@/src/components/atom/buttons-component/button-back';
+import MyImage from '@/src/components/atom/image-components';
+import PageLoading from '@/src/components/common/page-loading';
+import ButtonNext from '@/src/components/atom/buttons-component/button-next';
 
-// hooks
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
-import { useUserListenerById } from "@/src/hooks/users/use-user-listener-by-id";
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
 
-// firestore
-import { updateFirestoreUser } from "@/src/libs/auth/update-user";
+import { updateFirestoreUser } from '@/src/libs/auth/update-user';
 
 const AdminUserDetailComponent = () => {
-  // hooks
   const navigation = useNavigation();
   const params = useSearchParams();
-  const userId = params.get("userId");
+  const userId = params.get('userId');
 
   const { user, loading } = useUserListenerById(userId);
 
-  // date
   const now = dayjs();
 
-  // payment status
   const payment = user?.payment;
 
   const hasActivePayment = Boolean(
-    payment?.endAt && now.isBefore(payment.endAt),
+    payment?.endAt && now.isBefore(payment.endAt)
   );
 
-  // functions
   const onBack = () => {
     navigation.adminDashboard();
   };
@@ -45,7 +38,6 @@ const AdminUserDetailComponent = () => {
     });
   };
 
-  // ui
   if (loading || !user) return <PageLoading />;
 
   return (
@@ -76,7 +68,7 @@ const AdminUserDetailComponent = () => {
             </div>
 
             <p className="mb-4 text-body font-semibold text-primary-600">
-              <span className="font-bold text-black">Username:</span>{" "}
+              <span className="font-bold text-black">Username:</span>{' '}
               {user.userName}
             </p>
 
@@ -89,26 +81,26 @@ const AdminUserDetailComponent = () => {
             <hr className="mb-4 w-full border border-dashed border-gray-300" />
 
             <p className="mb-4 text-body font-semibold text-primary-600">
-              <span className="font-bold text-black">Birthday:</span>{" "}
-              {dayjs(user.birthday).format("MM-DD-YYYY")}
+              <span className="font-bold text-black">Birthday:</span>{' '}
+              {dayjs(user.birthday).format('MM-DD-YYYY')}
             </p>
 
             <hr className="mb-4 w-full border border-dashed border-gray-300" />
 
             <p className="mb-4 text-body font-semibold text-primary-600">
-              <span className="font-bold text-black">Status:</span>{" "}
+              <span className="font-bold text-black">Status:</span>{' '}
               <span
-                className={`${user.isActive ? "text-success-500" : "text-warning-500"}`}
+                className={`${user.isActive ? 'text-success-500' : 'text-warning-500'}`}
               >
-                {user.isActive ? "Active" : "Deactive"}
+                {user.isActive ? 'Active' : 'Deactive'}
               </span>
             </p>
 
             <hr className="mb-4 w-full border border-dashed border-gray-300" />
 
             <p className="mb-4 text-body font-semibold text-primary-600">
-              <span className="font-bold text-black">Created At:</span>{" "}
-              {dayjs(user.createdAt).format("MM-DD-YYYY")}
+              <span className="font-bold text-black">Created At:</span>{' '}
+              {dayjs(user.createdAt).format('MM-DD-YYYY')}
             </p>
 
             <hr className="mb-4 w-full border border-dashed border-gray-300" />
@@ -116,13 +108,13 @@ const AdminUserDetailComponent = () => {
             {hasActivePayment && (
               <>
                 <p className="mb-4 text-body font-semibold text-primary-600">
-                  <span className="font-bold text-black">Plan Type:</span>{" "}
+                  <span className="font-bold text-black">Plan Type:</span>{' '}
                   {user.payment.planType}
                 </p>
 
                 <p className="text-body font-semibold text-primary-600">
-                  <span className="font-bold text-black">End At:</span>{" "}
-                  {dayjs(user.payment.endAt).format("MM-DD-YYYY")}
+                  <span className="font-bold text-black">End At:</span>{' '}
+                  {dayjs(user.payment.endAt).format('MM-DD-YYYY')}
                 </p>
               </>
             )}
@@ -138,7 +130,7 @@ const AdminUserDetailComponent = () => {
 
           <div className="flex w-full items-center justify-center">
             <ButtonNext onClick={toggleActive}>
-              {user.isActive ? "Deactivated User" : "Activated User"}
+              {user.isActive ? 'Deactivated User' : 'Activated User'}
             </ButtonNext>
           </div>
         </div>

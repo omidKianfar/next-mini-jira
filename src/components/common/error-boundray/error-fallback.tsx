@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 export default function ErrorFallback() {
   return (
@@ -6,6 +6,7 @@ export default function ErrorFallback() {
       <h1 className="text-title font-semibold text-error-600">
         Something went wrong
       </h1>
+
       <p className="text-gray-500">Please try again later.</p>
     </div>
   );

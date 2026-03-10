@@ -1,13 +1,7 @@
-import { Editor, Transforms, Element as SlateElement } from 'slate';
-
-// data
+import { Element, Editor, Transforms } from '../../../../imports';
 import { LIST_TYPES, TEXT_ALIGN_TYPES } from '../../../data';
-
-// type
 import { AlignFormat, BlockFormat, CustomElement } from '../../../type';
 import { ToggleBlockProps } from '../type';
-
-// components
 import { IsBlockActive } from './is-block-active';
 
 export const ToggleBlock = ({ editor, format }: ToggleBlockProps) => {
@@ -18,11 +12,10 @@ export const ToggleBlock = ({ editor, format }: ToggleBlockProps) => {
     : 'type';
 
   const isActive = IsBlockActive({ editor, format, blockType });
-
   const isList = LIST_TYPES.includes(format as BlockFormat);
 
   if (blockType === 'align') {
-    Transforms.setNodes<SlateElement>(editor, {
+    Transforms.setNodes<Element>(editor, {
       align: isActive ? undefined : (format as AlignFormat),
     });
 
@@ -31,8 +24,7 @@ export const ToggleBlock = ({ editor, format }: ToggleBlockProps) => {
 
   const listMatch = Editor.above(editor, {
     match: (n) =>
-      SlateElement.isElement(n) &&
-      LIST_TYPES.includes((n as CustomElement).type),
+      Element.isElement(n) && LIST_TYPES.includes((n as CustomElement).type),
   });
 
   if (listMatch) {
@@ -41,7 +33,7 @@ export const ToggleBlock = ({ editor, format }: ToggleBlockProps) => {
     if (isActive || !isList) {
       Transforms.unwrapNodes(editor, {
         match: (n) =>
-          SlateElement.isElement(n) &&
+          Element.isElement(n) &&
           LIST_TYPES.includes((n as CustomElement).type),
         split: true,
       });
@@ -49,11 +41,12 @@ export const ToggleBlock = ({ editor, format }: ToggleBlockProps) => {
       Transforms.setNodes(
         editor,
         { type: 'paragraph' },
-        { match: (n) => SlateElement.isElement(n) && n.type === 'listItem' }
+        { match: (n) => Element.isElement(n) && n.type === 'listItem' }
       );
+
       Transforms.unwrapNodes(editor, {
         match: (n) =>
-          SlateElement.isElement(n) &&
+          Element.isElement(n) &&
           LIST_TYPES.includes((n as CustomElement).type),
         split: true,
       });
@@ -65,12 +58,13 @@ export const ToggleBlock = ({ editor, format }: ToggleBlockProps) => {
     : isList
       ? 'listItem'
       : (format as BlockFormat);
-  Transforms.setNodes<SlateElement>(
+
+  Transforms.setNodes<Element>(
     editor,
     { type: newType },
     {
       match: (n) =>
-        SlateElement.isElement(n) &&
+        Element.isElement(n) &&
         !Editor.isEditor(n) &&
         !LIST_TYPES.includes((n as CustomElement).type),
     }

@@ -1,6 +1,5 @@
 'use client';
 
-// ui
 import HeroSectionComponent from './hero-section';
 import FooterComponent from './footer';
 import WorkflowComponent from './workflow';

@@ -1,14 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useEffect } from '../imports';
 
-// type
-import { UseSetStepNumberProps } from "../type";
+import { UseSetStepNumberProps } from '../type';
 
 export const useSetStepNumber = ({ setStepNumber }: UseSetStepNumberProps) => {
   useEffect(() => {
     const saved =
-      typeof window !== "undefined" ? localStorage.getItem("step") : null;
+      typeof window !== 'undefined' ? localStorage.getItem('step') : null;
     if (saved) setStepNumber(saved);
   }, []);
 };

@@ -1,19 +1,25 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
-export interface ErrorBoundaryProps {
+interface ErrorBoundaryProps {
   children: ReactNode;
   fallback?: ReactNode;
 }
-export interface ErrorBoundaryState {
+interface ErrorBoundaryState {
   hasError: boolean;
 }
-export interface LightBoxProps {
+interface LightBoxProps {
   children: React.ReactNode;
   url: string;
 }
-
-export interface CropProps {
+interface CropProps {
   file: never;
   onCancel: () => void;
   onSave: (file: File) => void | Promise<void>;
 }
+
+export type {
+  ErrorBoundaryProps,
+  ErrorBoundaryState,
+  LightBoxProps,
+  CropProps,
+};

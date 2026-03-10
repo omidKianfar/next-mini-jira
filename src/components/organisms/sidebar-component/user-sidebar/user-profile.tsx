@@ -1,23 +1,12 @@
-// hooks
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-
-// ui
-import MyImage from '../../../atom/image-components';
-
-// utiles
-import { stringSlicer } from '@/src/utils/string-slicer';
-
-// type
+import { MyImage, stringSlicer, useNavigation } from '../../imports';
 import { sidebarProps } from '../../type';
 
 const UserProfile = ({
   user,
   setShowSidebar,
 }: Pick<sidebarProps, 'user' | 'setShowSidebar'>) => {
-  // hooks
   const navigation = useNavigation();
 
-  // functions
   const goProfile = () => {
     navigation.profile();
     setShowSidebar?.(false);

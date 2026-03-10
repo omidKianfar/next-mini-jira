@@ -1,6 +1,4 @@
-import * as Yup from 'yup';
-
-// type
+import { Yup } from '../../../imports';
 import { UploadMenuForm } from '../../type';
 
 export const UploadMenuShema = Yup.object({

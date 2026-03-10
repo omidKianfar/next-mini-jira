@@ -1,42 +1,34 @@
-"use client";
+'use client';
 
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-
-// schema
-import { usersfilterSchema } from "./schema";
-
-// type
-import { ModalProps } from "@/src/types/global";
-import { UsersFilterFormType } from "../../type";
-
-// redux
-import { RootState } from "@/src/store";
+import { usersfilterSchema } from './schema';
+import { UsersFilterFormType } from '../../type';
 import {
+  ButtonNext,
+  DateInputField,
+  FormProvider,
+  ModalProps,
   resetUserFilters,
-  setUserDate,
+  RootState,
+  SelectField,
   setActive,
-} from "@/src/store/slices/users/users-filter";
+  setUserDate,
+  useDispatch,
+  useEffect,
+  useForm,
+  useSelector,
+  yupResolver,
+} from '../../imports';
+import { statusList } from './data';
 
-// ui
-import SelectField from "../../../molecule/RHF-controllers-components/RHF-fields/select-filed";
-import DateInputField from "../../../molecule/RHF-controllers-components/RHF-fields/date-input-field";
-import ButtonNext from "../../../atom/buttons-component/button-next";
-
-const FilterUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
-  // redux
+const FilterUsers = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
   const dispatch = useDispatch();
 
-  // redux state
   const usersFilters = useSelector((state: RootState) => state.usersFilters);
 
-  // form
   const defaultValues: UsersFilterFormType = {
-    status: usersFilters.status ?? "all",
-    from: usersFilters.createdAt.from ?? "",
-    to: usersFilters.createdAt.to ?? "",
+    status: usersFilters.status ?? 'all',
+    from: usersFilters.createdAt.from ?? '',
+    to: usersFilters.createdAt.to ?? '',
   };
 
   const methods = useForm<UsersFilterFormType>({
@@ -44,20 +36,19 @@ const FilterUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
     resolver: yupResolver(usersfilterSchema),
   });
 
-  // functions
   useEffect(() => {
     if (usersFilters) {
       methods.reset({
-        status: usersFilters.status ?? "all",
-        from: usersFilters.createdAt.from ?? "",
-        to: usersFilters.createdAt.to ?? "",
+        status: usersFilters.status ?? 'all',
+        from: usersFilters.createdAt.from ?? '',
+        to: usersFilters.createdAt.to ?? '',
       });
     }
   }, [usersFilters, methods]);
 
   const filterHandeler = (values: UsersFilterFormType) => {
-    dispatch(setUserDate({ from: values.from ?? "", to: values.to ?? "" }));
-    dispatch(setActive(values.status ?? "all"));
+    dispatch(setUserDate({ from: values.from ?? '', to: values.to ?? '' }));
+    dispatch(setActive(values.status ?? 'all'));
     handleClose();
   };
 
@@ -98,9 +89,3 @@ const FilterUsers = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
 };
 
 export default FilterUsers;
-
-const statusList = [
-  { label: "All", value: "all" },
-  { label: "Active", value: "true" },
-  { label: "Deactive", value: "false" },
-];

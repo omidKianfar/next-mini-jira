@@ -1,36 +1,33 @@
 import {
-  doc,
-  deleteDoc,
-  updateDoc,
   collection,
-  query,
-  orderBy,
-  limit,
+  db,
+  deleteDoc,
+  doc,
   getDocs,
-} from 'firebase/firestore';
-
-// config
-import { db } from '@/configs/firebase';
-
-// type
-import { DeleteChatMessageProps } from './type';
+  limit,
+  orderBy,
+  query,
+  updateDoc,
+} from '../imports';
+import { DeleteChatMessageProps } from '../type';
 
 export const deleteChatMessage = async ({
   userId,
   messageId,
 }: DeleteChatMessageProps) => {
+  const chatRef = doc(db, 'chat', userId);
   const messageRef = doc(db, 'chat', userId, 'message', messageId);
+  const messagesRef = collection(db, 'chat', userId, 'message');
 
   await deleteDoc(messageRef);
 
-  const messagesRef = collection(db, 'chat', userId, 'message');
   const q = query(messagesRef, orderBy('createdAt', 'desc'), limit(1));
-  const querySnapshot = await getDocs(q);
 
-  const chatRef = doc(db, 'chat', userId);
+  const querySnapshot = await getDocs(q);
 
   if (!querySnapshot.empty) {
     const lastMsg = querySnapshot.docs[0].data();
+
     await updateDoc(chatRef, {
       'message.lastMessageText': lastMsg.text || '',
       'message.lastMessageSenderId': lastMsg.senderId || '',

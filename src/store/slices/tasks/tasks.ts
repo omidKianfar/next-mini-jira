@@ -1,32 +1,33 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-// type
-import { Task, TaskState } from "@/src/types/global";
+import { createSlice, PayloadAction, Task, TaskState } from '../../imports';
 
 const initialState: TaskState = {
   tasks: [],
 };
 
 const taskSlice = createSlice({
-  name: "tasks",
+  name: 'tasks',
   initialState,
   reducers: {
     setTasks: (state, action: PayloadAction<Task[]>) => {
       state.tasks = action.payload;
     },
+
     addTask: (state, action: PayloadAction<Task>) => {
       state.tasks.push(action.payload);
     },
+
     removeTask: (state, action: PayloadAction<string>) => {
       state.tasks = state.tasks.filter((task) => task.id !== action.payload);
     },
+
     updateTask: (state, action: PayloadAction<Task>) => {
       const index = state.tasks.findIndex(
-        (task) => task.id == action.payload.id,
+        (task) => task.id == action.payload.id
       );
 
       if (index !== -1) state.tasks[index] = action.payload;
     },
+
     clearTasks: (state) => {
       state.tasks = [];
     },

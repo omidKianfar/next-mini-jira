@@ -1,52 +1,39 @@
-import { lazy, Suspense } from 'react';
-import { enqueueSnackbar } from 'notistack';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { FormProvider, useForm } from 'react-hook-form';
-import { useSearchParams } from 'next/navigation';
-
-// ui
-import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
-import PageLoading from '@/src/components/common/page-loading';
+import {
+  ButtonFreeClass,
+  DragDropUploader,
+  enqueueSnackbar,
+  FormProvider,
+  LoadingCircle,
+  MyIcon,
+  MyUserType,
+  PageLoading,
+  sendChatMessage,
+  Suspense,
+  useAuth,
+  useForm,
+  useImageProcessor,
+  UserType,
+  useSearchParams,
+  useUserListenerById,
+  useVideoProcessor,
+  yupResolver,
+} from '../../../imports';
 import ShowAttachment from './show-attachment';
-import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
-import MyIcon from '@/src/components/atom/icon-components';
-
-// type
-import { MyUserType, UserType } from '@/src/types/global';
 import { UploadMenuComponentProps, UploadMenuForm } from '../../type';
-
-// lib
-import { sendChatMessage } from '@/src/libs/chat/send-message';
-import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
-
-// hook
-import { useAuth } from '@/src/hooks/auth/use-auth';
-import { useImageProcessor } from '@/src/hooks/image-processor/use-image-processor';
-import { useVideoProcessor } from '@/src/hooks/video-processor/use-video-processor';
-
-// schema
 import { UploadMenuShema } from './schema';
 
-const DragDropUploader = lazy(
-  () => import('@/src/components/organisms/uploads/drag-drop')
-);
-
 const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
-  // hook
   const params = useSearchParams();
   const reciverId = params.get('chatId');
 
   const { cancel, error, fileType, progress, reset, upload, uploading, url } =
     fileUploader;
-
-  const { user: currentUser } = useAuth();
-
-  const { user: userChat } = useUserListenerById(reciverId);
-
   const { processImage } = useImageProcessor({ size: 1024 });
-
   const { compressVideo, isCompressing, compressionProgress } =
     useVideoProcessor();
+
+  const { user: userChat } = useUserListenerById(reciverId);
+  const { user: currentUser } = useAuth();
 
   const admin = currentUser?.userType === UserType.Admin;
 
@@ -54,7 +41,6 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
     ? (userChat as MyUserType)
     : (currentUser as MyUserType);
 
-  // form
   const defaultValues: UploadMenuForm = {
     fileUrl: null,
   };
@@ -64,7 +50,6 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
     resolver: yupResolver(UploadMenuShema),
   });
 
-  // functions
   const uploadProcessHandler = async (file: File) => {
     let finalFile = file;
 

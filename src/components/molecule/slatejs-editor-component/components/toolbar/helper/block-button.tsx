@@ -1,20 +1,12 @@
-import React from 'react';
-import { useSlate } from 'slate-react';
-
-// data
+import { React, useSlate } from '../../../../imports';
 import { TEXT_ALIGN_TYPES } from '../../../data';
-
-// components
 import { Button } from '../../helpers/button';
 import { IsBlockActive } from './is-block-active';
 import { ToggleBlock } from './toggle-block';
-
-// type
 import { AlignFormat } from '../../../type';
 import { BlockButtonProps } from '../type';
 
 export const BlockButton = ({ format, icon }: BlockButtonProps) => {
-  // hooks
   const editor = useSlate();
   const isAlign = TEXT_ALIGN_TYPES.includes(format as AlignFormat);
 

@@ -1,19 +1,15 @@
-"use client";
+'use client';
 
-import { Controller, FieldValues, useFormContext } from "react-hook-form";
-
-// type
-import { InputControllerProps } from "../../type";
-
-// ui
-import LabelComponent from "./label";
-import ErrorComponent from "./errors";
+import { Controller, FieldValues, useFormContext } from '../../imports';
+import { InputControllerProps } from '../../type';
+import LabelComponent from './label';
+import ErrorComponent from './errors';
 
 const InputField = <T extends FieldValues>({
   name,
   label,
   placeholder,
-  type = "text",
+  type = 'text',
   className,
   autoFocus,
   icon,
@@ -44,6 +40,7 @@ const InputField = <T extends FieldValues>({
               disabled={disabled}
               className="my-1 w-full rounded-lg border-2 border-primary-400 py-2 pl-2 pr-8 text-bodySm placeholder:text-bodySm focus:outline-primary-700"
             />
+
             <div className="absolute bottom-3 right-2 text-title text-gray-400">
               {icon}
             </div>

@@ -1,10 +1,6 @@
 'use client';
 
-// ui
-import MyIcon from '@/src/components/atom/icon-components';
-
-// type
-import { ModalProps } from '@/src/types/global';
+import { ModalProps, MyIcon } from '../imports';
 
 const AdminSupportHeader = ({
   handleOpenModal,

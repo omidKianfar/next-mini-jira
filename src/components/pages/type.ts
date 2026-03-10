@@ -1,29 +1,36 @@
-import dayjs from "dayjs";
+import { dayjs, PlanType, Task } from './imports';
 
-// type
-import { PlanType, Task } from "@/src/types/global";
-
-export type AuthType = "signin" | "signup";
-export interface FormValues {
+type AuthType = 'signin' | 'signup';
+interface FormValues {
   email: string;
   password: string;
 }
 
-export type ColumnID = "todo" | "inprogress" | "done";
-export interface ColumnProps {
+type ColumnID = 'todo' | 'inprogress' | 'done';
+interface ColumnProps {
   id: ColumnID;
   children: React.ReactNode;
 }
-export interface TaskCardProps {
+interface TaskCardProps {
   id: string;
   task: Task;
 }
-export interface ChoosePlanSectionProps {
+interface ChoosePlanSectionProps {
   onBack: () => void;
   onChoosePlan: (plan: PlanType) => void;
 }
-export interface ActivePaymentSectionProps {
+interface ActivePaymentSectionProps {
   payment: any;
   onBack: () => void;
   now: dayjs.Dayjs;
 }
+
+export type {
+  AuthType,
+  FormValues,
+  ColumnID,
+  ColumnProps,
+  TaskCardProps,
+  ChoosePlanSectionProps,
+  ActivePaymentSectionProps,
+};

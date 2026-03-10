@@ -1,10 +1,5 @@
-// type
-import { UserType } from '@/src/types/global';
+import { MyIcon, MyImage, UserType } from '../imports';
 import { ChatSidebar } from '../type';
-
-// ui
-import MyImage from '../../atom/image-components';
-import MyIcon from '../../atom/icon-components';
 
 const ChatHeader = ({ userChat, currentUser }: ChatSidebar) => {
   return (

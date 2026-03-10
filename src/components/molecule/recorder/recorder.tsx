@@ -1,26 +1,23 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
-import RecordRTC from 'recordrtc';
-
-// types
+import {
+  ButtonFreeClass,
+  MyIcon,
+  RecordRTC,
+  useEffect,
+  useRef,
+  useState,
+} from '../imports';
 import { RecorderProps } from '../type';
 
-// ui
-import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
-import MyIcon from '../../atom/icon-components';
-
 const Recorder = ({ fileUploader }: RecorderProps) => {
-  // refs
   const recorderRef = useRef<RecordRTC | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // states
   const [recording, setRecording] = useState<boolean>(false);
   const [time, setTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
 
-  // functions
   const startRecording = async (): Promise<void> => {
     if (typeof window === 'undefined' || !navigator.mediaDevices) return;
 
@@ -39,17 +36,13 @@ const Recorder = ({ fileUploader }: RecorderProps) => {
       recorderRef.current = recorder;
 
       setTime(0);
-
       setDuration(0);
-
       setRecording(true);
 
       intervalRef.current = setInterval(() => {
         setTime((prev) => prev + 1);
       }, 1000);
-    } catch (err) {
-      console.error(err);
-    }
+    } catch (err) {}
   };
 
   const stopRecording = (): void => {
@@ -70,12 +63,9 @@ const Recorder = ({ fileUploader }: RecorderProps) => {
 
         try {
           await fileUploader.upload({ file: file });
-        } catch (error) {
-          console.error(error);
-        }
+        } catch (error) {}
 
         setRecording(false);
-
         setTime(0);
       });
     }
@@ -89,7 +79,6 @@ const Recorder = ({ fileUploader }: RecorderProps) => {
 
   const formatTime = (totalSeconds: number) => {
     const minutes = Math.floor(totalSeconds / 60);
-
     const secs = totalSeconds % 60;
 
     return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;

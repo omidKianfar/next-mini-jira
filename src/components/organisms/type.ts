@@ -1,14 +1,17 @@
-import { Dispatch, SetStateAction } from 'react';
+import {
+  ChatMessage,
+  ChatsType,
+  Dispatch,
+  MyUserType,
+  SetStateAction,
+} from './imports';
 
-// type
-import { ChatMessage, ChatsType, MyUserType } from '@/src/types/global';
-
-export interface AddTaskProps {
+interface AddTaskProps {
   handleClose: () => void;
   setNumber: Dispatch<SetStateAction<number>>;
   loading: boolean;
 }
-export interface AddTaskUploadProps {
+interface AddTaskUploadProps {
   uploadProcessHandler: (file: File) => Promise<void>;
   handleCancel: () => void;
   handleSave: () => void;
@@ -20,64 +23,64 @@ export interface AddTaskUploadProps {
   isCompressing?: boolean;
   compressionProgress?: number;
 }
-export interface HeaderProps {
+interface HeaderProps {
   showSidebar?: boolean;
   setShowSidebar?: Dispatch<SetStateAction<boolean>>;
 }
-export interface sidebarProps extends HeaderProps {
+interface sidebarProps extends HeaderProps {
   user?: MyUserType | null;
 }
-export interface chatSidebarProps extends HeaderProps {
+interface chatSidebarProps extends HeaderProps {
   chat: ChatsType;
 }
 
-export type SidebarNotification =
+type SidebarNotification =
   | { type: 'none' }
   | { type: 'count'; value: number }
   | { type: 'dot' };
 
-export type sidebarItemsType = {
+type sidebarItemsType = {
   id: string;
   icon: string;
   title: string;
   direction: () => void | Promise<void>;
   notification?: SidebarNotification;
 };
-export interface SidebarItemProps {
+interface SidebarItemProps {
   item: sidebarItemsType;
 }
 
-export type CellContent<T> =
+type CellContent<T> =
   | string
   | number
   | React.ReactNode
   | ((row: T) => React.ReactNode);
 
-export type Column<T> = {
+type Column<T> = {
   key?: string;
   head: CellContent<T>;
   column: CellContent<T>;
   className?: string;
 };
 
-export type TableProps<T> = {
+type TableProps<T> = {
   data: T[];
   columns: Column<T>[];
 };
 
-export type PaginationProps = {
+type PaginationProps = {
   currentPage: number;
   totalPages: number;
   pageSize: number;
   onPageChange: (page: number) => void;
   onPageSizeChange: (size: number) => void;
 };
-export interface ListComponentProps {
+interface ListComponentProps {
   children: React.ReactNode;
   title?: string;
 }
 
-export interface ChatMessagesProps {
+interface ChatMessagesProps {
   messages: ChatMessage[];
   showMenu?: boolean;
   handleTemplateSelect?: (text: string) => void;
@@ -86,24 +89,45 @@ export interface ChatMessagesProps {
   userChat?: MyUserType | null;
 }
 
-export interface UsersTableProps {
+interface UsersTableProps {
   users: MyUserType[];
   goDetail: (userId: string) => void;
   toggleActive: (user: MyUserType) => Promise<void>;
 }
 
-export type UsersFilterFormType = {
+type UsersFilterFormType = {
   status: string;
   from?: string;
   to?: string;
 };
-export type ChatsFilterFormType = {
+type ChatsFilterFormType = {
   from?: string;
   to?: string;
 };
 
-export type TasksFilterFormType = {
+type TasksFilterFormType = {
   tag: string;
   from?: string;
   to?: string;
+};
+
+export type {
+  AddTaskProps,
+  AddTaskUploadProps,
+  HeaderProps,
+  sidebarProps,
+  chatSidebarProps,
+  SidebarNotification,
+  sidebarItemsType,
+  SidebarItemProps,
+  CellContent,
+  Column,
+  TableProps,
+  PaginationProps,
+  ListComponentProps,
+  ChatMessagesProps,
+  UsersTableProps,
+  UsersFilterFormType,
+  ChatsFilterFormType,
+  TasksFilterFormType,
 };

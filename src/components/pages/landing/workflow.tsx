@@ -2,10 +2,8 @@
 
 import { motion } from 'framer-motion';
 
-// ui
 import MyIcon from '../../atom/icon-components';
 
-// data
 import { containerVariants, itemVariants, TECH_STACK } from './data';
 import { IconName } from '../../atom/icon-components/icons';
 

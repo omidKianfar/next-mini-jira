@@ -1,30 +1,23 @@
-"use client";
+'use client';
 
-import { lazy, Suspense, useState } from "react";
-import { usePathname } from "next/navigation";
-import dayjs from "dayjs";
+import { lazy, Suspense, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import dayjs from 'dayjs';
 
-// hooks
-import { useAuth } from "@/src/hooks/auth/use-auth";
-import { useRequireActiveStatus } from "@/src/hooks/pages-user-status-require/use-require-active-status";
-import { usePlanAction } from "@/src/hooks/payment/usePlanAction";
-import { useNavigation } from "@/src/hooks/navigation/use-navigation";
+import { useAuth } from '@/src/hooks/auth/use-auth';
+import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
+import { usePlanAction } from '@/src/hooks/payment/usePlanAction';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 
-// type
-import { PlanType } from "@/src/types/global";
+import { PlanType } from '@/src/types/global';
 
-// ui
-import PageLoading from "../../common/page-loading";
-import FramerMotion from "../../atom/animation-component";
+import PageLoading from '../../common/page-loading';
+import FramerMotion from '../../atom/animation-component';
 
-// lazy
-const ActivePaymentComponent = lazy(
-  () => import("./ActivePayment"),
-);
-const ChoosePlanComponent = lazy(() => import("./ChoosePlan"));
+const ActivePaymentComponent = lazy(() => import('./ActivePayment'));
+const ChoosePlanComponent = lazy(() => import('./ChoosePlan'));
 
 const PlanComponent = () => {
-  // hooks
   const pathName = usePathname();
   const navigation = useNavigation();
 
@@ -33,27 +26,22 @@ const PlanComponent = () => {
 
   useRequireActiveStatus();
 
-  // states
   const [loading, setLoading] = useState(false);
 
-  // date
   const now = dayjs();
 
-  // pathnames
-  const isSignupPage = pathName.includes("/signup");
-  const isDashboard = pathName.includes("/dashboard");
+  const isSignupPage = pathName.includes('/signup');
+  const isDashboard = pathName.includes('/dashboard');
 
-  // payments
   const payment = user?.payment;
 
   const hasActivePayment = Boolean(
-    payment?.endAt && now.isBefore(payment.endAt),
+    payment?.endAt && now.isBefore(payment.endAt)
   );
 
-  // functions
   const BackToPlan = () => {
     if (isSignupPage) {
-      changeStep("2");
+      changeStep('2');
     } else {
       navigation.dashboard();
     }
@@ -66,7 +54,6 @@ const PlanComponent = () => {
     await choosePlan({ selectedPlan, setLoading });
   };
 
-  // ui
   if (loading) return <PageLoading />;
 
   return (
@@ -74,7 +61,7 @@ const PlanComponent = () => {
       <FramerMotion>
         <div
           className={`flex w-full flex-col items-center justify-center p-4 ${
-            isSignupPage ? "min-h-screen" : ""
+            isSignupPage ? 'min-h-screen' : ''
           }`}
         >
           {isDashboard && hasActivePayment ? (

@@ -1,31 +1,21 @@
-import { Suspense } from 'react';
-import { enqueueSnackbar } from 'notistack';
-import { useSearchParams } from 'next/navigation';
-
-// ui
-import ButtonNext from '@/src/components/atom/buttons-component/button-next';
-import PageLoading from '@/src/components/common/page-loading';
-
-// type
-import { MyUserType, UserType } from '@/src/types/global';
-import { UploadMenuComponentProps } from '../../type';
-
-// lib
-import { sendChatMessage } from '@/src/libs/chat/send-message';
-import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
-
-// hook
-import { useAuth } from '@/src/hooks/auth/use-auth';
-
-// schema
+import {
+  ButtonFreeClass,
+  enqueueSnackbar,
+  MyIcon,
+  MyUserType,
+  PageLoading,
+  sendChatMessage,
+  Suspense,
+  useAuth,
+  UserType,
+  useSearchParams,
+  useUserListenerById,
+} from '../../../imports';
 import RecorderComponent from '../../../recorder/recorder-component';
-import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
-import MyIcon from '@/src/components/atom/icon-components';
+import { UploadMenuComponentProps } from '../../type';
 
 const VoiceMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
   const { cancel, error, fileType, reset, uploading, url } = fileUploader;
-
-  // hooks
   const params = useSearchParams();
   const reciverId = params.get('chatId');
 
@@ -38,7 +28,6 @@ const VoiceMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
     ? (userChat as MyUserType)
     : (currentUser as MyUserType);
 
-  // functions
   const handleCancel = () => {
     cancel();
   };

@@ -1,21 +1,20 @@
-"use client";
+'use client';
 
-import { Component } from "react";
+import { Component } from '../imports';
+import { ErrorBoundaryProps, ErrorBoundaryState } from '../type';
 
-// type
-import { ErrorBoundaryProps, ErrorBoundaryState } from "../type";
-
-export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  // state
+export default class ErrorBoundary extends Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
   state: ErrorBoundaryState = { hasError: false };
 
-  // functions
   static getDerivedStateFromError() {
     return { hasError: true };
   }
 
   componentDidCatch(error: unknown) {
-    console.error("Global ErrorBoundary:", error);
+    console.error('Global ErrorBoundary:', error);
   }
 
   render() {

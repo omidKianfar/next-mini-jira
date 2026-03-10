@@ -1,18 +1,9 @@
-"use client";
+'use client';
 
-import Cropper from "react-easy-crop";
-
-// hooks
-import { useImageCrop } from "@/src/hooks/image-crop/use-image-crop";
-
-// ui
-import ButtonNext from "../../atom/buttons-component/button-next";
-
-// type
-import { CropProps } from "../type";
+import { ButtonNext, Cropper, useImageCrop } from '../imports';
+import { CropProps } from '../type';
 
 const AvatarCropModal = ({ file, onCancel, onSave }: CropProps) => {
-  // hooks
   const {
     imageSrc,
     crop,
@@ -26,10 +17,10 @@ const AvatarCropModal = ({ file, onCancel, onSave }: CropProps) => {
 
   if (file && !imageSrc) loadImageFile(file);
 
-  // functions
   const handleSave = async () => {
     const cropped = await cropImage();
     if (!cropped) return;
+
     onSave(cropped);
   };
 
@@ -49,9 +40,9 @@ const AvatarCropModal = ({ file, onCancel, onSave }: CropProps) => {
             showGrid={false}
             style={{
               containerStyle: {
-                borderRadius: "8px",
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
+                borderRadius: '8px',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
               },
             }}
           />

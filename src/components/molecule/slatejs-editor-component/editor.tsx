@@ -1,32 +1,25 @@
-import isHotkey from 'is-hotkey';
-import { Slate, Editable } from 'slate-react';
-import { Editor, Descendant } from 'slate';
-import { useState } from 'react';
-import { enqueueSnackbar } from 'notistack';
-import { useSearchParams } from 'next/navigation';
-
-// data
-import { HOTKEYS } from './data';
-
-// type
-import { MarkFormat, SlateEditorProps } from './type';
+import {
+  Descendant,
+  Editable,
+  Editor,
+  enqueueSnackbar,
+  isHotkey,
+  MyUserType,
+  sendChatMessage,
+  Slate,
+  updateChatMessage,
+  useAuth,
+  useEditor,
+  UserType,
+  useSearchParams,
+  useState,
+  useUserListenerById,
+} from '../imports';
 import { ToggleMark } from './components/toolbar/helper/toggle-mark';
-import { MyUserType, UserType } from '@/src/types/global';
-
-// hooks
-import { useEditor } from '@/src/hooks/editor/use-editor';
-
-// ui
 import ToolbarComponent from './components/toolbar';
 import { Serialize } from './components/serialize';
-
-// lib
-import { sendChatMessage } from '@/src/libs/chat/send-message';
-import { updateChatMessage } from '@/src/libs/chat/update-message';
-
-// hook
-import { useAuth } from '@/src/hooks/auth/use-auth';
-import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
+import { HOTKEYS } from './data';
+import { MarkFormat, SlateEditorProps } from './type';
 
 const initialValue: Descendant[] = [
   {
@@ -40,14 +33,11 @@ const SlateEditor = ({
   editMessageId,
   setEditMessageId,
 }: SlateEditorProps) => {
-  // hook
   const params = useSearchParams();
   const reciverId = params.get('chatId');
 
   const { user: currentUser } = useAuth();
-
   const { user: userChat } = useUserListenerById(reciverId);
-
   const {
     editor,
     deserializedNodes,
@@ -58,10 +48,8 @@ const SlateEditor = ({
     resetEditor,
   } = useEditor();
 
-  // states
   const [loading, setLoading] = useState(false);
 
-  // function
   const handleSend = async () => {
     if (
       editorOutput == '' ||

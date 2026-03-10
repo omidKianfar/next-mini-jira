@@ -1,11 +1,11 @@
 import { IconName } from './icon-components/icons';
 
-export interface FarmerMotionProps {
+interface FarmerMotionProps {
   children: React.ReactNode;
 }
 
-export type ButtonType = 'button' | 'submit' | 'reset';
-export interface ButtonProps {
+type ButtonType = 'button' | 'submit' | 'reset';
+interface ButtonProps {
   type?: ButtonType;
   children?: React.ReactNode;
   isLoading?: boolean;
@@ -14,20 +14,20 @@ export interface ButtonProps {
   disable?: boolean;
   icon?: React.ReactNode;
 }
-export interface BackButtonProps {
+interface BackButtonProps {
   onClick: () => void;
 }
-export interface LoadingProps {
+interface LoadingProps {
   color?: string;
   size?: number;
 }
-export interface MyIconProps {
+interface MyIconProps {
   onClick?: () => void;
   className?: string;
   icon: IconName;
   iconClass?: string;
 }
-export interface MyImageProps {
+interface MyImageProps {
   src: string;
   alt?: string;
   width?: number;
@@ -37,13 +37,25 @@ export interface MyImageProps {
   wrapperClass?: string;
   onClick?: () => void;
 }
-export interface LogoProps {
+interface LogoProps {
   small?: boolean;
 }
-export interface MyVideoProps {
+interface MyVideoProps {
   src: string;
   alt?: string;
   width?: number;
   height?: number;
   className?: string;
 }
+
+export type {
+  FarmerMotionProps,
+  ButtonType,
+  ButtonProps,
+  BackButtonProps,
+  LoadingProps,
+  MyIconProps,
+  MyImageProps,
+  LogoProps,
+  MyVideoProps,
+};

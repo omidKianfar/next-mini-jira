@@ -1,11 +1,5 @@
-import { doc, setDoc } from "firebase/firestore";
-
-// configs
-import { db } from "@/configs/firebase";
-
-// type
-import { Task } from "@/src/types/global";
+import { db, doc, setDoc, Task } from '../imports';
 
 export const createTaskDocument = async (newTask: Task) => {
-  await setDoc(doc(db, "tasks", newTask?.id), newTask);
+  await setDoc(doc(db, 'tasks', newTask?.id), newTask);
 };

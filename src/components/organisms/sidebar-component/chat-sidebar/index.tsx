@@ -1,40 +1,34 @@
 'use client';
 
-import { useSelector } from 'react-redux';
-import { RootState } from '@/src/store';
-import { useEffect, useRef, useState } from 'react';
-
-// ui
-import AdminSupportUserCard from '@/src/components/molecule/cards/admin-support-user-card';
-import PageLoading from '@/src/components/common/page-loading';
-import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
-import MyIcon from '@/src/components/atom/icon-components';
-
-// type
+import {
+  AdminSupportUserCard,
+  ButtonFreeClass,
+  MyIcon,
+  PageLoading,
+  RootState,
+  useChatsListener,
+  useEffect,
+  useRef,
+  useSelector,
+  useState,
+} from '../../imports';
 import { chatSidebarProps } from '../../type';
-
-// hook
-import { useChatsListener } from '@/src/hooks/chat/use-user-listener';
 
 const ChatSidebar = ({
   setShowSidebar,
 }: Pick<chatSidebarProps, 'setShowSidebar'>) => {
-  // ref
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
-  // state
   const [showScrollBtn, setShowScrollBtn] = useState(false);
-  // redux
   const chats = useSelector((state: RootState) => state.chats.chats);
   const chatsFilters = useSelector((state: RootState) => state.chatsFilters);
 
-  // hook
   useChatsListener();
 
-  // function
   const scrollToTop = () => {
     scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
@@ -48,21 +42,17 @@ const ChatSidebar = ({
     return () => container.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // apply filters
   const finalChats = chats.filter((chat) => {
     const messageUpdatedAt = chat.message.updatedAt;
     const { updatedAt } = chatsFilters;
 
     if (!messageUpdatedAt) return false;
-
-    // date filters
     if (updatedAt.from && messageUpdatedAt < updatedAt.from) return false;
     if (updatedAt.to && messageUpdatedAt > updatedAt.to) return false;
 
     return true;
   });
 
-  // ui
   if (!finalChats) return <PageLoading />;
 
   return (

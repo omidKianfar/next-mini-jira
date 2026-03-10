@@ -1,13 +1,9 @@
-"use client";
+'use client';
 
-import { Controller, FieldValues, useFormContext } from "react-hook-form";
-
-// type
-import { TextareaControllerProps } from "../../type";
-
-// ui
-import LabelComponent from "./label";
-import ErrorComponent from "./errors";
+import { Controller, FieldValues, useFormContext } from '../../imports';
+import { TextareaControllerProps } from '../../type';
+import LabelComponent from './label';
+import ErrorComponent from './errors';
 
 const TextareaFiled = <T extends FieldValues>({
   name,

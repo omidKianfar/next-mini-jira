@@ -1,8 +1,4 @@
-// ui
-import { IconName } from '@/src/components/atom/icon-components/icons';
-import MyIcon from '../../../atom/icon-components';
-
-// type
+import { IconName, MyIcon } from '../../imports';
 import { SidebarItemProps } from '../../type';
 
 const SidebarActionItem = ({ item }: SidebarItemProps) => {

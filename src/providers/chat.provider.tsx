@@ -1,30 +1,26 @@
 'use client';
 
-import { createContext, useEffect, useState, ReactNode } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
-
-// type
 import {
   ChatContextType,
   ChatMessage,
+  ChatMessagesListener,
+  createContext,
   MyUserType,
+  ReactNode,
+  useAuth,
+  useEffect,
+  usePathname,
   UserType,
-} from '../types/global';
+  useSearchParams,
+  useState,
+  useUserListenerById,
+} from './imports';
 
-// chat
-import { ChatMessagesListener } from '../libs/chat/messages-listener';
-
-// hooks
-import { useAuth } from '../hooks/auth/use-auth';
-import { useUserListenerById } from '../hooks/users/use-user-listener-by-id';
-
-// create context
 export const ChatContext = createContext<ChatContextType | undefined>(
   undefined
 );
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
-  // hooks
   const pathname = usePathname();
   const params = useSearchParams();
   const chatId = params.get('chatId');
@@ -32,10 +28,8 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const { user: currentUser } = useAuth();
   const { user: userChat } = useUserListenerById(chatId);
 
-  // states
   const [messages, setMessages] = useState<ChatMessage[]>([]);
 
-  // functions
   useEffect(() => {
     if (!currentUser) return;
 

@@ -1,29 +1,23 @@
-import { useState } from 'react';
-
-// ui
-import { TableComponent } from '@/src/components/organisms/table-component';
-import PaginationComponent from '@/src/components/organisms/pagination-component';
+import {
+  LoadingCircle,
+  PaginationComponent,
+  TableComponent,
+  useState,
+} from '../imports';
 import { Cloumns } from './cloumns';
-import LoadingCircle from '../../atom/loadings/loading-circle';
-
-// type
 import { UsersTableProps } from '../type';
 
 const UsersTable = ({ users, goDetail, toggleActive }: UsersTableProps) => {
-  // pagination
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
 
   const totalPages = Math.max(1, Math.ceil(users.length / pageSize));
-
   const safePage = Math.min(page, totalPages);
-
   const paginatedUsers = users.slice(
     (safePage - 1) * pageSize,
     safePage * pageSize
   );
 
-  // columns data
   const columns = Cloumns({ goDetail, toggleActive });
 
   if (!users)

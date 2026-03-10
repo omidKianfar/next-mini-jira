@@ -1,15 +1,13 @@
-"use client";
+'use client';
 
-import { useState, useCallback } from "react";
+import { useState, useCallback } from '../imports';
 
 export const useImageCrop = () => {
-  // states
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedPixels, setCroppedPixels] = useState<any>(null);
 
-  // functions
   const onCropComplete = useCallback((_: any, croppedAreaPixels: any) => {
     setCroppedPixels(croppedAreaPixels);
   }, []);
@@ -35,12 +33,12 @@ export const useImageCrop = () => {
       img.onload = () => resolve(img);
     });
 
-    const canvas = document.createElement("canvas");
+    const canvas = document.createElement('canvas');
 
     canvas.width = croppedPixels.width;
     canvas.height = croppedPixels.height;
 
-    const ctx = canvas.getContext("2d")!;
+    const ctx = canvas.getContext('2d')!;
 
     ctx.drawImage(
       image,
@@ -51,13 +49,13 @@ export const useImageCrop = () => {
       0,
       0,
       croppedPixels.width,
-      croppedPixels.height,
+      croppedPixels.height
     );
 
     return new Promise<File>((resolve) => {
       canvas.toBlob((blob) => {
-        resolve(new File([blob!], "avatar.png", { type: "image/png" }));
-      }, "image/png");
+        resolve(new File([blob!], 'avatar.png', { type: 'image/png' }));
+      }, 'image/png');
     });
   };
 

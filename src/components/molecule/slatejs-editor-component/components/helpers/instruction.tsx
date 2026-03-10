@@ -1,9 +1,5 @@
-import React, { Ref } from 'react';
-
-// type
+import { React, Ref } from '../../../imports';
 import { SimpleForwardRefProps } from '../../type';
-
-// helpers
 import { Clsx } from './clsx';
 
 export const Instruction = React.forwardRef<

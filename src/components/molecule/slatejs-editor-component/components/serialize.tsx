@@ -1,33 +1,35 @@
-import { Element as SlateElement, Text, Node } from 'slate';
-import escapeHTML from 'escape-html';
-
-// type
+import { Element, Text, Node, escapeHTML } from '../../imports';
 import { CustomElement, CustomText } from '../type';
 
 export const Serialize = (node: Node): string => {
   if (Text.isText(node)) {
     let string = escapeHTML(node.text);
-
     const textNode = node as CustomText;
 
-    if (textNode.bold) string = `<strong>${string}</strong>`;
-
-    if (textNode.italic) string = `<em>${string}</em>`;
-
-    if (textNode.underline) string = `<u>${string}</u>`;
-
-    if (textNode.code) string = `<code>${string}</code>`;
-
+    if (textNode.bold) {
+      string = `<strong>${string}</strong>`;
+    }
+    if (textNode.italic) {
+      string = `<em>${string}</em>`;
+    }
+    if (textNode.underline) {
+      string = `<u>${string}</u>`;
+    }
+    if (textNode.code) {
+      string = `<code>${string}</code>`;
+    }
     if (textNode.fontFamily || textNode.color || textNode.backgroundColor) {
       let styleAttributes = '';
 
-      if (textNode.fontFamily)
+      if (textNode.fontFamily) {
         styleAttributes += `font-family: ${textNode.fontFamily};`;
-
-      if (textNode.color) styleAttributes += `color: ${textNode.color};`;
-
-      if (textNode.backgroundColor)
+      }
+      if (textNode.color) {
+        styleAttributes += `color: ${textNode.color};`;
+      }
+      if (textNode.backgroundColor) {
         styleAttributes += `background-color: ${textNode.backgroundColor};`;
+      }
 
       string = `<span style="${styleAttributes}">${string}</span>`;
     }
@@ -35,7 +37,7 @@ export const Serialize = (node: Node): string => {
     return string;
   }
 
-  if (SlateElement.isElement(node)) {
+  if (Element.isElement(node)) {
     const elementNode = node as CustomElement;
 
     const children = elementNode.children

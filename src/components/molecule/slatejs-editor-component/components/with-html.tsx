@@ -1,6 +1,4 @@
-import { Editor, Transforms, Descendant, Node } from 'slate';
-
-// components
+import { Editor, Transforms, Descendant, Node } from '../../imports';
 import { Deserialize } from './deserialize';
 
 export const WithHtml = (editor: Editor) => {
@@ -10,7 +8,6 @@ export const WithHtml = (editor: Editor) => {
 
     if (html) {
       const parsed = new DOMParser().parseFromString(html, 'text/html');
-
       const deserializedContent = Deserialize(parsed.body);
 
       const fragment = Array.isArray(deserializedContent)

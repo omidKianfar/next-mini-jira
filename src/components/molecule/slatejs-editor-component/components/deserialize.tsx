@@ -1,5 +1,4 @@
-import { Descendant, Text } from 'slate';
-import { jsx } from 'slate-hyperscript';
+import { Descendant, Text, jsx } from '../../imports';
 import { AlignFormat, CustomText } from '../type';
 
 export const Deserialize = (
@@ -15,9 +14,7 @@ export const Deserialize = (
   }
 
   const element = el as HTMLElement;
-
   const nodeAttributes: any = { ...markAttributes };
-
   const style = element.getAttribute('style');
 
   if (style) {
@@ -31,17 +28,18 @@ export const Deserialize = (
         return acc;
       }, {});
 
-    if (styleAttributes['font-family'])
+    if (styleAttributes['font-family']) {
       nodeAttributes.fontFamily = styleAttributes['font-family'];
-
-    if (styleAttributes['color'])
+    }
+    if (styleAttributes['color']) {
       nodeAttributes.color = styleAttributes['color'];
-
-    if (styleAttributes['background-color'])
+    }
+    if (styleAttributes['background-color']) {
       nodeAttributes.backgroundColor = styleAttributes['background-color'];
-
-    if (styleAttributes['text-align'])
+    }
+    if (styleAttributes['text-align']) {
       nodeAttributes.align = styleAttributes['text-align'] as AlignFormat;
+    }
   }
 
   switch (element.nodeName) {
@@ -93,8 +91,9 @@ export const Deserialize = (
 
   if (
     ['STRONG', 'B', 'U', 'I', 'EM', 'CODE', 'SPAN'].includes(element.nodeName)
-  )
+  ) {
     return children;
+  }
 
   switch (element.nodeName) {
     case 'BODY':

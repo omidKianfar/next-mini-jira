@@ -1,39 +1,33 @@
 'use client';
 
-import { lazy, Suspense, useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { enqueueSnackbar } from 'notistack';
-import dayjs from 'dayjs';
-
-// hook
-import { useAuth } from '@/src/hooks/auth/use-auth';
-import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
-import { useImageProcessor } from '@/src/hooks/image-processor/use-image-processor';
-import { useVideoProcessor } from '@/src/hooks/video-processor/use-video-processor';
-
-// type
+import {
+  useAuth,
+  useFileUploader,
+  useImageProcessor,
+  useVideoProcessor,
+  useState,
+  TaskForm,
+  useForm,
+  yupResolver,
+  Task,
+  dayjs,
+  createTaskDocument,
+  enqueueSnackbar,
+  PageLoading,
+  FormProvider,
+} from '../../imports';
+import { lazy, Suspense } from 'react';
 import { AddTaskProps } from '../../type';
-import { Task, TaskForm } from '@/src/types/global';
-
-// schema
 import { TaskShema } from './schema';
 
-// firestore
-import { createTaskDocument } from '@/src/libs/tasks/create-task';
-
-// ui
-import PageLoading from '../../../common/page-loading';
-
-// lazy
 const AddTaskFormComponent = lazy(() => import('./steps/add-task-form'));
 const AddTaskUploadCmponent = lazy(() => import('./steps/upload'));
 
 const AddTask = ({ handleClose }: Pick<AddTaskProps, 'handleClose'>) => {
-  // hooks
   const { user } = useAuth();
 
   const { processImage } = useImageProcessor({ size: 1024 });
+
   const { compressVideo, isCompressing, compressionProgress } =
     useVideoProcessor();
 
@@ -42,11 +36,9 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, 'handleClose'>) => {
       accept: ['image/*', 'video/*'],
     });
 
-  // states
   const [loading, setLoading] = useState<boolean>(false);
   const [number, setNumber] = useState(0);
 
-  // form
   const defaultValues: TaskForm = {
     title: '',
     description: '',
@@ -62,7 +54,6 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, 'handleClose'>) => {
     resolver: yupResolver(TaskShema),
   });
 
-  // functions
   const uploadProcessHandler = async (file: File) => {
     let finalFile = file;
 
@@ -110,9 +101,7 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, 'handleClose'>) => {
       enqueueSnackbar(`Task created successfully`, {
         variant: 'success',
       });
-
       reset();
-
       handleClose();
     } catch (error: any) {
       enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {

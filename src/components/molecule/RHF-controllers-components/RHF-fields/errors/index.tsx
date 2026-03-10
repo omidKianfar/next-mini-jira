@@ -1,14 +1,12 @@
-"use client";
+'use client';
 
-import { FieldValues } from "react-hook-form";
-
-// type
-import { DateInputFieldProps, ErrorProps } from "../../../type";
+import { FieldValues } from '../../../imports';
+import { DateInputFieldProps, ErrorProps } from '../../../type';
 
 const ErrorComponent = <T extends FieldValues>({
   errors,
   name,
-}: Pick<DateInputFieldProps<T>, "name"> & ErrorProps) => {
+}: Pick<DateInputFieldProps<T>, 'name'> & ErrorProps) => {
   return (
     <>
       {errors?.[name] && (

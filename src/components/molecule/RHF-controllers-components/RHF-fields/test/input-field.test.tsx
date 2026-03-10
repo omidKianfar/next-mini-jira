@@ -1,12 +1,15 @@
-import { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { fireEvent, render, screen } from "@testing-library/react";
-
-// ui
-import InputField from "../input-field";
+import {
+  useForm,
+  useEffect,
+  FormProvider,
+  render,
+  screen,
+  fireEvent,
+} from '../../../imports';
+import InputField from '../input-field';
 
 const Wrapper = ({ withError = false }) => {
-  const defaultValues = { name: "Initial text" };
+  const defaultValues = { name: 'Initial text' };
 
   const methods = useForm({
     defaultValues,
@@ -14,9 +17,9 @@ const Wrapper = ({ withError = false }) => {
 
   useEffect(() => {
     if (withError) {
-      methods.setError("name", {
-        type: "manual",
-        message: "Enter your name",
+      methods.setError('name', {
+        type: 'manual',
+        message: 'Enter your name',
       });
     }
   }, [withError, methods]);
@@ -28,52 +31,48 @@ const Wrapper = ({ withError = false }) => {
   );
 };
 
-describe("InputField component", () => {
-  test("Renders input and label correctly", () => {
+describe('InputField component', () => {
+  test('Renders input and label correctly', () => {
     render(<Wrapper />);
 
-    const textInput = screen.getByLabelText("Name") as HTMLInputElement;
-
+    const textInput = screen.getByLabelText('Name') as HTMLInputElement;
     expect(textInput).toBeInTheDocument();
   });
 
-  test("Allows user to type in the input", () => {
+  test('Allows user to type in the input', () => {
     render(<Wrapper />);
 
     const textInput = screen.getByPlaceholderText(
-      "Enter your name",
+      'Enter your name'
     ) as HTMLInputElement;
 
-    fireEvent.change(textInput, { target: { value: "omid" } });
+    fireEvent.change(textInput, { target: { value: 'omid' } });
 
-    expect(textInput.value).toBe("omid");
+    expect(textInput.value).toBe('omid');
   });
 
-  test("Shows default value from form", () => {
+  test('Shows default value from form', () => {
     render(<Wrapper />);
 
     const textInput = screen.getByDisplayValue(
-      "Initial text",
+      'Initial text'
     ) as HTMLInputElement;
-
     expect(textInput).toBeInTheDocument();
   });
 
-  test("Label is connected to input", () => {
+  test('Label is connected to input', () => {
     render(<Wrapper />);
 
-    const label = screen.getByText("Name") as HTMLInputElement;
+    const textInput = screen.getByLabelText('Name') as HTMLInputElement;
+    const label = screen.getByText('Name') as HTMLInputElement;
 
-    const textInput = screen.getByLabelText("Name") as HTMLInputElement;
-
-    expect(label).toHaveAttribute("for", textInput.id);
+    expect(label).toHaveAttribute('for', textInput.id);
   });
 
-  test("Displays error message", () => {
+  test('Displays error message', () => {
     render(<Wrapper withError />);
 
-    const textInput = screen.getByText("Enter your name") as HTMLInputElement;
-
+    const textInput = screen.getByText('Enter your name') as HTMLInputElement;
     expect(textInput).toBeInTheDocument();
   });
 });

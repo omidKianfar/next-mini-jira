@@ -1,26 +1,19 @@
-"use client";
+'use client';
 
-import { useState, useRef, useCallback, useMemo } from "react";
-
-// type
-import { MyUserType } from "@/src/types/global";
+import { useState, useRef, useCallback, useMemo, MyUserType } from '../imports';
 
 export const useInfiniteUsers = (users: MyUserType[], batchSize = 10) => {
-  // states
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
   const [cursor, setCursor] = useState(batchSize);
 
   const safeCursor = Math.min(cursor, users.length);
-
   const effectiveCursor = users.length === 0 ? 0 : safeCursor;
+  const hasMore = effectiveCursor < users.length;
 
-  // functions
   const visibleUsers = useMemo(() => {
     return users.slice(0, effectiveCursor);
   }, [users, effectiveCursor]);
-
-  const hasMore = effectiveCursor < users.length;
-
-  const observerRef = useRef<IntersectionObserver | null>(null);
 
   const loadMore = useCallback(() => {
     if (!hasMore) return;
@@ -40,12 +33,12 @@ export const useInfiniteUsers = (users: MyUserType[], batchSize = 10) => {
             loadMore();
           }
         },
-        { threshold: 1 },
+        { threshold: 1 }
       );
 
       observerRef.current.observe(node);
     },
-    [loadMore],
+    [loadMore]
   );
 
   return { visibleUsers, loaderRef, hasMore };

@@ -1,46 +1,34 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
-import { useSelector } from 'react-redux';
-
-// hooks
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-
-// type
-import { ModalProps, ChatsType, UserType } from '@/src/types/global';
-
-// redux
-import { RootState } from '@/src/store';
-
-// ui
-import MyIcon from '../../../atom/icon-components';
-import EmptyColumn from '../../../atom/empty-components/empty-column';
-import MyImage from '../../../atom/image-components';
-
-// utils
-import { stringSlicer } from '@/src/utils/string-slicer';
-
-// libs
-import { MessgesRead } from '@/src/libs/chat/read-message';
+import {
+  ChangeEvent,
+  ChatsType,
+  EmptyColumn,
+  MessgesRead,
+  ModalProps,
+  MyIcon,
+  MyImage,
+  RootState,
+  stringSlicer,
+  useNavigation,
+  UserType,
+  useSelector,
+  useState,
+} from '../../imports';
 
 const SearchSupportChats = ({
   handleClose,
 }: Pick<ModalProps, 'handleClose'>) => {
-  // hooks
   const navigation = useNavigation();
 
-  // redux
   const chats = useSelector((state: RootState) => state.chats.chats);
 
-  // states
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
   const [filteredChats, setFilteredChats] = useState<ChatsType[]>([]);
 
-  // functions
   const serachHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value as string;
-
     setSearchValue(value);
 
     if (!value.trim()) {
@@ -70,7 +58,6 @@ const SearchSupportChats = ({
     MessgesRead({ chatId: chatId, senderType: UserType.Client });
 
     handleClose();
-
     navigation.adminSupportChat(chatId);
   };
 

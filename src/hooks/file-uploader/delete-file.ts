@@ -1,8 +1,6 @@
-import { supabase } from "@/configs/supabase";
-
-// type
-import { deleteUploadedFileProps } from "../type";
+import { supabase } from '../imports';
+import { deleteUploadedFileProps } from '../type';
 
 export const deleteFile = async ({ path }: deleteUploadedFileProps) => {
-  if (path) await supabase.storage.from("uploads").remove([path]);
+  if (path) await supabase.storage.from('uploads').remove([path]);
 };

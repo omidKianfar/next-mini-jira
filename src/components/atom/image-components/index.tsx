@@ -1,8 +1,5 @@
-// ui
-import Image from "next/image";
-
-// type
-import { MyImageProps } from "../type";
+import Image from 'next/image';
+import { MyImageProps } from '../type';
 
 const MyImage = ({
   src,
@@ -18,7 +15,7 @@ const MyImage = ({
     <div className={wrapperClass}>
       <Image
         src={src}
-        alt={alt || ""}
+        alt={alt || ''}
         width={width}
         height={height}
         fill={fill}

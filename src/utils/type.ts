@@ -1,8 +1,10 @@
-export interface StringSlicerProps {
+interface StringSlicerProps {
   string: string;
   slice: number;
 }
 
-export interface UnSeenMessageCalcProps {
+interface UnSeenMessageCalcProps {
   date: string | number | Date;
 }
+
+export type { StringSlicerProps, UnSeenMessageCalcProps };

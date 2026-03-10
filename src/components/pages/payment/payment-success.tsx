@@ -4,42 +4,34 @@ import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import dayjs from 'dayjs';
 
-// hooks
 import { useAuth } from '@/src/hooks/auth/use-auth';
 import { useSetSubscriptionId } from '@/src/hooks/payment/useSetSubscriptionId';
 import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
 
-// ui
 import PageLoading from '@/src/components/common/page-loading';
 import MyIcon from '@/src/components/atom/icon-components';
 import ButtonNext from '@/src/components/atom/buttons-component/button-next';
 
-// firestore
 import { updateFirestoreUser } from '@/src/libs/auth/update-user';
 
 const PaymentSuccessComponent = () => {
-  // hooks
   const params = useSearchParams();
   const navigation = useNavigation();
   const { user, changeStep } = useAuth();
 
   useRequireActiveStatus();
 
-  // addressbar parametrs
   const planType = params.get('planType');
   const sessionId = params.get('session_id');
 
-  // states
   const [subscriptionId, setSubscriptionId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // date
   const now = dayjs().format('YYYY-MM-DD');
   const oneMonth = dayjs().add(1, 'month').format('YYYY-MM-DD');
   const oneYear = dayjs().add(1, 'year').format('YYYY-MM-DD');
 
-  // functions
   useSetSubscriptionId({ sessionId, setLoading, setSubscriptionId });
 
   const finishHandler = async () => {
@@ -72,7 +64,6 @@ const PaymentSuccessComponent = () => {
     navigation.dashboard();
   };
 
-  // ui
   if (loading) return <PageLoading />;
 
   return (

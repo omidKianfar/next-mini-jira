@@ -1,5 +1,4 @@
-import React from 'react';
-import { RenderElementProps } from 'slate-react';
+import { RenderElementProps } from '../../imports';
 
 const ElementComponent = (props: RenderElementProps) => {
   const { attributes, children, element } = props;

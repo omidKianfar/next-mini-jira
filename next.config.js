@@ -9,6 +9,7 @@ const nextConfig = {
       },
     ],
   },
+
   async headers() {
     return [
       {
@@ -16,7 +17,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Cross-Origin-Embedder-Policy',
-            value: 'require-corp', // یا 'credentialless' اگر با تصاویر به مشکل خوردی
+            value: 'require-corp',
           },
           {
             key: 'Cross-Origin-Opener-Policy',

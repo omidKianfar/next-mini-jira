@@ -1,10 +1,5 @@
-import { collection, query, where, onSnapshot } from "firebase/firestore";
-
-// config
-import { db } from "@/configs/firebase";
-
-// type
-import { userUnreadMessageListenerProps } from "./type";
+import { collection, db, onSnapshot, query, where } from '../imports';
+import { userUnreadMessageListenerProps } from '../type';
 
 export const userUnreadMessagesListener = ({
   chatId,
@@ -15,12 +10,12 @@ export const userUnreadMessagesListener = ({
     return () => {};
   }
 
-  const messagesRef = collection(db, "chat", chatId, "message");
+  const messagesRef = collection(db, 'chat', chatId, 'message');
 
   const q = query(
     messagesRef,
-    where("read", "==", false),
-    where("senderType", "==", senderType),
+    where('read', '==', false),
+    where('senderType', '==', senderType)
   );
 
   const unsubscribe = onSnapshot(
@@ -29,10 +24,8 @@ export const userUnreadMessagesListener = ({
       callback(snapshot.size);
     },
     (error) => {
-      console.error("Error listening to unread count:", error);
       callback(0);
-    },
+    }
   );
-
   return unsubscribe;
 };

@@ -1,11 +1,7 @@
-import React, { Ref } from 'react';
-
-// type
-import { SimpleForwardRefProps } from '../../type';
-
-// helpers
+import { React, Ref } from '../../../imports';
 import { Clsx } from './clsx';
 import { Menu } from './menu';
+import { SimpleForwardRefProps } from '../../type';
 
 export const Toolbar = React.forwardRef<
   HTMLDivElement,

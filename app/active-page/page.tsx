@@ -1,4 +1,4 @@
-import FramerMotion from '@/src/components/atom/animation-component';
+import { FramerMotion } from '../imports';
 import ActivePageComponent from '@/src/components/pages/active-page';
 
 const ActivePage = () => {

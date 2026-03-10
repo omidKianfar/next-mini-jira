@@ -1,9 +1,7 @@
-import { ClipLoader } from "react-spinners";
+import { ClipLoader } from '../imports';
+import { LoadingProps } from '../type';
 
-// type
-import { LoadingProps } from "../type";
-
-const LoadingCircle = ({ color = "#3b82f6", size = 16 }: LoadingProps) => {
+const LoadingCircle = ({ color = '#3b82f6', size = 16 }: LoadingProps) => {
   return <ClipLoader color={color} size={size} />;
 };
 

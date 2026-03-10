@@ -1,7 +1,6 @@
-"use client";
+'use client';
 
-// type
-import { PaginationProps } from "../type";
+import { PaginationProps } from '../type';
 
 const PaginationComponent = ({
   currentPage,
@@ -17,12 +16,11 @@ const PaginationComponent = ({
       for (let i = 1; i <= totalPages; i++) pages.push(i);
       return pages;
     }
-
-    if (currentPage <= 3) return [1, 2, 3, 4, "...", totalPages];
+    if (currentPage <= 3) return [1, 2, 3, 4, '...', totalPages];
     if (currentPage >= totalPages - 2)
       return [
         1,
-        "...",
+        '...',
         totalPages - 3,
         totalPages - 2,
         totalPages - 1,
@@ -31,11 +29,11 @@ const PaginationComponent = ({
 
     return [
       1,
-      "...",
+      '...',
       currentPage - 1,
       currentPage,
       currentPage + 1,
-      "...",
+      '...',
       totalPages,
     ];
   };
@@ -48,7 +46,7 @@ const PaginationComponent = ({
           disabled={currentPage === 1}
           className="rounded border-2 border-gray-300 bg-gray-300 px-3 py-1 disabled:opacity-50"
         >
-          {"<<"}
+          {'<<'}
         </button>
 
         <button
@@ -56,11 +54,11 @@ const PaginationComponent = ({
           disabled={currentPage === 1}
           className="rounded border-2 border-gray-300 bg-gray-300 px-3 py-1 disabled:opacity-50"
         >
-          {"<"}
+          {'<'}
         </button>
 
         {getPages().map((p, i) =>
-          p === "..." ? (
+          p === '...' ? (
             <span key={i} className="px-3 py-1 text-gray-500">
               ...
             </span>
@@ -70,13 +68,13 @@ const PaginationComponent = ({
               onClick={() => onPageChange(p as number)}
               className={`rounded border-2 border-gray-300 px-3 py-1 ${
                 p === currentPage
-                  ? "bg-primary-500 text-white"
-                  : "bg-gray-200 hover:bg-gray-300"
+                  ? 'bg-primary-500 text-white'
+                  : 'bg-gray-200 hover:bg-gray-300'
               }`}
             >
               {p}
             </button>
-          ),
+          )
         )}
 
         <button
@@ -84,7 +82,7 @@ const PaginationComponent = ({
           disabled={currentPage === totalPages}
           className="rounded border-2 border-gray-300 bg-gray-300 px-3 py-1 disabled:opacity-50"
         >
-          {">"}
+          {'>'}
         </button>
 
         <button
@@ -92,7 +90,7 @@ const PaginationComponent = ({
           disabled={currentPage === totalPages}
           className="rounded border-2 border-gray-300 bg-gray-300 px-3 py-1 disabled:opacity-50"
         >
-          {">>"}
+          {'>>'}
         </button>
       </div>
 

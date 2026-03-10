@@ -1,28 +1,16 @@
-import { lazy } from 'react';
-import copy from 'clipboard-copy';
-import { enqueueSnackbar } from 'notistack';
-
-// type
+import {
+  copy,
+  enqueueSnackbar,
+  LightBoxComponent,
+  MyIcon,
+  MyImage,
+  MyVideo,
+  stringSlicer,
+  useIsMobile,
+} from '../../../imports';
 import { ShowAttachmentProps } from '../../type';
 
-// ui
-import MyImage from '@/src/components/atom/image-components';
-import MyIcon from '@/src/components/atom/icon-components';
-
-// utils
-import { stringSlicer } from '@/src/utils/string-slicer';
-
-// hooks
-import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
-
-// lazy
-const LightBoxComponent = lazy(
-  () => import('@/src/components/common/light-box')
-);
-const MyVideo = lazy(() => import('@/src/components/atom/video-component'));
-
 const ShowAttachment = ({ url, fileType }: ShowAttachmentProps) => {
-  // hook
   const isMobile = useIsMobile();
 
   return (

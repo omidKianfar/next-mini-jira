@@ -2,25 +2,18 @@
 
 import { useRef, useEffect, useState } from 'react';
 import WaveSurfer from 'wavesurfer.js';
-
-// type
 import { WaveformPlayerProps } from '../type';
-
-// ui
 import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
 import MyIcon from '../../atom/icon-components';
 
 const WaveformPlayer = ({ audioUrl }: WaveformPlayerProps) => {
-  // ref
   const containerRef = useRef<HTMLDivElement | null>(null);
   const wavesurferRef = useRef<WaveSurfer | null>(null);
 
-  // states
   const [stopRecorder, setStopRecorder] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<string>('00:00');
   const [duration, setDuration] = useState<string>('00:00');
 
-  // functions
   const formatTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);

@@ -1,28 +1,19 @@
 'use client';
 
-import { useDraggable } from '@dnd-kit/core';
+import {
+  MyIcon,
+  stringSlicer,
+  TaskCardProps,
+  useDraggable,
+  useIsMobile,
+  useNavigation,
+} from '../imports';
 
-// hooks
-import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-
-// ui
-import MyIcon from '@/src/components/atom/icon-components';
-
-// type
-import { TaskCardProps } from '@/src/components/pages/type';
-
-// utils
-import { stringSlicer } from '@/src/utils/string-slicer';
-
-export const TaskCardComponent = ({ id, task }: TaskCardProps) => {
-  // hooks
+const TaskCardComponent = ({ id, task }: TaskCardProps) => {
   const navigation = useNavigation();
   const isMobile = useIsMobile();
-
   const { transform, setNodeRef, listeners, attributes } = useDraggable({ id });
 
-  // style
   const baseStyle = {
     transition: 'box-shadow-sm 0.2s ease, transform 0.04s linear',
   };

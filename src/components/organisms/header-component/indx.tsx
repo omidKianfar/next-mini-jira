@@ -1,31 +1,24 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { lazy, Suspense, useState } from 'react';
-
-// ui
-import MyIcon from '@/src/components/atom/icon-components';
-import Logo from '@/src/components/atom/logo-component';
-import AdminDashboardHeader from '../../molecule/headers/admin-dashboard';
-import DashboardHeader from '../../molecule/headers/user-dashboard';
-import ModalContainer from '../../common/modal-container';
-import AdminSupportHeader from '../../molecule/headers/admin-support';
+import {
+  AdminDashboardHeader,
+  AdminSupportHeader,
+  AdminUnreadMeassesListener,
+  DashboardHeader,
+  LoadingCircle,
+  Logo,
+  ModalContainer,
+  MyIcon,
+  useAuth,
+  usePathname,
+  UserType,
+  useUnreadCount,
+} from '../imports';
 import FilterChats from '../modals/filter-modals/chats';
 import SearchSupportChats from '../modals/serach-modals/search-support-chats';
-import LoadingCircle from '../../atom/loadings/loading-circle';
-
-// type
-import { UserType } from '@/src/types/global';
 import { HeaderProps } from '../type';
 
-// firestore
-import { AdminUnreadMeassesListener } from '@/src/libs/chat/admin-unread-messages-count';
-
-// hooks
-import { useAuth } from '@/src/hooks/auth/use-auth';
-import { useUnreadCount } from '@/src/hooks/chat/use-unread-count';
-
-// lazy
 const AddTask = lazy(() => import('../modals/add-task-modal'));
 const SearchTasks = lazy(() => import('../modals/serach-modals/search-tasks'));
 const FilterTask = lazy(() => import('../modals/filter-modals/tasks'));
@@ -33,22 +26,17 @@ const SearchUsers = lazy(() => import('../modals/serach-modals/serach-users'));
 const FilterUsers = lazy(() => import('../modals/filter-modals/users'));
 
 const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
-  // hooks
   const pathname = usePathname();
   const { user } = useAuth();
 
-  // states
   const [open, setOpen] = useState<boolean>(false);
   const [modalcounter, setModalCounter] = useState<number>(0);
 
-  // functions
-  // user unread message
   const UserUnreadCount = useUnreadCount({
     chatId: user?.userId as string,
     senderType: UserType.Admin,
   });
 
-  // admin unread count
   const AdminUnraedCount = AdminUnreadMeassesListener();
 
   const handleOpenModal = (modalNumber: number) => {

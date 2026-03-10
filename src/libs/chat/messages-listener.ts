@@ -1,19 +1,20 @@
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-
-// type
-import { db } from "@/configs/firebase";
-
-// type
-import { ChatMessage } from "../../types/global";
-import { ChatMessagesListenerProps } from "./type";
+import {
+  ChatMessage,
+  collection,
+  db,
+  onSnapshot,
+  orderBy,
+  query,
+} from '../imports';
+import { ChatMessagesListenerProps } from '../type';
 
 export const ChatMessagesListener = ({
   user,
   onReceive,
 }: ChatMessagesListenerProps) => {
-  const messagesRef = collection(db, "chat", user.userId, "message");
+  const messagesRef = collection(db, 'chat', user.userId, 'message');
 
-  const Query = query(messagesRef, orderBy("createdAt", "asc"));
+  const Query = query(messagesRef, orderBy('createdAt', 'asc'));
 
   return onSnapshot(Query, (snapshot) => {
     const msgs: ChatMessage[] = snapshot.docs.map((doc) => ({

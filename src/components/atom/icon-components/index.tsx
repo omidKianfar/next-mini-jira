@@ -1,8 +1,5 @@
-// ui
-import { Icon } from '@iconify/react';
+import { Icon } from '../imports';
 import { ICONS } from './icons';
-
-// type
 import { MyIconProps } from '../type';
 
 const MyIcon = ({ onClick, className, icon, iconClass }: MyIconProps) => {

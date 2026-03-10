@@ -1,14 +1,16 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-// type
-import { chatsState, ChatsType } from "@/src/types/global";
+import {
+  chatsState,
+  ChatsType,
+  createSlice,
+  PayloadAction,
+} from '../../imports';
 
 const initialState: chatsState = {
   chats: [],
 };
 
 const chatsSlice = createSlice({
-  name: "chats",
+  name: 'chats',
   initialState,
   reducers: {
     setChats: (state, action: PayloadAction<ChatsType[]>) => {

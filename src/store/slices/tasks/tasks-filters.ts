@@ -1,7 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-// type
-import { TaskFiltersState } from "@/src/types/global";
+import { createSlice, PayloadAction, TaskFiltersState } from '../../imports';
 
 const initialState: TaskFiltersState = {
   date: {
@@ -12,7 +9,7 @@ const initialState: TaskFiltersState = {
 };
 
 const filterTaskSlice = createSlice({
-  name: "taskFilters",
+  name: 'taskFilters',
   initialState,
   reducers: {
     setTaskType: (state, action: PayloadAction<string | null>) => {
@@ -21,7 +18,7 @@ const filterTaskSlice = createSlice({
 
     setTaskDate: (
       state,
-      action: PayloadAction<{ from: string | null; to: string | null }>,
+      action: PayloadAction<{ from: string | null; to: string | null }>
     ) => {
       state.date = action.payload;
     },
@@ -33,6 +30,7 @@ const filterTaskSlice = createSlice({
   },
 });
 
-export const { setTaskType, setTaskDate, resetTaskFilters } = filterTaskSlice.actions;
+export const { setTaskType, setTaskDate, resetTaskFilters } =
+  filterTaskSlice.actions;
 
 export default filterTaskSlice.reducer;

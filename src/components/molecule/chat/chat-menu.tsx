@@ -1,9 +1,5 @@
-import { Icon } from '@iconify/react';
-
-// type
+import { Icon } from '../imports';
 import { ChatMenuProps, MenuType } from './type';
-
-// data
 import { menuItems } from './data';
 
 const ChatMenuComponent = ({

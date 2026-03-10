@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import { PropsWithChildren, useEffect } from "react";
-
-// hooks
-import { useAuth } from "../hooks/auth/use-auth";
-import { useNavigation } from "../hooks/navigation/use-navigation";
+import {
+  PropsWithChildren,
+  useAuth,
+  useEffect,
+  useNavigation,
+} from './imports';
 
 const AuthGuard = ({ children }: PropsWithChildren) => {
   const navigation = useNavigation();
@@ -17,7 +18,6 @@ const AuthGuard = ({ children }: PropsWithChildren) => {
   }, [isInitialized, isAuthenticated, navigation]);
 
   if (!isInitialized) return null;
-
   if (!isAuthenticated) return null;
 
   return children;

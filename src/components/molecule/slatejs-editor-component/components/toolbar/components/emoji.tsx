@@ -1,11 +1,7 @@
-import { useEditor } from '@/src/hooks/editor/use-editor';
+import { useEditor, MyIcon, Picker, data } from '../../../../imports';
 import { CustomEmoji } from '../../../type';
-import MyIcon from '@/src/components/atom/icon-components';
-import Picker from '@emoji-mart/react';
-import data from '@emoji-mart/data';
 
 const EmojiComponent = () => {
-  // hooks
   const { setShowEmojiPicker, showEmojiPicker, insertEmoji } = useEditor();
 
   return (

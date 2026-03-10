@@ -1,15 +1,17 @@
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import {
+  ChatsType,
+  collection,
+  db,
+  onSnapshot,
+  orderBy,
+  query,
+  setChats,
+} from '../imports';
 
-// config
-import { db } from "@/configs/firebase";
-
-// type
-import { AdminChatsListenerProps } from "./type";
-import { ChatsType } from "@/src/types/global";
-import { setChats } from "@/src/store/slices/chats/chats";
+import { AdminChatsListenerProps } from '../type';
 
 export const AdminChatsListener = ({ dispatch }: AdminChatsListenerProps) => {
-  const q = query(collection(db, "chat"), orderBy("message.updatedAt", "desc"));
+  const q = query(collection(db, 'chat'), orderBy('message.updatedAt', 'desc'));
 
   return onSnapshot(q, (snapshot) => {
     const chats = snapshot.docs.map(
@@ -17,10 +19,9 @@ export const AdminChatsListener = ({ dispatch }: AdminChatsListenerProps) => {
         ({
           id: doc.id,
           ...doc.data(),
-        }) as ChatsType,
+        }) as ChatsType
     );
 
-    dispatch(setChats(chats))
+    dispatch(setChats(chats));
   });
-
 };

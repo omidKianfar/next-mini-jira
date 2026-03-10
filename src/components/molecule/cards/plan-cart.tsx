@@ -1,5 +1,4 @@
-// type
-import { CartType } from "../type";
+import { CartType } from '../type';
 
 const PlanCardComponent = ({
   title,

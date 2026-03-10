@@ -1,5 +1,5 @@
-import FramerMotion from "@/src/components/atom/animation-component";
-import TaskDetailComponent from "@/src/components/pages/dahboard/task-detail";
+import { FramerMotion } from '@/app/imports';
+import TaskDetailComponent from '@/src/components/pages/dahboard/task-detail';
 
 const TaskDeatailPage = () => {
   return (

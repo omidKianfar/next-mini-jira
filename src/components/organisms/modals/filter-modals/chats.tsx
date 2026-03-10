@@ -1,39 +1,30 @@
-"use client";
+'use client';
 
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-
-// schema
-import { chatsfilterSchema } from "./schema";
-
-// type
-import { ModalProps } from "@/src/types/global";
-import { ChatsFilterFormType } from "../../type";
-
-// redux
-import { RootState } from "@/src/store";
 import {
+  ButtonNext,
+  DateInputField,
+  FormProvider,
+  ModalProps,
   resetChatsFilters,
+  RootState,
   setChatsDate,
-} from "@/src/store/slices/chats/chats-filter";
+  useDispatch,
+  useEffect,
+  useForm,
+  useSelector,
+  yupResolver,
+} from '../../imports';
+import { chatsfilterSchema } from './schema';
+import { ChatsFilterFormType } from '../../type';
 
-// ui
-import DateInputField from "../../../molecule/RHF-controllers-components/RHF-fields/date-input-field";
-import ButtonNext from "../../../atom/buttons-component/button-next";
-
-const FilterChats = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
-  // redux
+const FilterChats = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
   const dispatch = useDispatch();
 
-  // redux state
   const chatsFilters = useSelector((state: RootState) => state.chatsFilters);
 
-  // form
   const defaultValues: ChatsFilterFormType = {
-    from: chatsFilters.updatedAt.from ?? "",
-    to: chatsFilters.updatedAt.to ?? "",
+    from: chatsFilters.updatedAt.from ?? '',
+    to: chatsFilters.updatedAt.to ?? '',
   };
 
   const methods = useForm<ChatsFilterFormType>({
@@ -41,18 +32,17 @@ const FilterChats = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
     resolver: yupResolver(chatsfilterSchema),
   });
 
-  // functions
   useEffect(() => {
     if (chatsFilters) {
       methods.reset({
-        from: chatsFilters.updatedAt.from ?? "",
-        to: chatsFilters.updatedAt.to ?? "",
+        from: chatsFilters.updatedAt.from ?? '',
+        to: chatsFilters.updatedAt.to ?? '',
       });
     }
   }, [chatsFilters, methods]);
 
   const filterHandeler = (values: ChatsFilterFormType) => {
-    dispatch(setChatsDate({ from: values.from ?? "", to: values.to ?? "" }));
+    dispatch(setChatsDate({ from: values.from ?? '', to: values.to ?? '' }));
     handleClose();
   };
 

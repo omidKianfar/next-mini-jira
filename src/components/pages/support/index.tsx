@@ -3,37 +3,30 @@
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
-// hook
 import { useChat } from '@/src/hooks/chat/use-chat';
 import { useAuth } from '@/src/hooks/auth/use-auth';
 import { useEditor } from '@/src/hooks/editor/use-editor';
 
-// lib
 import { MessgesRead } from '@/src/libs/chat/read-message';
 
-// ui
 import ChatMessages from '../../organisms/chat-messages';
 import ChatInput from '../../molecule/chat/chat-input';
 import ChatHeader from '../../molecule/headers/chat-header';
 
-// type
 import { UserType } from '@/src/types/global';
 
 const SupportComponent = () => {
-  // hook
   const pathname = usePathname();
   const chat = useChat();
   const { user } = useAuth();
   const { setEditorOutput, resetEditor } = useEditor();
 
-  // state
   const [showMenu, setShowMenu] = useState<boolean>(true);
   const [editorKey, setEditorKey] = useState<number>(0);
   const [editMessageId, setEditMessageId] = useState<string | null>(null);
 
   const isAdmin = user?.userType == UserType.Admin;
 
-  // function
   useEffect(() => {
     MessgesRead({
       chatId: !isAdmin ? (user?.userId as string) : (chat.chatId as string),

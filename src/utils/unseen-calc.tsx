@@ -1,25 +1,18 @@
 import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import durationPlugin from 'dayjs/plugin/duration';
-
-// type
 import { UnSeenMessageCalcProps } from './type';
 
-// plugin
 dayjs.extend(durationPlugin);
 
 const UnSeenMessageCalc = ({ date }: UnSeenMessageCalcProps) => {
-  // states
   const [timeDiff, setTimeDiff] = useState('');
 
-  // functions
   useEffect(() => {
     const calculateTimeDiff = () => {
-      //states
-      const givenDate = dayjs(date, 'DD-MM-YYYY');
       const now = dayjs();
+      const givenDate = dayjs(date, 'DD-MM-YYYY');
       const diff = now.diff(givenDate);
-
       const duration = dayjs.duration(diff);
 
       const formattedDiff = `${String(Math.floor(duration.asHours())).padStart(2, '0')}:${String(duration.minutes()).padStart(2, '0')}:${String(duration.seconds()).padStart(2, '0')}`;
@@ -30,13 +23,11 @@ const UnSeenMessageCalc = ({ date }: UnSeenMessageCalcProps) => {
     calculateTimeDiff();
 
     const interval = setInterval(calculateTimeDiff, 1000);
-
     return () => clearInterval(interval);
   }, [date]);
 
   const date1 = dayjs(date);
   const date2 = dayjs();
-
   const hours = date2.diff(date1, 'hours');
   const days = Math.floor(hours / 24);
 

@@ -5,18 +5,14 @@ import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-// hooks
 import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 import { useAuth } from '@/src/hooks/auth/use-auth';
 
-// type
 import { FormValues } from '../../type';
 
-// schema
 import { authSchema } from '../schema';
 
-// ui
 import MyImage from '@/src/components/atom/image-components';
 import InputField from '@/src/components/molecule/RHF-controllers-components/RHF-fields/input-field';
 import MyIcon from '@/src/components/atom/icon-components';
@@ -25,18 +21,15 @@ import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free
 import Logo from '@/src/components/atom/logo-component';
 
 const AuthComponent = () => {
-  // hooks
   const navigation = useNavigation();
   const pathname = usePathname();
 
   const { signinWithEmail, signupWithEmail, googleSignin } = useAuth();
   const isMobile = useIsMobile();
 
-  // states
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
 
-  // form
   const defaultValues: FormValues = {
     email: '',
     password: '',
@@ -47,7 +40,6 @@ const AuthComponent = () => {
     resolver: yupResolver(authSchema),
   });
 
-  // functions
   const authUser = async (values: FormValues) => {
     setLoading(true);
 
@@ -64,7 +56,6 @@ const AuthComponent = () => {
         });
       }
     } catch (error: any) {
-      console.log('Auth Error: ', error);
     } finally {
       setLoading(false);
     }
@@ -76,7 +67,6 @@ const AuthComponent = () => {
     try {
       await googleSignin();
     } catch (error: any) {
-      console.log('Auth with google Error: ', error);
     } finally {
       setLoading(false);
     }

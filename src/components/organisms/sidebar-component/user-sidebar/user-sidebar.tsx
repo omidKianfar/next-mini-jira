@@ -1,21 +1,12 @@
-// hooks
-import { useAuth } from '@/src/hooks/auth/use-auth';
-
-// type
+import { ButtonFreeClass, MyIcon, useAuth, UserType } from '../../imports';
 import { sidebarItemsType, sidebarProps } from '../../type';
-import { UserType } from '@/src/types/global';
-
-// ui
-import MyIcon from '../../../atom/icon-components';
 import { SidebarItems } from './sidebar-items';
 import SidebarActionItem from './sidebar-action-item';
-import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
 
 const UserSidebar = ({
   user,
   setShowSidebar,
 }: Pick<sidebarProps, 'setShowSidebar' | 'user'>) => {
-  // hooks
   const { logout } = useAuth();
 
   const { userSidebarItems, AdminSidebarItems } = SidebarItems({

@@ -1,4 +1,4 @@
-import FramerMotion from '@/src/components/atom/animation-component';
+import { FramerMotion } from '@/app/imports';
 import PlanComponent from '@/src/components/pages/payment/payment';
 
 const PaymentPage = () => {

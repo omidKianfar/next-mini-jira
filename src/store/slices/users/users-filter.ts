@@ -1,7 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-// type
-import { UserFiltersState } from "@/src/types/global";
+import { createSlice, PayloadAction, UserFiltersState } from '../../imports';
 
 const initialState: UserFiltersState = {
   createdAt: {
@@ -12,7 +9,7 @@ const initialState: UserFiltersState = {
 };
 
 const userFilterSlice = createSlice({
-  name: "usersFilters",
+  name: 'usersFilters',
   initialState,
   reducers: {
     setActive: (state, action: PayloadAction<string | null>) => {
@@ -21,7 +18,7 @@ const userFilterSlice = createSlice({
 
     setUserDate: (
       state,
-      action: PayloadAction<{ from: string | null; to: string | null }>,
+      action: PayloadAction<{ from: string | null; to: string | null }>
     ) => {
       state.createdAt = action.payload;
     },

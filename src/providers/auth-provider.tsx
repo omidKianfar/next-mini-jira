@@ -1,39 +1,29 @@
-"use client";
+'use client';
 
-import {
-  createContext,
-  PropsWithChildren,
-  useReducer,
-  useRef,
-  useState,
-} from "react";
-
-// config
-import config from "@/configs/firebase";
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-
-// hooks
-import { useAuthActions } from "@/src/hooks/auth/use-actions";
-import { useSetStepNumber } from "@/src/hooks/auth/use-set-step-number";
-import { useUserListener } from "@/src/hooks/auth/use-user-listener";
-
-// reducer
-import { authReducer, initialState } from "@/src/reducer/auth-reducer";
-
-// type
 import {
   AuthContextProps,
+  authReducer,
+  config,
+  createContext,
+  getAuth,
+  getFirestore,
+  initializeApp,
+  initialState,
+  PropsWithChildren,
   SignPropsType,
+  useAuthActions,
+  useReducer,
+  useRef,
   UserPasswordUpdateType,
   UserProfileType,
-} from "@/src/types/global";
+  useSetStepNumber,
+  useState,
+  useUserListener,
+} from './imports';
 
-// firebase initialize
-export const app = initializeApp(config.firebase);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+const app = initializeApp(config.firebase);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 export const authContext = createContext<AuthContextProps>({
   signupWithEmail: ({ email, password }: SignPropsType) => Promise.resolve(),
@@ -52,15 +42,14 @@ export const authContext = createContext<AuthContextProps>({
   isLoading: null,
   isAuthenticated: false,
   isInitialized: false,
-  stepNumber: "0",
+  stepNumber: '0',
 });
 
 const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [state, dispatch] = useReducer(authReducer, initialState);
-
   const unsubDocRef = useRef<null | (() => void)>(null);
 
-  const [stepNumber, setStepNumber] = useState("0");
+  const [stepNumber, setStepNumber] = useState('0');
+  const [state, dispatch] = useReducer(authReducer, initialState);
 
   useSetStepNumber({ setStepNumber });
 
@@ -107,3 +96,5 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 };
 
 export default AuthProvider;
+
+export { app, auth, db };

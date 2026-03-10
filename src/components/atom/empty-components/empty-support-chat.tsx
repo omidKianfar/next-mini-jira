@@ -1,9 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
-
-// ui
-import MyIcon from '@/src/components/atom/icon-components';
+import { motion } from '../imports';
+import MyIcon from '../icon-components';
 
 const AdminEmptySupportComponent = () => {
   return (

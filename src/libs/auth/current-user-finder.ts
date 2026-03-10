@@ -1,19 +1,10 @@
-import { User } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-
-// configs
-import { db } from "@/configs/firebase";
-
-// type
-import { MyUserType, UserType } from "@/src/types/global";
+import { db, doc, getDoc, MyUserType, User, UserType } from '../imports';
 
 export const findFirestoreCurrentUser = async (
-  currentUser: User,
+  currentUser: User
 ): Promise<MyUserType> => {
-  const docRef = doc(db, "users", currentUser.uid);
-
+  const docRef = doc(db, 'users', currentUser.uid);
   const docSnap = await getDoc(docRef);
-
   const profile = docSnap.exists() ? docSnap.data() : {};
 
   return {

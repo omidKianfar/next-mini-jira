@@ -1,16 +1,15 @@
-// type
-import { SourceProps } from "../type";
+import { SourceProps } from '../type';
 
 export const createSmoothCanvas = ({ width, height }: SourceProps) => {
-  const canvas = document.createElement("canvas");
+  const canvas = document.createElement('canvas');
 
   canvas.width = width;
   canvas.height = height;
 
-  const ctx = canvas.getContext("2d")!;
+  const ctx = canvas.getContext('2d')!;
 
   ctx.imageSmoothingEnabled = true;
-  ctx.imageSmoothingQuality = "high";
+  ctx.imageSmoothingQuality = 'high';
 
   return { canvas, ctx };
 };

@@ -1,14 +1,13 @@
-"use client";
+'use client';
 
-// types
-import { Columns } from "@/src/types/global";
-import { AddTaskProps } from "../../../type";
-
-// ui
-import ButtonNext from "@/src/components/atom/buttons-component/button-next";
-import SelectField from "@/src/components/molecule/RHF-controllers-components/RHF-fields/select-filed";
-import InputField from "@/src/components/molecule/RHF-controllers-components/RHF-fields/input-field";
-import TextareaFiled from "@/src/components/molecule/RHF-controllers-components/RHF-fields/textarea-field";
+import {
+  ButtonNext,
+  InputField,
+  SelectField,
+  TextareaFiled,
+} from '../../../imports';
+import { columns } from './data';
+import { AddTaskProps } from '../../../type';
 
 const AddTaskFormComponent = ({
   handleClose,
@@ -23,7 +22,7 @@ const AddTaskFormComponent = ({
 
       <div className="mb-4 rounded-lg border-2 border-warning-400 bg-gray-50 p-3 shadow-md">
         <div>
-          <SelectField name="tag" options={columns} label={"Tag"} />
+          <SelectField name="tag" options={columns} label={'Tag'} />
 
           <div className="my-2">
             <InputField
@@ -43,6 +42,7 @@ const AddTaskFormComponent = ({
           <ButtonNext onClick={() => setNumber(1)}>Upload</ButtonNext>
         </div>
       </div>
+
       <div className="mt-4 flex justify-center lg:justify-end">
         <ButtonNext onClick={handleClose} className="mr-4">
           Cancel
@@ -57,8 +57,3 @@ const AddTaskFormComponent = ({
 };
 
 export default AddTaskFormComponent;
-
-export const columns: Columns[] = [
-  { label: "Bug", value: "bug" },
-  { label: "Task", value: "task" },
-];

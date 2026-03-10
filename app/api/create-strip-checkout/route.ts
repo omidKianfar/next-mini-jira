@@ -1,8 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
-import Stripe from 'stripe';
-
-// routes
-import { routes } from '@/src/helper/routes/routes';
+import { NextRequest, NextResponse, routes, Stripe } from '../../imports';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
@@ -38,7 +34,6 @@ export const POST = async (request: NextRequest) => {
 
     return NextResponse.json({ url: session.url });
   } catch (error: any) {
-    console.log('Stripe Error:', error);
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 };

@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { doc, onSnapshot } from "firebase/firestore";
+import {
+  auth,
+  db,
+  doc,
+  findFirestoreCurrentUser,
+  MyUserType,
+  onAuthStateChanged,
+  onSnapshot,
+  useEffect,
+  useRef,
+} from '../imports';
 
-// type
-import { UseAuthListenerProps } from "../type";
-import { MyUserType } from "@/src/types/global";
-
-// config
-import { auth, db } from "@/configs/firebase";
-
-// firestore
-import { findFirestoreCurrentUser } from "@/src/libs/auth/current-user-finder";
+import { UseAuthListenerProps } from '../type';
 
 export const useUserListener = ({
   dispatch,
@@ -24,7 +24,7 @@ export const useUserListener = ({
     const unsubscribeAuth = onAuthStateChanged(auth, async (currentUser) => {
       if (!currentUser) {
         dispatch({
-          type: "INITIALIZE",
+          type: 'INITIALIZE',
           payload: {
             user: null,
             isAuthenticated: false,
@@ -47,11 +47,9 @@ export const useUserListener = ({
         unsubDocRef.current = null;
       }
 
-      const ref = doc(db, "users", currentUser.uid);
+      const ref = doc(db, 'users', currentUser.uid);
 
       unsubDocRef.current = onSnapshot(ref, async (snap) => {
-        const newUserData = snap.exists() ? snap.data() : {};
-
         const newFullUser = await findFirestoreCurrentUser(currentUser);
 
         if (
@@ -63,7 +61,7 @@ export const useUserListener = ({
         lastUserRef.current = newFullUser;
 
         dispatch({
-          type: "INITIALIZE",
+          type: 'INITIALIZE',
           payload: {
             user: newFullUser,
             isAuthenticated: true,
@@ -76,6 +74,7 @@ export const useUserListener = ({
 
     return () => {
       unsubscribeAuth();
+
       if (unsubDocRef.current) {
         unsubDocRef.current();
         unsubDocRef.current = null;

@@ -1,11 +1,7 @@
-// hooks
-import { useEditor } from '@/src/hooks/editor/use-editor';
-
-// data
+import { useEditor } from '../../../../imports';
 import { ColorItems } from '../../../data';
 
 const BGColorSelectComponent = () => {
-  // hooks
   const {
     setShowBackgroundDropdown,
     showBackgroundDropdown,

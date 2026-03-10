@@ -1,33 +1,26 @@
-"use client";
+'use client';
 
-import { lazy, Suspense } from "react";
-import { RootState } from "@/src/store";
+import { lazy } from 'react';
 import {
-  DndContext,
-  DragEndEvent,
-  PointerSensor,
-  TouchSensor,
-  useSensor,
+  Suspense,
+  RootState,
   useSensors,
-} from "@dnd-kit/core";
-import { useSelector } from "react-redux";
-import dayjs from "dayjs";
+  useSensor,
+  TouchSensor,
+  PointerSensor,
+  useSelector,
+  DragEndEvent,
+  updateTaskStatus,
+  dayjs,
+  Task,
+  PageLoading,
+  DndContext,
+} from '../imports';
 
-// firestore
-import { updateTaskStatus } from "@/src/libs/tasks/update-task-status";
-
-// type
-import { Task } from "@/src/types/global";
-
-// ui
-import PageLoading from "../../common/page-loading";
-
-// lazy
-const ColumnComponent = lazy(() => import("./column"));
-const TaskCardComponent = lazy(() => import("../../molecule/cards/task-card"));
+const ColumnComponent = lazy(() => import('./column'));
+const TaskCardComponent = lazy(() => import('../../molecule/cards/task-card'));
 
 const BoardComponent = () => {
-  // mobile config
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(TouchSensor, {
@@ -35,14 +28,12 @@ const BoardComponent = () => {
         delay: 150,
         tolerance: 5,
       },
-    }),
+    })
   );
 
-  // redux states
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
   const taskFilters = useSelector((state: RootState) => state.taskFilters);
 
-  // functions
   const filteredTasks = tasks.filter((task) => {
     const taskDate = task.createdAt;
     const taskTag = task.tag;
@@ -51,11 +42,10 @@ const BoardComponent = () => {
     const from = taskFilters.date.from;
     const to = taskFilters.date.to;
 
-    if (tag && tag !== "all") {
+    if (tag && tag !== 'all') {
       if (taskTag !== tag) return false;
     }
     if (from && taskDate < from) return false;
-
     if (to && taskDate > to) return false;
 
     return true;
@@ -79,7 +69,7 @@ const BoardComponent = () => {
       .filter((task: Task) => task?.status === status)
       .sort(
         (a, b) =>
-          dayjs(b.updatedAt ?? 0).valueOf() - dayjs(a.updatedAt ?? 0).valueOf(),
+          dayjs(b.updatedAt ?? 0).valueOf() - dayjs(a.updatedAt ?? 0).valueOf()
       )
       .map((task: Task) => (
         <TaskCardComponent key={task?.id} id={task?.id} task={task} />
@@ -89,17 +79,17 @@ const BoardComponent = () => {
   return (
     <Suspense fallback={<PageLoading />}>
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-        <div className="flex flex-col items-start justify-center gap-4  lg:flex-row">
+        <div className="flex flex-col items-start justify-center gap-4 lg:flex-row">
           <ColumnComponent key="todo" id="todo">
-            {renderColumn("todo") ?? []}
+            {renderColumn('todo') ?? []}
           </ColumnComponent>
 
           <ColumnComponent key="inprogress" id="inprogress">
-            {renderColumn("inprogress") ?? []}
+            {renderColumn('inprogress') ?? []}
           </ColumnComponent>
 
           <ColumnComponent key="done" id="done">
-            {renderColumn("done") ?? []}
+            {renderColumn('done') ?? []}
           </ColumnComponent>
         </div>
       </DndContext>

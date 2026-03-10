@@ -5,20 +5,16 @@ import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { usePathname } from 'next/navigation';
 
-// hooks
 import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 import { useAuth } from '@/src/hooks/auth/use-auth';
 import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
 import { useRequirePaymentStatus } from '@/src/hooks/pages-user-status-require/use-require-payment-status';
 
-// schema
 import { authSchema } from '../auth/schema';
 
-// type
 import { SignPropsType } from '@/src/types/global';
 
-// ui
 import FramerMotion from '../../atom/animation-component';
 import InputField from '../../molecule/RHF-controllers-components/RHF-fields/input-field';
 import MyIcon from '../../atom/icon-components';
@@ -27,7 +23,6 @@ import MyImage from '../../atom/image-components';
 import ButtonBack from '../../atom/buttons-component/button-back';
 
 const PasswordComponent = () => {
-  // hooks
   const pathName = usePathname();
   const navigation = useNavigation();
   const isMobile = useIsMobile();
@@ -37,11 +32,9 @@ const PasswordComponent = () => {
   useRequireActiveStatus();
   useRequirePaymentStatus();
 
-  // states
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
 
-  // form
   const defaultValues: SignPropsType = {
     email: user?.email ?? '',
     password: '',
@@ -53,7 +46,6 @@ const PasswordComponent = () => {
     mode: 'onSubmit',
   });
 
-  // functions
   useEffect(() => {
     if (user) {
       methods.reset({
@@ -77,7 +69,6 @@ const PasswordComponent = () => {
         });
       }
     } catch (error: any) {
-      console.log('Error: ', error);
     } finally {
       setLoading(false);
     }

@@ -1,14 +1,8 @@
 'use client';
 
-// hook
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-
-// ui
-import ButtonNext from '@/src/components/atom/buttons-component/button-next';
-import MyIcon from '@/src/components/atom/icon-components';
+import { ButtonNext, MyIcon, useNavigation } from './imports';
 
 export default function NotFound() {
-  // hooks
   const navigation = useNavigation();
 
   return (

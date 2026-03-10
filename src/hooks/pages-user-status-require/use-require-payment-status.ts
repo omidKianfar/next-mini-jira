@@ -1,29 +1,18 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import dayjs from "dayjs";
-import { usePathname } from "next/navigation";
-
-// hooks
-import { useNavigation } from "../navigation/use-navigation";
-import { useAuth } from "../auth/use-auth";
-
-// types
-import { UserType } from "@/src/types/global";
+import { usePathname, dayjs, useEffect, UserType } from '../imports';
+import { useNavigation } from '../navigation/use-navigation';
+import { useAuth } from '../auth/use-auth';
 
 export const useRequirePaymentStatus = () => {
-  // hooks
+  const pathname = usePathname();
   const navigation = useNavigation();
   const { user, isLoading } = useAuth();
-  const pathname = usePathname();
 
-  // functions
   useEffect(() => {
     if (user?.userType == UserType?.Admin) return;
-
     if (isLoading || !user) return;
-
-    if (pathname.includes("/signup")) return;
+    if (pathname.includes('/signup')) return;
 
     const now = dayjs();
     const payment = user.payment;
@@ -33,6 +22,7 @@ export const useRequirePaymentStatus = () => {
         navigation.payment();
         return;
       }
+
       return;
     }
 
@@ -41,6 +31,7 @@ export const useRequirePaymentStatus = () => {
         navigation.payment();
         return;
       }
+
       return;
     }
 

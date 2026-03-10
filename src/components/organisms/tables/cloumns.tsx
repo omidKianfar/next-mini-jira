@@ -1,14 +1,4 @@
-import dayjs from 'dayjs';
-
-// ui
-import MyImage from '@/src/components/atom/image-components';
-import MyIcon from '@/src/components/atom/icon-components';
-
-// utiles
-import { stringSlicer } from '@/src/utils/string-slicer';
-
-// type
-import { MyUserType } from '@/src/types/global';
+import { dayjs, MyIcon, MyImage, MyUserType, stringSlicer } from '../imports';
 import { UsersTableProps } from '../type';
 
 export const Cloumns = ({

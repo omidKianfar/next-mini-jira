@@ -1,42 +1,34 @@
-"use client";
+'use client';
 
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-
-// schema
-import { tasksfilterSchema } from "./schema";
-
-// type
-import { ModalProps } from "@/src/types/global";
-import { TasksFilterFormType } from "../../type";
-
-// redux
-import { RootState } from "@/src/store";
 import {
+  ButtonNext,
+  DateInputField,
+  FormProvider,
+  ModalProps,
   resetTaskFilters,
+  RootState,
+  SelectField,
   setTaskDate,
   setTaskType,
-} from "@/src/store/slices/tasks/tasks-filters";
+  useDispatch,
+  useEffect,
+  useForm,
+  useSelector,
+  yupResolver,
+} from '../../imports';
+import { tasksfilterSchema } from './schema';
+import { TasksFilterFormType } from '../../type';
+import { Tags } from './data';
 
-// ui
-import SelectField from "../../../molecule/RHF-controllers-components/RHF-fields/select-filed";
-import DateInputField from "../../../molecule/RHF-controllers-components/RHF-fields/date-input-field";
-import ButtonNext from "../../../atom/buttons-component/button-next";
-
-const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
-  // redux
+const FilterTask = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
   const dispatch = useDispatch();
 
-  // redux state
   const taskFilters = useSelector((state: RootState) => state.taskFilters);
 
-  // form
   const defaultValues: TasksFilterFormType = {
-    tag: taskFilters.tag ?? "all",
-    from: taskFilters.date.from ?? "",
-    to: taskFilters.date.to ?? "",
+    tag: taskFilters.tag ?? 'all',
+    from: taskFilters.date.from ?? '',
+    to: taskFilters.date.to ?? '',
   };
 
   const methods = useForm<TasksFilterFormType>({
@@ -44,20 +36,19 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
     resolver: yupResolver(tasksfilterSchema),
   });
 
-  // functions
   useEffect(() => {
     if (taskFilters) {
       methods.reset({
-        tag: taskFilters.tag ?? "all",
-        from: taskFilters.date.from ?? "",
-        to: taskFilters.date.to ?? "",
+        tag: taskFilters.tag ?? 'all',
+        from: taskFilters.date.from ?? '',
+        to: taskFilters.date.to ?? '',
       });
     }
   }, [taskFilters, methods]);
 
   const filterHandeler = (values: TasksFilterFormType) => {
-    dispatch(setTaskDate({ from: values.from ?? "", to: values.to ?? "" }));
-    dispatch(setTaskType(values.tag ?? "all"));
+    dispatch(setTaskDate({ from: values.from ?? '', to: values.to ?? '' }));
+    dispatch(setTaskType(values.tag ?? 'all'));
     handleClose();
   };
 
@@ -98,9 +89,3 @@ const FilterTask = ({ handleClose }: Pick<ModalProps, "handleClose">) => {
 };
 
 export default FilterTask;
-
-const Tags = [
-  { label: "All", value: "all" },
-  { label: "Bug", value: "bug" },
-  { label: "Task", value: "task" },
-];

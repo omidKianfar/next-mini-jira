@@ -1,12 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
 
-// redux
-import tasksReducer from "./slices/tasks/tasks";
-import usersReducer from "./slices/users/users";
-import chatsReducer from "./slices/chats/chats";
-import taskFilterReducer from "./slices/tasks/tasks-filters";
-import usersFilterReducer from "./slices/users/users-filter";
-import chatsFilterReducer from "./slices/chats/chats-filter";
+import tasksReducer from './slices/tasks/tasks';
+import usersReducer from './slices/users/users';
+import chatsReducer from './slices/chats/chats';
+import taskFilterReducer from './slices/tasks/tasks-filters';
+import usersFilterReducer from './slices/users/users-filter';
+import chatsFilterReducer from './slices/chats/chats-filter';
 
 export const store = configureStore({
   reducer: {
@@ -19,5 +18,7 @@ export const store = configureStore({
   },
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+type RootState = ReturnType<typeof store.getState>;
+type AppDispatch = typeof store.dispatch;
+
+export type { RootState, AppDispatch };

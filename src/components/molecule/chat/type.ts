@@ -1,8 +1,11 @@
-import { fileType } from '@/src/hooks/type';
-import { FileUploaderType } from '@/src/types/global';
-import { Dispatch, SetStateAction } from 'react';
+import {
+  Dispatch,
+  fileType,
+  FileUploaderType,
+  SetStateAction,
+} from '../imports';
 
-export interface ChatMenuProps {
+interface ChatMenuProps {
   MenuHandler?: (type: MenuType) => void;
   showMenu?: boolean;
   setShowMenu?: Dispatch<SetStateAction<boolean>>;
@@ -11,17 +14,25 @@ export interface ChatMenuProps {
   setEditMessageId?: Dispatch<SetStateAction<string | null>>;
 }
 
-export type MenuType = 'text' | 'upload' | 'voice';
+type MenuType = 'text' | 'upload' | 'voice';
 
-export type UploadMenuForm = {
+type UploadMenuForm = {
   fileUrl?: string | null;
 };
 
-export interface ShowAttachmentProps {
+interface ShowAttachmentProps {
   url: string | null;
   fileType: fileType | null;
 }
 
-export interface UploadMenuComponentProps {
+interface UploadMenuComponentProps {
   fileUploader: FileUploaderType;
 }
+
+export type {
+  ChatMenuProps,
+  MenuType,
+  ShowAttachmentProps,
+  UploadMenuForm,
+  UploadMenuComponentProps,
+};

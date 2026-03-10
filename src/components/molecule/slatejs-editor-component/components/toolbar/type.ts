@@ -1,33 +1,42 @@
-import { Editor } from 'slate';
+import { Editor } from '../../../imports';
 import { AlignFormat, BlockFormat, MarkFormat } from '../../type';
 
-export interface BlockButtonProps {
+interface BlockButtonProps {
   format: BlockFormat | AlignFormat;
   icon: React.ReactNode;
 }
-
-export interface IsBlockActiveProps {
+interface IsBlockActiveProps {
   editor: Editor;
   format: string;
   blockType: 'type' | 'align';
 }
-export interface IsMarkActiveProps {
+interface IsMarkActiveProps {
   editor: Editor;
   format: MarkFormat;
 }
-export interface MarkButtonProps {
+interface MarkButtonProps {
   format: MarkFormat;
   icon: React.ReactNode;
 }
-export interface ToggleBlockProps {
+interface ToggleBlockProps {
   editor: Editor;
   format: BlockFormat | AlignFormat;
 }
-export interface ToggleMarkProps {
+interface ToggleMarkProps {
   editor: Editor;
   format: MarkFormat;
 }
-export interface ToolbarComponentProps {
+interface ToolbarComponentProps {
   handleSend?: () => void;
   loading?: boolean;
 }
+
+export type {
+  BlockButtonProps,
+  IsBlockActiveProps,
+  IsMarkActiveProps,
+  MarkButtonProps,
+  ToggleBlockProps,
+  ToggleMarkProps,
+  ToolbarComponentProps,
+};

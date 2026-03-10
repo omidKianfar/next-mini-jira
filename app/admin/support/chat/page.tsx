@@ -1,4 +1,4 @@
-import FramerMotion from '@/src/components/atom/animation-component';
+import { FramerMotion } from '@/app/imports';
 import SupportComponent from '@/src/components/pages/support';
 
 const AdminUserChatPage = () => {

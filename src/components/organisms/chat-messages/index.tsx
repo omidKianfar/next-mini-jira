@@ -1,16 +1,17 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-
-// type
+import {
+  AnimatePresence,
+  useEffect,
+  usePathname,
+  useRef,
+  useState,
+  motion,
+  ChatMessageItem,
+  MyIcon,
+  ButtonFreeClass,
+} from '../imports';
 import { ChatMessagesProps } from '../type';
-
-// ui
-import ChatMessageItem from '../../molecule/chat/chat-message-item';
-import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
-import MyIcon from '../../atom/icon-components';
 
 const ChatMessages = ({
   showMenu,
@@ -20,17 +21,13 @@ const ChatMessages = ({
   userChat,
   editMessageId,
 }: ChatMessagesProps) => {
-  // refs
   const endMessageRef = useRef<HTMLDivElement | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
-  // states
   const [showScrollBtn, setShowScrollBtn] = useState(false);
 
-  // hooks
   const pathname = usePathname();
 
-  // functions
   const scrollToBottom = () => {
     scrollContainerRef.current?.scrollTo({
       top: scrollContainerRef.current.scrollHeight,
@@ -52,11 +49,8 @@ const ChatMessages = ({
     container.addEventListener('scroll', handleScroll);
 
     handleScroll();
-
     return () => container.removeEventListener('scroll', handleScroll);
   }, [messages]);
-
-  console.log('editMessageId', editMessageId);
 
   useEffect(() => {
     if (!editMessageId) {
@@ -64,7 +58,6 @@ const ChatMessages = ({
     }
   }, [messages, userChat]);
 
-  // animation data
   const fadeInVariants = {
     initial: { opacity: 0 },
     animate: {
@@ -77,7 +70,6 @@ const ChatMessages = ({
     exit: { opacity: 0 },
   };
 
-  // style
   const menuHeight =
     pathname.includes('admin') && !showMenu
       ? 'h-[calc(100vh-200px)] lg:h-[calc(100vh-160px)] '

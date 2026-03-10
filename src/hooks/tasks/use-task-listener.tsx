@@ -1,19 +1,11 @@
-"use client";
+'use client';
 
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-
-// type
-import { useTaskListenerProps } from "../type";
-
-//hook
-import { listenToTasks } from "@/src/libs/tasks/listener";
+import { useDispatch, useEffect, listenToTasks } from '../imports';
+import { useTaskListenerProps } from '../type';
 
 export const useTaskListener = ({ user }: useTaskListenerProps) => {
-  // hooks
   const dispatch = useDispatch();
 
-  // functions
   useEffect(() => {
     if (!user) return;
 

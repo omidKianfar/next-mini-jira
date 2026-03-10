@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { RenderElementProps, RenderLeafProps } from 'slate-react';
-import { CustomEmoji } from '../components/molecule/slatejs-editor-component/type';
 import { Descendant } from 'slate';
+import { CustomEmoji } from '../components/molecule/slatejs-editor-component/type';
 import { fileType, uploadProps } from '../hooks/type';
 
 export enum UserType {

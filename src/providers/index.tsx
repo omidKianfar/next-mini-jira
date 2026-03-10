@@ -1,19 +1,15 @@
-"use client";
+'use client';
 
-import { PropsWithChildren } from "react";
-import { Provider } from "react-redux";
-import NotistackProvider from "./notistack";
-
-// provider
-import AuthProvider from "./auth-provider";
-import { ChatProvider } from "./chat.provider";
-
-// redux
-import { store } from "../store";
-
-// common
-import ErrorBoundary from "../components/common/error-boundray/error-boundary";
-import ErrorFallback from "../components/common/error-boundray/error-fallback";
+import {
+  ErrorBoundary,
+  ErrorFallback,
+  NotistackProvider,
+  PropsWithChildren,
+  Provider,
+  store,
+} from './imports';
+import AuthProvider from './auth-provider';
+import { ChatProvider } from './chat.provider';
 
 const ProvidersWrapper = ({ children }: PropsWithChildren) => {
   return (

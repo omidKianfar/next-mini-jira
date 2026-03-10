@@ -1,4 +1,4 @@
-export const TECH_STACK = [
+const TECH_STACK = [
   { label: 'Next.js', icon: 'logos:nextjs-icon', core: true },
   { label: 'TypeScript', icon: 'logos:typescript-icon', core: true },
   { label: 'Socket.io', icon: 'logos:socket-io', core: true },
@@ -9,7 +9,7 @@ export const TECH_STACK = [
   { label: 'Jest', icon: 'logos:jest', core: true },
 ];
 
-export const FEATURES = [
+const FEATURES = [
   {
     title: 'Real-time Collaboration',
     description:
@@ -48,7 +48,7 @@ export const FEATURES = [
   },
 ];
 
-export const containerVariants = {
+const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -58,7 +58,7 @@ export const containerVariants = {
   },
 };
 
-export const itemVariants = {
+const itemVariants = {
   hidden: { opacity: 0, scale: 0.8 },
   visible: {
     opacity: 1,
@@ -66,3 +66,5 @@ export const itemVariants = {
     transition: { duration: 0.5, ease: 'easeOut' } as const,
   },
 };
+
+export { TECH_STACK, FEATURES, containerVariants, itemVariants };

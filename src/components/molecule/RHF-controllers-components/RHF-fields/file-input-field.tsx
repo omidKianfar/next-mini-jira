@@ -1,13 +1,9 @@
-"use client";
+'use client';
 
-import { Controller, FieldValues, useFormContext } from "react-hook-form";
-
-// type
-import { FileInputControllerProps } from "../../type";
-
-// ui
-import LabelComponent from "./label";
-import ErrorComponent from "./errors";
+import { Controller, FieldValues, useFormContext } from '../../imports';
+import { FileInputControllerProps } from '../../type';
+import LabelComponent from './label';
+import ErrorComponent from './errors';
 
 const FileInputField = <T extends FieldValues>({
   name,
@@ -34,7 +30,7 @@ const FileInputField = <T extends FieldValues>({
             <input
               {...field}
               id={name}
-              type={"file"}
+              type={'file'}
               ref={ref}
               accept={accept}
               value={undefined}

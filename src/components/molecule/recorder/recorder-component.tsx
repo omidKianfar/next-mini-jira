@@ -1,22 +1,10 @@
+import { enqueueSnackbar, MyIcon, stringSlicer, useIsMobile } from '../imports';
 import WaveFormPlayer from './wave-form-player';
 import Recorder from './recorder';
 import copy from 'clipboard-copy';
-import { enqueueSnackbar } from 'notistack';
-
-// type
 import { RecorderComponentProps } from '../type';
 
-// utils
-import { stringSlicer } from '@/src/utils/string-slicer';
-
-// ui
-import MyIcon from '../../atom/icon-components';
-
-// hooks
-import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
-
 const RecorderComponent = ({ fileUploader }: RecorderComponentProps) => {
-  // hooks
   const isMobile = useIsMobile();
 
   return (

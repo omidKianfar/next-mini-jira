@@ -1,45 +1,33 @@
-import { useSearchParams } from 'next/navigation';
-
-// hooks
-import { useUnreadCount } from '@/src/hooks/chat/use-unread-count';
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-
-// firestore
-import { MessgesRead } from '@/src/libs/chat/read-message';
-
-// type
-import { UserType } from '@/src/types/global';
-import { chatSidebarProps } from '../../organisms/type';
-
-// ui
-import MyImage from '../../atom/image-components';
-import MyIcon from '../../atom/icon-components';
-
-// utils
-import { stringSlicer } from '@/src/utils/string-slicer';
-import UnSeenMessageCalc from '@/src/utils/unseen-calc';
+import {
+  chatSidebarProps,
+  MessgesRead,
+  MyIcon,
+  MyImage,
+  stringSlicer,
+  UnSeenMessageCalc,
+  useNavigation,
+  UserType,
+  useSearchParams,
+  useUnreadCount,
+} from '../imports';
 
 const AdminSupportUserCard = ({
   chat,
   setShowSidebar,
 }: Pick<chatSidebarProps, 'chat' | 'setShowSidebar'>) => {
-  // hooks
   const params = useSearchParams();
-  const chatId = params.get('chatId');
-
   const navigation = useNavigation();
-
   const unreadCount = useUnreadCount({
     chatId: chat.id,
     senderType: UserType.Client,
   });
 
-  // functions
+  const chatId = params.get('chatId');
+
   const goToChat = (chatId: string) => {
     MessgesRead({ chatId: chatId, senderType: UserType.Client });
 
     setShowSidebar?.(false);
-
     navigation.adminSupportChat(chatId);
   };
 

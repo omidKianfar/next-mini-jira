@@ -1,11 +1,7 @@
-// hooks
-import { useEditor } from '@/src/hooks/editor/use-editor';
-
-// data
+import { useEditor } from '../../../../imports';
 import { fontFamilyOptions } from '../../../data';
 
 const FontSelectComponent = () => {
-  // hooks
   const { changeFontFamily, fontFamilyState } = useEditor();
 
   return (

@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-// hooks
 import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
 import { useRequirePaymentStatus } from '@/src/hooks/pages-user-status-require/use-require-payment-status';
 import { useAuth } from '@/src/hooks/auth/use-auth';
@@ -14,10 +13,8 @@ import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
 import { useImageProcessor } from '@/src/hooks/image-processor/use-image-processor';
 
-// schema
 import { ProfileSchema } from './schema';
 
-// ui
 import ModalComponent from '../../molecule/modals/modal-component';
 import FramerMotion from '../../atom/animation-component';
 import ButtonBack from '../../atom/buttons-component/button-back';
@@ -30,15 +27,12 @@ import MyImage from '../../atom/image-components';
 import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
 import PageLoading from '../../common/page-loading';
 
-// type
 import { ProfileProps, UserType } from '@/src/types/global';
 import { backModalMessage } from './data';
 
-// lazy
 const AvatarUpload = lazy(() => import('../../molecule/uploads/avatar'));
 
 const ProfileComponent = () => {
-  // hooks
   const pathName = usePathname();
   const isMobile = useIsMobile();
   const navigation = useNavigation();
@@ -53,11 +47,9 @@ const ProfileComponent = () => {
   useRequireActiveStatus();
   useRequirePaymentStatus();
 
-  // states
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
 
-  // form
   const defaultValues: ProfileProps = {
     photo: user?.photo ?? '',
     userName: user?.userName ?? '',
@@ -70,7 +62,6 @@ const ProfileComponent = () => {
     mode: 'onSubmit',
   });
 
-  // functions
   useEffect(() => {
     if (user) {
       methods.reset({
@@ -109,7 +100,6 @@ const ProfileComponent = () => {
 
       reset();
     } catch (error: any) {
-      console.log('Profile Error: ', error);
     } finally {
       setLoading(false);
     }

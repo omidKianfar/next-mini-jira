@@ -1,27 +1,26 @@
-// type
 import {
   AuthContextActionType,
   AuthContextStateType,
-} from "@/src/types/global";
+} from '@/src/types/global';
 
-export const initialState: AuthContextStateType = {
+const initialState: AuthContextStateType = {
   user: null,
   isLoading: null,
   isInitialized: false,
   isAuthenticated: false,
 };
 
-export const authReducer = (
+const authReducer = (
   state: Partial<AuthContextStateType>,
   action: {
     payload: Partial<AuthContextStateType>;
     type: AuthContextActionType;
-  },
+  }
 ) => {
   const { isAuthenticated, isLoading, isInitialized, user } = action.payload;
 
   switch (action.type) {
-    case "INITIALIZE":
+    case 'INITIALIZE':
       return {
         ...state,
         user,
@@ -30,7 +29,7 @@ export const authReducer = (
         isInitialized,
       };
 
-    case "IS_LOADING":
+    case 'IS_LOADING':
       return {
         ...state,
         isLoading,
@@ -40,3 +39,5 @@ export const authReducer = (
       return state;
   }
 };
+
+export { initialState, authReducer };
