@@ -1,34 +1,30 @@
 'use client';
 
-import { lazy, Suspense, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { enqueueSnackbar } from 'notistack';
-import { useSearchParams } from 'next/navigation';
-
-import { useRequirePaymentStatus } from '@/src/hooks/pages-user-status-require/use-require-payment-status';
-import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
-import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-
-import { deleteTask } from '@/src/libs/tasks/delete-task';
-import { fetchTask } from '@/src/libs/tasks/fetch-task';
-
-import { RootState } from '@/src/store';
-
-import { Task } from '@/src/types/global';
-
-import ButtonBack from '@/src/components/atom/buttons-component/button-back';
-import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
-import MyIcon from '@/src/components/atom/icon-components';
-import MyImage from '@/src/components/atom/image-components';
-import PageLoading from '@/src/components/common/page-loading';
-import ModalContainer from '../../common/modal-container';
-import ModalComponent from '../../molecule/modals/modal-component';
-
-const MyVideo = lazy(() => import('@/src/components/atom/video-component'));
-const LightBoxComponent = lazy(
-  () => import('@/src/components/common/light-box')
-);
+import {
+  ButtonBack,
+  ButtonFreeClass,
+  deleteTask,
+  enqueueSnackbar,
+  fetchTask,
+  LightBoxComponent,
+  ModalComponent,
+  ModalContainer,
+  MyIcon,
+  MyImage,
+  MyVideo,
+  PageLoading,
+  RootState,
+  Suspense,
+  Task,
+  useEffect,
+  useIsMobile,
+  useNavigation,
+  useRequireActiveStatus,
+  useRequirePaymentStatus,
+  useSearchParams,
+  useSelector,
+  useState,
+} from '../imports';
 
 const TaskDetailComponent = () => {
   const navigation = useNavigation();
@@ -51,7 +47,6 @@ const TaskDetailComponent = () => {
     const data = await fetchTask({ taskId: taskId! });
 
     setTask(data);
-
     setLoading(false);
   };
 

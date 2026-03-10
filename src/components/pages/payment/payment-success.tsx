@@ -1,19 +1,18 @@
 'use client';
 
-import { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import dayjs from 'dayjs';
-
-import { useAuth } from '@/src/hooks/auth/use-auth';
-import { useSetSubscriptionId } from '@/src/hooks/payment/useSetSubscriptionId';
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
-
-import PageLoading from '@/src/components/common/page-loading';
-import MyIcon from '@/src/components/atom/icon-components';
-import ButtonNext from '@/src/components/atom/buttons-component/button-next';
-
-import { updateFirestoreUser } from '@/src/libs/auth/update-user';
+import {
+  useAuth,
+  useState,
+  useSearchParams,
+  dayjs,
+  useRequireActiveStatus,
+  useNavigation,
+  PageLoading,
+  MyIcon,
+  ButtonNext,
+  updateFirestoreUser,
+  useSetSubscriptionId,
+} from '../imports';
 
 const PaymentSuccessComponent = () => {
   const params = useSearchParams();
@@ -22,11 +21,11 @@ const PaymentSuccessComponent = () => {
 
   useRequireActiveStatus();
 
-  const planType = params.get('planType');
-  const sessionId = params.get('session_id');
-
   const [subscriptionId, setSubscriptionId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const planType = params.get('planType');
+  const sessionId = params.get('session_id');
 
   const now = dayjs().format('YYYY-MM-DD');
   const oneMonth = dayjs().add(1, 'month').format('YYYY-MM-DD');
@@ -60,7 +59,6 @@ const PaymentSuccessComponent = () => {
     await updateFirestoreUser(user.userId, data);
 
     changeStep('0');
-
     navigation.dashboard();
   };
 

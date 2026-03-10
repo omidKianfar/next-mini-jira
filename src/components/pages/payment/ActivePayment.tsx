@@ -1,7 +1,4 @@
-import dayjs from 'dayjs';
-
-import ButtonBack from '@/src/components/atom/buttons-component/button-back';
-
+import { dayjs, ButtonBack } from '../imports';
 import { ActivePaymentSectionProps } from '../type';
 
 const ActivePaymentComponent = ({

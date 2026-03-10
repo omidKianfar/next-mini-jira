@@ -1,26 +1,26 @@
 'use client';
 
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect, useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { usePathname } from 'next/navigation';
-
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-import { useAuth } from '@/src/hooks/auth/use-auth';
-import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
-import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
-import { useRequirePaymentStatus } from '@/src/hooks/pages-user-status-require/use-require-payment-status';
-
+import {
+  yupResolver,
+  useEffect,
+  useState,
+  MyIcon,
+  FormProvider,
+  useForm,
+  usePathname,
+  useNavigation,
+  useAuth,
+  useIsMobile,
+  useRequireActiveStatus,
+  useRequirePaymentStatus,
+  SignPropsType,
+  InputField,
+  ButtonNext,
+  MyImage,
+  ButtonBack,
+  FramerMotion,
+} from '../imports';
 import { authSchema } from '../auth/schema';
-
-import { SignPropsType } from '@/src/types/global';
-
-import FramerMotion from '../../atom/animation-component';
-import InputField from '../../molecule/RHF-controllers-components/RHF-fields/input-field';
-import MyIcon from '../../atom/icon-components';
-import ButtonNext from '../../atom/buttons-component/button-next';
-import MyImage from '../../atom/image-components';
-import ButtonBack from '../../atom/buttons-component/button-back';
 
 const PasswordComponent = () => {
   const pathName = usePathname();

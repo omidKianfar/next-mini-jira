@@ -1,13 +1,13 @@
 'use client';
 
-import { motion } from 'framer-motion';
-
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
-
-import ButtonNext from '../../atom/buttons-component/button-next';
-import MyImage from '../../atom/image-components';
-import MyIcon from '../../atom/icon-components';
+import {
+  useIsMobile,
+  useNavigation,
+  motion,
+  ButtonNext,
+  MyIcon,
+  MyImage,
+} from '../imports';
 
 const HeroSectionComponent = () => {
   const isMobile = useIsMobile();

@@ -1,11 +1,12 @@
 'use client';
 
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
-import { useAuth } from '@/src/hooks/auth/use-auth';
-
-import ButtonNext from '@/src/components/atom/buttons-component/button-next';
-import MyIcon from '@/src/components/atom/icon-components';
+import {
+  ButtonNext,
+  useAuth,
+  MyIcon,
+  useRequireActiveStatus,
+  useNavigation,
+} from '../imports';
 
 const PaymentFailedComponent = () => {
   const navigation = useNavigation();
@@ -15,7 +16,6 @@ const PaymentFailedComponent = () => {
 
   const finishHandler = () => {
     changeStep('0');
-
     navigation.payment();
   };
 

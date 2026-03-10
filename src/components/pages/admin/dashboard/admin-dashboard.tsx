@@ -1,23 +1,22 @@
 'use client';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
-
-import { useUsersListener } from '@/src/hooks/users/use-user-listener';
-import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-
-import PageLoading from '@/src/components/common/page-loading';
-import UsersTable from '../../../organisms/tables/admin-users-table';
-import UserListCard from '../../../organisms/lists/admin-users-list';
-import MyIcon from '@/src/components/atom/icon-components';
-
-import { MyUserType, UserType } from '@/src/types/global';
-
-import { updateFirestoreUser } from '@/src/libs/auth/update-user';
-
-import { RootState } from '@/src/store';
-import { toggleSortByCreatedAt } from '@/src/store/slices/users/users';
+import {
+  MyIcon,
+  MyUserType,
+  PageLoading,
+  RootState,
+  toggleSortByCreatedAt,
+  updateFirestoreUser,
+  useDispatch,
+  useIsMobile,
+  useNavigation,
+  UserListCard,
+  UsersTable,
+  UserType,
+  useSelector,
+  useState,
+  useUsersListener,
+} from '../../imports';
 
 const AdminDashboardComponent = () => {
   const isMobile = useIsMobile();
@@ -48,26 +47,32 @@ const AdminDashboardComponent = () => {
   const finalUsers = usersWithoutAdmin.filter((user) => {
     const created = user.createdAt;
     const { status, createdAt } = usersFilters;
-
-    if (!created) return false;
-
     let statusBool: boolean | null = null;
-    if (status === 'true') statusBool = true;
-    if (status === 'false') statusBool = false;
 
+    if (!created) {
+      return false;
+    }
+    if (status === 'true') {
+      statusBool = true;
+    }
+    if (status === 'false') {
+      statusBool = false;
+    }
     if (statusBool !== null && user.isActive !== statusBool) {
       return false;
     }
-
-    if (createdAt.from && created < createdAt.from) return false;
-    if (createdAt.to && created > createdAt.to) return false;
+    if (createdAt.from && created < createdAt.from) {
+      return false;
+    }
+    if (createdAt.to && created > createdAt.to) {
+      return false;
+    }
 
     return true;
   });
 
   const SortHandler = () => {
     setSort(!sort);
-
     dispatch(toggleSortByCreatedAt());
   };
 

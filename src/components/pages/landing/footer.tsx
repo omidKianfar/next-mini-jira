@@ -1,6 +1,4 @@
-import { useRouter } from 'next/navigation';
-
-import MyIcon from '../../atom/icon-components';
+import { MyIcon, useRouter } from '../imports';
 
 const FooterComponent = () => {
   const router = useRouter();

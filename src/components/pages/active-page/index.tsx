@@ -1,9 +1,6 @@
 'use client';
 
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-
-import ButtonNext from '@/src/components/atom/buttons-component/button-next';
-import MyIcon from '@/src/components/atom/icon-components';
+import { ButtonNext, MyIcon, useNavigation } from '../imports';
 
 export default function ActivePageComponent() {
   const navigation = useNavigation();

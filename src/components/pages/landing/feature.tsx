@@ -1,8 +1,12 @@
 'use client';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
-
+import {
+  Autoplay,
+  EffectCoverflow,
+  Pagination,
+  Swiper,
+  SwiperSlide,
+} from '../imports';
 import { FEATURES } from './data';
 
 import 'swiper/css';

@@ -1,18 +1,20 @@
 'use client';
 
-import { lazy, Suspense, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import dayjs from 'dayjs';
+import { lazy } from 'react';
 
-import { useAuth } from '@/src/hooks/auth/use-auth';
-import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
-import { usePlanAction } from '@/src/hooks/payment/usePlanAction';
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-
-import { PlanType } from '@/src/types/global';
-
-import PageLoading from '../../common/page-loading';
-import FramerMotion from '../../atom/animation-component';
+import {
+  Suspense,
+  useState,
+  usePathname,
+  useAuth,
+  dayjs,
+  useNavigation,
+  PageLoading,
+  FramerMotion,
+  PlanType,
+  useRequireActiveStatus,
+  usePlanAction,
+} from '../imports';
 
 const ActivePaymentComponent = lazy(() => import('./ActivePayment'));
 const ChoosePlanComponent = lazy(() => import('./ChoosePlan'));

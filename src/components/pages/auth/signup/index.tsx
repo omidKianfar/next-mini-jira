@@ -1,10 +1,7 @@
 'use client';
 
-import { lazy, Suspense } from 'react';
-
-import { useAuth } from '@/src/hooks/auth/use-auth';
-
-import PageLoading from '@/src/components/common/page-loading';
+import { lazy } from 'react';
+import { useAuth, Suspense, PageLoading } from '../../imports';
 
 const SignupStep = lazy(() => import('./steps/signup-step'));
 const ProfileStep = lazy(() => import('./steps/profile-step'));

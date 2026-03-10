@@ -1,16 +1,15 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-
-import { useAuth } from '@/src/hooks/auth/use-auth';
-import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
-
-import FramerMotion from '@/src/components/atom/animation-component';
-import ButtonBack from '@/src/components/atom/buttons-component/button-back';
-import MyIcon from '@/src/components/atom/icon-components';
-import MyImage from '@/src/components/atom/image-components';
-
-import PaymentCardComponent from '@/src/components/molecule/cards/payment-cart';
+import {
+  ButtonBack,
+  FramerMotion,
+  MyIcon,
+  MyImage,
+  PaymentCardComponent,
+  useAuth,
+  useIsMobile,
+  usePathname,
+} from '../../../imports';
 
 const PaymentStep = () => {
   const pathName = usePathname();

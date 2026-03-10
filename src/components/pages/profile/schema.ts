@@ -1,6 +1,4 @@
-import * as Yup from 'yup';
-
-import { ProfileProps } from '@/src/types/global';
+import { Yup, ProfileProps } from '../imports';
 
 export const ProfileSchema = Yup.object({
   photo: Yup.string()

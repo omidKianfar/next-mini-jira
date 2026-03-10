@@ -1,36 +1,37 @@
 'use client';
 
-import { lazy, Suspense, useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { FormProvider, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-
-import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
-import { useRequirePaymentStatus } from '@/src/hooks/pages-user-status-require/use-require-payment-status';
-import { useAuth } from '@/src/hooks/auth/use-auth';
-import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
-import { useNavigation } from '@/src/hooks/navigation/use-navigation';
-import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
-import { useImageProcessor } from '@/src/hooks/image-processor/use-image-processor';
-
+import {
+  Suspense,
+  useState,
+  usePathname,
+  useAuth,
+  useEffect,
+  useNavigation,
+  PageLoading,
+  FramerMotion,
+  useRequirePaymentStatus,
+  useRequireActiveStatus,
+  AvatarUpload,
+  FormProvider,
+  useForm,
+  yupResolver,
+  useIsMobile,
+  useFileUploader,
+  useImageProcessor,
+  ModalComponent,
+  ButtonBack,
+  ModalContainer,
+  InputField,
+  MyIcon,
+  DateInputField,
+  ButtonNext,
+  MyImage,
+  ButtonFreeClass,
+  ProfileProps,
+  UserType,
+} from '../imports';
 import { ProfileSchema } from './schema';
-
-import ModalComponent from '../../molecule/modals/modal-component';
-import FramerMotion from '../../atom/animation-component';
-import ButtonBack from '../../atom/buttons-component/button-back';
-import ModalContainer from '../../common/modal-container';
-import InputField from '../../molecule/RHF-controllers-components/RHF-fields/input-field';
-import MyIcon from '../../atom/icon-components';
-import DateInputField from '../../molecule/RHF-controllers-components/RHF-fields/date-input-field';
-import ButtonNext from '../../atom/buttons-component/button-next';
-import MyImage from '../../atom/image-components';
-import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
-import PageLoading from '../../common/page-loading';
-
-import { ProfileProps, UserType } from '@/src/types/global';
 import { backModalMessage } from './data';
-
-const AvatarUpload = lazy(() => import('../../molecule/uploads/avatar'));
 
 const ProfileComponent = () => {
   const pathName = usePathname();

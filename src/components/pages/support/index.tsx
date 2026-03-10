@@ -1,19 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-
-import { useChat } from '@/src/hooks/chat/use-chat';
-import { useAuth } from '@/src/hooks/auth/use-auth';
-import { useEditor } from '@/src/hooks/editor/use-editor';
-
-import { MessgesRead } from '@/src/libs/chat/read-message';
-
-import ChatMessages from '../../organisms/chat-messages';
-import ChatInput from '../../molecule/chat/chat-input';
-import ChatHeader from '../../molecule/headers/chat-header';
-
-import { UserType } from '@/src/types/global';
+import {
+  useEffect,
+  useState,
+  usePathname,
+  useChat,
+  useAuth,
+  useEditor,
+  MessgesRead,
+  UserType,
+  ChatMessages,
+  ChatInput,
+  ChatHeader,
+} from '../imports';
 
 const SupportComponent = () => {
   const pathname = usePathname();
