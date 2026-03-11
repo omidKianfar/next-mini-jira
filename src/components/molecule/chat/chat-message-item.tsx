@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import {
   deleteChatMessage,
   LightBoxComponent,
@@ -5,13 +6,16 @@ import {
   MyIcon,
   MyImage,
   MyVideo,
+  PageLoading,
+  Suspense,
   useAuth,
   UserType,
   useState,
 } from '../imports';
 import ModalComponent from '../modals/modal-component';
-import WaveformPlayer from '../recorder/wave-form-player';
 import { ChatMessageItemProps } from '../type';
+
+const WaveformPlayer = lazy(() => import('../recorder/wave-form-player'));
 
 const ChatMessageItem = ({
   message,
@@ -46,68 +50,70 @@ const ChatMessageItem = ({
     <div
       className={`w-full ${user?.userType == UserType.Client ? (isAdmin ? 'justify-start' : 'justify-end') : isAdmin ? 'justify-end' : 'justify-start'} mb-4 flex items-center`}
     >
-      <div className="relative min-w-[100px] max-w-[500px]">
-        {message?.attachment?.fileType ? (
-          <div>
-            {message?.attachment?.fileType === 'image' && (
-              <LightBoxComponent url={message?.attachment?.fileUrl as string}>
-                <MyImage
-                  src={message?.attachment?.fileUrl as string}
-                  alt="preview"
-                  fill
-                  wrapperClass={`relative cursor-pointer w-[190px] h-[190px]  overflow-hidden 
+      <Suspense fallback={<PageLoading />}>
+        <div className="relative min-w-[100px] max-w-[500px]">
+          {message?.attachment?.fileType ? (
+            <div>
+              {message?.attachment?.fileType === 'image' && (
+                <LightBoxComponent url={message?.attachment?.fileUrl as string}>
+                  <MyImage
+                    src={message?.attachment?.fileUrl as string}
+                    alt="preview"
+                    fill
+                    wrapperClass={`relative cursor-pointer w-[190px] h-[190px]  overflow-hidden 
                     
                      shadow-md p-1 shadow-md border-2  ${isAdmin ? 'border-warning-400' : 'border-primary-400'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
-                  className="object-cover"
+                    className="object-cover"
+                  />
+                </LightBoxComponent>
+              )}
+
+              {message?.attachment?.fileType === 'video' && (
+                <MyVideo
+                  src={message?.attachment?.fileUrl as string}
+                  alt="preview"
+                  className={`w-[330px] border-2 shadow-md ${isAdmin ? 'border-warning-400' : 'border-primary-400'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
                 />
-              </LightBoxComponent>
-            )}
+              )}
 
-            {message?.attachment?.fileType === 'video' && (
-              <MyVideo
-                src={message?.attachment?.fileUrl as string}
-                alt="preview"
-                className={`w-[330px] border-2 shadow-md ${isAdmin ? 'border-warning-400' : 'border-primary-400'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
-              />
-            )}
-
-            {message?.attachment?.fileType === 'voice' && (
-              <div
-                className={`flex h-[64px] w-[250px] items-center justify-center border-2 bg-primary-100 p-2 px-2 shadow-md lg:w-[400px] ${isAdmin ? 'border-warning-400' : 'border-primary-400'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
-              >
-                <WaveformPlayer
-                  audioUrl={message?.attachment?.fileUrl as string}
-                />
-              </div>
-            )}
-          </div>
-        ) : (
-          <div
-            className={`break-words border-2 p-2 shadow-md ${isAdmin ? 'border-warning-400 bg-warning-100' : 'border-primary-400 bg-primary-100'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
-            dangerouslySetInnerHTML={{ __html: message.text as string }}
-          />
-        )}
-
-        {currentUser ? (
-          <div
-            className={`flex h-full w-full items-center justify-between rounded-b-lg border-2 border-t-0 ${isAdmin ? 'border-warning-400' : 'border-primary-400'} p-2 shadow-md`}
-          >
-            <MyIcon
-              icon="delete"
-              className="cursor-pointer text-subtitle text-error-500 hover:text-error-700"
-              onClick={handleOpenModal}
+              {message?.attachment?.fileType === 'voice' && (
+                <div
+                  className={`flex h-[64px] w-[250px] items-center justify-center border-2 bg-primary-100 p-2 px-2 shadow-md lg:w-[400px] ${isAdmin ? 'border-warning-400' : 'border-primary-400'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
+                >
+                  <WaveformPlayer
+                    audioUrl={message?.attachment?.fileUrl as string}
+                  />
+                </div>
+              )}
+            </div>
+          ) : (
+            <div
+              className={`break-words border-2 p-2 shadow-md ${isAdmin ? 'border-warning-400 bg-warning-100' : 'border-primary-400 bg-primary-100'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
+              dangerouslySetInnerHTML={{ __html: message.text as string }}
             />
+          )}
 
-            {message.text !== '' && (
+          {currentUser ? (
+            <div
+              className={`flex h-full w-full items-center justify-between rounded-b-lg border-2 border-t-0 ${isAdmin ? 'border-warning-400' : 'border-primary-400'} p-2 shadow-md`}
+            >
               <MyIcon
-                icon="edit"
-                className="cursor-pointer text-subtitle text-primary-500 hover:text-primary-700"
-                onClick={() => handleTemplateSelect?.(message.text as string)}
+                icon="delete"
+                className="cursor-pointer text-subtitle text-error-500 hover:text-error-700"
+                onClick={handleOpenModal}
               />
-            )}
-          </div>
-        ) : null}
-      </div>
+
+              {message.text !== '' && (
+                <MyIcon
+                  icon="edit"
+                  className="cursor-pointer text-subtitle text-primary-500 hover:text-primary-700"
+                  onClick={() => handleTemplateSelect?.(message.text as string)}
+                />
+              )}
+            </div>
+          ) : null}
+        </div>
+      </Suspense>
 
       <ModalContainer open={open} handleClose={handleCloseModal}>
         <ModalComponent

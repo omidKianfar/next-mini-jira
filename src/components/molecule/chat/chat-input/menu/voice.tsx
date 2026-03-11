@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import {
   ButtonFreeClass,
   enqueueSnackbar,
@@ -11,8 +12,11 @@ import {
   useSearchParams,
   useUserListenerById,
 } from '../../../imports';
-import RecorderComponent from '../../../recorder/recorder-component';
 import { UploadMenuComponentProps } from '../../type';
+
+const RecorderComponent = lazy(
+  () => import('../../../recorder/recorder-component')
+);
 
 const VoiceMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
   const { cancel, error, fileType, reset, uploading, url } = fileUploader;

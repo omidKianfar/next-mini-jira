@@ -1,10 +1,14 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
-import WaveSurfer from 'wavesurfer.js';
+import {
+  useRef,
+  useEffect,
+  useState,
+  WaveSurfer,
+  ButtonFreeClass,
+  MyIcon,
+} from '../imports';
 import { WaveformPlayerProps } from '../type';
-import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
-import MyIcon from '../../atom/icon-components';
 
 const WaveformPlayer = ({ audioUrl }: WaveformPlayerProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);

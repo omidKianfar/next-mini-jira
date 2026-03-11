@@ -6,6 +6,7 @@ import {
   MyIcon,
   PageLoading,
   RootState,
+  Suspense,
   useChatsListener,
   useEffect,
   useRef,
@@ -56,28 +57,33 @@ const ChatSidebar = ({
   if (!finalChats) return <PageLoading />;
 
   return (
-    <div className="relative h-full w-full">
-      <div className="h-full w-full">
-        {finalChats.map((chat) => (
-          <div key={chat.id} className="mb-4">
-            <AdminSupportUserCard chat={chat} setShowSidebar={setShowSidebar} />
-          </div>
-        ))}
-      </div>
+    <Suspense fallback={<PageLoading />}>
+      <div className="relative h-full w-full">
+        <div className="h-full w-full">
+          {finalChats.map((chat) => (
+            <div key={chat.id} className="mb-4">
+              <AdminSupportUserCard
+                chat={chat}
+                setShowSidebar={setShowSidebar}
+              />
+            </div>
+          ))}
+        </div>
 
-      {showScrollBtn && (
-        <ButtonFreeClass
-          onClick={scrollToTop}
-          className="z-9 absolute right-0 top-0"
-          icon={
-            <MyIcon
-              icon="scroll-down"
-              className="rotate-180 text-h3 text-primary-500/50 hover:text-primary-700"
-            />
-          }
-        ></ButtonFreeClass>
-      )}
-    </div>
+        {showScrollBtn && (
+          <ButtonFreeClass
+            onClick={scrollToTop}
+            className="z-9 absolute right-0 top-0"
+            icon={
+              <MyIcon
+                icon="scroll-down"
+                className="rotate-180 text-h3 text-primary-500/50 hover:text-primary-700"
+              />
+            }
+          ></ButtonFreeClass>
+        )}
+      </div>
+    </Suspense>
   );
 };
 

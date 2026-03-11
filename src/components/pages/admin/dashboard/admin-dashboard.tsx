@@ -1,10 +1,12 @@
 'use client';
 
+import { LoadingCircle } from '@/src/components/organisms/imports';
 import {
   MyIcon,
   MyUserType,
   PageLoading,
   RootState,
+  Suspense,
   toggleSortByCreatedAt,
   updateFirestoreUser,
   useDispatch,
@@ -101,19 +103,21 @@ const AdminDashboardComponent = () => {
           )}
         </div>
 
-        {isMobile ? (
-          <UserListCard
-            users={finalUsers}
-            goDetail={goDetail}
-            toggleActive={toggleActive}
-          />
-        ) : (
-          <UsersTable
-            users={finalUsers}
-            goDetail={goDetail}
-            toggleActive={toggleActive}
-          />
-        )}
+        <Suspense fallback={<PageLoading />}>
+          {isMobile ? (
+            <UserListCard
+              users={finalUsers}
+              goDetail={goDetail}
+              toggleActive={toggleActive}
+            />
+          ) : (
+            <UsersTable
+              users={finalUsers}
+              goDetail={goDetail}
+              toggleActive={toggleActive}
+            />
+          )}
+        </Suspense>
       </div>
     </div>
   );

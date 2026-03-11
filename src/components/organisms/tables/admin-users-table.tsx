@@ -1,6 +1,8 @@
 import {
   LoadingCircle,
+  PageLoading,
   PaginationComponent,
+  Suspense,
   TableComponent,
   useState,
 } from '../imports';
@@ -29,18 +31,20 @@ const UsersTable = ({ users, goDetail, toggleActive }: UsersTableProps) => {
 
   return (
     <div>
-      <TableComponent data={paginatedUsers} columns={columns} />
+      <Suspense fallback={<PageLoading />}>
+        <TableComponent data={paginatedUsers} columns={columns} />
 
-      <PaginationComponent
-        currentPage={safePage}
-        totalPages={totalPages}
-        pageSize={pageSize}
-        onPageChange={setPage}
-        onPageSizeChange={(size) => {
-          setPageSize(size);
-          setPage(1);
-        }}
-      />
+        <PaginationComponent
+          currentPage={safePage}
+          totalPages={totalPages}
+          pageSize={pageSize}
+          onPageChange={setPage}
+          onPageSizeChange={(size) => {
+            setPageSize(size);
+            setPage(1);
+          }}
+        />
+      </Suspense>
     </div>
   );
 };

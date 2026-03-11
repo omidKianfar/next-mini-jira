@@ -7,6 +7,7 @@ export { default as Yup } from 'yup';
 export { default as copy } from 'clipboard-copy';
 export { default as escapeHTML } from 'escape-html';
 export { default as isHotkey } from 'is-hotkey';
+export { default as WaveSurfer } from 'wavesurfer.js';
 
 // ui
 export { default as MyIcon } from '@/src/components/atom/icon-components';
@@ -18,7 +19,6 @@ export { default as ButtonFreeClass } from '@/src/components/atom/buttons-compon
 export { default as ModalContainer } from '@/src/components/common/modal-container';
 export { default as Picker } from '@emoji-mart/react';
 export { default as data } from '@emoji-mart/data';
-export { default as ChatSidebar } from '@/src/components/organisms/sidebar-component/chat-sidebar';
 
 // utils
 export { default as UnSeenMessageCalc } from '@/src/utils/unseen-calc';
@@ -115,3 +115,7 @@ export const DragDropUploader = lazy(
 );
 
 export const AvatarCropModal = lazy(() => import('../common/avatar-crop'));
+
+export const ChatSidebar = lazy(
+  () => import('@/src/components/organisms/sidebar-component/chat-sidebar')
+);

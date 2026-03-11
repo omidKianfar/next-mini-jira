@@ -24,7 +24,6 @@ export { default as AdminDashboardHeader } from '@/src/components/molecule/heade
 export { default as AdminSupportHeader } from '@/src/components/molecule/headers/admin-support';
 export { default as ChatMessageItem } from '@/src/components/molecule/chat/chat-message-item';
 export { default as ListComponent } from '@/src/components/organisms/list-component';
-export { default as AdminSupportUserCard } from '@/src/components/molecule/cards/admin-support-user-card';
 export { default as EmptyColumn } from '@/src/components/atom/empty-components/empty-column';
 
 // -------------------------------------------------------------------export
@@ -109,9 +108,15 @@ export type { ColumnProps } from '@/src/components/pages/type';
 export const LightBoxComponent = lazy(
   () => import('@/src/components/common/light-box')
 );
+
 export const MyVideo = lazy(
   () => import('@/src/components/atom/video-component')
 );
+
 export const DragDropUploader = lazy(
   () => import('@/src/components/organisms/uploads/drag-drop')
+);
+
+export const AdminSupportUserCard = lazy(
+  () => import('@/src/components/molecule/cards/admin-support-user-card')
 );

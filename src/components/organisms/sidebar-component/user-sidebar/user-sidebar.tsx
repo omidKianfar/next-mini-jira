@@ -1,4 +1,11 @@
-import { ButtonFreeClass, MyIcon, useAuth, UserType } from '../../imports';
+import {
+  ButtonFreeClass,
+  MyIcon,
+  PageLoading,
+  Suspense,
+  useAuth,
+  UserType,
+} from '../../imports';
 import { sidebarItemsType, sidebarProps } from '../../type';
 import { SidebarItems } from './sidebar-items';
 import SidebarActionItem from './sidebar-action-item';
@@ -16,19 +23,21 @@ const UserSidebar = ({
 
   return (
     <div className="mt-6 flex flex-col items-start justify-center">
-      <div className="h-[45vh] overflow-y-auto">
-        {user?.userType === UserType?.Client
-          ? userSidebarItems?.map((item: sidebarItemsType) => (
-              <div key={item.id} className="mb-4">
-                <SidebarActionItem item={item} />
-              </div>
-            ))
-          : AdminSidebarItems?.map((item: sidebarItemsType) => (
-              <div key={item.id} className="mb-4">
-                <SidebarActionItem item={item} />
-              </div>
-            ))}
-      </div>
+      <Suspense fallback={<PageLoading />}>
+        <div className="h-[45vh] overflow-y-auto">
+          {user?.userType === UserType?.Client
+            ? userSidebarItems?.map((item: sidebarItemsType) => (
+                <div key={item.id} className="mb-4">
+                  <SidebarActionItem item={item} />
+                </div>
+              ))
+            : AdminSidebarItems?.map((item: sidebarItemsType) => (
+                <div key={item.id} className="mb-4">
+                  <SidebarActionItem item={item} />
+                </div>
+              ))}
+        </div>
+      </Suspense>
 
       <hr className="mt-6 w-[190px] border border-dashed border-gray-300" />
 

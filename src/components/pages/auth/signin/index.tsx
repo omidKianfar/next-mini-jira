@@ -13,14 +13,11 @@ import {
   usePathname,
   useState,
   yupResolver,
+  InputField,
+  Logo,
 } from '../../imports';
-
 import { FormValues } from '../../type';
-
 import { authSchema } from '../schema';
-
-import InputField from '@/src/components/molecule/RHF-controllers-components/RHF-fields/input-field';
-import Logo from '@/src/components/atom/logo-component';
 
 const AuthComponent = () => {
   const navigation = useNavigation();

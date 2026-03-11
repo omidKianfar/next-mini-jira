@@ -53,14 +53,13 @@ export { default as MyIcon } from '@/src/components/atom/icon-components';
 export { default as ModalContainer } from '@/src/components/common/modal-container';
 export { default as ModalComponent } from '@/src/components/molecule/modals/modal-component';
 export { default as PageLoading } from '@/src/components/common/page-loading';
-export { default as UsersTable } from '@/src/components/organisms/tables/admin-users-table';
-export { default as UserListCard } from '@/src/components/organisms/lists/admin-users-list';
 export { default as FramerMotion } from '@/src/components/atom/animation-component';
 export { default as PaymentCardComponent } from '@/src/components/molecule/cards/payment-cart';
 export { default as PlanCardComponent } from '@/src/components/molecule/cards/plan-cart';
 export { default as ChatMessages } from '@/src/components/organisms/chat-messages';
 export { default as ChatInput } from '@/src/components/molecule/chat/chat-input';
 export { default as ChatHeader } from '@/src/components/molecule/headers/chat-header';
+export { default as Logo } from '@/src/components/atom/logo-component';
 
 // -------------------------------------------------------------------type
 // global types
@@ -95,4 +94,12 @@ export const BoardComponent = lazy(
 
 export const AvatarUpload = lazy(
   () => import('@/src/components/molecule/uploads/avatar')
+);
+
+export const UsersTable = lazy(
+  () => import('@/src/components/organisms/tables/admin-users-table')
+);
+
+export const UserListCard = lazy(
+  () => import('@/src/components/organisms/lists/admin-users-list')
 );

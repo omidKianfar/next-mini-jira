@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import {
   ButtonFreeClass,
   DragDropUploader,
@@ -18,9 +19,10 @@ import {
   useVideoProcessor,
   yupResolver,
 } from '../../../imports';
-import ShowAttachment from './show-attachment';
 import { UploadMenuComponentProps, UploadMenuForm } from '../../type';
 import { UploadMenuShema } from './schema';
+
+const ShowAttachment = lazy(() => import('./show-attachment'));
 
 const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
   const params = useSearchParams();
