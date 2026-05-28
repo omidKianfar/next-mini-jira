@@ -1,9 +1,9 @@
 'use client';
 
+import RecordRTC from 'recordrtc';
 import {
   ButtonFreeClass,
   MyIcon,
-  RecordRTC,
   useEffect,
   useRef,
   useState,

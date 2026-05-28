@@ -1,4 +1,4 @@
-import { Inter, Outfit, Poppins } from './imports';
+import { Poppins, Inter, Outfit } from 'next/font/google';
 
 const OutfitFont = Outfit({
   variable: '--font-Outfit',

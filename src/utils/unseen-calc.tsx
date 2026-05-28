@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import durationPlugin from 'dayjs/plugin/duration';

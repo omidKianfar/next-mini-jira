@@ -13,7 +13,6 @@ export { default as RoleGuard } from '@/src/guards/role-guard';
 // -------------------------------------------------------------------export
 // packages
 export { useState } from 'react';
-export { Poppins, Inter, Outfit } from 'next/font/google';
 export { AnimatePresence, motion } from 'framer-motion';
 
 // hooks

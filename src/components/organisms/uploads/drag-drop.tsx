@@ -1,3 +1,5 @@
+'use client';
+
 import { DragEvent, useRef, useState } from 'react';
 import { AddTaskUploadProps } from '../type';
 import { FileInputField, LoadingCircle } from '../imports';

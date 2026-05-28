@@ -1,9 +1,11 @@
+'use client';
+
 import { lazy } from 'react';
+import * as Yup from 'yup';
 
 // -------------------------------------------------------------------default export
 // packages
 export { default as ReactDOM } from 'react-dom';
-export { default as Yup } from 'yup';
 export { default as copy } from 'clipboard-copy';
 export { default as escapeHTML } from 'escape-html';
 export { default as isHotkey } from 'is-hotkey';
@@ -30,6 +32,7 @@ export { Suspense, useState, useRef, useEffect } from 'react';
 export { useDraggable } from '@dnd-kit/core';
 export { enqueueSnackbar } from 'notistack';
 export { yupResolver } from '@hookform/resolvers/yup';
+export { Yup };
 export {
   FormProvider,
   useForm,
@@ -66,7 +69,6 @@ export { stringSlicer } from '@/src/utils/string-slicer';
 // -------------------------------------------------------------------type
 // packages
 export { default as React } from 'react';
-export { default as RecordRTC } from 'recordrtc';
 export { Element, Editor, Text, Node } from 'slate';
 export type { Descendant, BaseEditor } from 'slate';
 export type {

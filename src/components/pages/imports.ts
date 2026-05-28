@@ -1,9 +1,9 @@
 import { lazy } from 'react';
+import * as Yup from 'yup';
 
 // -------------------------------------------------------------------default export
 // packages
 export { default as dayjs } from 'dayjs';
-export { default as Yup } from 'yup';
 
 // -------------------------------------------------------------------export
 // packages
@@ -12,6 +12,7 @@ export { useState, Suspense, useEffect } from 'react';
 export { useDispatch, useSelector } from 'react-redux';
 export { FormProvider, useForm } from 'react-hook-form';
 export { yupResolver } from '@hookform/resolvers/yup';
+export { Yup };
 export { enqueueSnackbar } from 'notistack';
 export { Swiper, SwiperSlide } from 'swiper/react';
 export { Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';

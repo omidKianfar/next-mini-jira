@@ -1,8 +1,9 @@
 import { lazy } from 'react';
+import * as Yup from 'yup';
+
 // -------------------------------------------------------------------default export
 // packages
 export { default as dayjs } from 'dayjs';
-export { default as Yup } from 'yup';
 
 // ui
 export { default as ButtonNext } from '@/src/components/atom/buttons-component/button-next';
@@ -33,6 +34,7 @@ export { useEffect, useRef, useState, Suspense, useMemo } from 'react';
 export { AnimatePresence, motion } from 'framer-motion';
 export { FormProvider, useForm } from 'react-hook-form';
 export { yupResolver } from '@hookform/resolvers/yup';
+export { Yup };
 export { enqueueSnackbar } from 'notistack';
 export { useDispatch, useSelector } from 'react-redux';
 

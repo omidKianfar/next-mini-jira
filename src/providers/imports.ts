@@ -1,3 +1,5 @@
+'use client';
+
 // -------------------------------------------------------------------default export
 // packages
 export { default as NotistackProvider } from './notistack';
