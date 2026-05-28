@@ -1,5 +1,5 @@
 import { FramerMotion } from '@/app/imports';
-import TaskDetailComponent from '@/src/components/pages/dahboard/task-detail';
+import TaskDetailComponent from '@/src/components/pages/dashboard/task-detail';
 
 const TaskDeatailPage = () => {
   return (
