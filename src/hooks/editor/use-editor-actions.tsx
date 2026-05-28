@@ -99,14 +99,11 @@ const useEditorActions = ({
   }, [editor]);
 
   const resetEditor = () => {
-    Transforms.delete(editor, {
-      at: {
-        anchor: Editor.start(editor, []),
-        focus: Editor.end(editor, []),
-      },
-    });
+    editor.children = [{ type: 'paragraph', children: [{ text: '' }] }] as any;
 
-    Transforms.setNodes(editor, { type: 'paragraph' } as any);
+    editor.selection = null;
+
+    editor.onChange();
   };
 
   useEffect(() => {
