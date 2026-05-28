@@ -123,12 +123,25 @@ const SearchSupportChats = ({
                 </div>
 
                 <div className="rounded-sm border border-gray-100 p-2 shadow-md">
-                  <h6 className="break-words text-label font-semibold">
-                    {stringSlicer({
-                      string: chat.message.lastMessageText as string,
-                      slice: 80,
-                    })}
-                  </h6>
+                  {chat.message.lastMessageAttachment.fileType ? (
+                    <div className="break-words text-label text-gray-400">
+                      have a
+                      <span className="mx-1 text-gray-500">
+                        {chat.message.lastMessageAttachment.fileType}
+                      </span>
+                      attachment
+                    </div>
+                  ) : (
+                    <div
+                      className="break-words text-label"
+                      dangerouslySetInnerHTML={{
+                        __html: stringSlicer({
+                          string: chat.message.lastMessageText as string,
+                          slice: 80,
+                        }),
+                      }}
+                    ></div>
+                  )}
                 </div>
               </div>
             ))}
