@@ -1,21 +1,20 @@
 'use client';
 
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
+import dayjs from 'dayjs';
+import { useSelector } from 'react-redux';
 import {
-  Suspense,
-  RootState,
-  useSensors,
-  useSensor,
-  TouchSensor,
-  PointerSensor,
-  useSelector,
-  DragEndEvent,
-  updateTaskStatus,
-  dayjs,
-  Task,
-  PageLoading,
   DndContext,
-} from '../imports';
+  DragEndEvent,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import { RootState } from '@/src/store';
+import { updateTaskStatus } from '@/src/libs/tasks/update-task-status';
+import PageLoading from '../../common/page-loading';
+import { Task } from '@/src/types/global';
 
 const ColumnComponent = lazy(() => import('./column'));
 const TaskCardComponent = lazy(() => import('../../molecule/cards/task-card'));
@@ -31,16 +30,16 @@ const BoardComponent = () => {
     })
   );
 
-  const tasks = useSelector((state: RootState) => state.tasks.tasks);
-  const taskFilters = useSelector((state: RootState) => state.taskFilters);
+  const tasks = useSelector((state: RootState) => state?.tasks?.tasks);
+  const taskFilters = useSelector((state: RootState) => state?.taskFilters);
 
   const filteredTasks = tasks.filter((task) => {
     const taskDate = task.createdAt;
     const taskTag = task.tag;
 
-    const tag = taskFilters.tag;
-    const from = taskFilters.date.from;
-    const to = taskFilters.date.to;
+    const tag = taskFilters?.tag;
+    const from = taskFilters?.date?.from;
+    const to = taskFilters?.date?.to;
 
     if (tag && tag !== 'all') {
       if (taskTag !== tag) return false;

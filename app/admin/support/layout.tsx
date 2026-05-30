@@ -1,12 +1,9 @@
 'use client';
 
-import {
-  PropsWithChildren,
-  useIsMobile,
-  useState,
-  EditorProviderComponent,
-} from '../../imports';
 import AdminChatSidebar from '@/src/components/molecule/support/admin-chat-sidebar';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
+import EditorProviderComponent from '@/src/providers/editor-provider';
+import { PropsWithChildren, useState } from 'react';
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {
   const [showSidebar, setShowSidebar] = useState(true);

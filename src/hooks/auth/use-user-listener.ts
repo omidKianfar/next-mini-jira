@@ -1,18 +1,28 @@
 'use client';
 
+import { ActionDispatch, RefObject, useEffect, useRef } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { findFirestoreCurrentUser } from '@/src/libs/auth/current-user-finder';
+import { auth, db } from '@/configs/firebase';
 import {
-  auth,
-  db,
-  doc,
-  findFirestoreCurrentUser,
+  AuthContextActionType,
+  AuthContextStateType,
   MyUserType,
-  onAuthStateChanged,
-  onSnapshot,
-  useEffect,
-  useRef,
-} from '../imports';
+} from '@/src/types/global';
 
-import { UseAuthListenerProps } from '../type';
+interface UseAuthListenerProps {
+  state: Partial<AuthContextStateType>;
+  dispatch: ActionDispatch<
+    [
+      action: {
+        payload: Partial<AuthContextStateType>;
+        type: AuthContextActionType;
+      },
+    ]
+  >;
+  unsubDocRef: RefObject<(() => void) | null>;
+}
 
 export const useUserListener = ({
   dispatch,

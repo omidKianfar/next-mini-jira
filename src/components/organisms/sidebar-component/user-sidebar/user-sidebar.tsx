@@ -1,14 +1,12 @@
-import {
-  ButtonFreeClass,
-  MyIcon,
-  PageLoading,
-  Suspense,
-  useAuth,
-  UserType,
-} from '../../imports';
-import { sidebarItemsType, sidebarProps } from '../../type';
+import { Suspense } from 'react';
+import { useAuth } from '@/src/hooks/auth/use-auth';
 import { SidebarItems } from './sidebar-items';
 import SidebarActionItem from './sidebar-action-item';
+import PageLoading from '@/src/components/common/page-loading';
+import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
+import MyIcon from '@/src/components/atom/icon-components';
+import { UserType } from '@/src/types/global';
+import { sidebarItemsType, sidebarProps } from './type';
 
 const UserSidebar = ({
   user,
@@ -27,12 +25,12 @@ const UserSidebar = ({
         <div className="h-[45vh] overflow-y-auto">
           {user?.userType === UserType?.Client
             ? userSidebarItems?.map((item: sidebarItemsType) => (
-                <div key={item.id} className="mb-4">
+                <div key={item?.id} className="mb-4">
                   <SidebarActionItem item={item} />
                 </div>
               ))
             : AdminSidebarItems?.map((item: sidebarItemsType) => (
-                <div key={item.id} className="mb-4">
+                <div key={item?.id} className="mb-4">
                   <SidebarActionItem item={item} />
                 </div>
               ))}

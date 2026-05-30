@@ -1,8 +1,12 @@
-import { Element, Editor, Transforms } from '../../../../imports';
+import { Editor, Element, Transforms } from 'slate';
+import { IsBlockActive } from './is-block-active';
 import { LIST_TYPES, TEXT_ALIGN_TYPES } from '../../../data';
 import { AlignFormat, BlockFormat, CustomElement } from '../../../type';
-import { ToggleBlockProps } from '../type';
-import { IsBlockActive } from './is-block-active';
+
+interface ToggleBlockProps {
+  editor: Editor;
+  format: BlockFormat | AlignFormat;
+}
 
 export const ToggleBlock = ({ editor, format }: ToggleBlockProps) => {
   const blockType: 'type' | 'align' = TEXT_ALIGN_TYPES.includes(

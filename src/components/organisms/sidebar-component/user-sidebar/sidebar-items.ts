@@ -1,12 +1,10 @@
-import {
-  AdminUnreadMeassesListener,
-  MessgesRead,
-  useMemo,
-  useNavigation,
-  UserType,
-  useUnreadCount,
-} from '../../imports';
-import { sidebarItemsType, sidebarProps } from '../../type';
+import { useMemo } from 'react';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { useUnreadCount } from '@/src/hooks/chat/use-unread-count';
+import { AdminUnreadMeassesListener } from '@/src/libs/chat/admin-unread-messages-count';
+import { MessgesRead } from '@/src/libs/chat/read-message';
+import { UserType } from '@/src/types/global';
+import { sidebarItemsType, sidebarProps } from './type';
 
 export const SidebarItems = ({
   user,
@@ -16,7 +14,7 @@ export const SidebarItems = ({
 
   const UserUnreadCount = useUnreadCount({
     chatId: user?.userId as string,
-    senderType: UserType.Admin,
+    senderType: UserType?.Admin,
   });
 
   const AdminUnraedCount = AdminUnreadMeassesListener();

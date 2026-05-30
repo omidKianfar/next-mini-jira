@@ -1,6 +1,13 @@
-import { React, Ref } from '../../../imports';
-import { ButtonProps } from '../../type';
+import React, { ReactNode, Ref } from 'react';
 import { Clsx } from './clsx';
+import { BaseProps } from './type';
+
+type ButtonProps = {
+  active: boolean;
+  reversed: boolean;
+} & BaseProps & {
+    children?: ReactNode | undefined;
+  };
 
 export const Button = React.forwardRef<HTMLSpanElement, ButtonProps>(
   (

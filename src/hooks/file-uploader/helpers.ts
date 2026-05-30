@@ -1,4 +1,4 @@
-import { fileType } from '../type';
+import { fileType } from './type';
 
 export const detectFileType = (file: File): fileType =>
   file.type.startsWith('image/')

@@ -1,14 +1,11 @@
 'use client';
 
-import {
-  AuthGuard,
-  Header,
-  PropsWithChildren,
-  RoleGuard,
-  SideBar,
-  UserType,
-  useState,
-} from '../imports';
+import { PropsWithChildren, useState } from 'react';
+import AuthGuard from '@/src/guards/auth-guard';
+import RoleGuard from '@/src/guards/role-guard';
+import Header from '@/src/components/organisms/header-component/indx';
+import SideBar from '@/src/components/organisms/sidebar-component/user-sidebar';
+import { UserType } from '@/src/types/global';
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {
   const [showSidebar, setShowSidebar] = useState(false);

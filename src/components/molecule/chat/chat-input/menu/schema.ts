@@ -1,5 +1,5 @@
-import { Yup } from '../../../imports';
-import { UploadMenuForm } from '../../type';
+import * as Yup from 'yup';
+import { UploadMenuForm } from '@/src/types/global';
 
 export const UploadMenuShema = Yup.object({
   fileUrl: Yup.string()

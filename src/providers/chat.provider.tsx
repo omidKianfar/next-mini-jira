@@ -1,20 +1,16 @@
 'use client';
 
+import { createContext, ReactNode, useEffect, useState } from 'react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useAuth } from '../hooks/auth/use-auth';
+import { useUserListenerById } from '../hooks/users/use-user-listener-by-id';
+import { ChatMessagesListener } from '../libs/chat/messages-listener';
 import {
   ChatContextType,
   ChatMessage,
-  ChatMessagesListener,
-  createContext,
   MyUserType,
-  ReactNode,
-  useAuth,
-  useEffect,
-  usePathname,
   UserType,
-  useSearchParams,
-  useState,
-  useUserListenerById,
-} from './imports';
+} from '../types/global';
 
 export const ChatContext = createContext<ChatContextType | undefined>(
   undefined

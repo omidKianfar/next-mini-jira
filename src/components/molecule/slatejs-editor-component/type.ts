@@ -1,11 +1,5 @@
-import {
-  BaseEditor,
-  Descendant,
-  Dispatch,
-  ReactEditor,
-  ReactNode,
-  SetStateAction,
-} from '../imports';
+import { BaseEditor } from 'slate';
+import { ReactEditor } from 'slate-react';
 
 type BlockFormat =
   | 'paragraph'
@@ -51,41 +45,6 @@ declare module 'slate' {
   }
 }
 
-interface CustomEmoji {
-  id: string;
-  name: string;
-  native: string;
-  keywords: string[];
-}
-
-interface SlateEditorProps {
-  editorOutput?: string | undefined;
-  setEditorOutput?: React.Dispatch<React.SetStateAction<string>>;
-  editorKey?: number;
-  editMessageId?: string | null;
-  setEditMessageId?: Dispatch<SetStateAction<string | null>>;
-}
-
-interface BaseProps {
-  className: string;
-  [key: string]: any;
-}
-
-type SimpleForwardRefProps<T extends HTMLElement> =
-  React.PropsWithChildren<BaseProps> & React.RefAttributes<T>;
-
-type ButtonProps = {
-  active: boolean;
-  reversed: boolean;
-} & BaseProps & {
-    children?: ReactNode | undefined;
-  };
-
-type EditorValueProps = BaseProps & {
-  value: Descendant[];
-  children?: ReactNode | undefined;
-};
-
 const BLOCK_TYPES: { format: BlockFormat; name: string }[] = [
   { format: 'paragraph', name: 'P' },
   { format: 'headingOne', name: 'H1' },
@@ -96,17 +55,11 @@ const BLOCK_TYPES: { format: BlockFormat; name: string }[] = [
   { format: 'headingSix', name: 'H6' },
 ];
 
-export type {
-  BlockFormat,
-  MarkFormat,
-  AlignFormat,
-  CustomElement,
-  CustomText,
-  CustomEmoji,
-  SlateEditorProps,
-  BaseProps,
-  SimpleForwardRefProps,
-  ButtonProps,
-  EditorValueProps,
-};
+export interface ToolbarComponentProps {
+  handleSend?: () => void;
+  loading?: boolean;
+}
+
+export type { BlockFormat, MarkFormat, AlignFormat, CustomElement, CustomText };
+
 export { BLOCK_TYPES };

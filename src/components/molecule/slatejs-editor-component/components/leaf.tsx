@@ -1,4 +1,4 @@
-import { RenderLeafProps } from '../../imports';
+import { RenderLeafProps } from 'slate-react';
 
 const LeafComponent = (props: RenderLeafProps) => {
   const { attributes, leaf } = props;

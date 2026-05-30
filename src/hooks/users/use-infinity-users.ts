@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useRef, useCallback, useMemo, MyUserType } from '../imports';
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { MyUserType } from '@/src/types/global';
 
 export const useInfiniteUsers = (users: MyUserType[], batchSize = 10) => {
   const observerRef = useRef<IntersectionObserver | null>(null);

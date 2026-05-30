@@ -1,8 +1,10 @@
 'use client';
 
-import { usePathname, useEffect, UserType } from '../imports';
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '../auth/use-auth';
 import { useNavigation } from '../navigation/use-navigation';
+import { UserType } from '@/src/types/global';
 
 export const useRequireActiveStatus = () => {
   const pathname = usePathname();

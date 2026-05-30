@@ -1,17 +1,21 @@
 'use client';
 
-import {
-  AnimatePresence,
-  useEffect,
-  usePathname,
-  useRef,
-  useState,
-  motion,
-  ChatMessageItem,
-  MyIcon,
-  ButtonFreeClass,
-} from '../imports';
-import { ChatMessagesProps } from '../type';
+import { usePathname } from 'next/navigation';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import ChatMessageItem from '../../molecule/chat/chat-message-item';
+import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
+import MyIcon from '../../atom/icon-components';
+import { ChatMessage, MyUserType } from '@/src/types/global';
+
+interface ChatMessagesProps {
+  messages: ChatMessage[];
+  showMenu?: boolean;
+  handleTemplateSelect?: (text: string) => void;
+  editMessageId?: string | null;
+  setEditMessageId?: Dispatch<SetStateAction<string | null>>;
+  userChat?: MyUserType | null;
+}
 
 const ChatMessages = ({
   showMenu,

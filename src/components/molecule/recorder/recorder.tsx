@@ -1,14 +1,14 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import RecordRTC from 'recordrtc';
-import {
-  ButtonFreeClass,
-  MyIcon,
-  useEffect,
-  useRef,
-  useState,
-} from '../imports';
-import { RecorderProps } from '../type';
+import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
+import MyIcon from '../../atom/icon-components';
+import { FileUploaderType } from '@/src/types/global';
+
+interface RecorderProps {
+  fileUploader: FileUploaderType;
+}
 
 const Recorder = ({ fileUploader }: RecorderProps) => {
   const recorderRef = useRef<RecordRTC | null>(null);

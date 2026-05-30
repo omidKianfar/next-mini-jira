@@ -1,4 +1,9 @@
-import { validateFileProps } from '../type';
+interface validateFileProps {
+  file: File;
+  accept: string[] | null;
+  except: string[] | null;
+  maxSizeMB: number;
+}
 
 export function validateFile({
   file,

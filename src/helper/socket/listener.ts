@@ -1,4 +1,5 @@
-import { io, SOCKET_URL } from '../imports';
+import { io } from 'socket.io-client';
+import { SOCKET_URL } from '@/configs/socket';
 
 const socket = io(SOCKET_URL, {
   transports: ['websocket'],

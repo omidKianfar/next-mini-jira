@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from '../imports';
+import { motion } from 'framer-motion';
 import MyIcon from '../icon-components';
 
 const AdminEmptySupportComponent = () => {

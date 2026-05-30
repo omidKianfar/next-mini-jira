@@ -1,14 +1,12 @@
-import {
-  ChatsType,
-  collection,
-  db,
-  onSnapshot,
-  orderBy,
-  query,
-  setChats,
-} from '../imports';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { AppDispatch } from '@/src/store';
+import { setChats } from '@/src/store/slices/chats/chats';
+import { db } from '@/configs/firebase';
+import { ChatsType } from '@/src/types/global';
 
-import { AdminChatsListenerProps } from '../type';
+interface AdminChatsListenerProps {
+  dispatch: AppDispatch;
+}
 
 export const AdminChatsListener = ({ dispatch }: AdminChatsListenerProps) => {
   const q = query(collection(db, 'chat'), orderBy('message.updatedAt', 'desc'));

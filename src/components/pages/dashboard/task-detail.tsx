@@ -1,30 +1,30 @@
 'use client';
 
-import {
-  ButtonBack,
-  ButtonFreeClass,
-  deleteTask,
-  enqueueSnackbar,
-  fetchTask,
-  LightBoxComponent,
-  ModalComponent,
-  ModalContainer,
-  MyIcon,
-  MyImage,
-  MyVideo,
-  PageLoading,
-  RootState,
-  Suspense,
-  Task,
-  useEffect,
-  useIsMobile,
-  useNavigation,
-  useRequireActiveStatus,
-  useRequirePaymentStatus,
-  useSearchParams,
-  useSelector,
-  useState,
-} from '../imports';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { enqueueSnackbar } from 'notistack';
+import { useSelector } from 'react-redux';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
+import { useRequirePaymentStatus } from '@/src/hooks/pages-user-status-require/use-require-payment-status';
+import { RootState } from '@/src/store';
+import { deleteTask } from '@/src/libs/tasks/delete-task';
+import { fetchTask } from '@/src/libs/tasks/fetch-task';
+import PageLoading from '../../common/page-loading';
+import ButtonBack from '../../atom/buttons-component/button-back';
+import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
+import MyIcon from '../../atom/icon-components';
+import MyImage from '../../atom/image-components';
+import ModalContainer from '../../common/modal-container';
+import ModalComponent from '../../molecule/modals/modal-component';
+import { Task } from '@/src/types/global';
+
+const MyVideo = lazy(() => import('@/src/components/atom/video-component'));
+
+const LightBoxComponent = lazy(
+  () => import('@/src/components/common/light-box')
+);
 
 const TaskDetailComponent = () => {
   const navigation = useNavigation();
@@ -36,7 +36,7 @@ const TaskDetailComponent = () => {
   const params = useSearchParams();
   const taskId = params.get('taskId');
 
-  const tasks = useSelector((state: RootState) => state.tasks.tasks);
+  const tasks = useSelector((state: RootState) => state?.tasks?.tasks);
 
   const [task, setTask] = useState<Task | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -53,7 +53,7 @@ const TaskDetailComponent = () => {
   useEffect(() => {
     if (!taskId) return;
 
-    const foundTask = tasks.find((task: Task) => task.id === taskId);
+    const foundTask = tasks?.find((task: Task) => task?.id === taskId);
 
     const operationTask = () => {
       if (foundTask) {

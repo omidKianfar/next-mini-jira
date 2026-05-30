@@ -1,4 +1,6 @@
-import { LogoProps } from '../type';
+interface LogoProps {
+  small?: boolean;
+}
 
 const Logo = ({ small }: LogoProps) => {
   return (

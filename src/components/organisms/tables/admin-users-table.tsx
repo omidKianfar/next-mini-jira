@@ -1,11 +1,8 @@
-import {
-  LoadingCircle,
-  PageLoading,
-  PaginationComponent,
-  Suspense,
-  TableComponent,
-  useState,
-} from '../imports';
+import { Suspense, useState } from 'react';
+import LoadingCircle from '../../atom/loadings/loading-circle';
+import PageLoading from '../../common/page-loading';
+import { TableComponent } from '../table-component';
+import PaginationComponent from '../pagination-component';
 import { Cloumns } from './cloumns';
 import { UsersTableProps } from '../type';
 

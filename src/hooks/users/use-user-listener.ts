@@ -1,6 +1,8 @@
 'use client';
 
-import { useEffect, useDispatch, listenToUsers } from '../imports';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { listenToUsers } from '@/src/libs/auth/listener';
 
 export const useUsersListener = () => {
   const dispatch = useDispatch();

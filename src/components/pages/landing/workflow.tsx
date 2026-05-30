@@ -1,6 +1,8 @@
 'use client';
 
-import { IconName, motion, MyIcon } from '../imports';
+import { motion } from 'framer-motion';
+import MyIcon from '../../atom/icon-components';
+import { IconName } from '../../atom/icon-components/icons';
 import { containerVariants, itemVariants, TECH_STACK } from './data';
 
 const WorkflowComponent = () => {

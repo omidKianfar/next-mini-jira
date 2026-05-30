@@ -31,9 +31,3 @@ body {
 .swiper-pagination {
   bottom: 0px !important;
 }
-
-.swiper-pagination-bullet-active {
-  background: #f59e0b !important;
-  width: 20px !important;
-  border-radius: 5px !important;
-}

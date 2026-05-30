@@ -2,7 +2,10 @@
 
 import ButtonFreeClass from './button-free-class';
 import MyIcon from '../icon-components';
-import { BackButtonProps } from '../type';
+
+interface BackButtonProps {
+  onClick: () => void;
+}
 
 const ButtonBack = ({ onClick }: BackButtonProps) => {
   return (

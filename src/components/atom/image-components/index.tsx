@@ -1,5 +1,14 @@
 import Image from 'next/image';
-import { MyImageProps } from '../type';
+interface MyImageProps {
+  src: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  fill?: boolean;
+  className?: string;
+  wrapperClass?: string;
+  onClick?: () => void;
+}
 
 const MyImage = ({
   src,

@@ -1,15 +1,12 @@
-import {
-  chatSidebarProps,
-  MessgesRead,
-  MyIcon,
-  MyImage,
-  stringSlicer,
-  UnSeenMessageCalc,
-  useNavigation,
-  UserType,
-  useSearchParams,
-  useUnreadCount,
-} from '../imports';
+import { useSearchParams } from 'next/navigation';
+import { useUnreadCount } from '@/src/hooks/chat/use-unread-count';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { MessgesRead } from '@/src/libs/chat/read-message';
+import UnSeenMessageCalc from '@/src/utils/unseen-calc';
+import { stringSlicer } from '@/src/utils/string-slicer';
+import MyImage from '../../atom/image-components';
+import MyIcon from '../../atom/icon-components';
+import { chatSidebarProps, UserType } from '@/src/types/global';
 
 const AdminSupportUserCard = ({
   chat,

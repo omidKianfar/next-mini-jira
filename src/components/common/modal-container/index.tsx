@@ -1,6 +1,9 @@
 'use client';
 
-import { AnimatePresence, ModalProps, motion, MyIcon } from '../imports';
+import { AnimatePresence, motion } from 'framer-motion';
+import MyIcon from '../../atom/icon-components';
+import { ModalProps } from '@/src/types/global';
+
 const ModalContainer = ({ open, handleClose, children }: ModalProps) => {
   return (
     <AnimatePresence>

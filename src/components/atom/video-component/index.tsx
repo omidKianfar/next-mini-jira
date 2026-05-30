@@ -1,12 +1,17 @@
-import { MyVideoProps } from '../type';
-
-const MyVideo: React.FC<MyVideoProps> = ({
+interface MyVideoProps {
+  src: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  className?: string;
+}
+const MyVideo = ({
   src,
   alt,
   width = 500,
   height = 300,
   className = '',
-}) => {
+}: MyVideoProps) => {
   return (
     <video
       src={src}

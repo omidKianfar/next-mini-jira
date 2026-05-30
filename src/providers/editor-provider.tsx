@@ -1,17 +1,11 @@
 'use client';
 
-import {
-  createContext,
-  EditorContextType,
-  ElementComponent,
-  LeafComponent,
-  PropsWithChildren,
-  RenderElementProps,
-  RenderLeafProps,
-  useCallback,
-  useState,
-} from './imports';
+import { createContext, PropsWithChildren, useCallback, useState } from 'react';
+import { RenderElementProps, RenderLeafProps } from 'slate-react';
 import useEditorActions from '../hooks/editor/use-editor-actions';
+import ElementComponent from '../components/molecule/slatejs-editor-component/components/element';
+import LeafComponent from '../components/molecule/slatejs-editor-component/components/leaf';
+import { EditorContextType } from '../types/global';
 
 export const editorContext = createContext<EditorContextType>(
   {} as EditorContextType

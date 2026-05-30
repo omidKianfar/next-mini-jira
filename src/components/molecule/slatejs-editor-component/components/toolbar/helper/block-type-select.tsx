@@ -1,6 +1,7 @@
-import { useSlate, Element, Editor } from '../../../../imports';
-import { LIST_TYPES } from '../../../data';
+import { Editor, Element } from 'slate';
+import { useSlate } from 'slate-react';
 import { ToggleBlock } from './toggle-block';
+import { LIST_TYPES } from '../../../data';
 import { BLOCK_TYPES, BlockFormat, CustomElement } from '../../../type';
 
 export const BlockTypeSelect = () => {

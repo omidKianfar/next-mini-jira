@@ -1,4 +1,5 @@
-import { Element, Text, Node, escapeHTML } from '../../imports';
+import { Element, Node, Text } from 'slate';
+import escapeHTML from 'escape-html';
 import { CustomElement, CustomText } from '../type';
 
 export const Serialize = (node: Node): string => {

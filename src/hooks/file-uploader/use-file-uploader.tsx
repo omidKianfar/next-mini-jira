@@ -1,11 +1,19 @@
 'use client';
 
-import { useState, useCallback, useRef, supabase } from '../imports';
-import { fileType, FileUploaderOptions, uploadProps } from '../type';
+import { useCallback, useRef, useState } from 'react';
+import { supabase } from '@/configs/supabase';
 import { validateFile } from './validate-file';
 import { deleteFile } from './delete-file';
 import { uploadWithProgress } from './upload-with-progress';
 import { detectFileType, getFolderFromType } from './helpers';
+import { fileType, uploadProps } from './type';
+
+type FileUploaderOptions = {
+  accept?: string[];
+  except?: string[];
+  signedUrlExpiresIn?: number;
+  maxSizeMB?: number;
+};
 
 export function useFileUploader(options: FileUploaderOptions = {}) {
   const xhrRef = useRef<XMLHttpRequest | null>(null);

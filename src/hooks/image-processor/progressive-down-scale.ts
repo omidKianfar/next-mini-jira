@@ -1,5 +1,5 @@
 import { createSmoothCanvas } from './create-smooth-canvas';
-import { progressiveProps } from '../type';
+import { progressiveProps } from './type';
 
 export const progressiveDownscale = ({
   img,

@@ -1,7 +1,11 @@
 'use client';
 
-import { useIsMobile, motion } from '../imports';
-import { FarmerMotionProps } from '../type';
+import { motion } from 'framer-motion';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
+
+interface FarmerMotionProps {
+  children: React.ReactNode;
+}
 
 const FramerMotion = ({ children }: FarmerMotionProps) => {
   const isMobile = useIsMobile();

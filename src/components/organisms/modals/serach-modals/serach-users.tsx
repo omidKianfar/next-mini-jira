@@ -1,23 +1,19 @@
 'use client';
 
-import {
-  ChangeEvent,
-  EmptyColumn,
-  ModalProps,
-  MyIcon,
-  MyImage,
-  MyUserType,
-  RootState,
-  stringSlicer,
-  useNavigation,
-  useSelector,
-  useState,
-} from '../../imports';
+import { ChangeEvent, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { RootState } from '@/src/store';
+import { stringSlicer } from '@/src/utils/string-slicer';
+import { ModalProps, MyUserType } from '@/src/types/global';
+import EmptyColumn from '@/src/components/atom/empty-components/empty-column';
+import MyIcon from '@/src/components/atom/icon-components';
+import MyImage from '@/src/components/atom/image-components';
 
 const SearchUsers = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
   const navigation = useNavigation();
 
-  const users = useSelector((state: RootState) => state.users.users);
+  const users = useSelector((state: RootState) => state?.users?.users);
 
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
@@ -34,12 +30,12 @@ const SearchUsers = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
       return;
     }
 
-    const query = value.toLowerCase();
+    const query = value?.toLowerCase();
 
     const filtered = users.filter((user) => {
       const username = user?.userName?.toLowerCase() || '';
       const email = user?.email?.toLowerCase() || '';
-      return username.includes(query) || email.includes(query);
+      return username?.includes(query) || email?.includes(query);
     });
 
     setFilteredUsers(filtered);

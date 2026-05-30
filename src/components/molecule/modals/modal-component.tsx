@@ -1,5 +1,13 @@
-import { ModalComponentProps } from '../type';
-import { ButtonNext, stringSlicer } from '../imports';
+import { stringSlicer } from '@/src/utils/string-slicer';
+import ButtonNext from '../../atom/buttons-component/button-next';
+
+interface ModalComponentProps {
+  handleClose: () => void;
+  clickHandler: () => void;
+  isDelete?: boolean;
+  title: string;
+  description?: string;
+}
 
 const ModalComponent = ({
   handleClose,

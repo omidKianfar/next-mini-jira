@@ -1,4 +1,5 @@
-import { ReactNode, ReactDOM } from '../../../imports';
+import { ReactNode } from 'react';
+import ReactDOM from 'react-dom';
 
 export const Portal = ({ children }: { children?: ReactNode }) => {
   return typeof document === 'object' && document.body

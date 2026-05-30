@@ -1,17 +1,20 @@
 'use client';
 
 import { DragEvent, useRef, useState } from 'react';
-import { AddTaskUploadProps } from '../type';
-import { FileInputField, LoadingCircle } from '../imports';
+import FileInputField from '../../molecule/RHF-controllers-components/file-input-field';
+import LoadingCircle from '../../atom/loadings/loading-circle';
+
+interface DragDropUploaderProps {
+  uploadProcessHandler: (file: File) => Promise<void>;
+  progress?: number;
+  uploading?: boolean;
+}
 
 const DragDropUploader = ({
   uploadProcessHandler,
   progress,
   uploading,
-}: Pick<
-  AddTaskUploadProps,
-  'uploadProcessHandler' | 'progress' | 'uploading'
->) => {
+}: DragDropUploaderProps) => {
   const fileUploadRef = useRef<HTMLInputElement | null>(null);
 
   const [isDragging, setIsDragging] = useState(false);

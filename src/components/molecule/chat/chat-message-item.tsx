@@ -1,21 +1,25 @@
-import { lazy } from 'react';
-import {
-  deleteChatMessage,
-  LightBoxComponent,
-  ModalContainer,
-  MyIcon,
-  MyImage,
-  MyVideo,
-  PageLoading,
-  Suspense,
-  useAuth,
-  UserType,
-  useState,
-} from '../imports';
+import { lazy, Suspense, useState } from 'react';
+import { useAuth } from '@/src/hooks/auth/use-auth';
+import { deleteChatMessage } from '@/src/libs/chat/delete-message';
 import ModalComponent from '../modals/modal-component';
-import { ChatMessageItemProps } from '../type';
+import PageLoading from '../../common/page-loading';
+import MyImage from '../../atom/image-components';
+import MyIcon from '../../atom/icon-components';
+import ModalContainer from '../../common/modal-container';
+import { ChatMessage, UserType } from '@/src/types/global';
 
+export const MyVideo = lazy(
+  () => import('@/src/components/atom/video-component')
+);
+export const LightBoxComponent = lazy(
+  () => import('@/src/components/common/light-box')
+);
 const WaveformPlayer = lazy(() => import('../recorder/wave-form-player'));
+
+interface ChatMessageItemProps {
+  message: ChatMessage;
+  handleTemplateSelect?: (text: string) => void;
+}
 
 const ChatMessageItem = ({
   message,

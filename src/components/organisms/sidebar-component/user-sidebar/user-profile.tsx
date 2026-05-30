@@ -1,5 +1,7 @@
-import { MyImage, stringSlicer, useNavigation } from '../../imports';
-import { sidebarProps } from '../../type';
+import { stringSlicer } from '@/src/utils/string-slicer';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import MyImage from '@/src/components/atom/image-components';
+import { sidebarProps } from './type';
 
 const UserProfile = ({
   user,

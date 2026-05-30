@@ -1,13 +1,11 @@
 'use client';
 
-import {
-  ButtonNext,
-  InputField,
-  SelectField,
-  TextareaFiled,
-} from '../../../imports';
+import SelectField from '@/src/components/molecule/RHF-controllers-components/select-field';
+import InputField from '@/src/components/molecule/RHF-controllers-components/input-field';
+import TextareaFiled from '@/src/components/molecule/RHF-controllers-components/textarea-field';
+import ButtonNext from '@/src/components/atom/buttons-component/button-next';
 import { columns } from './data';
-import { AddTaskProps } from '../../../type';
+import { AddTaskProps } from '../type';
 
 const AddTaskFormComponent = ({
   handleClose,

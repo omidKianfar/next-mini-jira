@@ -1,5 +1,9 @@
-import { uploadWithProgressProps } from '../type';
-
+interface uploadWithProgressProps {
+  signedUrl: string;
+  file: File;
+  onProgress: (p: number) => void;
+  xhrRef: React.MutableRefObject<XMLHttpRequest | null>;
+}
 export function uploadWithProgress({
   signedUrl,
   file,

@@ -1,15 +1,15 @@
 import { Dispatch, SetStateAction } from 'react';
 import { RenderElementProps, RenderLeafProps } from 'slate-react';
 import { Descendant } from 'slate';
-import { CustomEmoji } from '../components/molecule/slatejs-editor-component/type';
-import { fileType, uploadProps } from '../hooks/type';
+import { FieldValues, Path } from 'react-hook-form';
+import { fileType, uploadProps } from '../hooks/file-uploader/type';
 
-export enum UserType {
+enum UserType {
   Client = 'client',
   Admin = 'admin',
 }
 
-export type MyUserType = {
+type MyUserType = {
   email: string | null;
   userId: string;
   userType: UserType;
@@ -29,23 +29,43 @@ export type MyUserType = {
   };
 };
 
-export type AuthContextActionType = 'INITIALIZE' | 'IS_LOADING' | 'ERROR';
+type AuthContextActionType = 'INITIALIZE' | 'IS_LOADING' | 'ERROR';
 
-export type AuthLoading =
+type AuthLoading =
   | 'SIGN_OUT'
   | 'INITIALIZING'
   | 'SIGN_UP_WITH_EMAIL'
   | 'SIGN_IN_WITH_EMAIL'
   | 'SIGN_IN_WITH_GOOGLE';
 
-export type AuthContextStateType = {
+type SignPropsType = {
+  email: string;
+  password: string;
+};
+
+type UserPasswordUpdateType = {
+  newPassword: string;
+};
+
+type UserProfileType = {
+  userId: string;
+  data?: Partial<MyUserType>;
+};
+
+type AuthStateType = {
+  user: MyUserType | null;
+  isLoading: string | null;
+  isAuthenticated: boolean;
+};
+
+type AuthContextStateType = {
   user: MyUserType | null;
   isLoading: AuthLoading | null;
   isInitialized: boolean;
   isAuthenticated: boolean;
 };
 
-export type AuthContextProps = AuthContextStateType & {
+type AuthContextProps = AuthContextStateType & {
   signupWithEmail: ({
     email,
     password,
@@ -68,38 +88,19 @@ export type AuthContextProps = AuthContextStateType & {
   stepNumber: string;
 };
 
-export type SignPropsType = {
-  email: string;
-  password: string;
-};
-
-export type UserProfileType = {
-  userId: string;
-  data?: Partial<MyUserType>;
-};
-
-export type UserPasswordUpdateType = {
-  newPassword: string;
-};
-
-export type AuthStateType = {
-  user: MyUserType | null;
-  isLoading: string | null;
-  isAuthenticated: boolean;
-};
-export interface ProfileProps {
+interface ProfileProps {
   photo?: string;
   userName: string;
   birthday: string;
 }
 
-export type PlanType = 'monthly' | 'yearly';
+type PlanType = 'monthly' | 'yearly';
 
-export type TaskStatus = 'todo' | 'inprogress' | 'done';
+type TaskStatus = 'todo' | 'inprogress' | 'done';
 
-export type TagType = 'task' | 'bug';
+type TagType = 'task' | 'bug';
 
-export type Task = {
+type Task = {
   id: string;
   title: string;
   description: string;
@@ -114,7 +115,7 @@ export type Task = {
   updatedAt?: string;
 };
 
-export type TaskForm = {
+type TaskForm = {
   title: string;
   description: string;
   tag: TagType;
@@ -124,16 +125,22 @@ export type TaskForm = {
   };
 };
 
-export type TaskState = {
+type TaskState = {
   tasks: Task[];
 };
 
-export type Columns = {
+type Columns = {
   label: string;
   value: string;
 };
 
-export type TaskFiltersState = {
+type ColumnID = 'todo' | 'inprogress' | 'done';
+interface ColumnProps {
+  id: ColumnID;
+  children: React.ReactNode;
+}
+
+type TaskFiltersState = {
   tag: string | null;
   date: {
     from: string | null;
@@ -141,31 +148,33 @@ export type TaskFiltersState = {
   };
 };
 
-export type SortOrder = 'asc' | 'desc';
+type SortOrder = 'asc' | 'desc';
 
-export type UserState = {
+type UserState = {
   users: MyUserType[];
   sortOrder: SortOrder;
 };
-export type chatsState = {
-  chats: ChatsType[];
-};
 
-export type UserFiltersState = {
+type UserFiltersState = {
   status: string | null;
   createdAt: {
     from: string | null;
     to: string | null;
   };
 };
-export type ChatFiltersState = {
+
+type chatsState = {
+  chats: ChatsType[];
+};
+
+type ChatFiltersState = {
   updatedAt: {
     from: string | null;
     to: string | null;
   };
 };
 
-export type ChatMessage = {
+type ChatMessage = {
   id?: string;
   chatId?: string;
   senderId: string;
@@ -180,13 +189,13 @@ export type ChatMessage = {
   };
 };
 
-export type ChatContextType = {
+type ChatContextType = {
   messages: ChatMessage[];
   chatId: string | null;
   userChat: MyUserType | null;
 };
 
-export type ChatMessageType = {
+type ChatMessageType = {
   createdAt: string;
   updatedAt: string;
   lastMessageSenderId: UserType;
@@ -199,7 +208,7 @@ export type ChatMessageType = {
   };
 };
 
-export type ChatUserType = {
+type ChatUserType = {
   email: string;
   photo: string;
   status: boolean;
@@ -207,19 +216,46 @@ export type ChatUserType = {
   username: string;
 };
 
-export type ChatsType = {
+type ChatsType = {
   id: string;
   message: ChatMessageType;
   user: ChatUserType;
 };
 
-export type ModalProps = React.PropsWithChildren & {
+interface HeaderProps {
+  showSidebar?: boolean;
+  setShowSidebar?: Dispatch<SetStateAction<boolean>>;
+}
+
+interface chatSidebarProps extends HeaderProps {
+  chat: ChatsType;
+}
+
+type MenuType = 'text' | 'upload' | 'voice';
+
+interface ChatMenuProps {
+  MenuHandler?: (type: MenuType) => void;
+  showMenu?: boolean;
+  setShowMenu?: Dispatch<SetStateAction<boolean>>;
+  editorKey?: number;
+  editMessageId?: string | null;
+  setEditMessageId?: Dispatch<SetStateAction<string | null>>;
+}
+
+type ModalProps = React.PropsWithChildren & {
   open: boolean;
   handleClose: () => void;
   handleOpenModal?: (modalNumber: number) => void;
 };
 
-export type EditorContextType = {
+interface CustomEmoji {
+  id: string;
+  name: string;
+  native: string;
+  keywords: string[];
+}
+
+type EditorContextType = {
   editorOutput?: string;
   setEditorOutput?: Dispatch<SetStateAction<string>>;
   fontColorState?: string | null;
@@ -253,7 +289,7 @@ export type EditorContextType = {
   resetEditor: () => void;
 };
 
-export type FileUploaderType = {
+type FileUploaderType = {
   upload: ({ file, avatar, userId }: uploadProps) => Promise<string | null>;
   cancel: () => Promise<void>;
   reset: () => void;
@@ -263,4 +299,85 @@ export type FileUploaderType = {
   error: string | null;
   fileType: fileType | null;
   realPath: string | null;
+};
+
+type UploadMenuForm = {
+  fileUrl?: string | null;
+};
+
+interface UploadMenuComponentProps {
+  fileUploader: FileUploaderType;
+}
+
+interface ChatSidebar {
+  userChat: MyUserType | null;
+  currentUser: MyUserType | null;
+}
+
+type CartType = {
+  title: string;
+  description: string;
+  onClick: () => void;
+  price?: number;
+  icon: React.ReactNode;
+};
+
+type ButtonType = 'button' | 'submit' | 'reset';
+
+interface BaseControllerProps<T extends FieldValues> {
+  name: Path<T>;
+  label?: string;
+  placeholder?: string;
+  className?: string;
+}
+
+type InputFieldsProps<T extends FieldValues> = BaseControllerProps<T>;
+
+export { UserType };
+export type {
+  MyUserType,
+  AuthContextActionType,
+  AuthLoading,
+  SignPropsType,
+  UserPasswordUpdateType,
+  UserProfileType,
+  AuthStateType,
+  AuthContextStateType,
+  AuthContextProps,
+  ProfileProps,
+  PlanType,
+  TaskStatus,
+  TagType,
+  Task,
+  TaskForm,
+  TaskState,
+  Columns,
+  ColumnID,
+  ColumnProps,
+  TaskFiltersState,
+  SortOrder,
+  UserState,
+  UserFiltersState,
+  chatsState,
+  ChatFiltersState,
+  ChatMessage,
+  ChatContextType,
+  ChatMessageType,
+  ChatUserType,
+  ChatsType,
+  HeaderProps,
+  chatSidebarProps,
+  MenuType,
+  ChatMenuProps,
+  ModalProps,
+  CustomEmoji,
+  EditorContextType,
+  FileUploaderType,
+  UploadMenuForm,
+  UploadMenuComponentProps,
+  ChatSidebar,
+  CartType,
+  ButtonType,
+  BaseControllerProps,
+  InputFieldsProps,
 };

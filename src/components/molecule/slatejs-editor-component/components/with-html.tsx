@@ -1,4 +1,4 @@
-import { Editor, Transforms, Descendant, Node } from '../../imports';
+import { Descendant, Editor, Node, Transforms } from 'slate';
 import { Deserialize } from './deserialize';
 
 export const WithHtml = (editor: Editor) => {

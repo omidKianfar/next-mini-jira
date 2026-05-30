@@ -1,16 +1,18 @@
 import { lazy, Suspense } from 'react';
-import {
-  enqueueSnackbar,
-  MyIcon,
-  PageLoading,
-  stringSlicer,
-  useIsMobile,
-  copy,
-} from '../imports';
-import { RecorderComponentProps } from '../type';
+import copy from 'clipboard-copy';
+import { enqueueSnackbar } from 'notistack';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
+import { stringSlicer } from '@/src/utils/string-slicer';
+import MyIcon from '../../atom/icon-components';
+import PageLoading from '../../common/page-loading';
+import { FileUploaderType } from '@/src/types/global';
 
 const WaveFormPlayer = lazy(() => import('./wave-form-player'));
 const Recorder = lazy(() => import('./recorder'));
+
+interface RecorderComponentProps {
+  fileUploader: FileUploaderType;
+}
 
 const RecorderComponent = ({ fileUploader }: RecorderComponentProps) => {
   const isMobile = useIsMobile();

@@ -1,6 +1,6 @@
-import { Metadata, ProvidersWrapper } from './imports';
+import { Metadata } from 'next';
 import { InterFont, OutfitFont, PoppinsFont } from './fonts';
-
+import ProvidersWrapper from '@/src/providers';
 import '@/src/styles/globals.css';
 
 export const metadata: Metadata = {

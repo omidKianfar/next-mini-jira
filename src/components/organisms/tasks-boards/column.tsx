@@ -2,10 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { useDroppable } from '@dnd-kit/core';
-
 import MyIcon from '@/src/components/atom/icon-components';
 import EmptyColumn from '../../atom/empty-components/empty-column';
-import { ColumnProps } from '../imports';
+import { ColumnProps } from '@/src/types/global';
 
 const ColumnComponent = ({ id, children }: ColumnProps) => {
   const { setNodeRef, isOver } = useDroppable({ id });

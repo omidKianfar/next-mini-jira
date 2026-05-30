@@ -1,15 +1,19 @@
 'use client';
 
-import {
-  ListComponent,
-  LoadingCircle,
-  MyIcon,
-  stringSlicer,
-  useInfiniteUsers,
-} from '../imports';
-import { UsersTableProps } from '../type';
+import { useInfiniteUsers } from '@/src/hooks/users/use-infinity-users';
+import LoadingCircle from '../../atom/loadings/loading-circle';
+import ListComponent from '../list-component';
+import { stringSlicer } from '@/src/utils/string-slicer';
+import MyIcon from '../../atom/icon-components';
+import { MyUserType } from '@/src/types/global';
 
-const UserListCard = ({ users, goDetail, toggleActive }: UsersTableProps) => {
+interface UsersListProps {
+  users: MyUserType[];
+  goDetail: (userId: string) => void;
+  toggleActive: (user: MyUserType) => Promise<void>;
+}
+
+const UserListCard = ({ users, goDetail, toggleActive }: UsersListProps) => {
   const { visibleUsers, loaderRef, hasMore } = useInfiniteUsers(users, 10);
 
   if (!users)

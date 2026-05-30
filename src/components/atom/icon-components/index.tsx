@@ -1,6 +1,12 @@
-import { Icon } from '../imports';
-import { ICONS } from './icons';
-import { MyIconProps } from '../type';
+import { IconName, ICONS } from './icons';
+import { Icon } from '@iconify/react';
+
+interface MyIconProps {
+  onClick?: () => void;
+  className?: string;
+  icon: IconName;
+  iconClass?: string;
+}
 
 const MyIcon = ({ onClick, className, icon, iconClass }: MyIconProps) => {
   return (

@@ -1,12 +1,10 @@
-import {
-  ChatMessage,
-  collection,
-  db,
-  onSnapshot,
-  orderBy,
-  query,
-} from '../imports';
-import { ChatMessagesListenerProps } from '../type';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { db } from '@/configs/firebase';
+import { ChatMessage, MyUserType } from '@/src/types/global';
+interface ChatMessagesListenerProps {
+  user: MyUserType;
+  onReceive: (messages: ChatMessage[]) => void;
+}
 
 export const ChatMessagesListener = ({
   user,

@@ -1,23 +1,20 @@
 'use client';
 
 import { lazy, Suspense, useState } from 'react';
-import {
-  AdminDashboardHeader,
-  AdminSupportHeader,
-  AdminUnreadMeassesListener,
-  DashboardHeader,
-  LoadingCircle,
-  Logo,
-  ModalContainer,
-  MyIcon,
-  useAuth,
-  usePathname,
-  UserType,
-  useUnreadCount,
-} from '../imports';
+import { usePathname } from 'next/navigation';
+import { useAuth } from '@/src/hooks/auth/use-auth';
+import { useUnreadCount } from '@/src/hooks/chat/use-unread-count';
+import { AdminUnreadMeassesListener } from '@/src/libs/chat/admin-unread-messages-count';
 import FilterChats from '../modals/filter-modals/chats';
 import SearchSupportChats from '../modals/serach-modals/search-support-chats';
-import { HeaderProps } from '../type';
+import MyIcon from '../../atom/icon-components';
+import Logo from '../../atom/logo-component';
+import DashboardHeader from '../../molecule/headers/user-dashboard';
+import AdminDashboardHeader from '../../molecule/headers/admin-dashboard';
+import AdminSupportHeader from '../../molecule/headers/admin-support';
+import LoadingCircle from '../../atom/loadings/loading-circle';
+import ModalContainer from '../../common/modal-container';
+import { HeaderProps, UserType } from '@/src/types/global';
 
 const AddTask = lazy(() => import('../modals/add-task-modal'));
 const SearchTasks = lazy(() => import('../modals/serach-modals/search-tasks'));

@@ -1,6 +1,7 @@
 'use client';
 
-import { EditorProviderComponent, PropsWithChildren } from '../../imports';
+import { PropsWithChildren } from 'react';
+import EditorProviderComponent from '@/src/providers/editor-provider';
 
 const SupportLayout = ({ children }: PropsWithChildren) => {
   return <EditorProviderComponent>{children}</EditorProviderComponent>;

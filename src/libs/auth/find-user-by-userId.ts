@@ -1,4 +1,6 @@
-import { db, doc, MyUserType, onSnapshot, UserType } from '../imports';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '@/configs/firebase';
+import { MyUserType, UserType } from '@/src/types/global';
 
 export const listenToUserById = (
   userId: string,

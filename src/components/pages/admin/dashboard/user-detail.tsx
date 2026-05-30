@@ -1,16 +1,14 @@
 'use client';
 
-import {
-  ButtonBack,
-  ButtonNext,
-  dayjs,
-  MyImage,
-  PageLoading,
-  updateFirestoreUser,
-  useNavigation,
-  useSearchParams,
-  useUserListenerById,
-} from '../../imports';
+import { useSearchParams } from 'next/navigation';
+import dayjs from 'dayjs';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
+import { updateFirestoreUser } from '@/src/libs/auth/update-user';
+import ButtonBack from '@/src/components/atom/buttons-component/button-back';
+import ButtonNext from '@/src/components/atom/buttons-component/button-next';
+import MyImage from '@/src/components/atom/image-components';
+import PageLoading from '@/src/components/common/page-loading';
 
 const AdminUserDetailComponent = () => {
   const navigation = useNavigation();

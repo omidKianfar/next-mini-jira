@@ -1,9 +1,5 @@
-import {
-  chatsState,
-  ChatsType,
-  createSlice,
-  PayloadAction,
-} from '../../imports';
+import { chatsState, ChatsType } from '@/src/types/global';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: chatsState = {
   chats: [],

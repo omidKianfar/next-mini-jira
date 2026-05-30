@@ -1,4 +1,5 @@
-import { Descendant, Text, jsx } from '../../imports';
+import { Descendant, Text } from 'slate';
+import { jsx } from 'slate-hyperscript';
 import { AlignFormat, CustomText } from '../type';
 
 export const Deserialize = (

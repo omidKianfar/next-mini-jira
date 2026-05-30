@@ -1,11 +1,12 @@
 'use client';
 
-import { useAuth, motion } from '../../imports';
+import { motion } from 'framer-motion';
+import { useAuth } from '@/src/hooks/auth/use-auth';
 import UserSidebar from './user-sidebar';
 import UserProfile from './user-profile';
-import { sidebarProps } from '../../type';
+import { HeaderProps } from '@/src/types/global';
 
-const SideBar = ({ showSidebar, setShowSidebar }: sidebarProps) => {
+const SideBar = ({ showSidebar, setShowSidebar }: HeaderProps) => {
   const { user } = useAuth();
 
   return (

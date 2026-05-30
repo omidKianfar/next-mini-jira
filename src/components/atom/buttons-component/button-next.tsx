@@ -1,7 +1,16 @@
 'use client';
 
+import { ButtonType } from '@/src/types/global';
 import LoadingCircle from '../loadings/loading-circle';
-import { ButtonProps } from '../type';
+interface ButtonProps {
+  type?: ButtonType;
+  children?: React.ReactNode;
+  isLoading?: boolean;
+  onClick?: () => void;
+  className?: string;
+  disable?: boolean;
+  icon?: React.ReactNode;
+}
 
 const ButtonNext = ({
   type = 'button',
@@ -11,7 +20,7 @@ const ButtonNext = ({
   className = '',
   disable = false,
   icon,
-}: Partial<ButtonProps>) => {
+}: ButtonProps) => {
   return (
     <button
       type={type}

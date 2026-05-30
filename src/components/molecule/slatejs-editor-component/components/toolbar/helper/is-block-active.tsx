@@ -1,8 +1,12 @@
-import { Element, Editor } from '../../../../imports';
+import { Editor, Element } from 'slate';
 import { LIST_TYPES } from '../../../data';
 import { BlockFormat, CustomElement } from '../../../type';
-import { IsBlockActiveProps } from '../type';
 
+interface IsBlockActiveProps {
+  editor: Editor;
+  format: string;
+  blockType: 'type' | 'align';
+}
 export const IsBlockActive = ({
   editor,
   format,

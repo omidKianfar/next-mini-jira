@@ -1,15 +1,15 @@
 'use client';
 
-import {
-  collection,
-  db,
-  onSnapshot,
-  query,
-  setTasks,
-  Task,
-  where,
-} from '../imports';
-import { ListenToTasksProps } from '../type';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { AppDispatch } from '@/src/store';
+import { setTasks } from '@/src/store/slices/tasks/tasks';
+import { db } from '@/configs/firebase';
+import { Task } from '@/src/types/global';
+
+interface ListenToTasksProps {
+  userId: string;
+  dispatch: AppDispatch;
+}
 
 export const listenToTasks = ({ userId, dispatch }: ListenToTasksProps) => {
   const userIdInTasksQuery = query(

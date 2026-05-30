@@ -1,18 +1,11 @@
 'use client';
 
-import {
-  collection,
-  db,
-  onSnapshot,
-  query,
-  Unsubscribe,
-  useAuth,
-  useEffect,
-  useRef,
-  UserType,
-  useState,
-  where,
-} from '../imports';
+import { useEffect, useRef, useState } from 'react';
+import { Unsubscribe } from 'firebase/auth';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { db } from '@/configs/firebase';
+import { useAuth } from '@/src/hooks/auth/use-auth';
+import { UserType } from '@/src/types/global';
 
 export const AdminUnreadMeassesListener = (): number => {
   const unreadCountsRef = useRef<Record<string, number>>({});
@@ -73,7 +66,7 @@ export const AdminUnreadMeassesListener = (): number => {
 
       currentListenerKeys.forEach((existingChatId) => {
         if (!newChatIds.has(existingChatId)) {
-          unreadListenersRef.current[existingChatId]();
+          unreadListenersRef?.current[existingChatId]();
 
           delete unreadListenersRef.current[existingChatId];
           delete unreadCountsRef.current[existingChatId];

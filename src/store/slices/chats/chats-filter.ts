@@ -1,4 +1,5 @@
-import { ChatFiltersState, createSlice, PayloadAction } from '../../imports';
+import { ChatFiltersState } from '@/src/types/global';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: ChatFiltersState = {
   updatedAt: {

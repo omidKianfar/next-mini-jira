@@ -1,14 +1,18 @@
+import dayjs from 'dayjs';
 import {
   addDoc,
   collection,
-  dayjs,
-  db,
   doc,
   getDoc,
   setDoc,
   updateDoc,
-} from '../imports';
-import { SendMessageProps } from '../type';
+} from 'firebase/firestore';
+import { db } from '@/configs/firebase';
+import { ChatMessage, MyUserType } from '@/src/types/global';
+interface SendMessageProps {
+  user: MyUserType;
+  message: ChatMessage;
+}
 
 export const sendChatMessage = async ({ user, message }: SendMessageProps) => {
   const chatRef = doc(db, 'chat', user.userId);

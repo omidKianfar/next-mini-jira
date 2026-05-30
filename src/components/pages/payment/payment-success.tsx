@@ -1,18 +1,16 @@
 'use client';
 
-import {
-  useAuth,
-  useState,
-  useSearchParams,
-  dayjs,
-  useRequireActiveStatus,
-  useNavigation,
-  PageLoading,
-  MyIcon,
-  ButtonNext,
-  updateFirestoreUser,
-  useSetSubscriptionId,
-} from '../imports';
+import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import dayjs from 'dayjs';
+import { useAuth } from '@/src/hooks/auth/use-auth';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
+import { useSetSubscriptionId } from '@/src/hooks/payment/useSetSubscriptionId';
+import { updateFirestoreUser } from '@/src/libs/auth/update-user';
+import PageLoading from '../../common/page-loading';
+import MyIcon from '../../atom/icon-components';
+import ButtonNext from '../../atom/buttons-component/button-next';
 
 const PaymentSuccessComponent = () => {
   const params = useSearchParams();

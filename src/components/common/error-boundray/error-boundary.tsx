@@ -1,7 +1,7 @@
 'use client';
 
-import { Component } from '../imports';
-import { ErrorBoundaryProps, ErrorBoundaryState } from '../type';
+import { Component } from 'react';
+import { ErrorBoundaryProps, ErrorBoundaryState } from './type';
 
 export default class ErrorBoundary extends Component<
   ErrorBoundaryProps,

@@ -1,4 +1,4 @@
-import { CartType } from '../type';
+import { CartType } from '@/src/types/global';
 
 const PlanCardComponent = ({
   title,
@@ -6,7 +6,7 @@ const PlanCardComponent = ({
   description,
   onClick,
   icon,
-}: Partial<CartType>) => {
+}: CartType) => {
   return (
     <div
       className="relative h-[230px] w-[250px] max-w-md cursor-pointer rounded-xl border-2 border-primary-500 p-4 text-center text-primary-500 shadow-md backdrop-blur-sm hover:border-primary-500 hover:bg-primary-500 hover:text-white lg:h-[300px] lg:w-[300px]"

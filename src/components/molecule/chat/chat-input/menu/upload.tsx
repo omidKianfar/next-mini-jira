@@ -1,27 +1,28 @@
-import { lazy } from 'react';
-import {
-  ButtonFreeClass,
-  DragDropUploader,
-  enqueueSnackbar,
-  FormProvider,
-  LoadingCircle,
-  MyIcon,
-  MyUserType,
-  PageLoading,
-  sendChatMessage,
-  Suspense,
-  useAuth,
-  useForm,
-  useImageProcessor,
-  UserType,
-  useSearchParams,
-  useUserListenerById,
-  useVideoProcessor,
-  yupResolver,
-} from '../../../imports';
-import { UploadMenuComponentProps, UploadMenuForm } from '../../type';
+import { lazy, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { FormProvider, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { enqueueSnackbar } from 'notistack';
+import { useAuth } from '@/src/hooks/auth/use-auth';
+import { useImageProcessor } from '@/src/hooks/image-processor/use-image-processor';
+import { useVideoProcessor } from '@/src/hooks/video-processor/use-video-processor';
+import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
+import { sendChatMessage } from '@/src/libs/chat/send-message';
+import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
+import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
+import MyIcon from '@/src/components/atom/icon-components';
+import PageLoading from '@/src/components/common/page-loading';
 import { UploadMenuShema } from './schema';
+import {
+  MyUserType,
+  UploadMenuComponentProps,
+  UploadMenuForm,
+  UserType,
+} from '@/src/types/global';
 
+const DragDropUploader = lazy(
+  () => import('@/src/components/organisms/uploads/drag-drop')
+);
 const ShowAttachment = lazy(() => import('./show-attachment'));
 
 const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {

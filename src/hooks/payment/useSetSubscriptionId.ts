@@ -1,7 +1,13 @@
 'use client';
 
-import { useEffect, routes } from '../imports';
-import { UsePaymentSuccessProps } from '../type';
+import { Dispatch, SetStateAction, useEffect } from 'react';
+import { routes } from '@/src/helper/routes/routes';
+
+interface UsePaymentSuccessProps {
+  sessionId: string | null;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  setSubscriptionId: Dispatch<SetStateAction<string | null>>;
+}
 
 export const useSetSubscriptionId = ({
   sessionId,

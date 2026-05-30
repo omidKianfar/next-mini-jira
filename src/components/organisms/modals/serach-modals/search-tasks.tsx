@@ -1,24 +1,20 @@
 'use client';
 
-import {
-  ChangeEvent,
-  EmptyColumn,
-  ModalProps,
-  MyIcon,
-  RootState,
-  stringSlicer,
-  Task,
-  useIsMobile,
-  useNavigation,
-  useSelector,
-  useState,
-} from '../../imports';
+import { ChangeEvent, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { RootState } from '@/src/store';
+import { stringSlicer } from '@/src/utils/string-slicer';
+import EmptyColumn from '@/src/components/atom/empty-components/empty-column';
+import MyIcon from '@/src/components/atom/icon-components';
+import { ModalProps, Task } from '@/src/types/global';
 
 const SearchTasks = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
   const navigation = useNavigation();
   const isMobile = useIsMobile();
 
-  const tasks = useSelector((state: RootState) => state.tasks.tasks);
+  const tasks = useSelector((state: RootState) => state?.tasks?.tasks);
 
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
@@ -34,13 +30,13 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
       return;
     }
 
-    const query = value.toLowerCase();
+    const query = value?.toLowerCase();
 
-    const filtered = tasks.filter((task) => {
+    const filtered = tasks?.filter((task) => {
       const title = task?.title?.toLowerCase() || '';
       const description = task?.description?.toLowerCase() || '';
 
-      return title.includes(query) || description.includes(query);
+      return title?.includes(query) || description?.includes(query);
     });
 
     setFilteredTasks(filtered);

@@ -1,5 +1,11 @@
-import { collection, db, onSnapshot, query, where } from '../imports';
-import { userUnreadMessageListenerProps } from '../type';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import { db } from '@/configs/firebase';
+import { UserType } from '@/src/types/global';
+interface userUnreadMessageListenerProps {
+  chatId: string;
+  senderType: UserType;
+  callback: (count: number) => void;
+}
 
 export const userUnreadMessagesListener = ({
   chatId,

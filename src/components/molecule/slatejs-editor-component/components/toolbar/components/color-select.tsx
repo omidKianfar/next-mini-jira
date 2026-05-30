@@ -1,4 +1,4 @@
-import { useEditor } from '../../../../imports';
+import { useEditor } from '@/src/hooks/editor/use-editor';
 import { ColorItems } from '../../../data';
 
 const ColorSelectComponent = () => {
@@ -29,7 +29,7 @@ const ColorSelectComponent = () => {
       </div>
 
       {showColorDropdown && (
-        <ul className="scrollbar-hide absolute bottom-full z-10 mb-1 max-h-40 w-[100px] overflow-y-auto rounded border bg-white shadow-lg">
+        <ul className="absolute top-full z-10 mb-1 max-h-40 w-[100px] overflow-y-auto rounded border bg-white shadow-lg">
           <li
             key={'no-color'}
             onClick={() => changeColor?.(null)}

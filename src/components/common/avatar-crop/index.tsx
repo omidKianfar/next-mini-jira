@@ -1,7 +1,14 @@
 'use client';
 
-import { ButtonNext, Cropper, useImageCrop } from '../imports';
-import { CropProps } from '../type';
+import Cropper from 'react-easy-crop';
+import { useImageCrop } from '@/src/hooks/image-crop/use-image-crop';
+import ButtonNext from '../../atom/buttons-component/button-next';
+
+interface CropProps {
+  file: never;
+  onCancel: () => void;
+  onSave: (file: File) => void | Promise<void>;
+}
 
 const AvatarCropModal = ({ file, onCancel, onSave }: CropProps) => {
   const {

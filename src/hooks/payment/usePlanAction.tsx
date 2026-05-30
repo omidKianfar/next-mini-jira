@@ -1,5 +1,11 @@
-import { routes } from '../imports';
-import { UsePlanActionProps } from '../type';
+import { routes } from '@/src/helper/routes/routes';
+import { PlanType } from '@/src/types/global';
+import { Dispatch, SetStateAction } from 'react';
+
+interface UsePlanActionProps {
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  selectedPlan: PlanType;
+}
 
 export const usePlanAction = () => {
   const choosePlan = async ({

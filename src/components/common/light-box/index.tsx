@@ -1,6 +1,12 @@
-import { useState, Lightbox, Zoom } from '../imports';
-import { LightBoxProps } from '../type';
+import { useState } from 'react';
+import Lightbox from 'yet-another-react-lightbox';
+import Zoom from 'yet-another-react-lightbox/plugins/zoom';
 import 'yet-another-react-lightbox/styles.css';
+
+interface LightBoxProps {
+  children: React.ReactNode;
+  url: string;
+}
 
 const LightBoxComponent = ({ children, url }: LightBoxProps) => {
   const [open, setOpen] = useState(false);

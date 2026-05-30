@@ -1,5 +1,16 @@
-import { collection, db, getDocs, query, where, writeBatch } from '../imports';
-import { MessgesReadProps } from '../type';
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  writeBatch,
+} from 'firebase/firestore';
+import { db } from '@/configs/firebase';
+import { UserType } from '@/src/types/global';
+interface MessgesReadProps {
+  chatId: string;
+  senderType: UserType;
+}
 
 export const MessgesRead = async ({
   chatId,

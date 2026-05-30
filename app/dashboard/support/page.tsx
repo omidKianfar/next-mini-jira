@@ -1,4 +1,4 @@
-import { FramerMotion } from '@/app/imports';
+import FramerMotion from '@/src/components/atom/animation-component';
 import SupportComponent from '@/src/components/pages/support';
 
 const SupportPage = () => {

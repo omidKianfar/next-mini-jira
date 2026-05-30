@@ -1,18 +1,17 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { enqueueSnackbar } from 'notistack';
+import { useAuth } from '@/src/hooks/auth/use-auth';
+import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
+import { sendChatMessage } from '@/src/libs/chat/send-message';
+import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
+import MyIcon from '@/src/components/atom/icon-components';
+import PageLoading from '@/src/components/common/page-loading';
 import {
-  ButtonFreeClass,
-  enqueueSnackbar,
-  MyIcon,
   MyUserType,
-  PageLoading,
-  sendChatMessage,
-  Suspense,
-  useAuth,
+  UploadMenuComponentProps,
   UserType,
-  useSearchParams,
-  useUserListenerById,
-} from '../../../imports';
-import { UploadMenuComponentProps } from '../../type';
+} from '@/src/types/global';
 
 const RecorderComponent = lazy(
   () => import('../../../recorder/recorder-component')

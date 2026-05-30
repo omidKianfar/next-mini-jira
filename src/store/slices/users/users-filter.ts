@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction, UserFiltersState } from '../../imports';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UserFiltersState } from '@/src/types/global';
 
 const initialState: UserFiltersState = {
   createdAt: {

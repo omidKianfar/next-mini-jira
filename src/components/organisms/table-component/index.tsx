@@ -1,5 +1,9 @@
-import { TableProps } from '../type';
+import { Column } from '../type';
 
+type TableProps<T> = {
+  data: T[];
+  columns: Column<T>[];
+};
 export function TableComponent<T>({ data, columns }: TableProps<T>) {
   return (
     <div className="w-full overflow-hidden rounded-lg border-2 border-warning-500 bg-white shadow-lg">

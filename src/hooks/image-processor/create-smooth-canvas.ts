@@ -1,4 +1,7 @@
-import { SourceProps } from '../type';
+type SourceProps = {
+  width: number;
+  height: number;
+};
 
 export const createSmoothCanvas = ({ width, height }: SourceProps) => {
   const canvas = document.createElement('canvas');

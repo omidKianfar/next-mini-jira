@@ -1,14 +1,11 @@
-import {
-  AnimatePresence,
-  motion,
-  useIsMobile,
-  ButtonFreeClass,
-  MyIcon,
-  chatSidebarProps,
-  ChatSidebar,
-  Suspense,
-  PageLoading,
-} from '../imports';
+import { Suspense } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
+import PageLoading from '../../common/page-loading';
+import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
+import MyIcon from '../../atom/icon-components';
+import ChatSidebar from '../../organisms/sidebar-component/chat-sidebar';
+import { chatSidebarProps } from '@/src/types/global';
 
 const AdminChatSidebar = ({
   showSidebar,

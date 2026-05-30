@@ -1,6 +1,6 @@
+import { db } from '@/configs/firebase';
 import {
   collection,
-  db,
   deleteDoc,
   doc,
   getDocs,
@@ -8,8 +8,12 @@ import {
   orderBy,
   query,
   updateDoc,
-} from '../imports';
-import { DeleteChatMessageProps } from '../type';
+} from 'firebase/firestore';
+
+interface DeleteChatMessageProps {
+  userId: string;
+  messageId: string;
+}
 
 export const deleteChatMessage = async ({
   userId,

@@ -1,4 +1,4 @@
-import { FramerMotion } from '../imports';
+import FramerMotion from '@/src/components/atom/animation-component';
 import SigninComponent from '@/src/components/pages/auth/signin';
 
 const SigninPage = () => {

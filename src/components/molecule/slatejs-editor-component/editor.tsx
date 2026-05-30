@@ -1,25 +1,20 @@
-import {
-  Descendant,
-  Editable,
-  Editor,
-  enqueueSnackbar,
-  isHotkey,
-  MyUserType,
-  sendChatMessage,
-  Slate,
-  updateChatMessage,
-  useAuth,
-  useEditor,
-  UserType,
-  useSearchParams,
-  useState,
-  useUserListenerById,
-} from '../imports';
+import { useSearchParams } from 'next/navigation';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { enqueueSnackbar } from 'notistack';
+import { Descendant, Editor } from 'slate';
+import { Editable, Slate } from 'slate-react';
+import isHotkey from 'is-hotkey';
+import { useAuth } from '@/src/hooks/auth/use-auth';
+import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
+import { useEditor } from '@/src/hooks/editor/use-editor';
+import { updateChatMessage } from '@/src/libs/chat/update-message';
+import { sendChatMessage } from '@/src/libs/chat/send-message';
 import { ToggleMark } from './components/toolbar/helper/toggle-mark';
 import ToolbarComponent from './components/toolbar';
 import { Serialize } from './components/serialize';
 import { HOTKEYS } from './data';
-import { MarkFormat, SlateEditorProps } from './type';
+import { MyUserType, UserType } from '@/src/types/global';
+import { MarkFormat } from './type';
 
 const initialValue: Descendant[] = [
   {
@@ -27,6 +22,14 @@ const initialValue: Descendant[] = [
     children: [{ text: '' }],
   },
 ];
+
+interface SlateEditorProps {
+  editorOutput?: string | undefined;
+  setEditorOutput?: React.Dispatch<React.SetStateAction<string>>;
+  editorKey?: number;
+  editMessageId?: string | null;
+  setEditMessageId?: Dispatch<SetStateAction<string | null>>;
+}
 
 const SlateEditor = ({
   editorKey,

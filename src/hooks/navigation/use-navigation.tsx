@@ -1,7 +1,7 @@
 'use client';
 
-import { useRouter } from '../imports';
 import { routes } from '@/src/helper/routes/routes';
+import { useRouter } from 'next/navigation';
 
 export const useNavigation = () => {
   const router = useRouter();

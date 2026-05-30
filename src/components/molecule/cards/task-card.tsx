@@ -1,13 +1,16 @@
 'use client';
 
-import {
-  MyIcon,
-  stringSlicer,
-  TaskCardProps,
-  useDraggable,
-  useIsMobile,
-  useNavigation,
-} from '../imports';
+import { useDraggable } from '@dnd-kit/core';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { stringSlicer } from '@/src/utils/string-slicer';
+import MyIcon from '../../atom/icon-components';
+import { Task } from '@/src/types/global';
+
+interface TaskCardProps {
+  id: string;
+  task: Task;
+}
 
 const TaskCardComponent = ({ id, task }: TaskCardProps) => {
   const navigation = useNavigation();

@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect } from '../imports';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 
-import { UseSetStepNumberProps } from '../type';
+interface UseSetStepNumberProps {
+  setStepNumber: Dispatch<SetStateAction<string>>;
+}
 
 export const useSetStepNumber = ({ setStepNumber }: UseSetStepNumberProps) => {
   useEffect(() => {

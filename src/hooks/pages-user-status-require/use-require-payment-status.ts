@@ -1,8 +1,11 @@
 'use client';
 
-import { usePathname, dayjs, useEffect, UserType } from '../imports';
+import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
+import dayjs from 'dayjs';
 import { useNavigation } from '../navigation/use-navigation';
 import { useAuth } from '../auth/use-auth';
+import { UserType } from '@/src/types/global';
 
 export const useRequirePaymentStatus = () => {
   const pathname = usePathname();

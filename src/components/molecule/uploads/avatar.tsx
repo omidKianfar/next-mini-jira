@@ -1,18 +1,19 @@
 'use client';
 
-import {
-  Suspense,
-  useRef,
-  useState,
-  MyImage,
-  MyIcon,
-  LoadingCircle,
-  PageLoading,
-  AvatarCropModal,
-} from '../imports';
-import FileInputField from '../RHF-controllers-components/RHF-fields/file-input-field';
-import { UploadAvatarProps } from '../type';
+import { Suspense, useRef, useState } from 'react';
+import FileInputField from '../RHF-controllers-components/file-input-field';
+import PageLoading from '../../common/page-loading';
+import AvatarCropModal from '../../common/avatar-crop';
+import LoadingCircle from '../../atom/loadings/loading-circle';
+import MyImage from '../../atom/image-components';
+import MyIcon from '../../atom/icon-components';
 
+interface UploadAvatarProps {
+  photo: string | undefined;
+  uploadHandler: (event: any) => void;
+  uploading?: boolean;
+  progress?: number;
+}
 const AvatarUpload = ({
   photo,
   uploadHandler,

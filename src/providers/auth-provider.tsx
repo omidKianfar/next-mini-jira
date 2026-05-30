@@ -1,25 +1,26 @@
 'use client';
 
 import {
-  AuthContextProps,
-  authReducer,
-  config,
   createContext,
-  getAuth,
-  getFirestore,
-  initializeApp,
-  initialState,
   PropsWithChildren,
-  SignPropsType,
-  useAuthActions,
   useReducer,
   useRef,
+  useState,
+} from 'react';
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import config from '@/configs/firebase';
+import { authReducer, initialState } from '../reducer/auth-reducer';
+import { useSetStepNumber } from '../hooks/auth/use-set-step-number';
+import { useUserListener } from '../hooks/auth/use-user-listener';
+import { useAuthActions } from '../hooks/auth/use-actions';
+import {
+  AuthContextProps,
+  SignPropsType,
   UserPasswordUpdateType,
   UserProfileType,
-  useSetStepNumber,
-  useState,
-  useUserListener,
-} from './imports';
+} from '../types/global';
 
 const app = initializeApp(config.firebase);
 const auth = getAuth(app);

@@ -1,5 +1,6 @@
-import { ButtonFreeClass, MyIcon } from '../../../../imports';
-import { ToolbarComponentProps } from '../type';
+import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
+import MyIcon from '@/src/components/atom/icon-components';
+import { ToolbarComponentProps } from '../../../type';
 
 const SendMessage = ({ handleSend, loading }: ToolbarComponentProps) => {
   return (

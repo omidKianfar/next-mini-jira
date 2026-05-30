@@ -1,4 +1,6 @@
-import { useEffect, useState, MyUserType, listenToUserById } from '../imports';
+import { useEffect, useState } from 'react';
+import { listenToUserById } from '@/src/libs/auth/find-user-by-userId';
+import { MyUserType } from '@/src/types/global';
 
 export const useUserListenerById = (userId: string | null) => {
   const [user, setUser] = useState<MyUserType | null>(null);

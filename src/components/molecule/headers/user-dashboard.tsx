@@ -1,6 +1,7 @@
 'use client';
 
-import { ModalProps, MyIcon } from '../imports';
+import MyIcon from '../../atom/icon-components';
+import { ModalProps } from '@/src/types/global';
 
 const DashboardHeader = ({
   handleOpenModal,

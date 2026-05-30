@@ -1,10 +1,11 @@
-import {
-  useState,
-  useEffect,
-  userUnreadMessagesListener,
-  SetStateAction,
-} from '../imports';
-import { useUnreadCountProps } from '../type';
+import { SetStateAction, useEffect, useState } from 'react';
+import { userUnreadMessagesListener } from '@/src/libs/chat/user-unread-messages-listener';
+import { UserType } from '@/src/types/global';
+
+interface useUnreadCountProps {
+  chatId: string;
+  senderType: UserType;
+}
 
 export const useUnreadCount = ({ chatId, senderType }: useUnreadCountProps) => {
   const [unreadCount, setUnreadCount] = useState(0);

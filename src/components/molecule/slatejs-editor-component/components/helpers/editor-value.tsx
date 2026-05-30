@@ -1,6 +1,12 @@
-import { React, Ref } from '../../../imports';
-import { EditorValueProps } from '../../type';
+import React, { ReactNode, Ref } from 'react';
+import { Descendant } from 'slate';
 import { Clsx } from './clsx';
+import { BaseProps } from './type';
+
+type EditorValueProps = BaseProps & {
+  value: Descendant[];
+  children?: ReactNode | undefined;
+};
 
 export const EditorValue = React.forwardRef<HTMLDivElement, EditorValueProps>(
   (

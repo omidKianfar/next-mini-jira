@@ -1,19 +1,17 @@
 'use client';
 
-import {
-  AdminSupportUserCard,
-  ButtonFreeClass,
-  MyIcon,
-  PageLoading,
-  RootState,
-  Suspense,
-  useChatsListener,
-  useEffect,
-  useRef,
-  useSelector,
-  useState,
-} from '../../imports';
-import { chatSidebarProps } from '../../type';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/src/store';
+import { useChatsListener } from '@/src/hooks/chat/use-user-listener';
+import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
+import MyIcon from '@/src/components/atom/icon-components';
+import PageLoading from '@/src/components/common/page-loading';
+import { chatSidebarProps } from '@/src/types/global';
+
+const AdminSupportUserCard = lazy(
+  () => import('@/src/components/molecule/cards/admin-support-user-card')
+);
 
 const ChatSidebar = ({
   setShowSidebar,
@@ -21,8 +19,9 @@ const ChatSidebar = ({
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
   const [showScrollBtn, setShowScrollBtn] = useState(false);
-  const chats = useSelector((state: RootState) => state.chats.chats);
-  const chatsFilters = useSelector((state: RootState) => state.chatsFilters);
+
+  const chats = useSelector((state: RootState) => state?.chats?.chats);
+  const chatsFilters = useSelector((state: RootState) => state?.chatsFilters);
 
   useChatsListener();
 

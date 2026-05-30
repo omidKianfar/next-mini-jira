@@ -3,7 +3,10 @@
 import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import durationPlugin from 'dayjs/plugin/duration';
-import { UnSeenMessageCalcProps } from './type';
+
+interface UnSeenMessageCalcProps {
+  date: string | number | Date;
+}
 
 dayjs.extend(durationPlugin);
 

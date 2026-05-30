@@ -1,5 +1,12 @@
-import { dayjs, db, doc, updateDoc } from '../imports';
-import { UpdateChatMessageProps } from '../type';
+import dayjs from 'dayjs';
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '@/configs/firebase';
+
+interface UpdateChatMessageProps {
+  userId: string;
+  messageId: string;
+  newText: string;
+}
 
 export const updateChatMessage = async ({
   userId,

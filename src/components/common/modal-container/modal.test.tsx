@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from '../imports';
-import ModalContainer from '.';
+import { render, screen, fireEvent } from '@testing-library/react';
+import ModalContainer from './index';
 
 describe('Modal Component', () => {
   test('Does not render when open = false', () => {

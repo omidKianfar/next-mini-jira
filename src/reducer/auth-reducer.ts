@@ -1,7 +1,4 @@
-import {
-  AuthContextActionType,
-  AuthContextStateType,
-} from '@/src/types/global';
+import { AuthContextActionType, AuthContextStateType } from '../types/global';
 
 const initialState: AuthContextStateType = {
   user: null,

@@ -1,17 +1,12 @@
 'use client';
 
-import { lazy } from 'react';
-import {
-  AnimatePresence,
-  useFileUploader,
-  useState,
-  motion,
-  LoadingCircle,
-  Suspense,
-  PageLoading,
-} from '../../imports';
+import { lazy, Suspense, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
 import ChatMenuComponent from '../chat-menu';
-import { ChatMenuProps, MenuType } from '../type';
+import PageLoading from '@/src/components/common/page-loading';
+import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
+import { ChatMenuProps, MenuType } from '@/src/types/global';
 
 const SlateEditor = lazy(() => import('../../slatejs-editor-component/editor'));
 const UploadMenuComponent = lazy(() => import('./menu/upload'));
@@ -42,7 +37,7 @@ const ChatInput = ({
 
   return (
     <div
-      className={`absolute bottom-0 left-0 z-10 flex w-full items-center justify-start rounded-b-md p-1 transition-all duration-300 ${
+      className={`z-41 absolute bottom-0 left-0 flex w-full items-center justify-start rounded-b-md p-1 transition-all duration-300 ${
         !showMenu ? 'h-[32px]' : 'h-[250px] lg:h-[227px]'
       }`}
     >
@@ -62,7 +57,7 @@ const ChatInput = ({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={fastTransition}
-                className="h-full w-full overflow-hidden rounded-md border-2 border-primary-500 bg-white"
+                className="h-full w-full rounded-md border-2 border-primary-500 bg-white"
               >
                 <AnimatePresence mode="wait">
                   {Menu === 'text' ? (

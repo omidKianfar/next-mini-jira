@@ -1,5 +1,6 @@
-import { MyIcon, MyImage, UserType } from '../imports';
-import { ChatSidebar } from '../type';
+import MyImage from '../../atom/image-components';
+import MyIcon from '../../atom/icon-components';
+import { ChatSidebar, UserType } from '@/src/types/global';
 
 const ChatHeader = ({ userChat, currentUser }: ChatSidebar) => {
   return (

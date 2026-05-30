@@ -1,10 +1,6 @@
-import {
-  createSlice,
-  dayjs,
-  MyUserType,
-  PayloadAction,
-  UserState,
-} from '../../imports';
+import { MyUserType, UserState } from '@/src/types/global';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import dayjs from 'dayjs';
 
 const initialState: UserState = {
   users: [],

@@ -1,6 +1,6 @@
-import { React, Ref } from '../../../imports';
-import { SimpleForwardRefProps } from '../../type';
+import React, { Ref } from 'react';
 import { Clsx } from './clsx';
+import { SimpleForwardRefProps } from './type';
 
 export const Icon = React.forwardRef<
   HTMLSpanElement,

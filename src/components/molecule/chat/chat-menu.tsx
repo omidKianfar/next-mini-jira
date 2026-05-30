@@ -1,6 +1,6 @@
-import { Icon } from '../imports';
-import { ChatMenuProps, MenuType } from './type';
 import { menuItems } from './data';
+import { Icon } from '@iconify/react';
+import { ChatMenuProps, MenuType } from '@/src/types/global';
 
 const ChatMenuComponent = ({
   showMenu,

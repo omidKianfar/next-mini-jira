@@ -1,5 +1,10 @@
-import { IconName, MyIcon } from '../../imports';
-import { SidebarItemProps } from '../../type';
+import MyIcon from '@/src/components/atom/icon-components';
+import { IconName } from '@/src/components/atom/icon-components/icons';
+import { sidebarItemsType } from './type';
+
+interface SidebarItemProps {
+  item: sidebarItemsType;
+}
 
 const SidebarActionItem = ({ item }: SidebarItemProps) => {
   return (

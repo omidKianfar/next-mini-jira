@@ -1,30 +1,45 @@
 'use client';
 
-import { useNavigation } from '../navigation/use-navigation';
+import { ActionDispatch, Dispatch, SetStateAction } from 'react';
+import dayjs from 'dayjs';
+import { enqueueSnackbar } from 'notistack';
 import {
-  auth,
-  createUserDocument,
   createUserWithEmailAndPassword,
-  dayjs,
-  db,
-  doc,
   EmailAuthProvider,
-  enqueueSnackbar,
-  findFirestoreCurrentUser,
-  getDoc,
   GoogleAuthProvider,
   linkWithCredential,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  SignPropsType,
-  updateFirestoreUser,
   updatePassword,
+} from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { findFirestoreCurrentUser } from '@/src/libs/auth/current-user-finder';
+import { createUserDocument } from '@/src/libs/auth/create-user';
+import { updateFirestoreUser } from '@/src/libs/auth/update-user';
+import { useNavigation } from '../navigation/use-navigation';
+import { auth, db } from '@/configs/firebase';
+import {
+  AuthContextActionType,
+  AuthContextStateType,
+  SignPropsType,
   UserPasswordUpdateType,
   UserProfileType,
   UserType,
-} from '../imports';
-import { UseAuthActionProps } from '../type';
+} from '@/src/types/global';
+
+interface UseAuthActionProps {
+  state: Partial<AuthContextStateType>;
+  dispatch: ActionDispatch<
+    [
+      action: {
+        payload: Partial<AuthContextStateType>;
+        type: AuthContextActionType;
+      },
+    ]
+  >;
+  setStepNumber: Dispatch<SetStateAction<string>>;
+}
 
 export const useAuthActions = ({
   dispatch,
@@ -220,7 +235,7 @@ export const useAuthActions = ({
         await linkWithCredential(user, credential);
 
         enqueueSnackbar(
-          'Password linked successfully ✅ (Email & Password enabled)',
+          'Password linked successfully (Email & Password enabled)',
           { variant: 'success' }
         );
         return;
@@ -228,7 +243,7 @@ export const useAuthActions = ({
         if (linkError.code === 'auth/provider-already-linked') {
           await updatePassword(user, newPassword);
 
-          enqueueSnackbar('Password updated successfully ✅', {
+          enqueueSnackbar('Password updated successfully', {
             variant: 'success',
           });
 

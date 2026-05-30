@@ -1,12 +1,14 @@
-import {
-  useIsMobile,
-  ButtonBack,
-  MyIcon,
-  MyImage,
-  PlanCardComponent,
-} from '../imports';
-import { ChoosePlanSectionProps } from '../type';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
+import MyImage from '../../atom/image-components';
+import ButtonBack from '../../atom/buttons-component/button-back';
+import PlanCardComponent from '../../molecule/cards/plan-cart';
+import MyIcon from '../../atom/icon-components';
+import { PlanType } from '@/src/types/global';
 
+interface ChoosePlanSectionProps {
+  onBack: () => void;
+  onChoosePlan: (plan: PlanType) => void;
+}
 const ChoosePlanComponent = ({
   onBack,
   onChoosePlan,

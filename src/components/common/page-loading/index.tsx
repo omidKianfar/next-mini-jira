@@ -1,4 +1,4 @@
-import { PulseLoader } from '../imports';
+import { PulseLoader } from 'react-spinners';
 
 const PageLoading = () => {
   return (

@@ -1,18 +1,33 @@
 import {
-  createEditor,
-  CustomEmoji,
-  Deserialize,
-  Editor,
-  Text,
-  Transforms,
+  Dispatch,
+  SetStateAction,
   useCallback,
   useEffect,
   useMemo,
-  withHistory,
-  WithHtml,
-  withReact,
-} from '../imports';
-import { useEditorActionsProps } from '../type';
+} from 'react';
+import { createEditor, Text, Transforms } from 'slate';
+import { withReact } from 'slate-react';
+import { withHistory } from 'slate-history';
+import { WithHtml } from '@/src/components/molecule/slatejs-editor-component/components/with-html';
+import { Deserialize } from '@/src/components/molecule/slatejs-editor-component/components/deserialize';
+import { CustomEmoji } from '@/src/types/global';
+
+interface useEditorActionsProps {
+  editorOutput: string;
+  setEditorOutput: Dispatch<SetStateAction<string>>;
+  showColorDropdown: boolean;
+  setShowColorDropdown: Dispatch<SetStateAction<boolean>>;
+  fontBgColorState: string | null;
+  showBackgroundDropdown: boolean;
+  setShowBackgroundDropdown: Dispatch<SetStateAction<boolean>>;
+  showEmojiPicker: boolean;
+  setShowEmojiPicker: Dispatch<SetStateAction<boolean>>;
+  fontFamilyState: string;
+  fontColorState: string | null;
+  setFontColorState: Dispatch<SetStateAction<string | null>>;
+  setFontFamilyState: Dispatch<SetStateAction<string>>;
+  setFontBgColorState: Dispatch<SetStateAction<string | null>>;
+}
 
 const useEditorActions = ({
   editorOutput,

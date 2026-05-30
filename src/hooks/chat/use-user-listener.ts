@@ -1,6 +1,8 @@
 'use client';
 
-import { AdminChatsListener, useDispatch, useEffect } from '../imports';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { AdminChatsListener } from '@/src/libs/chat/admin-chats-listener';
 
 export const useChatsListener = () => {
   const dispatch = useDispatch();

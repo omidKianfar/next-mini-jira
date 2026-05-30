@@ -1,14 +1,27 @@
-import {
-  ButtonNext,
-  DragDropUploader,
-  LightBoxComponent,
-  LoadingCircle,
-  MyImage,
-  MyVideo,
-  PageLoading,
-  Suspense,
-} from '../../../imports';
-import { AddTaskUploadProps } from '../../../type';
+import { lazy, Suspense } from 'react';
+import ButtonNext from '@/src/components/atom/buttons-component/button-next';
+import MyImage from '@/src/components/atom/image-components';
+import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
+import LightBoxComponent from '@/src/components/common/light-box';
+import PageLoading from '@/src/components/common/page-loading';
+
+interface AddTaskUploadProps {
+  uploadProcessHandler: (file: File) => Promise<void>;
+  handleCancel: () => void;
+  handleSave: () => void;
+  progress?: number;
+  uploading?: boolean;
+  error?: string | null;
+  fileType?: string | null;
+  url?: string | null;
+  isCompressing?: boolean;
+  compressionProgress?: number;
+}
+
+const DragDropUploader = lazy(
+  () => import('@/src/components/organisms/uploads/drag-drop')
+);
+const MyVideo = lazy(() => import('@/src/components/atom/video-component'));
 
 const AddTaskUploadComponent = ({
   uploadProcessHandler,

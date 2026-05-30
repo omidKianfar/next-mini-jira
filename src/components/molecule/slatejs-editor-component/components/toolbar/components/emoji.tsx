@@ -1,5 +1,8 @@
-import { useEditor, MyIcon, Picker, data } from '../../../../imports';
-import { CustomEmoji } from '../../../type';
+import Picker from '@emoji-mart/react';
+import data from '@emoji-mart/data';
+import { useEditor } from '@/src/hooks/editor/use-editor';
+import MyIcon from '@/src/components/atom/icon-components';
+import { CustomEmoji } from '@/src/types/global';
 
 const EmojiComponent = () => {
   const { setShowEmojiPicker, showEmojiPicker, insertEmoji } = useEditor();
@@ -19,16 +22,19 @@ const EmojiComponent = () => {
       </button>
 
       {showEmojiPicker && (
-        <div className="absolute bottom-[24px] left-0 z-50">
+        <div className="absolute bottom-[36px] left-0 h-[250px] overflow-hidden rounded-md shadow-lg">
           <Picker
             data={data}
             onEmojiSelect={(emoji: CustomEmoji) => insertEmoji?.(emoji)}
-            emojiSize={20}
-            perLine={6}
+            emojiSize={18}
+            perLine={7}
+            maxFrequentRows={1}
             previewPosition="none"
             navPosition="top"
             searchPosition="sticky"
             maxStackedResults={1}
+            dynamicWidth={false}
+            emojiButtonRadius="2px"
           />
         </div>
       )}

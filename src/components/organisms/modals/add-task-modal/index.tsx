@@ -1,24 +1,19 @@
 'use client';
 
-import {
-  useAuth,
-  useFileUploader,
-  useImageProcessor,
-  useVideoProcessor,
-  useState,
-  TaskForm,
-  useForm,
-  yupResolver,
-  Task,
-  dayjs,
-  createTaskDocument,
-  enqueueSnackbar,
-  PageLoading,
-  FormProvider,
-} from '../../imports';
-import { lazy, Suspense } from 'react';
-import { AddTaskProps } from '../../type';
+import { lazy, Suspense, useState } from 'react';
+import { enqueueSnackbar } from 'notistack';
+import { FormProvider, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import dayjs from 'dayjs';
+import { useAuth } from '@/src/hooks/auth/use-auth';
+import { useImageProcessor } from '@/src/hooks/image-processor/use-image-processor';
+import { useVideoProcessor } from '@/src/hooks/video-processor/use-video-processor';
+import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
+import { createTaskDocument } from '@/src/libs/tasks/create-task';
+import PageLoading from '@/src/components/common/page-loading';
 import { TaskShema } from './schema';
+import { Task, TaskForm } from '@/src/types/global';
+import { AddTaskProps } from './type';
 
 const AddTaskFormComponent = lazy(() => import('./steps/add-task-form'));
 const AddTaskUploadCmponent = lazy(() => import('./steps/upload'));

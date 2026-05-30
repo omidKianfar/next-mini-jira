@@ -1,6 +1,11 @@
-import { Editor } from '../../../../imports';
+import { Editor } from 'slate';
 import { IsMarkActive } from './is-mark-active';
-import { ToggleMarkProps } from '../type';
+import { MarkFormat } from '../../../type';
+
+interface ToggleMarkProps {
+  editor: Editor;
+  format: MarkFormat;
+}
 
 export const ToggleMark = ({ editor, format }: ToggleMarkProps) => {
   if (IsMarkActive({ editor, format })) {

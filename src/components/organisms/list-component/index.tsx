@@ -1,6 +1,8 @@
 'use client';
-
-import { ListComponentProps } from '../type';
+interface ListComponentProps {
+  children: React.ReactNode;
+  title?: string;
+}
 
 const ListComponent = ({ children }: ListComponentProps) => {
   return (

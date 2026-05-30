@@ -1,31 +1,31 @@
 'use client';
 
-import { LoadingCircle } from '@/src/components/organisms/imports';
-import {
-  MyIcon,
-  MyUserType,
-  PageLoading,
-  RootState,
-  Suspense,
-  toggleSortByCreatedAt,
-  updateFirestoreUser,
-  useDispatch,
-  useIsMobile,
-  useNavigation,
-  UserListCard,
-  UsersTable,
-  UserType,
-  useSelector,
-  useState,
-  useUsersListener,
-} from '../../imports';
+import { lazy, Suspense, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
+import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { useUsersListener } from '@/src/hooks/users/use-user-listener';
+import { updateFirestoreUser } from '@/src/libs/auth/update-user';
+import { RootState } from '@/src/store';
+import { toggleSortByCreatedAt } from '@/src/store/slices/users/users';
+import MyIcon from '@/src/components/atom/icon-components';
+import PageLoading from '@/src/components/common/page-loading';
+import { MyUserType, UserType } from '@/src/types/global';
+
+const UsersTable = lazy(
+  () => import('@/src/components/organisms/tables/admin-users-table')
+);
+
+const UserListCard = lazy(
+  () => import('@/src/components/organisms/lists/admin-users-list')
+);
 
 const AdminDashboardComponent = () => {
   const isMobile = useIsMobile();
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const users = useSelector((state: RootState) => state.users.users);
+  const users = useSelector((state: RootState) => state?.users?.users);
   const usersFilters = useSelector((state: RootState) => state.usersFilters);
 
   useUsersListener();

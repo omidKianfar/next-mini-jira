@@ -1,11 +1,8 @@
 'use client';
 
-import {
-  PropsWithChildren,
-  useAuth,
-  useEffect,
-  useNavigation,
-} from './imports';
+import { PropsWithChildren, useEffect } from 'react';
+import { useNavigation } from '../hooks/navigation/use-navigation';
+import { useAuth } from '../hooks/auth/use-auth';
 
 const AuthGuard = ({ children }: PropsWithChildren) => {
   const navigation = useNavigation();
