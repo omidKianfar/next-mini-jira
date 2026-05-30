@@ -119,7 +119,7 @@ const ChatMessages = ({
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="absolute left-1/2 top-[24px] z-50"
+            className="absolute left-[45%] top-[24px] z-50 lg:left-[48%]"
           >
             <ButtonFreeClass
               onClick={scrollToBottom}

@@ -55,7 +55,7 @@ const ChatMessageItem = ({
       className={`w-full ${user?.userType == UserType.Client ? (isAdmin ? 'justify-start' : 'justify-end') : isAdmin ? 'justify-end' : 'justify-start'} mb-4 flex items-center`}
     >
       <Suspense fallback={<PageLoading />}>
-        <div className="relative min-w-[100px] max-w-[500px]">
+        <div className="relative min-w-[300px] max-w-[500px]">
           {message?.attachment?.fileType ? (
             <div>
               {message?.attachment?.fileType === 'image' && (
