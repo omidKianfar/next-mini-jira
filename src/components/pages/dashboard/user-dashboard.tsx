@@ -7,7 +7,7 @@ import { useRequirePaymentStatus } from '@/src/hooks/pages-user-status-require/u
 import { useTaskListener } from '@/src/hooks/tasks/use-task-listener';
 import PageLoading from '../../common/page-loading';
 
-export const BoardComponent = lazy(
+const BoardComponent = lazy(
   () => import('@/src/components/organisms/tasks-boards')
 );
 
@@ -20,7 +20,7 @@ const DashboardComponent = () => {
   useTaskListener({ user });
 
   return (
-    <div className="min-h-screen w-full">
+    <div className="lg:over-flow-hidden min-h-screen w-full lg:max-h-[calc(100vh-110px)] lg:min-h-[calc(100vh-110px)]">
       <Suspense fallback={<PageLoading />}>
         <BoardComponent />
       </Suspense>

@@ -131,21 +131,23 @@ const TaskDetailComponent = () => {
             <div className="w-[90vw] p-4 lg:w-full">
               <div className="flex flex-col justify-between lg:mb-4 lg:w-[500px] lg:flex-row">
                 <p className="mb-4 font-semibold capitalize text-primary-600">
-                  <span className="text-body font-bold text-black">
+                  <span className="mr-2 text-body font-bold text-black">
                     Status:
                   </span>
                   {task.status}
                 </p>
 
                 <p className="mb-4 font-semibold capitalize text-primary-600">
-                  <span className="text-body font-bold text-black">Tag:</span>{' '}
+                  <span className="mr-2 text-body font-bold text-black">
+                    Tag:
+                  </span>
                   {task.tag}
                 </p>
 
                 <p className="mb-4 font-semibold capitalize text-primary-600">
-                  <span className="text-body font-bold text-black">
+                  <span className="mr-2 text-body font-bold text-black">
                     Created:
-                  </span>{' '}
+                  </span>
                   {task.createdAt}
                 </p>
               </div>

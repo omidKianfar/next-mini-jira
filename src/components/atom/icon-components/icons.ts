@@ -17,6 +17,7 @@ export const ICONS = {
   'swipe-up': 'ic:baseline-swipe-up',
   'under-line': 'mingcute:underline-fill',
   'yearly-payment': 'fluent:payment-20-filled',
+  'dotted-menu': 'qlementine-icons:menu-dots-16',
   ASC: 'ph:sort-ascending-bold',
   DSCE: 'ph:sort-descending-bold',
   bold: 'ooui:bold-b',

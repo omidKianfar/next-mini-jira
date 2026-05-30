@@ -1,11 +1,13 @@
 'use client';
 
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import dayjs from 'dayjs';
 import { useSelector } from 'react-redux';
 import {
   DndContext,
   DragEndEvent,
+  DragStartEvent,
+  DragOverlay,
   PointerSensor,
   TouchSensor,
   useSensor,
@@ -33,6 +35,8 @@ const BoardComponent = () => {
   const tasks = useSelector((state: RootState) => state?.tasks?.tasks);
   const taskFilters = useSelector((state: RootState) => state?.taskFilters);
 
+  const [activeId, setActiveId] = useState<string | null>(null);
+
   const filteredTasks = tasks.filter((task) => {
     const taskDate = task.createdAt;
     const taskTag = task.tag;
@@ -52,8 +56,14 @@ const BoardComponent = () => {
 
   const finalTasks = filteredTasks;
 
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveId(event.active.id as string);
+  };
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
+
+    setActiveId(null);
 
     if (!over) return;
 
@@ -77,8 +87,12 @@ const BoardComponent = () => {
 
   return (
     <Suspense fallback={<PageLoading />}>
-      <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-        <div className="flex flex-col items-start justify-center gap-4 lg:flex-row">
+      <DndContext
+        sensors={sensors}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+      >
+        <div className="flex flex-col items-start justify-center gap-4 lg:flex-row lg:gap-12">
           <ColumnComponent key="todo" id="todo">
             {renderColumn('todo') ?? []}
           </ColumnComponent>
@@ -91,6 +105,18 @@ const BoardComponent = () => {
             {renderColumn('done') ?? []}
           </ColumnComponent>
         </div>
+
+        <DragOverlay dropAnimation={null}>
+          {activeId ? (
+            <div className="pointer-events-none scale-105 transform cursor-grabbing shadow-md transition-transform">
+              {finalTasks
+                .filter((task) => task.id === activeId)
+                .map((task) => (
+                  <TaskCardComponent key={task.id} id={task.id} task={task} />
+                ))}
+            </div>
+          ) : null}
+        </DragOverlay>
       </DndContext>
     </Suspense>
   );

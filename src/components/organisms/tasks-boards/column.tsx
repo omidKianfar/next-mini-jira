@@ -32,7 +32,7 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
   return (
     <div
       ref={setNodeRef}
-      className={`h-auto w-full rounded-xl border-2 border-primary-300 shadow-md transition lg:w-80 ${
+      className={`h-auto w-full rounded-xl border-2 border-primary-300 shadow-md transition lg:h-full lg:w-80 ${
         isOver ? 'bg-primary-200' : 'bg-white'
       }`}
       style={{
@@ -68,7 +68,7 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
       </div>
 
       {show && (
-        <div className="flex flex-col gap-2 p-2">
+        <div className="scrollbar-hide flex flex-col gap-2 p-2 lg:max-h-[calc(100vh-150px)] lg:min-h-[calc(100vh-150px)] lg:overflow-y-auto">
           {ChildrenArray && children.length === 0 ? <EmptyColumn /> : children}
         </div>
       )}
