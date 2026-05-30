@@ -16,7 +16,7 @@ const PlanCardComponent = ({
         {title}
       </h1>
 
-      <p className="text-lg font-semibold lg:mb-4 lg:text-2xl">{`${price}$`}</p>
+      <p className="text-title font-semibold lg:mb-4 lg:text-2xl">{`${price}$`}</p>
 
       <p className="break-all font-semibold">{description}</p>
 

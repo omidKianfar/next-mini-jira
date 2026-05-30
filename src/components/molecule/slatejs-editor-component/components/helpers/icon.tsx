@@ -9,7 +9,10 @@ export const Icon = React.forwardRef<
   <span
     {...props}
     ref={ref}
-    className={Clsx(className, 'material-icons align-text-bottom text-lg')}
+    className={Clsx(
+      className,
+      'material-icons align-text-bottom text-subtitle'
+    )}
   >
     {children}
   </span>

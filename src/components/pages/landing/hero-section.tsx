@@ -31,7 +31,7 @@ const HeroSectionComponent = () => {
               <span className="text-warning-500">Project Manager</span>
             </h1>
 
-            <p className="mx-auto mb-10 max-w-[500px] text-lg leading-relaxed text-slate-600 lg:mx-0">
+            <p className="mx-auto mb-10 max-w-[500px] text-body leading-relaxed text-slate-600 lg:mx-0">
               A professional Mini Jira engineered for speed and precision.
             </p>
 
