@@ -92,7 +92,7 @@ const ChatMessageItem = ({
             </div>
           ) : (
             <div
-              className={`break-words border-2 p-2 shadow-md ${isAdmin ? 'border-warning-400 bg-warning-100' : 'border-primary-400 bg-primary-100'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
+              className={`prose prose-sm break-words border-2 p-2 shadow-md ${isAdmin ? 'border-warning-400 bg-warning-100' : 'border-primary-400 bg-primary-100'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
               dangerouslySetInnerHTML={{ __html: message.text as string }}
             />
           )}

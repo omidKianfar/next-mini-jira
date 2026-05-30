@@ -30,7 +30,7 @@ const ModalComponent = ({
 
       {description && isDelete && (
         <div
-          className="mt-4 break-words rounded-lg bg-gray-100 p-2 text-body capitalize text-blue-500 shadow-md"
+          className="prose prose-sm mt-4 break-words rounded-lg bg-gray-100 p-2 text-body capitalize text-blue-500 shadow-md"
           dangerouslySetInnerHTML={{
             __html: stringSlicer({ string: description as string, slice: 100 }),
           }}

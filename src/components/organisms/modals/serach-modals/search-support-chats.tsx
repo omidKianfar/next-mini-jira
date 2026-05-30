@@ -128,7 +128,7 @@ const SearchSupportChats = ({
                     </div>
                   ) : (
                     <div
-                      className="break-words text-label"
+                      className="prose prose-sm break-words text-label"
                       dangerouslySetInnerHTML={{
                         __html: stringSlicer({
                           string: chat.message.lastMessageText as string,
