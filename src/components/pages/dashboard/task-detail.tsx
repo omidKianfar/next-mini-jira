@@ -153,13 +153,13 @@ const TaskDetailComponent = () => {
               </div>
 
               <div className="rounded-md border border-gray-300 bg-gray-50 p-4 shadow-md">
-                <h1 className="break-word mb-4 text-body font-semibold">
+                <h1 className="mb-4 break-words text-body font-semibold">
                   {task.title}
                 </h1>
 
                 <hr className="border border-dashed border-gray-300" />
 
-                <p className="break-word mb-4 mt-2 text-body">
+                <p className="mb-4 mt-2 break-words text-body">
                   {task.description}
                 </p>
 
