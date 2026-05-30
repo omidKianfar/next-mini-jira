@@ -1,8 +1,12 @@
 import MyImage from '../../atom/image-components';
 import MyIcon from '../../atom/icon-components';
 import { ChatSidebar, UserType } from '@/src/types/global';
+import { stringSlicer } from '@/src/utils/string-slicer';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 
 const ChatHeader = ({ userChat, currentUser }: ChatSidebar) => {
+  const isMobile = useIsMobile();
+
   return (
     <div className="absolute left-0 top-0 z-10 flex h-[60px] w-full items-center justify-start rounded-t-md bg-white/20 px-2 shadow-md backdrop-blur-sm">
       <div className="mr-2 overflow-hidden">
@@ -24,13 +28,19 @@ const ChatHeader = ({ userChat, currentUser }: ChatSidebar) => {
       <div>
         <p className="mb-1 text-bodySm font-semibold text-gray-700">
           {currentUser?.userType === UserType.Admin
-            ? userChat?.userName
+            ? stringSlicer({
+                string: userChat?.userName as string,
+                slice: isMobile ? 30 : 100,
+              })
             : 'Admin'}
         </p>
 
         <p className="text-caption text-gray-400">
           {currentUser?.userType === UserType.Admin
-            ? userChat?.email
+            ? stringSlicer({
+                string: userChat?.email as string,
+                slice: isMobile ? 30 : 100,
+              })
             : 'Support'}
         </p>
       </div>

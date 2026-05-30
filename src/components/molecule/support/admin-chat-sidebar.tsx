@@ -71,7 +71,7 @@ const AdminChatSidebar = ({
                   />
                 </div>
 
-                <div className="mt-4 h-[calc(100vh-178px)] overflow-y-auto rounded-md">
+                <div className="scrollbar-hide mt-4 h-[calc(100vh-178px)] overflow-y-auto rounded-md">
                   <ChatSidebar setShowSidebar={setShowSidebar} />
                 </div>
               </div>

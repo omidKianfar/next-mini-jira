@@ -52,7 +52,7 @@ const AdminSupportUserCard = ({
           <p className="text-label text-gray-600">
             {stringSlicer({
               string: chat.user.email as string,
-              slice: 30,
+              slice: 20,
             })}
           </p>
         </div>
