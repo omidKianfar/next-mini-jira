@@ -94,7 +94,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
                 <div className="w-full p-1">
                   <div className="rounded-lg border border-gray-300 bg-gray-50 shadow-md">
                     <div className="p-2">
-                      <p className="break-word text-bodySm font-bold">
+                      <p className="break-words text-bodySm font-bold">
                         {stringSlicer({
                           string: task.title,
                           slice: isMobile ? 50 : 100,
