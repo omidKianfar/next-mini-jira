@@ -72,6 +72,13 @@ const LandingDashboard = () => {
                 </div>
 
                 <div
+                  onClick={() => navigation.profile()}
+                  className="w-full cursor-pointer rounded-sm px-2 py-1 text-bodySm hover:bg-gray-100 hover:text-warning-600"
+                >
+                  Profile
+                </div>
+
+                <div
                   onClick={logout}
                   className="flex w-full cursor-pointer items-center justify-start rounded-sm px-2 py-1 text-bodySm hover:bg-gray-100 hover:text-warning-600"
                 >
