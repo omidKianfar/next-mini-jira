@@ -124,9 +124,11 @@ const AuthComponent = () => {
                 <MyIcon
                   icon={'google'}
                   className={`${
-                    loading ? 'mr-20' : 'mr-[100px]'
-                  } cursor-pointer rounded-full p-2 text-h3 transition-all duration-200 hover:rotate-12 hover:bg-primary-200`}
-                  onClick={authGoogle}
+                    loading
+                      ? 'mr-20 cursor-not-allowed opacity-50 grayscale'
+                      : 'mr-[100px] cursor-pointer hover:bg-primary-200'
+                  } rounded-full p-2 text-h3 transition-all duration-200 hover:rotate-12`}
+                  onClick={!loading ? authGoogle : undefined}
                 />
 
                 <ButtonNext type="submit" isLoading={loading}>
