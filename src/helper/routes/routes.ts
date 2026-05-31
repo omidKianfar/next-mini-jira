@@ -1,4 +1,5 @@
 export const routes = {
+  landing: '/',
   signin: '/signin',
   signup: '/signup',
   paymentSuccess: '/payment-success',

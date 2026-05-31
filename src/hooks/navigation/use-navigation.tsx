@@ -7,6 +7,7 @@ export const useNavigation = () => {
   const router = useRouter();
 
   return {
+    landing: () => router.push(routes.landing),
     signin: () => router.push(routes.signin),
     signup: () => router.push(routes.signup),
     paymentSuccess: () => router.push(routes.paymentSuccess),
