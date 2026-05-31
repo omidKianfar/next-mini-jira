@@ -1,5 +1,7 @@
 export const routes = {
   landing: '/',
+  about: '/about',
+  contact: '/contact',
   signin: '/signin',
   signup: '/signup',
   paymentSuccess: '/payment-success',

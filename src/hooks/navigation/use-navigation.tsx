@@ -8,6 +8,8 @@ export const useNavigation = () => {
 
   return {
     landing: () => router.push(routes.landing),
+    about: () => router.push(routes.about),
+    contact: () => router.push(routes.contact),
     signin: () => router.push(routes.signin),
     signup: () => router.push(routes.signup),
     paymentSuccess: () => router.push(routes.paymentSuccess),

@@ -8,7 +8,7 @@ import SideBar from '@/src/components/organisms/sidebar-component/user-sidebar';
 import { UserType } from '@/src/types/global';
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
   return (
     <AuthGuard>

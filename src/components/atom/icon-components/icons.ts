@@ -61,6 +61,9 @@ export const ICONS = {
   wallet: 'streamline-freehand:cash-payment-bill',
   user: 'solar:user-bold-duotone',
   upload: 'ic:round-upload',
+  about: 'ix:about',
+  contact: 'mdi:contact-outline',
+  home: 'ic:round-home',
 };
 
 export type IconName = keyof typeof ICONS;

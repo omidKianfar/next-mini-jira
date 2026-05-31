@@ -19,8 +19,74 @@ export const SidebarItems = ({
 
   const AdminUnraedCount = AdminUnreadMeassesListener();
 
+  const LandingSidebarItems = useMemo<sidebarItemsType[]>(() => {
+    const items: sidebarItemsType[] = [
+      {
+        id: 'profile',
+        icon: 'profile',
+        title: 'profile',
+        direction: () => {
+          navigation.profile();
+          setShowSidebar?.(false);
+        },
+        notification: { type: 'none' },
+      },
+      {
+        id: 'dashboard',
+        icon: 'dashboard',
+        title: 'dashboard',
+        direction: () => {
+          navigation.dashboard();
+          setShowSidebar?.(false);
+        },
+        notification: { type: 'none' },
+      },
+      {
+        id: 'about',
+        icon: 'about',
+        title: 'about',
+        direction: () => {
+          navigation.about();
+          setShowSidebar?.(false);
+        },
+        notification: { type: 'none' },
+      },
+      {
+        id: 'contact',
+        icon: 'contact',
+        title: 'contact',
+        direction: () => {
+          navigation.contact();
+          setShowSidebar?.(false);
+        },
+        notification: { type: 'none' },
+      },
+    ];
+
+    if (
+      !user?.userType ||
+      (user?.userType !== UserType.Client && user?.userType !== UserType.Admin)
+    ) {
+      return items.filter(
+        (item) => item.id !== 'profile' && item.id !== 'dashboard'
+      );
+    }
+
+    return items;
+  }, [navigation, setShowSidebar, user?.userType]);
+
   const userSidebarItems = useMemo<sidebarItemsType[]>(
     () => [
+      {
+        id: 'home',
+        icon: 'home',
+        title: 'home',
+        direction: () => {
+          navigation.landing();
+          setShowSidebar?.(false);
+        },
+        notification: { type: 'none' },
+      },
       {
         id: 'profile',
         icon: 'profile',
@@ -76,6 +142,16 @@ export const SidebarItems = ({
   const AdminSidebarItems = useMemo<sidebarItemsType[]>(
     () => [
       {
+        id: 'home',
+        icon: 'home',
+        title: 'home',
+        direction: () => {
+          navigation.landing();
+          setShowSidebar?.(false);
+        },
+        notification: { type: 'none' },
+      },
+      {
         id: 'adminProfile',
         icon: 'profile',
         title: 'profile',
@@ -112,5 +188,5 @@ export const SidebarItems = ({
     [navigation, setShowSidebar, AdminUnraedCount]
   );
 
-  return { userSidebarItems, AdminSidebarItems };
+  return { userSidebarItems, AdminSidebarItems, LandingSidebarItems };
 };
