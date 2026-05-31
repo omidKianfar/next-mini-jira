@@ -1,20 +1,15 @@
 'use client';
 
 import { lazy, Suspense, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { useAuth } from '@/src/hooks/auth/use-auth';
-import { useUnreadCount } from '@/src/hooks/chat/use-unread-count';
-import { AdminUnreadMeassesListener } from '@/src/libs/chat/admin-unread-messages-count';
-import FilterChats from '../modals/filter-modals/chats';
-import SearchSupportChats from '../modals/serach-modals/search-support-chats';
-import MyIcon from '../../atom/icon-components';
+
 import Logo from '../../atom/logo-component';
-import DashboardHeader from '../../molecule/headers/user-dashboard';
-import AdminDashboardHeader from '../../molecule/headers/admin-dashboard';
-import AdminSupportHeader from '../../molecule/headers/admin-support';
 import LoadingCircle from '../../atom/loadings/loading-circle';
 import ModalContainer from '../../common/modal-container';
-import { HeaderProps, UserType } from '@/src/types/global';
+import LeftSideHeaders from '../../molecule/headers/left-side-headers';
+import RightSideHeaders from '../../molecule/headers/right-side-headers';
+import FilterChats from '../modals/filter-modals/chats';
+import SearchSupportChats from '../modals/serach-modals/search-support-chats';
+import { HeaderProps } from '@/src/types/global';
 
 const AddTask = lazy(() => import('../modals/add-task-modal'));
 const SearchTasks = lazy(() => import('../modals/serach-modals/search-tasks'));
@@ -23,18 +18,8 @@ const SearchUsers = lazy(() => import('../modals/serach-modals/serach-users'));
 const FilterUsers = lazy(() => import('../modals/filter-modals/users'));
 
 const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
-  const pathname = usePathname();
-  const { user } = useAuth();
-
   const [open, setOpen] = useState<boolean>(false);
   const [modalcounter, setModalCounter] = useState<number>(0);
-
-  const UserUnreadCount = useUnreadCount({
-    chatId: user?.userId as string,
-    senderType: UserType.Admin,
-  });
-
-  const AdminUnraedCount = AdminUnreadMeassesListener();
 
   const handleOpenModal = (modalNumber: number) => {
     setModalCounter(modalNumber);
@@ -49,37 +34,16 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
   return (
     <>
       <div className="sticky top-0 z-50 flex h-[60px] flex-row items-center justify-between border border-white/30 bg-white/20 px-4 shadow-lg backdrop-blur-md lg:h-[80px]">
-        <div className="relative flex w-1/3 items-center justify-start">
-          {pathname !== '/' && (
-            <MyIcon
-              icon="menu"
-              className="cursor-pointer text-title text-primary-500 hover:text-primary-700 lg:text-h3"
-              onClick={() => setShowSidebar?.(!showSidebar)}
-            />
-          )}
-
-          {user?.userType === UserType.Client && UserUnreadCount > 0 && (
-            <div className="absolute left-0 top-0 h-[10px] w-[10px] rounded-full bg-warning-500"></div>
-          )}
-
-          {user?.userType === UserType.Admin && AdminUnraedCount > 0 && (
-            <div className="absolute left-0 top-0 h-[10px] w-[10px] rounded-full bg-warning-500"></div>
-          )}
-        </div>
+        <LeftSideHeaders
+          showSidebar={showSidebar}
+          setShowSidebar={setShowSidebar}
+        />
 
         <div className="flex w-1/3 items-center justify-center">
           <Logo small />
         </div>
 
-        <div className="w-1/3">
-          {pathname == '/dashboard' ? (
-            <DashboardHeader handleOpenModal={handleOpenModal} />
-          ) : pathname == '/admin/dashboard' ? (
-            <AdminDashboardHeader handleOpenModal={handleOpenModal} />
-          ) : pathname.includes('/admin/support') ? (
-            <AdminSupportHeader handleOpenModal={handleOpenModal} />
-          ) : null}
-        </div>
+        <RightSideHeaders handleOpenModal={handleOpenModal} />
       </div>
 
       <Suspense fallback={<LoadingCircle />}>

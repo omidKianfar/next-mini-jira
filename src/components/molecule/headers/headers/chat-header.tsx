@@ -1,5 +1,5 @@
-import MyImage from '../../atom/image-components';
-import MyIcon from '../../atom/icon-components';
+import MyImage from '../../../atom/image-components';
+import MyIcon from '../../../atom/icon-components';
 import { ChatSidebar, UserType } from '@/src/types/global';
 import { stringSlicer } from '@/src/utils/string-slicer';
 import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';

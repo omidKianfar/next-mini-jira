@@ -1,9 +1,9 @@
 'use client';
 
-import MyIcon from '../../atom/icon-components';
+import MyIcon from '../../../atom/icon-components';
 import { ModalProps } from '@/src/types/global';
 
-const DashboardHeader = ({
+const AdminDashboardHeader = ({
   handleOpenModal,
 }: Pick<ModalProps, 'handleOpenModal'>) => {
   return (
@@ -11,22 +11,16 @@ const DashboardHeader = ({
       <MyIcon
         icon="filter"
         className="mr-2 cursor-pointer text-title text-primary-500 hover:text-primary-700 lg:mr-3 lg:text-h3"
-        onClick={() => handleOpenModal?.(3)}
+        onClick={() => handleOpenModal?.(5)}
       />
 
       <MyIcon
         icon="search"
         className="mr-2 cursor-pointer text-title text-primary-500 hover:text-primary-700 lg:mr-4 lg:text-h3"
-        onClick={() => handleOpenModal?.(2)}
-      />
-
-      <MyIcon
-        icon="add-task"
-        className="cursor-pointer text-title text-primary-500 hover:text-primary-700 lg:text-h3"
-        onClick={() => handleOpenModal?.(1)}
+        onClick={() => handleOpenModal?.(4)}
       />
     </div>
   );
 };
 
-export default DashboardHeader;
+export default AdminDashboardHeader;

@@ -9,7 +9,8 @@ const Logo = ({ small }: LogoProps) => {
 
   return (
     <div
-      className="flex cursor-pointer items-center justify-center py-2"
+      className="flex items-center justify-center py-2"
+      title="Go to landing page"
       onClick={navigation.landing}
     >
       <h1

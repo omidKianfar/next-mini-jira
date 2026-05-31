@@ -60,6 +60,7 @@ export const ICONS = {
   todo: 'ri:todo-line',
   wallet: 'streamline-freehand:cash-payment-bill',
   user: 'solar:user-bold-duotone',
+  upload: 'ic:round-upload',
 };
 
 export type IconName = keyof typeof ICONS;
