@@ -51,8 +51,8 @@ const LandingDashboard = () => {
             )}
           </div>
 
-          <p className="font-semibold">
-            {stringSlicer({ string: user?.userName as string, slice: 15 })}
+          <p className="text-label text-gray-400">
+            {stringSlicer({ string: user?.userName as string, slice: 10 })}
           </p>
 
           <div ref={dropdownRef}>

@@ -25,10 +25,10 @@ const LeftSideHeaders = ({ showSidebar, setShowSidebar }: HeaderProps) => {
       !isMobile ? (
         <div className="flex items-center gap-4">
           <Link
-            href="/contact"
+            href="/"
             className="text-body font-medium text-primary-500 hover:text-warning-500"
           >
-            Contact
+            Home
           </Link>
 
           <Link
@@ -36,6 +36,13 @@ const LeftSideHeaders = ({ showSidebar, setShowSidebar }: HeaderProps) => {
             className="text-body font-medium text-primary-500 hover:text-warning-500"
           >
             About
+          </Link>
+
+          <Link
+            href="/contact"
+            className="text-body font-medium text-primary-500 hover:text-warning-500"
+          >
+            Contact
           </Link>
         </div>
       ) : (
