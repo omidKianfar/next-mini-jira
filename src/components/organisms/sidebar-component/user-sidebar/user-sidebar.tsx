@@ -22,20 +22,21 @@ const UserSidebar = ({
       setShowSidebar,
     });
 
+  const HomePage =
+    pathName === '/' || pathName === '/about' || pathName === '/contact';
+
   return (
     <div className="mt-6 flex flex-col items-start justify-center">
       <Suspense fallback={<PageLoading />}>
         <div className="h-[45vh] overflow-y-auto">
-          {(pathName === '/' ||
-            pathName === '/about' ||
-            pathName === '/contact') &&
+          {HomePage &&
             LandingSidebarItems?.map((item: sidebarItemsType) => (
               <div key={item?.id} className="mb-4">
                 <SidebarActionItem item={item} />
               </div>
             ))}
 
-          {pathName !== '/' &&
+          {!HomePage &&
             user?.userType === UserType?.Client &&
             userSidebarItems?.map((item: sidebarItemsType) => (
               <div key={item?.id} className="mb-4">
@@ -43,7 +44,7 @@ const UserSidebar = ({
               </div>
             ))}
 
-          {pathName !== '/' &&
+          {!HomePage &&
             user?.userType === UserType?.Admin &&
             AdminSidebarItems?.map((item: sidebarItemsType) => (
               <div key={item?.id} className="mb-4">

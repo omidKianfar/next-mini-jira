@@ -22,6 +22,16 @@ export const SidebarItems = ({
   const LandingSidebarItems = useMemo<sidebarItemsType[]>(() => {
     const items: sidebarItemsType[] = [
       {
+        id: 'home',
+        icon: 'home',
+        title: 'home',
+        direction: () => {
+          navigation.landing();
+          setShowSidebar?.(false);
+        },
+        notification: { type: 'none' },
+      },
+      {
         id: 'profile',
         icon: 'profile',
         title: 'profile',
