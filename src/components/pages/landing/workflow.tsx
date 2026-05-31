@@ -1,14 +1,51 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
+import { MouseEvent } from 'react';
 import MyIcon from '../../atom/icon-components';
 import { IconName } from '../../atom/icon-components/icons';
 import { containerVariants, itemVariants, TECH_STACK } from './data';
 
 const WorkflowComponent = () => {
+  const mouseXProgress = useMotionValue(0);
+
+  const smoothXProgress = useSpring(mouseXProgress, {
+    stiffness: 500,
+    damping: 15,
+    mass: 0.2,
+  });
+
+  const background = useTransform(smoothXProgress, (x) => {
+    const start = x - 5;
+    const end = x + 5;
+
+    return `linear-gradient(115deg, 
+        transparent ${start}%, 
+        rgba(245, 158, 11, 0.2) ${x}%, 
+        transparent ${end}%
+      )`;
+  });
+
+  const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+    const { currentTarget, clientX } = event;
+    const { left, width } = currentTarget.getBoundingClientRect();
+
+    const xPercentage = ((clientX - left) / width) * 100;
+    mouseXProgress.set(xPercentage);
+  };
+
+  const handleMouseLeave = () => {
+    mouseXProgress.set(-50);
+  };
+
   return (
-    <div className="border-y border-gray-100 bg-white py-[32px]">
-      <div className="mx-auto px-4 text-center">
+    <motion.div
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ background }}
+      className="relative overflow-hidden border-y border-gray-100 bg-white py-[32px] transition-colors duration-500"
+    >
+      <div className="relative z-10 mx-auto px-4 text-center">
         <motion.p
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -23,7 +60,7 @@ const WorkflowComponent = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="flex flex-wrap items-center justify-between gap-x-6 gap-y-5 lg:justify-center lg:gap-x-12 lg:gap-y-10"
+          className="grid grid-cols-3 justify-items-center gap-x-4 gap-y-6 lg:flex lg:flex-wrap lg:items-center lg:justify-center lg:gap-x-12 lg:gap-y-10"
         >
           {TECH_STACK.map((tech, index) => (
             <motion.div
@@ -33,7 +70,7 @@ const WorkflowComponent = () => {
                 scale: 1.1,
                 color: '#F59E0B',
               }}
-              className="flex cursor-default items-center gap-3 transition-colors duration-300"
+              className="flex cursor-default items-center gap-2 transition-colors duration-300"
             >
               <MyIcon
                 icon={tech.icon as IconName}
@@ -47,7 +84,7 @@ const WorkflowComponent = () => {
           ))}
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
