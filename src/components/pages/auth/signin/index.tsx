@@ -68,25 +68,32 @@ const AuthComponent = () => {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center p-4">
-      <Logo />
+    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-slate-50/50 p-4">
+      <div className="mb-6">
+        <Logo />
+      </div>
 
-      <div className="flex flex-col items-center justify-center lg:flex-row">
+      <div className="flex flex-col items-center justify-center gap-8 lg:flex-row lg:gap-12">
         <MyImage
           src="/images/auth.png"
-          alt=""
-          width={isMobile ? 300 : 500}
-          height={isMobile ? 200 : 400}
+          alt="Auth Illustration"
+          width={isMobile ? 260 : 460}
+          height={isMobile ? 180 : 360}
           className="object-contain"
-          wrapperClass="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center"
-        />{' '}
-        <div className="w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-md lg:w-[500px]">
-          <h1 className="mb-8 text-center text-title font-bold text-warning-500">
+          wrapperClass="w-[280px] h-[180px] lg:w-[460px] lg:h-[360px] flex items-center justify-center"
+        />
+
+        <div className="w-[90vw] max-w-[440px] rounded-2xl border border-warning-200 bg-white p-6 pb-10 pt-8 shadow-sm lg:w-[440px]">
+          <h1 className="mb-8 text-center text-h4 font-extrabold text-warning-500">
             {pathname.includes('signin') ? 'Sign In' : 'Sign Up'}
           </h1>
 
           <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(authUser)} autoComplete="on">
+            <form
+              onSubmit={methods.handleSubmit(authUser)}
+              autoComplete="on"
+              className="space-y-5"
+            >
               <InputField
                 name="email"
                 label="Email"
@@ -120,43 +127,48 @@ const AuthComponent = () => {
                 }
               />
 
-              <div className="my-8 flex items-center justify-end">
-                <MyIcon
-                  icon={'google'}
-                  className={`${
-                    loading
-                      ? 'mr-20 cursor-not-allowed opacity-50 grayscale'
-                      : 'mr-[100px] cursor-pointer hover:bg-primary-200'
-                  } rounded-full p-2 text-h3 transition-all duration-200 hover:rotate-12`}
-                  onClick={!loading ? authGoogle : undefined}
-                />
+              <div className="flex items-center justify-between gap-4 pt-4">
+                <div className="flex items-center">
+                  <MyIcon
+                    icon={'google'}
+                    className={`rounded-full border border-gray-100 p-2.5 text-h3 shadow-sm transition-all duration-200 ${
+                      loading
+                        ? 'cursor-not-allowed opacity-50 grayscale'
+                        : 'cursor-pointer bg-white hover:rotate-12 hover:bg-slate-50'
+                    }`}
+                    onClick={!loading ? authGoogle : undefined}
+                  />
+                </div>
 
-                <ButtonNext type="submit" isLoading={loading}>
+                <ButtonNext
+                  type="submit"
+                  isLoading={loading}
+                  className="w-full min-w-[140px] sm:w-auto"
+                >
                   {pathname.includes('signin') ? 'Sign In' : 'Sign Up'}
                 </ButtonNext>
               </div>
             </form>
           </FormProvider>
 
-          <ButtonFreeClass
-            onClick={() =>
-              pathname.includes('signin')
-                ? navigation.signup()
-                : navigation.signin()
-            }
-            className="text-bodySm font-semibold text-warning-500 hover:text-warning-600"
-            icon={
+          <div className="mt-8 flex justify-center border-t border-gray-50 pt-4">
+            <ButtonFreeClass
+              onClick={() =>
+                pathname.includes('signin')
+                  ? navigation.signup()
+                  : navigation.signin()
+              }
+              className="flex items-center gap-1 text-label font-semibold text-warning-500 hover:text-warning-600"
+            >
+              {pathname.includes('signin')
+                ? "Don't have an account? Sign Up"
+                : 'Already have an account? Sign In'}
               <MyIcon
                 icon="arrow-right"
-                className="ml-1 mt-1 text-body"
-                onClick={() => setPasswordShow(true)}
+                className="translate-y-[1px] transform text-body"
               />
-            }
-          >
-            {pathname.includes('signin')
-              ? "Don't have an account? Sign Up"
-              : 'Already have an account? Sign In'}
-          </ButtonFreeClass>
+            </ButtonFreeClass>
+          </div>
         </div>
       </div>
     </div>
