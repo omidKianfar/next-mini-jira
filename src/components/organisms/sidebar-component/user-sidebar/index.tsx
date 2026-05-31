@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/src/hooks/auth/use-auth';
 import UserSidebar from './user-sidebar';
@@ -9,11 +10,30 @@ import { HeaderProps } from '@/src/types/global';
 const SideBar = ({ showSidebar, setShowSidebar }: HeaderProps) => {
   const { user } = useAuth();
 
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        showSidebar &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setShowSidebar?.(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showSidebar, setShowSidebar]);
+
   return (
     <motion.div
       variants={sidebarVariants}
       animate={showSidebar ? 'open' : 'closed'}
       initial="closed"
+      ref={dropdownRef}
       className="fixed top-[70px] z-50 h-full w-[220px] rounded-r-md border border-gray-300 bg-white/20 p-4 shadow-md backdrop-blur-md lg:top-[90px]"
     >
       <UserProfile setShowSidebar={setShowSidebar} user={user} />
