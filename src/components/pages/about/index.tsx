@@ -1,14 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import MyIcon from '../../atom/icon-components';
 import MyImage from '../../atom/image-components';
+import Link from 'next/link';
 
 const AboutComponent = () => {
   return (
     <div className="bg-white px-4 py-16 text-gray-600 lg:py-28">
       <div className="mx-auto max-w-5xl">
-        {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -18,13 +17,13 @@ const AboutComponent = () => {
           <h1 className="mb-4 text-h3 font-extrabold text-gray-800 lg:text-h1">
             Behind <span className="text-warning-500">Mini Jira</span>
           </h1>
+
           <p className="mx-auto max-w-2xl text-body leading-relaxed text-slate-500">
             A high-performance project management tool designed to strip away
             the bloat and deliver speed, precision, and real-time collaboration.
           </p>
         </motion.div>
 
-        {/* The Motivation Section */}
         <div className="mb-20 grid items-center gap-12 lg:mb-32 lg:grid-cols-2 lg:gap-16">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -35,11 +34,13 @@ const AboutComponent = () => {
             <h2 className="mb-4 text-title font-bold text-gray-800">
               The Motivation
             </h2>
+
             <p className="mb-4 text-body leading-relaxed text-slate-600">
               Traditional project management tools can feel heavy, cluttered,
               and slow. Mini Jira was engineered from scratch to tackle these
               exact pain points.
             </p>
+
             <p className="text-body leading-relaxed text-slate-600">
               By focusing heavily on frontend performance, state hydration, and
               optimistic UI updates, this platform ensures that managing your
@@ -64,11 +65,11 @@ const AboutComponent = () => {
           </motion.div>
         </div>
 
-        {/* Technical Engineering Challenges (جایگزین بخش تکراری) */}
         <div className="mb-20 lg:mb-32">
           <h2 className="mb-4 text-center text-title font-bold text-gray-800">
             Engineering Challenges
           </h2>
+
           <p className="mx-auto mb-12 max-w-xl text-center text-body text-slate-500">
             How complex frontend engineering problems were solved during
             development.
@@ -81,18 +82,17 @@ const AboutComponent = () => {
               viewport={{ once: true }}
               className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm"
             >
-              <h3 className="mb-2 flex items-center gap-2 font-bold text-gray-800">
-                <span className="bg-danger-50 text-danger-500 flex h-6 w-6 items-center justify-center rounded-full text-label font-bold">
-                  1
-                </span>
-                Challenge: Real-time State Desynchronization
+              <h3 className="mb-2 flex items-center gap-2 font-bold text-primary-500">
+                Real-time State Desynchronization
               </h3>
-              <p className="pl-8 text-label leading-relaxed text-slate-600">
-                <strong className="text-gray-700">Solution:</strong> Implemented
-                a strict event-driven state architecture using Socket.io
-                combined with optimistic UI updates. If a server synchronization
-                fails, the UI gracefully rolls back to the previous stable
-                state, preventing layout shifts and ensuring data consistency.
+
+              <p className="text-label leading-relaxed text-slate-600">
+                <strong className="text-warning-500">Solution:</strong>{' '}
+                Implemented a strict event-driven state architecture using
+                Socket.io combined with optimistic UI updates. If a server
+                synchronization fails, the UI gracefully rolls back to the
+                previous stable state, preventing layout shifts and ensuring
+                data consistency.
               </p>
             </motion.div>
 
@@ -102,15 +102,13 @@ const AboutComponent = () => {
               viewport={{ once: true }}
               className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm"
             >
-              <h3 className="mb-2 flex items-center gap-2 font-bold text-gray-800">
-                <span className="bg-danger-50 text-danger-500 flex h-6 w-6 items-center justify-center rounded-full text-label font-bold">
-                  2
-                </span>
-                Challenge: Kanban Board Performance Dropping on Drag
+              <h3 className="mb-2 flex items-center gap-2 font-bold text-primary-500">
+                Kanban Board Performance Dropping on Drag
               </h3>
-              <p className="pl-8 text-label leading-relaxed text-slate-600">
-                <strong className="text-gray-700">Solution:</strong> Engineered
-                optimized collision detection algorithms using{' '}
+
+              <p className="text-label leading-relaxed text-slate-600">
+                <strong className="text-warning-500">Solution:</strong>{' '}
+                Engineered optimized collision detection algorithms using{' '}
                 <code className="rounded bg-slate-100 px-1 text-warning-600">
                   @dnd-kit
                 </code>
@@ -122,13 +120,12 @@ const AboutComponent = () => {
           </div>
         </div>
 
-        {/* About the Developer Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center gap-8 rounded-2xl border border-gray-100 bg-slate-50/50 p-8 md:flex-row lg:p-12"
+          className="flex flex-col items-center gap-8 rounded-2xl border border-gray-100 bg-slate-50/50 p-8 shadow-sm md:flex-row lg:p-12"
         >
           <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-warning-400 bg-white shadow-inner">
             <span className="text-h4 font-extrabold text-warning-500">OK</span>
@@ -138,6 +135,7 @@ const AboutComponent = () => {
             <h2 className="mb-2 text-title font-bold text-gray-800">
               About the Developer
             </h2>
+
             <p className="mb-4 max-w-2xl text-body leading-relaxed text-slate-600">
               Hi, I’m Omid Kianfar. A Frontend Engineer passionate about
               crafting highly interactive, performant, and production-ready web
@@ -145,10 +143,25 @@ const AboutComponent = () => {
               advanced React patterns, state management solutions, and
               micro-interactions.
             </p>
+
             <div className="flex justify-center gap-4 text-label font-semibold text-warning-600 md:justify-start">
-              <span className="cursor-pointer hover:underline">GitHub</span>
+              <Link
+                target="_blank"
+                href="https://github.com/omidKianfar"
+                className="cursor-pointer hover:underline"
+              >
+                GitHub
+              </Link>
+
               <span className="text-gray-300">•</span>
-              <span className="cursor-pointer hover:underline">LinkedIn</span>
+
+              <Link
+                target="_blank"
+                href="https://linkedin.com/in/kianfar-omid1990/"
+                className="cursor-pointer hover:underline"
+              >
+                LinkedIn
+              </Link>
             </div>
           </div>
         </motion.div>
