@@ -12,7 +12,7 @@ const RightSideHeaders = ({
 
   return (
     <div className="w-1/3">
-      {pathname == '/' ? (
+      {pathname == '/' || pathname == '/about' || pathname == '/contact' ? (
         <LandingDashboard />
       ) : pathname == '/dashboard' ? (
         <DashboardHeader handleOpenModal={handleOpenModal} />

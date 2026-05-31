@@ -21,18 +21,19 @@ const LeftSideHeaders = ({ showSidebar, setShowSidebar }: HeaderProps) => {
 
   return (
     <div className="relative flex w-1/3 items-center justify-start">
-      {pathname === '/' && !isMobile ? (
+      {(pathname === '/' || pathname === '/about' || pathname === '/contact') &&
+      !isMobile ? (
         <div className="flex items-center gap-4">
           <Link
             href="/contact"
-            className="text-bodySm font-medium text-primary-500 hover:text-warning-500 lg:text-body"
+            className="text-body font-medium text-primary-500 hover:text-warning-500"
           >
             Contact
           </Link>
 
           <Link
             href="/about"
-            className="text-bodySm font-medium text-primary-500 hover:text-warning-500 lg:text-body"
+            className="text-body font-medium text-primary-500 hover:text-warning-500"
           >
             About
           </Link>
