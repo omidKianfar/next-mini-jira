@@ -26,7 +26,9 @@ const UserSidebar = ({
     <div className="mt-6 flex flex-col items-start justify-center">
       <Suspense fallback={<PageLoading />}>
         <div className="h-[45vh] overflow-y-auto">
-          {pathName === '/' &&
+          {(pathName === '/' ||
+            pathName === '/about' ||
+            pathName === '/contact') &&
             LandingSidebarItems?.map((item: sidebarItemsType) => (
               <div key={item?.id} className="mb-4">
                 <SidebarActionItem item={item} />
