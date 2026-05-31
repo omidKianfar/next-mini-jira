@@ -19,7 +19,7 @@ const FEATURES = [
   {
     title: 'Advanced Media Engine',
     description:
-      'Native audio recording with RecordRTC and client-side media processing via FFmpeg integration.',
+      'Native audio recording with RecordRTC and client-side media processing via FFmpeg integration',
     icon: '🎙️',
   },
   {

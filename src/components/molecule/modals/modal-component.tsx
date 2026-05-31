@@ -1,5 +1,5 @@
 import { stringSlicer } from '@/src/utils/string-slicer';
-import ButtonNext from '../../atom/buttons-component/button-next';
+import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
 
 interface ModalComponentProps {
   handleClose: () => void;
@@ -23,14 +23,14 @@ const ModalComponent = ({
       </h1>
 
       {description && !isDelete && (
-        <p className="mt-4 break-words rounded-lg bg-gray-100 p-2 text-body capitalize text-blue-500 shadow-md">
-          {stringSlicer({ string: description as string, slice: 100 })}
+        <p className="text-bodysm mt-4 break-words rounded-lg bg-gray-50 p-4 shadow-md">
+          {description}
         </p>
       )}
 
       {description && isDelete && (
         <div
-          className="prose prose-sm mt-4 break-words rounded-lg bg-gray-100 p-2 text-body capitalize text-blue-500 shadow-md"
+          className="prose prose-sm mt-4 break-words rounded-lg bg-gray-50 p-2 text-body capitalize text-primary-500 shadow-md"
           dangerouslySetInnerHTML={{
             __html: stringSlicer({ string: description as string, slice: 100 }),
           }}
@@ -38,11 +38,19 @@ const ModalComponent = ({
       )}
 
       <div className="mt-4 flex justify-center gap-4 lg:justify-end">
-        <ButtonNext onClick={handleClose}>Cancel</ButtonNext>
+        <ButtonFreeClass
+          onClick={handleClose}
+          className="w-[150px] rounded-sm border-2 border-primary-500 bg-white py-2 text-body text-primary-500 hover:bg-primary-500 hover:text-white"
+        >
+          Cancel
+        </ButtonFreeClass>
 
-        <ButtonNext onClick={clickHandler}>
+        <ButtonFreeClass
+          onClick={clickHandler}
+          className="w-[150px] rounded-sm border-2 border-warning-500 bg-white py-2 text-body text-warning-500 hover:bg-warning-500 hover:text-white"
+        >
           {isDelete ? 'Delete' : 'Back'}
-        </ButtonNext>
+        </ButtonFreeClass>
       </div>
     </div>
   );

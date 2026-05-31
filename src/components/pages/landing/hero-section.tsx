@@ -6,13 +6,15 @@ import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 import ButtonNext from '../../atom/buttons-component/button-next';
 import MyIcon from '../../atom/icon-components';
 import MyImage from '../../atom/image-components';
+import { useAuth } from '@/src/hooks/auth/use-auth';
 
 const HeroSectionComponent = () => {
   const isMobile = useIsMobile();
   const navigation = useNavigation();
+  const { user } = useAuth();
 
   return (
-    <div className="relative overflow-hidden px-4 py-8 lg:py-36">
+    <div className="relative overflow-hidden px-4 py-8 lg:py-24">
       <div className="flex justify-center">
         <div className="flex flex-col items-center gap-16 lg:flex-row">
           <div className="flex-1 text-center lg:text-left">
@@ -26,24 +28,27 @@ const HeroSectionComponent = () => {
             </motion.div>
 
             <h1 className="mb-6 text-h4 font-extrabold tracking-tight text-gray-500 lg:text-h1">
-              The Next Gen
+              The Next-Gen
               <br />
               <span className="text-warning-500">Project Manager</span>
             </h1>
 
-            <p className="mx-auto mb-10 max-w-[500px] text-body leading-relaxed text-slate-600 lg:mx-0">
-              A professional Mini Jira engineered for speed and precision.
+            <p className="mx-auto mb-10 max-w-[500px] text-body leading-relaxed text-slate-600 lg:mx-0 lg:mb-16">
+              A high-performance project management tool engineered for speed
+              and precision.
             </p>
 
-            <div className="flex w-full justify-center lg:justify-start">
-              <ButtonNext
-                onClick={() => navigation.signin()}
-                className="max-w-[140px]"
-                icon={<MyIcon icon="arrow-right" className="ml-2" />}
-              >
-                Signin
-              </ButtonNext>
-            </div>
+            {!user && (
+              <div className="flex w-full justify-center lg:justify-start">
+                <ButtonNext
+                  onClick={() => navigation.signin()}
+                  className="max-w-[200px]"
+                  icon={<MyIcon icon="arrow-right" className="ml-2" />}
+                >
+                  Get Started
+                </ButtonNext>
+              </div>
+            )}
           </div>
 
           <motion.div

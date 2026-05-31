@@ -91,13 +91,13 @@ const AdminDashboardComponent = () => {
           {sort ? (
             <MyIcon
               icon="ASC"
-              className="cursor-pointer text-h4 text-blue-400"
+              className="cursor-pointer text-h4 text-primary-400"
               onClick={SortHandler}
             />
           ) : (
             <MyIcon
               icon="DSCE"
-              className="cursor-pointer text-h4 text-blue-400"
+              className="cursor-pointer text-h4 text-primary-400"
               onClick={SortHandler}
             />
           )}

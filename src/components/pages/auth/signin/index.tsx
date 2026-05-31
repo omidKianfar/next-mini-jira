@@ -82,7 +82,7 @@ const AuthComponent = () => {
         />{' '}
         <div className="w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-md lg:w-[500px]">
           <h1 className="mb-8 text-center text-title font-bold text-warning-500">
-            {pathname.includes('signin') ? 'Signin' : 'Signup'}
+            {pathname.includes('signin') ? 'Sign In' : 'Sign Up'}
           </h1>
 
           <FormProvider {...methods}>
@@ -130,7 +130,7 @@ const AuthComponent = () => {
                 />
 
                 <ButtonNext type="submit" isLoading={loading}>
-                  {pathname.includes('signin') ? 'Signin' : 'Signup'}
+                  {pathname.includes('signin') ? 'Sign In' : 'Sign Up'}
                 </ButtonNext>
               </div>
             </form>
@@ -142,7 +142,7 @@ const AuthComponent = () => {
                 ? navigation.signup()
                 : navigation.signin()
             }
-            className="text-body font-semibold text-warning-500 hover:text-warning-600"
+            className="text-bodySm font-semibold text-warning-500 hover:text-warning-600"
             icon={
               <MyIcon
                 icon="arrow-right"
@@ -151,7 +151,9 @@ const AuthComponent = () => {
               />
             }
           >
-            {pathname.includes('signin') ? 'Signup Page' : 'Signin Page'}
+            {pathname.includes('signin')
+              ? "Don't have an account? Sign Up"
+              : 'Already have an account? Sign In'}
           </ButtonFreeClass>
         </div>
       </div>

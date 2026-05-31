@@ -12,24 +12,6 @@ const FooterComponent = () => {
           passion by
           <span className="ml-1 font-bold text-gray-500">Omid Kianfar</span>.
         </p>
-
-        <div className="mt-4 flex items-center justify-center">
-          <MyIcon
-            icon="github"
-            onClick={() =>
-              router.push('https://github.com/omidKianfar/next-mini-jira.git')
-            }
-            className="mr-8 cursor-pointer text-h1 hover:text-primary-700"
-          />
-
-          <MyIcon
-            icon="linkedin"
-            onClick={() =>
-              router.push('https://www.linkedin.com/in/kianfar-omid1990/')
-            }
-            className="mr-8 cursor-pointer text-h1 text-primary-500 hover:text-primary-700"
-          />
-        </div>
       </div>
     </footer>
   );

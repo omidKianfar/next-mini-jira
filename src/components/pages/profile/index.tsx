@@ -138,8 +138,8 @@ const ProfileComponent = () => {
           className={`flex w-full flex-col items-center justify-center p-4 ${pathName.includes('/signup') && 'min-h-screen'}`}
         >
           <div className="flex flex-col items-center justify-center lg:flex-row">
-            <div className="mb-10 w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-md lg:mb-0 lg:w-[500px]">
-              <div className="mb-4 flex items-center justify-between">
+            <div className="mb-4 w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-md lg:mb-0 lg:w-[500px]">
+              <div className="flex items-center justify-between">
                 <ButtonBack onClick={handelBack} />
 
                 {user?.userType === UserType.Client &&
@@ -165,13 +165,13 @@ const ProfileComponent = () => {
                 />
               </ModalContainer>
 
-              <h1 className="mb-8 text-center text-title font-bold text-warning-500">
+              <h1 className="mb-4 text-center text-title font-bold text-warning-500">
                 Profile
               </h1>
 
               <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(setProfileHandler)}>
-                  <div className="mb-4">
+                  <div>
                     <AvatarUpload
                       photo={methods.watch('photo')}
                       uploadHandler={uploadPhotoHandler}

@@ -86,7 +86,7 @@ const AvatarUpload = ({
         />
 
         <MyIcon
-          icon="download"
+          icon="upload"
           className="cursor-pointer text-h3 text-primary-500"
           onClick={photoRefHandler}
         />

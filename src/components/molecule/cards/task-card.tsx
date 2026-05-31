@@ -87,7 +87,7 @@ const TaskCardComponent = ({ id, task }: TaskCardProps) => {
                 >
                   <MyIcon
                     icon="todo"
-                    className={`cursor-pointer text-subtitle text-warning-500 hover:text-blue-500`}
+                    className={`cursor-pointer text-subtitle text-warning-500 hover:text-primary-500`}
                   />
                 </div>
               )}
@@ -99,7 +99,7 @@ const TaskCardComponent = ({ id, task }: TaskCardProps) => {
                 >
                   <MyIcon
                     icon="progress"
-                    className={`cursor-pointer text-subtitle text-warning-500 hover:text-blue-500`}
+                    className={`cursor-pointer text-subtitle text-warning-500 hover:text-primary-500`}
                   />
                 </div>
               )}
@@ -111,7 +111,7 @@ const TaskCardComponent = ({ id, task }: TaskCardProps) => {
                 >
                   <MyIcon
                     icon="done"
-                    className={`cursor-pointer text-subtitle text-warning-500 hover:text-blue-500`}
+                    className={`cursor-pointer text-subtitle text-warning-500 hover:text-primary-500`}
                   />
                 </div>
               )}
@@ -123,7 +123,7 @@ const TaskCardComponent = ({ id, task }: TaskCardProps) => {
             >
               <MyIcon
                 icon="arrow-right"
-                className="cursor-pointer text-subtitle text-warning-500 hover:text-blue-500"
+                className="cursor-pointer text-subtitle text-warning-500 hover:text-primary-500"
               />
             </div>
           </div>
