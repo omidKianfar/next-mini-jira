@@ -31,6 +31,10 @@ const PasswordComponent = () => {
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
 
+  const isSignupPage = pathName.includes('/signup');
+  const isProfilePage = pathName.includes('profile');
+  const isResetPasswordMode = pathName.includes('/password');
+
   const defaultValues: SignPropsType = {
     email: user?.email ?? '',
     password: '',
@@ -42,57 +46,57 @@ const PasswordComponent = () => {
     mode: 'onSubmit',
   });
 
+  const { reset, handleSubmit } = methods;
+
   useEffect(() => {
     if (user) {
-      methods.reset({
+      reset({
         email: user?.email ?? '',
         password: '',
       });
     }
-  }, [user, methods]);
+  }, [user, reset]);
 
   const setProfileHandler = async (values: SignPropsType) => {
     setLoading(true);
-
     try {
-      if (pathName.includes('/signup')) {
-        await updatePasswordGoogle({
-          newPassword: values.password,
-        });
+      if (isSignupPage) {
+        await updatePasswordGoogle({ newPassword: values.password });
       } else {
         await addOrUpdatePasswordForCurrentUser({
           newPassword: values.password,
         });
       }
-    } catch (error: any) {
+    } catch (error) {
     } finally {
       setLoading(false);
     }
   };
 
-  const handelBack = () => {
-    navigation.profile();
-  };
-
   return (
     <FramerMotion>
       <div
-        className={`flex w-full flex-col items-center justify-center p-4 ${pathName.includes('/signup') && 'min-h-screen'}`}
+        className={`flex w-full flex-col items-center justify-center p-4 md:p-8 ${
+          isSignupPage ? 'min-h-screen' : ''
+        }`}
       >
-        <div className="flex flex-col items-center justify-center lg:flex-row">
-          <div className="mb-10 w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-md lg:mb-0 lg:w-[500px]">
-            {pathName.includes('profile') && (
-              <div className="mb-2">
-                <ButtonBack onClick={handelBack} />
+        <div className="flex w-full max-w-6xl flex-col items-center justify-center gap-8 lg:flex-row lg:gap-16">
+          <div className="w-full max-w-[500px] rounded-2xl border-2 border-warning-300 bg-white p-6 pt-8 shadow-md transition-all">
+            {isProfilePage && (
+              <div className="mb-4">
+                <ButtonBack onClick={() => navigation.profile()} />
               </div>
             )}
 
-            <h1 className="mb-8 text-center text-title font-bold text-warning-500">
+            <h1 className="mb-8 text-center text-h4 font-extrabold tracking-tight text-warning-500">
               Password
             </h1>
 
             <FormProvider {...methods}>
-              <form onSubmit={methods.handleSubmit(setProfileHandler)}>
+              <form
+                onSubmit={handleSubmit(setProfileHandler)}
+                className="space-y-5"
+              >
                 <InputField
                   name="email"
                   label="Email"
@@ -104,49 +108,52 @@ const PasswordComponent = () => {
 
                 <InputField
                   name="password"
-                  label={
-                    pathName.includes('/password') ? 'New Password' : 'Password'
-                  }
+                  label={isResetPasswordMode ? 'New Password' : 'Password'}
                   placeholder={
-                    pathName.includes('/password')
+                    isResetPasswordMode
                       ? 'Enter your new password'
                       : 'Enter your password'
                   }
                   type={passwordShow ? 'text' : 'password'}
-                  autoComplete="current-password"
+                  autoComplete={
+                    isResetPasswordMode ? 'new-password' : 'current-password'
+                  }
                   icon={
                     passwordShow ? (
                       <MyIcon
                         icon="show"
-                        className="cursor-pointer text-success-400"
+                        className="cursor-pointer text-success-500 transition-colors hover:text-success-600"
                         onClick={() => setPasswordShow(false)}
                       />
                     ) : (
                       <MyIcon
                         icon="hide"
-                        className="cursor-pointer text-gray-400"
+                        className="cursor-pointer text-slate-400 transition-colors hover:text-slate-500"
                         onClick={() => setPasswordShow(true)}
                       />
                     )
                   }
                 />
 
-                <div className="mt-6 flex items-center justify-end">
+                <div className="flex items-center justify-end pt-2">
                   <ButtonNext type="submit" isLoading={loading}>
-                    {pathName.includes('/password') ? 'Save' : 'Next'}
+                    {isResetPasswordMode ? 'Save' : 'Next'}
                   </ButtonNext>
                 </div>
               </form>
             </FormProvider>
           </div>
-          <MyImage
-            src="/images/set-password.svg"
-            alt=""
-            width={isMobile ? 300 : 500}
-            height={isMobile ? 200 : 400}
-            className="object-contain"
-            wrapperClass="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center"
-          />
+
+          <div className="flex w-full max-w-[500px] items-center justify-center">
+            <MyImage
+              src="/images/set-password.svg"
+              alt="Set Password Illustration"
+              width={isMobile ? 280 : 450}
+              height={isMobile ? 180 : 350}
+              className="object-contain"
+              wrapperClass="w-full h-auto flex items-center justify-center"
+            />
+          </div>
         </div>
       </div>
     </FramerMotion>

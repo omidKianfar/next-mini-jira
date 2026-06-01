@@ -20,7 +20,7 @@ const PlanCardComponent = ({
 
       <p className="break-all font-semibold">{description}</p>
 
-      <div className="absolute bottom-0 left-[25%] lg:bottom-8 lg:left-[30%]">
+      <div className="absolute bottom-0 left-[30%] lg:bottom-8 lg:left-[35%]">
         {icon}
       </div>
     </div>

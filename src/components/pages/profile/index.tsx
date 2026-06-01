@@ -11,7 +11,6 @@ import { useImageProcessor } from '@/src/hooks/image-processor/use-image-process
 import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
 import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/use-require-active-status';
 import { useRequirePaymentStatus } from '@/src/hooks/pages-user-status-require/use-require-payment-status';
-import PageLoading from '../../common/page-loading';
 import FramerMotion from '../../atom/animation-component';
 import ButtonBack from '../../atom/buttons-component/button-back';
 import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
@@ -47,6 +46,7 @@ const ProfileComponent = () => {
 
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const defaultValues: ProfileProps = {
     photo: user?.photo ?? '',
@@ -60,31 +60,37 @@ const ProfileComponent = () => {
     mode: 'onSubmit',
   });
 
+  const { isDirty } = methods.formState;
+
   useEffect(() => {
-    if (user) {
+    if (user && !isDirty) {
       methods.reset({
         photo: user.photo ?? '',
         userName: user.userName ?? '',
         birthday: user.birthday ?? '',
       });
     }
-  }, [user, methods]);
+  }, [user, isDirty, methods]);
 
   const uploadPhotoHandler = async (file: File) => {
-    const finalFile = await processImage(file);
+    try {
+      const finalFile = await processImage(file);
+      const uploadedUrl = await upload({
+        file: finalFile,
+        avatar: true,
+        userId: user?.userId as string,
+      });
 
-    const uploadedUrl = await upload({
-      file: finalFile,
-      avatar: true,
-      userId: user?.userId as string,
-    });
-
-    methods.setValue('photo', uploadedUrl as string);
-    reset();
+      methods.setValue('photo', uploadedUrl as string, { shouldDirty: true });
+      reset();
+    } catch (err) {
+      setServerError('Failed to upload image. Please try again.');
+    }
   };
 
   const setProfileHandler = async (values: ProfileProps) => {
     setLoading(true);
+    setServerError(null);
 
     try {
       await saveUserProfile({
@@ -95,21 +101,18 @@ const ProfileComponent = () => {
           birthday: values?.birthday,
         },
       });
-
       reset();
     } catch (error: any) {
+      setServerError(
+        error?.message || 'Something went wrong. Please try again.'
+      );
     } finally {
       setLoading(false);
     }
   };
 
-  const handleOpenModal = () => {
-    setOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setOpen(false);
-  };
+  const handleOpenModal = () => setOpen(true);
+  const handleCloseModal = () => setOpen(false);
 
   const handelBack = () => {
     if (pathName.includes('signup')) {
@@ -123,98 +126,110 @@ const ProfileComponent = () => {
     }
   };
 
-  const goPasswordHandler = () => {
-    navigation.changePassword();
-  };
-
-  const clickHandler = () => {
-    changeStep('0');
-  };
+  const goPasswordHandler = () => navigation.changePassword();
+  const clickHandler = () => changeStep('0');
 
   return (
-    <Suspense fallback={<PageLoading />}>
-      <FramerMotion>
-        <div
-          className={`flex w-full flex-col items-center justify-center p-4 ${pathName.includes('/signup') && 'min-h-screen'}`}
-        >
-          <div className="flex flex-col items-center justify-center lg:flex-row">
-            <div className="mb-4 w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-4 pt-8 shadow-md lg:mb-0 lg:w-[500px]">
-              <div className="flex items-center justify-between">
-                <ButtonBack onClick={handelBack} />
+    <FramerMotion>
+      <div
+        className={`flex w-full flex-col items-center justify-center p-4 ${pathName.includes('/signup') && 'min-h-screen'}`}
+      >
+        <div className="flex flex-col items-center justify-center lg:flex-row lg:gap-12">
+          <div className="mb-4 w-[90vw] rounded-2xl border border-warning-400 bg-white p-6 pb-8 shadow-sm lg:mb-0 lg:w-[480px]">
+            <div className="mb-4 flex items-center justify-between">
+              <ButtonBack onClick={handelBack} />
 
-                {user?.userType === UserType.Client &&
-                  pathName.includes('profile') && (
-                    <ButtonFreeClass
-                      className="ml-4 text-primary-500 hover:text-primary-600"
-                      onClick={goPasswordHandler}
-                      icon={
-                        <MyIcon icon="arrow-right" className="ml-2 text-body" />
-                      }
-                    >
-                      Password
-                    </ButtonFreeClass>
-                  )}
-              </div>
+              {user?.userType === UserType.Client &&
+                pathName.includes('profile') && (
+                  <ButtonFreeClass
+                    className="font-semibold text-warning-500 hover:text-warning-600"
+                    onClick={goPasswordHandler}
+                    icon={
+                      <MyIcon icon="arrow-right" className="ml-1 text-body" />
+                    }
+                  >
+                    Password
+                  </ButtonFreeClass>
+                )}
+            </div>
 
-              <ModalContainer open={open} handleClose={handleCloseModal}>
-                <ModalComponent
-                  handleClose={handleCloseModal}
-                  clickHandler={clickHandler}
-                  title={backModalMessage.title}
-                  description={backModalMessage.description}
-                />
-              </ModalContainer>
+            <ModalContainer open={open} handleClose={handleCloseModal}>
+              <ModalComponent
+                handleClose={handleCloseModal}
+                clickHandler={clickHandler}
+                title={backModalMessage.title}
+                description={backModalMessage.description}
+              />
+            </ModalContainer>
 
-              <h1 className="mb-4 text-center text-title font-bold text-warning-500">
-                Profile
-              </h1>
+            <h1 className="mb-6 text-center text-h4 font-extrabold text-warning-500">
+              Profile
+            </h1>
 
-              <FormProvider {...methods}>
-                <form onSubmit={methods.handleSubmit(setProfileHandler)}>
-                  <div>
+            <FormProvider {...methods}>
+              <form
+                onSubmit={methods.handleSubmit(setProfileHandler)}
+                className="space-y-5"
+              >
+                <div className="flex justify-center py-2">
+                  <Suspense
+                    fallback={
+                      <div className="h-24 w-24 animate-pulse rounded-full bg-gray-100" />
+                    }
+                  >
                     <AvatarUpload
                       photo={methods.watch('photo')}
                       uploadHandler={uploadPhotoHandler}
                       uploading={uploading}
                       progress={progress}
                     />
-                  </div>
+                  </Suspense>
+                </div>
 
-                  <InputField
-                    name="userName"
-                    label="Username"
-                    placeholder="Enter your username"
-                    icon={
-                      <MyIcon
-                        icon="user"
-                        className="text-subtitle text-gray-600"
-                      />
-                    }
-                  />
+                <InputField
+                  name="userName"
+                  label="Username"
+                  placeholder="Enter your username"
+                  icon={
+                    <MyIcon
+                      icon="user"
+                      className="text-subtitle text-gray-400"
+                    />
+                  }
+                />
 
-                  <DateInputField name="birthday" label="Birthday" />
+                <DateInputField name="birthday" label="Birthday" />
 
-                  <div className="mt-6 flex items-center justify-end">
-                    <ButtonNext type="submit" isLoading={loading}>
-                      {pathName.includes('profile') ? 'Save' : 'Next'}
-                    </ButtonNext>
-                  </div>
-                </form>
-              </FormProvider>
-            </div>
+                {serverError && (
+                  <p className="text-danger-500 bg-danger-50/50 border-danger-100 rounded-lg border p-3 text-label font-medium">
+                    {serverError}
+                  </p>
+                )}
 
-            <MyImage
-              src="/images/profile.svg"
-              alt=""
-              width={isMobile ? 300 : 500}
-              height={isMobile ? 200 : 400}
-              className="object-contain"
-              wrapperClass="w-[300px] h-[200px] lg:w-[500px] lg:h-[400px] flex items-center justify-center"
-            />
+                <div className="flex items-center justify-end pt-2">
+                  <ButtonNext
+                    type="submit"
+                    isLoading={loading}
+                    className="w-full min-w-[120px] sm:w-auto"
+                  >
+                    {pathName.includes('profile') ? 'Save' : 'Next'}
+                  </ButtonNext>
+                </div>
+              </form>
+            </FormProvider>
           </div>
+
+          <MyImage
+            src="/images/profile.svg"
+            alt="Profile Illustration"
+            width={isMobile ? 260 : 460}
+            height={isMobile ? 180 : 360}
+            className="object-contain"
+            wrapperClass="w-[280px] h-[180px] lg:w-[460px] lg:h-[360px] flex items-center justify-center"
+          />
         </div>
-      </FramerMotion>
-    </Suspense>
+      </div>
+    </FramerMotion>
   );
 };
 

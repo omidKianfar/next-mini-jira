@@ -19,8 +19,8 @@ import { FormValues } from '../type';
 const AuthComponent = () => {
   const navigation = useNavigation();
   const pathname = usePathname();
-  const { signinWithEmail, signupWithEmail, googleSignin } = useAuth();
   const isMobile = useIsMobile();
+  const { signinWithEmail, signupWithEmail, googleSignin } = useAuth();
 
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
@@ -50,7 +50,6 @@ const AuthComponent = () => {
           password: values?.password,
         });
       }
-    } catch (error: any) {
     } finally {
       setLoading(false);
     }
@@ -61,7 +60,6 @@ const AuthComponent = () => {
 
     try {
       await googleSignin();
-    } catch (error: any) {
     } finally {
       setLoading(false);
     }
@@ -153,6 +151,12 @@ const AuthComponent = () => {
 
           <div className="mt-8 flex justify-center border-t border-gray-50 pt-4">
             <ButtonFreeClass
+              icon={
+                <MyIcon
+                  icon="arrow-right"
+                  className="translate-y-[1px] transform text-body"
+                />
+              }
               onClick={() =>
                 pathname.includes('signin')
                   ? navigation.signup()
@@ -163,10 +167,6 @@ const AuthComponent = () => {
               {pathname.includes('signin')
                 ? "Don't have an account? Sign Up"
                 : 'Already have an account? Sign In'}
-              <MyIcon
-                icon="arrow-right"
-                className="translate-y-[1px] transform text-body"
-              />
             </ButtonFreeClass>
           </div>
         </div>

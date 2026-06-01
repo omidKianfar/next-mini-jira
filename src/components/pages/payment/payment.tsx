@@ -17,7 +17,6 @@ const ChoosePlanComponent = lazy(() => import('./ChoosePlan'));
 const PlanComponent = () => {
   const pathName = usePathname();
   const navigation = useNavigation();
-
   const { changeStep, user } = useAuth();
   const { choosePlan } = usePlanAction();
 
@@ -31,12 +30,11 @@ const PlanComponent = () => {
   const isDashboard = pathName.includes('/dashboard');
 
   const payment = user?.payment;
-
   const hasActivePayment = Boolean(
-    payment?.endAt && now.isBefore(payment.endAt)
+    payment?.endAt && now.isBefore(dayjs(payment.endAt))
   );
 
-  const BackToPlan = () => {
+  const handleBackToPlan = () => {
     if (isSignupPage) {
       changeStep('2');
     } else {
@@ -44,33 +42,43 @@ const PlanComponent = () => {
     }
   };
 
-  const BackDashboard = () => navigation.dashboard();
+  const handleBackDashboard = () => navigation.dashboard();
 
   const choosePlanHandler = async (selectedPlan: PlanType) => {
     setLoading(true);
-    await choosePlan({ selectedPlan, setLoading });
-  };
 
-  if (loading) return <PageLoading />;
+    try {
+      await choosePlan({ selectedPlan, setLoading });
+    } catch (error) {
+      setLoading(false);
+    }
+  };
 
   return (
     <Suspense fallback={<PageLoading />}>
       <FramerMotion>
         <div
-          className={`flex w-full flex-col items-center justify-center p-4 ${
+          className={`relative flex w-full flex-col items-center justify-center ${
             isSignupPage ? 'min-h-screen' : ''
           }`}
         >
+          {loading && (
+            <div className="absolute inset-0 z-50 flex items-center justify-center rounded-xl bg-white/60 backdrop-blur-[1px] transition-all duration-200">
+              <PageLoading />
+            </div>
+          )}
+
           {isDashboard && hasActivePayment ? (
             <ActivePaymentComponent
               payment={payment}
-              onBack={BackDashboard}
+              onBack={handleBackDashboard}
               now={now}
             />
           ) : (
             <ChoosePlanComponent
-              onBack={BackToPlan}
+              onBack={handleBackToPlan}
               onChoosePlan={choosePlanHandler}
+              isLoading={loading}
             />
           )}
         </div>

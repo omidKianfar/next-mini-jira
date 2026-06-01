@@ -10,27 +10,24 @@ const PaymentStep = lazy(() => import('./steps/payment-step'));
 const PalnStep = lazy(() => import('./steps/paln-step'));
 const PasswordStep = lazy(() => import('./steps/password-step'));
 
+const stepsMap: Record<string, React.ComponentType> = {
+  '0': SignupStep,
+  '1': ProfileStep,
+  '2': PaymentStep,
+  '3': PalnStep,
+  '4': PasswordStep,
+};
+
 const SignupComponent = () => {
   const { stepNumber } = useAuth();
 
-  const renderStep = () => {
-    switch (stepNumber) {
-      case '0':
-        return <SignupStep />;
-      case '1':
-        return <ProfileStep />;
-      case '2':
-        return <PaymentStep />;
-      case '3':
-        return <PalnStep />;
-      case '4':
-        return <PasswordStep />;
-      default:
-        return null;
-    }
-  };
+  const StepComponent = stepsMap[stepNumber] || null;
 
-  return <Suspense fallback={<PageLoading />}>{renderStep()}</Suspense>;
+  return (
+    <Suspense fallback={<PageLoading />}>
+      {StepComponent ? <StepComponent /> : null}
+    </Suspense>
+  );
 };
 
 export default SignupComponent;

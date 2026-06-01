@@ -14,53 +14,60 @@ const PaymentStep = () => {
   const { user, changeStep, terialMode } = useAuth();
   const isMobile = useIsMobile();
 
-  const BackProfile = () => {
+  const handleBackProfile = () => {
     changeStep('1');
   };
 
-  const freeModeHandler = async () => {
+  const handleFreeMode = async () => {
     try {
-      await terialMode({ userId: user?.userId as string });
+      if (terialMode) {
+        await terialMode({ userId: user?.userId as string });
+      }
     } catch (error: any) {}
   };
 
-  const paymentModeHandler = () => {
+  const handlePaymentMode = () => {
     changeStep('3');
   };
 
   return (
     <FramerMotion>
       <div
-        className={`relative flex w-full flex-col items-center justify-center p-4 ${pathName.includes('/signup') && 'min-h-screen'}`}
+        className={`flex w-full flex-col items-center justify-center p-4 ${
+          pathName.includes('/signup') && 'min-h-screen'
+        }`}
       >
-        <div className="relative">
-          <MyImage
-            src="/images/Wallet.svg"
-            alt=""
-            width={isMobile ? 150 : 200}
-            height={isMobile ? 150 : 200}
-            className="object-contain"
-            wrapperClass="absolute w-full top-[-20px] flex justify-center items-center"
-          />
+        <div className="relative w-[90vw] max-w-[840px] pt-12">
+          <div className="absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/3">
+            <MyImage
+              src="/images/Wallet.svg"
+              alt="Wallet Illustration"
+              width={isMobile ? 120 : 160}
+              height={isMobile ? 120 : 160}
+              className="object-contain"
+            />
+          </div>
 
-          <div className="w-[90vw] rounded-xl border-2 border-warning-300 bg-white p-8 shadow-md lg:h-[600px] lg:w-[900px]">
-            <div className="mb-[50px] flex w-full justify-start lg:mb-[135px]">
-              <ButtonBack onClick={BackProfile} />
+          <div className="rounded-2xl border border-warning-400 bg-white p-6 pt-12 shadow-sm md:p-10 md:pt-16">
+            <div className="mb-8 flex w-full justify-start md:mb-12">
+              <ButtonBack onClick={handleBackProfile} />
             </div>
 
-            <div className="flex w-full flex-col items-center justify-center gap-4 lg:flex-row lg:gap-8">
+            <div className="flex w-full flex-col items-center justify-center gap-6 md:flex-row md:gap-8">
               <PaymentCardComponent
-                title="Terial Mode"
+                title="Trial Mode"
                 description="You get 10 days of free access to the app."
-                onClick={freeModeHandler}
-                icon={<MyIcon icon="terial" className="text-8xl" />}
+                onClick={handleFreeMode}
+                icon={<MyIcon icon="terial" className="text-7xl lg:text-8xl" />}
               />
 
               <PaymentCardComponent
                 title="Payment Mode"
                 description="Go to payment plan page"
-                onClick={paymentModeHandler}
-                icon={<MyIcon icon="cash-alot" className="text-8xl" />}
+                onClick={handlePaymentMode}
+                icon={
+                  <MyIcon icon="cash-alot" className="text-7xl lg:text-8xl" />
+                }
               />
             </div>
           </div>

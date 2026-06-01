@@ -1,3 +1,5 @@
+'use client';
+
 import { stringSlicer } from '@/src/utils/string-slicer';
 import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
 
@@ -16,38 +18,34 @@ const ModalComponent = ({
   title,
   description,
 }: ModalComponentProps) => {
+  if (!description || !title) return null;
+
   return (
-    <div>
-      <h1 className="mb-4 mt-4 break-words font-semibold text-warning-500">
-        {stringSlicer({ string: title as string, slice: 50 })}
+    <div className="p-2">
+      <h1 className="mb-4 break-words text-subtitle font-extrabold text-gray-800">
+        {stringSlicer({ string: title, slice: 50 })}
       </h1>
 
-      {description && !isDelete && (
-        <p className="text-bodysm mt-4 break-words rounded-lg bg-gray-50 p-4 shadow-md">
-          {description}
-        </p>
-      )}
+      <div
+        className="prose prose-sm mb-6 mt-4 max-w-none break-words rounded-xl border border-gray-100 bg-gray-50 p-4 text-body leading-relaxed text-gray-600"
+        dangerouslySetInnerHTML={{ __html: description }}
+      />
 
-      {description && isDelete && (
-        <div
-          className="prose prose-sm mt-4 break-words rounded-lg bg-gray-50 p-2 text-body capitalize text-primary-500 shadow-md"
-          dangerouslySetInnerHTML={{
-            __html: stringSlicer({ string: description as string, slice: 100 }),
-          }}
-        />
-      )}
-
-      <div className="mt-4 flex justify-center gap-4 lg:justify-end">
+      <div className="flex flex-wrap-reverse items-center justify-center gap-3 sm:justify-end">
         <ButtonFreeClass
           onClick={handleClose}
-          className="w-[150px] rounded-sm border-2 border-primary-500 bg-white py-2 text-body text-primary-500 hover:bg-primary-500 hover:text-white"
+          className="w-full rounded-sm border border-gray-200 bg-white py-2 text-label font-semibold text-gray-600 transition-all duration-200 hover:bg-gray-50 sm:w-[120px]"
         >
           Cancel
         </ButtonFreeClass>
 
         <ButtonFreeClass
           onClick={clickHandler}
-          className="w-[150px] rounded-sm border-2 border-warning-500 bg-white py-2 text-body text-warning-500 hover:bg-warning-500 hover:text-white"
+          className={`w-full rounded-sm border py-2 text-label font-semibold shadow-sm transition-all duration-200 sm:w-[120px] ${
+            isDelete
+              ? 'border-error-500 bg-error-500 text-white hover:bg-white hover:text-error-500'
+              : 'border-warning-500 bg-warning-500 text-white hover:bg-white hover:text-warning-500'
+          }`}
         >
           {isDelete ? 'Delete' : 'Back'}
         </ButtonFreeClass>
