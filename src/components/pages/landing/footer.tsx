@@ -1,9 +1,6 @@
-import { useRouter } from 'next/navigation';
-import MyIcon from '../../atom/icon-components';
+'use client';
 
 const FooterComponent = () => {
-  const router = useRouter();
-
   return (
     <footer className="border-t border-gray-100 bg-white py-6 text-center">
       <div className="mx-auto max-w-[500px] px-4">

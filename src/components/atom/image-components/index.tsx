@@ -7,6 +7,8 @@ interface MyImageProps {
   fill?: boolean;
   className?: string;
   wrapperClass?: string;
+  sizes?: string;
+  priority?: boolean;
   onClick?: () => void;
 }
 
@@ -18,6 +20,8 @@ const MyImage = ({
   fill,
   className,
   wrapperClass,
+  sizes,
+  priority,
   onClick,
 }: MyImageProps) => {
   return (
@@ -30,6 +34,8 @@ const MyImage = ({
         fill={fill}
         className={className}
         onClick={onClick}
+        sizes={sizes}
+        priority={priority}
       />
     </div>
   );

@@ -9,62 +9,58 @@ const TECH_STACK = [
   { label: 'Jest', icon: 'logos:jest', core: true },
 ];
 
-const FEATURES = [
+const PROJECT_SLIDES = [
+  {
+    title: 'Workspace Dashboard',
+    description:
+      'A birds-eye view of your metrics, personal velocity, and comprehensive project analytics.',
+    image: '/images/landing.png',
+  },
+  {
+    title: 'Collaborative Kanban Board',
+    description:
+      'Manage tasks with fluid drag-and-drop operations, customized collision sensors, and instant updates.',
+    image: '/images/landing.png',
+  },
+  {
+    title: 'Project Customization Engine',
+    description:
+      'Fine-tune your workspace visibility, system webhooks, permissions, and specialized workflows.',
+    image: '/images/landing.png',
+  },
+];
+
+const TASK_JOURNEY_STEPS = [
   {
     title: 'Real-time Collaboration',
     description:
       'Instant synchronization across clients using Socket.io and Firebase for a seamless team experience.',
-    icon: '⚡',
   },
   {
     title: 'Advanced Media Engine',
     description:
       'Native audio recording with RecordRTC and client-side media processing via FFmpeg integration',
-    icon: '🎙️',
   },
   {
     title: 'Interactive Kanban',
     description:
       'Fluid drag-and-drop task management built with Dnd-kit, designed for high-performance workflows.',
-    icon: '📋',
   },
   {
     title: 'Rich Text Editor',
     description:
       'A fully customized content editor powered by Slate.js, supporting emojis, mentions, and formatting.',
-    icon: '✍️',
   },
   {
     title: 'Production Ready',
     description:
       'Robust code architecture with 100% type safety and comprehensive testing using Jest & RTL.',
-    icon: '🛡️',
   },
   {
     title: 'Optimized UI/UX',
     description:
       'Modern interface crafted with Tailwind CSS and Framer Motion for buttery-smooth interactions.',
-    icon: '✨',
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, ease: 'easeOut' } as const,
-  },
-};
-
-export { TECH_STACK, FEATURES, containerVariants, itemVariants };
+export { TECH_STACK, PROJECT_SLIDES, TASK_JOURNEY_STEPS };

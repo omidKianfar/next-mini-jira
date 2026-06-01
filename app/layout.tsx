@@ -19,7 +19,10 @@ const RootLayout = ({
         className={` ${OutfitFont.variable} ${PoppinsFont.variable} ${InterFont.variable} antialiased`}
       >
         <ProvidersWrapper>
-          <div className="scrollbar-hide h-screen w-screen overflow-y-auto">
+          <div
+            id="main-scroll-container"
+            className="scrollbar-hide h-screen w-screen overflow-y-auto"
+          >
             {children}
           </div>
         </ProvidersWrapper>
