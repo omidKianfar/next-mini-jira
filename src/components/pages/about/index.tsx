@@ -18,13 +18,13 @@ const AboutComponent = () => {
             Behind <span className="text-warning-500">Mini Jira</span>
           </h1>
 
-          <p className="mx-auto max-w-2xl text-body leading-relaxed text-slate-500">
+          <p className="mx-auto max-w-2xl text-body leading-relaxed text-gray-500">
             A high-performance project management tool designed to strip away
             the bloat and deliver speed, precision, and real-time collaboration.
           </p>
         </motion.div>
 
-        <div className="mb-20 grid items-center gap-12 lg:mb-32 lg:grid-cols-2 lg:gap-16">
+        <div className="mb-20 text-center lg:mb-32">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -35,33 +35,13 @@ const AboutComponent = () => {
               The Motivation
             </h2>
 
-            <p className="mb-4 text-body leading-relaxed text-slate-600">
+            <p className="mb-4 text-body leading-relaxed text-gray-600">
               Traditional project management tools can feel heavy, cluttered,
               and slow. Mini Jira was engineered from scratch to tackle these
-              exact pain points.
+              exact pain points. By focusing heavily on frontend performance,
+              state hydration, and optimistic UI updates, this platform ensures
+              that managing your sprint is as fast as typing code.
             </p>
-
-            <p className="text-body leading-relaxed text-slate-600">
-              By focusing heavily on frontend performance, state hydration, and
-              optimistic UI updates, this platform ensures that managing your
-              sprint is as fast as typing code.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative overflow-hidden rounded-xl border border-gray-100 bg-slate-50 p-2 shadow-sm"
-          >
-            <MyImage
-              src="/images/landing.png"
-              alt="Architecture Preview"
-              width={500}
-              height={300}
-              className="h-auto w-full rounded-lg object-cover"
-            />
           </motion.div>
         </div>
 
@@ -70,7 +50,7 @@ const AboutComponent = () => {
             Engineering Challenges
           </h2>
 
-          <p className="mx-auto mb-12 max-w-xl text-center text-body text-slate-500">
+          <p className="mx-auto mb-12 max-w-xl text-center text-body text-gray-500">
             How complex frontend engineering problems were solved during
             development.
           </p>
@@ -86,7 +66,7 @@ const AboutComponent = () => {
                 Real-time State Desynchronization
               </h3>
 
-              <p className="text-label leading-relaxed text-slate-600">
+              <p className="text-label leading-relaxed text-gray-600">
                 <strong className="text-warning-500">Solution:</strong>{' '}
                 Implemented a strict event-driven state architecture using
                 Socket.io combined with optimistic UI updates. If a server
@@ -106,10 +86,10 @@ const AboutComponent = () => {
                 Kanban Board Performance Dropping on Drag
               </h3>
 
-              <p className="text-label leading-relaxed text-slate-600">
+              <p className="text-label leading-relaxed text-gray-600">
                 <strong className="text-warning-500">Solution:</strong>{' '}
                 Engineered optimized collision detection algorithms using{' '}
-                <code className="rounded bg-slate-100 px-1 text-warning-600">
+                <code className="rounded bg-gray-100 px-1 text-warning-600">
                   @dnd-kit
                 </code>
                 . Memoized list items and columns heavily, reducing unnecessary
@@ -125,7 +105,7 @@ const AboutComponent = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center gap-8 rounded-2xl border border-gray-100 bg-slate-50/50 p-8 shadow-sm md:flex-row lg:p-12"
+          className="flex flex-col items-center gap-8 rounded-2xl border border-gray-100 bg-gray-50/50 p-8 shadow-sm md:flex-row lg:p-12"
         >
           <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-warning-400 bg-white shadow-inner">
             <span className="text-h4 font-extrabold text-warning-500">OK</span>
@@ -136,7 +116,7 @@ const AboutComponent = () => {
               About the Developer
             </h2>
 
-            <p className="mb-4 max-w-2xl text-body leading-relaxed text-slate-600">
+            <p className="mb-4 max-w-2xl text-body leading-relaxed text-gray-600">
               Hi, I’m Omid Kianfar. A Frontend Engineer passionate about
               crafting highly interactive, performant, and production-ready web
               applications. Mini Jira serves as a playground for testing
