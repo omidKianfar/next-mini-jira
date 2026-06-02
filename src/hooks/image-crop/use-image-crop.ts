@@ -6,10 +6,10 @@ export const useImageCrop = () => {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-  const [croppedPixels, setCroppedPixels] = useState<any>(null);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null);
 
   const onCropComplete = useCallback((_: any, croppedAreaPixels: any) => {
-    setCroppedPixels(croppedAreaPixels);
+    setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
   const loadImageFile = (file: File) => {
@@ -18,43 +18,49 @@ export const useImageCrop = () => {
   };
 
   const closeCrop = () => {
+    if (imageSrc) URL.revokeObjectURL(imageSrc);
     setImageSrc(null);
     setZoom(1);
     setCrop({ x: 0, y: 0 });
-    setCroppedPixels(null);
+    setCroppedAreaPixels(null);
   };
 
   const cropImage = async (): Promise<File | null> => {
-    if (!imageSrc || !croppedPixels) return null;
+    if (!imageSrc || !croppedAreaPixels) return null;
 
-    const image = await new Promise<HTMLImageElement>((resolve) => {
+    const image = await new Promise<HTMLImageElement>((resolve, reject) => {
       const img = new Image();
       img.src = imageSrc;
       img.onload = () => resolve(img);
+      img.onerror = (error) => reject(error);
     });
 
     const canvas = document.createElement('canvas');
+    canvas.width = croppedAreaPixels.width;
+    canvas.height = croppedAreaPixels.height;
 
-    canvas.width = croppedPixels.width;
-    canvas.height = croppedPixels.height;
-
-    const ctx = canvas.getContext('2d')!;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return null;
 
     ctx.drawImage(
       image,
-      croppedPixels.x,
-      croppedPixels.y,
-      croppedPixels.width,
-      croppedPixels.height,
+      croppedAreaPixels.x,
+      croppedAreaPixels.y,
+      croppedAreaPixels.width,
+      croppedAreaPixels.height,
       0,
       0,
-      croppedPixels.width,
-      croppedPixels.height
+      croppedAreaPixels.width,
+      croppedAreaPixels.height
     );
 
-    return new Promise<File>((resolve) => {
+    return new Promise<File>((resolve, reject) => {
       canvas.toBlob((blob) => {
-        resolve(new File([blob!], 'avatar.png', { type: 'image/png' }));
+        if (!blob) {
+          reject(new Error('Canvas is empty'));
+          return;
+        }
+        resolve(new File([blob], 'cropped-image.png', { type: 'image/png' }));
       }, 'image/png');
     });
   };
