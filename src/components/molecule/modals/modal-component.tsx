@@ -22,12 +22,12 @@ const ModalComponent = ({
 
   return (
     <div className="p-2">
-      <h1 className="mb-4 break-words text-subtitle font-extrabold text-gray-800">
+      <h1 className="mb-4 break-words text-body font-bold text-gray-700">
         {stringSlicer({ string: title, slice: 50 })}
       </h1>
 
       <div
-        className="prose prose-sm mb-6 mt-4 max-w-none break-words rounded-xl border border-gray-100 bg-gray-50 p-4 text-body leading-relaxed text-gray-600"
+        className="prose prose-sm mb-6 mt-4 max-w-none break-words rounded-xl border border-gray-100 bg-gray-50 p-4 text-bodySm leading-relaxed text-gray-600"
         dangerouslySetInnerHTML={{ __html: description }}
       />
 
@@ -41,7 +41,7 @@ const ModalComponent = ({
 
         <ButtonFreeClass
           onClick={clickHandler}
-          className={`w-[120px] w-full rounded-sm border py-2 text-label font-semibold shadow-sm transition-all duration-200 ${
+          className={`w-full rounded-sm border py-2 text-label font-semibold shadow-sm transition-all duration-200 lg:w-[120px] ${
             isDelete
               ? 'border-error-500 bg-error-500 text-white hover:bg-white hover:text-error-500'
               : 'border-warning-500 bg-warning-500 text-white hover:bg-white hover:text-warning-500'
