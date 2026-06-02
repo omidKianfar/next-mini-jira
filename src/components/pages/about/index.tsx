@@ -105,13 +105,13 @@ const AboutComponent = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center gap-8 rounded-2xl border border-gray-100 bg-gray-50/50 p-8 shadow-sm md:flex-row lg:p-12"
+          className="flex flex-col items-center gap-8 rounded-2xl border border-gray-100 bg-gray-50/50 p-8 shadow-sm lg:flex-row lg:p-12"
         >
           <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-warning-400 bg-white shadow-inner">
             <span className="text-h4 font-extrabold text-warning-500">OK</span>
           </div>
 
-          <div className="text-center md:text-left">
+          <div className="text-center lg:text-left">
             <h2 className="mb-2 text-title font-bold text-gray-800">
               About the Developer
             </h2>
@@ -124,7 +124,7 @@ const AboutComponent = () => {
               micro-interactions.
             </p>
 
-            <div className="flex justify-center gap-4 text-label font-semibold text-warning-600 md:justify-start">
+            <div className="flex justify-center gap-4 text-label font-semibold text-warning-600 lg:justify-start">
               <Link
                 target="_blank"
                 href="https://github.com/omidKianfar"
