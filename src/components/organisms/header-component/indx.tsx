@@ -7,8 +7,6 @@ import LoadingCircle from '../../atom/loadings/loading-circle';
 import ModalContainer from '../../common/modal-container';
 import LeftSideHeaders from '../../molecule/headers/left-side-headers';
 import RightSideHeaders from '../../molecule/headers/right-side-headers';
-import FilterChats from '../modals/filter-modals/chats';
-import SearchSupportChats from '../modals/serach-modals/search-support-chats';
 import { HeaderProps } from '@/src/types/global';
 
 const AddTask = lazy(() => import('../modals/add-task-modal'));
@@ -16,19 +14,43 @@ const SearchTasks = lazy(() => import('../modals/serach-modals/search-tasks'));
 const FilterTask = lazy(() => import('../modals/filter-modals/tasks'));
 const SearchUsers = lazy(() => import('../modals/serach-modals/serach-users'));
 const FilterUsers = lazy(() => import('../modals/filter-modals/users'));
+const SearchSupportChats = lazy(
+  () => import('../modals/serach-modals/search-support-chats')
+);
+const FilterChats = lazy(() => import('../modals/filter-modals/chats'));
 
 const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [modalcounter, setModalCounter] = useState<number>(0);
+  const [modalCounter, setModalCounter] = useState<number>(0);
 
   const handleOpenModal = (modalNumber: number) => {
     setModalCounter(modalNumber);
-
     setOpen(true);
   };
 
   const handleCloseModal = () => {
     setOpen(false);
+  };
+
+  const renderModalContent = () => {
+    switch (modalCounter) {
+      case 1:
+        return <AddTask handleClose={handleCloseModal} />;
+      case 2:
+        return <SearchTasks handleClose={handleCloseModal} />;
+      case 3:
+        return <FilterTask handleClose={handleCloseModal} />;
+      case 4:
+        return <SearchUsers handleClose={handleCloseModal} />;
+      case 5:
+        return <FilterUsers handleClose={handleCloseModal} />;
+      case 6:
+        return <SearchSupportChats handleClose={handleCloseModal} />;
+      case 7:
+        return <FilterChats handleClose={handleCloseModal} />;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -48,33 +70,7 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
 
       <Suspense fallback={<LoadingCircle />}>
         <ModalContainer open={open} handleClose={handleCloseModal}>
-          {modalcounter == 1 ? (
-            <AddTask handleClose={handleCloseModal} />
-          ) : modalcounter == 2 ? (
-            <div>
-              <SearchTasks handleClose={handleCloseModal} />
-            </div>
-          ) : modalcounter == 3 ? (
-            <div>
-              <FilterTask handleClose={handleCloseModal} />
-            </div>
-          ) : modalcounter == 4 ? (
-            <div>
-              <SearchUsers handleClose={handleCloseModal} />
-            </div>
-          ) : modalcounter == 5 ? (
-            <div>
-              <FilterUsers handleClose={handleCloseModal} />
-            </div>
-          ) : modalcounter == 6 ? (
-            <div>
-              <SearchSupportChats handleClose={handleCloseModal} />
-            </div>
-          ) : modalcounter == 7 ? (
-            <div>
-              <FilterChats handleClose={handleCloseModal} />
-            </div>
-          ) : null}
+          {renderModalContent()}
         </ModalContainer>
       </Suspense>
     </>
