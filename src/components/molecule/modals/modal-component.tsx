@@ -31,17 +31,17 @@ const ModalComponent = ({
         dangerouslySetInnerHTML={{ __html: description }}
       />
 
-      <div className="flex flex-wrap-reverse items-center justify-center gap-3 sm:justify-end">
+      <div className="flex flex-wrap-reverse items-center justify-end gap-3 lg:justify-center">
         <ButtonFreeClass
           onClick={handleClose}
-          className="w-full rounded-sm border border-gray-200 bg-white py-2 text-label font-semibold text-gray-600 transition-all duration-200 hover:bg-gray-50 sm:w-[120px]"
+          className="w-full rounded-sm border border-gray-200 bg-white py-2 text-label font-semibold text-gray-600 transition-all duration-200 hover:bg-gray-50 lg:w-[120px]"
         >
           Cancel
         </ButtonFreeClass>
 
         <ButtonFreeClass
           onClick={clickHandler}
-          className={`w-full rounded-sm border py-2 text-label font-semibold shadow-sm transition-all duration-200 sm:w-[120px] ${
+          className={`w-[120px] w-full rounded-sm border py-2 text-label font-semibold shadow-sm transition-all duration-200 ${
             isDelete
               ? 'border-error-500 bg-error-500 text-white hover:bg-white hover:text-error-500'
               : 'border-warning-500 bg-warning-500 text-white hover:bg-white hover:text-warning-500'

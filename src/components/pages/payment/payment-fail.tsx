@@ -12,34 +12,44 @@ const PaymentFailedComponent = () => {
 
   useRequireActiveStatus();
 
-  const finishHandler = () => {
+  const handleRetry = () => {
     changeStep('0');
     navigation.payment();
   };
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center">
-      <div className="h-screen w-screen rounded-xl border-warning-300 bg-white p-6 shadow-md lg:h-[500px] lg:w-[600px] lg:border-2">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-50/80 p-4">
+      <div className="w-full max-w-[500px] rounded-2xl border border-gray-100 bg-white p-8 text-center shadow-xl">
         <MyIcon
-          icon="wallet"
-          className="mb-10 mt-8 text-[150px] text-warning-500"
+          icon="alert-circle"
+          className="mx-auto mb-6 text-[80px] text-error-500"
         />
 
-        <h1 className="text-h3 font-bold text-error-600">Payment failed.</h1>
+        <h1 className="text-2xl font-bold text-gray-800">
+          Payment Unsuccessful
+        </h1>
 
-        <p className="mb-6 mt-4">
-          Please check your card details or try another payment method. If the
-          amount has been deducted from your account but the payment still shows
-          as failed, please contact support for further assistance.
+        <p className="mt-4 leading-relaxed text-gray-500">
+          We couldn't process your payment. Please verify your card details or
+          try a different payment method. If you're still having trouble, our
+          support team is here to help.
         </p>
 
-        <div className="mt-6 flex justify-center">
+        <div className="mt-8 flex flex-col gap-3">
           <ButtonNext
-            onClick={finishHandler}
-            icon={<MyIcon icon="arrow-right" className="ml-2 mt-1 text-body" />}
+            onClick={handleRetry}
+            className="w-full"
+            icon={<MyIcon icon="refresh" className="ml-2" />}
           >
-            Go To Payment
+            Try Again
           </ButtonNext>
+
+          <button
+            onClick={() => navigation.contact()}
+            className="text-sm font-medium text-gray-400 transition-colors hover:text-gray-600"
+          >
+            Contact Support
+          </button>
         </div>
       </div>
     </div>

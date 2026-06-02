@@ -66,7 +66,7 @@ const AuthComponent = () => {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-slate-50/50 p-4">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-gray-50/50 p-4">
       <div className="mb-6">
         <Logo />
       </div>
@@ -132,7 +132,7 @@ const AuthComponent = () => {
                     className={`rounded-full border border-gray-100 p-2.5 text-h3 shadow-sm transition-all duration-200 ${
                       loading
                         ? 'cursor-not-allowed opacity-50 grayscale'
-                        : 'cursor-pointer bg-white hover:rotate-12 hover:bg-slate-50'
+                        : 'cursor-pointer bg-white hover:rotate-12 hover:bg-gray-50'
                     }`}
                     onClick={!loading ? authGoogle : undefined}
                   />
@@ -141,7 +141,7 @@ const AuthComponent = () => {
                 <ButtonNext
                   type="submit"
                   isLoading={loading}
-                  className="w-full min-w-[140px] sm:w-auto"
+                  className="w-full min-w-[140px] lg:w-auto"
                 >
                   {pathname.includes('signin') ? 'Sign In' : 'Sign Up'}
                 </ButtonNext>

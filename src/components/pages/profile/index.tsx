@@ -135,7 +135,7 @@ const ProfileComponent = () => {
         className={`flex w-full flex-col items-center justify-center p-4 ${pathName.includes('/signup') && 'min-h-screen'}`}
       >
         <div className="flex flex-col items-center justify-center lg:flex-row lg:gap-12">
-          <div className="mb-4 w-[90vw] rounded-2xl border border-warning-400 bg-white p-6 pb-8 shadow-sm lg:mb-0 lg:w-[480px]">
+          <div className="mb-4 w-[90vw] rounded-lg border border-warning-400 bg-white p-6 pb-8 shadow-sm lg:mb-0 lg:w-[480px]">
             <div className="mb-4 flex items-center justify-between">
               <ButtonBack onClick={handelBack} />
 
@@ -162,7 +162,7 @@ const ProfileComponent = () => {
               />
             </ModalContainer>
 
-            <h1 className="mb-6 text-center text-h4 font-extrabold text-warning-500">
+            <h1 className="mb-6 text-center text-title font-bold text-warning-500 lg:text-h4">
               Profile
             </h1>
 
@@ -210,7 +210,7 @@ const ProfileComponent = () => {
                   <ButtonNext
                     type="submit"
                     isLoading={loading}
-                    className="w-full min-w-[120px] sm:w-auto"
+                    className="w-full min-w-[120px] lg:w-auto"
                   >
                     {pathName.includes('profile') ? 'Save' : 'Next'}
                   </ButtonNext>

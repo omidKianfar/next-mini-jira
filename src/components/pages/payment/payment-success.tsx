@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import dayjs from 'dayjs';
 import { useAuth } from '@/src/hooks/auth/use-auth';
@@ -21,72 +21,77 @@ const PaymentSuccessComponent = () => {
 
   const [subscriptionId, setSubscriptionId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isFinishing, setIsFinishing] = useState(false);
 
   const planType = params.get('planType');
   const sessionId = params.get('session_id');
 
-  const now = dayjs().format('YYYY-MM-DD');
-  const oneMonth = dayjs().add(1, 'month').format('YYYY-MM-DD');
-  const oneYear = dayjs().add(1, 'year').format('YYYY-MM-DD');
+  const dates = useMemo(() => {
+    const now = dayjs();
+    return {
+      createdAt: now.format('YYYY-MM-DD'),
+      endAt:
+        planType === 'monthly'
+          ? now.add(1, 'month').format('YYYY-MM-DD')
+          : now.add(1, 'year').format('YYYY-MM-DD'),
+    };
+  }, [planType]);
 
   useSetSubscriptionId({ sessionId, setLoading, setSubscriptionId });
 
   const finishHandler = async () => {
-    if (!user?.userId) {
-      console.log('User not found');
-      return;
+    if (!user?.userId || !planType || !subscriptionId) return;
+
+    setIsFinishing(true);
+
+    try {
+      const data = {
+        payment: {
+          freeTrialEnabled: false,
+          trialEnd: dates.createdAt,
+          isPaid: true,
+          planType,
+          subscriptionId,
+          createdAt: dates.createdAt,
+          endAt: dates.endAt,
+        },
+      };
+
+      await updateFirestoreUser(user.userId, data);
+      changeStep('0');
+      navigation.dashboard();
+    } catch (error) {
+      console.error('Failed to update subscription:', error);
+      setIsFinishing(false);
     }
-
-    if (!planType || !subscriptionId) {
-      console.log('Missing planType or subscriptionId');
-      return;
-    }
-
-    const data = {
-      payment: {
-        freeTrialEnabled: false,
-        trialEnd: now,
-        isPaid: true,
-        planType: planType,
-        subscriptionId: subscriptionId,
-        createdAt: now,
-        endAt: planType === 'monthly' ? oneMonth : oneYear,
-      },
-    };
-
-    await updateFirestoreUser(user.userId, data);
-
-    changeStep('0');
-    navigation.dashboard();
   };
 
   if (loading) return <PageLoading />;
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center">
-      <div className="h-screen w-screen rounded-xl border-warning-300 bg-white p-6 shadow-md lg:h-[500px] lg:w-[600px] lg:border-2">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-50/80 p-4">
+      <div className="w-full max-w-[500px] rounded-2xl border border-gray-100 bg-white p-8 text-center shadow-xl">
         <MyIcon
-          icon="cash"
-          className="mb-10 mt-8 text-[150px] text-success-500"
+          icon="check-circle"
+          className="mx-auto mb-6 text-[80px] text-success-500"
         />
 
-        <h1 className="text-h3 font-bold text-success-600">
-          Payment successful.
+        <h1 className="text-2xl font-bold text-green-500">
+          Payment successful!
         </h1>
-
-        <p className="mb-12 mt-4">
-          Your transaction has been completed and your{' '}
-          {planType == 'monthly' ? 'Monthly' : 'Yearly'} subscription is now
-          active. Thank you for your purchase!
+        <p className="mt-2 text-gray-500">
+          Your {planType === 'monthly' ? 'Monthly' : 'Yearly'} subscription is
+          active. Thank you for trusting us.
         </p>
 
-        <div className="mt-6 flex justify-center">
+        <div className="mt-8">
           <ButtonNext
             onClick={finishHandler}
-            disable={!user || !subscriptionId}
-            isLoading={!user || !subscriptionId}
+            isLoading={isFinishing}
+            disable={isFinishing || !user || !subscriptionId}
+            className="w-full"
           >
-            Finish
+            {isFinishing ? 'Processing...' : 'Continue to Dashboard'}
           </ButtonNext>
         </div>
       </div>

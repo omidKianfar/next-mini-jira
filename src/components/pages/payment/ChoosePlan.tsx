@@ -32,12 +32,12 @@ const ChoosePlanComponent = ({
         />
       </div>
 
-      <div className="rounded-2xl border border-warning-400 bg-white p-6 pt-12 shadow-md md:p-10 md:pt-16">
-        <div className="mb-8 flex w-full justify-start md:mb-12">
+      <div className="rounded-2xl border border-warning-400 bg-white p-6 pt-12 shadow-md lg:p-10 lg:pt-16">
+        <div className="mb-8 flex w-full justify-start lg:mb-12">
           <ButtonBack onClick={onBack} />
         </div>
 
-        <div className="flex w-full flex-col items-center justify-center gap-6 md:flex-row md:gap-8">
+        <div className="flex w-full flex-col items-center justify-center gap-6 lg:flex-row lg:gap-8">
           <PlanCardComponent
             title="Monthly"
             description="Try a month payment"

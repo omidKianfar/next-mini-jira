@@ -18,7 +18,7 @@ const ActivePaymentComponent = ({
 
   return (
     <div className="mx-auto w-[90vw] max-w-[840px]">
-      <div className="mb-8 flex items-center justify-start md:mb-12">
+      <div className="mb-8 flex items-center justify-start lg:mb-12">
         <ButtonBack onClick={onBack} />
       </div>
 
