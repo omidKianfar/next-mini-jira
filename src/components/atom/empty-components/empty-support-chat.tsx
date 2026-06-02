@@ -6,7 +6,7 @@ import MyIcon from '../icon-components';
 const AdminEmptySupportComponent = () => {
   return (
     <div className="h-full w-full">
-      <div className="flex h-[calc(100vh-125px)] w-full items-center justify-center overflow-y-auto rounded-md border-2 border-warning-500 bg-white p-2 shadow-md lg:h-[calc(100vh-110px)] lg:p-4">
+      <div className="flex h-[calc(100vh-125px)] w-full items-center justify-center overflow-y-auto rounded-md border border-gray-300 bg-white p-2 shadow-md lg:h-[calc(100vh-110px)] lg:p-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{

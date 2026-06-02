@@ -19,7 +19,7 @@ const PaymentFailedComponent = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-50/80 p-4">
-      <div className="w-full max-w-[500px] rounded-2xl border border-gray-100 bg-white p-8 text-center shadow-xl">
+      <div className="w-full max-w-[500px] rounded-2xl border border-gray-300 bg-white p-8 text-center shadow-lg">
         <MyIcon
           icon="alert-circle"
           className="mx-auto mb-6 text-[80px] text-error-500"
@@ -35,10 +35,10 @@ const PaymentFailedComponent = () => {
           support team is here to help.
         </p>
 
-        <div className="mt-8 flex flex-col gap-3">
+        <div className="mt-8 flex flex-col items-center justify-center gap-3">
           <ButtonNext
             onClick={handleRetry}
-            className="w-full"
+            className="w-full lg:w-[200px]"
             icon={<MyIcon icon="refresh" className="ml-2" />}
           >
             Try Again
@@ -46,7 +46,7 @@ const PaymentFailedComponent = () => {
 
           <button
             onClick={() => navigation.contact()}
-            className="text-sm font-medium text-gray-400 transition-colors hover:text-gray-600"
+            className="text-bodySm font-medium text-gray-400 transition-colors hover:text-gray-600"
           >
             Contact Support
           </button>

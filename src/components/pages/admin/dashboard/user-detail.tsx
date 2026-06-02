@@ -39,17 +39,17 @@ const AdminUserDetailComponent = () => {
 
   return (
     <div className="flex h-full w-full items-center justify-center p-4">
-      <div className="w-[90vw] rounded-xl border-2 border-warning-500 bg-white p-4 pb-2 shadow-md lg:w-[500px]">
+      <div className="w-[90vw] rounded-lg border border-gray-300 bg-white p-4 pb-2 shadow-md lg:w-[500px]">
         <div className="flex items-center justify-start">
           <ButtonBack onClick={onBack} />
         </div>
 
         <div className="text-center">
-          <p className="mb-4 text-title font-bold text-warning-500">
+          <p className="mb-4 text-subtitle font-bold text-warning-500">
             User Detail
           </p>
 
-          <div className="mb-4 flex flex-col items-start justify-start rounded-sm border-2 border-warning-400 bg-gray-50 p-4 shadow-md">
+          <div className="mb-4 flex flex-col items-start justify-start rounded-sm border border-gray-300 bg-gray-50 p-4 shadow-md">
             <div className="mb-4 flex w-full items-center justify-center overflow-hidden">
               {user?.photo ? (
                 <MyImage
@@ -64,28 +64,29 @@ const AdminUserDetailComponent = () => {
               )}
             </div>
 
-            <p className="mb-4 text-body font-semibold text-primary-600">
-              <span className="font-bold text-black">Username:</span>{' '}
+            <p className="mb-4 text-body font-semibold text-gray-500">
+              <span className="font-bold text-gray-800">Username:</span>{' '}
               {user.userName}
             </p>
 
             <hr className="mb-4 w-full border border-dashed border-gray-300" />
 
-            <p className="mb-4 text-body font-semibold text-primary-600">
-              <span className="font-bold text-black">Email:</span> {user.email}
+            <p className="mb-4 text-body font-semibold text-gray-500">
+              <span className="font-bold text-gray-800">Email:</span>{' '}
+              {user.email}
             </p>
 
             <hr className="mb-4 w-full border border-dashed border-gray-300" />
 
-            <p className="mb-4 text-body font-semibold text-primary-600">
-              <span className="font-bold text-black">Birthday:</span>{' '}
+            <p className="mb-4 text-body font-semibold text-gray-500">
+              <span className="font-bold text-gray-800">Birthday:</span>{' '}
               {dayjs(user.birthday).format('MM-DD-YYYY')}
             </p>
 
             <hr className="mb-4 w-full border border-dashed border-gray-300" />
 
-            <p className="mb-4 text-body font-semibold text-primary-600">
-              <span className="font-bold text-black">Status:</span>{' '}
+            <p className="mb-4 text-body font-semibold text-gray-500">
+              <span className="font-bold text-gray-800">Status:</span>{' '}
               <span
                 className={`${user.isActive ? 'text-success-500' : 'text-warning-500'}`}
               >
@@ -95,22 +96,26 @@ const AdminUserDetailComponent = () => {
 
             <hr className="mb-4 w-full border border-dashed border-gray-300" />
 
-            <p className="mb-4 text-body font-semibold text-primary-600">
-              <span className="font-bold text-black">Created At:</span>{' '}
+            <p className="text-body font-semibold text-gray-500">
+              <span className="font-bold text-gray-800">Created At:</span>{' '}
               {dayjs(user.createdAt).format('MM-DD-YYYY')}
             </p>
 
-            <hr className="mb-4 w-full border border-dashed border-gray-300" />
+            {(hasActivePayment || user.payment.freeTrialEnabled) && (
+              <hr className="mb-4 mt-4 w-full border border-dashed border-gray-300" />
+            )}
 
             {hasActivePayment && (
               <>
-                <p className="mb-4 text-body font-semibold text-primary-600">
-                  <span className="font-bold text-black">Plan Type:</span>{' '}
+                <p className="mb-4 text-body font-semibold text-gray-500">
+                  <span className="font-bold text-gray-800">Plan Type:</span>{' '}
                   {user.payment.planType}
                 </p>
 
-                <p className="text-body font-semibold text-primary-600">
-                  <span className="font-bold text-black">End At:</span>{' '}
+                <hr className="mb-4 w-full border border-dashed border-gray-300" />
+
+                <p className="text-body font-semibold text-gray-500">
+                  <span className="font-bold text-gray-800">End At:</span>{' '}
                   {dayjs(user.payment.endAt).format('MM-DD-YYYY')}
                 </p>
               </>
@@ -118,15 +123,19 @@ const AdminUserDetailComponent = () => {
 
             {user.payment.freeTrialEnabled && (
               <>
-                <p className="text-body font-semibold text-primary-600">
-                  <span className="font-bold text-black">Trial Mode:</span> True
+                <p className="text-body font-semibold text-gray-500">
+                  <span className="font-bold text-gray-800">Trial Mode:</span>{' '}
+                  True
                 </p>
               </>
             )}
           </div>
 
-          <div className="flex w-full items-center justify-center">
-            <ButtonNext onClick={toggleActive}>
+          <div className="flex items-center justify-end">
+            <ButtonNext
+              onClick={toggleActive}
+              className="w-full min-w-[140px] lg:w-auto"
+            >
               {user.isActive ? 'Deactivated User' : 'Activated User'}
             </ButtonNext>
           </div>

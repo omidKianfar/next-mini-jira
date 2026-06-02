@@ -86,7 +86,9 @@ const DragDropUploader = ({
                 {progress}%
               </p>
 
-              <span className="text-xs text-warning-400">Please wait...</span>
+              <span className="text-bodySm text-warning-400">
+                Please wait...
+              </span>
             </div>
           ) : isDragging ? (
             <p className="text-gray-500">Drop file here...</p>

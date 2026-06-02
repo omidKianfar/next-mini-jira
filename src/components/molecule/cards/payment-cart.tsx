@@ -10,10 +10,10 @@ const PaymentCardComponent = ({
 }: CartType) => {
   return (
     <div
-      className="group relative h-[250px] w-[260px] max-w-md cursor-pointer rounded-2xl border-2 border-primary-500 p-5 text-center text-primary-500 shadow-sm backdrop-blur-sm transition-all duration-300 hover:bg-primary-500 hover:text-white lg:h-[320px] lg:w-[300px]"
+      className="group relative h-[250px] w-[260px] max-w-md cursor-pointer rounded-2xl border-2 border-gray-300 p-5 text-center text-primary-500 shadow-sm backdrop-blur-sm transition-all duration-300 hover:bg-primary-500/90 hover:text-white lg:h-[320px] lg:w-[300px]"
       onClick={onClick}
     >
-      <h1 className="mb-4 text-subtitle font-extrabold text-warning-500 transition-colors duration-300 group-hover:text-warning-400 lg:mb-8 lg:text-3xl">
+      <h1 className="mb-4 text-subtitle font-bold transition-colors duration-300 lg:mb-8 lg:text-title">
         {title}
       </h1>
 

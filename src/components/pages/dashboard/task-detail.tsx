@@ -110,7 +110,7 @@ const TaskDetailComponent = () => {
   return (
     <Suspense>
       <div className="flex w-full flex-col items-start justify-center">
-        <div className="h-full w-full rounded-xl border-2 border-amber-300 bg-white p-4 shadow-md">
+        <div className="h-full w-full rounded-xl border border-gray-300 bg-white p-4 shadow-md">
           <div className="mb-4 flex items-center justify-between lg:mb-2">
             <ButtonBack onClick={BackDashboard} />
 

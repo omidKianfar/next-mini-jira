@@ -81,8 +81,8 @@ const AuthComponent = () => {
           wrapperClass="w-[280px] h-[180px] lg:w-[460px] lg:h-[360px] flex items-center justify-center"
         />
 
-        <div className="w-[90vw] max-w-[440px] rounded-2xl border border-warning-200 bg-white p-6 pb-10 pt-8 shadow-sm lg:w-[440px]">
-          <h1 className="mb-8 text-center text-h4 font-extrabold text-warning-500">
+        <div className="w-[90vw] max-w-[440px] rounded-2xl border border-gray-300 bg-white p-6 pb-10 pt-8 shadow-sm lg:w-[440px]">
+          <h1 className="mb-8 text-center text-h4 font-bold text-primary-500">
             {pathname.includes('signin') ? 'Sign In' : 'Sign Up'}
           </h1>
 
@@ -149,7 +149,7 @@ const AuthComponent = () => {
             </form>
           </FormProvider>
 
-          <div className="mt-8 flex justify-center border-t border-gray-50 pt-4">
+          <div className="mt-8 flex justify-center border-t border-gray-100 pt-8">
             <ButtonFreeClass
               icon={
                 <MyIcon

@@ -32,7 +32,7 @@ const ChoosePlanComponent = ({
         />
       </div>
 
-      <div className="rounded-2xl border border-warning-400 bg-white p-6 pt-12 shadow-md lg:p-10 lg:pt-16">
+      <div className="rounded-2xl border border-gray-200 bg-white p-6 pt-12 shadow-md lg:p-10 lg:pt-16">
         <div className="mb-8 flex w-full justify-start lg:mb-12">
           <ButtonBack onClick={onBack} />
         </div>

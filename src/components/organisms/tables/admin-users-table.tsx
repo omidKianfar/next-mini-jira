@@ -4,7 +4,7 @@ import PageLoading from '../../common/page-loading';
 import { TableComponent } from '../table-component';
 import PaginationComponent from '../pagination-component';
 import { Cloumns } from './cloumns';
-import { UsersTableProps } from '../type';
+import { UsersTableProps } from './type';
 
 const UsersTable = ({ users, goDetail, toggleActive }: UsersTableProps) => {
   const [page, setPage] = useState(1);

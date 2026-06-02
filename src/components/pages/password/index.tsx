@@ -81,14 +81,14 @@ const PasswordComponent = () => {
         }`}
       >
         <div className="flex w-full max-w-6xl flex-col items-center justify-center gap-8 lg:flex-row lg:gap-16">
-          <div className="w-full max-w-[500px] rounded-lg border border-warning-300 bg-white p-6 pt-8 shadow-md transition-all">
+          <div className="w-full max-w-[500px] rounded-lg border border-gray-300 bg-white p-6 pt-8 shadow-md transition-all">
             {isProfilePage && (
               <div className="mb-4">
                 <ButtonBack onClick={() => navigation.profile()} />
               </div>
             )}
 
-            <h1 className="mb-4 text-center text-title font-bold tracking-tight text-warning-500 lg:text-h4">
+            <h1 className="mb-4 text-center text-title font-bold tracking-tight text-primary-500 lg:text-title">
               Password
             </h1>
 

@@ -52,7 +52,7 @@ const AdminChatSidebar = ({
             }`}
           >
             <div className="h-full w-full p-4 lg:pr-0">
-              <div className="h-full w-full rounded-lg border-2 border-warning-500 bg-white p-2 shadow-md">
+              <div className="h-full w-full rounded-lg border border-gray-300 bg-white p-2 shadow-md">
                 <div className="flex items-center justify-between">
                   <h2 className="mx-2 text-subtitle font-semibold text-warning-500">
                     Chats List

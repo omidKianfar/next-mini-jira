@@ -77,7 +77,7 @@ const AdminSupportUserCard = ({
             dangerouslySetInnerHTML={{
               __html: stringSlicer({
                 string: chat.message.lastMessageText as string,
-                slice: 80,
+                slice: 20,
               }),
             }}
           ></div>

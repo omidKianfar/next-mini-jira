@@ -37,7 +37,7 @@ const LandingDashboard = () => {
 
   return (
     <div className="relative flex w-full items-center justify-end gap-3">
-      <div className="relative h-[40px] w-[40px] overflow-hidden rounded-full border-2 border-primary-500 bg-gray-200">
+      <div className="relative h-[40px] w-[40px] overflow-hidden rounded-full border-2 border-gray-300 bg-gray-200">
         {user.photo ? (
           <MyImage
             src={user.photo}
@@ -48,7 +48,7 @@ const LandingDashboard = () => {
         ) : null}
       </div>
 
-      <p className="text-label text-gray-400">
+      <p className="text-label text-gray-700">
         {stringSlicer({ string: user.userName || '', slice: 10 })}
       </p>
 
@@ -66,7 +66,7 @@ const LandingDashboard = () => {
                 navigation.dashboard();
                 setShowMenu(false);
               }}
-              className="w-full rounded px-3 py-2 text-left text-bodySm transition-colors hover:bg-gray-50 hover:text-warning-600"
+              className="w-full rounded px-3 py-2 text-left text-bodySm text-gray-700 transition-colors hover:bg-gray-50 hover:text-warning-500"
             >
               Dashboard
             </button>
@@ -76,7 +76,7 @@ const LandingDashboard = () => {
                 navigation.profile();
                 setShowMenu(false);
               }}
-              className="w-full rounded px-3 py-2 text-left text-bodySm transition-colors hover:bg-gray-50 hover:text-warning-600"
+              className="w-full rounded px-3 py-2 text-left text-bodySm text-gray-700 transition-colors hover:bg-gray-50 hover:text-warning-500"
             >
               Profile
             </button>
@@ -85,7 +85,7 @@ const LandingDashboard = () => {
 
             <button
               onClick={logout}
-              className="flex w-full items-center justify-between rounded px-3 py-2 text-bodySm text-error-600 transition-colors hover:bg-gray-50"
+              className="flex w-full items-center justify-between rounded px-3 py-2 text-bodySm text-gray-700 transition-colors hover:bg-gray-50 hover:text-error-500"
             >
               Logout <MyIcon icon="logout" />
             </button>

@@ -4,6 +4,7 @@ import MyImage from '@/src/components/atom/image-components';
 import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
 import LightBoxComponent from '@/src/components/common/light-box';
 import PageLoading from '@/src/components/common/page-loading';
+import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
 
 interface AddTaskUploadProps {
   uploadProcessHandler: (file: File) => Promise<void>;
@@ -103,25 +104,24 @@ const AddTaskUploadComponent = ({
         )}
 
         <div>
-          <div className="mt-4 flex items-center justify-center lg:justify-end">
-            <ButtonNext
+          <div className="mt-4 flex flex-wrap-reverse items-center justify-end gap-3 lg:justify-center lg:gap-8">
+            <ButtonFreeClass
               onClick={handleCancel}
-              className="mr-4"
-              disable={uploading || !!!url}
+              className="w-full rounded-sm border border-gray-200 bg-white py-2 text-label font-semibold text-gray-600 transition-all duration-200 hover:bg-gray-50 lg:w-[120px]"
             >
               Cancel
-            </ButtonNext>
+            </ButtonFreeClass>
 
-            <ButtonNext
+            <ButtonFreeClass
               onClick={handleSave}
-              className="w-[130px]"
               disable={!!!url}
+              className={`hover:text-warning-500' w-full rounded-sm border border-warning-500 bg-warning-500 py-2 text-label font-semibold text-white shadow-sm transition-all duration-200 hover:bg-white hover:text-warning-500 lg:w-[120px]`}
             >
-              Save
-            </ButtonNext>
-
-            {error! && <p className="mt-1 text-red-500">{error}</p>}
+              Create
+            </ButtonFreeClass>
           </div>
+
+          {error! && <p className="mt-1 text-red-500">{error}</p>}
         </div>
       </div>
     </Suspense>

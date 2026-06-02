@@ -12,7 +12,7 @@ const ChatMenuComponent = ({
       className={`${showMenu ? 'top-[-36px]' : 'bottom-0'} absolute left-0 flex w-full items-center justify-center`}
     >
       <div
-        className={`flex h-[38px] w-[150px] items-center justify-between border-2 ${showMenu ? 'rounded-t-md border-b-0 bg-white' : 'rounded-md bg-primary-50'} border-primary-500 p-2`}
+        className={`flex h-[38px] w-[150px] items-center justify-between border-2 ${showMenu ? 'rounded-t-md border-b-0 bg-white' : 'rounded-md bg-primary-50'} border-primary-400 p-2`}
       >
         {menuItems?.map((menu) => (
           <div

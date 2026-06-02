@@ -9,10 +9,13 @@ interface SidebarItemProps {
 const SidebarActionItem = ({ item }: SidebarItemProps) => {
   return (
     <div
-      className="relative flex cursor-pointer items-center justify-start text-primary-700 hover:text-warning-600"
+      className="text-gary-800 relative flex w-full cursor-pointer items-center justify-start hover:text-primary-600"
       onClick={item.direction}
     >
-      <MyIcon icon={item.icon as IconName} className="mr-1 text-title" />
+      <MyIcon
+        icon={item.icon as IconName}
+        className="mr-1 text-title text-warning-500"
+      />
 
       <p className="text-[16px] font-semibold capitalize">{item.title}</p>
 

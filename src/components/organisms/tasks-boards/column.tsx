@@ -32,7 +32,7 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
   return (
     <div
       ref={setNodeRef}
-      className={`h-auto w-full rounded-xl border-2 border-primary-300 shadow-md transition lg:h-full lg:w-80 ${
+      className={`h-auto w-full rounded-xl border border-primary-300 shadow-md transition lg:h-full lg:w-80 ${
         isOver ? 'bg-primary-200' : 'bg-white'
       }`}
       style={{
@@ -57,7 +57,7 @@ const ColumnComponent = ({ id, children }: ColumnProps) => {
         </div>
 
         <button
-          className="absolute right-2 text-xl text-white"
+          className="absolute right-2 text-subtitle text-white"
           onClick={toggleCollapse}
         >
           <MyIcon

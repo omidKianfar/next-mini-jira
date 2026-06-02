@@ -57,7 +57,7 @@ const ChatInput = ({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={fastTransition}
-                className="h-full w-full rounded-md border-2 border-primary-500 bg-white"
+                className="h-full w-full rounded-md border-2 border-primary-400 bg-white"
               >
                 <AnimatePresence mode="wait">
                   {Menu === 'text' ? (

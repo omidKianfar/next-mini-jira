@@ -44,7 +44,7 @@ const SupportComponent = () => {
 
   return (
     <div
-      className={`lg:pt[40px] relative w-full overflow-hidden rounded-md border-2 border-warning-400 bg-white pt-[60px] shadow-md lg:h-[calc(100vh-110px)] ${pathname.includes('admin') ? 'h-[calc(100vh-150px)]' : 'h-[calc(100vh-90px)]'} `}
+      className={`lg:pt[40px] relative w-full overflow-hidden rounded-md border border-gray-300 bg-white pt-[60px] shadow-md lg:h-[calc(100vh-110px)] ${pathname.includes('admin') ? 'h-[calc(100vh-150px)]' : 'h-[calc(100vh-90px)]'} `}
     >
       <ChatHeader userChat={chat.userChat} currentUser={user} />
 

@@ -28,10 +28,13 @@ const UserSidebar = ({
   return (
     <div className="mt-6 flex flex-col items-start justify-center">
       <Suspense fallback={<PageLoading />}>
-        <div className="h-[45vh] overflow-y-auto">
+        <div className="h-[45vh] w-full overflow-y-auto">
           {HomePage &&
             LandingSidebarItems?.map((item: sidebarItemsType) => (
-              <div key={item?.id} className="mb-4">
+              <div
+                key={item?.id}
+                className="mb-4 w-full rounded-sm p-1 hover:bg-gray-200"
+              >
                 <SidebarActionItem item={item} />
               </div>
             ))}
@@ -39,7 +42,10 @@ const UserSidebar = ({
           {!HomePage &&
             user?.userType === UserType?.Client &&
             userSidebarItems?.map((item: sidebarItemsType) => (
-              <div key={item?.id} className="mb-4">
+              <div
+                key={item?.id}
+                className="mb-4 w-full rounded-sm p-1 hover:bg-gray-200"
+              >
                 <SidebarActionItem item={item} />
               </div>
             ))}
@@ -47,7 +53,10 @@ const UserSidebar = ({
           {!HomePage &&
             user?.userType === UserType?.Admin &&
             AdminSidebarItems?.map((item: sidebarItemsType) => (
-              <div key={item?.id} className="mb-4">
+              <div
+                key={item?.id}
+                className="mb-4 w-full rounded-sm p-1 hover:bg-gray-200"
+              >
                 <SidebarActionItem item={item} />
               </div>
             ))}
@@ -61,7 +70,7 @@ const UserSidebar = ({
 
           <div className="flex w-full items-center justify-center pt-4">
             <ButtonFreeClass
-              className="cursor-pointer text-[16px] font-semibold text-primary-700 hover:text-warning-600"
+              className="text-gary-700 cursor-pointer text-[16px] font-semibold hover:text-error-600"
               onClick={logout}
               icon={<MyIcon icon="logout" className="ml-1 text-title" />}
             >

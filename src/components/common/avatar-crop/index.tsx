@@ -56,7 +56,7 @@ const AvatarCropModal = ({ file, onCancel, onSave }: CropProps) => {
           />
         </div>
 
-        <div className="flex flex-wrap-reverse items-center justify-end gap-3 lg:justify-center">
+        <div className="flex flex-wrap-reverse items-center justify-end gap-3 lg:justify-center lg:gap-8">
           <ButtonFreeClass
             onClick={onCancel}
             className="w-full rounded-sm border border-gray-200 bg-white py-2 text-label font-semibold text-gray-600 transition-all duration-200 hover:bg-gray-50 lg:w-[120px]"

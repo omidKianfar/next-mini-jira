@@ -20,7 +20,7 @@ const ModalContainer = ({ open, handleClose, children }: ModalProps) => {
         >
           <motion.div
             key="modal"
-            className="relative mx-4 w-full max-w-lg rounded-xl bg-white p-4 shadow-xl"
+            className="relative mx-4 w-full max-w-lg rounded-xl bg-white p-4"
             onClick={(e) => e.stopPropagation()}
             initial={{ opacity: 0, scale: 0.92, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}

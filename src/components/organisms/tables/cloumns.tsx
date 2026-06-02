@@ -3,7 +3,7 @@ import MyImage from '../../atom/image-components';
 import { stringSlicer } from '@/src/utils/string-slicer';
 import MyIcon from '../../atom/icon-components';
 import { MyUserType } from '@/src/types/global';
-import { UsersTableProps } from '../type';
+import { UsersTableProps } from './type';
 
 export const Cloumns = ({
   toggleActive,
@@ -29,7 +29,7 @@ export const Cloumns = ({
           </div>
 
           <p className="font-semibold" title={user.userName as string}>
-            {stringSlicer({ string: user.userName as string, slice: 60 })}
+            {stringSlicer({ string: user.userName as string, slice: 25 })}
           </p>
         </div>
       ),
@@ -39,7 +39,7 @@ export const Cloumns = ({
 
       column: (user: MyUserType) => (
         <p className="font-semibold" title={user.email as string}>
-          {stringSlicer({ string: user.email as string, slice: 60 })}
+          {stringSlicer({ string: user.email as string, slice: 25 })}
         </p>
       ),
     },
@@ -74,7 +74,7 @@ export const Cloumns = ({
         <div className="flex items-center justify-end">
           <MyIcon
             icon="arrow-enter"
-            iconClass="cursor-pointer text-h2 text-warning-500 hover:text-warning-700"
+            iconClass="cursor-pointer text-h2 text-warning-400 hover:text-warning-500"
             onClick={() => goDetail(user.userId)}
           />
         </div>

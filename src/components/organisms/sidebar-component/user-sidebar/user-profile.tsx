@@ -23,18 +23,18 @@ const UserProfile = ({
             alt=""
             fill
             className="rounded-full object-cover"
-            wrapperClass="relative h-[80px] w-[80px] rounded-full border-2 border-primary-500 "
+            wrapperClass="relative h-[80px] w-[80px] rounded-full border-2 border-gray-300 "
             onClick={goProfile}
           />
         ) : (
           <div
-            className="h-[80px] w-[80px] rounded-full border-2 border-primary-500 bg-gray-200"
+            className="h-[80px] w-[80px] rounded-full border-2 border-gray-300 bg-gray-200"
             onClick={goProfile}
           ></div>
         )}
       </div>
 
-      <p className="mt-2 font-semibold text-primary-700">
+      <p className="mt-2 font-semibold text-gray-700">
         {stringSlicer({ string: user?.userName as string, slice: 15 })}
       </p>
 

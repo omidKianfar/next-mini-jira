@@ -70,7 +70,7 @@ const PaymentSuccessComponent = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-50/80 p-4">
-      <div className="w-full max-w-[500px] rounded-2xl border border-gray-100 bg-white p-8 text-center shadow-xl">
+      <div className="w-full max-w-[500px] rounded-2xl border border-gray-300 bg-white p-8 text-center shadow-lg">
         <MyIcon
           icon="check-circle"
           className="mx-auto mb-6 text-[80px] text-success-500"
@@ -84,12 +84,12 @@ const PaymentSuccessComponent = () => {
           active. Thank you for trusting us.
         </p>
 
-        <div className="mt-8">
+        <div className="mt-8 flex items-center justify-center">
           <ButtonNext
             onClick={finishHandler}
             isLoading={isFinishing}
             disable={isFinishing || !user || !subscriptionId}
-            className="w-full"
+            className="w-full lg:w-[300px]"
           >
             {isFinishing ? 'Processing...' : 'Continue to Dashboard'}
           </ButtonNext>

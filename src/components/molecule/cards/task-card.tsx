@@ -4,17 +4,19 @@ import { useState } from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 import { useNavigation } from '@/src/hooks/navigation/use-navigation';
+import { updateTaskStatus } from '@/src/libs/tasks/update-task-status';
 import { stringSlicer } from '@/src/utils/string-slicer';
 import MyIcon from '../../atom/icon-components';
 import { Task } from '@/src/types/global';
-import { updateTaskStatus } from '@/src/libs/tasks/update-task-status';
 
 interface TaskCardProps {
   id: string;
   task: Task;
+  modal?: boolean;
+  handleClose?: () => void;
 }
 
-const TaskCardComponent = ({ id, task }: TaskCardProps) => {
+const TaskCardComponent = ({ id, task, modal, handleClose }: TaskCardProps) => {
   const navigation = useNavigation();
   const isMobile = useIsMobile();
 
@@ -37,6 +39,14 @@ const TaskCardComponent = ({ id, task }: TaskCardProps) => {
 
   const changeTaskStatus = (newStatus: string) => {
     updateTaskStatus({ id: id as string, status: newStatus as string });
+
+    handleClose?.();
+  };
+
+  const goToDetailTask = () => {
+    navigation.taskDetail(task.id);
+
+    handleClose?.();
   };
 
   return (
@@ -49,7 +59,7 @@ const TaskCardComponent = ({ id, task }: TaskCardProps) => {
     >
       <div className="w-full p-1">
         <div
-          className="cursor-grab rounded-lg border border-gray-300 bg-gray-50 shadow-md"
+          className={`${!modal ? 'cursor-grab' : 'cursor-default'} rounded-lg border border-gray-300 bg-gray-50 shadow-md`}
           {...listeners}
           {...attributes}
         >
@@ -117,10 +127,7 @@ const TaskCardComponent = ({ id, task }: TaskCardProps) => {
               )}
             </div>
 
-            <div
-              onClick={() => navigation.taskDetail(task.id)}
-              title="Move to Detail"
-            >
+            <div onClick={goToDetailTask} title="Move to Detail">
               <MyIcon
                 icon="arrow-right"
                 className="cursor-pointer text-subtitle text-warning-500 hover:text-primary-500"

@@ -11,7 +11,7 @@ const ButtonBack = ({ onClick }: BackButtonProps) => {
   return (
     <ButtonFreeClass
       onClick={onClick}
-      className="text-warning-500 hover:text-warning-600"
+      className="text-warning-400 hover:text-warning-500"
       icon={<MyIcon icon="arrow-right" className="rotate-180 text-title" />}
     />
   );
