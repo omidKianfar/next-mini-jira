@@ -34,7 +34,7 @@ const TextareaFiled = <T extends FieldValues>({
             id={name}
             placeholder={placeholder}
             rows={rows}
-            className="my-1 w-full rounded-lg border-2 border-primary-400 px-2 py-2 text-sm placeholder:text-bodySm focus:outline-primary-700"
+            className="my-1 w-full rounded-lg border-2 border-primary-400 px-2 py-2 text-bodySm placeholder:text-bodySm focus:outline-primary-700"
           />
         )}
       />
