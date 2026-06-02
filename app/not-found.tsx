@@ -8,27 +8,32 @@ export default function NotFound() {
   const navigation = useNavigation();
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center p-4">
-      <div className="mb-4 flex justify-center">
-        <h1 className="text-h2 font-bold text-warning-500 lg:text-h1">404</h1>
+    <div className="flex h-screen w-full flex-col items-center justify-center p-6 text-center">
+      <div className="mb-6 flex flex-col items-center">
+        <MyIcon
+          icon="alert-circle"
+          className="mb-4 text-[100px] text-warning-400"
+        />
+        <h1 className="text-8xl font-black text-error-500">404</h1>
       </div>
 
-      <div className="flex flex-col justify-start">
-        <h1 className="mb-4 text-h4 font-bold lg:text-h2">
-          Somthing went wrong
-        </h1>
-
-        <p className="mb-12 text-subtitle lg:text-h4">Page not found.</p>
+      <div className="mb-10 max-w-md">
+        <h2 className="mb-3 text-2xl font-bold text-gray-800">
+          Page not found
+        </h2>
+        <p className="text-gray-500">
+          The page you are looking for might have been removed, had its name
+          changed, or is temporarily unavailable.
+        </p>
       </div>
 
-      <div>
-        <ButtonNext
-          onClick={() => navigation.dashboard()}
-          icon={<MyIcon icon="arrow-right" className="ml-2 text-body" />}
-        >
-          Go Home
-        </ButtonNext>
-      </div>
+      <ButtonNext
+        onClick={() => navigation.dashboard()}
+        icon={<MyIcon icon="arrow-right" className="ml-2" />}
+        className="w-full max-w-[200px]"
+      >
+        Go Home
+      </ButtonNext>
     </div>
   );
 }
