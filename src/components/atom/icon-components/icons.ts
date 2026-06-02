@@ -8,6 +8,7 @@ export const ICONS = {
   'arrow-open': 'mdi:chevron-down',
   'arrow-right': 'maki:arrow',
   'alert-circle': 'mdi:alert-circle',
+  'alert-triangle': 'tabler:alert-triangle-filled',
   'bullet-list': 'pajamas:list-bulleted',
   'cash-alot': 'streamline:payment-10-solid',
   'close-round': 'zondicons:close-outline',
