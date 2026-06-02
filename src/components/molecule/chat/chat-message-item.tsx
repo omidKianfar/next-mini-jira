@@ -124,7 +124,7 @@ const ChatMessageItem = ({
           isDelete
           handleClose={handleCloseModal}
           clickHandler={deleteMessage}
-          title={'Are you shure delete this message?.'}
+          title={'Are you sure you want to delete this message?'}
           description={
             message.attachment?.fileType
               ? message.attachment.fileType
