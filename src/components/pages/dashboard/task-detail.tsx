@@ -146,7 +146,7 @@ const TaskDetailComponent = () => {
 
                 <p className="mb-4 font-semibold capitalize text-primary-600">
                   <span className="mr-2 text-body font-bold text-black">
-                    Created:
+                    Created Date:
                   </span>
                   {task.createdAt}
                 </p>
@@ -206,8 +206,8 @@ const TaskDetailComponent = () => {
           isDelete
           handleClose={handleCloseModal}
           clickHandler={deleteTaskHandler}
-          title={task.title}
-          description={task.description}
+          title={`Are you sure you want to delete this task?`}
+          description={task.title}
         />
       </ModalContainer>
     </Suspense>
