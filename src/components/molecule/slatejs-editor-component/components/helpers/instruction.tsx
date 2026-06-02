@@ -11,7 +11,7 @@ export const Instruction = React.forwardRef<
     ref={ref}
     className={Clsx(
       className,
-      'whitespace-pre-wrap rounded border border-yellow-200 bg-yellow-50 p-2 text-sm'
+      'whitespace-pre-wrap rounded border border-yellow-200 bg-yellow-50 p-2 text-bodySm'
     )}
   >
     {children}

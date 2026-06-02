@@ -12,17 +12,17 @@ const ToolbarComponent = ({ handleSend, loading }: ToolbarComponentProps) => {
     <Toolbar>
       <div className="flex h-full w-full flex-col items-start justify-between gap-[8px] rounded-t-sm border-b-2 border-dashed border-gray-200 bg-white p-[4px] lg:flex-row">
         <div className="relative flex w-full flex-wrap items-center justify-start gap-2 lg:w-2/3">
-          <div className="relative flex items-center justify-center">
-            <EmojiComponent />
-          </div>
-
-          <ToolbarButtonsComponents />
-
           <FontSelectComponent />
 
           <ColorSelectComponent />
 
           <BGColorSelectComponent />
+
+          <ToolbarButtonsComponents />
+
+          <div className="relative flex items-center justify-center">
+            <EmojiComponent />
+          </div>
         </div>
 
         <div className="flex w-full items-center justify-end lg:w-1/3">

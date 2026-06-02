@@ -21,11 +21,11 @@ export const EditorValue = React.forwardRef<HTMLDivElement, EditorValueProps>(
         {...props}
         className={Clsx(className, 'border border-gray-300 bg-gray-50 p-2')}
       >
-        <div className="border-b border-gray-300 bg-gray-200 p-1 text-sm font-semibold text-gray-700">
+        <div className="border-b border-gray-300 bg-gray-200 p-1 text-bodySm font-semibold text-gray-700">
           Slate's value as JSON (For Debugging)
         </div>
 
-        <pre className="overflow-y-auto whitespace-pre-wrap p-1 font-mono text-xs text-gray-600">
+        <pre className="overflow-y-auto whitespace-pre-wrap p-1 font-mono text-label text-gray-600">
           {textLines}
         </pre>
       </div>

@@ -4,9 +4,10 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
 } from 'react';
-import { createEditor, Text, Transforms } from 'slate';
-import { withReact } from 'slate-react';
+import { createEditor, Editor, Text, Transforms } from 'slate';
+import { ReactEditor, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 import { WithHtml } from '@/src/components/molecule/slatejs-editor-component/components/with-html';
 import { Deserialize } from '@/src/components/molecule/slatejs-editor-component/components/deserialize';
@@ -49,6 +50,15 @@ const useEditorActions = ({
     () => WithHtml(withReact(withHistory(createEditor()))),
     []
   );
+
+  const editorFocuse = useRef(true);
+
+  useEffect(() => {
+    if (editorFocuse.current) {
+      ReactEditor.focus(editor);
+      editorFocuse.current = false;
+    }
+  }, [editor]);
 
   const changeColor = (color: string | null) => {
     setFontColorState(color);
@@ -114,11 +124,22 @@ const useEditorActions = ({
   }, [editor]);
 
   const resetEditor = () => {
-    editor.children = [{ type: 'paragraph', children: [{ text: '' }] }] as any;
+    if (editor.children.length > 0) {
+      while (editor.children.length > 0) {
+        Transforms.removeNodes(editor, { at: [0] });
+      }
+    }
 
-    editor.selection = null;
+    Transforms.insertNodes(editor, {
+      type: 'paragraph',
+      children: [{ text: '' }],
+    });
 
-    editor.onChange();
+    Transforms.select(editor, Editor.start(editor, [0]));
+
+    setTimeout(() => {
+      ReactEditor.focus(editor);
+    }, 50);
   };
 
   useEffect(() => {

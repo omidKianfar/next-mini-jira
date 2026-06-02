@@ -31,3 +31,8 @@ body {
 .swiper-pagination {
   bottom: 0px !important;
 }
+
+[data-slate-placeholder] {
+  top: 16px !important;
+  left: 16px !important;
+}
