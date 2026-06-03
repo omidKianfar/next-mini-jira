@@ -46,11 +46,11 @@ const PaginationComponent = ({
 
   return (
     <div className="mt-4 flex items-center justify-center gap-2">
-      <div className="flex justify-center gap-2 rounded-md border border-gray-300 bg-white p-2 shadow-md lg:flex-row">
+      <div className="flex justify-center gap-2 rounded-md border border-gray-300 bg-white p-2 shadow-sm lg:flex-row">
         <button
           onClick={() => onPageChange(1)}
           disabled={currentPage === 1}
-          className="rounded border-2 border-gray-300 bg-gray-300 px-3 py-1 disabled:opacity-50"
+          className="rounded border border-gray-300 bg-gray-100 px-3 py-1 text-gray-700 hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {'<<'}
         </button>
@@ -58,24 +58,24 @@ const PaginationComponent = ({
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="rounded border-2 border-gray-300 bg-gray-300 px-3 py-1 disabled:opacity-50"
+          className="rounded border border-gray-300 bg-gray-100 px-3 py-1 text-gray-700 hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {'<'}
         </button>
 
         {getPages().map((p, i) =>
           p === '...' ? (
-            <span key={i} className="px-3 py-1 text-gray-500">
+            <span key={i} className="px-3 py-1 text-gray-200">
               ...
             </span>
           ) : (
             <button
               key={p}
               onClick={() => onPageChange(p as number)}
-              className={`rounded border-2 border-gray-300 px-3 py-1 ${
+              className={`rounded border border-gray-300 px-3 py-1 ${
                 p === currentPage
                   ? 'bg-primary-500 text-white'
-                  : 'bg-gray-200 hover:bg-gray-300'
+                  : 'bg-gray-100 hover:bg-gray-200'
               }`}
             >
               {p}
@@ -86,7 +86,7 @@ const PaginationComponent = ({
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="rounded border-2 border-gray-300 bg-gray-300 px-3 py-1 disabled:opacity-50"
+          className="rounded border border-gray-300 bg-gray-100 px-3 py-1 text-gray-700 hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {'>'}
         </button>
@@ -94,17 +94,17 @@ const PaginationComponent = ({
         <button
           onClick={() => onPageChange(totalPages)}
           disabled={currentPage === totalPages}
-          className="rounded border-2 border-gray-300 bg-gray-300 px-3 py-1 disabled:opacity-50"
+          className="rounded border border-gray-300 bg-gray-100 px-3 py-1 text-gray-700 hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {'>>'}
         </button>
       </div>
 
-      <div className="rounded-md border border-gray-300 bg-white p-2 shadow-md">
+      <div className="rounded-md border border-gray-300 bg-white p-2 shadow-sm">
         <select
           value={pageSize}
           onChange={(e) => onPageSizeChange(Number(e.target.value))}
-          className="cursor-pointer rounded border border-gray-300 px-2 py-1"
+          className="cursor-pointer px-2 py-1"
         >
           <option value={5}>5</option>
           <option value={10}>10</option>
