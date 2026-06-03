@@ -163,7 +163,7 @@ const SlateEditor = ({
         />
 
         {editorOutput === '<p></p>' && (
-          <div className="absolute bottom-2 left-0 text-caption text-gray-400 lg:text-bodySm">
+          <div className="absolute bottom-2 left-0 pl-2 text-caption text-gray-400 lg:text-bodySm">
             Press <strong>CTRL + Enter</strong> to add a new line, or{' '}
             <strong>Enter</strong> to send.
           </div>

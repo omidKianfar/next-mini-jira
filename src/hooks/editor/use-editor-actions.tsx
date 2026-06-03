@@ -139,7 +139,7 @@ const useEditorActions = ({
 
     setTimeout(() => {
       ReactEditor.focus(editor);
-    }, 50);
+    }, 100);
   };
 
   useEffect(() => {

@@ -227,7 +227,7 @@ interface HeaderProps {
   setShowSidebar?: Dispatch<SetStateAction<boolean>>;
 }
 
-interface chatSidebarProps extends HeaderProps {
+interface chatSidebarProps extends HeaderProps, ModalProps {
   chat: ChatsType;
 }
 
@@ -240,11 +240,13 @@ interface ChatMenuProps {
   editorKey?: number;
   editMessageId?: string | null;
   setEditMessageId?: Dispatch<SetStateAction<string | null>>;
+  Menu?: MenuType;
+  setMenu?: Dispatch<SetStateAction<MenuType>>;
 }
 
 type ModalProps = React.PropsWithChildren & {
   open: boolean;
-  handleClose: () => void;
+  handleClose?: () => void;
   handleOpenModal?: (modalNumber: number) => void;
 };
 
