@@ -1,12 +1,15 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, lazy, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/src/store';
 import EmptyColumn from '@/src/components/atom/empty-components/empty-column';
 import MyIcon from '@/src/components/atom/icon-components';
 import { ModalProps, Task } from '@/src/types/global';
-import TaskCardComponent from '@/src/components/molecule/cards/task-card';
+
+const TaskCardComponent = lazy(
+  () => import('@/src/components/molecule/cards/task-card')
+);
 
 const SearchTasks = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
   const tasks = useSelector((state: RootState) => state?.tasks?.tasks);
@@ -46,7 +49,7 @@ const SearchTasks = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
 
   return (
     <div className="w-full">
-      <h1 className="mb-4 text-subtitle font-bold text-gray-700">
+      <h1 className="mb-4 text-subtitle font-bold text-primary-500">
         Search Tasks
       </h1>
 

@@ -1,15 +1,17 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, lazy, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 import { MessgesRead } from '@/src/libs/chat/read-message';
 import { RootState } from '@/src/store';
-import { stringSlicer } from '@/src/utils/string-slicer';
 import EmptyColumn from '@/src/components/atom/empty-components/empty-column';
 import MyIcon from '@/src/components/atom/icon-components';
-import MyImage from '@/src/components/atom/image-components';
 import { ChatsType, ModalProps, UserType } from '@/src/types/global';
+
+const AdminSupportUserCard = lazy(
+  () => import('@/src/components/molecule/cards/admin-support-user-card')
+);
 
 const SearchSupportChats = ({
   handleClose,
@@ -52,35 +54,36 @@ const SearchSupportChats = ({
   const goToChat = (chatId: string) => {
     MessgesRead({ chatId: chatId, senderType: UserType.Client });
 
-    handleClose();
+    handleClose?.();
     navigation.adminSupportChat(chatId);
   };
 
   return (
     <div className="w-full">
-      <h1 className="mb-4 text-center text-subtitle font-bold text-warning-500">
+      <h1 className="mb-4 text-subtitle font-bold text-primary-500">
         Search Chat
       </h1>
 
-      <div className="relative mb-4 rounded-lg border-2 border-warning-400 bg-gray-50 p-2 shadow-md">
+      <div className="relative mb-4">
         <div>
           <MyIcon
             icon="search"
-            className="absolute left-3 top-5 text-title text-primary-500"
+            className="absolute left-2 top-[15px] text-subtitle text-gray-300"
           />
 
           {filteredChats.length > 0 && (
             <MyIcon
               icon="close"
-              className="absolute right-3 top-5 cursor-pointer text-title text-gray-400 hover:text-error-500"
+              className="absolute right-2 top-[14px] cursor-pointer text-subtitle text-gray-400 hover:text-error-500"
               onClick={handelClear}
             />
           )}
 
           <input
-            className="my-1 w-full rounded-lg border-2 border-primary-400 px-8 py-2 text-bodySm shadow-md focus:outline-primary-700"
+            className="my-1 w-full rounded-md border-2 border-primary-500 px-8 py-2 text-bodySm text-gray-600 focus:outline-primary-700"
             value={searchValue}
             onChange={(event) => serachHandler(event)}
+            autoFocus
           />
         </div>
       </div>
@@ -89,55 +92,8 @@ const SearchSupportChats = ({
         filteredChats.length > 0 ? (
           <div className="scrollbar-hide mt-4 max-h-80 overflow-y-auto">
             {filteredChats.map((chat) => (
-              <div
-                key={chat.user.userId}
-                className="mb-4 w-full cursor-pointer rounded-lg border-2 border-warning-400 bg-gray-50 p-4 shadow-md"
-                onClick={() => goToChat(chat.id)}
-              >
-                <div className="mb-4 flex items-center justify-start">
-                  <div className="mr-4 overflow-hidden">
-                    {chat?.user?.photo ? (
-                      <MyImage
-                        src={chat.user?.photo as string}
-                        alt=""
-                        fill
-                        className="rounded-full object-cover"
-                        wrapperClass="relative h-[40px] w-[40px] rounded-full border-2 border-primary-500 "
-                      />
-                    ) : (
-                      <div className="h-[40px] w-[40px] rounded-full border-2 border-primary-500 bg-gray-200"></div>
-                    )}
-                  </div>
-
-                  <p className="text-label text-gray-600">
-                    {stringSlicer({
-                      string: chat.user?.email as string,
-                      slice: 30,
-                    })}
-                  </p>
-                </div>
-
-                <div className="rounded-sm border border-gray-100 p-2 shadow-md">
-                  {chat.message.lastMessageAttachment.fileType ? (
-                    <div className="break-words text-label text-gray-400">
-                      have a
-                      <span className="mx-1 text-gray-500">
-                        {chat.message.lastMessageAttachment.fileType}
-                      </span>
-                      attachment
-                    </div>
-                  ) : (
-                    <div
-                      className="prose prose-sm break-words text-label"
-                      dangerouslySetInnerHTML={{
-                        __html: stringSlicer({
-                          string: chat.message.lastMessageText as string,
-                          slice: 80,
-                        }),
-                      }}
-                    ></div>
-                  )}
-                </div>
+              <div key={chat.id} className="mb-4">
+                <AdminSupportUserCard chat={chat} handleClose={handleClose} />
               </div>
             ))}
           </div>

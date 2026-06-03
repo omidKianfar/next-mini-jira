@@ -10,10 +10,8 @@ const options = [
 ];
 
 const Wrapper = ({ withError = false }) => {
-  const defaultValues = { category: 'B' };
-
   const methods = useForm({
-    defaultValues,
+    defaultValues: { category: 'B' },
   });
 
   useEffect(() => {

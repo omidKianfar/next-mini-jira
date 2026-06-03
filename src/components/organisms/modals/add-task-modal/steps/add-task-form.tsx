@@ -12,14 +12,15 @@ const AddTaskFormComponent = ({
   handleClose,
   setNumber,
   loading,
+  url,
 }: AddTaskProps) => {
   return (
     <div className="flex flex-col gap-4 p-1">
       <div>
-        <h1 className="mb-2 text-subtitle font-bold text-gray-700">
+        <h1 className="mb-2 text-subtitle font-bold text-primary-500">
           Create Task
         </h1>
-        <p className="text-label text-gray-500">
+        <p className="text-label text-gray-400">
           Fill in the details to add a new task to your board.
         </p>
       </div>
@@ -40,13 +41,28 @@ const AddTaskFormComponent = ({
           placeholder="Enter your description"
         />
 
-        <ButtonFreeClass
-          onClick={() => setNumber(1)}
-          className="w-full justify-start rounded-sm border-dashed border-gray-400 bg-gray-50 py-1 text-gray-600 hover:bg-gray-100"
-          icon={<MyIcon icon="upload" className="text-h4" />}
-        >
-          Add Attachment
-        </ButtonFreeClass>
+        <div>
+          {url && (
+            <>
+              <p className="mb-2 text-center text-label text-gray-400">
+                You have an attachment ready to upload.
+              </p>
+            </>
+          )}
+
+          <ButtonFreeClass
+            onClick={() => setNumber(1)}
+            className="w-full justify-start rounded-sm border-dashed border-gray-400 bg-gray-50 py-1 text-gray-600 hover:bg-gray-100"
+            icon={
+              <MyIcon
+                icon="upload"
+                className={`text-h4 ${url ? 'text-primary-500' : 'text-gray-400'}`}
+              />
+            }
+          >
+            {url ? 'Review & replace Attachment' : 'Add Attachment'}
+          </ButtonFreeClass>
+        </div>
       </div>
 
       <div className="mt-4 flex flex-wrap-reverse items-center justify-end gap-3 lg:justify-center lg:gap-8">

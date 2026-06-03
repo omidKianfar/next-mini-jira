@@ -1,6 +1,6 @@
 'use client';
 
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense, useCallback, useRef, useState } from 'react';
 import { enqueueSnackbar } from 'notistack';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -21,10 +21,16 @@ const AddTaskUploadCmponent = lazy(() => import('./steps/upload'));
 const AddTask = ({ handleClose }: Pick<AddTaskProps, 'handleClose'>) => {
   const { user } = useAuth();
 
+  const isCancelledRef = useRef(false);
+
   const { processImage } = useImageProcessor({ size: 1024 });
 
-  const { compressVideo, isCompressing, compressionProgress } =
-    useVideoProcessor();
+  const {
+    compressVideo,
+    isCompressing,
+    compressionProgress,
+    cancelCompression,
+  } = useVideoProcessor();
 
   const { cancel, error, fileType, progress, reset, upload, uploading, url } =
     useFileUploader({
@@ -34,32 +40,45 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, 'handleClose'>) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [number, setNumber] = useState(0);
 
-  const defaultValues: TaskForm = {
-    title: '',
-    description: '',
-    tag: 'task',
-    attachment: {
-      fileUrl: null,
-      fileType: null,
-    },
-  };
-
   const methods = useForm<TaskForm>({
-    defaultValues,
+    defaultValues: {
+      title: '',
+      description: '',
+      tag: 'task',
+      attachment: {
+        fileUrl: null,
+        fileType: null,
+      },
+    },
     resolver: yupResolver(TaskShema),
   });
 
-  const uploadProcessHandler = async (file: File) => {
-    let finalFile = file;
+  const uploadProcessHandler = useCallback(
+    async (file: File) => {
+      isCancelledRef.current = false;
 
-    if (file.type.startsWith('image/')) {
-      finalFile = await processImage(file);
-    } else if (file.type.startsWith('video/')) {
-      finalFile = await compressVideo(file);
-    }
+      let finalFile = file;
 
-    await upload({ file: finalFile });
-  };
+      try {
+        if (file.type.startsWith('image/')) {
+          finalFile = await processImage(file);
+        } else if (file.type.startsWith('video/')) {
+          const compressed = await compressVideo(file);
+
+          if (isCancelledRef.current || !compressed) return;
+
+          finalFile = compressed;
+        }
+
+        if (isCancelledRef.current) return;
+
+        await upload({ file: finalFile });
+      } catch (err) {
+        console.error('Upload process error:', err);
+      }
+    },
+    [processImage, compressVideo, upload]
+  );
 
   const handleSave = () => {
     methods.setValue('attachment.fileUrl', url);
@@ -67,8 +86,10 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, 'handleClose'>) => {
   };
 
   const handleCancel = () => {
-    methods.setValue('attachment.fileUrl', '');
+    isCancelledRef.current = true;
+    cancelCompression();
     cancel();
+    methods.setValue('attachment.fileUrl', '');
     setNumber(0);
   };
 
@@ -117,6 +138,7 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, 'handleClose'>) => {
               handleClose={handleClose}
               setNumber={setNumber}
               loading={loading}
+              url={url}
             />
           ) : (
             <AddTaskUploadCmponent

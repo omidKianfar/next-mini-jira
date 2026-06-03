@@ -4,11 +4,12 @@ import { ChangeEvent, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 import { RootState } from '@/src/store';
-import { stringSlicer } from '@/src/utils/string-slicer';
 import { ModalProps, MyUserType } from '@/src/types/global';
 import EmptyColumn from '@/src/components/atom/empty-components/empty-column';
 import MyIcon from '@/src/components/atom/icon-components';
-import MyImage from '@/src/components/atom/image-components';
+import UserListCard from '../../lists/admin-users-list';
+import { updateFirestoreUser } from '@/src/libs/auth/update-user';
+import { stringSlicer } from '@/src/utils/string-slicer';
 
 const SearchUsers = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
   const navigation = useNavigation();
@@ -18,6 +19,20 @@ const SearchUsers = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
   const [filteredUsers, setFilteredUsers] = useState<MyUserType[]>([]);
+
+  const goDetail = (userId: string) => {
+    navigation.adminUserDetail(userId);
+
+    handleClose?.();
+  };
+
+  const toggleActive = async (user: MyUserType) => {
+    await updateFirestoreUser(user.userId as string, {
+      isActive: !user.isActive,
+    });
+
+    handleClose?.();
+  };
 
   const serachHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value as string;
@@ -50,27 +65,27 @@ const SearchUsers = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
 
   return (
     <div className="w-full">
-      <h1 className="mb-4 text-center text-subtitle font-bold text-warning-500">
+      <h1 className="mb-4 text-subtitle font-bold text-primary-500">
         Search Users
       </h1>
 
-      <div className="relative mb-4 rounded-lg border-2 border-warning-400 bg-gray-50 p-2 shadow-md">
+      <div className="relative mb-4">
         <div>
           <MyIcon
             icon="search"
-            className="absolute left-3 top-5 text-title text-primary-500"
+            className="absolute left-2 top-[15px] text-subtitle text-gray-300"
           />
 
           {filteredUsers.length > 0 && (
             <MyIcon
-              icon="close-round"
-              className="absolute right-3 top-5 cursor-pointer text-title text-gray-400 hover:text-error-500"
+              icon="close"
+              className="absolute right-2 top-[14px] cursor-pointer text-subtitle text-gray-400 hover:text-error-500"
               onClick={handelClear}
             />
           )}
 
           <input
-            className="my-1 w-full rounded-lg border-2 border-primary-400 px-8 py-2 text-bodySm shadow-md focus:outline-primary-700"
+            className="my-1 w-full rounded-md border-2 border-primary-500 px-8 py-2 text-bodySm text-gray-600 focus:outline-primary-700"
             value={searchValue}
             onChange={(event) => serachHandler(event)}
           />
@@ -83,41 +98,32 @@ const SearchUsers = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
             {filteredUsers.map((user) => (
               <div
                 key={user.userId}
-                className="mb-4 flex w-full cursor-pointer items-center justify-start rounded-lg border-2 border-warning-400 bg-gray-50 p-4 shadow-md"
-                onClick={() => {
-                  navigation.adminUserDetail(user.userId);
-                  handleClose();
-                }}
+                className="mb-4 w-full cursor-pointer rounded-lg border-2 border-gray-300 p-2 shadow-sm last:mb-2 hover:bg-gray-100"
+                onClick={() => goDetail(user?.userId)}
               >
-                <div className="mr-4 overflow-hidden">
-                  {user?.photo ? (
-                    <MyImage
-                      src={user.photo as string}
-                      alt=""
-                      fill
-                      className="rounded-full object-cover"
-                      wrapperClass="relative h-[40px] w-[40px] rounded-full border-2 border-primary-500 "
-                    />
-                  ) : (
-                    <div className="h-[40px] w-[40px] rounded-full border-2 border-primary-500 bg-gray-200"></div>
-                  )}
-                </div>
-
-                <div>
-                  <h3 className="mb-1 text-body font-semibold">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-semibold text-gray-600">
                     {stringSlicer({
                       string: user.userName as string,
                       slice: 40,
                     })}
                   </h3>
 
-                  <p className="text-label text-gray-600">
-                    {stringSlicer({
-                      string: user.email as string,
-                      slice: 40,
-                    })}
-                  </p>
+                  <div onClick={(e) => e.stopPropagation()}>
+                    <MyIcon
+                      icon="user"
+                      iconClass={`cursor-pointer text-title ${user.isActive ? 'text-success-500' : 'text-warning-500'}`}
+                      onClick={() => toggleActive(user)}
+                    />
+                  </div>
                 </div>
+
+                <p className="my-1 mt-2 text-label text-gray-400">
+                  {stringSlicer({
+                    string: user.email as string,
+                    slice: 40,
+                  })}
+                </p>
               </div>
             ))}
           </div>

@@ -4,10 +4,8 @@ import { useForm, FormProvider } from 'react-hook-form';
 import TextareaFiled from './index';
 
 const Wrapper = ({ withError = false }) => {
-  const defaultValues = { description: 'Initial text' };
-
   const methods = useForm({
-    defaultValues,
+    defaultValues: { description: 'Initial text' },
   });
 
   useEffect(() => {

@@ -4,10 +4,8 @@ import { useForm, FormProvider } from 'react-hook-form';
 import InputField from './index';
 
 const Wrapper = ({ withError = false }) => {
-  const defaultValues = { name: 'Initial text' };
-
   const methods = useForm({
-    defaultValues,
+    defaultValues: { name: 'Initial text' },
   });
 
   useEffect(() => {
