@@ -59,7 +59,7 @@ const TaskCardComponent = ({ id, task, modal, handleClose }: TaskCardProps) => {
     >
       <div className="w-full p-1">
         <div
-          className={`${!modal ? 'cursor-grab' : 'cursor-default'} rounded-lg border border-gray-300 bg-gray-50 shadow-md`}
+          className={`${!modal ? 'cursor-grab' : 'cursor-default'} rounded-md border border-gray-300 bg-gray-50 shadow-sm`}
           {...listeners}
           {...attributes}
         >
@@ -80,7 +80,7 @@ const TaskCardComponent = ({ id, task, modal, handleClose }: TaskCardProps) => {
         </div>
 
         <div
-          className="flex items-center justify-between rounded-b-lg px-2 pb-1 pt-2"
+          className="flex items-center justify-between p-1 pt-2"
           data-no-dnd="true"
         >
           <MyIcon
@@ -88,7 +88,7 @@ const TaskCardComponent = ({ id, task, modal, handleClose }: TaskCardProps) => {
             className="mr-2 text-subtitle text-warning-500"
           />
 
-          <div className="flex items-center justify-end gap-4 rounded-sm border border-gray-200 px-2 py-1 shadow-sm">
+          <div className="flex items-center justify-end gap-4 px-2 py-1">
             <div className="flex items-center justify-start gap-4">
               {task.status !== 'todo' && (
                 <div
@@ -97,7 +97,7 @@ const TaskCardComponent = ({ id, task, modal, handleClose }: TaskCardProps) => {
                 >
                   <MyIcon
                     icon="todo"
-                    className={`cursor-pointer text-subtitle text-warning-500 hover:text-primary-500`}
+                    className={`cursor-pointer text-subtitle text-primary-400 hover:text-primary-500`}
                   />
                 </div>
               )}
@@ -109,7 +109,7 @@ const TaskCardComponent = ({ id, task, modal, handleClose }: TaskCardProps) => {
                 >
                   <MyIcon
                     icon="progress"
-                    className={`cursor-pointer text-subtitle text-warning-500 hover:text-primary-500`}
+                    className={`cursor-pointer text-subtitle text-primary-400 hover:text-primary-500`}
                   />
                 </div>
               )}
@@ -121,7 +121,7 @@ const TaskCardComponent = ({ id, task, modal, handleClose }: TaskCardProps) => {
                 >
                   <MyIcon
                     icon="done"
-                    className={`cursor-pointer text-subtitle text-warning-500 hover:text-primary-500`}
+                    className={`cursor-pointer text-subtitle text-primary-400 hover:text-primary-500`}
                   />
                 </div>
               )}
@@ -130,7 +130,7 @@ const TaskCardComponent = ({ id, task, modal, handleClose }: TaskCardProps) => {
             <div onClick={goToDetailTask} title="Move to Detail">
               <MyIcon
                 icon="arrow-right"
-                className="cursor-pointer text-subtitle text-warning-500 hover:text-primary-500"
+                className="cursor-pointer text-subtitle text-primary-400 hover:text-primary-500"
               />
             </div>
           </div>

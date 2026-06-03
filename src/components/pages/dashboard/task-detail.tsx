@@ -42,6 +42,7 @@ const TaskDetailComponent = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [deleting, setDeleting] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
+  const [modalCounter, setModalCounter] = useState<number>(0);
 
   const fetchTaskHandler = async () => {
     const data = await fetchTask({ taskId: taskId! });
@@ -92,7 +93,9 @@ const TaskDetailComponent = () => {
     }
   };
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (modalNumber: number) => {
+    setModalCounter(modalNumber);
+
     setOpen(true);
   };
 
@@ -115,7 +118,7 @@ const TaskDetailComponent = () => {
             <ButtonBack onClick={BackDashboard} />
 
             <ButtonFreeClass
-              onClick={handleOpenModal}
+              onClick={() => handleOpenModal(1)}
               isLoading={deleting}
               disable={deleting}
               icon={
@@ -153,7 +156,7 @@ const TaskDetailComponent = () => {
               </div>
 
               <div className="rounded-md border border-gray-300 bg-gray-50 p-4 shadow-md">
-                <h1 className="mb-4 break-words text-body font-semibold">
+                <h1 className="mb-10 break-words text-body font-semibold">
                   {task.title}
                 </h1>
 
@@ -163,29 +166,14 @@ const TaskDetailComponent = () => {
                   {task.description}
                 </p>
 
-                <div className="flex items-center justify-center">
-                  {task.attachment?.fileType ? (
-                    task.attachment?.fileType === 'image' ? (
-                      <LightBoxComponent
-                        url={task?.attachment?.fileUrl as string}
-                      >
-                        <MyImage
-                          src={task?.attachment?.fileUrl as string}
-                          alt="preview"
-                          fill
-                          wrapperClass="relative cursor-pointer w-[250px] h-[250px] overflow-hidden rounded-lg  shadow-md border-2 border-warning-400 "
-                          className="object-cover"
-                        />
-                      </LightBoxComponent>
-                    ) : (
-                      <MyVideo
-                        src={task?.attachment?.fileUrl as string}
-                        alt="preview"
-                        className="border-warning-400shadow-md w-full max-w-[500px] rounded-lg border-2"
-                      />
-                    )
-                  ) : null}
-                </div>
+                {task?.attachment?.fileUrl && (
+                  <div
+                    onClick={() => handleOpenModal(2)}
+                    className="cursor-pointer text-label text-primary-500"
+                  >
+                    This task has an attachment. click to show
+                  </div>
+                )}
               </div>
             </div>
 
@@ -202,13 +190,41 @@ const TaskDetailComponent = () => {
       </div>
 
       <ModalContainer open={open} handleClose={handleCloseModal}>
-        <ModalComponent
-          isDelete
-          handleClose={handleCloseModal}
-          clickHandler={deleteTaskHandler}
-          title={`Are you sure you want to delete this task?`}
-          description={task.title}
-        />
+        {modalCounter === 1 ? (
+          <ModalComponent
+            isDelete
+            handleClose={handleCloseModal}
+            clickHandler={deleteTaskHandler}
+            title={`Are you sure you want to delete this task?`}
+            description={task.title}
+          />
+        ) : modalCounter === 2 ? (
+          <div className="w-full max-w-[500px] pt-8">
+            {task.attachment?.fileType ? (
+              task.attachment?.fileType === 'image' ? (
+                <LightBoxComponent url={task?.attachment?.fileUrl as string}>
+                  <div className="relative aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-md border border-gray-300">
+                    <MyImage
+                      src={task?.attachment?.fileUrl as string}
+                      alt={task?.attachment?.fileUrl as string}
+                      fill
+                      wrapperClass="w-full h-full"
+                      className="object-contain"
+                    />
+                  </div>
+                </LightBoxComponent>
+              ) : (
+                <div className="aspect-square w-full max-w-[500px] rounded-md border border-gray-300">
+                  <MyVideo
+                    src={task?.attachment?.fileUrl as string}
+                    alt={task?.attachment?.fileUrl as string}
+                    className="h-full w-full rounded-md object-contain"
+                  />
+                </div>
+              )
+            ) : null}
+          </div>
+        ) : null}
       </ModalContainer>
     </Suspense>
   );
