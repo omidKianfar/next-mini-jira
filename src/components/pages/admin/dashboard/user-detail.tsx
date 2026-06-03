@@ -45,7 +45,7 @@ const AdminUserDetailComponent = () => {
         </div>
 
         <div className="text-center">
-          <p className="mb-4 text-subtitle font-bold text-warning-500">
+          <p className="mb-4 text-subtitle font-bold text-primary-500">
             User Detail
           </p>
 

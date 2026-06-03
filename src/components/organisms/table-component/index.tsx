@@ -6,7 +6,7 @@ type TableProps<T> = {
 };
 export function TableComponent<T>({ data, columns }: TableProps<T>) {
   return (
-    <div className="border-grayu-500 w-full overflow-hidden rounded-lg border bg-white shadow-lg">
+    <div className="border-grayu-500 w-full overflow-hidden rounded-lg border bg-white shadow-sm">
       <table className="w-full">
         <thead className="border-b border-gray-300 bg-gray-200 shadow-md">
           <tr>

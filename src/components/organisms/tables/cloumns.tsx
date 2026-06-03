@@ -11,7 +11,7 @@ export const Cloumns = ({
 }: Pick<UsersTableProps, 'goDetail' | 'toggleActive'>) => {
   const columns = [
     {
-      head: <span className="text-primary-500">Username</span>,
+      head: <span className="text-gray-700">Username</span>,
 
       column: (user: MyUserType) => (
         <div className="flex items-center justify-start">
@@ -20,40 +20,43 @@ export const Cloumns = ({
               <MyImage
                 src={user.photo}
                 fill
-                wrapperClass="relative h-[40px] w-[40px] rounded-full border-2 border-primary-500 overflow-hidden"
+                wrapperClass="relative h-[40px] w-[40px] rounded-full border-2 border-gray-300 overflow-hidden"
                 alt=""
               />
             ) : (
-              <div className="h-[40px] w-[40px] rounded-full border-2 border-primary-500 bg-gray-200" />
+              <div className="h-[40px] w-[40px] rounded-full border-2 border-gray-300 bg-gray-200" />
             )}
           </div>
 
-          <p className="font-semibold" title={user.userName as string}>
+          <p
+            className="font-semibold text-gray-600"
+            title={user.userName as string}
+          >
             {stringSlicer({ string: user.userName as string, slice: 25 })}
           </p>
         </div>
       ),
     },
     {
-      head: <span className="text-primary-500">Email</span>,
+      head: <span className="text-gray-700">Email</span>,
 
       column: (user: MyUserType) => (
-        <p className="font-semibold" title={user.email as string}>
+        <p className="font-semibold text-gray-600" title={user.email as string}>
           {stringSlicer({ string: user.email as string, slice: 25 })}
         </p>
       ),
     },
     {
-      head: <span className="text-primary-500">Created At</span>,
+      head: <span className="text-gray-700">Created At</span>,
 
       column: (user: MyUserType) => (
-        <p className="font-semibold">
+        <p className="font-semibold text-gray-600">
           {dayjs(user.createdAt).format('YYYY-MM-DD')}
         </p>
       ),
     },
     {
-      head: <span className="text-primary-500">Status</span>,
+      head: <span className="text-gray-700">Status</span>,
 
       column: (user: MyUserType) => (
         <div className="flex items-center justify-start">
