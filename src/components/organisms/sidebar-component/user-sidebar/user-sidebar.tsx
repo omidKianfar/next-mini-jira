@@ -28,13 +28,10 @@ const UserSidebar = ({
   return (
     <div className="mt-6 flex flex-col items-start justify-center">
       <Suspense fallback={<PageLoading />}>
-        <div className="h-[45vh] w-full overflow-y-auto">
+        <div className="h-[45vh] overflow-y-auto">
           {HomePage &&
             LandingSidebarItems?.map((item: sidebarItemsType) => (
-              <div
-                key={item?.id}
-                className="mb-4 w-full rounded-sm p-1 hover:bg-gray-200"
-              >
+              <div key={item?.id} className="mb-4 rounded-sm p-1">
                 <SidebarActionItem item={item} />
               </div>
             ))}
@@ -42,10 +39,7 @@ const UserSidebar = ({
           {!HomePage &&
             user?.userType === UserType?.Client &&
             userSidebarItems?.map((item: sidebarItemsType) => (
-              <div
-                key={item?.id}
-                className="mb-4 w-full rounded-sm p-1 hover:bg-gray-200"
-              >
+              <div key={item?.id} className="mb-4 rounded-sm">
                 <SidebarActionItem item={item} />
               </div>
             ))}
@@ -53,10 +47,7 @@ const UserSidebar = ({
           {!HomePage &&
             user?.userType === UserType?.Admin &&
             AdminSidebarItems?.map((item: sidebarItemsType) => (
-              <div
-                key={item?.id}
-                className="mb-4 w-full rounded-sm p-1 hover:bg-gray-200"
-              >
+              <div key={item?.id} className="mb-4 rounded-sm">
                 <SidebarActionItem item={item} />
               </div>
             ))}

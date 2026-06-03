@@ -9,7 +9,7 @@ interface SidebarItemProps {
 const SidebarActionItem = ({ item }: SidebarItemProps) => {
   return (
     <div
-      className="text-gary-800 relative flex w-full cursor-pointer items-center justify-start hover:text-primary-600"
+      className="text-gary-800 relative flex cursor-pointer items-center justify-start hover:text-primary-600"
       onClick={item.direction}
     >
       <MyIcon

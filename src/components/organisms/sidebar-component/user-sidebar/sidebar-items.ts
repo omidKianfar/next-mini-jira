@@ -36,7 +36,10 @@ export const SidebarItems = ({
         icon: 'profile',
         title: 'profile',
         direction: () => {
-          navigation.profile();
+          user?.userType === UserType.Admin
+            ? navigation.adminProfile()
+            : navigation.profile();
+
           setShowSidebar?.(false);
         },
         notification: { type: 'none' },
@@ -46,7 +49,10 @@ export const SidebarItems = ({
         icon: 'dashboard',
         title: 'dashboard',
         direction: () => {
-          navigation.dashboard();
+          user?.userType === UserType.Admin
+            ? navigation.adminDashboard()
+            : navigation.dashboard();
+
           setShowSidebar?.(false);
         },
         notification: { type: 'none' },
