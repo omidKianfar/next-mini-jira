@@ -9,7 +9,7 @@ import { MessgesRead } from '@/src/libs/chat/read-message';
 import ChatHeader from '../../molecule/headers/headers/chat-header';
 import ChatMessages from '../../organisms/chat-messages';
 import ChatInput from '../../molecule/chat/chat-input';
-import { UserType } from '@/src/types/global';
+import { MenuType, UserType } from '@/src/types/global';
 
 const SupportComponent = () => {
   const pathname = usePathname();
@@ -20,6 +20,7 @@ const SupportComponent = () => {
   const [showMenu, setShowMenu] = useState<boolean>(true);
   const [editorKey, setEditorKey] = useState<number>(0);
   const [editMessageId, setEditMessageId] = useState<string | null>(null);
+  const [Menu, setMenu] = useState<MenuType>('text');
 
   const isAdmin = user?.userType == UserType.Admin;
 
@@ -36,6 +37,7 @@ const SupportComponent = () => {
     setEditorOutput?.(content);
     setEditorKey((prev) => prev + 1);
     setShowMenu(true);
+    setMenu('text');
   };
 
   if (!chat) {
@@ -63,6 +65,8 @@ const SupportComponent = () => {
         editorKey={editorKey}
         editMessageId={editMessageId}
         setEditMessageId={setEditMessageId}
+        Menu={Menu}
+        setMenu={setMenu}
       />
     </div>
   );

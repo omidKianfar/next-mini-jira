@@ -11,7 +11,8 @@ import { chatSidebarProps, UserType } from '@/src/types/global';
 const AdminSupportUserCard = ({
   chat,
   setShowSidebar,
-}: Pick<chatSidebarProps, 'chat' | 'setShowSidebar'>) => {
+  handleClose,
+}: Pick<chatSidebarProps, 'chat' | 'setShowSidebar' | 'handleClose'>) => {
   const params = useSearchParams();
   const navigation = useNavigation();
   const unreadCount = useUnreadCount({
@@ -26,6 +27,7 @@ const AdminSupportUserCard = ({
 
     setShowSidebar?.(false);
     navigation.adminSupportChat(chatId);
+    handleClose?.();
   };
 
   return (
@@ -42,10 +44,10 @@ const AdminSupportUserCard = ({
                 alt=""
                 fill
                 className="rounded-full object-cover"
-                wrapperClass="relative h-[40px] w-[40px] rounded-full border-2 border-primary-500 "
+                wrapperClass="relative h-[40px] w-[40px] rounded-full border border-gray-300 "
               />
             ) : (
-              <div className="h-[40px] w-[40px] rounded-full border-2 border-primary-500 bg-gray-200"></div>
+              <div className="h-[40px] w-[40px] rounded-full border border-gray-300 bg-gray-200"></div>
             )}
           </div>
 

@@ -29,7 +29,7 @@ const ShowAttachment = ({ url, fileType }: ShowAttachmentProps) => {
               src={url as string}
               alt="preview"
               fill
-              wrapperClass="relative cursor-pointer w-[150px] h-[150px] lg:w-[190px] lg:h-[190px] overflow-hidden rounded-lg p-1 shadow-md border-2 border-warning-400"
+              wrapperClass="relative cursor-pointer w-[150px] h-[150px] lg:w-[190px] lg:h-[190px] overflow-hidden rounded-lg p-1 shadow-md border border-gray-300"
               className="object-cover"
             />
           </LightBoxComponent>
@@ -39,7 +39,7 @@ const ShowAttachment = ({ url, fileType }: ShowAttachmentProps) => {
           <MyVideo
             src={url! as string}
             alt="preview"
-            className="w-[330px] rounded-lg border-2 border-warning-400 shadow-md"
+            className="w-[330px] rounded-lg border border-gray-300 shadow-md"
           />
         )}
       </div>

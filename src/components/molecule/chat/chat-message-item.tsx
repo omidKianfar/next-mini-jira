@@ -52,37 +52,43 @@ const ChatMessageItem = ({
 
   return (
     <div
-      className={`w-full ${user?.userType == UserType.Client ? (isAdmin ? 'justify-start' : 'justify-end') : isAdmin ? 'justify-end' : 'justify-start'} mb-4 flex items-center`}
+      className={`w-full ${user?.userType == UserType.Client ? (isAdmin ? 'justify-end' : 'justify-start') : isAdmin ? 'justify-start' : 'justify-end'} mb-4 flex items-center`}
     >
       <Suspense fallback={<PageLoading />}>
-        <div className="relative min-w-[300px] max-w-[500px]">
+        <div className="w-full min-w-[300px] max-w-[500px] pt-8">
           {message?.attachment?.fileType ? (
             <div>
               {message?.attachment?.fileType === 'image' && (
                 <LightBoxComponent url={message?.attachment?.fileUrl as string}>
-                  <MyImage
-                    src={message?.attachment?.fileUrl as string}
-                    alt="preview"
-                    fill
-                    wrapperClass={`relative cursor-pointer w-[190px] h-[190px]  overflow-hidden 
-                    
-                     shadow-md p-1 shadow-md border-2  ${isAdmin ? 'border-warning-400' : 'border-primary-400'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
-                    className="object-cover"
-                  />
+                  <div
+                    className={`relative aspect-[4/3] w-full cursor-pointer overflow-hidden border-2 border-primary-400 shadow-md ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
+                  >
+                    <MyImage
+                      src={message?.attachment?.fileUrl as string}
+                      alt="preview"
+                      fill
+                      wrapperClass="w-full h-full"
+                      className="object-contain"
+                    />
+                  </div>
                 </LightBoxComponent>
               )}
 
               {message?.attachment?.fileType === 'video' && (
-                <MyVideo
-                  src={message?.attachment?.fileUrl as string}
-                  alt="preview"
-                  className={`w-[330px] border-2 shadow-md ${isAdmin ? 'border-warning-400' : 'border-primary-400'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
-                />
+                <div
+                  className={`${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'} aspect-square w-full overflow-hidden rounded-t-md border-2 border-primary-400 shadow-md`}
+                >
+                  <MyVideo
+                    src={message?.attachment?.fileUrl as string}
+                    alt="preview"
+                    className="h-full w-full rounded-t-lg object-contain"
+                  />
+                </div>
               )}
 
               {message?.attachment?.fileType === 'voice' && (
                 <div
-                  className={`flex h-[64px] w-[250px] items-center justify-center border-2 bg-primary-100 p-2 px-2 shadow-md lg:w-[400px] ${isAdmin ? 'border-warning-400' : 'border-primary-400'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
+                  className={`flex h-[64px] w-full items-center justify-center border-2 bg-primary-100 p-2 px-2 shadow-md lg:w-[500px] ${isAdmin ? 'border-warning-400' : 'border-primary-400'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
                 >
                   <WaveformPlayer
                     audioUrl={message?.attachment?.fileUrl as string}

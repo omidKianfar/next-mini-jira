@@ -18,15 +18,15 @@ const ChatInput = ({
   editorKey,
   editMessageId,
   setEditMessageId,
+  Menu,
+  setMenu,
 }: ChatMenuProps) => {
   const fileUploader = useFileUploader({
     accept: ['image/*', 'video/*', 'audio/*'],
   });
 
-  const [Menu, setMenu] = useState<MenuType>('text');
-
   const MenuHandler = (type: MenuType) => {
-    setMenu(type as MenuType);
+    setMenu?.(type as MenuType);
     fileUploader.reset();
   };
 
