@@ -35,13 +35,8 @@ const PasswordComponent = () => {
   const isProfilePage = pathName.includes('profile');
   const isResetPasswordMode = pathName.includes('/password');
 
-  const defaultValues: SignPropsType = {
-    email: user?.email ?? '',
-    password: '',
-  };
-
   const methods = useForm<SignPropsType>({
-    defaultValues,
+    defaultValues: { email: user?.email ?? '', password: '' },
     resolver: yupResolver(passwordSchema),
     mode: 'onSubmit',
   });
