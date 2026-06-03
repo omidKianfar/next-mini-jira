@@ -2,7 +2,6 @@
 
 import Cropper from 'react-easy-crop';
 import { useImageCrop } from '@/src/hooks/image-crop/use-image-crop';
-import ButtonNext from '../../atom/buttons-component/button-next';
 import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
 
 interface CropProps {
