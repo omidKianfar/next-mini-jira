@@ -38,12 +38,14 @@ const LeftSideHeaders = ({ showSidebar, setShowSidebar }: HeaderProps) => {
           >
             Home
           </Link>
+
           <Link
             href="/about"
             className="text-body font-medium text-primary-500 transition-colors hover:text-warning-500"
           >
             About
           </Link>
+
           <Link
             href="/contact"
             className="text-body font-medium text-primary-500 transition-colors hover:text-warning-500"
@@ -52,15 +54,17 @@ const LeftSideHeaders = ({ showSidebar, setShowSidebar }: HeaderProps) => {
           </Link>
         </nav>
       ) : (
-        <MyIcon
-          icon="menu"
-          className="cursor-pointer text-title text-primary-500 transition-colors hover:text-primary-700 lg:text-h3"
-          onClick={() => setShowSidebar?.(!showSidebar)}
-        />
-      )}
+        <>
+          <MyIcon
+            icon="menu"
+            className="cursor-pointer text-title text-primary-500 transition-colors hover:text-primary-700 lg:text-h3"
+            onClick={() => setShowSidebar?.(!showSidebar)}
+          />
 
-      {shouldShowBadge && (
-        <div className="absolute left-0 top-0 h-[10px] w-[10px] animate-pulse rounded-full bg-warning-500" />
+          {shouldShowBadge && (
+            <div className="absolute left-0 top-0 h-[10px] w-[10px] animate-pulse rounded-full bg-warning-500" />
+          )}
+        </>
       )}
     </div>
   );

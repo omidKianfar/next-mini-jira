@@ -8,6 +8,7 @@ import { stringSlicer } from '@/src/utils/string-slicer';
 import MyIcon from '@/src/components/atom/icon-components';
 import MyImage from '@/src/components/atom/image-components';
 import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
+import { UserType } from '@/src/types/global';
 
 const LandingDashboard = () => {
   const isMobile = useIsMobile();
@@ -15,6 +16,23 @@ const LandingDashboard = () => {
   const { user, logout } = useAuth();
 
   const [showMenu, setShowMenu] = useState(false);
+
+  const goToDashboard = () => {
+    user?.userType === UserType.Admin
+      ? navigation.adminDashboard()
+      : navigation.dashboard();
+
+    setShowMenu(false);
+  };
+
+  const goToProfile = () => {
+    user?.userType === UserType.Admin
+      ? navigation.adminProfile()
+      : navigation.profile();
+
+    setShowMenu(false);
+  };
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -62,20 +80,14 @@ const LandingDashboard = () => {
         {showMenu && (
           <div className="absolute right-0 top-full z-50 mt-2 w-[140px] flex-col items-start rounded-md border border-gray-100 bg-white p-1 shadow-xl">
             <button
-              onClick={() => {
-                navigation.dashboard();
-                setShowMenu(false);
-              }}
+              onClick={goToDashboard}
               className="w-full rounded px-3 py-2 text-left text-bodySm text-gray-700 transition-colors hover:bg-gray-50 hover:text-warning-500"
             >
               Dashboard
             </button>
 
             <button
-              onClick={() => {
-                navigation.profile();
-                setShowMenu(false);
-              }}
+              onClick={goToProfile}
               className="w-full rounded px-3 py-2 text-left text-bodySm text-gray-700 transition-colors hover:bg-gray-50 hover:text-warning-500"
             >
               Profile
