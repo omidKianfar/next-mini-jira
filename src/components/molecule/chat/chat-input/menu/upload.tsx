@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useCallback, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -29,11 +29,17 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
   const params = useSearchParams();
   const reciverId = params.get('chatId');
 
+  const isCancelledRef = useRef(false);
+
   const { cancel, error, fileType, progress, reset, upload, uploading, url } =
     fileUploader;
   const { processImage } = useImageProcessor({ size: 1024 });
-  const { compressVideo, isCompressing, compressionProgress } =
-    useVideoProcessor();
+  const {
+    compressVideo,
+    isCompressing,
+    compressionProgress,
+    cancelCompression,
+  } = useVideoProcessor();
 
   const { user: userChat } = useUserListenerById(reciverId);
   const { user: currentUser } = useAuth();
@@ -44,34 +50,49 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
     ? (userChat as MyUserType)
     : (currentUser as MyUserType);
 
-  const defaultValues: UploadMenuForm = {
-    fileUrl: null,
-  };
-
   const methods = useForm<UploadMenuForm>({
-    defaultValues,
+    defaultValues: {
+      fileUrl: null,
+    },
     resolver: yupResolver(UploadMenuShema),
   });
 
-  const uploadProcessHandler = async (file: File) => {
-    let finalFile = file;
+  const uploadProcessHandler = useCallback(
+    async (file: File) => {
+      isCancelledRef.current = false;
 
-    if (file.type.startsWith('image/')) {
-      finalFile = await processImage(file);
-    } else if (file.type.startsWith('video/')) {
-      finalFile = await compressVideo(file);
-    }
+      let finalFile = file;
+      try {
+        if (file.type.startsWith('image/')) {
+          finalFile = await processImage(file);
+        } else if (file.type.startsWith('video/')) {
+          const compressed = await compressVideo(file);
 
-    await upload({ file: finalFile });
-  };
+          if (isCancelledRef.current || !compressed) return;
+
+          finalFile = compressed;
+        }
+
+        if (isCancelledRef.current) return;
+
+        await upload({ file: finalFile });
+      } catch (err) {
+        console.error('Upload process error:', err);
+      }
+    },
+    [processImage, compressVideo, upload]
+  );
 
   const handleSave = () => {
     methods.setValue('fileUrl', url);
   };
 
   const handleCancel = () => {
-    methods.setValue('fileUrl', '');
+    isCancelledRef.current = true;
+    cancelCompression();
     cancel();
+    methods.setValue('fileUrl', '');
+    reset();
   };
 
   const onSubmit = async (values: UploadMenuForm) => {
@@ -106,7 +127,7 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
               {isCompressing ? (
                 <div className="flex h-[223px] w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-primary-300 bg-primary-50 lg:h-[200px]">
                   <p className="mb-2 mt-2 text-label font-semibold text-warning-500">
-                    Optimizing Video:
+                    Optimizing and compressing Video:
                     <span className="ml-1 animate-pulse text-subtitle text-primary-500">
                       {compressionProgress} %
                     </span>
@@ -115,6 +136,13 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
                   <p className="text-caption text-gray-400">
                     Please wait, this happens in your browser...
                   </p>
+
+                  <ButtonFreeClass
+                    className="mt-4 rounded-sm border border-warning-500 bg-white px-8 py-2 text-label text-warning-500 hover:bg-warning-500 hover:text-white"
+                    onClick={handleCancel}
+                  >
+                    Cancel upload
+                  </ButtonFreeClass>
                 </div>
               ) : (
                 !url &&
@@ -140,41 +168,41 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
               )}
 
               {url && (
-                <div className="mb-2 h-[187px] w-full lg:mb-0 lg:h-[200px]">
-                  <ShowAttachment fileType={fileType} url={url} />
-                </div>
-              )}
-
-              {!!url && (
-                <div className="h-full w-full lg:w-[80px]">
-                  <div className="flex w-full flex-row-reverse items-center justify-between lg:flex-col lg:justify-center">
-                    <ButtonFreeClass
-                      onClick={handleSave}
-                      type="submit"
-                      className="lg:mb-2"
-                      disable={!!!url}
-                      icon={
-                        <MyIcon
-                          icon="send"
-                          className="text-h4 text-primary-500 hover:text-primary-700 lg:text-h2"
-                        />
-                      }
-                    />
-
-                    <ButtonFreeClass
-                      onClick={handleCancel}
-                      disable={uploading || !!!url}
-                      icon={
-                        <MyIcon
-                          icon="close"
-                          className="text-h4 text-error-500 hover:text-error-700 lg:text-h2"
-                        />
-                      }
-                    />
-
-                    {error! && <p className="mt-1 text-red-500">{error}</p>}
+                <>
+                  <div className="mb-2 h-[187px] w-full lg:mb-0 lg:h-[200px]">
+                    <ShowAttachment fileType={fileType} url={url} />
                   </div>
-                </div>
+
+                  <div className="h-full w-full lg:w-[80px]">
+                    <div className="flex w-full flex-row-reverse items-center justify-between lg:flex-col lg:justify-center">
+                      <ButtonFreeClass
+                        onClick={handleSave}
+                        type="submit"
+                        className="lg:mb-2"
+                        disable={!!!url}
+                        icon={
+                          <MyIcon
+                            icon="send"
+                            className="text-h4 text-primary-500 hover:text-primary-700 lg:text-h2"
+                          />
+                        }
+                      />
+
+                      <ButtonFreeClass
+                        onClick={handleCancel}
+                        disable={uploading || !!!url}
+                        icon={
+                          <MyIcon
+                            icon="close"
+                            className="text-h4 text-error-500 hover:text-error-700 lg:text-h2"
+                          />
+                        }
+                      />
+
+                      {error! && <p className="mt-1 text-red-500">{error}</p>}
+                    </div>
+                  </div>
+                </>
               )}
             </div>
           </form>

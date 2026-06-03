@@ -56,7 +56,7 @@ const DragDropUploader = ({
   };
 
   return (
-    <div className="h-full w-full rounded-lg shadow-md">
+    <div className="h-full w-full rounded-lg shadow-sm">
       <FileInputField
         name="fileUrl"
         label="FileUrl"
@@ -70,10 +70,10 @@ const DragDropUploader = ({
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDragEnd={() => setIsDragging(false)}
-        className={`flex h-full w-full ${!!uploading || !!progress ? 'cursor-not-allowed' : 'cursor-pointer'} items-center justify-center rounded-lg border-2 border-dashed transition-all ${
+        className={`flex h-full w-full ${!!uploading || !!progress ? 'cursor-not-allowed' : 'cursor-pointer'} items-center justify-center rounded-md border-2 border-dashed transition-all ${
           !uploading && !progress
             ? 'border-primary-500 bg-primary-50'
-            : 'border-zinc-300 bg-zinc-50'
+            : 'border-gray-300 bg-gray-50'
         } `}
         onClick={openFilePicker}
       >
@@ -87,13 +87,13 @@ const DragDropUploader = ({
               </p>
 
               <span className="text-bodySm text-warning-400">
-                Please wait...
+                Please wait for uploading...
               </span>
             </div>
           ) : isDragging ? (
-            <p className="text-gray-500">Drop file here...</p>
+            <p className="text-gray-400">Drop file here...</p>
           ) : (
-            <p className="text-wrap px-2 text-gray-500">
+            <p className="text-wrap px-2 text-gray-400">
               Drag & Drop file here or click to upload
             </p>
           )}
