@@ -48,14 +48,12 @@ const ProfileComponent = () => {
   const [open, setOpen] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
 
-  const defaultValues: ProfileProps = {
-    photo: user?.photo ?? '',
-    userName: user?.userName ?? '',
-    birthday: user?.birthday ?? '',
-  };
-
   const methods = useForm<ProfileProps>({
-    defaultValues,
+    defaultValues: {
+      photo: user?.photo ?? '',
+      userName: user?.userName ?? '',
+      birthday: user?.birthday ?? '',
+    },
     resolver: yupResolver(ProfileSchema),
     mode: 'onSubmit',
   });

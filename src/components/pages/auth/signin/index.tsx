@@ -25,13 +25,8 @@ const AuthComponent = () => {
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
 
-  const defaultValues: FormValues = {
-    email: '',
-    password: '',
-  };
-
   const methods = useForm<FormValues>({
-    defaultValues,
+    defaultValues: { email: '', password: '' },
     resolver: yupResolver(authSchema),
   });
 
