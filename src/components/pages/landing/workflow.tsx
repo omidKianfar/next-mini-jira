@@ -1,8 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import MyIcon from '../../atom/icon-components';
-import { IconName } from '../../atom/icon-components/icons';
 import { TECH_STACK } from './data';
 
 const WorkflowComponent = () => {
@@ -42,7 +40,7 @@ const WorkflowComponent = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-3 justify-items-center gap-x-4 gap-y-6 lg:flex lg:flex-wrap lg:items-center lg:justify-center lg:gap-x-12 lg:gap-y-10"
+          className="grid grid-cols-2 justify-items-center gap-x-4 gap-y-8 lg:flex lg:flex-wrap lg:items-center lg:justify-center lg:gap-x-12 lg:gap-y-10"
         >
           {TECH_STACK.map((tech, index) => (
             <motion.div
@@ -52,13 +50,9 @@ const WorkflowComponent = () => {
                 scale: 1.1,
                 color: '#F59E0B',
               }}
-              className="flex cursor-default items-center gap-2 transition-colors duration-300"
+              className="flex w-32 cursor-default items-center justify-center text-center transition-colors duration-300 lg:w-auto"
             >
-              <MyIcon
-                icon={tech.icon as IconName}
-                className="font-black text-gray-500 lg:text-subtitle"
-              />
-              <span className="whitespace-nowrap font-black text-gray-500 lg:text-subtitle">
+              <span className="break-words font-black text-gray-500 lg:text-subtitle">
                 {tech.label}
               </span>
             </motion.div>

@@ -43,15 +43,15 @@ const ProjectComponent = () => {
                 key={index}
                 className="h-auto max-w-[540px] lg:max-w-[860px]"
               >
-                <div className="group flex h-full select-none flex-col rounded-2xl border border-gray-100 bg-white p-3 shadow-lg transition-all duration-300 hover:border-warning-200 hover:shadow-2xl">
-                  <div className="relative aspect-[21/9] w-full overflow-hidden rounded-xl border border-gray-50 bg-gray-50">
+                <div className="group flex h-full select-none flex-col rounded-2xl border border-gray-100 bg-white p-3 shadow-lg transition-all duration-300 hover:border-gray-300 hover:shadow-xl">
+                  <div className="relative aspect-[21/9] w-full overflow-hidden rounded-md">
                     <MyImage
                       src={item.image}
                       alt={item.title}
                       fill
                       sizes="(max-w: 1024px) 100vw, 860px"
                       priority={index === 0}
-                      className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                      className="object-conatin scale-y-[1.02] object-top"
                     />
                   </div>
 
@@ -59,7 +59,7 @@ const ProjectComponent = () => {
                     <h3 className="mb-0.5 text-base font-bold text-gray-800 lg:text-body">
                       {item.title}
                     </h3>
-                    <p className="mx-auto max-w-xl text-bodySm leading-relaxed text-gray-500">
+                    <p className="mx-auto max-w-xl text-bodySm leading-relaxed text-gray-600">
                       {item.description}
                     </p>
                   </div>

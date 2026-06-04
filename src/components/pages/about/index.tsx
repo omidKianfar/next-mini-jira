@@ -105,18 +105,14 @@ const AboutComponent = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col items-center gap-8 rounded-2xl border border-gray-100 bg-gray-50/50 p-8 shadow-sm lg:flex-row lg:p-12"
+          className="flex flex-col items-center gap-8 rounded-lg border border-gray-100 bg-gray-50/50 p-8 shadow-sm lg:flex-row"
         >
-          <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full border border-gray-300 bg-white shadow-inner">
-            <span className="text-h4 font-extrabold text-gray-300">OK</span>
-          </div>
-
           <div className="text-center lg:text-left">
             <h2 className="mb-2 text-title font-bold text-gray-800">
               About the Developer
             </h2>
 
-            <p className="mb-4 max-w-2xl text-body leading-relaxed text-gray-600">
+            <p className="mb-4 text-body leading-relaxed text-gray-600">
               Hi, I’m Omid Kianfar. A Frontend Engineer passionate about
               crafting highly interactive, performant, and production-ready web
               applications. Mini Jira serves as a playground for testing
