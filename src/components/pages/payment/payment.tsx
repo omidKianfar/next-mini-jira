@@ -59,7 +59,7 @@ const PlanComponent = () => {
       <FramerMotion>
         <div
           className={`relative flex w-full flex-col items-center justify-center ${
-            isSignupPage ? 'min-h-screen' : ''
+            isSignupPage ? 'min-h-screen' : 'lg:pt-4'
           }`}
         >
           {loading && (

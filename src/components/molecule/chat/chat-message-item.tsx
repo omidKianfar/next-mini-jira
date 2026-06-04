@@ -61,7 +61,7 @@ const ChatMessageItem = ({
               {message?.attachment?.fileType === 'image' && (
                 <LightBoxComponent url={message?.attachment?.fileUrl as string}>
                   <div
-                    className={`relative aspect-[4/3] w-full cursor-pointer overflow-hidden border-2 border-primary-400 shadow-md ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
+                    className={`relative aspect-[4/3] w-full cursor-pointer overflow-hidden border-2 shadow-md ${currentUser ? 'rounded-t-lg border-b-0 border-primary-400 bg-primary-100' : 'rounded-lg border-warning-400 bg-warning-100'}`}
                   >
                     <MyImage
                       src={message?.attachment?.fileUrl as string}
@@ -76,7 +76,7 @@ const ChatMessageItem = ({
 
               {message?.attachment?.fileType === 'video' && (
                 <div
-                  className={`${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'} aspect-square w-full overflow-hidden rounded-t-md border-2 border-primary-400 shadow-md`}
+                  className={`aspect-square w-full overflow-hidden border-2 shadow-md ${currentUser ? 'rounded-t-lg border-b-0 border-primary-400 bg-primary-100' : 'rounded-lg border-warning-400 bg-warning-100'}`}
                 >
                   <MyVideo
                     src={message?.attachment?.fileUrl as string}
@@ -88,7 +88,7 @@ const ChatMessageItem = ({
 
               {message?.attachment?.fileType === 'voice' && (
                 <div
-                  className={`flex h-[64px] w-full items-center justify-center border-2 bg-primary-100 p-2 px-2 shadow-md lg:w-[500px] ${isAdmin ? 'border-warning-400' : 'border-primary-400'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
+                  className={`flex h-[64px] w-full items-center justify-center border-2 bg-primary-100 p-2 px-2 shadow-md lg:w-[500px] ${currentUser ? 'rounded-t-lg border-b-0 border-primary-400 bg-primary-100' : 'rounded-lg border-warning-400 bg-warning-100'}`}
                 >
                   <WaveformPlayer
                     audioUrl={message?.attachment?.fileUrl as string}
@@ -98,14 +98,14 @@ const ChatMessageItem = ({
             </div>
           ) : (
             <div
-              className={`prose prose-sm break-words border-2 p-2 shadow-md ${isAdmin ? 'border-warning-400 bg-warning-100' : 'border-primary-400 bg-primary-100'} ${currentUser ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}
+              className={`prose prose-sm break-words border-2 p-2 shadow-md ${currentUser ? 'rounded-t-lg border-b-0 border-primary-400 bg-primary-100' : 'rounded-lg border-warning-400 bg-warning-100'}`}
               dangerouslySetInnerHTML={{ __html: message.text as string }}
             />
           )}
 
           {currentUser ? (
             <div
-              className={`flex h-full w-full items-center justify-between rounded-b-lg border-2 border-t-0 ${isAdmin ? 'border-warning-400' : 'border-primary-400'} p-2 shadow-md`}
+              className={`flex h-full w-full items-center justify-between rounded-b-lg border-2 border-t-0 border-primary-400 p-2 shadow-md`}
             >
               <MyIcon
                 icon="delete"

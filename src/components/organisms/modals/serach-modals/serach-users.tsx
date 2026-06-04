@@ -88,6 +88,7 @@ const SearchUsers = ({ handleClose }: Pick<ModalProps, 'handleClose'>) => {
             className="my-1 w-full rounded-md border-2 border-primary-500 px-8 py-2 text-bodySm text-gray-600 focus:outline-primary-700"
             value={searchValue}
             onChange={(event) => serachHandler(event)}
+            autoFocus
           />
         </div>
       </div>

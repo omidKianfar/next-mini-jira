@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const AboutComponent = () => {
   return (
-    <div className="bg-white px-4 py-16 text-gray-600 lg:py-28">
+    <div className="bg-white px-4 py-16 lg:py-28">
       <div className="mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -18,7 +18,7 @@ const AboutComponent = () => {
             Behind <span className="text-warning-500">Mini Jira</span>
           </h1>
 
-          <p className="mx-auto max-w-2xl text-body leading-relaxed text-gray-500">
+          <p className="mx-auto max-w-2xl text-body leading-relaxed text-gray-600">
             A high-performance project management tool designed to strip away
             the bloat and deliver speed, precision, and real-time collaboration.
           </p>
@@ -50,7 +50,7 @@ const AboutComponent = () => {
             Engineering Challenges
           </h2>
 
-          <p className="mx-auto mb-12 max-w-xl text-center text-body text-gray-500">
+          <p className="mx-auto mb-12 max-w-xl text-center text-body text-gray-600">
             How complex frontend engineering problems were solved during
             development.
           </p>
@@ -62,7 +62,7 @@ const AboutComponent = () => {
               viewport={{ once: true }}
               className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm"
             >
-              <h3 className="mb-2 flex items-center gap-2 font-bold text-primary-500">
+              <h3 className="mb-2 flex items-center gap-2 font-bold text-gray-800">
                 Real-time State Desynchronization
               </h3>
 
@@ -82,7 +82,7 @@ const AboutComponent = () => {
               viewport={{ once: true }}
               className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm"
             >
-              <h3 className="mb-2 flex items-center gap-2 font-bold text-primary-500">
+              <h3 className="mb-2 flex items-center gap-2 font-bold text-gray-800">
                 Kanban Board Performance Dropping on Drag
               </h3>
 
@@ -107,8 +107,8 @@ const AboutComponent = () => {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center gap-8 rounded-2xl border border-gray-100 bg-gray-50/50 p-8 shadow-sm lg:flex-row lg:p-12"
         >
-          <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-warning-400 bg-white shadow-inner">
-            <span className="text-h4 font-extrabold text-warning-500">OK</span>
+          <div className="flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full border border-gray-300 bg-white shadow-inner">
+            <span className="text-h4 font-extrabold text-gray-300">OK</span>
           </div>
 
           <div className="text-center lg:text-left">

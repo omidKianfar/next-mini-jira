@@ -28,7 +28,7 @@ const AdminChatSidebar = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={fastTransition}
-            className="z-50 p-4 lg:absolute lg:left-0 lg:top-0 lg:px-3"
+            className="z-40 p-4 lg:absolute lg:left-0 lg:top-0 lg:px-3"
           >
             <div className="flex items-center justify-start">
               <ButtonFreeClass

@@ -133,22 +133,22 @@ const TaskDetailComponent = () => {
           <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
             <div className="w-[90vw] p-4 lg:w-full">
               <div className="flex flex-col justify-between lg:mb-4 lg:w-[500px] lg:flex-row">
-                <p className="mb-4 font-semibold capitalize text-primary-600">
-                  <span className="mr-2 text-body font-bold text-black">
+                <p className="mb-4 font-semibold capitalize text-gray-600">
+                  <span className="mr-2 text-body font-bold text-gray-800">
                     Status:
                   </span>
                   {task.status}
                 </p>
 
-                <p className="mb-4 font-semibold capitalize text-primary-600">
-                  <span className="mr-2 text-body font-bold text-black">
+                <p className="mb-4 font-semibold capitalize text-gray-600">
+                  <span className="mr-2 text-body font-bold text-gray-800">
                     Tag:
                   </span>
                   {task.tag}
                 </p>
 
-                <p className="mb-4 font-semibold capitalize text-primary-600">
-                  <span className="mr-2 text-body font-bold text-black">
+                <p className="mb-4 font-semibold capitalize text-gray-600">
+                  <span className="mr-2 text-body font-bold text-gray-800">
                     Created Date:
                   </span>
                   {task.createdAt}
@@ -156,13 +156,13 @@ const TaskDetailComponent = () => {
               </div>
 
               <div className="rounded-md border border-gray-300 bg-gray-50 p-4 shadow-md">
-                <h1 className="mb-10 break-words text-body font-semibold">
+                <h1 className="mb-4 break-words text-body font-semibold text-gray-800">
                   {task.title}
                 </h1>
 
                 <hr className="border border-dashed border-gray-300" />
 
-                <p className="mb-4 mt-2 break-words text-body">
+                <p className="mb-8 mt-4 break-words text-body text-gray-600">
                   {task.description}
                 </p>
 

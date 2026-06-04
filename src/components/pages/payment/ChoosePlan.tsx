@@ -22,7 +22,7 @@ const ChoosePlanComponent = ({
 
   return (
     <div className="relative w-[90vw] max-w-[840px] pt-12 lg:w-[900px]">
-      <div className="absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/3">
+      <div className="absolute left-1/2 top-8 z-10 -translate-x-1/2 -translate-y-1/3 lg:top-4">
         <MyImage
           src="/images/Wallet.svg"
           alt="Wallet Illustration"

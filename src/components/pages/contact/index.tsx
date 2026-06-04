@@ -43,7 +43,7 @@ const ContactComponent = () => {
             Let’s <span className="text-warning-500">Connect</span>
           </h1>
 
-          <p className="mx-auto max-w-xl text-body leading-relaxed text-gray-500">
+          <p className="mx-auto max-w-xl text-body leading-relaxed text-gray-600">
             Whether you have a remote opportunity, a technical question, or just
             want to talk about frontend architecture—feel free to reach out.
           </p>
