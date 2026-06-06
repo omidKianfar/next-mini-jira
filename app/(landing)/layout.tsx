@@ -1,7 +1,7 @@
 'use client';
 
 import { PropsWithChildren, useState } from 'react';
-import Header from '@/src/components/organisms/header-component/indx';
+import Header from '@/src/components/organisms/header-component';
 import SideBar from '@/src/components/organisms/sidebar-component/user-sidebar';
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {

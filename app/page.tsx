@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Header from '@/src/components/organisms/header-component/indx';
+import Header from '@/src/components/organisms/header-component';
 import SideBar from '@/src/components/organisms/sidebar-component/user-sidebar';
 import HomeComponent from '@/src/components/pages/landing';
 
