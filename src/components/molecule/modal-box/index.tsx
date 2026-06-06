@@ -11,7 +11,7 @@ interface ModalComponentProps {
   description?: string;
 }
 
-const ModalComponent = ({
+const ModalBoxComponent = ({
   handleClose,
   isDelete,
   clickHandler,
@@ -54,4 +54,4 @@ const ModalComponent = ({
   );
 };
 
-export default ModalComponent;
+export default ModalBoxComponent;

@@ -4,10 +4,18 @@ import { lazy } from 'react';
 import { usePathname } from 'next/navigation';
 import { ModalProps } from '@/src/types/global';
 
-const LandingDashboard = lazy(() => import('./headers/landing-dashboard'));
-const DashboardHeader = lazy(() => import('./headers/user-dashboard'));
-const AdminDashboardHeader = lazy(() => import('./headers/admin-dashboard'));
-const AdminSupportHeader = lazy(() => import('./headers/admin-support'));
+const LandingDashboard = lazy(
+  () => import('../../molecule/headers/landing-dashboard')
+);
+const DashboardHeader = lazy(
+  () => import('../../molecule/headers/user-dashboard')
+);
+const AdminDashboardHeader = lazy(
+  () => import('../../molecule/headers/admin-dashboard')
+);
+const AdminSupportHeader = lazy(
+  () => import('../../molecule/headers/admin-support')
+);
 
 const RightSideHeaders = ({
   handleOpenModal,

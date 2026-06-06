@@ -1,12 +1,12 @@
 import { lazy, Suspense, useState } from 'react';
 import { useAuth } from '@/src/hooks/auth/use-auth';
 import { deleteChatMessage } from '@/src/libs/chat/delete-message';
-import ModalComponent from '../modals/modal-component';
 import PageLoading from '../../common/page-loading';
 import MyImage from '../../atom/image-components';
 import MyIcon from '../../atom/icon-components';
 import ModalContainer from '../../common/modal-container';
 import { ChatMessage, UserType } from '@/src/types/global';
+import ModalBoxComponent from '../modal-box';
 
 export const MyVideo = lazy(
   () => import('@/src/components/atom/video-component')
@@ -126,7 +126,7 @@ const ChatMessageItem = ({
       </Suspense>
 
       <ModalContainer open={open} handleClose={handleCloseModal}>
-        <ModalComponent
+        <ModalBoxComponent
           isDelete
           handleClose={handleCloseModal}
           clickHandler={deleteMessage}

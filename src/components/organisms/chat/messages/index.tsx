@@ -3,9 +3,9 @@
 import { usePathname } from 'next/navigation';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import ChatMessageItem from '../../molecule/chat/chat-message-item';
-import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
-import MyIcon from '../../atom/icon-components';
+import ChatMessageItem from '../../../molecule/chat/chat-message-item';
+import ButtonFreeClass from '../../../atom/buttons-component/button-free-class';
+import MyIcon from '../../../atom/icon-components';
 import { ChatMessage, MyUserType } from '@/src/types/global';
 
 interface ChatMessagesProps {

@@ -17,8 +17,8 @@ import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
 import MyIcon from '../../atom/icon-components';
 import MyImage from '../../atom/image-components';
 import ModalContainer from '../../common/modal-container';
-import ModalComponent from '../../molecule/modals/modal-component';
 import { Task } from '@/src/types/global';
+import ModalBoxComponent from '../../molecule/modal-box';
 
 const MyVideo = lazy(() => import('@/src/components/atom/video-component'));
 
@@ -191,7 +191,7 @@ const TaskDetailComponent = () => {
 
       <ModalContainer open={open} handleClose={handleCloseModal}>
         {modalCounter === 1 ? (
-          <ModalComponent
+          <ModalBoxComponent
             isDelete
             handleClose={handleCloseModal}
             clickHandler={deleteTaskHandler}

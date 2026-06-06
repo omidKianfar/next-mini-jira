@@ -6,9 +6,9 @@ import { useAuth } from '@/src/hooks/auth/use-auth';
 import { useChat } from '@/src/hooks/chat/use-chat';
 import { useEditor } from '@/src/hooks/editor/use-editor';
 import { MessgesRead } from '@/src/libs/chat/read-message';
-import ChatHeader from '../../molecule/headers/headers/chat-header';
-import ChatMessages from '../../organisms/chat-messages';
-import ChatInput from '../../molecule/chat/chat-input';
+import ChatHeader from '../../molecule/headers/chat-header';
+import ChatMessages from '../../organisms/chat/messages';
+import ChatInput from '../../organisms/chat/input';
 import { MenuType, UserType } from '@/src/types/global';
 
 const SupportComponent = () => {

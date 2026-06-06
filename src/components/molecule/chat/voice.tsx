@@ -13,9 +13,7 @@ import {
   UserType,
 } from '@/src/types/global';
 
-const RecorderComponent = lazy(
-  () => import('../../../recorder/recorder-component')
-);
+const RecorderComponent = lazy(() => import('../recorder/recorder-component'));
 
 const VoiceMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
   const { cancel, error, fileType, reset, uploading, url } = fileUploader;

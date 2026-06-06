@@ -5,8 +5,8 @@ import { lazy, Suspense, useState } from 'react';
 import Logo from '../../atom/logo-component';
 import LoadingCircle from '../../atom/loadings/loading-circle';
 import ModalContainer from '../../common/modal-container';
-import LeftSideHeaders from '../../molecule/headers/left-side-headers';
-import RightSideHeaders from '../../molecule/headers/right-side-headers';
+import LeftSideHeaders from './left-side-headers';
+import RightSideHeaders from './right-side-headers';
 import { HeaderProps } from '@/src/types/global';
 
 const AddTask = lazy(() => import('../modals/add-task-modal'));

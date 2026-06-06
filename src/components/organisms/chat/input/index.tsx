@@ -3,14 +3,16 @@
 import { lazy, Suspense, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
-import ChatMenuComponent from '../chat-menu';
+import ChatMenuComponent from '../../../molecule/chat/chat-menu';
 import PageLoading from '@/src/components/common/page-loading';
 import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
 import { ChatMenuProps, MenuType } from '@/src/types/global';
 
-const SlateEditor = lazy(() => import('../../slatejs-editor-component/editor'));
-const UploadMenuComponent = lazy(() => import('./menu/upload'));
-const VoiceMenuComponent = lazy(() => import('./menu/voice'));
+const SlateEditor = lazy(
+  () => import('../../../molecule/slatejs-editor-component/editor')
+);
+const UploadMenuComponent = lazy(() => import('../../../molecule/chat/upload'));
+const VoiceMenuComponent = lazy(() => import('../../../molecule/chat/voice'));
 
 const ChatInput = ({
   showMenu,

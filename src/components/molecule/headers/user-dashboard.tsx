@@ -1,6 +1,6 @@
 'use client';
 
-import MyIcon from '../../../atom/icon-components';
+import MyIcon from '../../atom/icon-components';
 import { ModalProps } from '@/src/types/global';
 
 const DashboardHeader = ({

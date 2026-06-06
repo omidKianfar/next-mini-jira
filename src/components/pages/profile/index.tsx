@@ -16,7 +16,6 @@ import ButtonBack from '../../atom/buttons-component/button-back';
 import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
 import MyIcon from '../../atom/icon-components';
 import ModalContainer from '../../common/modal-container';
-import ModalComponent from '../../molecule/modals/modal-component';
 import InputField from '../../molecule/RHF-controllers-components/input-field';
 import DateInputField from '../../molecule/RHF-controllers-components/date-input-field';
 import ButtonNext from '../../atom/buttons-component/button-next';
@@ -24,6 +23,7 @@ import MyImage from '../../atom/image-components';
 import { backModalMessage } from './data';
 import { ProfileSchema } from './schema';
 import { ProfileProps, UserType } from '@/src/types/global';
+import ModalBoxComponent from '../../molecule/modal-box';
 
 const AvatarUpload = lazy(
   () => import('@/src/components/molecule/uploads/avatar')
@@ -152,7 +152,7 @@ const ProfileComponent = () => {
             </div>
 
             <ModalContainer open={open} handleClose={handleCloseModal}>
-              <ModalComponent
+              <ModalBoxComponent
                 handleClose={handleCloseModal}
                 clickHandler={clickHandler}
                 title={backModalMessage.title}
