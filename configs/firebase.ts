@@ -4,12 +4,12 @@ import { initializeFirestore, persistentLocalCache } from 'firebase/firestore';
 
 const config = {
   firebase: {
-    apiKey: 'AIzaSyDkirdT4ehu4UruJwQ-SXlMmm6tXoBe4zs',
+    apiKey: 'AIzaSyD8433gUdpO3VdzVHhw8eKLH3mtT_8qfdI',
     authDomain: 'next-mini-jira.firebaseapp.com',
     projectId: 'next-mini-jira',
     storageBucket: 'next-mini-jira.firebasestorage.app',
     messagingSenderId: '514927518642',
-    appId: '1:514927518642:web:9a814aed05e3a68c94faab',
+    appId: '1:514927518642:web:092eb3c30405d85a94faab',
   },
 };
 
