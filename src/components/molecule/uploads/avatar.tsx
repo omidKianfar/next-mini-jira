@@ -74,7 +74,9 @@ const AvatarUpload = ({
         <div className="flex h-[100px] w-[100px] items-center justify-center overflow-hidden rounded-full border-2 border-gray-300 bg-gray-200">
           {isUploading ? (
             progress! < 100 ? (
-              <p className="text-label text-gray-300">{progress}%</p>
+              <p className="text-font-semibold text-label text-primary-500">
+                {progress}%
+              </p>
             ) : (
               <LoadingCircle />
             )
