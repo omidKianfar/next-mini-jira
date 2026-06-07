@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { initializeFirestore, persistentLocalCache } from 'firebase/firestore';
 
 const config = {
   firebase: {
@@ -15,8 +15,9 @@ const config = {
 
 const app = initializeApp(config.firebase);
 const auth = getAuth(app);
-const db = getFirestore(app);
+const db = initializeFirestore(app, {
+  localCache: persistentLocalCache(),
+});
 
 export { app, auth, db };
-
 export default config;
