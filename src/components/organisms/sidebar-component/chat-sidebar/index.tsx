@@ -8,6 +8,7 @@ import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free
 import MyIcon from '@/src/components/atom/icon-components';
 import PageLoading from '@/src/components/common/page-loading';
 import { chatSidebarProps } from '@/src/types/global';
+import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
 
 const AdminSupportUserCard = lazy(
   () => import('@/src/components/molecule/cards/admin-support-user-card')
@@ -56,33 +57,39 @@ const ChatSidebar = ({
   if (!finalChats) return <PageLoading />;
 
   return (
-    <Suspense fallback={<PageLoading />}>
-      <div className="relative h-full w-full">
-        <div className="h-full w-full">
-          {finalChats.map((chat) => (
-            <div key={chat.id} className="mb-4">
+    <div className="relative h-full w-full">
+      <div className="h-full w-full">
+        {finalChats.map((chat) => (
+          <div key={chat.id} className="mb-4">
+            <Suspense
+              fallback={
+                <div className="flex h-full w-full items-center justify-center">
+                  <LoadingCircle size={40} />
+                </div>
+              }
+            >
               <AdminSupportUserCard
                 chat={chat}
                 setShowSidebar={setShowSidebar}
               />
-            </div>
-          ))}
-        </div>
-
-        {showScrollBtn && (
-          <ButtonFreeClass
-            onClick={scrollToTop}
-            className="z-9 absolute right-0 top-0"
-            icon={
-              <MyIcon
-                icon="scroll-down"
-                className="rotate-180 text-h3 text-primary-500/50 hover:text-primary-700"
-              />
-            }
-          ></ButtonFreeClass>
-        )}
+            </Suspense>
+          </div>
+        ))}
       </div>
-    </Suspense>
+
+      {showScrollBtn && (
+        <ButtonFreeClass
+          onClick={scrollToTop}
+          className="z-9 absolute right-0 top-0"
+          icon={
+            <MyIcon
+              icon="scroll-down"
+              className="rotate-180 text-h3 text-primary-500/50 hover:text-primary-700"
+            />
+          }
+        ></ButtonFreeClass>
+      )}
+    </div>
   );
 };
 

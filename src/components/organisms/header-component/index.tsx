@@ -68,11 +68,17 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
         <RightSideHeaders handleOpenModal={handleOpenModal} />
       </div>
 
-      <Suspense fallback={<LoadingCircle />}>
-        <ModalContainer open={open} handleClose={handleCloseModal}>
+      <ModalContainer open={open} handleClose={handleCloseModal}>
+        <Suspense
+          fallback={
+            <div className="flex h-full w-full items-center justify-center">
+              <LoadingCircle size={40} />
+            </div>
+          }
+        >
           {renderModalContent()}
-        </ModalContainer>
-      </Suspense>
+        </Suspense>
+      </ModalContainer>
     </>
   );
 };

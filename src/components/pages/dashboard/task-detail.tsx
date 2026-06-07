@@ -12,6 +12,7 @@ import { RootState } from '@/src/store';
 import { deleteTask } from '@/src/libs/tasks/delete-task';
 import { fetchTask } from '@/src/libs/tasks/fetch-task';
 import PageLoading from '../../common/page-loading';
+import LoadingCircle from '../../atom/loadings/loading-circle';
 import ButtonBack from '../../atom/buttons-component/button-back';
 import ButtonFreeClass from '../../atom/buttons-component/button-free-class';
 import MyIcon from '../../atom/icon-components';
@@ -111,7 +112,7 @@ const TaskDetailComponent = () => {
   if (!task) return <div>Task not found</div>;
 
   return (
-    <Suspense>
+    <>
       <div className="flex w-full flex-col items-start justify-center">
         <div className="h-full w-full rounded-xl border border-gray-300 bg-white p-4 shadow-md">
           <div className="mb-4 flex items-center justify-between lg:mb-2">
@@ -202,31 +203,47 @@ const TaskDetailComponent = () => {
           <div className="w-full max-w-[500px] pt-8">
             {task.attachment?.fileType ? (
               task.attachment?.fileType === 'image' ? (
-                <LightBoxComponent url={task?.attachment?.fileUrl as string}>
-                  <div className="relative aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-md border border-gray-300">
-                    <MyImage
-                      src={task?.attachment?.fileUrl as string}
-                      alt={task?.attachment?.fileUrl as string}
-                      fill
-                      wrapperClass="w-full h-full"
-                      className="object-contain"
-                    />
-                  </div>
-                </LightBoxComponent>
+                <Suspense
+                  fallback={
+                    <div className="flex h-full w-full items-center justify-center">
+                      <LoadingCircle size={40} />
+                    </div>
+                  }
+                >
+                  <LightBoxComponent url={task?.attachment?.fileUrl as string}>
+                    <div className="relative aspect-[4/3] w-full cursor-pointer overflow-hidden rounded-md border border-gray-300">
+                      <MyImage
+                        src={task?.attachment?.fileUrl as string}
+                        alt={task?.attachment?.fileUrl as string}
+                        fill
+                        wrapperClass="w-full h-full"
+                        className="object-contain"
+                      />
+                    </div>
+                  </LightBoxComponent>
+                </Suspense>
               ) : (
                 <div className="aspect-square w-full max-w-[500px] rounded-md border border-gray-300">
-                  <MyVideo
-                    src={task?.attachment?.fileUrl as string}
-                    alt={task?.attachment?.fileUrl as string}
-                    className="h-full w-full rounded-md object-contain"
-                  />
+                  <Suspense
+                    fallback={
+                      <div className="flex h-full w-full items-center justify-center">
+                        <LoadingCircle size={40} />
+                      </div>
+                    }
+                  >
+                    <MyVideo
+                      src={task?.attachment?.fileUrl as string}
+                      alt={task?.attachment?.fileUrl as string}
+                      className="h-full w-full rounded-md object-contain"
+                    />
+                  </Suspense>
                 </div>
               )
             ) : null}
           </div>
         ) : null}
       </ModalContainer>
-    </Suspense>
+    </>
   );
 };
 

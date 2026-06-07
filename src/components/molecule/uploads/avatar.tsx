@@ -2,7 +2,6 @@
 
 import { Suspense, useRef, useState } from 'react';
 import FileInputField from '../RHF-controllers-components/file-input-field';
-import PageLoading from '../../common/page-loading';
 import AvatarCropModal from '../../common/avatar-crop';
 import LoadingCircle from '../../atom/loadings/loading-circle';
 import MyImage from '../../atom/image-components';
@@ -56,7 +55,13 @@ const AvatarUpload = ({
   const isUploading = uploading && progress !== null && progress !== undefined;
 
   return (
-    <Suspense fallback={<PageLoading />}>
+    <Suspense
+      fallback={
+        <div className="flex h-full w-full items-center justify-center">
+          <LoadingCircle size={40} />
+        </div>
+      }
+    >
       <div className="flex flex-col items-center justify-center">
         {cropFile && (
           <AvatarCropModal

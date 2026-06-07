@@ -191,7 +191,7 @@ type ChatMessage = {
 
 type ChatContextType = {
   messages: ChatMessage[];
-  chatId: string | null;
+  chatId: string | null | undefined;
   userChat: MyUserType | null;
 };
 

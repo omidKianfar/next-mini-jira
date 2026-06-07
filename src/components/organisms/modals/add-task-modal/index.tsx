@@ -10,7 +10,7 @@ import { useImageProcessor } from '@/src/hooks/image-processor/use-image-process
 import { useVideoProcessor } from '@/src/hooks/video-processor/use-video-processor';
 import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
 import { createTaskDocument } from '@/src/libs/tasks/create-task';
-import PageLoading from '@/src/components/common/page-loading';
+import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
 import { TaskShema } from './schema';
 import { Task, TaskForm } from '@/src/types/global';
 import { AddTaskProps } from './type';
@@ -130,17 +130,31 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, 'handleClose'>) => {
   };
 
   return (
-    <Suspense fallback={<PageLoading />}>
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
-          {number == 0 ? (
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(onSubmit)}>
+        {number == 0 ? (
+          <Suspense
+            fallback={
+              <div className="flex h-full w-full items-center justify-center">
+                <LoadingCircle size={40} />
+              </div>
+            }
+          >
             <AddTaskFormComponent
               handleClose={handleClose}
               setNumber={setNumber}
               loading={loading}
               url={url}
             />
-          ) : (
+          </Suspense>
+        ) : (
+          <Suspense
+            fallback={
+              <div className="flex h-full w-full items-center justify-center">
+                <LoadingCircle size={40} />
+              </div>
+            }
+          >
             <AddTaskUploadCmponent
               uploadProcessHandler={uploadProcessHandler}
               handleCancel={handleCancel}
@@ -153,10 +167,10 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, 'handleClose'>) => {
               isCompressing={isCompressing}
               compressionProgress={compressionProgress}
             />
-          )}
-        </form>
-      </FormProvider>
-    </Suspense>
+          </Suspense>
+        )}
+      </form>
+    </FormProvider>
   );
 };
 

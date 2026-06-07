@@ -1,6 +1,5 @@
 import { Suspense, useState } from 'react';
 import LoadingCircle from '../../atom/loadings/loading-circle';
-import PageLoading from '../../common/page-loading';
 import { TableComponent } from '../table-component';
 import PaginationComponent from '../../molecule/pagination-component';
 import { Cloumns } from './cloumns';
@@ -28,7 +27,13 @@ const UsersTable = ({ users, goDetail, toggleActive }: UsersTableProps) => {
 
   return (
     <div>
-      <Suspense fallback={<PageLoading />}>
+      <Suspense
+        fallback={
+          <div className="flex h-full w-full items-center justify-center">
+            <LoadingCircle size={40} />
+          </div>
+        }
+      >
         <TableComponent data={paginatedUsers} columns={columns} />
 
         <PaginationComponent

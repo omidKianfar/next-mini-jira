@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, lazy, useState } from 'react';
+import { ChangeEvent, lazy, Suspense, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 import { MessgesRead } from '@/src/libs/chat/read-message';
@@ -8,6 +8,7 @@ import { RootState } from '@/src/store';
 import EmptyColumn from '@/src/components/atom/empty-components/empty-column';
 import MyIcon from '@/src/components/atom/icon-components';
 import { ChatsType, ModalProps, UserType } from '@/src/types/global';
+import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
 
 const AdminSupportUserCard = lazy(
   () => import('@/src/components/molecule/cards/admin-support-user-card')
@@ -93,7 +94,15 @@ const SearchSupportChats = ({
           <div className="scrollbar-hide mt-4 max-h-80 overflow-y-auto">
             {filteredChats.map((chat) => (
               <div key={chat.id} className="mb-4">
-                <AdminSupportUserCard chat={chat} handleClose={handleClose} />
+                <Suspense
+                  fallback={
+                    <div className="flex h-full w-full items-center justify-center">
+                      <LoadingCircle size={40} />
+                    </div>
+                  }
+                >
+                  <AdminSupportUserCard chat={chat} handleClose={handleClose} />
+                </Suspense>
               </div>
             ))}
           </div>

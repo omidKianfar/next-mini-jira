@@ -6,7 +6,7 @@ import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
 import { sendChatMessage } from '@/src/libs/chat/send-message';
 import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
 import MyIcon from '@/src/components/atom/icon-components';
-import PageLoading from '@/src/components/common/page-loading';
+import LoadingCircle from '../../atom/loadings/loading-circle';
 import {
   MyUserType,
   UploadMenuComponentProps,
@@ -57,46 +57,52 @@ const VoiceMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
   };
 
   return (
-    <Suspense fallback={<PageLoading />}>
-      <div className="h-[242px] p-2 lg:h-[220px]">
-        <div className="flex h-full w-full flex-col lg:flex-row">
-          <div className="flex h-[220px] w-full items-center justify-start rounded-md border-2 border-gray-400 bg-gray-50 p-2 lg:h-[200px]">
-            <RecorderComponent fileUploader={fileUploader} />
-          </div>
-
-          {!!url && (
-            <div className="h-full w-full p-1 lg:w-[80px] lg:p-0">
-              <div className="flex w-full flex-row-reverse items-center justify-between lg:flex-col lg:justify-center">
-                <ButtonFreeClass
-                  onClick={handleSend}
-                  type="submit"
-                  className="lg:mb-2"
-                  disable={!!!url}
-                  icon={
-                    <MyIcon
-                      icon="send"
-                      className="text-h4 text-primary-500 hover:text-primary-700 lg:text-h2"
-                    />
-                  }
-                />
-                <ButtonFreeClass
-                  onClick={handleCancel}
-                  disable={uploading || !!!url}
-                  icon={
-                    <MyIcon
-                      icon="close"
-                      className="text-h4 text-error-500 hover:text-error-700 lg:text-h2"
-                    />
-                  }
-                />
-
-                {error! && <p className="mt-1 text-red-500">{error}</p>}
+    <div className="h-[242px] p-2 lg:h-[220px]">
+      <div className="flex h-full w-full flex-col lg:flex-row">
+        <div className="flex h-[220px] w-full items-center justify-start rounded-md border-2 border-gray-400 bg-gray-50 p-2 lg:h-[200px]">
+          <Suspense
+            fallback={
+              <div className="flex h-full w-full items-center justify-center">
+                <LoadingCircle size={40} />
               </div>
-            </div>
-          )}
+            }
+          >
+            <RecorderComponent fileUploader={fileUploader} />
+          </Suspense>
         </div>
+
+        {!!url && (
+          <div className="h-full w-full p-1 lg:w-[80px] lg:p-0">
+            <div className="flex w-full flex-row-reverse items-center justify-between lg:flex-col lg:justify-center">
+              <ButtonFreeClass
+                onClick={handleSend}
+                type="submit"
+                className="lg:mb-2"
+                disable={!!!url}
+                icon={
+                  <MyIcon
+                    icon="send"
+                    className="text-h4 text-primary-500 hover:text-primary-700 lg:text-h2"
+                  />
+                }
+              />
+              <ButtonFreeClass
+                onClick={handleCancel}
+                disable={uploading || !!!url}
+                icon={
+                  <MyIcon
+                    icon="close"
+                    className="text-h4 text-error-500 hover:text-error-700 lg:text-h2"
+                  />
+                }
+              />
+
+              {error! && <p className="mt-1 text-red-500">{error}</p>}
+            </div>
+          </div>
+        )}
       </div>
-    </Suspense>
+    </div>
   );
 };
 

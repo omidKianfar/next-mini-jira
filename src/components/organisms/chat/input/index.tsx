@@ -1,10 +1,9 @@
 'use client';
 
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useFileUploader } from '@/src/hooks/file-uploader/use-file-uploader';
 import ChatMenuComponent from '../../../molecule/chat/chat-menu';
-import PageLoading from '@/src/components/common/page-loading';
 import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
 import { ChatMenuProps, MenuType } from '@/src/types/global';
 
@@ -43,79 +42,101 @@ const ChatInput = ({
         !showMenu ? 'h-[32px]' : 'h-[250px] lg:h-[227px]'
       }`}
     >
-      <Suspense fallback={<PageLoading />}>
-        <div className="relative h-full w-full">
-          <ChatMenuComponent
-            MenuHandler={MenuHandler}
-            showMenu={showMenu}
-            setShowMenu={setShowMenu}
-          />
+      <div className="relative h-full w-full">
+        <ChatMenuComponent
+          MenuHandler={MenuHandler}
+          showMenu={showMenu}
+          setShowMenu={setShowMenu}
+        />
 
-          <AnimatePresence mode="wait">
-            {showMenu && (
-              <motion.div
-                key="chat-input-content"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={fastTransition}
-                className="h-full w-full rounded-md border-2 border-primary-400 bg-white"
-              >
-                <AnimatePresence mode="wait">
-                  {Menu === 'text' ? (
-                    <motion.div
-                      key="text-editor"
-                      initial={{ opacity: 0, x: 5 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -5 }}
-                      transition={fastTransition}
-                      className="h-full w-full"
+        <AnimatePresence mode="wait">
+          {showMenu && (
+            <motion.div
+              key="chat-input-content"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={fastTransition}
+              className="h-full w-full rounded-md border-2 border-primary-400 bg-white"
+            >
+              <AnimatePresence mode="wait">
+                {Menu === 'text' ? (
+                  <motion.div
+                    key="text-editor"
+                    initial={{ opacity: 0, x: 5 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -5 }}
+                    transition={fastTransition}
+                    className="h-full w-full"
+                  >
+                    <Suspense
+                      fallback={
+                        <div className="flex h-full w-full items-center justify-center">
+                          <LoadingCircle size={40} />
+                        </div>
+                      }
                     >
                       <SlateEditor
                         editorKey={editorKey}
                         editMessageId={editMessageId}
                         setEditMessageId={setEditMessageId}
                       />
-                    </motion.div>
-                  ) : Menu === 'upload' ? (
-                    <motion.div
-                      key="upload-menu"
-                      initial={{ opacity: 0, x: 5 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -5 }}
-                      transition={fastTransition}
-                      className="h-full w-full"
+                    </Suspense>
+                  </motion.div>
+                ) : Menu === 'upload' ? (
+                  <motion.div
+                    key="upload-menu"
+                    initial={{ opacity: 0, x: 5 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -5 }}
+                    transition={fastTransition}
+                    className="h-full w-full"
+                  >
+                    <Suspense
+                      fallback={
+                        <div className="flex h-full w-full items-center justify-center">
+                          <LoadingCircle size={40} />
+                        </div>
+                      }
                     >
                       <UploadMenuComponent fileUploader={fileUploader} />
-                    </motion.div>
-                  ) : Menu === 'voice' ? (
-                    <motion.div
-                      key="voice-menu"
-                      initial={{ opacity: 0, x: 5 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -5 }}
-                      transition={fastTransition}
-                      className="h-full w-full"
+                    </Suspense>
+                  </motion.div>
+                ) : Menu === 'voice' ? (
+                  <motion.div
+                    key="voice-menu"
+                    initial={{ opacity: 0, x: 5 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -5 }}
+                    transition={fastTransition}
+                    className="h-full w-full"
+                  >
+                    <Suspense
+                      fallback={
+                        <div className="flex h-full w-full items-center justify-center">
+                          <LoadingCircle size={40} />
+                        </div>
+                      }
                     >
                       <VoiceMenuComponent fileUploader={fileUploader} />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="loading-menu"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="flex h-full w-full items-center justify-center rounded-md bg-gray-300"
-                    >
-                      <LoadingCircle />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </Suspense>
+                    </Suspense>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="loading-menu"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex h-full w-full items-center justify-center rounded-md bg-gray-300"
+                  >
+                    <LoadingCircle />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 };

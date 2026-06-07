@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 import { useAuth } from '@/src/hooks/auth/use-auth';
 import { SidebarItems } from './sidebar-items';
 import SidebarActionItem from './sidebar-action-item';
-import PageLoading from '@/src/components/common/page-loading';
+import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
 import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
 import MyIcon from '@/src/components/atom/icon-components';
 import { UserType } from '@/src/types/global';
@@ -27,32 +27,54 @@ const UserSidebar = ({
 
   return (
     <div className="mt-6 flex flex-col items-start justify-center">
-      <Suspense fallback={<PageLoading />}>
-        <div className="h-[45vh] overflow-y-auto">
-          {HomePage &&
-            LandingSidebarItems?.map((item: sidebarItemsType) => (
-              <div key={item?.id} className="mb-4 rounded-sm p-1">
+      <div className="h-[45vh] overflow-y-auto">
+        {HomePage &&
+          LandingSidebarItems?.map((item: sidebarItemsType) => (
+            <div key={item?.id} className="mb-4 rounded-sm p-1">
+              <Suspense
+                fallback={
+                  <div className="flex h-full w-full items-center justify-center">
+                    <LoadingCircle size={40} />
+                  </div>
+                }
+              >
                 <SidebarActionItem item={item} />
-              </div>
-            ))}
+              </Suspense>
+            </div>
+          ))}
 
-          {!HomePage &&
-            user?.userType === UserType?.Client &&
-            userSidebarItems?.map((item: sidebarItemsType) => (
-              <div key={item?.id} className="mb-4 rounded-sm">
+        {!HomePage &&
+          user?.userType === UserType?.Client &&
+          userSidebarItems?.map((item: sidebarItemsType) => (
+            <div key={item?.id} className="mb-4 rounded-sm">
+              <Suspense
+                fallback={
+                  <div className="flex h-full w-full items-center justify-center">
+                    <LoadingCircle size={40} />
+                  </div>
+                }
+              >
                 <SidebarActionItem item={item} />
-              </div>
-            ))}
+              </Suspense>
+            </div>
+          ))}
 
-          {!HomePage &&
-            user?.userType === UserType?.Admin &&
-            AdminSidebarItems?.map((item: sidebarItemsType) => (
-              <div key={item?.id} className="mb-4 rounded-sm">
+        {!HomePage &&
+          user?.userType === UserType?.Admin &&
+          AdminSidebarItems?.map((item: sidebarItemsType) => (
+            <div key={item?.id} className="mb-4 rounded-sm">
+              <Suspense
+                fallback={
+                  <div className="flex h-full w-full items-center justify-center">
+                    <LoadingCircle size={40} />
+                  </div>
+                }
+              >
                 <SidebarActionItem item={item} />
-              </div>
-            ))}
-        </div>
-      </Suspense>
+              </Suspense>
+            </div>
+          ))}
+      </div>
 
       {(user?.userType === UserType.Client ||
         user?.userType === UserType.Admin) && (

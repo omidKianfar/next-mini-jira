@@ -11,6 +11,7 @@ import { toggleSortByCreatedAt } from '@/src/store/slices/users/users';
 import MyIcon from '@/src/components/atom/icon-components';
 import PageLoading from '@/src/components/common/page-loading';
 import { MyUserType, UserType } from '@/src/types/global';
+import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
 
 const UsersTable = lazy(
   () => import('@/src/components/organisms/tables/admin-users-table')
@@ -103,21 +104,35 @@ const AdminDashboardComponent = () => {
           )}
         </div>
 
-        <Suspense fallback={<PageLoading />}>
-          {isMobile ? (
+        {isMobile ? (
+          <Suspense
+            fallback={
+              <div className="flex h-full w-full items-center justify-center">
+                <LoadingCircle size={40} />
+              </div>
+            }
+          >
             <UserListCard
               users={finalUsers}
               goDetail={goDetail}
               toggleActive={toggleActive}
             />
-          ) : (
+          </Suspense>
+        ) : (
+          <Suspense
+            fallback={
+              <div className="flex h-full w-full items-center justify-center">
+                <LoadingCircle size={40} />
+              </div>
+            }
+          >
             <UsersTable
               users={finalUsers}
               goDetail={goDetail}
               toggleActive={toggleActive}
             />
-          )}
-        </Suspense>
+          </Suspense>
+        )}
       </div>
     </div>
   );

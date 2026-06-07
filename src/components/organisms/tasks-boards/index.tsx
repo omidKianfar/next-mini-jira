@@ -15,7 +15,7 @@ import {
 } from '@dnd-kit/core';
 import { RootState } from '@/src/store';
 import { updateTaskStatus } from '@/src/libs/tasks/update-task-status';
-import PageLoading from '../../common/page-loading';
+import LoadingCircle from '../../atom/loadings/loading-circle';
 import { Task } from '@/src/types/global';
 
 const ColumnComponent = lazy(() => import('./column'));
@@ -86,7 +86,13 @@ const BoardComponent = () => {
   };
 
   return (
-    <Suspense fallback={<PageLoading />}>
+    <Suspense
+      fallback={
+        <div className="flex h-full w-full items-center justify-center">
+          <LoadingCircle size={40} />
+        </div>
+      }
+    >
       <DndContext
         sensors={sensors}
         onDragStart={handleDragStart}

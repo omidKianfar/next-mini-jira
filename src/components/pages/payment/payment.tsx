@@ -9,6 +9,7 @@ import { useRequireActiveStatus } from '@/src/hooks/pages-user-status-require/us
 import { usePlanAction } from '@/src/hooks/payment/usePlanAction';
 import PageLoading from '../../common/page-loading';
 import FramerMotion from '../../atom/animation-component';
+import LoadingCircle from '../../atom/loadings/loading-circle';
 import { PlanType } from '@/src/types/global';
 
 const ActivePaymentComponent = lazy(() => import('./ActivePayment'));
@@ -55,35 +56,49 @@ const PlanComponent = () => {
   };
 
   return (
-    <Suspense fallback={<PageLoading />}>
-      <FramerMotion>
-        <div
-          className={`relative flex w-full flex-col items-center justify-center ${
-            isSignupPage ? 'min-h-screen' : 'lg:pt-4'
-          }`}
-        >
-          {loading && (
-            <div className="absolute inset-0 z-50 flex items-center justify-center rounded-xl bg-white/60 backdrop-blur-[1px] transition-all duration-200">
-              <PageLoading />
-            </div>
-          )}
+    <FramerMotion>
+      <div
+        className={`relative flex w-full flex-col items-center justify-center ${
+          isSignupPage ? 'min-h-screen' : 'lg:pt-4'
+        }`}
+      >
+        {loading && (
+          <div className="absolute inset-0 z-50 flex items-center justify-center rounded-xl bg-white/60 backdrop-blur-[1px] transition-all duration-200">
+            <PageLoading />
+          </div>
+        )}
 
-          {isDashboard && hasActivePayment ? (
+        {isDashboard && hasActivePayment ? (
+          <Suspense
+            fallback={
+              <div className="flex h-full w-full items-center justify-center">
+                <LoadingCircle size={40} />
+              </div>
+            }
+          >
             <ActivePaymentComponent
               payment={payment}
               onBack={handleBackDashboard}
               now={now}
             />
-          ) : (
+          </Suspense>
+        ) : (
+          <Suspense
+            fallback={
+              <div className="flex h-full w-full items-center justify-center">
+                <LoadingCircle size={40} />
+              </div>
+            }
+          >
             <ChoosePlanComponent
               onBack={handleBackToPlan}
               onChoosePlan={choosePlanHandler}
               isLoading={loading}
             />
-          )}
-        </div>
-      </FramerMotion>
-    </Suspense>
+          </Suspense>
+        )}
+      </div>
+    </FramerMotion>
   );
 };
 

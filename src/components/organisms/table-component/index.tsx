@@ -1,4 +1,4 @@
-import { Column } from '../type';
+import { Column } from '../tables/type';
 
 type TableProps<T> = {
   data: T[];

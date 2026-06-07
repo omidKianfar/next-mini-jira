@@ -11,7 +11,6 @@ import { sendChatMessage } from '@/src/libs/chat/send-message';
 import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
 import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
 import MyIcon from '@/src/components/atom/icon-components';
-import PageLoading from '@/src/components/common/page-loading';
 import { UploadMenuShema } from './schema';
 import {
   MyUserType,
@@ -119,96 +118,110 @@ const UploadMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
   };
 
   return (
-    <Suspense fallback={<PageLoading />}>
-      <div className={`p-2`}>
-        <FormProvider {...methods}>
-          <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <div className="flex h-full w-full flex-col lg:flex-row">
-              {isCompressing ? (
-                <div className="flex h-[223px] w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-primary-300 bg-primary-50 lg:h-[200px]">
-                  <p className="mb-2 mt-2 text-label font-semibold text-warning-500">
-                    Optimizing and compressing Video:
-                    <span className="ml-1 animate-pulse text-subtitle text-primary-500">
-                      {compressionProgress} %
-                    </span>
-                  </p>
+    <div className={`p-2`}>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <div className="flex h-full w-full flex-col lg:flex-row">
+            {isCompressing ? (
+              <div className="flex h-[223px] w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-primary-300 bg-primary-50 lg:h-[200px]">
+                <p className="mb-2 mt-2 text-label font-semibold text-warning-500">
+                  Optimizing and compressing Video:
+                  <span className="ml-1 animate-pulse text-subtitle text-primary-500">
+                    {compressionProgress} %
+                  </span>
+                </p>
 
-                  <p className="text-caption text-gray-400">
-                    Please wait, this happens in your browser...
-                  </p>
+                <p className="text-caption text-gray-400">
+                  Please wait, this happens in your browser...
+                </p>
 
-                  <ButtonFreeClass
-                    className="mt-4 rounded-sm border border-warning-500 bg-white px-8 py-2 text-label text-warning-500 hover:bg-warning-500 hover:text-white"
-                    onClick={handleCancel}
+                <ButtonFreeClass
+                  className="mt-4 rounded-sm border border-warning-500 bg-white px-8 py-2 text-label text-warning-500 hover:bg-warning-500 hover:text-white"
+                  onClick={handleCancel}
+                >
+                  Cancel upload
+                </ButtonFreeClass>
+              </div>
+            ) : (
+              !url &&
+              progress < 100 && (
+                <div className="h-[223px] w-full lg:h-[200px]">
+                  <Suspense
+                    fallback={
+                      <div className="flex h-full w-full items-center justify-center">
+                        <LoadingCircle size={40} />
+                      </div>
+                    }
                   >
-                    Cancel upload
-                  </ButtonFreeClass>
-                </div>
-              ) : (
-                !url &&
-                progress < 100 && (
-                  <div className="h-[223px] w-full lg:h-[200px]">
                     <DragDropUploader
                       uploadProcessHandler={uploadProcessHandler}
                       progress={progress}
                       uploading={uploading}
                     />
-                  </div>
-                )
-              )}
+                  </Suspense>
+                </div>
+              )
+            )}
 
-              {!url! && progress! === 100 && (
-                <div className="h-[223px] w-full lg:h-[200px]">
-                  <div
-                    className={`flex h-[220px] w-full cursor-not-allowed items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 transition-all lg:h-[200px]`}
+            {!url! && progress! === 100 && (
+              <div className="h-[223px] w-full lg:h-[200px]">
+                <div
+                  className={`flex h-[220px] w-full cursor-not-allowed items-center justify-center rounded-lg border-2 border-dashed border-zinc-300 bg-zinc-50 transition-all lg:h-[200px]`}
+                >
+                  <LoadingCircle size={40} />
+                </div>
+              </div>
+            )}
+
+            {url && (
+              <>
+                <div className="mb-2 h-[187px] w-full lg:mb-0 lg:h-[200px]">
+                  <Suspense
+                    fallback={
+                      <div className="flex h-full w-full items-center justify-center">
+                        <LoadingCircle size={40} />
+                      </div>
+                    }
                   >
-                    <LoadingCircle size={40} />
+                    <ShowAttachment fileType={fileType} url={url} />
+                  </Suspense>
+                </div>
+
+                <div className="h-full w-full lg:w-[80px]">
+                  <div className="flex w-full flex-row-reverse items-center justify-between lg:flex-col lg:justify-center">
+                    <ButtonFreeClass
+                      onClick={handleSave}
+                      type="submit"
+                      className="lg:mb-2"
+                      disable={!!!url}
+                      icon={
+                        <MyIcon
+                          icon="send"
+                          className="text-h4 text-primary-500 hover:text-primary-700 lg:text-h2"
+                        />
+                      }
+                    />
+
+                    <ButtonFreeClass
+                      onClick={handleCancel}
+                      disable={uploading || !!!url}
+                      icon={
+                        <MyIcon
+                          icon="close"
+                          className="text-h4 text-error-500 hover:text-error-700 lg:text-h2"
+                        />
+                      }
+                    />
+
+                    {error! && <p className="mt-1 text-red-500">{error}</p>}
                   </div>
                 </div>
-              )}
-
-              {url && (
-                <>
-                  <div className="mb-2 h-[187px] w-full lg:mb-0 lg:h-[200px]">
-                    <ShowAttachment fileType={fileType} url={url} />
-                  </div>
-
-                  <div className="h-full w-full lg:w-[80px]">
-                    <div className="flex w-full flex-row-reverse items-center justify-between lg:flex-col lg:justify-center">
-                      <ButtonFreeClass
-                        onClick={handleSave}
-                        type="submit"
-                        className="lg:mb-2"
-                        disable={!!!url}
-                        icon={
-                          <MyIcon
-                            icon="send"
-                            className="text-h4 text-primary-500 hover:text-primary-700 lg:text-h2"
-                          />
-                        }
-                      />
-
-                      <ButtonFreeClass
-                        onClick={handleCancel}
-                        disable={uploading || !!!url}
-                        icon={
-                          <MyIcon
-                            icon="close"
-                            className="text-h4 text-error-500 hover:text-error-700 lg:text-h2"
-                          />
-                        }
-                      />
-
-                      {error! && <p className="mt-1 text-red-500">{error}</p>}
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-          </form>
-        </FormProvider>
-      </div>
-    </Suspense>
+              </>
+            )}
+          </div>
+        </form>
+      </FormProvider>
+    </div>
   );
 };
 
