@@ -18,11 +18,11 @@ export const ChatContext = createContext<ChatContextType | undefined>(
 
 export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname();
-  const params = useSearchParams();
-  const chatId = params.get('chatId');
+  const searchParams = typeof window !== 'undefined' ? useSearchParams() : null;
+  const chatId = searchParams?.get('chatId');
 
   const { user: currentUser } = useAuth();
-  const { user: userChat } = useUserListenerById(chatId);
+  const { user: userChat } = useUserListenerById(chatId as string);
 
   const [messages, setMessages] = useState<ChatMessage[]>([]);
 
