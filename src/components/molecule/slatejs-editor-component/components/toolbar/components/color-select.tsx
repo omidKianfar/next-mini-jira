@@ -10,14 +10,14 @@ const ColorSelectComponent = () => {
     changeColor,
   } = useEditor();
 
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         showColorDropdown &&
         dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
+        !dropdownRef.current.contains(event.target as Node)
       ) {
         setShowColorDropdown?.(false);
       }

@@ -7,8 +7,10 @@ import { BLOCK_TYPES, BlockFormat, CustomElement } from '../../../type';
 
 export const BlockTypeSelect = () => {
   const editor = useSlate();
+
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const getActiveBlockFormat = (): BlockFormat => {
     const [match] = Array.from(
@@ -41,8 +43,11 @@ export const BlockTypeSelect = () => {
   const currentBlock = BLOCK_TYPES.find((b) => b.format === activeFormat);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };

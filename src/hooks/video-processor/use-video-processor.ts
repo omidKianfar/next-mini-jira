@@ -57,7 +57,9 @@ export const useVideoProcessor = () => {
       ]);
 
       const data = await ffmpeg.readFile('output.mp4');
-      const compressedBlob = new Blob([data], { type: 'video/mp4' });
+      const compressedBlob = new Blob([new Uint8Array(data as any)], {
+        type: 'video/mp4',
+      });
 
       return new File([compressedBlob], file.name, { type: 'video/mp4' });
     } catch (err) {

@@ -6,7 +6,7 @@ import {
   useMemo,
   useRef,
 } from 'react';
-import { createEditor, Editor, Text, Transforms } from 'slate';
+import { createEditor, Descendant, Editor, Text, Transforms } from 'slate';
 import { ReactEditor, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 import { WithHtml } from '@/src/components/molecule/slatejs-editor-component/components/with-html';
@@ -110,11 +110,20 @@ const useEditorActions = ({
       editorOutput || '<p></p>',
       'text/html'
     );
+
     const content = Deserialize(document.body);
 
+    const isValidNode = (item: any): item is Descendant => {
+      if (item === null) return false;
+
+      const isNewline =
+        typeof item === 'object' && 'text' in item && item.text === '\n';
+      return !isNewline;
+    };
+
     return Array.isArray(content)
-      ? content.filter((item) => item !== '\n' && item !== null)
-      : [content].filter((item) => item !== '\n' && item !== null);
+      ? content.filter(isValidNode)
+      : [content].filter(isValidNode);
   }, [editorOutput]);
 
   const removeSecondLine = useCallback(() => {

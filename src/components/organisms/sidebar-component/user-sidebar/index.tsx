@@ -10,14 +10,14 @@ import { HeaderProps } from '@/src/types/global';
 const SideBar = ({ showSidebar, setShowSidebar }: HeaderProps) => {
   const { user } = useAuth();
 
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         showSidebar &&
         dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
+        !dropdownRef.current.contains(event.target as Node)
       ) {
         setShowSidebar?.(false);
       }
