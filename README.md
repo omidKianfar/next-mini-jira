@@ -105,6 +105,58 @@ yarn install
 
 ### 3. Add environment variables
 
+### Setup Guide
+
+To ensure full functionality of the SaaS features, please follow these configuration steps in your Stripe and Supabase dashboards:
+
+1. Stripe Integration
+   Product Setup: In your Stripe Dashboard, create two products for the "Monthly" and "Yearly" subscription plans.
+
+- Price IDs: After creating the products, retrieve the Price ID for each and update your .env.local file with the corresponding STRIPE_MONTHLY_PRICE_ID and STRIPE_YEARLY_PRICE_ID.
+
+- API Keys: Navigate to dashboard > settings > Developers > API keys to retrieve your Secret Key and Publishable Key, then add them to your environment variables.
+
+- Products: Navigate to product catalog > Create Monthly and Yearly.
+
+- Find price click and copy and price id then add them to your environment variables.
+
+  <a target="_blank" href="https://docs.stripe.com/billing">
+  Stripe Billing Docs
+  </a>
+
+2. Supabase Configuration
+   Project Setup: Initialize a new project in the Supabase Dashboard.
+
+- Storage: Create a Public Bucket to handle media assets (images and audio files), ensuring the application can read/write files correctly.
+
+- The polices you must make for this project
+
+<div style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 8px">
+ 
+  <a target="_blank" href="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/policies/bucket-policies.png">
+    <img src="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/policies/bucket-policies.png" width="300" />
+  </a>
+
+  <a target="_blank" href="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/policies/policy-1.png">
+    <img src="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/policies/policy-1.png" width="300" />
+  </a>
+
+  <a target="_blank" href="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/policies/policy-2.png">
+    <img src="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/policies/policy-2.png" width="300" />
+  </a>
+
+  <a target="_blank" href="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/policies/policy-3.png">
+    <img src="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/policies/policy-3.png" width="300" />
+  </a>
+
+  <a target="_blank" href="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/policies/policy-4.png">
+    <img src="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/policies/policy-4.png" width="300" />
+  </a>
+
+</div>
+
+- Credentials: Retrieve your SUPABASE_URL and SUPABASE_ANON_KEY from Project Settings > API and populate your .env.local file.
+
 Create a `.env.local` file:
 
 ```env
