@@ -76,8 +76,9 @@ const AboutComponent = () => {
 
           <div className="flex flex-col gap-4 sm:flex-row">
             <Link
-              href="/resume.pdf"
+              href="/pdf/Omid-Kianfar-Resume.pdf"
               target="_blank"
+              download
               className="rounded-lg bg-warning-500 px-6 py-3 text-center text-bodySm font-semibold text-gray-900 transition hover:bg-warning-400"
             >
               Download Full Resume
