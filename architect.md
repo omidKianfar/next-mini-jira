@@ -34,7 +34,7 @@ The data flow is centralized through a Service Layer:
 
 3. Service Call: The hook invokes a method from the service layer.
 
-4. State Update: The service communicates with Firebase; the UI updates optimistically, followed by a data sync.
+4. State Update: The service communicates with Firebase (Real-time DB); the UI updates optimistically, followed by a data sync.
 
 5. UI Feedback: notistack confirms the operation.
 
