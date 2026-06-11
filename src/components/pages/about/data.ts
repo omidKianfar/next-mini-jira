@@ -5,7 +5,7 @@ export const Engineering_Highlights = [
   },
   {
     title: 'Real-time & State',
-    desc: 'Orchestrated complex data sync via Socket.io, Firestore, and Redux Toolkit.',
+    desc: 'Orchestrated complex data sync via firebase realtime database, and Redux Toolkit.',
   },
   {
     title: 'Rich-Text Engine',
