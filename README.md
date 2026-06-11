@@ -5,7 +5,7 @@ A professional, production-ready Project Management SaaS. Built with a highly **
 ## Features
 
 - **Advanced Kanban Board**: Custom drag-and-drop implementation with `dnd-kit` and custom collision sensors.
-- **Real-time Collaboration**: Integrated `Socket.io` & Firestore for instant messaging and live task updates.
+- **Real-time Collaboration**: Integrated Firebase Realtime Database for instant messaging and live task updates.
 - **Multimedia Engine**: In-browser image/video compression, cropping (`react-easy-crop`), lightbox (`yet-another-react-lightbox`), and professional voice recording (`RecordRTC`/`WaveSurfer`).
 - **SaaS Subscription**: Full Stripe integration (monthly/yearly) with active user validation and role-based access control.
 - **Rich Experience**: Slate.js rich-text editor, Framer Motion animations, and Notistack feedback system.
@@ -16,7 +16,7 @@ A professional, production-ready Project Management SaaS. Built with a highly **
 
 - **Framework**: Next.js 16 (App Router), TypeScript.
 - **State Management**: Redux Toolkit (RTK).
-- **Database & Cloud**: Firebase & Firestore, Supabase (Storage)
+- **Database & Cloud**: Firebase (Real-time DB/Auth), Supabase (Storage)
 - **Forms**: React Hook Form with custom controllers & Yup validation.
 - **Editor**: Slate.js / Slate-react.
 - **Styling**: Tailwind CSS (Custom Design System).
@@ -197,8 +197,8 @@ npm run test
 
 - **Senior-Level Architecture**: Demonstrates mastery of **Maintainable**, **Modular**, and **Editable** system design, ensuring long-term code health.
 
-- **Full-Stack Competence**: Mastery of integrating **Stripe** for SaaS, **Supabase** for secure storage, and **Firebase** for backend-as-a-service.
-- **Real-Time Mastery**: Proficient in managing complex live data synchronization via **WebSockets** and **Firestore** listeners.
+- **Full-Stack Competence**: Mastery of integrating **Stripe** for SaaS, **Supabase** for secure storage, and **Firebase (Realtime Database/Auth)** for backend-as-a-service.
+- **Real-Time Mastery**: Proficient in managing complex live data synchronization via **Firebase Realtime Database** .
 - **Quality-Driven Development**: Includes a strategic unit testing suite using **Jest** and **React Testing Library**, focused on mission-critical components like **Modals** and **Form Validation**.
 - **Modern Workflow**: Expertise in cutting-edge frontend tools including **Redux Toolkit**, **Framer Motion**, **Slate.js** for rich text, and **Type Inheritance** for scalable data models.
 - **Interview-Ready**: A polished, high-performance application that showcases deep knowledge of **Next.js 16** architecture and scalable UI component design.
