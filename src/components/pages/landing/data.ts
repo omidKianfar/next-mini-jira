@@ -1,17 +1,17 @@
 const TECH_STACK = [
   { label: 'Next.js', icon: 'nextJs', core: true },
   { label: 'TypeScript', icon: 'typeScript', core: true },
+  { label: 'Tailwind CSS', icon: 'logos:tailwindcss-icon', core: false },
+  { label: 'Firebase', icon: 'logos:firebase', core: false },
+  { label: 'Stripe', icon: 'logos:stripe', core: false },
+  { label: 'Supabase', icon: 'logos:supabase-icon', core: false },
   { label: 'Slate.js', icon: 'slateJs', core: true },
-  { label: 'Dnd-kit', icon: 'dnd-kit', core: true },
   { label: 'Redux Toolkit', icon: 'redux-toolkit', core: true },
+  { label: 'Jest', icon: 'logos:jest', core: true },
+  { label: 'Dnd-kit', icon: 'dnd-kit', core: true },
   { label: 'React Hook Form', icon: 'logos:react-hook-form', core: false },
   { label: 'RecordRTC', icon: 'logos:recordrtc', core: true },
   { label: 'FFmpeg', icon: 'logos:ffmpeg', core: true },
-  { label: 'Firebase', icon: 'logos:firebase', core: false },
-  { label: 'Supabase', icon: 'logos:supabase-icon', core: false },
-  { label: 'Stripe', icon: 'logos:stripe', core: false },
-  { label: 'Tailwind CSS', icon: 'logos:tailwindcss-icon', core: false },
-  { label: 'Jest', icon: 'logos:jest', core: true },
 ];
 
 const PROJECT_SLIDES = [
@@ -79,27 +79,13 @@ const TASK_JOURNEY_STEPS = [
   {
     title: 'Real-time Collaboration',
     description:
-      'Instant synchronization across clients using  FireStore for a seamless team experience.',
+      'Instant synchronization across clients using  Firebase Realtime Database for a seamless team experience.',
   },
-  {
-    title: 'Offline-First PWA',
-    description:
-      'Seamless offline experience with Workbox service workers and Firestore local persistence for high availability.',
-  },
+
   {
     title: 'Optimized UI/UX',
     description:
       'Modern interface crafted with Tailwind CSS and Framer Motion for buttery-smooth interactions.',
-  },
-  {
-    title: 'Production Ready',
-    description:
-      'Robust code architecture with 100% type safety and comprehensive testing using Jest & RTL.',
-  },
-  {
-    title: 'DevOps & CI/CD',
-    description:
-      'Automated deployment pipelines via GitHub Actions, supporting multi-stage environments (QA/Prod) for reliable releases.',
   },
 ];
 
