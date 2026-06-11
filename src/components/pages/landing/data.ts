@@ -3,7 +3,6 @@ const TECH_STACK = [
   { label: 'TypeScript', icon: 'typeScript', core: true },
   { label: 'Slate.js', icon: 'slateJs', core: true },
   { label: 'Dnd-kit', icon: 'dnd-kit', core: true },
-  { label: 'Socket.io', icon: 'socketIo', core: true },
   { label: 'Redux Toolkit', icon: 'redux-toolkit', core: true },
   { label: 'React Hook Form', icon: 'logos:react-hook-form', core: false },
   { label: 'RecordRTC', icon: 'logos:recordrtc', core: true },
@@ -80,7 +79,7 @@ const TASK_JOURNEY_STEPS = [
   {
     title: 'Real-time Collaboration',
     description:
-      'Instant synchronization across clients using Socket.io and Firebase for a seamless team experience.',
+      'Instant synchronization across clients using  FireStore for a seamless team experience.',
   },
   {
     title: 'Offline-First PWA',
