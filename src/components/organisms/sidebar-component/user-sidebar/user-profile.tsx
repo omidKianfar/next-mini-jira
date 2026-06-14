@@ -2,6 +2,7 @@ import { stringSlicer } from '@/src/utils/string-slicer';
 import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 import MyImage from '@/src/components/atom/image-components';
 import { sidebarProps } from './type';
+import { UserType } from '@/src/types/global';
 
 const UserProfile = ({
   user,
@@ -10,7 +11,12 @@ const UserProfile = ({
   const navigation = useNavigation();
 
   const goProfile = () => {
-    navigation.profile();
+    if (user?.userType === UserType.Client) {
+      navigation.profile();
+    } else {
+      navigation.adminProfile();
+    }
+
     setShowSidebar?.(false);
   };
 
