@@ -1,63 +1,63 @@
-## Architecture Overview: Mini-Jira
+## Architecture & Design Decisions
 
-This document outlines the architectural decisions, data flow, and engineering design for the Mini-Jira project. The application is a high-performance Kanban-style project management tool built with Next.js 16+, React, and TypeScript, utilizing a modular, service-oriented architecture.
+This document outlines the architectural patterns and technical design decisions behind the Mini Jira platform.
 
-### 1. Core Architectural Principles
+### Architectural Pattern: Atomic Design
 
-- **Feature-First Architecture:** Features are encapsulated in isolated modules to ensure high cohesion and maintainability.
+To ensure scalability and maintainability, the project adopts the Atomic Design pattern. This enforces a strict decoupling of UI components:
 
-- **Service-Oriented Logic:** API interactions and data persistence are abstracted into a service layer, decoupling business logic from UI components.
+- **Atoms:** Basic building blocks (Buttons, Inputs, Icons).
 
-- **Custom Hook Pattern:** Component-level state and side effects are managed through custom hooks, ensuring "Dumb" (Presentational) components.
+- **Molecules:** Simple combinations of atoms (Search-Input with Icon).
 
-- **Type Safety:** TypeScript is enforced across the entire stack to provide robust data modeling and reduce runtime errors.
+- **Organisms:** Complex UI regions (Header, Sidebar, Kanban-Column).
 
-### Tech Stack & Dependencies
+- **Pages:** Feature-specific compositions of organisms.
 
-- **Framework:** Next.js 16 (App Router), TypeScript.
+### State Management Strategy
 
-- **State Management:** Redux Toolkit (RTK).
+The application utilizes Redux Toolkit (RTK) to manage complex, globally shared states:
 
-- **Backend/Storage:** Firebase (Real-time DB/Auth), Supabase (Storage).
+- **Slices:** Domain-specific logic is isolated into slices (tasks, chats, users, filters).
 
-- **UI Interaction:** DnD-Kit (Drag-and-drop), Swiper.js (for performant, touch-friendly sliders and carousels).
+- **Real-time Synchronization:** RTK is integrated with Firebase Firestore listeners to ensure the local UI state is always a reflection of the server-side database.
 
-- **Styling:** Tailwind CSS & MUI (Modular design system).
+- **Strict Typing:** Global state interfaces are inherited from core types, ensuring that dispatching actions remains type-safe.
 
-### 3. Data Flow & Logic Layer
+### Media & Processing Pipeline
 
-The data flow is centralized through a Service Layer:
+Data flows through a centralized service layer and benefits from real-time capabilities:
 
-1. User Interaction: Kanban board triggers an event (e.g., onDragEnd).
+- **Client-Side:** Image manipulation (cropping/scaling) is performed in the browser using react-easy-crop to reduce server load and latency.
 
-2. Hook Execution: The useKanban custom hook captures the event.
+- **Server-Side/Worker:** Video compression is handled via FFmpeg to ensure optimized file sizes before persistence.
 
-3. Service Call: The hook invokes a method from the service layer.
+- **Persistence:** All optimized assets are piped to Supabase Storage, utilizing signed URLs for secure access.
 
-4. State Update: The service communicates with Firebase (Real-time DB); the UI updates optimistically, followed by a data sync.
+### Communication & Real-time Flow
 
-5. UI Feedback: notistack confirms the operation.
+- **Rich Text Engine:** A customized Slate.js implementation provides a modular editor experience, including emoji support and document serialization.
 
-### 4. Engineering Decisions
+- **Real-time Messaging:** Firestore Realtime DB listeners are encapsulated in a ChatProvider, handling message life-cycle, status updates, and auto-scroll events.
 
-- **Optimistic UI Updates:** The Kanban board updates the UI state immediately before the API call confirms persistence to ensure a native-like feel.
+### Security & Authentication
 
-- **Abstraction of Backend:** The service-based architecture ensures the UI is backend-agnostic, allowing for future-proofing or migration to other data sources.
+- **Auth Provider:** A centralized Firebase Auth context manages user sessions and Google/Email credentials.
 
-- **Atomic Design:** The component hierarchy (atom to organism) ensures that UI elements are highly reusable and modular.
+- **Guards:** Route protection is handled via AuthGuard (for session verification) and RoleGuard (for admin/client access control), ensuring that sensitive routes are only accessible to authorized roles.
 
-- **Scalability:** The structure allows team members to add features within specific folders without impacting global logic, facilitating easy migration to tools like Storybook for component documentation.
+### Responsive & Design Tokens
 
-### 6. Animations & Motion Design
+- **Tailwind Integration:** The design system is centralized in tailwind.config.ts, utilizing custom tokens for colors, shadows, and border-radius to ensure design consistency across the application.
 
-The application leverages advanced motion design to enhance user engagement and visual feedback:
+- **Mobile-First:** The useIsMobile custom hook enables device-aware UI rendering, ensuring the Kanban and support modules remain functional across mobile, tablet, and desktop viewports.
 
-- **Page Transitions:** Smooth entry/exit animations for routes, ensuring a seamless "Single Page Application" (SPA) feel.
+### Why these decisions were made
 
-- **Scroll-Triggered Motion:** Used for interactive storytelling, where elements animate from right-to-left as the user scrolls, improving content discoverability.
+- **Maintainability:** By using Atomic Design, we prevent the "component bloat" often found in large-scale React projects.
 
-- **Feedback Animations:** Fade and Show effects implemented for UI states (modals, tooltips, and alerts) to provide clear, non-jarring transitions.
+- **Performance:** Offloading media processing to client-side/FFmpeg minimizes bandwidth and storage costs.
 
-- **Implementation:** Developed using Framer Motion (or your animation library), focusing on hardware-accelerated transitions to ensure no impact on scroll performance or layout shift (CLS)
+- **Scalability:** RTK and the modular directory structure allow adding new features (e.g., Reports, Team settings) without refactoring the existing core.
 
-#### Maintained by **Omid Kianfar**
+#### Copyright © 2026 **Omid Kianfar**
