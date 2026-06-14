@@ -5,8 +5,8 @@ A professional, production-ready Project Management SaaS. Built with a highly **
 ## Features
 
 - **Advanced Kanban Board**: Custom drag-and-drop implementation with `dnd-kit` and custom collision sensors.
-- **Real-time Collaboration**: Integrated Firebase Realtime Database for instant messaging and live task updates.
-- **Multimedia Engine**: In-browser image/video compression, cropping (`react-easy-crop`), lightbox (`yet-another-react-lightbox`), and professional voice recording (`RecordRTC`/`WaveSurfer`).
+- **Real-time Collaboration**: Powered by `Firebase Realtime Database` for instant, live task updates and seamless synchronization across all clients.
+- **Multimedia Engine**: In-browser image/video compression, cropping (react-easy-crop), lightbox (yet-another-react-lightbox), and professional voice recording (RecordRTC/WaveSurfer).
 - **SaaS Subscription**: Full Stripe integration (monthly/yearly) with active user validation and role-based access control.
 - **Rich Experience**: Slate.js rich-text editor, Framer Motion animations, and Notistack feedback system.
 - **Responsive Design**: Mobile-first approach using custom `useMobile` hooks and dynamic navigation.
@@ -160,14 +160,14 @@ To ensure full functionality of the SaaS features, please follow these configura
 Create a `.env.local` file:
 
 ```env
-STRIPE_SECRET_KEY=YOUR_STRIPE_SECRET_KEY
-NEXT_PUBLIC_STRIPE_PUBLISHABLE=YOUR_STRIPE_PUBLISHABLE_KEY
+STRIPE_SECRET_KEY= Your stripe secret key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE= Your strip publishable key
 
-STRIPE_MONTHLY_PRICE_ID=YOUR_MONTHLY_PRICE_ID
-STRIPE_YEARLY_PRICE_ID=YOUR_YEARLY_PRICE_ID
+STRIPE_MONTHLY_PRICE_ID= Your monthly price id
+STRIPE_YEARLY_PRICE_ID= Your yearly price id
 
-NEXT_PUBLIC_SUPABASE_URL=YOUR_SUPABASE_URL
-NEXT_PUBLIC_SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY
+NEXT_PUBLIC_SUPABASE_URL= Your supabase URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY= Your supabase ANON key
 ```
 
 ### 4. Run development server
@@ -197,8 +197,8 @@ npm run test
 
 - **Senior-Level Architecture**: Demonstrates mastery of **Maintainable**, **Modular**, and **Editable** system design, ensuring long-term code health.
 
-- **Full-Stack Competence**: Mastery of integrating **Stripe** for SaaS, **Supabase** for secure storage, and **Firebase (Realtime Database/Auth)** for backend-as-a-service.
-- **Real-Time Mastery**: Proficient in managing complex live data synchronization via **Firebase Realtime Database** .
+- **Full-Stack Competence**: Mastery of integrating **Stripe** for SaaS, **Supabase** for secure storage, and **Firebase** for backend-as-a-service.
+- **Real-Time Mastery**: Proficient in managing complex live data synchronization via **Firebase Firestore & Realtime Database**, ensuring high-availability state without the overhead of custom socket servers.
 - **Quality-Driven Development**: Includes a strategic unit testing suite using **Jest** and **React Testing Library**, focused on mission-critical components like **Modals** and **Form Validation**.
 - **Modern Workflow**: Expertise in cutting-edge frontend tools including **Redux Toolkit**, **Framer Motion**, **Slate.js** for rich text, and **Type Inheritance** for scalable data models.
 - **Interview-Ready**: A polished, high-performance application that showcases deep knowledge of **Next.js 16** architecture and scalable UI component design.
