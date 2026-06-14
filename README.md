@@ -1,26 +1,45 @@
-# Mini Jira
+# Mini Jira: Enterprise-Grade Project Management SaaS
 
-A professional, production-ready Project Management SaaS. Built with a highly **Maintainable**, **Modular**, and **Editable** architecture.
+A production-ready, highly modular Project Management platform engineered for scalability. Built with a robust architecture that prioritizes maintainability, strict type safety, and real-time synchronization.
 
 ## Features
 
-- **Advanced Kanban Board**: Custom drag-and-drop implementation with `dnd-kit` and custom collision sensors.
-- **Real-time Collaboration**: Powered by `Firebase Realtime Database` for instant, live task updates and seamless synchronization across all clients.
-- **Multimedia Engine**: In-browser image/video compression, cropping (react-easy-crop), lightbox (yet-another-react-lightbox), and professional voice recording (RecordRTC/WaveSurfer).
-- **SaaS Subscription**: Full Stripe integration (monthly/yearly) with active user validation and role-based access control.
-- **Rich Experience**: Slate.js rich-text editor, Framer Motion animations, and Notistack feedback system.
-- **Responsive Design**: Mobile-first approach using custom `useMobile` hooks and dynamic navigation.
-  = **Dynamic Motion:** Advanced page transitions and scroll-triggered animations using Framer Motion for a premium, engaging UI experience.
+- **Real-time Kanban Engine:** High-fidelity drag-and-drop system via `@dnd-kit` with custom collision detection.
+
+- **Support & Communication Hub:** Full-featured real-time Support Chat using `Firestore`, utilizing `Slate.js` editor (with `emoji-mart`), voice recording (`RecordRTC`), file/video/image uploads, and automatic scroll-to-bottom.
+
+- **Advanced Media Pipeline:**
+  - **In-browser:** Image cropping, scaling, and compression capabilities.
+
+  - **Server-side:** Video compression and optimization using `@ffmpeg/ffmpeg`
+
+  - **Cloud Integration:** Secure file handling via `Supabase` storage with custom drag-and-drop uploader.
+
+- **SaaS Subscription Logic:** End-to-end `Stripe` integration (monthly/yearly), trial mode (10 days), and API-driven frontend flow for success/failed states.
+
+- **Role-Based Access Control (RBAC):** Distinct Client/Admin dashboards with dedicated layouts, Auth Guards, Role Guards, and active/deactive user management.
+
+- **Rich Text Experience:** Deeply customized `Slate.js` editor with plugins for document serialization and styling.
+
+- **Design System:** `Tailwind CSS` with custom configuration (colors, shadows, border-radius, typography) and `Framer Motion` for animations.
 
 ## Tech Stack
 
-- **Framework**: Next.js 16 (App Router), TypeScript.
-- **State Management**: Redux Toolkit (RTK).
-- **Database & Cloud**: Firebase (Real-time DB/Auth), Supabase (Storage)
-- **Forms**: React Hook Form with custom controllers & Yup validation.
-- **Editor**: Slate.js / Slate-react.
-- **Styling**: Tailwind CSS (Custom Design System).
-- **UI Utilities:** Swiper.js (for performant, touch-friendly sliders and carousels).
+- **Framework:** Next.js 16 (App Router), TypeScript, Next.js Font Optimization.
+
+- **State Management:** `Redux Toolkit` (RTK) for tasks, users, chats, and global search/filter states.
+
+- **Backend & Data:** `Firebase` (Auth, Firestore Realtime DB) + `Supabase` (Storage).
+
+- **Media Processing:** `FFmpeg` (Video), `react-easy-crop` (Image).
+
+- **Forms:** `react-hook-form` + `yup` (resolver) + `Jest/RTL` unit testing.
+
+- **Rich Text:** `Slate.js` with `emoji-mart` integration.
+
+- **UI/Styling:** `Tailwind CSS` (Custom Design System: Colors, Shadows, Border-Radius) + `Framer Motion.`
+
+- **Utilities:** `dayjs` (time), `swiper` (carousel), `notistack` (notifications), `yet-another-react-lightbox`.
 
 ## Screenshots
 
@@ -57,11 +76,17 @@ A professional, production-ready Project Management SaaS. Built with a highly **
 
 ## Engineering Highlights
 
-- **Maintainable & Modular**: Decoupled UI, logic, and API layers ensure the system is easy to scale and update.
-- **Highly Editable**: Fully isolated atoms (Buttons, Tables, Lists, Routes, Images, Videos, Pagination, Modals, File Uploader) designed for rapid customization.
-- **Performance**: Firestore aggregation, lazy-loaded components, and `react-spinners` for optimized UX.
-- **Type Safety**: Advanced **Type Inheritance** and custom utility scripts across the codebase.
-- **Motion Design:** High-performance, hardware-accelerated animations implemented with Framer Motion to ensure smooth interactions without impacting layout shift (CLS).
+- **Modular Architecture:** Strict adherence to `Atomic Design` (Atom, Molecule, Organism, Page) ensuring code reusability and maintainability.
+
+- **Advanced Type Safety:** Comprehensive TypeScript implementation for global error handling and schema consistency via interface inheritance.
+
+- **Performance:** Optimized media processing with `FFmpeg` and `lazy-loading` components.
+
+- **Responsive Engine:** Custom useIsMobile hook for context-aware UI logic.
+
+**Quality Assurance:** Full unit testing suite (`Jest` and `React Testing Library`) for forms, modals, and core utilities.
+
+- **Helper Utilities:** Dedicated logic for string-slicer (text truncation) and date-time-counter (unread messages).
 
 ## Project Structure
 
@@ -87,7 +112,7 @@ A professional, production-ready Project Management SaaS. Built with a highly **
     └── utils/          # Core utility functions, helpers, and shared business logic.
 ```
 
-## Installation
+## Setup & Installation
 
 ### 1. Clone the project
 
@@ -112,13 +137,13 @@ To ensure full functionality of the SaaS features, please follow these configura
 1. Stripe Integration
    Product Setup: In your Stripe Dashboard, create two products for the "Monthly" and "Yearly" subscription plans.
 
-- Price IDs: After creating the products, retrieve the Price ID for each and update your .env.local file with the corresponding STRIPE_MONTHLY_PRICE_ID and STRIPE_YEARLY_PRICE_ID.
+- Price IDs: After creating the products, retrieve the Price ID for each and update your .env.local file with the corresponding `STRIPE_MONTHLY_PRICE_ID` and `STRIPE_YEARLY_PRICE_ID`.
 
-- API Keys: Navigate to dashboard > settings > Developers > API keys to retrieve your Secret Key and Publishable Key, then add them to your environment variables.
+- API Keys: Navigate to dashboard > settings > Developers > API keys to retrieve your `Secret Key` and `Publishable Key`, then add them to your environment variables.
 
 - Products: Navigate to product catalog > Create Monthly and Yearly.
 
-- Find price click and copy and price id then add them to your environment variables.
+- Find price click and copy and `price id` then add them to your environment variables.
 
   <a target="_blank" href="https://docs.stripe.com/billing">
   Stripe Billing Docs
@@ -155,7 +180,7 @@ To ensure full functionality of the SaaS features, please follow these configura
 
 </div>
 
-- Credentials: Retrieve your SUPABASE_URL and SUPABASE_ANON_KEY from Project Settings > API and populate your .env.local file.
+- Credentials: Retrieve your `SUPABASE_URL` and `SUPABASE_ANON_KEY` from Project Settings > API and populate your .env.local file.
 
 Create a `.env.local` file:
 
@@ -185,23 +210,29 @@ yarn run dev
 - Jest
 - React Testing Library
 
-> The project includes unit testing using Jest and React Testing Library. Currently, tests focus on core UI components including Modals and React Hook Form (RHF) validation logic.
+> The project utilizes Jest and React Testing Library for robust unit testing, focusing on mission-critical components like Modals and RHF validation logic.
 
 ## Running Tests
 
 ```bash
 npm run test
+# or
+yarn run test
 ```
 
 ## Why This Project Is Valuable (For Recruiters)
 
-- **Senior-Level Architecture**: Demonstrates mastery of **Maintainable**, **Modular**, and **Editable** system design, ensuring long-term code health.
+- **Senior-Level Engineering:** Demonstrates capability in building complex pipelines (FFmpeg, image manipulation, real-time sync).
 
-- **Full-Stack Competence**: Mastery of integrating **Stripe** for SaaS, **Supabase** for secure storage, and **Firebase** for backend-as-a-service.
-- **Real-Time Mastery**: Proficient in managing complex live data synchronization via **Firebase Firestore & Realtime Database**, ensuring high-availability state without the overhead of custom socket servers.
-- **Quality-Driven Development**: Includes a strategic unit testing suite using **Jest** and **React Testing Library**, focused on mission-critical components like **Modals** and **Form Validation**.
-- **Modern Workflow**: Expertise in cutting-edge frontend tools including **Redux Toolkit**, **Framer Motion**, **Slate.js** for rich text, and **Type Inheritance** for scalable data models.
-- **Interview-Ready**: A polished, high-performance application that showcases deep knowledge of **Next.js 16** architecture and scalable UI component design.
+- **Full-Stack Competence:** Proven capability in managing the full user lifecycle: from Auth (Email/Google) and Subscription (Stripe API) to Admin Dashboards (RBAC).
+
+- **Production-Ready Quality:** Commitment to Test-Driven Development (Jest/RTL) and modular system design.
+
+- **Complex Feature Integration:** Built production-grade support systems, media pipelines, and RBAC-enabled dashboards from scratch.
+
+- **Test-Driven Development:** Proven commitment to code reliability through integration of Jest/RTL.
+
+- **Scalable Architecture:** Modular design ensures the project can expand and evolve in an enterprise environment. Designed for growth, using robust state management (RTK) and type-safe data models.
 
 ## Copyright
 
