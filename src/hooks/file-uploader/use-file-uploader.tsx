@@ -25,8 +25,8 @@ export function useFileUploader(options: FileUploaderOptions = {}) {
     maxSizeMB = 100,
   } = options;
 
-  const [progress, setProgress] = useState(0);
-  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState<number>(0);
+  const [uploading, setUploading] = useState<boolean>(false);
   const [url, setUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [realPath, setRealPath] = useState<string | null>(null);

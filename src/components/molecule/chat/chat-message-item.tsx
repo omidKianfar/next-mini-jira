@@ -27,7 +27,7 @@ const ChatMessageItem = ({
 }: ChatMessageItemProps) => {
   const { user } = useAuth();
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const isAdmin = message.senderId === 'admin';
 

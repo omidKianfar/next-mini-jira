@@ -17,7 +17,7 @@ const DragDropUploader = ({
 }: DragDropUploaderProps) => {
   const fileUploadRef = useRef<HTMLInputElement | null>(null);
 
-  const [isDragging, setIsDragging] = useState(false);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
 
   const openFilePicker = () => {
     fileUploadRef.current?.click();

@@ -49,7 +49,7 @@ export const authContext = createContext<AuthContextProps>({
 const AuthProvider = ({ children }: PropsWithChildren) => {
   const unsubDocRef = useRef<null | (() => void)>(null);
 
-  const [stepNumber, setStepNumber] = useState('0');
+  const [stepNumber, setStepNumber] = useState<string>('0');
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   useSetStepNumber({ setStepNumber });

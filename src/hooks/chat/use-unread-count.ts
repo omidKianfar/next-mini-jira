@@ -8,7 +8,7 @@ interface useUnreadCountProps {
 }
 
 export const useUnreadCount = ({ chatId, senderType }: useUnreadCountProps) => {
-  const [unreadCount, setUnreadCount] = useState(0);
+  const [unreadCount, setUnreadCount] = useState<number>(0);
 
   useEffect(() => {
     if (!chatId) {

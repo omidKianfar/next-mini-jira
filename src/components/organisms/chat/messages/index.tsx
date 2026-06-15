@@ -28,7 +28,7 @@ const ChatMessages = ({
   const endMessageRef = useRef<HTMLDivElement | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const [showScrollBtn, setShowScrollBtn] = useState(false);
+  const [showScrollBtn, setShowScrollBtn] = useState<boolean>(false);
 
   const pathname = usePathname();
 

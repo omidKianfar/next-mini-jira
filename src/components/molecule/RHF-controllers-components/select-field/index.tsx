@@ -18,7 +18,7 @@ const SelectField = <T extends FieldValues>({
     formState: { errors },
   } = useFormContext();
 
-  const [changeStatus, setChangeStatus] = useState(false);
+  const [changeStatus, setChangeStatus] = useState<boolean>(false);
 
   return (
     <div className={className}>

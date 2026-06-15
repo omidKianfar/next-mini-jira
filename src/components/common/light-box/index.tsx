@@ -9,7 +9,7 @@ interface LightBoxProps {
 }
 
 const LightBoxComponent = ({ children, url }: LightBoxProps) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <>

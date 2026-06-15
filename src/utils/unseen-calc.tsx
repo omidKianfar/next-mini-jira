@@ -11,7 +11,7 @@ interface UnSeenMessageCalcProps {
 dayjs.extend(durationPlugin);
 
 const UnSeenMessageCalc = ({ date }: UnSeenMessageCalcProps) => {
-  const [timeDiff, setTimeDiff] = useState('');
+  const [timeDiff, setTimeDiff] = useState<string>('');
 
   useEffect(() => {
     const calculateTimeDiff = () => {

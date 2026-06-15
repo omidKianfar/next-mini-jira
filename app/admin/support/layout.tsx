@@ -6,7 +6,7 @@ import EditorProviderComponent from '@/src/providers/editor-provider';
 import { PropsWithChildren, useState } from 'react';
 
 const DashboardLayout = ({ children }: PropsWithChildren) => {
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [showSidebar, setShowSidebar] = useState<boolean>(true);
 
   const isMobile = useIsMobile();
 

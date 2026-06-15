@@ -4,7 +4,7 @@ import { MyUserType } from '@/src/types/global';
 
 export const useUserListenerById = (userId: string | null) => {
   const [user, setUser] = useState<MyUserType | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (!userId) return;

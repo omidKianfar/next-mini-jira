@@ -20,8 +20,8 @@ const PaymentSuccessComponent = () => {
   useRequireActiveStatus();
 
   const [subscriptionId, setSubscriptionId] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [isFinishing, setIsFinishing] = useState(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [isFinishing, setIsFinishing] = useState<boolean>(false);
 
   const planType = params.get('planType');
   const sessionId = params.get('session_id');

@@ -15,7 +15,7 @@ const LandingDashboard = () => {
   const navigation = useNavigation();
   const { user, logout } = useAuth();
 
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState<boolean>(false);
 
   const goToDashboard = () => {
     user?.userType === UserType.Admin

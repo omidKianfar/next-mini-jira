@@ -23,7 +23,7 @@ const PlanComponent = () => {
 
   useRequireActiveStatus();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const now = dayjs();
 

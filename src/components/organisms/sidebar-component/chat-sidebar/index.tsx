@@ -19,7 +19,7 @@ const ChatSidebar = ({
 }: Pick<chatSidebarProps, 'setShowSidebar'>) => {
   const scrollContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const [showScrollBtn, setShowScrollBtn] = useState(false);
+  const [showScrollBtn, setShowScrollBtn] = useState<boolean>(false);
 
   const chats = useSelector((state: RootState) => state?.chats?.chats);
   const chatsFilters = useSelector((state: RootState) => state?.chatsFilters);

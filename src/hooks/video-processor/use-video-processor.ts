@@ -6,8 +6,8 @@ import { fetchFile, toBlobURL } from '@ffmpeg/util';
 
 export const useVideoProcessor = () => {
   const ffmpegRef = useRef<FFmpeg | null>(null);
-  const [isCompressing, setIsCompressing] = useState(false);
-  const [compressionProgress, setCompressionProgress] = useState(0);
+  const [isCompressing, setIsCompressing] = useState<boolean>(false);
+  const [compressionProgress, setCompressionProgress] = useState<number>(0);
 
   const cancelCompression = () => {
     if (ffmpegRef.current) {

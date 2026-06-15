@@ -6,7 +6,7 @@ import { MyUserType } from '@/src/types/global';
 export const useInfiniteUsers = (users: MyUserType[], batchSize = 10) => {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  const [cursor, setCursor] = useState(batchSize);
+  const [cursor, setCursor] = useState<number>(batchSize);
 
   const safeCursor = Math.min(cursor, users.length);
   const effectiveCursor = users.length === 0 ? 0 : safeCursor;

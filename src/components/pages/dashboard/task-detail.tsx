@@ -42,7 +42,7 @@ const TaskDetailComponent = () => {
   const [task, setTask] = useState<Task | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [deleting, setDeleting] = useState<boolean>(false);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const [modalCounter, setModalCounter] = useState<number>(0);
 
   const fetchTaskHandler = async () => {

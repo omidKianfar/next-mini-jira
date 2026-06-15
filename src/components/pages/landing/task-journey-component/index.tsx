@@ -8,8 +8,8 @@ import AnimatedStepCard from './animated-step-card';
 const TaskJourneyComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollingContainerRef = useRef<HTMLDivElement>(null);
-  const [isMounted, setIsMounted] = useState(false);
-  const [scrollRange, setScrollRange] = useState(0);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [scrollRange, setScrollRange] = useState<number>(0);
   const [scrollContainer, setScrollContainer] = useState<HTMLElement | null>(
     null
   );

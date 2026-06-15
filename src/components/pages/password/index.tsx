@@ -28,8 +28,8 @@ const PasswordComponent = () => {
   useRequireActiveStatus();
   useRequirePaymentStatus();
 
-  const [loading, setLoading] = useState(false);
-  const [passwordShow, setPasswordShow] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [passwordShow, setPasswordShow] = useState<boolean>(false);
 
   const isSignupPage = pathName.includes('/signup');
   const isProfilePage = pathName.includes('profile');

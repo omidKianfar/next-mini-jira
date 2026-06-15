@@ -5,7 +5,7 @@ import { stringSlicer } from '@/src/utils/string-slicer';
 
 const FontSelectComponent = () => {
   const { changeFontFamily, fontFamilyState } = useEditor();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const currentFont = fontFamilyOptions.find(

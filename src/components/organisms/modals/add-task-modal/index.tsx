@@ -21,7 +21,7 @@ const AddTaskUploadCmponent = lazy(() => import('./steps/upload'));
 const AddTask = ({ handleClose }: Pick<AddTaskProps, 'handleClose'>) => {
   const { user } = useAuth();
 
-  const isCancelledRef = useRef(false);
+  const isCancelledRef = useRef<boolean>(false);
 
   const { processImage } = useImageProcessor({ size: 1024 });
 
@@ -38,7 +38,7 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, 'handleClose'>) => {
     });
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [number, setNumber] = useState(0);
+  const [number, setNumber] = useState<number>(0);
 
   const methods = useForm<TaskForm>({
     defaultValues: {

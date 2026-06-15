@@ -51,7 +51,7 @@ const SlateEditor = ({
     resetEditor,
   } = useEditor();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSend = async () => {
     if (
