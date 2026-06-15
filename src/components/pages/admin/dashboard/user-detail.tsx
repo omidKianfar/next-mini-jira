@@ -66,13 +66,10 @@ const AdminUserDetailComponent = () => {
             variant: `${user?.isActive ? 'warning' : 'success'}`,
           }
         );
-      } catch (error) {
-        enqueueSnackbar(
-          `Error: ${error?.message || error}. Please try again.`,
-          {
-            variant: 'error',
-          }
-        );
+      } catch (error: any) {
+        enqueueSnackbar(`Error: ${error.message || error}. Please try again.`, {
+          variant: 'error',
+        });
       } finally {
         setLoading(false);
       }

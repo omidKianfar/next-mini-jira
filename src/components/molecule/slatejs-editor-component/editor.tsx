@@ -101,7 +101,7 @@ const SlateEditor = ({
     } catch (error: any) {
       setLoading(false);
 
-      enqueueSnackbar(`Error: ${error.message}`, { variant: 'error' });
+      enqueueSnackbar(`Error: ${error.message || error}`, { variant: 'error' });
     } finally {
       setLoading(false);
     }

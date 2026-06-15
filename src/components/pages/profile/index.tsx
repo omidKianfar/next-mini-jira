@@ -102,7 +102,7 @@ const ProfileComponent = () => {
       reset();
     } catch (error: any) {
       setServerError(
-        error?.message || 'Something went wrong. Please try again.'
+        error.message || 'Something went wrong. Please try again.'
       );
     } finally {
       setLoading(false);

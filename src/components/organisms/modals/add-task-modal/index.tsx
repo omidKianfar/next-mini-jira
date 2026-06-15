@@ -120,7 +120,7 @@ const AddTask = ({ handleClose }: Pick<AddTaskProps, 'handleClose'>) => {
       reset();
       handleClose();
     } catch (error: any) {
-      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+      enqueueSnackbar(`Error: ${error.message || error}. Please try again.`, {
         variant: 'error',
       });
       setLoading(false);
