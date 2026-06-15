@@ -34,7 +34,7 @@ const ProfileComponent = () => {
   const isMobile = useIsMobile();
   const navigation = useNavigation();
 
-  const { saveUserProfile, user, changeStep } = useAuth();
+  const { saveUserProfile, user, changeStep, terialMode } = useAuth();
   const { processImage } = useImageProcessor();
 
   const { progress, reset, upload, uploading } = useFileUploader({
@@ -44,8 +44,8 @@ const ProfileComponent = () => {
   useRequireActiveStatus();
   useRequirePaymentStatus();
 
-  const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
   const [serverError, setServerError] = useState<string | null>(null);
 
   const methods = useForm<ProfileProps>({
@@ -125,7 +125,12 @@ const ProfileComponent = () => {
   };
 
   const goPasswordHandler = () => navigation.changePassword();
-  const clickHandler = () => changeStep('0');
+
+  const clickHandler = async () => {
+    await terialMode({ userId: user?.userId as string });
+
+    changeStep('0');
+  };
 
   return (
     <FramerMotion>
