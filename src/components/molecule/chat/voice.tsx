@@ -50,7 +50,7 @@ const VoiceMenuComponent = ({ fileUploader }: UploadMenuComponentProps) => {
 
       reset();
     } catch (error: any) {
-      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+      enqueueSnackbar(`Error: ${error.message || error}. Please try again.`, {
         variant: 'error',
       });
     }

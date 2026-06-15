@@ -89,7 +89,7 @@ export const useAuthActions = ({
         }
       }
     } catch (error: any) {
-      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+      enqueueSnackbar(`Error: ${error.message || error}. Please try again.`, {
         variant: 'error',
       });
     } finally {
@@ -133,7 +133,7 @@ export const useAuthActions = ({
         return user;
       }
     } catch (error: any) {
-      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+      enqueueSnackbar(`Error: ${error.message || error}. Please try again.`, {
         variant: 'error',
       });
     } finally {
@@ -182,7 +182,7 @@ export const useAuthActions = ({
         navigation.dashboard();
       }
     } catch (error: any) {
-      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+      enqueueSnackbar(`Error: ${error.message || error}. Please try again.`, {
         variant: 'error',
       });
     } finally {
@@ -212,7 +212,7 @@ export const useAuthActions = ({
         changeStep('1');
       }
     } catch (error: any) {
-      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+      enqueueSnackbar(`Error: ${error.message || error}. Please try again.`, {
         variant: 'error',
       });
     }
@@ -304,7 +304,7 @@ export const useAuthActions = ({
         changeStep('2');
       }
     } catch (error: any) {
-      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+      enqueueSnackbar(`Error: ${error.message || error}. Please try again.`, {
         variant: 'error',
       });
     }
@@ -325,7 +325,7 @@ export const useAuthActions = ({
       changeStep('0');
       navigation.dashboard();
     } catch (error: any) {
-      enqueueSnackbar(`Error: ${error?.message || error}. Please try again.`, {
+      enqueueSnackbar(`Error: ${error.message || error}. Please try again.`, {
         variant: 'error',
       });
     }
