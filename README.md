@@ -84,7 +84,7 @@ A production-ready, highly modular Project Management platform engineered for sc
 
 - **Responsive Engine:** Custom useIsMobile hook for context-aware UI logic.
 
-**Quality Assurance:** Full unit testing suite (`Jest` and `React Testing Library`) for forms, modals, and core utilities.
+- **Quality Assurance:** Full unit testing suite (`Jest` and `React Testing Library`) for forms, modals, and core utilities.
 
 - **Helper Utilities:** Dedicated logic for string-slicer (text truncation) and date-time-counter (unread messages).
 
@@ -226,11 +226,9 @@ yarn run test
 
 - **Full-Stack Competence:** Proven capability in managing the full user lifecycle: from Auth (Email/Google) and Subscription (Stripe API) to Admin Dashboards (RBAC).
 
-- **Production-Ready Quality:** Commitment to Test-Driven Development (Jest/RTL) and modular system design.
+- **Production-Ready Quality:** Commitment to Test-Driven Development (Jest/RTL) and modular system design..
 
 - **Complex Feature Integration:** Built production-grade support systems, media pipelines, and RBAC-enabled dashboards from scratch.
-
-- **Test-Driven Development:** Proven commitment to code reliability through integration of Jest/RTL.
 
 - **Scalable Architecture:** Modular design ensures the project can expand and evolve in an enterprise environment. Designed for growth, using robust state management (RTK) and type-safe data models.
 
