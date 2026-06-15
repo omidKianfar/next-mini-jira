@@ -32,8 +32,8 @@ const Step2 = ({ user, setUser, setStep, handleClose }: Step2Props) => {
             variant: `${user?.isActive ? 'warning' : 'success'}`,
           }
         );
-      } catch (error) {
-        enqueueSnackbar(`Error: ${error.message || error}. Please try again.`, {
+      } catch (error: any) {
+        enqueueSnackbar(`Error: ${error.message}. Please try again.`, {
           variant: 'error',
         });
       } finally {
