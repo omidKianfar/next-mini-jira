@@ -25,6 +25,7 @@ export const listenToUserById = (
       userType: profile.userType ?? UserType.Client,
       isActive: profile.isActive ?? true,
       createdAt: profile.createdAt ?? null,
+      isGuest: profile.isGuest ?? false,
       payment: {
         isPaid: profile?.payment?.isPaid ?? false,
         freeTrialEnabled: profile?.payment?.freeTrialEnabled ?? false,

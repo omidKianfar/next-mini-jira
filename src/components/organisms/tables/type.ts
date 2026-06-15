@@ -1,4 +1,5 @@
 import { MyUserType } from '@/src/types/global';
+import { Dispatch, SetStateAction } from 'react';
 
 type CellContent<T> =
   | string
@@ -21,7 +22,8 @@ type TableProps<T> = {
 interface UsersTableProps {
   users: MyUserType[];
   goDetail: (userId: string) => void;
-  toggleActive: (user: MyUserType) => Promise<void>;
+  setUser: Dispatch<SetStateAction<MyUserType | null>>;
+  handleOpenModal: () => void;
 }
 
 export type { CellContent, Column, TableProps, UsersTableProps };

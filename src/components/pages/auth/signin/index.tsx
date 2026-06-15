@@ -22,8 +22,8 @@ const AuthComponent = () => {
   const isMobile = useIsMobile();
   const { signinWithEmail, signupWithEmail, googleSignin } = useAuth();
 
-  const [loading, setLoading] = useState(false);
-  const [passwordShow, setPasswordShow] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [passwordShow, setPasswordShow] = useState<boolean>(false);
 
   const methods = useForm<FormValues>({
     defaultValues: { email: '', password: '' },
@@ -55,6 +55,19 @@ const AuthComponent = () => {
 
     try {
       await googleSignin();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGuestLogin = async () => {
+    setLoading(true);
+
+    try {
+      await signinWithEmail({
+        email: process.env.NEXT_PUBLIC_ADMIN_GUEST_EMAIL as string,
+        password: process.env.NEXT_PUBLIC_ADMIN_GUEST_USER_PASSWORD as string,
+      });
     } finally {
       setLoading(false);
     }
@@ -141,28 +154,44 @@ const AuthComponent = () => {
                   {pathname.includes('signin') ? 'Sign In' : 'Sign Up'}
                 </ButtonNext>
               </div>
+
+              {pathname.includes('signin') && (
+                <div className="flex items-center justify-center border-t border-gray-100 pt-8">
+                  <ButtonFreeClass
+                    type="button"
+                    onClick={handleGuestLogin}
+                    isLoading={loading}
+                    className="text-label font-semibold text-gray-400 transition-colors hover:text-success-500"
+                    icon={<MyIcon icon="user" className="ml-1 text-subtitle" />}
+                  >
+                    Sign in as a admin guest
+                  </ButtonFreeClass>
+                </div>
+              )}
             </form>
           </FormProvider>
 
-          <div className="mt-8 flex justify-center border-t border-gray-100 pt-8">
-            <ButtonFreeClass
-              icon={
-                <MyIcon
-                  icon="arrow-right"
-                  className="translate-y-[1px] transform text-body"
-                />
-              }
-              onClick={() =>
-                pathname.includes('signin')
-                  ? navigation.signup()
-                  : navigation.signin()
-              }
-              className="flex items-center gap-1 text-label font-semibold text-warning-500 hover:text-warning-600"
-            >
-              {pathname.includes('signin')
-                ? "Don't have an account? Sign Up"
-                : 'Already have an account? Sign In'}
-            </ButtonFreeClass>
+          <div className="mt-8 w-full border-t border-gray-100 pt-8">
+            <div className="flex items-center justify-center">
+              <ButtonFreeClass
+                icon={
+                  <MyIcon
+                    icon="arrow-right"
+                    className="translate-y-[1px] transform text-body"
+                  />
+                }
+                onClick={() =>
+                  pathname.includes('signin')
+                    ? navigation.signup()
+                    : navigation.signin()
+                }
+                className="flex items-center gap-1 text-label font-semibold text-warning-500 hover:text-warning-600"
+              >
+                {pathname.includes('signin')
+                  ? "Don't have an account? Sign Up"
+                  : 'Already have an account? Sign In'}
+              </ButtonFreeClass>
+            </div>
           </div>
         </div>
       </div>

@@ -1,21 +1,30 @@
 'use client';
 
+import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import dayjs from 'dayjs';
+import { enqueueSnackbar } from 'notistack';
+import { useAuth } from '@/src/hooks/auth/use-auth';
 import { useNavigation } from '@/src/hooks/navigation/use-navigation';
 import { useUserListenerById } from '@/src/hooks/users/use-user-listener-by-id';
 import { updateFirestoreUser } from '@/src/libs/auth/update-user';
 import ButtonBack from '@/src/components/atom/buttons-component/button-back';
-import ButtonNext from '@/src/components/atom/buttons-component/button-next';
 import MyImage from '@/src/components/atom/image-components';
 import PageLoading from '@/src/components/common/page-loading';
+import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free-class';
+import ModalContainer from '@/src/components/common/modal-container';
+import ModalBoxComponent from '@/src/components/molecule/modal-box';
 
 const AdminUserDetailComponent = () => {
   const navigation = useNavigation();
   const params = useSearchParams();
   const userId = params.get('userId');
+  const { user: currentUser } = useAuth();
 
-  const { user, loading } = useUserListenerById(userId);
+  const { user, loading: useLoading } = useUserListenerById(userId);
+
+  const [open, setOpen] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const now = dayjs();
 
@@ -29,13 +38,48 @@ const AdminUserDetailComponent = () => {
     navigation.adminDashboard();
   };
 
-  const toggleActive = async () => {
-    await updateFirestoreUser(userId as string, {
-      isActive: !user?.isActive,
-    });
+  const handleOpenModal = () => {
+    setOpen(true);
   };
 
-  if (loading || !user) return <PageLoading />;
+  const handleCloseModal = () => {
+    setOpen(false);
+  };
+
+  const toggleActive = async () => {
+    if (currentUser?.isGuest) {
+      enqueueSnackbar(`You can't do it. you are a guest admin`, {
+        variant: 'warning',
+      });
+    } else {
+      setLoading(true);
+
+      try {
+        await updateFirestoreUser(user?.userId as string, {
+          isActive: !user?.isActive,
+        });
+
+        handleCloseModal();
+        enqueueSnackbar(
+          `Change status user ${user?.userName ? user.userName : user?.email} to ${user?.isActive ? 'Deactive' : 'Active'}`,
+          {
+            variant: `${user?.isActive ? 'warning' : 'success'}`,
+          }
+        );
+      } catch (error) {
+        enqueueSnackbar(
+          `Error: ${error?.message || error}. Please try again.`,
+          {
+            variant: 'error',
+          }
+        );
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  if (useLoading || !user) return <PageLoading />;
 
   return (
     <div className="flex h-full w-full items-center justify-center p-4">
@@ -132,15 +176,27 @@ const AdminUserDetailComponent = () => {
           </div>
 
           <div className="flex items-center justify-end">
-            <ButtonNext
-              onClick={toggleActive}
-              className="w-full min-w-[140px] lg:w-auto"
+            <ButtonFreeClass
+              onClick={handleOpenModal}
+              className={`w-full min-w-[140px] rounded-sm border-2 bg-white py-2 hover:text-white lg:w-[180px] ${user.isActive ? 'border-success-500 text-success-500 hover:bg-success-500' : 'border-warning-500 text-warning-500 hover:bg-warning-500'}`}
             >
               {user.isActive ? 'Deactivated User' : 'Activated User'}
-            </ButtonNext>
+            </ButtonFreeClass>
           </div>
         </div>
       </div>
+
+      <ModalContainer open={open} handleClose={handleCloseModal}>
+        <ModalBoxComponent
+          handleClose={handleCloseModal}
+          clickHandler={toggleActive}
+          title={'Are you shure to change user status'}
+          description={` ${user?.userName ? user.userName : user?.email} is ${user?.isActive ? 'Active' : 'Deactive'}`}
+          isActive
+          user={user}
+          loading={loading}
+        />
+      </ModalContainer>
     </div>
   );
 };

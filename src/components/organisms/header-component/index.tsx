@@ -12,7 +12,7 @@ import { HeaderProps } from '@/src/types/global';
 const AddTask = lazy(() => import('../modals/add-task-modal'));
 const SearchTasks = lazy(() => import('../modals/serach-modals/search-tasks'));
 const FilterTask = lazy(() => import('../modals/filter-modals/tasks'));
-const SearchUsers = lazy(() => import('../modals/serach-modals/serach-users'));
+const SearchUsers = lazy(() => import('../modals/serach-modals/user'));
 const FilterUsers = lazy(() => import('../modals/filter-modals/users'));
 const SearchSupportChats = lazy(
   () => import('../modals/serach-modals/search-support-chats')

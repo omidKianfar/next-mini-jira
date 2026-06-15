@@ -18,6 +18,7 @@ type MyUserType = {
   userName: string | null;
   birthday: string | null;
   createdAt: string | null;
+  isGuest: boolean;
   payment: {
     isPaid: boolean | null;
     freeTrialEnabled: boolean | null;

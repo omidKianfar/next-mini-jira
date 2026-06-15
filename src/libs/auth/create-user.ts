@@ -13,6 +13,7 @@ export const createUserDocument = async (user: User): Promise<MyUserType> => {
     isActive: true,
     photo: null,
     birthday: null,
+    isGuest: false,
     createdAt: dayjs().format('YYYY-MM-DD'),
     payment: {
       isPaid: null,

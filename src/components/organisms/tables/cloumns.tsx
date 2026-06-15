@@ -6,9 +6,10 @@ import { MyUserType } from '@/src/types/global';
 import { UsersTableProps } from './type';
 
 export const Cloumns = ({
-  toggleActive,
+  setUser,
+  handleOpenModal,
   goDetail,
-}: Pick<UsersTableProps, 'goDetail' | 'toggleActive'>) => {
+}: Pick<UsersTableProps, 'goDetail' | 'setUser' | 'handleOpenModal'>) => {
   const columns = [
     {
       head: <span className="text-gray-700">Username</span>,
@@ -64,7 +65,10 @@ export const Cloumns = ({
             <MyIcon
               icon="user"
               iconClass={`cursor-pointer text-h3 ${user.isActive ? 'text-success-500' : 'text-warning-500'}`}
-              onClick={() => toggleActive(user)}
+              onClick={() => {
+                setUser(user);
+                handleOpenModal();
+              }}
             />
           </div>
         </div>
@@ -77,7 +81,7 @@ export const Cloumns = ({
         <div className="flex items-center justify-end">
           <MyIcon
             icon="arrow-enter"
-            iconClass="cursor-pointer text-h2 text-warning-400 hover:text-warning-500"
+            iconClass="cursor-pointer text-h2 text-primary-400 hover:text-primary-500"
             onClick={() => goDetail(user.userId)}
           />
         </div>

@@ -1,5 +1,6 @@
 'use client';
 
+import { Dispatch, SetStateAction } from 'react';
 import { useInfiniteUsers } from '@/src/hooks/users/use-infinity-users';
 import LoadingCircle from '../../atom/loadings/loading-circle';
 import ListComponent from '../list-component';
@@ -10,10 +11,16 @@ import { MyUserType } from '@/src/types/global';
 interface UsersListProps {
   users: MyUserType[];
   goDetail: (userId: string) => void;
-  toggleActive: (user: MyUserType) => Promise<void>;
+  setUser: Dispatch<SetStateAction<MyUserType | null>>;
+  handleOpenModal: () => void;
 }
 
-const UserListCard = ({ users, goDetail, toggleActive }: UsersListProps) => {
+const UserListCard = ({
+  users,
+  goDetail,
+  setUser,
+  handleOpenModal,
+}: UsersListProps) => {
   const { visibleUsers, loaderRef, hasMore } = useInfiniteUsers(users, 10);
 
   if (!users)
@@ -40,7 +47,10 @@ const UserListCard = ({ users, goDetail, toggleActive }: UsersListProps) => {
               <MyIcon
                 icon="user"
                 iconClass={`cursor-pointer text-title ${user.isActive ? 'text-success-500' : 'text-warning-500'}`}
-                onClick={() => toggleActive(user)}
+                onClick={() => {
+                  setUser(user);
+                  handleOpenModal();
+                }}
               />
             </div>
           </div>

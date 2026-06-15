@@ -5,9 +5,14 @@ import PaginationComponent from '../../molecule/pagination-component';
 import { Cloumns } from './cloumns';
 import { UsersTableProps } from './type';
 
-const UsersTable = ({ users, goDetail, toggleActive }: UsersTableProps) => {
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
+const UsersTable = ({
+  users,
+  goDetail,
+  handleOpenModal,
+  setUser,
+}: UsersTableProps) => {
+  const [page, setPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(5);
 
   const totalPages = Math.max(1, Math.ceil(users.length / pageSize));
   const safePage = Math.min(page, totalPages);
@@ -16,7 +21,7 @@ const UsersTable = ({ users, goDetail, toggleActive }: UsersTableProps) => {
     safePage * pageSize
   );
 
-  const columns = Cloumns({ goDetail, toggleActive });
+  const columns = Cloumns({ goDetail, handleOpenModal, setUser });
 
   if (!users)
     return (
