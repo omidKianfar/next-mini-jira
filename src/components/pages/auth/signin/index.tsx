@@ -161,7 +161,8 @@ const AuthComponent = () => {
                     type="button"
                     onClick={handleGuestLogin}
                     isLoading={loading}
-                    className="text-label font-semibold text-gray-400 transition-colors hover:text-success-500"
+                    disable={loading}
+                    className="text-label font-semibold text-gray-400 transition-colors hover:text-success-500 disabled:text-gray-400"
                     icon={<MyIcon icon="user" className="ml-1 text-subtitle" />}
                   >
                     Sign in as a admin guest
