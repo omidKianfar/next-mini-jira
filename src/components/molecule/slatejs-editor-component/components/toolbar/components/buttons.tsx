@@ -1,16 +1,13 @@
 import { MarkButton } from '../helper/mark-button';
 import { BlockButton } from '../helper/block-button';
-import { BlockTypeSelect } from '../helper/block-type-select';
 import MyIcon from '@/src/components/atom/icon-components';
 
 const ToolbarButtonsComponents = () => {
   return (
     <>
-      <BlockTypeSelect />
-
       <MarkButton
         format="bold"
-        icon={<MyIcon icon="bold" className="text-bodySm" />}
+        icon={<MyIcon icon="bold" className="text-body" />}
       />
       <MarkButton
         format="italic"

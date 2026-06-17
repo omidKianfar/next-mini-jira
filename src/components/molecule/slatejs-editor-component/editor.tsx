@@ -52,6 +52,7 @@ const SlateEditor = ({
   } = useEditor();
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [showExtraTools, setShowExtraTools] = useState(false);
 
   const handleSend = async () => {
     if (
@@ -127,7 +128,12 @@ const SlateEditor = ({
       }}
     >
       <div className="relative h-full w-full">
-        <ToolbarComponent handleSend={handleSend} loading={loading} />
+        <ToolbarComponent
+          handleSend={handleSend}
+          loading={loading}
+          showExtraTools={showExtraTools}
+          setShowExtraTools={setShowExtraTools}
+        />
 
         <Editable
           renderElement={renderElement}
@@ -135,9 +141,9 @@ const SlateEditor = ({
           placeholder="Enter your message"
           spellCheck
           autoFocus
-          className="h-[90px] w-full overflow-y-auto overflow-x-hidden rounded-b-lg bg-white p-4 focus:outline-none lg:h-[170px]"
+          className={`${showExtraTools ? 'h-[150px]' : 'h-[180px]'} w-full overflow-y-auto overflow-x-hidden rounded-b-lg bg-white p-4 focus:outline-none lg:h-[175px]`}
           onKeyDown={(event) => {
-            if (isHotkey('mod+enter', event)) {
+            if (isHotkey('shift+enter', event)) {
               event.preventDefault();
 
               Editor.insertBreak(editor);
@@ -164,7 +170,7 @@ const SlateEditor = ({
 
         {editorOutput === '<p></p>' && (
           <div className="absolute bottom-2 left-0 pl-2 text-caption text-gray-400 lg:text-bodySm">
-            Press <strong>CTRL + Enter</strong> to add a new line, or{' '}
+            Press <strong>Shift + Enter</strong> to add a new line, or{' '}
             <strong>Enter</strong> to send.
           </div>
         )}

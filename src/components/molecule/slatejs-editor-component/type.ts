@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import { BaseEditor } from 'slate';
 import { ReactEditor } from 'slate-react';
 
@@ -58,6 +59,8 @@ const BLOCK_TYPES: { format: BlockFormat; name: string }[] = [
 export interface ToolbarComponentProps {
   handleSend?: () => void;
   loading?: boolean;
+  showExtraTools?: boolean;
+  setShowExtraTools?: Dispatch<SetStateAction<boolean>>;
 }
 
 export type { BlockFormat, MarkFormat, AlignFormat, CustomElement, CustomText };
