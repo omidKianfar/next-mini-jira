@@ -44,7 +44,10 @@ const ToolbarComponent = ({
               </button>
             )}
           </div>
-          <SendMessage handleSend={handleSend} loading={loading} />
+
+          {!isMobile && (
+            <SendMessage handleSend={handleSend} loading={loading} />
+          )}
         </div>
 
         {showExtraTools && isMobile && (
