@@ -4,14 +4,16 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/src/hooks/auth/use-auth';
 import { useUnreadCount } from '@/src/hooks/chat/use-unread-count';
-import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 import { AdminUnreadMeassesListener } from '@/src/libs/chat/admin-unread-messages-count';
 import { HeaderProps, UserType } from '@/src/types/global';
 import MyIcon from '../../atom/icon-components';
 
-const LeftSideHeaders = ({ showSidebar, setShowSidebar }: HeaderProps) => {
+const LeftSideHeaders = ({
+  showSidebar,
+  setShowSidebar,
+  menuRef,
+}: HeaderProps) => {
   const pathname = usePathname();
-  const isMobile = useIsMobile();
   const { user } = useAuth();
 
   const userUnreadCount = useUnreadCount({
@@ -55,6 +57,7 @@ const LeftSideHeaders = ({ showSidebar, setShowSidebar }: HeaderProps) => {
 
       <div
         className={`${isPublicPage ? 'lg:hidden' : 'flex'} flex items-center`}
+        ref={menuRef}
       >
         <MyIcon
           icon="menu"

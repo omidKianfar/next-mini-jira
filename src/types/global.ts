@@ -226,6 +226,7 @@ type ChatsType = {
 interface HeaderProps {
   showSidebar?: boolean;
   setShowSidebar?: Dispatch<SetStateAction<boolean>>;
+  menuRef?: React.RefObject<HTMLDivElement> | null;
 }
 
 interface chatSidebarProps extends HeaderProps, ModalProps {

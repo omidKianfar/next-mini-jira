@@ -7,26 +7,30 @@ import UserSidebar from './user-sidebar';
 import UserProfile from './user-profile';
 import { HeaderProps } from '@/src/types/global';
 
-const SideBar = ({ showSidebar, setShowSidebar }: HeaderProps) => {
+const SideBar = ({ showSidebar, setShowSidebar, menuRef }: HeaderProps) => {
   const { user } = useAuth();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        showSidebar &&
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+      if (!showSidebar) return;
+
+      const isClickInsideSidebar = dropdownRef.current?.contains(
+        event.target as Node
+      );
+      const isClickInsideMenu = menuRef?.current?.contains(
+        event.target as Node
+      );
+
+      if (showSidebar && !isClickInsideSidebar && !isClickInsideMenu) {
         setShowSidebar?.(false);
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [showSidebar, setShowSidebar]);
+  }, [showSidebar, setShowSidebar, menuRef]);
 
   return (
     <motion.div

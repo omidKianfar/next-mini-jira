@@ -19,7 +19,7 @@ const SearchSupportChats = lazy(
 );
 const FilterChats = lazy(() => import('../modals/filter-modals/chats'));
 
-const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
+const Header = ({ showSidebar, setShowSidebar, menuRef }: HeaderProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const [modalCounter, setModalCounter] = useState<number>(0);
 
@@ -59,6 +59,7 @@ const Header = ({ showSidebar, setShowSidebar }: HeaderProps) => {
         <LeftSideHeaders
           showSidebar={showSidebar}
           setShowSidebar={setShowSidebar}
+          menuRef={menuRef}
         />
 
         <div className="flex w-1/3 items-center justify-center">
