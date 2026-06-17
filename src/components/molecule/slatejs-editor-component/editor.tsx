@@ -15,6 +15,7 @@ import { Serialize } from './components/serialize';
 import { HOTKEYS } from './data';
 import { MyUserType, UserType } from '@/src/types/global';
 import { MarkFormat } from './type';
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 
 const initialValue: Descendant[] = [
   {
@@ -38,6 +39,8 @@ const SlateEditor = ({
 }: SlateEditorProps) => {
   const params = useSearchParams();
   const reciverId = params.get('chatId');
+
+  const isMobile = useIsMobile();
 
   const { user: currentUser } = useAuth();
   const { user: userChat } = useUserListenerById(reciverId);
@@ -157,10 +160,10 @@ const SlateEditor = ({
           }}
         />
 
-        {editorOutput === '<p></p>' && (
+        {!isMobile && editorOutput === '<p></p>' && (
           <div className="absolute bottom-2 left-0 pl-2 text-caption text-gray-400 lg:text-bodySm">
-            Press <strong>Shift + Enter</strong> to add a new line, or{' '}
-            <strong>Enter</strong> to send.
+            Press <strong>Shift + Enter</strong> to add a new line, or
+            <strong className="ml-1">Enter</strong> to send.
           </div>
         )}
       </div>

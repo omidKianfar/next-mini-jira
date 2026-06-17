@@ -20,20 +20,23 @@ const ToolbarButtonsComponents = () => {
         format="underline"
         icon={<MyIcon icon="under-line" className="text-subtitle" />}
       />
-      <MarkButton
-        format="code"
-        icon={<MyIcon icon="code" className="text-subtitle" />}
-      />
-      <BlockButton
-        format="numberedList"
-        icon={<MyIcon icon="number-list" className="text-subtitle" />}
-      />
-      <BlockButton
-        format="bulletedList"
-        icon={<MyIcon icon="bullet-list" className="text-subtitle" />}
-      />
+
       {!isMobile && (
         <>
+          <MarkButton
+            format="code"
+            icon={<MyIcon icon="code" className="text-subtitle" />}
+          />
+
+          <BlockButton
+            format="numberedList"
+            icon={<MyIcon icon="number-list" className="text-subtitle" />}
+          />
+          <BlockButton
+            format="bulletedList"
+            icon={<MyIcon icon="bullet-list" className="text-subtitle" />}
+          />
+
           <BlockButton
             format="left"
             icon={<MyIcon icon="align-left" className="text-subtitle" />}
