@@ -1,13 +1,16 @@
+import { useIsMobile } from '@/src/hooks/mobile-size/use-is-mobile';
 import { MarkButton } from '../helper/mark-button';
 import { BlockButton } from '../helper/block-button';
 import MyIcon from '@/src/components/atom/icon-components';
 
 const ToolbarButtonsComponents = () => {
+  const isMobile = useIsMobile();
+
   return (
     <>
       <MarkButton
         format="bold"
-        icon={<MyIcon icon="bold" className="text-body" />}
+        icon={<MyIcon icon="bold" className="text-bodySm" />}
       />
       <MarkButton
         format="italic"
@@ -29,18 +32,22 @@ const ToolbarButtonsComponents = () => {
         format="bulletedList"
         icon={<MyIcon icon="bullet-list" className="text-subtitle" />}
       />
-      <BlockButton
-        format="left"
-        icon={<MyIcon icon="align-left" className="text-subtitle" />}
-      />
-      <BlockButton
-        format="center"
-        icon={<MyIcon icon="align-center" className="text-subtitle" />}
-      />
-      <BlockButton
-        format="right"
-        icon={<MyIcon icon="align-right" className="text-subtitle" />}
-      />
+      {!isMobile && (
+        <>
+          <BlockButton
+            format="left"
+            icon={<MyIcon icon="align-left" className="text-subtitle" />}
+          />
+          <BlockButton
+            format="center"
+            icon={<MyIcon icon="align-center" className="text-subtitle" />}
+          />
+          <BlockButton
+            format="right"
+            icon={<MyIcon icon="align-right" className="text-subtitle" />}
+          />
+        </>
+      )}
     </>
   );
 };

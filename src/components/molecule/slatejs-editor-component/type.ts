@@ -59,8 +59,6 @@ const BLOCK_TYPES: { format: BlockFormat; name: string }[] = [
 export interface ToolbarComponentProps {
   handleSend?: () => void;
   loading?: boolean;
-  showExtraTools?: boolean;
-  setShowExtraTools?: Dispatch<SetStateAction<boolean>>;
 }
 
 export type { BlockFormat, MarkFormat, AlignFormat, CustomElement, CustomText };

@@ -52,7 +52,6 @@ const SlateEditor = ({
   } = useEditor();
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [showExtraTools, setShowExtraTools] = useState(false);
 
   const handleSend = async () => {
     if (
@@ -128,12 +127,7 @@ const SlateEditor = ({
       }}
     >
       <div className="relative h-full w-full">
-        <ToolbarComponent
-          handleSend={handleSend}
-          loading={loading}
-          showExtraTools={showExtraTools}
-          setShowExtraTools={setShowExtraTools}
-        />
+        <ToolbarComponent handleSend={handleSend} loading={loading} />
 
         <Editable
           renderElement={renderElement}
@@ -141,7 +135,7 @@ const SlateEditor = ({
           placeholder="Enter your message"
           spellCheck
           autoFocus
-          className={`${showExtraTools ? 'h-[150px]' : 'h-[180px]'} w-full overflow-y-auto overflow-x-hidden rounded-b-lg bg-white p-4 focus:outline-none lg:h-[175px]`}
+          className="h-[200px] w-full overflow-y-auto overflow-x-hidden rounded-b-lg bg-white p-4 focus:outline-none lg:h-[175px]"
           onKeyDown={(event) => {
             if (isHotkey('shift+enter', event)) {
               event.preventDefault();

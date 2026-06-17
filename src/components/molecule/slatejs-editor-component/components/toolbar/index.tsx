@@ -6,14 +6,10 @@ import ColorSelectComponent from './components/color-select';
 import FontSelectComponent from './components/font-select';
 import BGColorSelectComponent from './components/background-color-select';
 import { Toolbar } from '../helpers/toolbar';
+import { BlockTypeSelect } from './helper/block-type-select';
 import { ToolbarComponentProps } from '../../type';
 
-const ToolbarComponent = ({
-  handleSend,
-  loading,
-  setShowExtraTools,
-  showExtraTools,
-}: ToolbarComponentProps) => {
+const ToolbarComponent = ({ handleSend, loading }: ToolbarComponentProps) => {
   const isMobile = useIsMobile();
 
   return (
@@ -29,34 +25,16 @@ const ToolbarComponent = ({
                   <EmojiComponent />
                 </div>
 
+                <BlockTypeSelect />
                 <FontSelectComponent />
                 <ColorSelectComponent />
                 <BGColorSelectComponent />
               </>
             )}
-
-            {isMobile && (
-              <button
-                onClick={() => setShowExtraTools?.(!showExtraTools)}
-                className="p-2 text-gray-500"
-              >
-                ...
-              </button>
-            )}
           </div>
 
-          {!isMobile && (
-            <SendMessage handleSend={handleSend} loading={loading} />
-          )}
+          <SendMessage handleSend={handleSend} loading={loading} />
         </div>
-
-        {showExtraTools && isMobile && (
-          <div className="flex flex-wrap gap-2 pb-2">
-            <FontSelectComponent />
-            <ColorSelectComponent />
-            <BGColorSelectComponent />
-          </div>
-        )}
       </div>
     </Toolbar>
   );
