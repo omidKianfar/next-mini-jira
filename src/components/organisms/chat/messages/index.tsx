@@ -119,14 +119,14 @@ const ChatMessages = ({
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="absolute left-[45%] top-[24px] z-50 lg:left-[48%]"
+            className="absolute left-[43%] top-[-20px] z-50 lg:left-[48%] lg:top-[24px]"
           >
             <ButtonFreeClass
               onClick={scrollToBottom}
               icon={
                 <MyIcon
                   icon="scroll-down"
-                  className="rounded-full text-h2 text-primary-500 shadow-sm hover:text-primary-700"
+                  className="rounded-full text-h3 text-primary-500 shadow-sm hover:text-primary-700 lg:text-h2"
                 />
               }
             />
