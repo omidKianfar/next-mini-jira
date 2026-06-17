@@ -15,13 +15,13 @@ const HomePage = () => {
       <Header
         showSidebar={showSidebar}
         setShowSidebar={setShowSidebar}
-        menuRef={menuRef}
+        menuRef={menuRef as React.RefObject<HTMLDivElement>}
       />
 
       <SideBar
         showSidebar={showSidebar}
         setShowSidebar={setShowSidebar}
-        menuRef={menuRef}
+        menuRef={menuRef as React.RefObject<HTMLDivElement>}
       />
 
       <HomeComponent />

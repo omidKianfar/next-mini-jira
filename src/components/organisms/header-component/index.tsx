@@ -59,7 +59,7 @@ const Header = ({ showSidebar, setShowSidebar, menuRef }: HeaderProps) => {
         <LeftSideHeaders
           showSidebar={showSidebar}
           setShowSidebar={setShowSidebar}
-          menuRef={menuRef}
+          menuRef={menuRef as React.RefObject<HTMLDivElement>}
         />
 
         <div className="flex w-1/3 items-center justify-center">
