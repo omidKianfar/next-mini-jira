@@ -8,7 +8,8 @@ import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free
 import MyIcon from '@/src/components/atom/icon-components';
 import PageLoading from '@/src/components/common/page-loading';
 import { chatSidebarProps } from '@/src/types/global';
-import LoadingCircle from '@/src/components/atom/loadings/loading-circle';
+import LoadingDotted from '@/src/components/atom/loadings/loding-dotted';
+import SupportUserCardSkeleton from '@/src/components/molecule/skeleton/support-user-card-skeleton';
 
 const AdminSupportUserCard = lazy(
   () => import('@/src/components/molecule/cards/admin-support-user-card')
@@ -61,13 +62,7 @@ const ChatSidebar = ({
       <div className="h-full w-full">
         {finalChats.map((chat) => (
           <div key={chat.id} className="mb-4">
-            <Suspense
-              fallback={
-                <div className="flex h-full w-full items-center justify-center">
-                  <LoadingCircle size={40} />
-                </div>
-              }
-            >
+            <Suspense fallback={<SupportUserCardSkeleton />}>
               <AdminSupportUserCard
                 chat={chat}
                 setShowSidebar={setShowSidebar}
