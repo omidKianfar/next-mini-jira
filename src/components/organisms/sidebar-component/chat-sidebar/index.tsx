@@ -8,7 +8,6 @@ import ButtonFreeClass from '@/src/components/atom/buttons-component/button-free
 import MyIcon from '@/src/components/atom/icon-components';
 import PageLoading from '@/src/components/common/page-loading';
 import { chatSidebarProps } from '@/src/types/global';
-import LoadingDotted from '@/src/components/atom/loadings/loding-dotted';
 import SupportUserCardSkeleton from '@/src/components/molecule/skeleton/support-user-card-skeleton';
 
 const AdminSupportUserCard = lazy(
