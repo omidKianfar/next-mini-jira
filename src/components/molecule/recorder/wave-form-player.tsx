@@ -66,7 +66,7 @@ const WaveformPlayer = ({ audioUrl }: WaveformPlayerProps) => {
   };
 
   return (
-    <div className="relative flex h-full w-full items-center">
+    <div className="relative z-0 flex h-full w-full items-center">
       <div className="flex w-[50px] items-center">
         {audioUrl && (
           <ButtonFreeClass
