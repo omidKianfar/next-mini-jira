@@ -30,22 +30,20 @@ const LeftSideHeaders = ({ showSidebar, setShowSidebar }: HeaderProps) => {
 
   return (
     <div className="relative flex w-1/3 items-center justify-start">
-      {isPublicPage && !isMobile ? (
-        <nav className="flex items-center gap-4">
+      {isPublicPage && (
+        <nav className="hidden items-center gap-4 lg:flex">
           <Link
             href="/"
             className="text-body font-medium text-primary-500 transition-colors hover:text-warning-500"
           >
             Home
           </Link>
-
           <Link
             href="/about"
             className="text-body font-medium text-primary-500 transition-colors hover:text-warning-500"
           >
             About
           </Link>
-
           <Link
             href="/contact"
             className="text-body font-medium text-primary-500 transition-colors hover:text-warning-500"
@@ -53,19 +51,21 @@ const LeftSideHeaders = ({ showSidebar, setShowSidebar }: HeaderProps) => {
             Contact
           </Link>
         </nav>
-      ) : (
-        <>
-          <MyIcon
-            icon="menu"
-            className="cursor-pointer text-title text-primary-500 transition-colors hover:text-primary-700 lg:text-h3"
-            onClick={() => setShowSidebar?.(!showSidebar)}
-          />
-
-          {shouldShowBadge && (
-            <div className="absolute left-0 top-0 h-[10px] w-[10px] animate-pulse rounded-full bg-warning-500" />
-          )}
-        </>
       )}
+
+      <div
+        className={`${isPublicPage ? 'lg:hidden' : 'flex'} flex items-center`}
+      >
+        <MyIcon
+          icon="menu"
+          className="cursor-pointer text-title text-primary-500 transition-colors hover:text-primary-700 lg:text-h3"
+          onClick={() => setShowSidebar?.(!showSidebar)}
+        />
+
+        {shouldShowBadge && (
+          <div className="absolute left-0 top-0 h-[10px] w-[10px] animate-pulse rounded-full bg-warning-500" />
+        )}
+      </div>
     </div>
   );
 };
