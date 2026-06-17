@@ -137,25 +137,20 @@ const SlateEditor = ({
           autoFocus
           className="h-[200px] w-full overflow-y-auto overflow-x-hidden rounded-b-lg bg-white p-4 focus:outline-none lg:h-[175px]"
           onKeyDown={(event) => {
-            if (isHotkey('shift+enter', event)) {
+            if (event.key === 'Enter' && event.shiftKey) {
               event.preventDefault();
-
               Editor.insertBreak(editor);
-            } else if (isHotkey('enter', event)) {
+              return;
+            } else if (event.key === 'Enter') {
               event.preventDefault();
-
               handleSend();
+              return;
             } else {
               for (const hotkey in HOTKEYS) {
                 if (isHotkey(hotkey, event as any)) {
                   event.preventDefault();
-
                   const mark = HOTKEYS[hotkey as keyof typeof HOTKEYS];
-
-                  ToggleMark({
-                    editor: editor,
-                    format: mark as MarkFormat,
-                  });
+                  ToggleMark({ editor, format: mark as MarkFormat });
                 }
               }
             }
