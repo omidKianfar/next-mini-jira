@@ -1,5 +1,7 @@
 # Mini Jira: Enterprise-Grade Project Management SaaS
 
+[Live Demo](https://next-mini-jira.netlify.app) | [Source Code](https://github.com/omidKianfar/next-mini-jira)
+
 A production-ready, highly modular Project Management platform engineered for scalability. Built with a robust architecture that prioritizes maintainability, strict type safety, and real-time synchronization.
 
 ## Features
