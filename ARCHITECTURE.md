@@ -1,4 +1,4 @@
-## Architecture & Design Decisions
+# Architecture & Design Decisions
 
 This document outlines the architectural patterns and technical design decisions behind the Mini Jira platform.
 
