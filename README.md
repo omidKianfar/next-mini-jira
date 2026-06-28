@@ -1,8 +1,10 @@
-# Mini Jira: Enterprise-Grade Project Management SaaS
+# Mini Jira: Project Management SaaS
 
 [Live Demo](https://next-mini-jira.netlify.app) | [Source Code](https://github.com/omidKianfar/next-mini-jira)
 
-A production-ready, highly modular Project Management platform engineered for scalability. Built with a robust architecture that prioritizes maintainability, strict type safety, and real-time synchronization.
+A modular Project Management platform engineered for scalability, with a focus on maintainability, strict type safety, and real-time synchronization.
+
+For a detailed breakdown of architectural decisions, see [ARCHITECTURE.md](./ARCHITECTURE.md).
 
 ## Features
 
@@ -12,9 +14,7 @@ A production-ready, highly modular Project Management platform engineered for sc
 
 - **Advanced Media Pipeline:**
   - **In-browser:** Image cropping, scaling, and compression capabilities.
-
   - **Server-side:** Video compression and optimization using `@ffmpeg/ffmpeg`
-
   - **Cloud Integration:** Secure file handling via `Supabase` storage with custom drag-and-drop uploader.
 
 - **SaaS Subscription Logic:** End-to-end `Stripe` integration (monthly/yearly), trial mode (10 days), and API-driven frontend flow for success/failed states.
@@ -28,25 +28,18 @@ A production-ready, highly modular Project Management platform engineered for sc
 ## Tech Stack
 
 - **Framework:** Next.js 16 (App Router), TypeScript, Next.js Font Optimization.
-
 - **State Management:** `Redux Toolkit` (RTK) for tasks, users, chats, and global search/filter states.
-
 - **Backend & Data:** `Firebase` (Auth, Firestore Realtime DB) + `Supabase` (Storage).
-
 - **Media Processing:** `FFmpeg` (Video), `react-easy-crop` (Image).
-
 - **Forms:** `react-hook-form` + `yup` (resolver) + `Jest/RTL` unit testing.
-
 - **Rich Text:** `Slate.js` with `emoji-mart` integration.
-
-- **UI/Styling:** `Tailwind CSS` (Custom Design System: Colors, Shadows, Border-Radius) + `Framer Motion.`
-
+- **UI/Styling:** `Tailwind CSS` (Custom Design System: Colors, Shadows, Border-Radius) + `Framer Motion`.
 - **Utilities:** `dayjs` (time), `swiper` (carousel), `notistack` (notifications), `yet-another-react-lightbox`.
 
 ## Screenshots
 
 <div style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 8px">
- 
+
   <a target="_blank" href="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/landing/Kanban.png">
     <img src="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/landing/Kanban.png" width="300" />
   </a>
@@ -62,7 +55,8 @@ A production-ready, highly modular Project Management platform engineered for sc
   <a target="_blank" href="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/landing/payment.png">
     <img src="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/landing/payment.png" width="300" />
   </a>
-    <a target="_blank" href="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/landing/admin-edit-support-message.png">
+
+  <a target="_blank" href="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/landing/admin-edit-support-message.png">
     <img src="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/landing/admin-edit-support-message.png" width="300" />
   </a>
 
@@ -78,16 +72,11 @@ A production-ready, highly modular Project Management platform engineered for sc
 
 ## Engineering Highlights
 
-- **Modular Architecture:** Strict adherence to `Atomic Design` (Atom, Molecule, Organism, Page) ensuring code reusability and maintainability.
-
-- **Advanced Type Safety:** Comprehensive TypeScript implementation for global error handling and schema consistency via interface inheritance.
-
+- **Modular Architecture:** Adherence to `Atomic Design` (Atom, Molecule, Organism, Page) for code reusability and maintainability.
+- **Type Safety:** TypeScript implementation for global error handling and schema consistency via interface inheritance.
 - **Performance:** Optimized media processing with `FFmpeg` and `lazy-loading` components.
-
-- **Responsive Engine:** Custom useIsMobile hook for context-aware UI logic.
-
-- **Quality Assurance:** Full unit testing suite (`Jest` and `React Testing Library`) for forms, modals, and core utilities.
-
+- **Responsive Engine:** Custom `useIsMobile` hook for context-aware UI logic.
+- **Quality Assurance:** Unit testing suite (`Jest` and `React Testing Library`) for forms, modals, and core utilities.
 - **Helper Utilities:** Dedicated logic for string-slicer (text truncation) and date-time-counter (unread messages).
 
 ## Project Structure
@@ -145,7 +134,7 @@ To ensure full functionality of the SaaS features, please follow these configura
 
 - Products: Navigate to product catalog > Create Monthly and Yearly.
 
-- Find price click and copy and `price id` then add them to your environment variables.
+- Find the price, click to copy the `price id`, then add it to your environment variables.
 
   <a target="_blank" href="https://docs.stripe.com/billing">
   Stripe Billing Docs
@@ -156,10 +145,10 @@ To ensure full functionality of the SaaS features, please follow these configura
 
 - Storage: Create a Public Bucket to handle media assets (images and audio files), ensuring the application can read/write files correctly.
 
-- The polices you must make for this project
+- The policies you must create for this project:
 
 <div style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 8px">
- 
+
   <a target="_blank" href="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/policies/bucket-policies.png">
     <img src="https://raw.githubusercontent.com/omidKianfar/next-mini-jira/refs/heads/main/public/images/policies/bucket-policies.png" width="300" />
   </a>
@@ -188,7 +177,7 @@ Create a `.env.local` file:
 
 ```env
 STRIPE_SECRET_KEY= Your stripe secret key
-NEXT_PUBLIC_STRIPE_PUBLISHABLE= Your strip publishable key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE= Your stripe publishable key
 
 STRIPE_MONTHLY_PRICE_ID= Your monthly price id
 STRIPE_YEARLY_PRICE_ID= Your yearly price id
@@ -207,12 +196,14 @@ yarn run dev
 
 > These values are local and private.
 
-### **Testing**
+> **Note:** Make sure to have a Firebase project initialized, as it handles the real-time database and authentication services.
+
+### Testing
 
 - Jest
 - React Testing Library
 
-> The project utilizes Jest and React Testing Library for robust unit testing, focusing on mission-critical components like Modals and RHF validation logic.
+> The project uses Jest and React Testing Library for unit testing, focusing on key components like Modals and RHF validation logic.
 
 ## Running Tests
 
@@ -222,18 +213,6 @@ npm run test
 yarn run test
 ```
 
-## Why This Project Is Valuable (For Recruiters)
-
-- **Senior-Level Engineering:** Demonstrates capability in building complex pipelines (FFmpeg, image manipulation, real-time sync).
-
-- **Full-Stack Competence:** Proven capability in managing the full user lifecycle: from Auth (Email/Google) and Subscription (Stripe API) to Admin Dashboards (RBAC).
-
-- **Production-Ready Quality:** Commitment to Test-Driven Development (Jest/RTL) and modular system design..
-
-- **Complex Feature Integration:** Built production-grade support systems, media pipelines, and RBAC-enabled dashboards from scratch.
-
-- **Scalable Architecture:** Modular design ensures the project can expand and evolve in an enterprise environment. Designed for growth, using robust state management (RTK) and type-safe data models.
-
 ## Copyright
 
-2026 Omid Kianfar
+© 2026 Omid Kianfar
