@@ -10,12 +10,12 @@ For a detailed breakdown of architectural decisions, see [ARCHITECTURE.md](./ARC
 
 - **Real-time Kanban Engine:** High-fidelity drag-and-drop system via `@dnd-kit` with custom collision detection.
 
-- **Support & Communication Hub:** Full-featured real-time Support Chat using `Firestore`, utilizing `Slate.js` editor (with `emoji-mart`), voice recording (`RecordRTC`), file/video/image uploads, and automatic scroll-to-bottom.
+- **Support & Communication Hub:** Full-featured real-time Support Chat using `Firestore`, utilizing `Slate.js` editor (with `emoji-mart`), voice recording (`RecordRTC`), audio waveform visualization (`wavesurfer.js`), file/video/image uploads, and automatic scroll-to-bottom.
 
 - **Advanced Media Pipeline:**
-  - **In-browser:** Image cropping, scaling, and compression capabilities.
-  - **Server-side:** Video compression and optimization using `@ffmpeg/ffmpeg`
-  - **Cloud Integration:** Secure file handling via `Supabase` storage with custom drag-and-drop uploader.
+  - **In-browser image processing:** Cropping, scaling, and compression via `react-easy-crop`.
+  - **Browser-based video compression:** Optimized via `FFmpeg WASM` (`@ffmpeg/ffmpeg`) running entirely client-side.
+  - **Cloud Integration:** Secure file handling via `Supabase` Storage with signed URLs and custom drag-and-drop uploader.
 
 - **SaaS Subscription Logic:** End-to-end `Stripe` integration (monthly/yearly), trial mode (10 days), and API-driven frontend flow for success/failed states.
 
@@ -27,13 +27,13 @@ For a detailed breakdown of architectural decisions, see [ARCHITECTURE.md](./ARC
 
 ## Tech Stack
 
-- **Framework:** Next.js 16 (App Router), TypeScript, Next.js Font Optimization.
+- **Framework:** Next.js 16 (App Router), TypeScript, `next/font` optimization.
 - **State Management:** `Redux Toolkit` (RTK) for tasks, users, chats, and global search/filter states.
 - **Backend & Data:** `Firebase` (Auth, Firestore Realtime DB) + `Supabase` (Storage).
-- **Media Processing:** `FFmpeg` (Video), `react-easy-crop` (Image).
-- **Forms:** `react-hook-form` + `yup` (resolver) + `Jest/RTL` unit testing.
+- **Media Processing:** `@ffmpeg/ffmpeg` (Video via WASM), `react-easy-crop` (Image), `RecordRTC` + `wavesurfer.js` (Audio recording & playback).
+- **Forms:** `react-hook-form` + `yup` (resolver) + `Jest`/`RTL` unit testing.
 - **Rich Text:** `Slate.js` with `emoji-mart` integration.
-- **UI/Styling:** `Tailwind CSS` (Custom Design System: Colors, Shadows, Border-Radius) + `Framer Motion`.
+- **UI/Styling:** `Tailwind CSS` (Custom Design System) + `Framer Motion`.
 - **Utilities:** `dayjs` (time), `swiper` (carousel), `notistack` (notifications), `yet-another-react-lightbox`.
 
 ## Screenshots
@@ -74,7 +74,7 @@ For a detailed breakdown of architectural decisions, see [ARCHITECTURE.md](./ARC
 
 - **Modular Architecture:** Adherence to `Atomic Design` (Atom, Molecule, Organism, Page) for code reusability and maintainability.
 - **Type Safety:** TypeScript implementation for global error handling and schema consistency via interface inheritance.
-- **Performance:** Optimized media processing with `FFmpeg` and `lazy-loading` components.
+- **Performance:** Optimized media processing with `FFmpeg WASM` and `lazy-loading` components.
 - **Responsive Engine:** Custom `useIsMobile` hook for context-aware UI logic.
 - **Quality Assurance:** Unit testing suite (`Jest` and `React Testing Library`) for forms, modals, and core utilities.
 - **Helper Utilities:** Dedicated logic for string-slicer (text truncation) and date-time-counter (unread messages).
@@ -98,7 +98,7 @@ For a detailed breakdown of architectural decisions, see [ARCHITECTURE.md](./ARC
     ├── reducer/        # Complex state transition logic for local or shared state management.
     ├── store/          # Redux Toolkit (RTK) slices and global state configuration.
     ├── styles/         # Global CSS/SCSS and design tokens.
-    ├── theme/          # Theme configuration for UI libraries (e.g., MUI or Tailwind).
+    ├── theme/          # Custom design tokens (colors, shadows, border-radius, font sizes).
     ├── types/          # TypeScript interface definitions and global type inheritance.
     └── utils/          # Core utility functions, helpers, and shared business logic.
 ```
