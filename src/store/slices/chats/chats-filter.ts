@@ -9,7 +9,7 @@ const initialState: ChatFiltersState = {
 };
 
 const chatsFilterSlice = createSlice({
-  name: 'usersFilters',
+  name: 'chatsFilters',
   initialState,
   reducers: {
     setChatsDate: (
