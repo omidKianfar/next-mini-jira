@@ -1,9 +1,9 @@
 'use client';
 
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { db } from '@/src/providers/auth-provider';
 import { setUsers } from '@/src/store/slices/users/users';
 import { AppDispatch } from '@/src/store';
-import { db } from '@/configs/firebase';
 import { MyUserType } from '@/src/types/global';
 
 interface ListenToUserProps {

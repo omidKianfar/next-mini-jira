@@ -5,8 +5,9 @@ import {
   where,
   writeBatch,
 } from 'firebase/firestore';
-import { db } from '@/configs/firebase';
+import { db } from '@/src/providers/auth-provider';
 import { UserType } from '@/src/types/global';
+
 interface MessgesReadProps {
   chatId: string;
   senderType: UserType;

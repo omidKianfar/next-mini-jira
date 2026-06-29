@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Unsubscribe } from 'firebase/auth';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
-import { db } from '@/configs/firebase';
+import { db } from '@/src/providers/auth-provider';
 import { useAuth } from '@/src/hooks/auth/use-auth';
 import { UserType } from '@/src/types/global';
 

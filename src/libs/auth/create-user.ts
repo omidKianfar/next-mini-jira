@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { User } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { db } from '@/configs/firebase';
+import { db } from '@/src/providers/auth-provider';
 import { MyUserType, UserType } from '@/src/types/global';
 
 export const createUserDocument = async (user: User): Promise<MyUserType> => {

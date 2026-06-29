@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '@/configs/firebase';
+import { db } from '@/src/providers/auth-provider';
 
 interface UpdateTaskStatusProps {
   id: string;

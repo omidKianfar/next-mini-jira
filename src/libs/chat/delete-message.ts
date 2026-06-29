@@ -1,4 +1,3 @@
-import { db } from '@/configs/firebase';
 import {
   collection,
   deleteDoc,
@@ -9,6 +8,7 @@ import {
   query,
   updateDoc,
 } from 'firebase/firestore';
+import { db } from '@/src/providers/auth-provider';
 
 interface DeleteChatMessageProps {
   userId: string;

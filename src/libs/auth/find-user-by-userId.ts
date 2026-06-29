@@ -1,5 +1,5 @@
 import { doc, onSnapshot } from 'firebase/firestore';
-import { db } from '@/configs/firebase';
+import { db } from '@/src/providers/auth-provider';
 import { MyUserType, UserType } from '@/src/types/global';
 
 export const listenToUserById = (

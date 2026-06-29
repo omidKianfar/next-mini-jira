@@ -1,6 +1,7 @@
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { db } from '@/configs/firebase';
+import { db } from '@/src/providers/auth-provider';
 import { ChatMessage, MyUserType } from '@/src/types/global';
+
 interface ChatMessagesListenerProps {
   user: MyUserType;
   onReceive: (messages: ChatMessage[]) => void;

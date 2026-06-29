@@ -1,6 +1,6 @@
 import { User } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@/configs/firebase';
+import { db } from '@/src/providers/auth-provider';
 import { MyUserType, UserType } from '@/src/types/global';
 
 export const findFirestoreCurrentUser = async (

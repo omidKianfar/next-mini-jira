@@ -3,8 +3,8 @@
 import { ActionDispatch, RefObject, useEffect, useRef } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, onSnapshot } from 'firebase/firestore';
+import { auth, db } from '@/src/providers/auth-provider';
 import { findFirestoreCurrentUser } from '@/src/libs/auth/current-user-finder';
-import { auth, db } from '@/configs/firebase';
 import {
   AuthContextActionType,
   AuthContextStateType,

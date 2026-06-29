@@ -1,6 +1,7 @@
 import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@/configs/firebase';
+import { db } from '@/src/providers/auth-provider';
 import { Task } from '@/src/types/global';
+
 interface FetchTaskProps {
   taskId: string;
 }

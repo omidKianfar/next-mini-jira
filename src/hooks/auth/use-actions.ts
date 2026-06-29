@@ -14,11 +14,11 @@ import {
   updatePassword,
 } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '@/src/providers/auth-provider';
 import { findFirestoreCurrentUser } from '@/src/libs/auth/current-user-finder';
 import { createUserDocument } from '@/src/libs/auth/create-user';
 import { updateFirestoreUser } from '@/src/libs/auth/update-user';
 import { useNavigation } from '../navigation/use-navigation';
-import { auth, db } from '@/configs/firebase';
 import {
   AuthContextActionType,
   AuthContextStateType,

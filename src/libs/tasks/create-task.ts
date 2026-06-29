@@ -1,5 +1,5 @@
 import { doc, setDoc } from 'firebase/firestore';
-import { db } from '@/configs/firebase';
+import { db } from '@/src/providers/auth-provider';
 import { Task } from '@/src/types/global';
 
 export const createTaskDocument = async (newTask: Task) => {

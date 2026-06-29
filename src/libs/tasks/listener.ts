@@ -2,8 +2,8 @@
 
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { AppDispatch } from '@/src/store';
+import { db } from '@/src/providers/auth-provider';
 import { setTasks } from '@/src/store/slices/tasks/tasks';
-import { db } from '@/configs/firebase';
 import { Task } from '@/src/types/global';
 
 interface ListenToTasksProps {

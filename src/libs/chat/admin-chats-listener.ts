@@ -1,7 +1,7 @@
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { AppDispatch } from '@/src/store';
 import { setChats } from '@/src/store/slices/chats/chats';
-import { db } from '@/configs/firebase';
+import { db } from '@/src/providers/auth-provider';
 import { ChatsType } from '@/src/types/global';
 
 interface AdminChatsListenerProps {

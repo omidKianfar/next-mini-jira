@@ -7,8 +7,9 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
-import { db } from '@/configs/firebase';
+import { db } from '@/src/providers/auth-provider';
 import { ChatMessage, MyUserType } from '@/src/types/global';
+
 interface SendMessageProps {
   user: MyUserType;
   message: ChatMessage;
