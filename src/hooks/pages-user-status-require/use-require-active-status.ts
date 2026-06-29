@@ -26,5 +26,5 @@ export const useRequireActiveStatus = () => {
       navigation.activePage();
       return;
     }
-  }, [isLoading, user, navigation]);
+  }, [isLoading, user, pathname]);
 };
