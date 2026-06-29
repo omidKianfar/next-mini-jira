@@ -196,8 +196,6 @@ yarn run dev
 
 > These values are local and private.
 
-> **Note:** Make sure to have a Firebase project initialized, as it handles the real-time database and authentication services.
-
 ### Testing
 
 - Jest
