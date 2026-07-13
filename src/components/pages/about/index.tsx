@@ -64,7 +64,7 @@ const AboutComponent = () => {
           <h2 className="mb-4 text-title font-bold">About the Developer</h2>
 
           <p className="mb-8 leading-relaxed text-gray-600">
-            "Hi, I’m Omid Kianfar, a Senior Frontend Engineer with 5+ years of
+            "Hi, I’m Omid Kianfar, a Senior Frontend Engineer with 6 years of
             experience in React.js and Next.js. I am a problem-solver who enjoys
             taking on complex technical challenges and learning new technologies
             to deliver high-quality solutions. My approach is to focus on clean
