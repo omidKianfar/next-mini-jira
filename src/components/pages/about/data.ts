@@ -15,12 +15,4 @@ export const Engineering_Highlights = [
     title: 'Payments & Auth',
     desc: 'Secure integration of Stripe for subscriptions and full Auth flows.',
   },
-  {
-    title: 'Infrastructure',
-    desc: 'Multi-stage CI/CD pipelines (QA/Prod) with robust automated testing.',
-  },
-  {
-    title: 'PWA/Offline',
-    desc: 'Offline-first architecture for resilient, native-app-like mobile experiences.',
-  },
 ];

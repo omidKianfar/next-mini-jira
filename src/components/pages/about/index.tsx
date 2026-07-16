@@ -70,8 +70,8 @@ const AboutComponent = () => {
             to deliver high-quality solutions. My approach is to focus on clean
             architecture, performance, and user-centric features. Mini Jira is
             my engineering sandbox, where I experiment with new patterns and
-            refine my development process to build robust, production-ready
-            applications."
+            refine my development process using production-grade patterns and
+            practices."
           </p>
 
           <div className="flex flex-col gap-4 sm:flex-row">
